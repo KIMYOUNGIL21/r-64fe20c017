@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강한결 신곡 7곡 · 수노 작사 작업판</title>
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,sans-serif;}
+body{background:#1a100c;color:#f4ece2;min-height:100vh;padding:28px 16px 60px;
+  background-image:radial-gradient(circle at 20% 0%,#422014 0%,#1a100c 55%);}
+.wrap{max-width:740px;margin:0 auto;}
+header{text-align:center;margin-bottom:18px;}
+header h1{font-size:23px;font-weight:800;letter-spacing:-.5px;color:#f0a878;}
+header p{font-size:13px;color:#b59482;margin-top:5px;}
+.counter{display:inline-block;margin-top:12px;font-size:13px;color:#e0b08c;
+  background:#2e170f;border:1px solid #55301c;border-radius:999px;padding:5px 16px;}
+
+.anatomy{background:#241209;border:1px solid #55301c;border-radius:14px;
+  padding:16px 18px;margin-bottom:18px;font-size:13px;line-height:1.8;color:#d8c0ae;}
+.anatomy b{color:#f0a878;display:block;margin-bottom:6px;font-size:13.5px;}
+
+.progress{height:8px;background:#2e170f;border-radius:99px;overflow:hidden;margin-bottom:18px;border:1px solid #55301c;}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#c05a2e,#f0a878);width:0;transition:.3s;}
+
+.card{background:#26130b;border:1px solid #55301c;border-radius:18px;padding:26px 24px 28px;
+  box-shadow:0 14px 40px rgba(0,0,0,.45);}
+.songhead{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.songno{font-size:14px;font-weight:800;color:#1a100c;background:#f0a878;
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.title{font-size:25px;font-weight:800;letter-spacing:-.5px;color:#fff;flex:1;}
+.donechk{display:flex;align-items:center;gap:6px;font-size:13px;color:#d8c0ae;cursor:pointer;user-select:none;}
+.donechk input{width:18px;height:18px;accent-color:#f0a878;cursor:pointer;}
+.tags{margin:10px 0 6px;display:flex;gap:7px;flex-wrap:wrap;}
+.tag{font-size:12px;color:#eac09a;background:#38180d;border:1px solid #653a20;
+  border-radius:7px;padding:4px 10px;}
+.tag.hot{color:#ffb4b4;background:#3a1c1c;border-color:#6a2f2f;}
+.concept{font-size:13.5px;color:#c9ac97;margin:4px 0 18px;line-height:1.6;}
+
+.section{margin-top:20px;}
+.slabel{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.slabel span{font-size:14px;font-weight:700;color:#f0a878;}
+.copybtn{font-size:12.5px;font-weight:700;color:#1a100c;background:#f0a878;border:none;
+  border-radius:8px;padding:7px 15px;cursor:pointer;transition:.15s;}
+.copybtn:hover{background:#ffc79c;}
+.copybtn.done{background:#7bd88f;color:#0e2a14;}
+textarea{width:100%;background:#170c06;color:#f4ece2;border:1px solid #55301c;border-radius:11px;
+  padding:14px 15px;font-size:14.5px;line-height:1.85;resize:vertical;letter-spacing:-.2px;}
+.lyrics{min-height:320px;}
+.style{min-height:130px;font-size:13px;line-height:1.7;color:#dcc6b4;}
+.excl{min-height:50px;font-size:13px;color:#dcc6b4;}
+.yt{min-height:46px;font-size:13.5px;color:#dcc6b4;}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;}
+.navbtn{flex:1;font-size:15px;font-weight:700;color:#f4ece2;background:#38180d;
+  border:1px solid #653a20;border-radius:12px;padding:14px;cursor:pointer;transition:.15s;}
+.navbtn:hover:not(:disabled){background:#4a2210;}
+.navbtn:disabled{opacity:.3;cursor:not-allowed;}
+.dots{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
+.dot{width:34px;height:34px;border-radius:8px;border:1px solid #653a20;background:#26130b;
+  color:#b59482;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;position:relative;}
+.dot:hover{border-color:#f0a878;}
+.dot.active{background:#f0a878;color:#1a100c;border-color:#f0a878;}
+.dot.finished::after{content:'✓';position:absolute;top:-7px;right:-5px;font-size:11px;color:#7bd88f;}
+.hint{text-align:center;font-size:12px;color:#8f7361;margin-top:24px;line-height:1.7;}
+
+details.review{margin-top:26px;background:#241209;border:1px solid #55301c;border-radius:14px;padding:14px 18px;}
+details.review summary{font-size:13.5px;font-weight:700;color:#f0a878;cursor:pointer;}
+details.review ul{margin:12px 0 4px 18px;font-size:12.5px;line-height:1.9;color:#c9ac97;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>강한결 · 신곡 수노 작사 7곡</h1>
+    <p>강한결의 트로트 TV · 한형 6곡 + 흥형 1곡 · 남성 보컬</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+
+  <div class="anatomy">
+    <b>스타일 해부 (그한마디 · 그뒷모습 기준)</b>
+    ① 정서: 말하지 못한 마음이 구체적 사물(참기름 병·구두·월급봉투)에 맺히는 한(恨)<br>
+    ② 화자: 남성 1인칭 독백, 상대를 직접 부름 (여보 · 우리 딸 · 아들아 · 누나)<br>
+    ③ 구조: 벌스→프리코러스→후렴→벌스2→브릿지→파이널 후렴, 파이널에서 못 했던 말을 끝내 뱉음<br>
+    ④ 사운드: 세미트로트 발라드 70BPM 피아노+스트링, 과한 꺾기 금지 / 흥형 1곡만 120BPM 뽕짝<br>
+    ⑤ 소재: 기존 카탈로그(어머니·아버지·소주·골목첫사랑·고향·친구·인생응원)와 겹치지 않게 전부 새 관계·새 장면
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div class="card">
+    <div class="songhead">
+      <div class="songno" id="songno">1</div>
+      <div class="title" id="title">제목</div>
+      <label class="donechk"><input type="checkbox" id="donebox" onchange="toggleDone()">완료</label>
+    </div>
+    <div class="tags" id="tags"></div>
+    <div class="concept" id="concept"></div>
+
+    <div class="section">
+      <div class="slabel"><span>① 가사 (Lyrics 칸)</span>
+        <button class="copybtn" onclick="copyBox('lyrics',this)">가사 복사</button></div>
+      <textarea class="lyrics" id="lyrics" readonly></textarea>
+    </div>
+
+    <div class="section">
+      <div class="slabel"><span>② 스타일 (Style of Music 칸)</span>
+        <button class="copybtn" onclick="copyBox('style',this)">스타일 복사</button></div>
+      <textarea class="style" id="style" readonly></textarea>
+    </div>
+
+    <div class="section">
+      <div class="slabel"><span>③ 제외 (Exclude Styles 칸)</span>
+        <button class="copybtn" onclick="copyBox('excl',this)">제외 복사</button></div>
+      <textarea class="excl" id="excl" readonly></textarea>
+    </div>
+
+    <div class="section">
+      <div class="slabel"><span>④ 유튜브 롱폼 제목</span>
+        <button class="copybtn" onclick="copyBox('yt',this)">제목 복사</button></div>
+      <textarea class="yt" id="yt" readonly></textarea>
+    </div>
+
+    <div class="nav">
+      <button class="navbtn" id="prev" onclick="go(-1)">◀ 이전 곡</button>
+      <button class="navbtn" id="next" onclick="go(1)">다음 곡 ▶</button>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <details class="review">
+    <summary>셀프 검토표 (곡별 고친 점)</summary>
+    <ul>
+      <li><b>막차는 떠나고</b> — "쥐여줬죠"가 그한마디 핵심 표현과 겹쳐 "건넸죠"로 교체.</li>
+      <li><b>그 반지</b> — 브릿지의 "늦어서 미안합니다"가 2집 곡명과 동일해 문장 재작성.</li>
+      <li><b>잘 살아요 그대</b> — "하얀 드레스"가 시집가는 날과 겹쳐 청첩장 장면으로 교체, "꽃길"(그한마디 핵심어) 제거.</li>
+      <li><b>시집가는 날</b> — 후렴 "잘 살아라"가 3번 곡 제목과 충돌해 "잘 가거라"로 수정, "그 한마디" 어구 제거.</li>
+      <li><b>우리 누나</b> — 파이널의 "꽃구경"이 두근두근과 겹쳐 "평생 호강"으로 교체.</li>
+      <li><b>아들아 밥 먹자</b> — 아웃트로 "밥은 먹고 다니냐"(그한마디 가사)와 "뒷모습"(그뒷모습 곡명) 제거.</li>
+      <li><b>두근두근</b> — "환갑 넘어" 나이 못박기를 "이 나이에"로 완화, 기존 흥형(인생응원 계열)과 소재 차별화(황혼 설렘) 확인.</li>
+    </ul>
+  </details>
+
+  <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
+  곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
+</div>
+
+<script>
+// ===== 공용 스타일 — 강한결(남성 보컬) =====
+const STYLE_HAN = `emotional Korean adult-contemporary ballad with a subtle trot (teuroteu) flavor, gentle and understated, NOT heavy ppongjjak, sung by a young male vocalist in his early thirties with a warm clear slightly husky tone and only light delicate vibrato (no heavy kkeokki, no exaggerated trembling), calm tender flowing melody, intimate arrangement of soft piano and warm strings with gentle electric guitar and a faint electronic organ, smooth mellow rhythm rather than a strong two-beat, slow tempo around 70 BPM, minor pentatonic, nostalgic and melancholic longing (han), refined modern and restrained, tasteful and tearful`;
+const EXCL_HAN = `trumpet, brass, saxophone, heavy ppongjjak, strong vibrato, loud drums, fast tempo, cheerful, female vocal, spoken word`;
+
+const STYLE_HEUNG = `upbeat cheerful Korean trot (teuroteu) with a bright bouncy ppongjjak two-beat groove, sung by a young male vocalist in his early thirties with a clear bright energetic warm tone and light playful kkeokki, lively major-key melody, fun arrangement of bright synth, accordion, electric guitar and punchy drums, mid-up tempo around 120 BPM, giddy butterflies falling-in-love-again mood, catchy sing-along hook, feel-good and energetic`;
+const EXCL_HEUNG = `sad, slow, heavy ballad, gloomy, mournful, dark, female vocal, spoken word`;
+
+const SONGS = [
+{title:"막차는 떠나고", motif:"기차역 이별", type:"han",
+concept:"눈 내리던 밤 플랫폼, 잡아 달라는 눈빛을 모른 척했던 남자 — 기차는 돌아오지 않는다.",
+yt:`"그때 왜 잡지 못했을까…" 막차는 떠나고 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+그 겨울밤 아홉시 오십분
+플랫폼엔 눈이 내렸죠
+자판기 커피 두 잔 뽑아서
+말없이 그대 손에 건넸죠
+가지 말란 그 말 한마디
+끝내 하지 못한 바보처럼
+
+[Pre-Chorus]
+기적이 울리던 그 순간
+그대 눈이 나를 봤는데
+잡아 달라는 그 눈빛을
+나는 왜 모른 척했을까
+
+[Chorus]
+막차는 떠나고 나만 남았죠
+텅 빈 플랫폼에 눈만 쌓이고
+창가에 어리던 그대 얼굴이
+멀어져 가던 그 밤
+바보야 바보야 소리쳐 봐도
+기차는 돌아오지 않아요
+
+[Verse 2]
+그 역은 이제 문을 닫았고
+녹슨 철길엔 풀이 자라도
+아홉시 오십분 그 시간이면
+아직도 가슴이 내려앉아요
+
+[Break]
+
+[Bridge]
+한 번만 그날로 돌아간다면
+개찰구 앞을 막아설 텐데
+그 차표 찢어서라도
+그대를 잡을 텐데
+
+[Final Chorus]
+막차는 떠나고 세월도 가고
+그 겨울 플랫폼 나만 남았죠
+잘 지내냐는 말 한마디조차
+전할 곳 없는 내 사랑
+바보야 바보야 이제 알아도
+기차는 돌아오지 않아요
+
+[Outro]
+눈은 또 내리는데
+막차는… 오지 않네`},
+
+{title:"그 반지", motif:"아내 · 팔아버린 결혼반지", type:"han",
+concept:"힘들던 시절 말없이 반지를 팔았던 아내 — 사십 년 만에 남편이 금은방 앞에 선다.",
+yt:`"여보, 그 반지 어디 갔소…" 그 반지 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+스물여덟 그해 봄날에
+삼만 원짜리 가락지 하나
+미안하단 말도 못 하고
+당신 손에 끼워줬었죠
+평생을 두고 갚겠다던
+그 약속 하나 믿고 왔었죠
+
+[Pre-Chorus]
+그 힘들던 겨울이었죠
+반지가 보이질 않았죠
+쌀독이 비어가던 밤에
+당신은 웃고만 있었죠
+
+[Chorus]
+여보 그 반지 어디 갔냐고
+차마 묻지를 못했습니다
+자식들 학비로 녹아 사라진
+당신의 하나뿐인 보석
+거칠어진 그 빈 손가락이
+내 가슴에 박혔습니다
+
+[Verse 2]
+오늘은 금은방 유리 앞에
+당신 손을 끌고 왔어요
+아까워서 도망가려는 손
+이번엔 놓지 않을게요
+
+[Break]
+
+[Bridge]
+사십 년을 돌아왔습니다
+그 봄날의 약속 하나로
+꽃 한 번 못 달아준 못난 남편
+오늘은 무릎을 꿇어요
+
+[Final Chorus]
+여보 이 반지 받아주시오
+사십 년 이자까지 담았소
+주름진 그 손가락 위에
+다시 피는 스물여덟 봄날
+고생했단 그 말보다 먼저
+사랑하오 나의 사람아
+
+[Outro]
+반짝이네요
+당신 손에서… 그 봄이`},
+
+{title:"잘 살아요 그대", motif:"옛사랑의 결혼 소식", type:"han",
+concept:"옛사랑이 오월의 신부가 된다는 소식 — 축하 문자를 쓰다 지우고, 그날 강가로 낚시를 간 남자.",
+yt:`"축하한단 문자를 쓰다 지웠습니다" 잘 살아요 그대 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+바람결에 들었습니다
+그대 좋은 사람 만났다고
+오월의 신부가 된다고
+청첩장이 참 곱더라고
+잘됐다 정말 잘됐다
+몇 번을 혼자 말했는지
+
+[Pre-Chorus]
+축하한다는 문자 한 통
+썼다가 지웠다가
+끝내 보내지 못하고
+전화기만 껐습니다
+
+[Chorus]
+잘 살아요 그대 부디 잘 살아요
+나 같은 놈은 잊어버리고
+좋은 사람 곁에서 많이 웃어요
+그거면 나는 됐어요
+근데 왜 이럴까요 이 눈물은
+오늘따라 말을 안 듣네요
+
+[Verse 2]
+그날 나는 강가에 갔어요
+예식장 반대편 그 강가로
+오월의 꽃가루 날리는데
+찌만 보다가 하루가 갔죠
+
+[Break]
+
+[Bridge]
+못난 놈이라서 그랬어요
+가진 게 없어서 그랬어요
+그대 손을 놓아준 일이
+평생 잘한 일이면서
+평생 아픈 일입니다
+
+[Final Chorus]
+잘 살아요 그대 부디 행복해요
+그대 우는 건 못 보니까
+오월의 햇살 속을 걸어가면서
+뒤는 돌아보지 말아요
+이게 정말 마지막 인사예요
+안녕 나의 첫사랑
+
+[Outro]
+잘 살아요 그 말이
+이렇게 아픈 말인 줄… 몰랐네요`},
+
+{title:"시집가는 날", motif:"딸을 보내는 아버지", type:"han",
+concept:"포대기에 잠들던 딸이 팔짱을 끼고 신부 입장하는 날 — 가지 마라 소리는 못 하고.",
+yt:`"가지 마라 소리는 못 하고…" 시집가는 날 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+서른 해가 꿈결 같구나
+포대기에 잠들던 니가
+하얀 드레스 곱게 차려입고
+아빠 팔짱을 끼고 섰구나
+떨리는 건 나뿐인가 봐
+너는 웃고 나는 우는구나
+
+[Pre-Chorus]
+한 발 한 발 걸을 때마다
+지난 세월이 밟히는구나
+아장아장 첫걸음마 떼던 니가
+어느새 이 길을 걷는구나
+
+[Chorus]
+가지 마라 소리는 못 하고
+잘 가거라 그 말만 했다
+목말 태워 키운 우리 딸
+남의 집 사람 되는 날
+신부 입장 그 열 걸음이
+아빠는 왜 이리 멀었을까
+
+[Verse 2]
+니 엄마는 사흘 밤을 새워
+이불 홑청 곱게 꿰맸다
+시집가서 서러운 날 오면
+친정 와서 실컷 울어라
+
+[Break]
+
+[Bridge]
+사위 손을 맞잡고서
+잘 부탁하네 인사하는데
+삼십 년 참아온 눈물이
+왈칵 쏟아질 뻔했다
+
+[Final Chorus]
+가지 마라 소리는 못 하고
+행복해라 그 말만 한다
+새끼손가락 마주 걸고
+소풍 가자 조르던 우리 딸
+오늘부터 아빠 자리는
+니 마음 한켠이면 된다
+
+[Outro]
+잘 가라 우리 딸
+아빠는… 늘 여기 있을게`},
+
+{title:"우리 누나", motif:"누나의 희생 (구로공단 미싱)", type:"han",
+concept:"동생 하나 가르치겠다고 스무 살 봄날을 공장 불빛에 바친 누나 — 이제는 내가 갚는다.",
+yt:`"나 하나 가르치려고 그 봄날을…" 우리 누나 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+열아홉에 서울로 간 누나
+구로공단 미싱을 밟았죠
+명절에도 내려오지 못하고
+봉투 속에 돈만 보냈죠
+공부 열심히 하라는 말
+삐뚤빼뚤 눌러 썼었죠
+
+[Pre-Chorus]
+그 돈이 어떤 돈인지
+철없던 나는 몰랐죠
+밤새워 돌던 미싱 바늘에
+누나의 밤이 감긴 줄도
+
+[Chorus]
+누나 우리 누나 미안해 누나
+나 하나 가르치겠다고
+꽃 같은 스무 살 그 봄날을
+공장 불빛에 바친 사람
+내가 받은 이 세상 전부가
+누나의 청춘이었어
+
+[Verse 2]
+어느새 백발이 된 누나는
+아직도 내 걱정뿐이죠
+넥타이가 삐뚤다 하면서
+눈물 반 웃음 반 매만져요
+
+[Break]
+
+[Bridge]
+누나 시집가던 그날에
+혼수라곤 이불 한 채
+그마저도 내 등록금에
+반을 접고 갔었지
+
+[Final Chorus]
+누나 우리 누나 고마워 누나
+이제는 내가 갚을게
+못 신어본 꽃신도 사 신기고
+평생 호강시켜 줄게
+세상에 하나뿐인 내 편
+누나는 나의 봄이야
+
+[Outro]
+누나
+이제는 누나 인생을 살아`},
+
+{title:"아들아 밥 먹자", motif:"취업 준비 아들을 위로하는 아버지", type:"han",
+concept:"새벽까지 꺼지지 않는 아들 방 불빛 — 면접 어땠냐 묻는 대신 고기를 굽는 아버지.",
+yt:`"니 방에 불이 꺼지지 않던 밤…" 아들아 밥 먹자 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+새벽까지 니 방 불빛이
+문틈으로 새어 나오더라
+면접 어땠냐 말 한마디
+차마 묻지를 못했다
+아빠도 그 시절 살아봤다
+그 밤이 얼마나 긴지 안다
+
+[Pre-Chorus]
+세상이 널 몰라줘도
+아빠는 안다 우리 아들
+니가 얼마나 애쓰는지
+얼마나 견디고 있는지
+
+[Chorus]
+아들아 밥 먹자 고기 굽자
+소주도 한잔 따라주마
+넘어져도 된다 쉬어도 된다
+인생 길다 조급해 마라
+이 아빠 눈에는 니가 아직
+세상에서 제일 잘난 놈이다
+
+[Verse 2]
+아빠 어깨 이제 좁아졌어도
+니 하나 기댈 자린 남았다
+빈손으로 시작한 아빠도
+너 하나는 키워냈잖냐
+
+[Break]
+
+[Bridge]
+다 큰 니 얼굴 마주 보며
+말은 못 하고 돌아서서
+아빠는 오늘도 빌어본다
+내 아들 앞길에 볕 들라고
+
+[Final Chorus]
+아들아 밥 먹자 많이 먹자
+반찬 없어도 든든하게
+세상이 문을 다 닫아걸어도
+이 집 문은 열려 있다
+이 아빠 눈에는 니가 언제나
+세상에서 제일 잘난 놈이다
+
+[Outro]
+아들아 천천히 와도 된다
+아빠가… 기다리마`},
+
+{title:"두근두근", motif:"황혼의 설렘 (흥형)", type:"heung",
+concept:"꽃무늬 남방 다려 입고 거울 앞 한 시간 — 이 나이에 다시 찾아온 봄바람.",
+yt:`"이 나이에 봄바람이 웬 말이오" 두근두근 - 강한결 자작곡 (신나는 트로트)`,
+lyrics:
+`[Verse 1]
+꽃무늬 남방 다려 입고
+거울 앞에 벌써 한 시간
+오늘따라 왜 이러나
+심장이 말을 안 듣네
+그 사람 웃는 얼굴이
+자꾸만 아른거리네
+
+[Pre-Chorus]
+나이는 숫자일 뿐이라고
+그 말이 오늘 정답이네
+
+[Chorus]
+두근두근 두근두근
+내 가슴이 뛴다 뛴다
+이 나이에 다시 올 줄이야
+요 놈의 봄바람아
+두근두근 설레설레
+오늘 만나러 갑니다
+곱게 물든 내 사랑아
+기다려요 지금 가요
+
+[Verse 2]
+자식들은 주책이라 해도
+사랑에 나이가 어딨나
+심장이 뛰면 청춘이지
+가슴 펴고 나가보자
+
+[Chorus]
+두근두근 두근두근
+내 가슴이 뛴다 뛴다
+자장면을 먹어도 꿀맛
+요 놈의 봄바람아
+두근두근 설레설레
+손이라도 잡아볼까
+곱게 물든 내 사랑아
+우리 같이 걸어봅시다
+
+[Outro]
+두근두근 두근두근
+내 인생 지금이 청춘이다`}
+];
+
+let idx=0;
+const DKEY='hangyeol7_done';
+function getDone(){try{return JSON.parse(localStorage.getItem(DKEY)||'[]');}catch(e){return[];}}
+function setDone(a){localStorage.setItem(DKEY,JSON.stringify(a));}
+function toggleDone(){
+  const a=getDone();const on=document.getElementById('donebox').checked;
+  const i=a.indexOf(idx);
+  if(on&&i<0)a.push(idx); if(!on&&i>=0)a.splice(i,1);
+  setDone(a);paint();
+}
+function paint(){
+  const a=getDone();
+  document.getElementById('cdone').textContent=a.length;
+  document.getElementById('pbar').style.width=(a.length/SONGS.length*100)+'%';
+  document.querySelectorAll('.dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===idx);
+    d.classList.toggle('finished',a.includes(i));
+  });
+}
+function render(){
+  const s=SONGS[idx];
+  document.getElementById('songno').textContent=idx+1;
+  document.getElementById('title').textContent=s.title;
+  document.getElementById('cnow').textContent=idx+1;
+  const heung=s.type==='heung';
+  document.getElementById('tags').innerHTML=
+    `<span class="tag ${heung?'hot':''}">${heung?'흥형 (밝고 신나게)':'한형 (애절·세미트로트)'}</span>`+
+    `<span class="tag">소재 · ${s.motif}</span>`+
+    `<span class="tag">남성 보컬</span>`;
+  document.getElementById('concept').textContent=s.concept;
+  document.getElementById('lyrics').value=s.lyrics;
+  document.getElementById('style').value=heung?STYLE_HEUNG:STYLE_HAN;
+  document.getElementById('excl').value=heung?EXCL_HEUNG:EXCL_HAN;
+  document.getElementById('yt').value=s.yt;
+  document.getElementById('donebox').checked=getDone().includes(idx);
+  document.getElementById('prev').disabled=idx===0;
+  document.getElementById('next').disabled=idx===SONGS.length-1;
+  paint();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function go(d){idx=Math.min(SONGS.length-1,Math.max(0,idx+d));render();}
+function jump(i){idx=i;render();}
+function copyBox(id,btn){
+  const t=document.getElementById(id);
+  navigator.clipboard.writeText(t.value).then(()=>{
+    const o=btn.textContent;btn.textContent='복사됨!';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1200);
+  });
+}
+const dotsEl=document.getElementById('dots');
+SONGS.forEach((_,i)=>{const b=document.createElement('button');b.className='dot';
+  b.textContent=i+1;b.onclick=()=>jump(i);dotsEl.appendChild(b);});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
+render();
+</script>
+</body>
+</html>
