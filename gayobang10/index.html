@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>중년가요방 · 10곡 작업판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:"Pretendard Variable", Pretendard, sans-serif;
+    background:#17141f; color:#efe9dc; padding:28px 16px 80px;
+  }
+  .wrap { max-width:860px; margin:0 auto; }
+  header { text-align:center; margin-bottom:14px; }
+  header h1 { font-size:26px; letter-spacing:-0.5px; }
+  header h1 .disco { color:#ffb84d; }
+  header p { color:#a89ec4; margin-top:6px; font-size:14px; }
+  .progress {
+    background:#241f31; border:1px solid #383050; border-radius:14px;
+    padding:14px 18px; margin:18px 0 10px; display:flex; align-items:center; gap:14px;
+  }
+  .progress .bar { flex:1; height:12px; background:#383050; border-radius:6px; overflow:hidden; }
+  .progress .fill { height:100%; width:0%; background:linear-gradient(90deg,#ffb84d,#ff6f91); border-radius:6px; transition:width .3s; }
+  .progress .num { font-weight:700; color:#ffb84d; white-space:nowrap; }
+  .hashtags {
+    background:#241f31; border:1px solid #383050; border-radius:14px;
+    padding:12px 18px; margin-bottom:24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  .hashtags code { color:#8fd3a8; font-size:13px; flex:1; min-width:200px; }
+  .card {
+    background:#241f31; border:1px solid #383050; border-radius:16px;
+    padding:20px 22px; margin-bottom:20px;
+  }
+  .card.done { opacity:.55; border-color:#2e5c3f; }
+  .card-top { display:flex; align-items:flex-start; gap:12px; margin-bottom:6px; }
+  .no {
+    background:#ffb84d; color:#241f31; font-weight:800; border-radius:10px;
+    min-width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:17px;
+  }
+  .card h2 { font-size:20px; flex:1; padding-top:5px; letter-spacing:-0.3px; }
+  .theme { font-size:11.5px; font-weight:700; border-radius:6px; padding:3px 8px; margin-top:8px; white-space:nowrap; }
+  .theme.love { background:#4a2436; color:#ff9db4; }
+  .theme.etc { background:#2c3a52; color:#8fc1ff; }
+  .genre { color:#c9bfe4; font-size:12.5px; font-weight:600; padding-top:9px; white-space:nowrap; }
+  .donechk { display:flex; align-items:center; gap:6px; cursor:pointer; padding-top:7px; user-select:none; }
+  .donechk input { width:20px; height:20px; accent-color:#4caf7d; cursor:pointer; }
+  .donechk span { font-size:13px; color:#a89ec4; }
+  .concept { color:#c9bfe4; font-size:14px; line-height:1.55; margin:4px 0 14px 50px; }
+  .block { margin:12px 0 0 0; }
+  .block-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .block-head b { font-size:13.5px; color:#ffb84d; }
+  .copybtn {
+    background:#383050; color:#efe9dc; border:none; border-radius:8px;
+    padding:7px 16px; font-size:13px; font-weight:600; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover { background:#4a4066; }
+  .copybtn.ok { background:#2e7d4f; }
+  pre {
+    background:#17141f; border:1px solid #302a44; border-radius:10px;
+    padding:14px 16px; font-family:inherit; font-size:13.5px; line-height:1.65;
+    white-space:pre-wrap; color:#ddd5c6; max-height:200px; overflow-y:auto;
+  }
+  pre.small { max-height:120px; color:#b7d9c4; }
+  .yt { background:#17141f; border:1px dashed #4a4066; border-radius:10px; padding:11px 14px; font-size:13.5px; color:#f0c9d8; line-height:1.5; }
+  footer { text-align:center; color:#6f658c; font-size:12.5px; margin-top:30px; line-height:1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🪩 중년가요방 <span class="disco">10곡 작업판</span> <span style="font-size:14px;color:#a89ec4;">v2</span></h1>
+    <p>사랑·이별 중심(8곡) + 인생·가족(2곡) · 텐션 상한 = 중년애창곡 · 곡마다 [복사] → 수노 → 완료 ✅</p>
+  </header>
+
+  <div class="progress">
+    <div class="num" id="prognum">0 / 10 곡 완료</div>
+    <div class="bar"><div class="fill" id="progfill"></div></div>
+  </div>
+
+  <div class="hashtags">
+    <b style="color:#ffb84d;font-size:13.5px;">고정 해시태그</b>
+    <code id="tags">#중년의노래 #7080노래 #감성발라드 #인생노래 #까페음악 #듣기좋은노래</code>
+    <button class="copybtn" onclick="copyText(document.getElementById('tags').textContent,this)">복사</button>
+  </div>
+
+  <div id="songs"></div>
+
+  <footer>
+    체크 표시는 이 컴퓨터에 자동 저장됩니다 · 벤치마크 썸네일은 <b>자료실\벤치마크_썸네일_소리곳간</b> 폴더 참고<br>
+    유튜브 제목 공식: 시청자 반응 인용 + 곡명 + [중년의 노래]
+  </footer>
+</div>
+
+<script>
+const SONGS = [
+{
+  title:"오늘은 내 이름으로",
+  theme:"인생",
+  genre:"레트로 디스코 · 122 BPM",
+  concept:"설거지 끝낸 저녁, 고무장갑 벗어 던지고 립스틱 바르는 여자. 여보도 엄마도 아줌마도 아닌, 스무 살 적 내 이름으로 사는 하룻밤. (확정 1호곡)",
+  yt:"\"설거지하다 나도 모르게 어깨가 들썩였습니다..\" 오늘 하루만은 나로 사는 노래 '오늘은 내 이름으로' [중년의 노래]",
+  lyrics:`[Chorus - catchy, full energy]
+불러줘 불러줘 내 이름을 불러줘
+여보 말고 엄마 말고 내 이름 석 자로
+춤을 춰 춤을 춰 스무 살처럼 춤을 춰
+오늘 밤은 내 이름으로 살아볼 거야
+
+[Verse 1 - groovy]
+설거지 끝낸 저녁 아홉 시
+고무장갑을 벗어 던졌지
+거울 앞에서 립스틱 바르고
+제일 아끼던 원피스를 꺼냈어
+삼십 년을 누구의 아내로
+누구의 엄마로 살았잖아
+달력에 동그라미 쳤어
+오늘은 나만의 날이야
+
+[Pre-Chorus - chanting build]
+나로 산다 나로 산다
+오늘부터 나로 산다
+나로 산다 나로 산다
+미뤄왔던 나로 산다
+
+[Chorus - bigger]
+불러줘 불러줘 내 이름을 불러줘
+여보 말고 엄마 말고 내 이름 석 자로
+춤을 춰 춤을 춰 스무 살처럼 춤을 춰
+오늘 밤은 내 이름으로 살아볼 거야
+
+[Bridge - half-time, emotional then lift]
+서러웠던 세월일랑
+디스코 비트에 던져버려
+빛바랜 앨범 속 단발머리 그 애가
+지금 내 안에서 웃잖아
+
+[Final Chorus - explosive, key change]
+불러줘 불러줘 내 이름을 불러줘
+여보 말고 엄마 말고 내 이름 석 자로
+춤을 춰 춤을 춰 스무 살처럼 춤을 춰
+남은 인생 내 이름으로 살아갈 거야
+(내 이름으로! 내 이름으로!)
+오늘 밤은 내 이름으로 살아볼 거야`,
+  style:`Upbeat Korean 80s retro disco dance gayo, nostalgic 7080/90s Korean dance pop, funky synth brass stabs, four-on-the-floor groove with handclaps, bright electric guitar riffs, warm mature female vocal full of joy and grit, instantly catchy singalong chorus, chanting pre-chorus, half-time emotional bridge then explosive key-change final chorus, retro analog warmth, 122 BPM, feel-good and danceable`
+},
+{
+  title:"못 본 척",
+  theme:"사랑·이별",
+  genre:"레트로 그루브 · 110 BPM",
+  concept:"은행 앞 횡단보도 건너편, 삼십 년 만에 알아본 옛사랑. 잘 지냈냐 한마디가 뭐가 어렵다고 — 우산으로 얼굴 가리고 지나쳐버린 여자.",
+  yt:"\"은행 앞에서 그 사람을 봤는데 심장이 먼저 알아봤습니다..\" '못 본 척' [중년의 노래]",
+  lyrics:`[Chorus - restrained, heart racing]
+못 본 척 못 본 척 지나쳐 놓고
+쿵쿵 쿵쿵 심장이 먼저 알아봤네
+잘 지냈냐 한마디 그게 뭐라고
+신호등만 세 번을 그냥 보냈네
+
+[Verse 1 - fluttering groove]
+은행 앞 횡단보도 건너편에
+낯익은 어깨가 서 있었지
+흰머리가 늘었어도 한눈에 알았어
+내 청춘이 저기 서 있구나
+우산을 반쯤 내려 얼굴을 가리고
+괜히 가방끈만 고쳐 멨네
+
+[Chorus - bigger]
+못 본 척 못 본 척 지나쳐 놓고
+쿵쿵 쿵쿵 심장이 먼저 알아봤네
+잘 지냈냐 한마디 그게 뭐라고
+신호등만 세 번을 그냥 보냈네
+
+[Bridge - half-time, regretful]
+그 시절엔 미안하단 말도
+못 하고 헤어졌는데
+삼십 년이 지난 오늘도
+등만 보이고 말았네
+
+[Final Chorus]
+못 본 척 못 본 척 지나쳐 놓고
+쿵쿵 쿵쿵 심장이 먼저 알아봤네
+잘 지냈냐 한마디 그게 뭐라고
+신호등만 세 번을 그냥 보냈네
+
+[Outro - music stops, one quiet line]
+당신도 나를 봤을까`,
+  style:`Mid-tempo Korean retro groove pop, 80s Korean gayo mood, muted funk guitar, warm analog synth pads, steady heartbeat-like dance rhythm, warm mature female vocal restrained and breathless, tension building each chorus, music suddenly stops for one quiet vocal line at the end, 110 BPM, bittersweet secret excitement`
+},
+{
+  title:"눈물은 집에 가서",
+  theme:"사랑·이별",
+  genre:"디스코 sad banger · 118 BPM",
+  concept:"이별하고 친구들이 불러낸 금요일 밤. 불빛 아래선 춤추고 웃고, 눈물은 집에 가는 버스에서. 씩씩한 척이 제일 슬픈 곡.",
+  yt:"\"친구들 앞에선 웃고, 집에 오는 버스에서 이 노래 듣고 울었습니다..\" '눈물은 집에 가서' [중년의 노래]",
+  lyrics:`[Chorus - defiantly cheerful]
+울긴 왜 울어 눈물은 집에 가서
+슬프긴 뭐가 슬퍼 슬픔은 이따가
+립스틱 짙게 바르고 웃어보는 거야
+이 노래 끝날 때까진 울지 않을 거야
+
+[Verse 1 - funky]
+그 사람 얘기는 꺼내지 마
+오늘은 나 위로받는 날
+친구들이 불러낸 금요일 밤
+음악 소리가 고마웠지
+괜찮냐 물으면 괜찮다 답하고
+잔을 높이 들었네
+
+[Pre-Chorus - short vow]
+집에 가서 울지 뭐
+지금은 아니야
+
+[Chorus - bigger]
+울긴 왜 울어 눈물은 집에 가서
+슬프긴 뭐가 슬퍼 슬픔은 이따가
+립스틱 짙게 바르고 웃어보는 거야
+이 노래 끝날 때까진 울지 않을 거야
+
+[Bridge - half-time, honest]
+버스 창에 기대앉으면
+그때부턴 내 시간이야
+흐르는 눈물은 못 막아도
+오늘 밤 춤춘 건 후회 안 해
+
+[Dance Break - disco strings]
+
+[Final Chorus - full]
+울긴 왜 울어 눈물은 집에 가서
+슬프긴 뭐가 슬퍼 슬픔은 이따가
+립스틱 짙게 바르고 웃어보는 거야
+이 노래 끝날 때까진 울지 않을 거야`,
+  style:`Korean retro disco sad banger, glittering disco strings, four-on-the-floor with funky bassline, sparkling hi-hats, warm mature female vocal cheerful on the surface with sadness underneath, instrumental disco string dance break before final chorus, 118 BPM, dancing with tears held back`
+},
+{
+  title:"그 노래가 나오면",
+  theme:"사랑·이별",
+  genre:"시티팝 무드 · 104 BPM",
+  concept:"저녁 설거지하다 라디오에서 흘러나온 그 시절 노래. 손에 물도 안 닦고 볼륨 올리는 순간 스물셋으로 돌아가는 여자.",
+  yt:"\"라디오에서 이 노래가 나오면 아직도 채널을 못 돌립니다..\" '그 노래가 나오면' [중년의 노래]",
+  lyrics:`[Chorus - wistful, smooth]
+그 노래가 나오면 채널을 못 돌려
+그 사람이 좋아하던 그 옛날 노래
+라라라 라라라 따라 부르다가
+목이 메는 줄도 모르는 바보 같은 나
+
+[Verse 1 - laid-back groove]
+저녁 설거지하다 라디오에서
+익숙한 전주가 흘러나왔지
+손에 물도 안 닦고 볼륨을 올렸어
+순식간에 스물셋이 됐네
+그 사람 옆자리 버스 맨 뒷좌석
+이어폰을 나눠 꽂던 밤
+
+[Pre-Chorus - wondering]
+어디서 뭘 하며 살까
+그 사람도 이 노래를 들을까
+
+[Chorus - warmer]
+그 노래가 나오면 채널을 못 돌려
+그 사람이 좋아하던 그 옛날 노래
+라라라 라라라 따라 부르다가
+목이 메는 줄도 모르는 바보 같은 나
+
+[Bridge - half-time, smiling]
+좋은 노래가 무슨 죄야
+사람이 그리운 거지
+세월은 다 흘러갔는데
+멜로디는 늙지도 않네
+
+[Final Chorus]
+그 노래가 나오면 채널을 못 돌려
+그 사람이 좋아하던 그 옛날 노래
+라라라 라라라 따라 부르다가
+목이 메는 줄도 모르는 바보 같은 나
+
+[Outro - humming, fading like a radio at night]
+라라라 라라라라`,
+  style:`Nostalgic Korean city pop groove, smooth 80s analog synths, clean electric guitar licks, soft saxophone lines, laid-back steady beat, warm mature female vocal wistful and tender, humming la-la outro fading out like a late night radio, 104 BPM, warm golden nostalgia`
+},
+{
+  title:"서랍 속 그 사람",
+  theme:"사랑·이별",
+  genre:"슬로우 그루브 · 96 BPM",
+  concept:"장롱 정리하던 일요일 오후, 낡은 상자에서 나온 삼십 년 전 연애편지. 버리자 버리자 하면서 서랍 깊이 다시 넣어두는 마음.",
+  yt:"\"서랍 정리하다 손이 멈췄습니다.. 다들 하나쯤 있으시죠\" '서랍 속 그 사람' [중년의 노래]",
+  lyrics:`[Chorus - tender, melodic]
+버리자 버리자 하면서도
+서랍 깊이 다시 넣어두네
+빛바랜 편지 속 그 사람은
+아직도 스물다섯 살이네
+
+[Verse 1 - storytelling]
+장롱 정리하던 일요일 오후
+손끝에 걸린 낡은 상자
+꾹꾹 눌러쓴 글씨체가
+삼십 년 전 그대로 남아서
+버린다는 게 뭐 어렵다고
+한 줄 읽고 주저앉았네
+
+[Chorus]
+버리자 버리자 하면서도
+서랍 깊이 다시 넣어두네
+빛바랜 편지 속 그 사람은
+아직도 스물다섯 살이네
+
+[Bridge - warm, a little guilty smile]
+나쁜 짓 하는 것도 아닌데
+괜히 문 쪽을 한 번 봤네
+젊은 날의 나에게 온 편지니까
+이건 내 것으로 할게요
+
+[Final Chorus - fuller]
+버리자 버리자 하면서도
+서랍 깊이 다시 넣어두네
+빛바랜 편지 속 그 사람은
+아직도 스물다섯 살이네
+
+[Outro - quiet, almost a cappella]
+가끔만 열어볼게요
+우리 거기서 만나요`,
+  style:`Slow Korean retro groove ballad with a gentle steady beat, warm Rhodes electric piano, soft string swells, brushed drums, mellow bass, warm mature female vocal intimate like telling a secret, quiet almost a cappella closing lines, 96 BPM, tender nostalgic warmth`
+},
+{
+  title:"동창회 가는 길",
+  theme:"사랑·이별",
+  genre:"80년대 신스팝 · 118 BPM",
+  concept:"삼십오 년 만의 동창회. 그 애가 온다는 말에 밤새 뒤척이고 세 번 갈아입은 여자. 신나는데 살짝 뭉클한 설렘.",
+  yt:"\"동창회 가는 차 안에서 들었다가 심장이 열여덟로 돌아갔습니다..\" '동창회 가는 길' [중년의 노래]",
+  lyrics:`[Chorus - sparkling, excited]
+심장아 나대지 마라 동창회 가는 길
+그 애가 온다는 말에 밤새 뒤척였네
+주름져도 알아보겠지 웃던 눈매 그대로
+심장아 나대지 마라 티 나면 어떡해
+
+[Verse 1 - fluttering]
+옷장을 다 뒤집어 놓고서
+세 번을 갈아입었지
+시집 장가 다들 갔어도
+추억은 그대로인데
+거울 속의 나를 보고 물었네
+너 지금 설레는 거니
+
+[Pre-Chorus - chanting build]
+뛴다 뛴다 가슴이 뛴다
+열여덟처럼 가슴이 뛴다
+뛴다 뛴다 가슴이 뛴다
+그 시절처럼 가슴이 뛴다
+
+[Chorus - bigger]
+심장아 나대지 마라 동창회 가는 길
+그 애가 온다는 말에 밤새 뒤척였네
+주름져도 알아보겠지 웃던 눈매 그대로
+심장아 나대지 마라 티 나면 어떡해
+
+[Bridge - half-time, bittersweet]
+교복 입고 웃던 우리가
+벌써 오십 줄이라니
+세월아 너만 갔구나
+우리는 여기 그대로인데
+
+[Final Chorus - soaring]
+심장아 나대지 마라 동창회 가는 길
+그 애가 온다는 말에 밤새 뒤척였네
+주름져도 알아보겠지 웃던 눈매 그대로
+(열여덟! 열여덟!)
+심장아 나대지 마라 오늘만 좀 봐줘라`,
+  style:`Nostalgic upbeat 80s Korean synth-pop dance gayo, sparkling analog synthesizers, gated reverb drums, four-on-the-floor, shimmering arpeggios, warm mature female vocal excited and wistful, bittersweet half-time bridge then soaring final chorus, retro city lights mood, 118 BPM, danceable nostalgia`
+},
+{
+  title:"가슴이 왜 이래",
+  theme:"사랑·이별",
+  genre:"레트로 팝 · 114 BPM",
+  concept:"문화센터 사진반 옆자리, 커피를 슬쩍 놓고 가는 점잖은 그 양반. 이 나이에 무슨 사랑이냐면서 문자 하나에 하루가 환해지는 늦은 설렘.",
+  yt:"\"이 나이에 무슨 사랑이냐 했는데.. 듣다가 혼자 웃었습니다\" '가슴이 왜 이래' [중년의 노래]",
+  lyrics:`[Chorus - shy, giddy]
+가슴이 왜 이래 왜 이래 왜 이래
+문자 하나 왔다고 하루가 환해지네
+이 나이에 사랑은 무슨 사랑이냐고
+말은 그렇게 해도 입꼬리가 안 내려와
+
+[Verse 1 - light groove]
+사진 교실 옆자리 그 양반
+커피를 슬쩍 놓고 가더니
+잘 나왔다며 내 사진 한 장을
+곱게 뽑아 건네주었지
+딸이 묻더라 엄마 요즘 좋은 일 있냐고
+글쎄다 하고 웃고 말았지
+
+[Pre-Chorus - asking herself]
+사랑은 아니겠지 아니어도 좋아
+설레는 이것만으로 살 것 같으니
+
+[Chorus - brighter]
+가슴이 왜 이래 왜 이래 왜 이래
+문자 하나 왔다고 하루가 환해지네
+이 나이에 사랑은 무슨 사랑이냐고
+말은 그렇게 해도 입꼬리가 안 내려와
+
+[Bridge - half-time, soft]
+꽃무늬 블라우스 곱게 다려 입고
+거울 앞에 오래 서 있었네
+이런 내가 낯설고 우스운데
+싫지가 않네 어쩌나
+
+[Final Chorus - blooming]
+가슴이 왜 이래 왜 이래 왜 이래
+문자 하나 왔다고 하루가 환해지네
+이 나이에 사랑은 무슨 사랑이냐고
+말은 그렇게 해도 입꼬리가 안 내려와
+몰라 몰라 나도 몰라
+입꼬리가 안 내려와`,
+  style:`Light bouncy Korean retro pop, sweet 80s gayo mood, bright keys, soft brass accents, gentle groove with finger snaps, warm mature female vocal shy and giddy like a teenage crush, playful sung ad-libs at the end, 114 BPM, blushing late-life butterflies`
+},
+{
+  title:"우리 딸 시집가던 날",
+  theme:"가족",
+  genre:"디스코 sad banger · 120 BPM",
+  concept:"면사포 쓴 딸이 걸음마 하던 게 엊그제 같은 엄마. 폐백에선 울고 식장에선 웃고 — 눈물 나는데 자꾸 웃음이 나는, 좋은 날의 춤.",
+  yt:"\"딸 가진 엄마들은 웃다가 웁니다..\" '우리 딸 시집가던 날' [중년의 노래]",
+  lyrics:`[Chorus - joyful with tears]
+잘 가라 내 딸아 훨훨 날아가라
+엄마 걱정일랑 하지 말고 가라
+눈물이 나는데 자꾸 웃음이 나네
+오늘같이 좋은 날 춤이나 추자
+
+[Verse 1 - warm groove]
+면사포 쓴 니 모습이
+어쩜 그리 곱던지
+니가 처음 걸음마 하던 날이
+엊그제 같은데
+폐백 절 받다가 눈물 쏟고
+식장에선 크게 웃었단다
+
+[Pre-Chorus - chanting]
+간다 간다 우리 딸 간다
+좋은 사람 만나서 간다
+간다 간다 꽃길로 간다
+엄마 몫까지 웃으며 간다
+
+[Chorus - bigger]
+잘 가라 내 딸아 훨훨 날아가라
+엄마 걱정일랑 하지 말고 가라
+눈물이 나는데 자꾸 웃음이 나네
+오늘같이 좋은 날 춤이나 추자
+
+[Bridge - half-time, tearful]
+빈방에 남은 니 인형 하나
+엄마가 잘 데리고 잘게
+보고 싶으면 언제든지
+김치 가지러 온나
+
+[Final Chorus - soaring, key change]
+잘 가라 내 딸아 훨훨 날아가라
+엄마 걱정일랑 하지 말고 가라
+눈물이 나는데 자꾸 웃음이 나네
+(잘 가라! 잘 살아라!)
+오늘같이 좋은 날 춤이나 추자`,
+  style:`Bittersweet upbeat Korean retro disco (sad banger), 80s Korean dance gayo, four-on-the-floor with warm strings and funky bass, sparkling synth, warm mature female vocal smiling through tears, emotional half-time bridge, soaring key-change final chorus, 120 BPM, happy and heartbreaking at once`
+},
+{
+  title:"미워도 당신",
+  theme:"사랑·이별",
+  genre:"레트로 소울 그루브 · 108 BPM",
+  concept:"건강검진 대기실에서 꾸벅꾸벅 조는 남편의 야윈 어깨. 사십 년을 싸우고도 '결과 괜찮대요' 한마디에 내가 더 웃는 — 정인 줄 알았는데 사랑이더라.",
+  yt:"\"40년을 미워했는데 이 노래에 당신 얼굴이 떠올랐습니다..\" '미워도 당신' [중년의 노래]",
+  lyrics:`[Chorus - deep, warm]
+미워도 당신 고와도 당신
+사십 년을 싸우고도 곁에 있는 당신
+말로는 원수라고 등을 돌려놓고
+당신 없는 하루는 상상이 안 되네
+
+[Verse 1 - mellow groove]
+건강검진 기다리는 대기실
+꾸벅꾸벅 조는 당신 어깨
+언제 이렇게 야위었나
+큰 산 같던 사람인데
+결과 괜찮답니다 그 말 한마디에
+내가 더 크게 웃었네
+
+[Pre-Chorus - speaking to him]
+여보 당신도 그랬을까
+나 아플까 봐 겁이 났을까
+
+[Chorus - fuller]
+미워도 당신 고와도 당신
+사십 년을 싸우고도 곁에 있는 당신
+말로는 원수라고 등을 돌려놓고
+당신 없는 하루는 상상이 안 되네
+
+[Bridge - half-time, realization]
+젊어서는 몰랐지 사랑인 줄
+그냥 정인 줄만 알았지
+미운 정 고운 정 다 합치면
+그게 사랑이더라
+
+[Final Chorus - with soft echo harmonies]
+미워도 당신 고와도 당신
+사십 년을 싸우고도 곁에 있는 당신
+말로는 원수라고 등을 돌려놓고
+당신 없는 하루는 상상이 안 되네
+(미워도 당신 고와도 당신)
+남은 날도 당신, 당신이네`,
+  style:`Warm Korean retro soul groove, 70s-80s Korean gayo soul, mellow electric organ, smooth bassline, soft backbeat with light tambourine, warm mature female vocal deep and affectionate, gentle echo harmonies in the final chorus, 108 BPM, lifelong love worn soft and warm`
+},
+{
+  title:"당신 없이 맞는 봄",
+  theme:"사랑·이별",
+  genre:"봄 그루브 발라드 · 100 BPM",
+  concept:"먼저 떠난 남편이 좋아하던 벚꽃길을 세 번째 봄에도 혼자 걷는 여자. 울지 말고 웃고 살라던 약속대로, 새로 산 분홍 스카프를 두르고. 앨범의 눈물 담당.",
+  yt:"\"벚꽃길 걷다가 이 노래에 주저앉아 울었습니다..\" '당신 없이 맞는 봄' [중년의 노래]",
+  lyrics:`[Chorus - bittersweet, gently swaying]
+당신 없이 맞는 봄이 세 번째인데
+벚꽃은 야속하게 또 이리도 곱네
+울지 말라고 했지 웃고 살라고 했지
+그래서 오늘도 꽃길을 걸어요
+
+[Verse 1 - soft groove]
+당신이 좋아하던 그 벚꽃길
+올해도 혼자 나왔어요
+사진 찍자 조르던 사람 없으니
+꽃이 피어도 심심하네요
+새로 산 분홍 스카프
+당신이 보면 곱다 했겠지
+
+[Chorus - warmer]
+당신 없이 맞는 봄이 세 번째인데
+벚꽃은 야속하게 또 이리도 곱네
+울지 말라고 했지 웃고 살라고 했지
+그래서 오늘도 꽃길을 걸어요
+
+[Bridge - like reading a letter]
+보고 싶단 말은 아껴둘게요
+자꾸 하면 닳을 것 같아서
+대신 꿈에 한 번 다녀가세요
+그 웃는 얼굴 그대로
+
+[Final Chorus - soft and lifting]
+당신 없이 맞는 봄이 세 번째인데
+벚꽃은 야속하게 또 이리도 곱네
+울지 말라고 했지 웃고 살라고 했지
+그래서 오늘도 꽃길을 걸어요
+
+[Outro - gentle]
+내년 봄에도 여기서 만나요
+꽃잎으로라도 오세요`,
+  style:`Bittersweet Korean retro spring groove ballad, gentle steady beat, warm acoustic guitar arpeggios, tender string section, soft piano, warm mature female vocal smiling through grief, softly lifting final chorus then a quiet gentle outro, 100 BPM, a love letter to someone in heaven`
+},
+];
+
+const EXCLUDE = "rap, EDM, trap, autotune, spoken word intro, heavy metal, aggressive party energy, modern pop production";
+
+function copyText(t, btn){
+  const done = () => { btn.classList.add('ok'); btn.textContent='복사됨!'; setTimeout(()=>{btn.classList.remove('ok'); btn.textContent='복사';},1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done).catch(()=>fallback(t,done));
+  } else fallback(t,done);
+}
+function fallback(t,done){
+  const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
+  ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done();
+}
+
+function render(){
+  const box=document.getElementById('songs');
+  SONGS.forEach((s,i)=>{
+    const card=document.createElement('div'); card.className='card'; card.id='card'+i;
+    const themeCls = s.theme === '사랑·이별' ? 'love' : 'etc';
+    card.innerHTML=`
+      <div class="card-top">
+        <div class="no">${i+1}</div>
+        <h2>${s.title}</h2>
+        <div class="theme ${themeCls}">${s.theme}</div>
+        <div class="genre">${s.genre}</div>
+        <label class="donechk"><input type="checkbox" data-i="${i}"><span>완료</span></label>
+      </div>
+      <div class="concept">${s.concept}</div>
+      <div class="block">
+        <div class="block-head"><b>① 가사 (수노 Lyrics 칸)</b><button class="copybtn">복사</button></div>
+        <pre>${s.lyrics}</pre>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>② 스타일 프롬프트 (수노 Styles 칸)</b><button class="copybtn">복사</button></div>
+        <pre class="small">${s.style}</pre>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>③ Exclude Styles</b><button class="copybtn">복사</button></div>
+        <pre class="small">${EXCLUDE}</pre>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>④ 유튜브 제목 (업로드용)</b><button class="copybtn">복사</button></div>
+        <div class="yt">${s.yt}</div>
+      </div>`;
+    box.appendChild(card);
+    const btns=card.querySelectorAll('.copybtn');
+    btns[0].onclick=()=>copyText(s.lyrics,btns[0]);
+    btns[1].onclick=()=>copyText(s.style,btns[1]);
+    btns[2].onclick=()=>copyText(EXCLUDE,btns[2]);
+    btns[3].onclick=()=>copyText(s.yt,btns[3]);
+  });
+  const saved=JSON.parse(localStorage.getItem('gayobang10v2')||'{}');
+  document.querySelectorAll('.donechk input').forEach(chk=>{
+    const i=chk.dataset.i;
+    if(saved[i]){ chk.checked=true; document.getElementById('card'+i).classList.add('done'); }
+    chk.onchange=()=>{
+      saved[i]=chk.checked;
+      localStorage.setItem('gayobang10v2',JSON.stringify(saved));
+      document.getElementById('card'+i).classList.toggle('done',chk.checked);
+      updateProg();
+    };
+  });
+  updateProg();
+}
+function updateProg(){
+  const saved=JSON.parse(localStorage.getItem('gayobang10v2')||'{}');
+  const n=Object.values(saved).filter(Boolean).length;
+  document.getElementById('prognum').textContent=`${n} / ${SONGS.length} 곡 완료`;
+  document.getElementById('progfill').style.width=(n/SONGS.length*100)+'%';
+}
+render();
+</script>
+</body>
+</html>
