@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>그 밤 라디오 · 90s 처절 발라드 7곡 작업판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:"Pretendard Variable", Pretendard, sans-serif;
+    background:#0b1120; color:#e8ecf5; padding:28px 16px 80px;
+  }
+  .wrap { max-width:860px; margin:0 auto; }
+  header { text-align:center; margin-bottom:14px; }
+  header h1 { font-size:25px; letter-spacing:-0.5px; }
+  header h1 .moon { color:#8fb3ff; }
+  header p { color:#8b96b5; margin-top:6px; font-size:14px; }
+  .anatomy {
+    background:#121a30; border:1px solid #263353; border-radius:14px;
+    padding:14px 18px; margin:16px 0 10px; font-size:13px; line-height:1.7; color:#b9c5e2; text-align:left;
+  }
+  .anatomy b { color:#8fb3ff; }
+  .progress {
+    background:#121a30; border:1px solid #263353; border-radius:14px;
+    padding:14px 18px; margin:12px 0 22px; display:flex; align-items:center; gap:14px;
+  }
+  .progress .bar { flex:1; height:12px; background:#263353; border-radius:6px; overflow:hidden; }
+  .progress .fill { height:100%; width:0%; background:linear-gradient(90deg,#8fb3ff,#c48fff); border-radius:6px; transition:width .3s; }
+  .progress .num { font-weight:700; color:#8fb3ff; white-space:nowrap; }
+  .card {
+    background:#121a30; border:1px solid #263353; border-radius:16px;
+    padding:20px 22px; margin-bottom:20px;
+  }
+  .card.done { opacity:.55; border-color:#2e5c3f; }
+  .card-top { display:flex; align-items:flex-start; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .no {
+    background:#8fb3ff; color:#0b1120; font-weight:800; border-radius:10px;
+    min-width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:17px;
+  }
+  .card h2 { font-size:20px; flex:1; padding-top:5px; letter-spacing:-0.3px; min-width:150px; }
+  .theme { font-size:11.5px; font-weight:700; border-radius:6px; padding:3px 8px; margin-top:8px; white-space:nowrap; }
+  .theme.rock { background:#3d2436; color:#ff9db4; }
+  .theme.soul { background:#233a44; color:#8fd8e8; }
+  .genre { color:#aab6d6; font-size:12.5px; font-weight:600; padding-top:9px; white-space:nowrap; }
+  .donechk { display:flex; align-items:center; gap:6px; cursor:pointer; padding-top:7px; user-select:none; }
+  .donechk input { width:20px; height:20px; accent-color:#4caf7d; cursor:pointer; }
+  .donechk span { font-size:13px; color:#8b96b5; }
+  .concept { color:#aab6d6; font-size:14px; line-height:1.55; margin:4px 0 14px 50px; }
+  .block { margin:12px 0 0 0; }
+  .block-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .block-head b { font-size:13.5px; color:#8fb3ff; }
+  .copybtn {
+    background:#263353; color:#e8ecf5; border:none; border-radius:8px;
+    padding:7px 16px; font-size:13px; font-weight:600; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover { background:#324066; }
+  .copybtn.ok { background:#2e7d4f; }
+  pre {
+    background:#0b1120; border:1px solid #1d2946; border-radius:10px;
+    padding:14px 16px; font-family:inherit; font-size:13.5px; line-height:1.65;
+    white-space:pre-wrap; color:#d5dcee; max-height:220px; overflow-y:auto;
+  }
+  pre.small { max-height:120px; color:#a8cfd8; }
+  .yt { background:#0b1120; border:1px dashed #324066; border-radius:10px; padding:11px 14px; font-size:13.5px; color:#f0c9d8; line-height:1.5; }
+  details.review {
+    background:#121a30; border:1px solid #263353; border-radius:14px;
+    padding:14px 18px; margin-top:26px; font-size:13px; color:#b9c5e2; line-height:1.75;
+  }
+  details.review summary { cursor:pointer; font-weight:700; color:#8fb3ff; font-size:14px; }
+  details.review h3 { font-size:13.5px; color:#c48fff; margin:12px 0 4px; }
+  footer { text-align:center; color:#5d6884; font-size:12.5px; margin-top:30px; line-height:1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🌙 그 밤 라디오 <span class="moon">90s 처절 발라드 7곡</span> <span style="font-size:14px;color:#8b96b5;">목숨 건 사랑</span></h1>
+    <p>록발라드 5곡 + 소울발라드 2곡 · 윤하경 (여성 보컬) · 곡마다 [복사] → 수노 → 완료 ✅</p>
+  </header>
+
+  <div class="anatomy">
+    <b>스타일 해부 (참조: 90년대 처절 사랑 발라드 두 축)</b><br>
+    ① 록발라드 축(5곡): 숨죽인 벌스(클린기타 아르페지오·피아노) → 후렴에서 절규 벨팅으로 폭발, 일렉기타 솔로+스트링, 90년대 드라마틱 서사<br>
+    ② 소울발라드 축(2곡): 피아노·어쿠스틱 중심, 허스키하고 절절한 보컬, 미디엄 슬로우, 절제하다 파이널에서 차오름<br>
+    ③ 정서: "목숨 건 사랑" — 사랑이 목숨보다 앞서는 화자, 직설 선언·간절한 부탁의 어법, 곡마다 다른 관계·장면<br>
+    ④ 여성 보컬 변환: 록=powerful female belting / 소울=husky soulful female, 남성 지칭 태그 배제<br>
+    ⑤ 원곡 가사 웹 대조 완료 — 제목·핵심 소절 겹침 없음 (검증 내역은 맨 아래 검토 기록)
+  </div>
+
+  <div class="progress">
+    <div class="num" id="prognum">0 / 7 곡 완료</div>
+    <div class="bar"><div class="fill" id="progfill"></div></div>
+  </div>
+
+  <div id="songs"></div>
+
+  <details class="review">
+    <summary>검토 기록 (셀프 검토 + 히트곡제조기 + 원곡 대조)</summary>
+    <h3>원곡 가사 웹 대조 (표절 방지, 실제 검색 대조)</h3>
+    「금지된 사랑」: 제목이 가사에 직접 등장하지 않음. 고유 표현(초대장·가족·"무릎 꿇은 세상"·"같은 날에 떠나" 등 결혼식 소재) → 1번곡에서 결혼식·가족 소재 전면 배제, 새벽 첫차 도피 장면으로 설계.<br>
+    「내사랑 내곁에」: 후렴 "내 곁에 있어줘"(상대에게 남아달라 부탁) 구조 → 3번곡은 "내가 여기 있을게"(내가 남는다)로 방향 자체를 반전. "너마저 떠나면"·"철없는 욕심" 등 고유 소절 미사용. 7곡 제목 모두 원곡들과 동명 아님.
+    <h3>3단계 셀프 검토에서 고친 것</h3>
+    ① 우리가 죄라면 — 원곡 소재(결혼식·가족) 겹침 원천 차단, 도피 새벽 장면으로 교체<br>
+    ② 심장도 가져가 — 파이널의 "내가 여기 있어"가 3번곡 제목과 충돌 → "미련이라 부르지 마 사랑이라 불러"로 교체<br>
+    ③ 내가 여기 있을게 — 후렴 마지막 줄이 길어 호흡 끊김 → "눈 뜨면 나를 봐"로 축약<br>
+    ④ 나를 미워해 — 파이널 "너 하나만"이 1번곡 후렴 "너야 너 하나야"와 겹침 → "그 말만은 진짜였어"로 교체<br>
+    ⑤ 다음 생엔 내가 먼저 — 초벌 유지 (반지 낀 손 장면이 킥)<br>
+    ⑥ 나 없는 날들에게 — 파이널 "다음에 만나면"이 5번곡(다음 생) 컨셉과 충돌 → "먼저 가서 자리 맡아둘게요"로 교체<br>
+    ⑦ 돌아온다 했잖아 — 2절 "골목"이 1번곡과 겹침 → 교체. "두 사람 몫 밥짓기" 장치가 기존 발행곡 재가되어도("두 잔의 커피")와 유사 → 휴대폰·현관 장면으로 교체
+    <h3>4단계 히트곡제조기 검토 (곡별 소견)</h3>
+    ① 킥 = "너와 사는 평생이 나의 형벌이길" — 벌을 상으로 뒤집는 역설 펀치라인, 파이널에서만 등장<br>
+    ② 제목이 후렴 첫 줄에서 바로 터짐. 심장 → "그게 무거워지거든" → "사랑이라 불러" 3단 연결로 오브제 회수<br>
+    ③ 소울 축 숨 고르기 트랙. "무서운 꿈은 내가 다 꿀게"가 눈물 포인트, 존댓말 아닌 반말로 6번곡과 차별<br>
+    ④ "손톱이 손바닥을 파고들었어" — 설명 대신 장면. 차가운 벌스와 절규 후렴의 낙차가 이 곡의 킥<br>
+    ⑤ "반지 낀 네 손을 보며 웃었어 / 울면 지는 거니까" — 앨범 최강 벌스 줄. 후렴 "생을 건너서라도"가 절규 자리<br>
+    ⑥ 유일한 존댓말 곡. 밥솥·겨울옷·사진 고르기 등 생활 디테일로 처절함 구현, "천천히 아주 천천히 와요" 마무리<br>
+    ⑦ "끝을 내도 네가 와서 끝내야지" 절규 킥. 브릿지의 자기 인정("아는 날이 더 많아")이 어른의 슬픔<br>
+    전체: 록5(항거→절규→희생→운명→기다림) 사이 3·6번에 소울2(지킴·작별)를 배치해 감정 온도 곡선 확보. 어미는 곡별로 반말 선언·존댓말 당부·독백을 분산.
+  </details>
+
+  <footer>
+    체크 표시는 이 컴퓨터에 자동 저장됩니다 · 썸네일 프롬프트는 ChatGPT 이미지 생성용 (윤하경 실사 감성 인물컷)<br>
+    스포큰 인트로 없음 · 첫 코러스 약하게, 파이널 코러스 최강 (그밤식 빌드업)
+  </footer>
+</div>
+
+<script>
+const SONGS = [
+{
+  title:"우리가 죄라면",
+  theme:"록발라드",
+  genre:"74 BPM · 이뤄질 수 없는 사랑",
+  concept:"모두가 반대한 사랑 — 새벽 첫차에 둘이 몸을 싣는 밤. 이 사랑이 죄라면 벌은 내가 받겠다는, 아니 그 벌이 평생 너와 사는 것이길 바라는 맹세.",
+  yt:"\"세상 전부가 반대해도 내 대답은 너 하나였습니다..\" '우리가 죄라면' | 윤하경",
+  lyrics:`[Verse 1 - hushed, almost whisper]
+불 꺼진 집을 나와 새벽 골목길
+네 손 하나만 잡고 걸었어
+숨소리도 크게 못 내던 우리 앞에
+첫차의 불빛이 다가와
+
+[Pre-Chorus - building]
+다들 그랬지 오래 못 갈 거라고
+그럴수록 난 네 손을 더 세게 쥐었어
+
+[Chorus - restrained first time, emotional]
+우리가 죄라면 벌은 내가 다 받을게
+너를 사랑한 일밖에 지은 죄가 없어
+온 세상이 아니라고 소리쳐 막아도
+내 대답은 하나야 너야 너 하나야
+
+[Verse 2 - quiet again]
+창밖으로 멀어지는 낯익은 거리
+네 어깨에 기대 눈을 감아
+가진 거라곤 서로뿐인 길인데
+이상하지 하나도 안 무서워
+
+[Chorus - explosive, soaring belting]
+우리가 죄라면 벌은 내가 다 받을게
+너를 사랑한 일밖에 지은 죄가 없어
+온 세상이 아니라고 소리쳐 막아도
+내 대답은 하나야 너야 너 하나야
+
+[Bridge - half-time, vowing]
+주름진 두 손으로 이 새벽을 꺼내 보며
+잘했다고 웃을 거야 우리 둘이서
+세상이 끝내 우릴 용서하지 않아도
+
+[Guitar Solo]
+
+[Final Chorus - strongest, key change]
+우리가 죄라면 벌은 내가 다 받을게
+너를 사랑한 일밖에 지은 죄가 없어
+온 세상이 아니라고 소리쳐 막아도
+내 대답은 하나야 너야 너 하나야
+이 사랑이 죄라서 벌을 받는 거라면
+너와 사는 평생이 나의 형벌이길`,
+  style:`1990s Korean rock ballad, hushed intimate verse with clean electric guitar arpeggios and soft piano, explosive chorus with distorted guitar wall and soaring strings, powerful emotional female vocal with raspy edge and desperate soaring belting, first chorus restrained, crying electric guitar solo, key-change final chorus at maximum intensity, dramatic 90s drama OST mood, 74 BPM`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 새벽 어스름의 오래된 시외버스 터미널, 낡은 코트를 입은 20대 후반 한국 여성이 버스 창가 좌석에서 누군가의 손을 꼭 잡은 채 정면을 응시한다. 결연하면서도 슬픈 눈빛, 푸른 새벽빛과 차창에 비친 터미널 불빛. 얕은 심도, 필름 그레인, 시네마틱 조명, 16:9, 이미지에 글자 없음.`
+},
+{
+  title:"심장도 가져가",
+  theme:"록발라드",
+  genre:"72 BPM · 붙잡는 사랑",
+  concept:"짐 싸서 떠나는 연인을 현관 앞에서 막아선 비 오는 밤 — 가려거든 심장도 가져가라는 절규. 어차피 너 없으면 뛰지 않으니까.",
+  yt:"\"가려거든 내 심장도 가져가..\" 떠나는 사람 앞에서 무너진 밤 '심장도 가져가' | 윤하경",
+  lyrics:`[Verse 1 - hushed, trembling]
+현관에 놓인 낯선 가방 하나
+그 옆에 가지런한 네 신발
+말없이 우산을 챙기는
+네 뒷모습이 대답이었어
+
+[Pre-Chorus - building]
+붙잡으면 초라해지는 거 알아
+그래도 이 문 앞을 비켜설 수가 없어
+
+[Chorus - restrained first time]
+가려거든 가 내 심장도 가져가
+어차피 너 없으면 뛰지도 않을 테니
+사랑이 어떻게 하루아침에 식어
+나는 아직 이렇게 뜨거운데
+
+[Verse 2 - quiet]
+처음 이 집에 들어오던 날 너는
+세상을 다 가진 얼굴이었지
+어디서부터 어긋난 걸까
+묻는 사이 네 손은 문고리 위에
+
+[Chorus - explosive scream]
+가려거든 가 내 심장도 가져가
+어차피 너 없으면 뛰지도 않을 테니
+사랑이 어떻게 하루아침에 식어
+나는 아직 이렇게 뜨거운데
+
+[Bridge - half-time, breaking]
+빗소리가 네 발소릴 삼켜버려도
+나는 이 문을 못 닫을 거야
+돌아올 이유 하나쯤은
+여기 두고 가
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+가려거든 가 내 심장도 가져가
+어차피 너 없으면 뛰지도 않을 테니
+사랑이 어떻게 하루아침에 식어
+나는 아직 이렇게 뜨거운데
+가다가 단 한 번 그게 무거워지거든
+미련이라 부르지 마 사랑이라 불러`,
+  style:`1990s Korean rock ballad, trembling quiet verse over clean guitar and rain-like piano, screaming explosive chorus with heavy distorted guitars and pounding drums, powerful female vocal breaking into raspy desperate belting, dynamic contrast between whisper and scream, wailing guitar solo, final chorus strongest, rainy night heartbreak, 72 BPM`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 비 오는 밤 오래된 아파트 현관 앞, 20대 후반 한국 여성이 문틀을 붙잡고 무너지듯 서 있다. 복도 백열등의 역광, 눈물이 맺힌 옆얼굴, 젖은 머리칼. 바닥에 놓인 여행 가방의 실루엣. 얕은 심도, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`
+},
+{
+  title:"내가 여기 있을게",
+  theme:"소울발라드",
+  genre:"63 BPM · 곁을 지키는 사랑",
+  concept:"병실 창가, 야윈 손을 잡고 밤을 지새우는 여자 — 길고 긴 밤이 삼키려 해도 아침은 내가 데려오겠다는 다짐.",
+  yt:"\"잠든 너의 손을 잡고 아침을 기다렸습니다..\" '내가 여기 있을게' | 윤하경",
+  lyrics:`[Verse 1 - warm, intimate]
+좁은 침대 곁에 의자를 붙이고
+야윈 네 손등을 쓸어내려
+겁내지 말라고 말해놓고선
+내 손이 먼저 떨고 있네
+
+[Chorus - husky, gently swelling]
+아무 데도 안 가 내가 여기 있을게
+네가 잠든 밤에도 이 손 놓지 않을게
+길고 긴 이 밤이 우릴 삼키려 해도
+아침은 내가 데려올게 눈 뜨면 나를 봐
+
+[Verse 2 - tender]
+창밖의 계절이 몇 번 바뀌어도
+나는 이 자리가 제일 좋아
+네가 눈을 뜨면 처음 보이는 곳
+여기가 내 자리니까
+
+[Bridge - husky, like a prayer]
+욕심 안 부릴게 많이 안 바랄게
+내일 아침 네 목소리 그거 하나면 돼
+
+[Final Chorus - fuller, tearful]
+아무 데도 안 가 내가 여기 있을게
+네가 잠든 밤에도 이 손 놓지 않을게
+길고 긴 이 밤이 우릴 삼키려 해도
+아침은 내가 데려올게 눈 뜨면 나를 봐
+
+[Outro - whispered, warm]
+잘 자 내 사랑
+무서운 꿈은 내가 다 꿀게`,
+  style:`1990s Korean soul ballad, warm grand piano and acoustic guitar arpeggios, soft brushed drums and mellow bass, husky soulful female vocal, tender aching bluesy phrasing, gentle string swells rising in the final chorus, restrained intimate dynamics, whispered warm outro, medium slow 63 BPM, dawn by a hospital window`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 새벽 병실 창가, 20대 후반 한국 여성이 침대 옆 의자에 앉아 잠든 이의 손을 두 손으로 감싸고 있다. 창으로 스며드는 첫 아침빛, 지쳤지만 따뜻한 미소, 흐트러진 머리칼. 얕은 심도, 부드러운 역광, 필름 그레인, 16:9, 이미지에 글자 없음.`
+},
+{
+  title:"나를 미워해",
+  theme:"록발라드",
+  genre:"76 BPM · 놓아주는 사랑",
+  concept:"이유는 숨긴 채 일부러 모질게 이별을 말하는 여자 — 네가 살려면 나를 미워하라고, 나쁜 여자로 남겠다는 거짓말.",
+  yt:"\"차라리 나를 미워해..\" 사랑해서 나쁜 여자가 되기로 한 밤 '나를 미워해' | 윤하경",
+  lyrics:`[Verse 1 - cold surface, trembling inside]
+사랑이 식었냐고 너는 물었지
+나는 눈도 깜빡하지 않았어
+연습한 말들을 쏟아내는 동안
+손톱이 손바닥을 파고들었어
+
+[Pre-Chorus - building]
+제발 더 묻지 마 흔들리기 전에
+너는 나를 두고 돌아서야만 해
+
+[Chorus - restrained first time]
+나를 미워해 그래야 네가 살아
+좋았던 날들까지 다 지워버려
+사랑해서 보낸단 말 따위 안 할게
+그냥 나쁜 여자로 남을게 네 기억 속에
+
+[Verse 2 - quiet, broken]
+돌아서던 네 눈에 고이던 것이
+밤새도록 나를 무너뜨려도
+잘한 거야 잘한 거야 되뇌면서
+소리 죽여 이불을 물었어
+
+[Chorus - explosive belting]
+나를 미워해 그래야 네가 살아
+좋았던 날들까지 다 지워버려
+사랑해서 보낸단 말 따위 안 할게
+그냥 나쁜 여자로 남을게 네 기억 속에
+
+[Bridge - half-time, confession to no one]
+언젠가 아주 먼 훗날에
+네가 웃으며 살아만 준다면
+그거면 됐어 그 하나를 바라고
+이 거짓말 속에서 사는 거야
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+나를 미워해 그래야 네가 살아
+좋았던 날들까지 다 지워버려
+사랑해서 보낸단 말 따위 안 할게
+그냥 나쁜 여자로 남을게 네 기억 속에
+미안해 이 말은 여기서 혼자 할게
+사랑했어 그 말만은 진짜였어`,
+  style:`1990s Korean rock ballad, cold restrained verse with sparse piano and clean guitar, explosive chorus with distorted guitars and dramatic strings, powerful emotional female vocal shifting from icy calm to desperate raspy belting, half-time emotional bridge, guitar solo before the strongest final chorus, tragic sacrifice mood, 76 BPM`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 흐린 오후의 카페 창가 테이블, 20대 후반 한국 여성의 얼굴 클로즈업 — 차갑게 정면을 응시하지만 테이블 아래로는 주먹을 꽉 쥔 손이 보인다. 창밖의 뿌연 빛, 식어버린 커피 두 잔. 얕은 심도, 차가운 색감, 필름 그레인, 16:9, 이미지에 글자 없음.`
+},
+{
+  title:"다음 생엔 내가 먼저",
+  theme:"록발라드",
+  genre:"70 BPM · 어긋난 사랑",
+  concept:"평생 반 박자씩 어긋난 두 사람 — 반지 낀 네 손을 보며 웃던 찻집에서, 다음 생엔 내가 먼저 알아보겠다는 기약.",
+  yt:"\"평생 반 박자씩 어긋난 사람이 있습니다..\" '다음 생엔 내가 먼저' | 윤하경",
+  lyrics:`[Verse 1 - wistful, quiet]
+네가 내민 손을 몰라본 스물의 나
+내가 달려간 밤엔 네가 없었지
+우리 사이엔 언제나 반 박자
+그 짧은 어긋남이 평생이 됐어
+
+[Pre-Chorus - building]
+신이 있다면 붙잡고 묻고 싶어
+왜 하필 우리였냐고
+
+[Chorus - restrained first time]
+다음 생엔 내가 먼저 너를 알아볼게
+네가 손 내밀기 전에 먼저 잡을게
+이번 생이 우리에게 등을 돌렸어도
+난 포기를 몰라 생을 건너서라도
+
+[Verse 2 - quiet, devastating]
+오랜만에 마주 앉은 찻집 창가엔
+말 대신 김만 피어올랐지
+반지 낀 네 손을 보며 웃었어
+울면 지는 거니까
+
+[Chorus - soaring belting]
+다음 생엔 내가 먼저 너를 알아볼게
+네가 손 내밀기 전에 먼저 잡을게
+이번 생이 우리에게 등을 돌렸어도
+난 포기를 몰라 생을 건너서라도
+
+[Bridge - half-time]
+우리가 못 만난 게 아니야
+너무 일찍 스쳐버린 거야
+그렇게 믿을게 그래야 견디니까
+
+[Guitar Solo]
+
+[Final Chorus - strongest, key change]
+다음 생엔 내가 먼저 너를 알아볼게
+네가 손 내밀기 전에 먼저 잡을게
+이번 생이 우리에게 등을 돌렸어도
+난 포기를 몰라 생을 건너서라도
+다음 생엔 늦지 마 나도 늦지 않을게
+그때는 처음부터 끝까지 너야`,
+  style:`1990s Korean rock ballad, wistful verse with clean electric guitar and warm piano, soaring anthemic chorus with lush strings and distorted guitars, powerful female vocal with yearning soaring belting, half-time bridge, key-change final chorus at full power, fate and longing mood, 70 BPM`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 노을이 드는 오후의 오래된 찻집 창가, 20대 후반 한국 여성이 김이 오르는 찻잔 두 개 사이에서 애써 미소 짓고 있다. 시선은 테이블 건너편 상대의 손끝을 향하고, 눈가에는 참는 물기. 따뜻한 노을빛과 얕은 심도, 필름 그레인, 16:9, 이미지에 글자 없음.`
+},
+{
+  title:"나 없는 날들에게",
+  theme:"소울발라드",
+  genre:"62 BPM · 남기고 가는 사랑",
+  concept:"먼저 떠날 걸 아는 여자가 연인에게 남기는 당부 — 겨울옷을 꺼내놓고 사진을 골라두고, 천천히 아주 천천히 오라는 마지막 사랑.",
+  yt:"\"울지 말아요, 부디 잘 살아요..\" 떠나는 이의 마지막 부탁 '나 없는 날들에게' | 윤하경",
+  lyrics:`[Verse 1 - calm, warm]
+겨울옷을 미리 꺼내놨어요
+당신은 늘 감기를 달고 사니까
+밥솥 예약하는 법도 적어놨어요
+글씨가 삐뚤어도 웃지 말아요
+
+[Chorus - husky, aching]
+울지 말아요 나의 사람아
+나 없는 아침에도 해는 뜰 거예요
+당신이 웃어야 내가 편히 가요
+살아요 부디 잘 살아요
+
+[Verse 2 - tender, breaking]
+당신 몰래 사진들을 골랐어요
+제일 예쁘게 웃는 나로만
+먼 훗날 꺼내 볼 내 얼굴이
+울상이면 안 되잖아요
+
+[Chorus - warmer]
+울지 말아요 나의 사람아
+나 없는 아침에도 해는 뜰 거예요
+당신이 웃어야 내가 편히 가요
+살아요 부디 잘 살아요
+
+[Bridge - trembling, honest]
+욕심이 하나 있다면
+가끔은 나를 잊지 말아요
+아니에요 다 잊어도 돼요
+당신 마음 아픈 것보단 나아요
+
+[Final Chorus - fuller, tears in voice]
+울지 말아요 나의 사람아
+나 없는 아침에도 해는 뜰 거예요
+당신이 웃어야 내가 편히 가요
+살아요 부디 잘 살아요
+
+[Outro - quiet, smiling through tears]
+먼저 가서 자리 맡아둘게요
+천천히 아주 천천히 와요`,
+  style:`1990s Korean soul ballad, intimate grand piano with soft acoustic guitar, warm upright bass and brushed drums, husky soulful female vocal singing gently like leaving a letter, restrained verses, tearful swelling final chorus with warm strings, quiet trembling outro, medium slow 62 BPM, calm farewell warmth`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 오후 햇살이 드는 따뜻한 거실, 20대 후반 한국 여성이 스웨터를 정성스레 개켜 상자에 담으며 잔잔히 웃고 있다. 물기 어린 눈, 창가의 부드러운 빛, 테이블 위 손글씨 메모지. 얕은 심도, 따뜻한 색감, 필름 그레인, 16:9, 이미지에 글자 없음.`
+},
+{
+  title:"돌아온다 했잖아",
+  theme:"록발라드",
+  genre:"73 BPM · 기다리는 사랑",
+  concept:"곧 온다던 약속 하나로 세 계절을 버틴 여자 — 현관 등도 비밀번호도 그대로 둔 채, 끝을 내도 네가 와서 끝내라는 절규.",
+  yt:"\"돌아온다 했잖아..\" 그 약속 하나로 세 계절을 버텼습니다 '돌아온다 했잖아' | 윤하경",
+  lyrics:`[Verse 1 - quiet, lonely]
+곧 온다는 네 말을 믿어서
+현관 등을 켜둔 채 잠들어
+계절이 세 번 바뀌는 동안
+비밀번호도 못 바꿨어
+
+[Pre-Chorus - building]
+바보라고 다들 혀를 차도
+약속은 지키라고 있는 거잖아
+
+[Chorus - restrained first time]
+돌아온다 했잖아 그 말 하나로 살았어
+어디쯤이야 얼마나 더 기다리면 돼
+잊으라는 위로는 나한테 넣어둬
+끝을 내도 네가 와서 끝내야지
+
+[Verse 2 - quiet]
+휴대폰이 울릴 때마다
+심장이 먼저 현관을 봐
+너 닮은 뒷모습을 쫓아가다
+모르는 길 위에서 울었어
+
+[Chorus - explosive scream]
+돌아온다 했잖아 그 말 하나로 살았어
+어디쯤이야 얼마나 더 기다리면 돼
+잊으라는 위로는 나한테 넣어둬
+끝을 내도 네가 와서 끝내야지
+
+[Bridge - half-time, honest]
+사실은 나도 알아 안 올 거라는 거
+아는 날이 모르는 날보다 많아
+그래도 오늘 밤 문을 못 잠그는 건
+너 때문이 아니라 나 때문이야
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+돌아온다 했잖아 그 말 하나로 살았어
+어디쯤이야 얼마나 더 기다리면 돼
+잊으라는 위로는 나한테 넣어둬
+끝을 내도 네가 와서 끝내야지
+오늘까지만 기다릴게 이 다짐이
+벌써 몇 번째인지 나도 몰라`,
+  style:`1990s Korean rock ballad, quiet lonely verse with clean guitar arpeggios and music-box-like piano, explosive screaming chorus with distorted guitar wall, strings and thunderous drums, powerful female vocal with desperate raspy belting, honest half-time bridge, guitar solo then the most explosive final chorus, waiting by the door at night, 73 BPM`,
+  thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 깊은 밤 아파트 현관 앞, 켜진 현관 등 불빛 아래 20대 후반 한국 여성이 문에 등을 기대고 주저앉아 무릎에 얼굴을 묻고 있다. 어둠 속 한 줄기 따뜻한 불빛, 맨발, 곁에 놓인 휴대폰. 얕은 심도, 시네마틱 명암, 필름 그레인, 16:9, 이미지에 글자 없음.`
+},
+];
+
+const EXCLUDE = "rap, hip hop, EDM, trap, autotune, spoken word intro, male vocal, duet, heavy metal, modern idol pop production, upbeat dance beat, trot";
+
+function copyText(t, btn){
+  const done = () => { btn.classList.add('ok'); btn.textContent='복사됨!'; setTimeout(()=>{btn.classList.remove('ok'); btn.textContent='복사';},1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done).catch(()=>fallback(t,done));
+  } else fallback(t,done);
+}
+function fallback(t,done){
+  const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
+  ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done();
+}
+
+function render(){
+  const box=document.getElementById('songs');
+  SONGS.forEach((s,i)=>{
+    const card=document.createElement('div'); card.className='card'; card.id='card'+i;
+    const themeCls = s.theme === '록발라드' ? 'rock' : 'soul';
+    card.innerHTML=`
+      <div class="card-top">
+        <div class="no">${i+1}</div>
+        <h2>${s.title}</h2>
+        <div class="theme ${themeCls}">${s.theme}</div>
+        <div class="genre">${s.genre}</div>
+        <label class="donechk"><input type="checkbox" data-i="${i}"><span>완료</span></label>
+      </div>
+      <div class="concept">${s.concept}</div>
+      <div class="block">
+        <div class="block-head"><b>① 가사 (수노 Lyrics 칸)</b><button class="copybtn">복사</button></div>
+        <pre>${s.lyrics}</pre>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>② 스타일 프롬프트 (수노 Styles 칸)</b><button class="copybtn">복사</button></div>
+        <pre class="small">${s.style}</pre>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>③ Exclude Styles</b><button class="copybtn">복사</button></div>
+        <pre class="small">${EXCLUDE}</pre>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>④ 유튜브 제목 (업로드용)</b><button class="copybtn">복사</button></div>
+        <div class="yt">${s.yt}</div>
+      </div>
+      <div class="block">
+        <div class="block-head"><b>⑤ 썸네일 프롬프트 (ChatGPT 이미지)</b><button class="copybtn">복사</button></div>
+        <pre class="small">${s.thumb}</pre>
+      </div>`;
+    box.appendChild(card);
+    const btns=card.querySelectorAll('.copybtn');
+    btns[0].onclick=()=>copyText(s.lyrics,btns[0]);
+    btns[1].onclick=()=>copyText(s.style,btns[1]);
+    btns[2].onclick=()=>copyText(EXCLUDE,btns[2]);
+    btns[3].onclick=()=>copyText(s.yt,btns[3]);
+    btns[4].onclick=()=>copyText(s.thumb,btns[4]);
+  });
+  const saved=JSON.parse(localStorage.getItem('geubamMoksum7')||'{}');
+  document.querySelectorAll('.donechk input').forEach(chk=>{
+    const i=chk.dataset.i;
+    if(saved[i]){ chk.checked=true; document.getElementById('card'+i).classList.add('done'); }
+    chk.onchange=()=>{
+      saved[i]=chk.checked;
+      localStorage.setItem('geubamMoksum7',JSON.stringify(saved));
+      document.getElementById('card'+i).classList.toggle('done',chk.checked);
+      updateProg();
+    };
+  });
+  updateProg();
+}
+function updateProg(){
+  const saved=JSON.parse(localStorage.getItem('geubamMoksum7')||'{}');
+  const n=Object.values(saved).filter(Boolean).length;
+  document.getElementById('prognum').textContent=`${n} / ${SONGS.length} 곡 완료`;
+  document.getElementById('progfill').style.width=(n/SONGS.length*100)+'%';
+}
+render();
+</script>
+</body>
+</html>
