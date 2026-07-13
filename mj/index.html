@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미드저니 프롬프트 생성기 — 윤하경 비주얼 v2</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Pretendard','Pretendard Variable','Malgun Gothic',sans-serif;
+    background:#101216; color:#e8e6e1; min-height:100vh; padding:32px 16px 80px;
+  }
+  .wrap { max-width:880px; margin:0 auto; }
+  h1 { font-size:22px; font-weight:800; letter-spacing:-0.5px; }
+  h1 small { font-size:13px; font-weight:400; color:#8b8f98; margin-left:10px; }
+  .sub { color:#8b8f98; font-size:13px; margin-top:6px; line-height:1.6; }
+
+  .panel { background:#181b21; border:1px solid #262a33; border-radius:14px; padding:20px; margin-top:20px; }
+  .row { margin-bottom:18px; }
+  .row:last-child { margin-bottom:0; }
+  .label { font-size:13px; font-weight:700; color:#aab0bb; margin-bottom:9px; }
+  .label span { font-weight:400; color:#6d727d; margin-left:6px; font-size:12px; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip {
+    padding:8px 14px; border-radius:99px; border:1px solid #2e333e; background:#1e222a;
+    color:#c9cdd5; font-size:14px; cursor:pointer; user-select:none; transition:all .12s;
+  }
+  .chip:hover { border-color:#4a5160; }
+  .chip.on { background:#e8e6e1; color:#15171c; border-color:#e8e6e1; font-weight:700; }
+
+  /* sref 박스 */
+  .sref {
+    background:#15242e; border:1px solid #24485c; border-radius:12px; padding:16px 18px; margin-top:20px;
+  }
+  .sref-h { font-size:14px; font-weight:800; color:#7fd3f7; margin-bottom:8px; }
+  .sref-p { font-size:12.5px; color:#8fa9b8; line-height:1.85; margin-bottom:12px; }
+  .sref-p b { color:#cfe6f2; }
+  .sref-p code { background:#0d1a22; padding:2px 6px; border-radius:4px; color:#7fd3f7; font-size:12px; }
+  .sref input {
+    width:100%; padding:11px 13px; border-radius:9px; border:1px solid #2b4d61; background:#0d1a22;
+    color:#dbeaf2; font-size:13px; font-family:Consolas,monospace; outline:none;
+  }
+  .sref input:focus { border-color:#4d90b3; }
+  .sref input::placeholder { color:#4a6674; }
+  .sref-note { font-size:12px; color:#6d8b9b; margin-top:9px; line-height:1.7; }
+
+  .go {
+    display:block; width:100%; margin-top:22px; padding:16px; border:none; border-radius:12px;
+    background:#e8e6e1; color:#15171c; font-size:17px; font-weight:800; cursor:pointer;
+    font-family:inherit; transition:transform .08s;
+  }
+  .go:active { transform:scale(0.99); }
+
+  .card { background:#181b21; border:1px solid #262a33; border-radius:14px; padding:18px 20px; margin-top:14px; }
+  .card-top { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; }
+  .card-title { font-size:14px; font-weight:700; color:#e8e6e1; }
+  .card-title .tag { font-size:12px; font-weight:400; color:#8b8f98; margin-left:8px; }
+  .btns { display:flex; gap:8px; flex-shrink:0; }
+  .mini {
+    padding:7px 13px; border-radius:8px; border:1px solid #2e333e; background:#1e222a;
+    color:#c9cdd5; font-size:13px; cursor:pointer; font-family:inherit; transition:all .12s;
+  }
+  .mini:hover { border-color:#4a5160; }
+  .mini.copied { background:#2f6b45; border-color:#2f6b45; color:#fff; }
+  .prompt {
+    font-size:13px; line-height:1.7; color:#b9bec8; background:#111318;
+    border-radius:10px; padding:14px; word-break:break-word;
+    font-family:Consolas,'Pretendard',monospace;
+  }
+  .empty { text-align:center; color:#565b66; padding:50px 0; font-size:14px; }
+
+  .tip { margin-top:26px; font-size:12.5px; color:#6d727d; line-height:1.95; }
+  .tip b { color:#9aa0ab; }
+  .tip .hd { color:#c9cdd5; font-weight:800; font-size:13px; display:block; margin:16px 0 6px; }
+  .tip .bad { color:#c97a7a; }
+  .tip .good { color:#7fbf8f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>미드저니 프롬프트 생성기 <small>윤하경 · v2 (best 6장 역산 공식)</small></h1>
+  <div class="sub">
+    <b>가장 중요한 건 아래 파란 박스(스타일 참조)입니다.</b> 그거 한 번 세팅하면 그 뒤론 감정만 고르면 됩니다.
+  </div>
+
+  <!-- 스타일 참조 -->
+  <div class="sref">
+    <div class="sref-h">① 스타일 참조 (--sref) — 이게 핵심입니다</div>
+    <div class="sref-p">
+      말로 설명하는 것보다 <b>마음에 드는 사진을 던지는 게 100배 정확합니다.</b> 사장님이 골라두신 6장이 그 재료예요.<br><br>
+      <b>미드저니 웹에서 (제일 쉬움):</b> 프롬프트 입력창 왼쪽 <b>이미지(🖼) 아이콘</b> 클릭 → best 폴더의 사진을 <b>드래그해서 업로드</b> → 뜬 썸네일에서 <code>Style Reference</code> 선택. 3~4장 같이 넣으면 더 안정적입니다. 한 번 넣으면 계속 유지돼요.<br>
+      <b>디스코드에서:</b> 사진을 아무 채널에 올리고 → 우클릭 <b>[링크 복사]</b> → 그 주소를 아래 칸에 붙여넣기 (여러 장이면 주소를 띄어쓰기로 나열).
+    </div>
+    <input id="srefInput" type="text" placeholder="디스코드용 — 이미지 주소를 붙여넣으세요 (웹에서 드래그로 넣으실 거면 비워두세요)">
+    <div class="sref-note">
+      📂 사진 위치 · <b>D:\work\ai-singer\작업실\썸네일모음\sona-wave-music\best</b><br>
+      스타일이 약하게 먹으면 아래 <b>참조 강도</b>를 올리세요. (기본 100 → 300~500이 보통 딱 맞습니다)
+    </div>
+  </div>
+
+  <!-- 옵션 -->
+  <div class="panel">
+    <div class="row">
+      <div class="label">② 감정 <span>곡 분위기 — 표정·시선·자세가 바뀝니다</span></div>
+      <div class="chips" id="emo"></div>
+    </div>
+    <div class="row">
+      <div class="label">장면 <span>배경은 어차피 다 뭉개집니다. "무슨 색 빛이 번지느냐"만 정하는 거예요</span></div>
+      <div class="chips" id="scene"></div>
+    </div>
+    <div class="row">
+      <div class="label">나이대</div>
+      <div class="chips" id="age"></div>
+    </div>
+    <div class="row">
+      <div class="label">비율</div>
+      <div class="chips" id="ratio"></div>
+    </div>
+    <div class="row">
+      <div class="label">제목 넣을 여백 <span>썸네일용</span></div>
+      <div class="chips" id="space"></div>
+    </div>
+    <div class="row">
+      <div class="label">참조 강도 (--sw) <span>위 칸에 주소를 넣었을 때만 붙습니다 — 웹에서 드래그로 넣으셨다면 미드저니 화면의 강도 슬라이더로 조절하세요</span></div>
+      <div class="chips" id="sw"></div>
+    </div>
+    <button class="go" onclick="generate()">프롬프트 6개 생성</button>
+  </div>
+
+  <div id="out"><div class="empty">감정을 고르고 버튼을 눌러주세요</div></div>
+
+  <div class="tip">
+    <span class="hd">이 공식은 어디서 나왔나</span>
+    사장님이 <b>best</b> 폴더에 고른 6장의 공통점을 뽑아낸 겁니다. 6장 전부 —
+    ① <b>얼굴이 화면 1/3을 채우는 바짝 붙은 상반신</b>, ② <b>카메라를 똑바로 응시</b>,
+    ③ <b>배경이 형체도 없이 뭉개진 보케</b>, ④ <b>민낯 · 20대 초반</b>,
+    ⑤ <b>흰색/아이보리 옷</b>, ⑥ <b>긴 흑발 웨이브 + 흩날리는 잔머리</b>,
+    ⑦ <b>바랜 필름 색 + 굵은 그레인</b>.
+
+    <span class="hd">구버전이 왜 안 나왔나 (같은 실수 반복 금지)</span>
+    <span class="bad">✗ "멀리 떨어져 서 있고 여백이 넉넉한 환경 인물사진, 35mm"</span> → 사장님이 원한 건 정반대인 <b>코앞 클로즈업</b>이었습니다.<br>
+    <span class="bad">✗ "우아하고 성숙한 아름다움"</span> → 실제 6장은 <b>앳되고 민낯</b>.<br>
+    <span class="bad">✗ "melancholic(우울한) 표정"</span> → <b>미드저니는 감정 형용사를 거의 안 듣습니다.</b>
+    감정은 <span class="good">조명 · 시선 · 입술 · 고개 각도</span> 같은 <b>눈에 보이는 것</b>으로 만들어야 합니다. 이 생성기는 전부 그렇게 바꿔놨습니다.
+
+    <span class="hd">잘 안 나올 때 — 한 번에 하나씩만 만지세요</span>
+    <b>1.</b> 느낌이 아예 딴판 → <b>참조 강도(--sw)를 400~700</b>으로 올린다.<br>
+    <b>2.</b> 배경이 너무 또렷하다 → 프롬프트에서 <code>f/1.4</code>를 <code>f/1.2</code>로 바꾼다.<br>
+    <b>3.</b> 얼굴이 너무 멀다 → <code>bust-up close-up</code>을 <code>tight head-and-shoulders close-up</code>으로.<br>
+    <b>4.</b> 그림 같고 사진 같지 않다 → <code>--style raw</code>가 붙어 있는지 확인.<br>
+    <b>5.</b> 마음에 드는 게 하나 나오면 그 프롬프트를 <b>통째로 저장</b>하고, 그다음부턴 <b>단어 하나씩만</b> 바꾸세요. 매번 다 갈아엎으면 뭐가 효과 있었는지 영영 모릅니다.
+
+    <span class="hd">파일 위치</span>
+    D:\work\ai-singer\미드저니_프롬프트생성기.html (더블클릭으로 열림) · 구버전은 <b>_archive</b>에 보관
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  고정 스타일 공식 — best 6장에서 역산. 함부로 바꾸지 말 것.
+// ═══════════════════════════════════════════════════════
+const LOOK_HEAD = 'Candid film photograph, bust-up close-up, her face filling a third of the frame';
+const LOOK_SUBJECT = 'a Korean woman in her AGE, bare face, no makeup, long dark wavy hair with loose strands drifting across her cheek';
+const LOOK_TAIL = 'Background completely dissolved into soft out-of-focus bokeh, only her face is sharp. 85mm lens at f/1.4, extremely shallow depth of field. FILM. Washed-out muted color, lifted blacks, halation glow on the highlights, heavy visible film grain, real skin texture, no retouching.';
+
+// ── 감정: 형용사 금지. 시선·눈·입·고개·어깨 같은 "보이는 것"으로만.
+const EMOTIONS = [
+  { id:'heartbreak', name:'이별·그리움', looks:[
+    'Looking straight into the lens, eyes wet and glassy, lips slightly parted, chin tilted down a little',
+    'Facing the lens, one tear held at the lash line, mouth closed tight, shoulders drawn in',
+    'Staring into the lens, eyes reddened at the rims, a strand of hair stuck to her damp cheek',
+  ]},
+  { id:'regret', name:'미련·후회', looks:[
+    'Turning back over her shoulder toward the lens, eyes steady on the camera, mouth closed, hair swinging across her jaw',
+    'Half-turned away but her eyes come back to the lens, lips pressed together, one hand near her collarbone',
+    'Glancing back into the lens, eyebrows slightly raised, breath caught, lips barely open',
+  ]},
+  { id:'flutter', name:'설렘·첫사랑', looks:[
+    'Looking into the lens with a small closed-mouth smile, cheeks flushed, eyes slightly narrowed',
+    'Smiling at the camera with her teeth just showing, wind lifting her hair off her shoulder',
+    'Chin resting on her hand, eyes on the lens, an unguarded quiet smile',
+  ]},
+  { id:'comfort', name:'잔잔한 위로', looks:[
+    'Facing the lens calmly, a faint soft smile, shoulders relaxed, eyes warm and steady',
+    'Looking at the camera with her head tilted slightly, a gentle unhurried smile',
+    'Eyes on the lens, breathing slowly, mouth relaxed, no tension in her face',
+  ]},
+  { id:'alone', name:'혼자만의 밤', looks:[
+    'Staring straight into the lens with no expression, eyes wide and still, lips closed',
+    'Looking into the camera as if she forgot it was there, gaze unfocused, mouth slack',
+    'Facing the lens, eyes half-lidded and tired, a long slow exhale',
+  ]},
+  { id:'letgo', name:'체념·담담함', looks:[
+    'Looking into the lens with an empty calm gaze, mouth relaxed, head slightly tilted',
+    'Eyes on the camera, perfectly still, no smile, no frown, wind moving only her hair',
+    'Facing the lens with a settled quiet face, the ghost of a smile at one corner',
+  ]},
+];
+
+// ── 장면: 배경은 어차피 뭉개진다. "무슨 색 빛이 번지느냐"만 쓴다.
+const SCENES = [
+  { id:'neon',     name:'밤거리 네온',   night:true,
+    bg:'Behind her, a night street dissolved into round bokeh of red, amber and teal lights' },
+  { id:'alley',    name:'밤 골목',       night:true,
+    bg:'Behind her, a dark alley at night, distant amber streetlamps melted into soft glowing orbs, everything else near black' },
+  { id:'rainglass',name:'비 오는 창가',  night:true,
+    bg:'Behind her, a rain-streaked window at night, cold blue city light smeared through the wet glass' },
+  { id:'river',    name:'강변 야경',     night:true,
+    bg:'Behind her, dark water and far-off city lights melted into warm floating bokeh' },
+  { id:'park',     name:'밤 산책로',     night:true,
+    bg:'Behind her, dark trees and a few warm streetlamps blurred into golden orbs' },
+  { id:'sea_dusk', name:'바다 (노을)',   night:false,
+    bg:'Behind her, the out-of-focus sea at dusk, muted blue-grey water filling the whole background, low warm sun' },
+  { id:'sea_dawn', name:'바다 (새벽)',   night:false,
+    bg:'Behind her, a pale hazy sea at dawn, soft blue-grey water and blurred sand, cold flat light' },
+  { id:'cafe',     name:'카페 창가',     night:false,
+    bg:'Behind her, a cafe interior melted into pale blur, soft window daylight, out-of-focus people' },
+  { id:'bus',      name:'버스·지하철',   night:false,
+    bg:'Behind her, blurred pastel-blue seats and out-of-focus passengers, soft light through a window' },
+  { id:'room',     name:'어두운 방',     night:true,
+    bg:'Behind her, a dark room, a single lamp glowing out of focus, the rest swallowed in shadow' },
+  { id:'field',    name:'노을 들판',     night:false,
+    bg:'Behind her, a blurred grass field in golden backlight, warm haze' },
+  { id:'street_day',name:'낮 거리',      night:false,
+    bg:'Behind her, a summer street melted into pale green and white blur, hazy afternoon light' },
+];
+
+// ── 옷: 6장 전부 흰색/아이보리. 예외 없음.
+const CLOTHES = [
+  'a plain white cotton t-shirt',
+  'a loose white linen shirt, collar open',
+  'an ivory fuzzy knit sweater',
+  'a white blouse with a wide neckline',
+  'a cream lace-trimmed camisole',
+  'an oversized white shirt slipping off one shoulder',
+];
+
+const AGES = [
+  { id:'early20s', name:'20대 초반 (best 6장의 결)', v:'early 20s' },
+  { id:'late20s',  name:'20대 후반',                 v:'late 20s' },
+  { id:'early30s', name:'30대 초반',                 v:'early 30s' },
+];
+
+const RATIOS = [
+  { id:'16:9', name:'가로 16:9 (썸네일)' },
+  { id:'9:16', name:'세로 9:16 (쇼츠)' },
+  { id:'1:1',  name:'정사각 1:1' },
+];
+
+const SPACES = [
+  { id:'none',  name:'없음 (인물 중앙)' },
+  { id:'left',  name:'왼쪽 비우기' },
+  { id:'right', name:'오른쪽 비우기' },
+];
+
+const SWS = [
+  { id:'0',    name:'안 씀' },
+  { id:'100',  name:'100 (기본)' },
+  { id:'300',  name:'300' },
+  { id:'500',  name:'500 (세게)' },
+  { id:'750',  name:'750 (아주 세게)' },
+];
+
+const FILM_NIGHT = 'Shot on Cinestill 800T';
+const FILM_DAY   = 'Shot on Kodak Portra 400';
+
+// ═══════════════════════════════════════════════════════
+const state = { emo:'heartbreak', scene:'auto', age:'early20s', ratio:'16:9', space:'left', sw:'300' };
+
+function renderChips(elId, items, key) {
+  const el = document.getElementById(elId);
+  el.innerHTML = '';
+  items.forEach(it => {
+    const c = document.createElement('div');
+    c.className = 'chip' + (state[key] === it.id ? ' on' : '');
+    c.textContent = it.name;
+    c.onclick = () => { state[key] = it.id; renderAll(); };
+    el.appendChild(c);
+  });
+}
+
+function renderAll() {
+  renderChips('emo', EMOTIONS, 'emo');
+  renderChips('scene', [{id:'auto',name:'자동 (여러 장면 섞기)'}].concat(SCENES.map(s=>({id:s.id,name:s.name}))), 'scene');
+  renderChips('age', AGES, 'age');
+  renderChips('ratio', RATIOS, 'ratio');
+  renderChips('space', SPACES, 'space');
+  renderChips('sw', SWS, 'sw');
+}
+
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function buildPrompt(scene) {
+  const emo   = EMOTIONS.find(e => e.id === state.emo);
+  const age   = AGES.find(a => a.id === state.age).v;
+  const film  = scene.night ? FILM_NIGHT : FILM_DAY;
+
+  let p = LOOK_HEAD + '. A'
+        + LOOK_SUBJECT.replace('AGE', age).slice(1) + '. '
+        + pick(emo.looks) + '. '
+        + 'She wears ' + pick(CLOTHES) + '. '
+        + scene.bg + '. ';
+
+  if (state.space !== 'none') {
+    const side  = state.space === 'left' ? 'right' : 'left';
+    const empty = state.space === 'left' ? 'left'  : 'right';
+    p += 'She sits in the ' + side + ' half of the frame; the ' + empty + ' half is empty blurred background. ';
+  }
+
+  p += LOOK_TAIL.replace('FILM', film);
+
+  // 파라미터
+  p += ' --ar ' + state.ratio + ' --style raw';
+
+  // --sw 는 --sref 가 있어야만 유효한 옵션. 참조 없이 붙이면 미드저니가 에러를 낸다.
+  // 웹에서 이미지를 드래그로 넣는 경우엔 화면의 강도 슬라이더로 조절하면 된다.
+  const sref = document.getElementById('srefInput').value.trim();
+  if (sref) {
+    p += ' --sref ' + sref;
+    if (state.sw !== '0' && state.sw !== '100') p += ' --sw ' + state.sw;
+  }
+
+  return p;
+}
+
+function generate() {
+  let candidates = state.scene === 'auto' ? SCENES : [SCENES.find(s => s.id === state.scene)];
+
+  const combos = [];
+  let pool = shuffle(candidates);
+  while (combos.length < 6) {
+    if (!pool.length) pool = shuffle(candidates);
+    combos.push(pool.pop());
+  }
+
+  const out = document.getElementById('out');
+  out.innerHTML = '';
+  combos.forEach((sc, i) => {
+    const prompt = buildPrompt(sc);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<div class="card-top">' +
+        '<div class="card-title">' + (i+1) + '. ' + sc.name +
+          '<span class="tag">' + EMOTIONS.find(e=>e.id===state.emo).name + '</span></div>' +
+        '<div class="btns">' +
+          '<button class="mini" data-act="re">🔄 다시</button>' +
+          '<button class="mini" data-act="copy">📋 복사</button>' +
+        '</div></div>' +
+      '<div class="prompt"></div>';
+    card.querySelector('.prompt').textContent = prompt;
+
+    card.querySelector('[data-act="copy"]').onclick = function() {
+      navigator.clipboard.writeText(card.querySelector('.prompt').textContent).then(() => {
+        this.textContent = '✓ 복사됨'; this.classList.add('copied');
+        setTimeout(() => { this.textContent = '📋 복사'; this.classList.remove('copied'); }, 1500);
+      });
+    };
+    card.querySelector('[data-act="re"]').onclick = function() {
+      card.querySelector('.prompt').textContent = buildPrompt(sc);
+    };
+    out.appendChild(card);
+  });
+  out.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+renderAll();
+</script>
+</body>
+</html>
