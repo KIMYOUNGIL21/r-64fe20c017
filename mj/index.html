@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>미드저니 프롬프트 생성기 — 윤하경 비주얼 v2</title>
+<title>미드저니 프롬프트 생성기 — 윤하경 비주얼 v3</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -28,21 +28,25 @@
   .chip:hover { border-color:#4a5160; }
   .chip.on { background:#e8e6e1; color:#15171c; border-color:#e8e6e1; font-weight:700; }
 
-  /* sref 박스 */
-  .sref {
-    background:#15242e; border:1px solid #24485c; border-radius:12px; padding:16px 18px; margin-top:20px;
-  }
-  .sref-h { font-size:14px; font-weight:800; color:#7fd3f7; margin-bottom:8px; }
-  .sref-p { font-size:12.5px; color:#8fa9b8; line-height:1.85; margin-bottom:12px; }
-  .sref-p b { color:#cfe6f2; }
-  .sref-p code { background:#0d1a22; padding:2px 6px; border-radius:4px; color:#7fd3f7; font-size:12px; }
-  .sref input {
-    width:100%; padding:11px 13px; border-radius:9px; border:1px solid #2b4d61; background:#0d1a22;
+  /* 작업방식 */
+  .mode { background:#15242e; border:1px solid #24485c; border-radius:12px; padding:16px 18px; margin-top:20px; }
+  .mode-h { font-size:14px; font-weight:800; color:#7fd3f7; margin-bottom:10px; }
+  .mode-p { font-size:12.5px; color:#8fa9b8; line-height:1.85; margin-top:12px; }
+  .mode-p b { color:#cfe6f2; }
+  .mode-p code { background:#0d1a22; padding:2px 6px; border-radius:4px; color:#7fd3f7; font-size:12px; }
+
+  /* 디스코드용 접이식 */
+  details { margin-top:14px; border-top:1px solid #23404f; padding-top:12px; }
+  summary { font-size:12.5px; color:#6d8b9b; cursor:pointer; user-select:none; }
+  summary:hover { color:#9fc2d4; }
+  .dc { margin-top:12px; }
+  .dc label { display:block; font-size:12px; color:#8fa9b8; margin:10px 0 5px; font-weight:700; }
+  .dc input {
+    width:100%; padding:10px 12px; border-radius:9px; border:1px solid #2b4d61; background:#0d1a22;
     color:#dbeaf2; font-size:13px; font-family:Consolas,monospace; outline:none;
   }
-  .sref input:focus { border-color:#4d90b3; }
-  .sref input::placeholder { color:#4a6674; }
-  .sref-note { font-size:12px; color:#6d8b9b; margin-top:9px; line-height:1.7; }
+  .dc input:focus { border-color:#4d90b3; }
+  .dc input::placeholder { color:#4a6674; }
 
   .go {
     display:block; width:100%; margin-top:22px; padding:16px; border:none; border-radius:12px;
@@ -71,31 +75,33 @@
 
   .tip { margin-top:26px; font-size:12.5px; color:#6d727d; line-height:1.95; }
   .tip b { color:#9aa0ab; }
+  .tip code { background:#1a1d23; padding:2px 6px; border-radius:4px; color:#9aa0ab; font-size:12px; }
   .tip .hd { color:#c9cdd5; font-weight:800; font-size:13px; display:block; margin:16px 0 6px; }
-  .tip .bad { color:#c97a7a; }
-  .tip .good { color:#7fbf8f; }
+  .tip .warn { color:#d8a657; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>미드저니 프롬프트 생성기 <small>윤하경 · v2 (best 6장 역산 공식)</small></h1>
+  <h1>미드저니 프롬프트 생성기 <small>윤하경 · v3 (무드보드 + 얼굴참조 방식)</small></h1>
   <div class="sub">
-    <b>가장 중요한 건 아래 파란 박스(스타일 참조)입니다.</b> 그거 한 번 세팅하면 그 뒤론 감정만 고르면 됩니다.
+    스타일은 <b>무드보드</b>가, 얼굴은 <b>얼굴참조</b>가 잡습니다. 프롬프트는 <b>"무슨 장면이냐"만</b> 말하면 됩니다.
   </div>
 
-  <!-- 스타일 참조 -->
-  <div class="sref">
-    <div class="sref-h">① 스타일 참조 (--sref) — 이게 핵심입니다</div>
-    <div class="sref-p">
-      말로 설명하는 것보다 <b>마음에 드는 사진을 던지는 게 100배 정확합니다.</b> 사장님이 골라두신 6장이 그 재료예요.<br><br>
-      <b>미드저니 웹에서 (제일 쉬움):</b> 프롬프트 입력창 왼쪽 <b>이미지(🖼) 아이콘</b> 클릭 → best 폴더의 사진을 <b>드래그해서 업로드</b> → 뜬 썸네일에서 <code>Style Reference</code> 선택. 3~4장 같이 넣으면 더 안정적입니다. 한 번 넣으면 계속 유지돼요.<br>
-      <b>디스코드에서:</b> 사진을 아무 채널에 올리고 → 우클릭 <b>[링크 복사]</b> → 그 주소를 아래 칸에 붙여넣기 (여러 장이면 주소를 띄어쓰기로 나열).
-    </div>
-    <input id="srefInput" type="text" placeholder="디스코드용 — 이미지 주소를 붙여넣으세요 (웹에서 드래그로 넣으실 거면 비워두세요)">
-    <div class="sref-note">
-      📂 사진 위치 · <b>D:\work\ai-singer\작업실\썸네일모음\sona-wave-music\best</b><br>
-      스타일이 약하게 먹으면 아래 <b>참조 강도</b>를 올리세요. (기본 100 → 300~500이 보통 딱 맞습니다)
-    </div>
+  <!-- 작업 방식 -->
+  <div class="mode">
+    <div class="mode-h">① 지금 어떻게 작업하고 계신가요</div>
+    <div class="chips" id="mode"></div>
+    <div class="mode-p" id="modeDesc"></div>
+
+    <details>
+      <summary>▸ 디스코드에서 쓰시나요? (웹에서 하시면 열 필요 없습니다)</summary>
+      <div class="dc">
+        <label>무드보드 코드 <span style="font-weight:400;color:#5f7e8e">— 미드저니 무드보드 페이지에서 복사한 코드</span></label>
+        <input id="pCode" type="text" placeholder="예: abc123 (--p 뒤에 붙는 코드만)">
+        <label>얼굴 참조 이미지 주소 <span style="font-weight:400;color:#5f7e8e">— 디스코드에 올린 얼굴 사진의 링크</span></label>
+        <input id="orefUrl" type="text" placeholder="https://...jpg">
+      </div>
+    </details>
   </div>
 
   <!-- 옵션 -->
@@ -109,10 +115,6 @@
       <div class="chips" id="scene"></div>
     </div>
     <div class="row">
-      <div class="label">나이대</div>
-      <div class="chips" id="age"></div>
-    </div>
-    <div class="row">
       <div class="label">비율</div>
       <div class="chips" id="ratio"></div>
     </div>
@@ -120,9 +122,9 @@
       <div class="label">제목 넣을 여백 <span>썸네일용</span></div>
       <div class="chips" id="space"></div>
     </div>
-    <div class="row">
-      <div class="label">참조 강도 (--sw) <span>위 칸에 주소를 넣었을 때만 붙습니다 — 웹에서 드래그로 넣으셨다면 미드저니 화면의 강도 슬라이더로 조절하세요</span></div>
-      <div class="chips" id="sw"></div>
+    <div class="row" id="owRow">
+      <div class="label">얼굴 강도 (--ow) <span>얼굴을 얼마나 똑같이 따라갈지 · 400 넘으면 결과가 불안정해집니다</span></div>
+      <div class="chips" id="ow"></div>
     </div>
     <button class="go" onclick="generate()">프롬프트 6개 생성</button>
   </div>
@@ -130,38 +132,69 @@
   <div id="out"><div class="empty">감정을 고르고 버튼을 눌러주세요</div></div>
 
   <div class="tip">
-    <span class="hd">이 공식은 어디서 나왔나</span>
-    사장님이 <b>best</b> 폴더에 고른 6장의 공통점을 뽑아낸 겁니다. 6장 전부 —
-    ① <b>얼굴이 화면 1/3을 채우는 바짝 붙은 상반신</b>, ② <b>카메라를 똑바로 응시</b>,
-    ③ <b>배경이 형체도 없이 뭉개진 보케</b>, ④ <b>민낯 · 20대 초반</b>,
-    ⑤ <b>흰색/아이보리 옷</b>, ⑥ <b>긴 흑발 웨이브 + 흩날리는 잔머리</b>,
-    ⑦ <b>바랜 필름 색 + 굵은 그레인</b>.
+    <span class="hd">v2에서 왜 에러가 났나 (--sw 사건)</span>
+    <span class="warn">⚠ <b>무드보드(--p)는 --sw(스타일 강도)와 같이 쓸 수 없습니다.</b></span> 미드저니 공식 제약입니다.
+    사장님이 무드보드로 작업하시는데 프롬프트에 <code>--sw</code>가 붙어 있으니 매번 에러가 났던 겁니다.
+    <b>v3에서 --sw를 완전히 들어냈습니다.</b> 이제 안 붙습니다.
 
-    <span class="hd">구버전이 왜 안 나왔나 (같은 실수 반복 금지)</span>
-    <span class="bad">✗ "멀리 떨어져 서 있고 여백이 넉넉한 환경 인물사진, 35mm"</span> → 사장님이 원한 건 정반대인 <b>코앞 클로즈업</b>이었습니다.<br>
-    <span class="bad">✗ "우아하고 성숙한 아름다움"</span> → 실제 6장은 <b>앳되고 민낯</b>.<br>
-    <span class="bad">✗ "melancholic(우울한) 표정"</span> → <b>미드저니는 감정 형용사를 거의 안 듣습니다.</b>
-    감정은 <span class="good">조명 · 시선 · 입술 · 고개 각도</span> 같은 <b>눈에 보이는 것</b>으로 만들어야 합니다. 이 생성기는 전부 그렇게 바꿔놨습니다.
+    <span class="hd">무드보드를 쓰면 프롬프트가 달라집니다</span>
+    무드보드가 이미 <b>필름 질감·색감·그레인</b>을 다 잡아줍니다. 그런데 프롬프트에 또 "Cinestill 800T, 바랜 색, 굵은 그레인"을 박으면
+    <b>둘이 싸워서 무드보드가 흐려집니다.</b> 그래서 무드보드 모드에서는 스타일 문구를 <b>일부러 뺐습니다.</b><br>
+    얼굴참조도 마찬가지입니다. 얼굴참조가 인물을 결정하는데 프롬프트에 "20대 초반, 민낯, 긴 흑발"을 또 쓰면 참조 얼굴과 충돌합니다.
+    그래서 <b>얼굴참조를 쓰면 외모 묘사도 뺍니다.</b><br>
+    남는 건 <b>구도 · 표정/시선 · 옷 · 배경</b> — 참조가 대신 못 해주는 것들뿐입니다.
 
-    <span class="hd">잘 안 나올 때 — 한 번에 하나씩만 만지세요</span>
-    <b>1.</b> 느낌이 아예 딴판 → <b>참조 강도(--sw)를 400~700</b>으로 올린다.<br>
-    <b>2.</b> 배경이 너무 또렷하다 → 프롬프트에서 <code>f/1.4</code>를 <code>f/1.2</code>로 바꾼다.<br>
-    <b>3.</b> 얼굴이 너무 멀다 → <code>bust-up close-up</code>을 <code>tight head-and-shoulders close-up</code>으로.<br>
-    <b>4.</b> 그림 같고 사진 같지 않다 → <code>--style raw</code>가 붙어 있는지 확인.<br>
-    <b>5.</b> 마음에 드는 게 하나 나오면 그 프롬프트를 <b>통째로 저장</b>하고, 그다음부턴 <b>단어 하나씩만</b> 바꾸세요. 매번 다 갈아엎으면 뭐가 효과 있었는지 영영 모릅니다.
+    <span class="hd">미드저니 웹에서 하는 순서</span>
+    <b>1.</b> 무드보드를 켭니다 (설정의 🙋 <b>Personalization</b> 버튼을 켜두면 매번 자동으로 붙습니다).<br>
+    <b>2.</b> 마음에 드는 <b>얼굴 사진</b>을 프롬프트창에 드래그 → <b>Omni Reference</b>(얼굴/인물 참조)로 지정.<br>
+    <b>3.</b> 여기서 프롬프트를 복사해 붙여넣고 실행.<br>
+    <b>4.</b> 얼굴이 덜 닮았으면 미드저니 화면의 <b>얼굴 강도 슬라이더를 400 근처</b>까지 올립니다.
+
+    <span class="hd">알아두실 제약</span>
+    얼굴참조(Omni Reference)를 쓰면 <b>GPU를 2배 씁니다.</b> 그리고 <b>드래프트 모드·빠른 모드에서는 안 됩니다.</b> (미드저니가 알아서 일반 모드로 돌립니다)
+
+    <span class="hd">잘 안 나올 때 — 한 번에 하나씩만</span>
+    <b>1.</b> 얼굴이 안 닮았다 → 얼굴 강도를 <b>400</b>까지 올린다. (그 이상은 오히려 이상해집니다)<br>
+    <b>2.</b> 무드보드 느낌이 안 난다 → 프롬프트에 스타일 문구가 섞여 있는지 본다. 있으면 뺀다.<br>
+    <b>3.</b> 배경이 너무 또렷하다 → <code>f/1.4</code>를 <code>f/1.2</code>로 바꾼다.<br>
+    <b>4.</b> 얼굴이 너무 멀다 → <code>bust-up close-up</code>을 <code>tight head-and-shoulders close-up</code>으로.<br>
+    <b>5.</b> 마음에 드는 게 나오면 그 프롬프트를 <b>통째로 저장</b>하고, 다음부턴 <b>단어 하나씩만</b> 바꾸세요.
+
+    <span class="hd">공식의 근거</span>
+    사장님이 <b>best</b> 폴더에 고른 6장의 공통점 — 얼굴이 화면 1/3을 채우는 <b>클로즈업</b>, <b>카메라 정면 응시</b>,
+    <b>형체도 없이 뭉개진 배경</b>, <b>흰색/아이보리 옷</b>. 이 네 가지는 참조가 대신 못 해주므로 프롬프트에 계속 남깁니다.<br>
+    감정은 <b>형용사로 쓰지 않습니다.</b> 미드저니는 "우울한" 같은 말을 거의 안 듣습니다. 대신 <b>시선·눈·입술·고개 각도</b>로 씁니다.
 
     <span class="hd">파일 위치</span>
-    D:\work\ai-singer\미드저니_프롬프트생성기.html (더블클릭으로 열림) · 구버전은 <b>_archive</b>에 보관
+    D:\work\ai-singer\미드저니_프롬프트생성기.html · 온라인판 kimyoungil21.github.io/r-64fe20c017/mj/
   </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  고정 스타일 공식 — best 6장에서 역산. 함부로 바꾸지 말 것.
+//  참조가 대신 못 해주는 것만 프롬프트에 남긴다.
+//   · 무드보드    → 스타일(필름·색감·그레인)을 잡는다  ⇒ 프롬프트에서 뺀다
+//   · 얼굴참조     → 인물 외모를 잡는다                ⇒ 프롬프트에서 뺀다
+//   · 프롬프트     → 구도 · 표정/시선 · 옷 · 배경       ⇒ 여기만 쓴다
 // ═══════════════════════════════════════════════════════
-const LOOK_HEAD = 'Candid film photograph, bust-up close-up, her face filling a third of the frame';
-const LOOK_SUBJECT = 'a Korean woman in her AGE, bare face, no makeup, long dark wavy hair with loose strands drifting across her cheek';
-const LOOK_TAIL = 'Background completely dissolved into soft out-of-focus bokeh, only her face is sharp. 85mm lens at f/1.4, extremely shallow depth of field. FILM. Washed-out muted color, lifted blacks, halation glow on the highlights, heavy visible film grain, real skin texture, no retouching.';
+const FRAME   = 'Candid photograph, bust-up close-up, her face filling a third of the frame';
+const SUBJECT_FULL = 'A Korean woman in her early 20s, bare face, no makeup, long dark wavy hair with loose strands drifting across her cheek';
+const SUBJECT_LEAN = 'A young Korean woman';   // 얼굴참조가 외모를 잡을 때
+const OPTICS  = 'Background completely dissolved into soft out-of-focus bokeh, only her face is sharp. 85mm lens at f/1.4, extremely shallow depth of field.';
+const STYLE   = 'FILM. Washed-out muted color, lifted blacks, halation glow on the highlights, heavy visible film grain, real skin texture, no retouching.';
+
+const MODES = [
+  { id:'board', name:'무드보드 + 얼굴참조 (지금 방식)',
+    desc:'스타일은 <b>무드보드</b>가, 얼굴은 <b>얼굴참조</b>가 잡습니다. 그래서 프롬프트에서 <b>필름·색감·외모 묘사를 뺍니다.</b> ' +
+         '참조와 싸우지 않게 하려는 거예요. 프롬프트에는 <b>구도·표정·옷·배경</b>만 남습니다.<br>' +
+         '<b>--sw는 붙지 않습니다</b> (무드보드와 같이 못 쓰는 옵션이라 에러가 났던 겁니다).' },
+  { id:'boardOnly', name:'무드보드만 (얼굴참조 없음)',
+    desc:'스타일은 <b>무드보드</b>가 잡고, <b>얼굴은 프롬프트로 만듭니다.</b> ' +
+         '그래서 외모 묘사(20대 초반·민낯·긴 흑발)는 남기고, 필름·색감 문구만 뺍니다.' },
+  { id:'plain', name:'참조 없이 프롬프트만',
+    desc:'무드보드도 얼굴참조도 안 쓸 때. <b>스타일·외모를 전부 프롬프트에 박습니다.</b> ' +
+         'best 6장 공식이 통째로 들어갑니다. 참조를 쓸 때보다 결과가 들쭉날쭉합니다.' },
+];
 
 // ── 감정: 형용사 금지. 시선·눈·입·고개·어깨 같은 "보이는 것"으로만.
 const EMOTIONS = [
@@ -199,33 +232,33 @@ const EMOTIONS = [
 
 // ── 장면: 배경은 어차피 뭉개진다. "무슨 색 빛이 번지느냐"만 쓴다.
 const SCENES = [
-  { id:'neon',     name:'밤거리 네온',   night:true,
+  { id:'neon',      name:'밤거리 네온',  night:true,
     bg:'Behind her, a night street dissolved into round bokeh of red, amber and teal lights' },
-  { id:'alley',    name:'밤 골목',       night:true,
+  { id:'alley',     name:'밤 골목',      night:true,
     bg:'Behind her, a dark alley at night, distant amber streetlamps melted into soft glowing orbs, everything else near black' },
-  { id:'rainglass',name:'비 오는 창가',  night:true,
+  { id:'rainglass', name:'비 오는 창가', night:true,
     bg:'Behind her, a rain-streaked window at night, cold blue city light smeared through the wet glass' },
-  { id:'river',    name:'강변 야경',     night:true,
+  { id:'river',     name:'강변 야경',    night:true,
     bg:'Behind her, dark water and far-off city lights melted into warm floating bokeh' },
-  { id:'park',     name:'밤 산책로',     night:true,
+  { id:'park',      name:'밤 산책로',    night:true,
     bg:'Behind her, dark trees and a few warm streetlamps blurred into golden orbs' },
-  { id:'sea_dusk', name:'바다 (노을)',   night:false,
-    bg:'Behind her, the out-of-focus sea at dusk, muted blue-grey water filling the whole background, low warm sun' },
-  { id:'sea_dawn', name:'바다 (새벽)',   night:false,
-    bg:'Behind her, a pale hazy sea at dawn, soft blue-grey water and blurred sand, cold flat light' },
-  { id:'cafe',     name:'카페 창가',     night:false,
-    bg:'Behind her, a cafe interior melted into pale blur, soft window daylight, out-of-focus people' },
-  { id:'bus',      name:'버스·지하철',   night:false,
-    bg:'Behind her, blurred pastel-blue seats and out-of-focus passengers, soft light through a window' },
-  { id:'room',     name:'어두운 방',     night:true,
+  { id:'room',      name:'어두운 방',    night:true,
     bg:'Behind her, a dark room, a single lamp glowing out of focus, the rest swallowed in shadow' },
-  { id:'field',    name:'노을 들판',     night:false,
+  { id:'sea_dusk',  name:'바다 (노을)',  night:false,
+    bg:'Behind her, the out-of-focus sea at dusk, muted blue-grey water filling the whole background, low warm sun' },
+  { id:'sea_dawn',  name:'바다 (새벽)',  night:false,
+    bg:'Behind her, a pale hazy sea at dawn, soft blue-grey water and blurred sand, cold flat light' },
+  { id:'cafe',      name:'카페 창가',    night:false,
+    bg:'Behind her, a cafe interior melted into pale blur, soft window daylight, out-of-focus people' },
+  { id:'bus',       name:'버스·지하철',  night:false,
+    bg:'Behind her, blurred pastel-blue seats and out-of-focus passengers, soft light through a window' },
+  { id:'field',     name:'노을 들판',    night:false,
     bg:'Behind her, a blurred grass field in golden backlight, warm haze' },
   { id:'street_day',name:'낮 거리',      night:false,
     bg:'Behind her, a summer street melted into pale green and white blur, hazy afternoon light' },
 ];
 
-// ── 옷: 6장 전부 흰색/아이보리. 예외 없음.
+// ── 옷: best 6장 전부 흰색/아이보리. 참조가 옷까지 잡아주진 않으므로 계속 남긴다.
 const CLOTHES = [
   'a plain white cotton t-shirt',
   'a loose white linen shirt, collar open',
@@ -233,12 +266,6 @@ const CLOTHES = [
   'a white blouse with a wide neckline',
   'a cream lace-trimmed camisole',
   'an oversized white shirt slipping off one shoulder',
-];
-
-const AGES = [
-  { id:'early20s', name:'20대 초반 (best 6장의 결)', v:'early 20s' },
-  { id:'late20s',  name:'20대 후반',                 v:'late 20s' },
-  { id:'early30s', name:'30대 초반',                 v:'early 30s' },
 ];
 
 const RATIOS = [
@@ -253,19 +280,17 @@ const SPACES = [
   { id:'right', name:'오른쪽 비우기' },
 ];
 
-const SWS = [
-  { id:'0',    name:'안 씀' },
-  { id:'100',  name:'100 (기본)' },
-  { id:'300',  name:'300' },
-  { id:'500',  name:'500 (세게)' },
-  { id:'750',  name:'750 (아주 세게)' },
+const OWS = [
+  { id:'100', name:'100 (기본)' },
+  { id:'200', name:'200' },
+  { id:'400', name:'400 (얼굴 확실히)' },
 ];
 
 const FILM_NIGHT = 'Shot on Cinestill 800T';
 const FILM_DAY   = 'Shot on Kodak Portra 400';
 
 // ═══════════════════════════════════════════════════════
-const state = { emo:'heartbreak', scene:'auto', age:'early20s', ratio:'16:9', space:'left', sw:'300' };
+const state = { mode:'board', emo:'heartbreak', scene:'auto', ratio:'16:9', space:'left', ow:'400' };
 
 function renderChips(elId, items, key) {
   const el = document.getElementById(elId);
@@ -280,24 +305,28 @@ function renderChips(elId, items, key) {
 }
 
 function renderAll() {
+  renderChips('mode', MODES, 'mode');
   renderChips('emo', EMOTIONS, 'emo');
   renderChips('scene', [{id:'auto',name:'자동 (여러 장면 섞기)'}].concat(SCENES.map(s=>({id:s.id,name:s.name}))), 'scene');
-  renderChips('age', AGES, 'age');
   renderChips('ratio', RATIOS, 'ratio');
   renderChips('space', SPACES, 'space');
-  renderChips('sw', SWS, 'sw');
+  renderChips('ow', OWS, 'ow');
+
+  document.getElementById('modeDesc').innerHTML = MODES.find(m => m.id === state.mode).desc;
+  // 얼굴 강도는 얼굴참조를 쓸 때만 의미가 있다
+  document.getElementById('owRow').style.display = (state.mode === 'board') ? '' : 'none';
 }
 
 const pick = arr => arr[Math.floor(Math.random()*arr.length)];
 function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function buildPrompt(scene) {
-  const emo   = EMOTIONS.find(e => e.id === state.emo);
-  const age   = AGES.find(a => a.id === state.age).v;
-  const film  = scene.night ? FILM_NIGHT : FILM_DAY;
+  const emo      = EMOTIONS.find(e => e.id === state.emo);
+  const useFace  = state.mode === 'board';    // 얼굴참조가 외모를 잡는다
+  const useBoard = state.mode !== 'plain';    // 무드보드가 스타일을 잡는다
 
-  let p = LOOK_HEAD + '. A'
-        + LOOK_SUBJECT.replace('AGE', age).slice(1) + '. '
+  let p = FRAME + '. '
+        + (useFace ? SUBJECT_LEAN : SUBJECT_FULL) + '. '
         + pick(emo.looks) + '. '
         + 'She wears ' + pick(CLOTHES) + '. '
         + scene.bg + '. ';
@@ -308,18 +337,21 @@ function buildPrompt(scene) {
     p += 'She sits in the ' + side + ' half of the frame; the ' + empty + ' half is empty blurred background. ';
   }
 
-  p += LOOK_TAIL.replace('FILM', film);
+  p += OPTICS;
 
-  // 파라미터
+  // 무드보드가 스타일을 잡는 모드에서는 필름·색감 문구를 넣지 않는다 (참조와 충돌)
+  if (!useBoard) {
+    p += ' ' + STYLE.replace('FILM', scene.night ? FILM_NIGHT : FILM_DAY);
+  }
+
   p += ' --ar ' + state.ratio + ' --style raw';
 
-  // --sw 는 --sref 가 있어야만 유효한 옵션. 참조 없이 붙이면 미드저니가 에러를 낸다.
-  // 웹에서 이미지를 드래그로 넣는 경우엔 화면의 강도 슬라이더로 조절하면 된다.
-  const sref = document.getElementById('srefInput').value.trim();
-  if (sref) {
-    p += ' --sref ' + sref;
-    if (state.sw !== '0' && state.sw !== '100') p += ' --sw ' + state.sw;
-  }
+  // 디스코드용 파라미터 — 주소/코드가 실제로 있을 때만 붙인다.
+  // (--ow 는 --oref 가, --sw 는 무드보드가 있으면 못 쓴다. v2 에러의 원인이었다.)
+  const pCode = document.getElementById('pCode').value.trim();
+  const oref  = document.getElementById('orefUrl').value.trim();
+  if (useBoard && pCode) p += ' --p ' + pCode;
+  if (useFace && oref)   p += ' --oref ' + oref + ' --ow ' + state.ow;
 
   return p;
 }
