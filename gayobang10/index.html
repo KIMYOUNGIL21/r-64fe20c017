@@ -18,7 +18,7 @@
   
   <div class="topbox">
     <b style="color:var(--acc);font-size:13px;">고정 해시태그</b>
-    <code id="tags">#중년의노래 #7080노래 #감성발라드 #인생노래 #까페음악 #듣기좋은노래</code>
+    <code id="hashtags">#중년의노래 #7080노래 #감성발라드 #인생노래 #까페음악 #듣기좋은노래</code>
     <button class="copybtn" id="tagcopy">복사</button>
   </div>
   <div class="progress"><i id="pbar"></i></div>
@@ -496,7 +496,7 @@ const EXCLUDE = "rap, EDM, trap, autotune, spoken word intro, heavy metal, aggre
     }catch(e){}
   }})();
 document.getElementById('tagcopy').onclick = function(){
-  navigator.clipboard.writeText(document.getElementById('tags').textContent);
+  navigator.clipboard.writeText(document.getElementById('hashtags').textContent);
   const b=this, o=b.textContent; b.textContent='복사됨!'; b.classList.add('done');
   setTimeout(()=>{b.textContent=o; b.classList.remove('done');},1200);
 };
