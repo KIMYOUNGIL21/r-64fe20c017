@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강한결 4집 「생계·땀」 7곡 · 수노 작사 작업판</title>
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,sans-serif;}
+body{background:#1a100c;color:#f4ece2;min-height:100vh;padding:28px 16px 60px;
+  background-image:radial-gradient(circle at 20% 0%,#422014 0%,#1a100c 55%);}
+.wrap{max-width:740px;margin:0 auto;}
+header{text-align:center;margin-bottom:18px;}
+header h1{font-size:23px;font-weight:800;letter-spacing:-.5px;color:#f0a878;}
+header p{font-size:13px;color:#b59482;margin-top:5px;}
+.counter{display:inline-block;margin-top:12px;font-size:13px;color:#e0b08c;
+  background:#2e170f;border:1px solid #55301c;border-radius:999px;padding:5px 16px;}
+
+.anatomy{background:#241209;border:1px solid #55301c;border-radius:14px;
+  padding:16px 18px;margin-bottom:18px;font-size:13px;line-height:1.8;color:#d8c0ae;}
+.anatomy b{color:#f0a878;display:block;margin-bottom:6px;font-size:13.5px;}
+
+.progress{height:8px;background:#2e170f;border-radius:99px;overflow:hidden;margin-bottom:18px;border:1px solid #55301c;}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#c05a2e,#f0a878);width:0;transition:.3s;}
+
+.card{background:#26130b;border:1px solid #55301c;border-radius:18px;padding:26px 24px 28px;
+  box-shadow:0 14px 40px rgba(0,0,0,.45);}
+.songhead{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.songno{font-size:14px;font-weight:800;color:#1a100c;background:#f0a878;
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.title{font-size:25px;font-weight:800;letter-spacing:-.5px;color:#fff;flex:1;}
+.donechk{display:flex;align-items:center;gap:6px;font-size:13px;color:#d8c0ae;cursor:pointer;user-select:none;}
+.donechk input{width:18px;height:18px;accent-color:#f0a878;cursor:pointer;}
+.tags{margin:10px 0 6px;display:flex;gap:7px;flex-wrap:wrap;}
+.tag{font-size:12px;color:#eac09a;background:#38180d;border:1px solid #653a20;
+  border-radius:7px;padding:4px 10px;}
+.tag.hot{color:#ffb4b4;background:#3a1c1c;border-color:#6a2f2f;}
+.concept{font-size:13.5px;color:#c9ac97;margin:4px 0 18px;line-height:1.6;}
+
+.section{margin-top:20px;}
+.slabel{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.slabel span{font-size:14px;font-weight:700;color:#f0a878;}
+.copybtn{font-size:12.5px;font-weight:700;color:#1a100c;background:#f0a878;border:none;
+  border-radius:8px;padding:7px 15px;cursor:pointer;transition:.15s;}
+.copybtn:hover{background:#ffc79c;}
+.copybtn.done{background:#7bd88f;color:#0e2a14;}
+textarea{width:100%;background:#170c06;color:#f4ece2;border:1px solid #55301c;border-radius:11px;
+  padding:14px 15px;font-size:14.5px;line-height:1.85;resize:vertical;letter-spacing:-.2px;}
+.lyrics{min-height:320px;}
+.style{min-height:130px;font-size:13px;line-height:1.7;color:#dcc6b4;}
+.excl{min-height:50px;font-size:13px;color:#dcc6b4;}
+.yt{min-height:46px;font-size:13.5px;color:#dcc6b4;}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;}
+.navbtn{flex:1;font-size:15px;font-weight:700;color:#f4ece2;background:#38180d;
+  border:1px solid #653a20;border-radius:12px;padding:14px;cursor:pointer;transition:.15s;}
+.navbtn:hover:not(:disabled){background:#4a2210;}
+.navbtn:disabled{opacity:.3;cursor:not-allowed;}
+.dots{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
+.dot{width:34px;height:34px;border-radius:8px;border:1px solid #653a20;background:#26130b;
+  color:#b59482;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;position:relative;}
+.dot:hover{border-color:#f0a878;}
+.dot.active{background:#f0a878;color:#1a100c;border-color:#f0a878;}
+.dot.finished::after{content:'✓';position:absolute;top:-7px;right:-5px;font-size:11px;color:#7bd88f;}
+.hint{text-align:center;font-size:12px;color:#8f7361;margin-top:24px;line-height:1.7;}
+
+details.review{margin-top:26px;background:#241209;border:1px solid #55301c;border-radius:14px;padding:14px 18px;}
+details.review summary{font-size:13.5px;font-weight:700;color:#f0a878;cursor:pointer;}
+details.review ul{margin:12px 0 4px 18px;font-size:12.5px;line-height:1.9;color:#c9ac97;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>강한결 4집 「생계 · 땀」 7곡</h1>
+    <p>강한결의 트로트 TV · 한형 6곡 + 흥형 1곡 · 남성 보컬</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+
+  <div class="anatomy">
+    <b>스타일 해부 (4집 = 일하는 남자의 하루)</b>
+    ① 정서: 3집과 같은 결(못다 한 말이 사물에 맺히는 한) — 단 장면과 사물은 전부 <b style="display:inline">노동 현장</b>의 것<br>
+    ② 사물: 빈 차등 · 언 지폐 · 양은 밥그릇 · 야광조끼 · 화물차 핸들 · 얇은 월급봉투 · 불판<br>
+    ③ 화자: 남성 1인칭 독백. 상대를 직접 부름 (여보 · 언 손 · 아저씨라 부르는 사람들)<br>
+    ④ 톤: "불쌍한 노동자"가 아니라 <b style="display:inline">제 손으로 세상을 버틴 남자</b> — 모든 곡 파이널은 자부심·따뜻함으로 올라감<br>
+    ⑤ 사운드: 한형 6곡 = 세미트로트 70BPM(3집 스타일 그대로) / 7번 흥형만 120BPM 뽕짝으로 확실히 털어내며 닫음
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div class="card">
+    <div class="songhead">
+      <div class="songno" id="songno">1</div>
+      <div class="title" id="title">제목</div>
+      <label class="donechk"><input type="checkbox" id="donebox" onchange="toggleDone()">완료</label>
+    </div>
+    <div class="tags" id="tags"></div>
+    <div class="concept" id="concept"></div>
+
+    <div class="section">
+      <div class="slabel"><span>① 가사 (Lyrics 칸)</span>
+        <button class="copybtn" onclick="copyBox('lyrics',this)">가사 복사</button></div>
+      <textarea class="lyrics" id="lyrics" readonly></textarea>
+    </div>
+
+    <div class="section">
+      <div class="slabel"><span>② 스타일 (Style of Music 칸)</span>
+        <button class="copybtn" onclick="copyBox('style',this)">스타일 복사</button></div>
+      <textarea class="style" id="style" readonly></textarea>
+    </div>
+
+    <div class="section">
+      <div class="slabel"><span>③ 제외 (Exclude Styles 칸)</span>
+        <button class="copybtn" onclick="copyBox('excl',this)">제외 복사</button></div>
+      <textarea class="excl" id="excl" readonly></textarea>
+    </div>
+
+    <div class="section">
+      <div class="slabel"><span>④ 유튜브 롱폼 제목</span>
+        <button class="copybtn" onclick="copyBox('yt',this)">제목 복사</button></div>
+      <textarea class="yt" id="yt" readonly></textarea>
+    </div>
+
+    <div class="nav">
+      <button class="navbtn" id="prev" onclick="go(-1)">◀ 이전 곡</button>
+      <button class="navbtn" id="next" onclick="go(1)">다음 곡 ▶</button>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <details class="review">
+    <summary>셀프 검토표 (곡별 고친 점)</summary>
+    <ul>
+      <li><b>새벽을 태우고</b> — 제목 초안 「빈 차」가 남진 「빈 잔」과 한 글자 차이로 헷갈려 교체. 파이널 "오늘도 무사히 왔소"가 5번 아웃트로와 겹쳐 "이 밤을 다 건너왔다"로 수정. '식구'는 이 곡에만 남김.</li>
+      <li><b>언 손</b> — 브릿지 "훈장 같은 건 필요 없어"가 3·6번과 3연속 겹쳐 삭제(훈장은 6번에만). 파이널 "우리 식구 이름이 있다"→"우리 애들 얼굴이 있다"(1번과 '식구' 중복 회피). "나는 오늘도 이겼다"는 1번 '이기고'와 충돌해 1번 쪽을 바꿔 해소.</li>
+      <li><b>밥값</b> — 벌스1 "이 밥이 왜 이리 꿀맛인지"가 3집 두근두근의 "자장면 꿀맛"과 겹쳐 "이 밥 한 그릇에 힘이 난다"로 교체. 후렴 "굳은살이 훈장은 아니어도"→"손금이 다 지워졌어도".</li>
+      <li><b>아저씨</b> — 벌스2 "저 집도 누가 자고 있겠지"가 3번 브릿지 '저 집'과 겹쳐 "저 안엔 다들 자고 있겠지"로, "오늘도 무사히"는 1번과 겹쳐 "오늘 밤도 별일 없기를"로 수정.</li>
+      <li><b>지금 익산쯤</b> — 후렴 "밥은 챙겨 먹었냐"가 발행곡 「그 한마디」의 핵심 표현("밥은 먹고 다니냐")과 충돌 → "졸리면 자고 가라는 그 말에"로 전면 교체(트럭 상황에도 더 맞음). 벌스1 '백미러'는 1번에 있어 '짐칸'으로, "그게 뭐라고"는 4번 브릿지 리프레인이라 삭제.</li>
+      <li><b>얇은 봉투</b> — 후렴 "수고했어요 그 한마디"가 발행곡 제목과 동일해 "수고했다며 웃기만 했다"로 교체. 어투를 3집 「그 반지」의 '~오/~소'체와 겹치지 않게 평서 과거형으로 통일.</li>
+      <li><b>오늘은 내가 쏜다</b> — 1집 「소주 한 잔에」·2집 「한잔해야 잠이 옵니다」와 부딪히지 않게 술이 아니라 <b style="display:inline">불판·삼겹살</b>을 후렴 핵심어로. "웃음까지 비진 않았지"가 2집 「웃음만은 부자요」와 겹쳐 "웃음까지 마르진 않았지"로 수정.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>히트곡제조기 검토 (최종 통독 소견)</summary>
+    <ul>
+      <li><b>새벽을 태우고</b> — 킥="빈 차라고 부르지 마라 / 이 차 안엔 우리 식구가 다 탔다". 빈 차라는 말을 뒤집는 한 방이 곡 전체를 지탱한다. 뒷자리 우는 청년 = 내 젊은 날, 5060 남성이 자기 얘기로 받는다.</li>
+      <li><b>언 손</b> — 사물(손)에 말 거는 구조는 앨범에서 이 곡 하나만 쓰도록 통제. 킥="언 손아 조금만 더 버텨라 / 집에 가면 제일 따뜻한 손". 언 손↔언 볼 대구가 후렴을 잡아준다.</li>
+      <li><b>밥값</b> — 자부심 담당. "저 아파트 불이 켜지면 우리는 여기 없겠지"가 이 곡의 품격. 파이널 "저 집은 내가 세웠다"로 착지. 후렴 각 줄 어미가 ~다/~도/~로로 교차돼 단조롭지 않음.</li>
+      <li><b>아저씨</b> — 앨범 최강 후보. 브릿지 "아빠 여기 있다고 못 하겠어서 / 모자를 눌러쓰고 고개를 숙였지"가 눈물 지점, 파이널 "누가 뭐래도 나는 아직 / 누구의 아버지다"가 못 한 말. 아웃트로 "이상 없습니다" 리프레인이 순찰일지와 인생을 겹쳐 닫는다.</li>
+      <li><b>지금 익산쯤</b> — 지명 하나로 신선함 확보(트로트는 지명이 잘 먹힌다). 따라 부를 줄="여보 나 지금 익산쯤이야". 벌스2 "아이 크는 건 사진으로 봤다"가 설명 없이 20년을 보여준다.</li>
+      <li><b>얇은 봉투</b> — 최강 반전. 브릿지에서 아내가 <b style="display:inline">빈 봉투를 차곡차곡 모아둔</b> 걸 발견하는 순간 곡이 뒤집힌다. 초안의 "미안하다"로만 끝나는 구조는 침울해서, 파이널을 "당신 손에 가면 무거워졌다 → 당신이 나를 살렸다"로 올려 톤을 회복.</li>
+      <li><b>오늘은 내가 쏜다</b> — 7곡의 무게를 털어내는 문. 따라 부를 줄="오늘은 내가 쏜다 / 잔이나 채워라 채워라". 아웃트로 "오늘은 내가 쏜다 / 내일은 니가 사라!" 웃음 포인트로 앨범을 닫는다.</li>
+      <li><b>앨범 전체</b> — 감정 곡선: 고독(1) → 버팀(2) → 자부심(3) → 자존심을 내려놓는 아픔(4) → 그리움(5) → 눈물 뒤 사랑(6) → 해방(7). 침울함이 3연속 이어지는 구간 없음. 아내를 부르는 곡(5·6)이 연속이라 원거리(도로)/근거리(집 안)로 장면을 완전히 갈라놨다. 발매 순서는 4번(아저씨) 또는 6번(얇은 봉투)을 선공개 권장.</li>
+      <li><b>원곡 대조</b> — 「아빠의 청춘」("원더풀 원더풀 아빠의 청춘"), 「타타타」("수지맞는 장사잖소"/"알몸으로 태어나서"), 「인생은 미완성」("쓰다가 마는 편지"), 「보릿고개」("아야 뛰지마라 배 꺼질라"), 「막걸리 한잔」(아버지·막걸리 후렴) 실제 가사 웹 대조 완료. 어구·제목 겹침 없음.</li>
+    </ul>
+  </details>
+
+  <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
+  곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
+</div>
+
+<script>
+// ===== 공용 스타일 — 강한결(남성 보컬) · 3집 검증값 그대로 =====
+const STYLE_HAN = `emotional Korean adult-contemporary ballad with a subtle trot (teuroteu) flavor, gentle and understated, NOT heavy ppongjjak, sung by a young male vocalist in his early thirties with a warm clear slightly husky tone and only light delicate vibrato (no heavy kkeokki, no exaggerated trembling), calm tender flowing melody, intimate arrangement of soft piano and warm strings with gentle electric guitar and a faint electronic organ, smooth mellow rhythm rather than a strong two-beat, slow tempo around 70 BPM, minor pentatonic, nostalgic and melancholic longing (han), refined modern and restrained, tasteful and tearful`;
+const EXCL_HAN = `trumpet, brass, saxophone, heavy ppongjjak, strong vibrato, loud drums, fast tempo, cheerful, female vocal, spoken word`;
+
+const STYLE_HEUNG = `upbeat cheerful Korean trot (teuroteu) with a bright bouncy ppongjjak two-beat groove, sung by a young male vocalist in his early thirties with a clear bright energetic warm tone and light playful kkeokki, lively major-key melody, fun arrangement of bright synth, accordion, electric guitar and punchy drums, mid-up tempo around 120 BPM, giddy butterflies falling-in-love-again mood, catchy sing-along hook, feel-good and energetic`;
+const EXCL_HEUNG = `sad, slow, heavy ballad, gloomy, mournful, dark, female vocal, spoken word`;
+
+const SONGS = [
+{title:"새벽을 태우고", motif:"야간 택시 · 빈 차등", type:"han",
+concept:"마지막 손님을 내려주고 빈 차로 돌아가는 새벽 — 빈 차가 아니다, 이 차 안엔 식구가 다 탔다.",
+yt:`"빈 차라고 부르지 마라" 새벽을 태우고 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+마지막 손님을 내려주고
+빈 차 등을 켜고 돌아서네
+뒷자리에 울다 잠든 청년
+꼭 내 젊은 날 같아서
+거스름돈은 됐다 하고
+그냥 문을 닫아줬네
+
+[Pre-Chorus]
+미터기는 오늘도 십만 원
+기름값 떼면 뭐가 남나
+그래도 시동은 안 꺼지네
+이 새벽이 나를 밀어주네
+
+[Chorus]
+새벽을 태우고 나는 달린다
+꺼져가는 도시의 불빛 사이로
+백미러에 비친 저 얼굴 하나
+낯설어도 내 얼굴이지
+빈 차라고 부르지 마라
+이 차 안엔 우리 식구가 다 탔다
+
+[Verse 2]
+집에 가면 다들 자고 있겠지
+현관 불만 나를 기다리겠지
+찬밥에 물 말아 넘기는 밤
+그 밥이 왜 이리 단지
+
+[Break]
+
+[Bridge]
+남들 잠들 때 나는 나가고
+남들 깨어날 때 나는 눕는다
+서로 다른 시간을 살아도
+이 길이 부끄럽진 않더라
+
+[Final Chorus]
+새벽을 태우고 또 하루 간다
+해가 뜨는 쪽으로 핸들을 꺾는다
+잠든 창문들을 지나가면서
+나 혼자 아침을 연다
+빈 차라고 부르지 마라
+나는 이 밤을 다 건너왔다
+
+[Outro]
+빈 차 등을 끄고
+나도 이제… 눈 좀 붙이자`},
+
+{title:"언 손", motif:"새벽 시장 · 언 지폐", type:"han",
+concept:"첫차보다 먼저 나가 언 지폐를 세는 손 — 갈라진 그 손이 집에 가면 제일 따뜻한 손이 된다.",
+yt:`"언 손아, 조금만 더 버텨라" 언 손 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+첫차보다 먼저 나선 길
+가로등도 아직 졸고 있네
+언 배추를 트럭에 싣고
+입김으로 손을 녹이네
+장갑은 구멍이 났어도
+버리질 못하겠더라
+
+[Pre-Chorus]
+천 원짜리 지폐 한 뭉치
+얼어붙어 넘어가질 않네
+침을 발라 한 장 한 장
+오늘 하루를 세어보네
+
+[Chorus]
+언 손아 언 손아 조금만 더 버텨라
+해 뜨면 좀 나아질 거다
+갈라진 이 손이 부끄럽다가도
+집에 가면 제일 따뜻한 손
+우리 딸 언 볼을 감싸주면
+그때 나는 다 녹는다
+
+[Verse 2]
+옆자리 할매 국밥 한 그릇
+말없이 내 앞에 놓고 가시네
+이 바닥엔 눈물이 없다
+서로 국물만 나눌 뿐
+
+[Break]
+
+[Bridge]
+누가 알아주길 바라진 않아
+박수 같은 건 필요도 없어
+그저 오늘 판 만큼
+내일이 오는 거지
+
+[Final Chorus]
+언 손아 언 손아 고생 많았다
+니가 우리 집 난로였다
+이 갈라진 손금 사이사이
+우리 애들 얼굴이 있다
+해가 뜬다 시장이 깬다
+나는 오늘도 이겼다
+
+[Outro]
+손을 비빈다
+따뜻하다… 살아있다`},
+
+{title:"밥값", motif:"공사판 함바집 · 굳은살", type:"han",
+concept:"열두 시 사이렌에 안전모를 벗고 받아든 백반 한 그릇 — 못 배웠어도 밥값은 하고 산다.",
+yt:`"이 손이 부끄럽진 않다" 밥값 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+열두 시 사이렌이 울리면
+안전모를 벗고 줄을 선다
+흙 묻은 손 대충 털고
+양은 밥그릇을 받아든다
+반찬은 늘 세 가지지만
+이 밥 한 그릇에 힘이 난다
+
+[Pre-Chorus]
+숟가락을 쥔 이 손등에
+세월이 다 박혀 있네
+못 배워서 서러웠던 날도
+이 손으로 견뎌왔지
+
+[Chorus]
+밥값은 하고 산다 나는
+누구한테 손 벌린 적 없다
+손금이 다 지워졌어도
+이 손이 부끄럽진 않다
+철근을 세운 이 손으로
+내 새끼 밥상을 차렸다
+
+[Verse 2]
+십 층 난간에 걸터앉아
+캔커피 하나 나눠 마신다
+형님은 아들 자랑을 하고
+나는 그냥 웃어준다
+
+[Break]
+
+[Bridge]
+저 아파트 불이 켜지면
+우리는 여기 없겠지
+누가 지었는지 몰라도
+누군가의 집이 되겠지
+
+[Final Chorus]
+밥값은 하고 산다 나는
+하늘 아래 떳떳하게 산다
+굳은살 배긴 이 손바닥이
+내가 살아온 이력서다
+오늘도 한 층을 올렸다
+저 집은 내가 세웠다
+
+[Outro]
+잘 먹었습니다
+오후도… 한번 가봅시다`},
+
+{title:"아저씨", motif:"경비실 · 야광조끼", type:"han",
+concept:"누구의 아버지였던 사람이 여기선 그냥 아저씨다 — 그래도 이 초소 등불 하나가 누군가의 밤을 지킨다.",
+yt:`"아빠 여기 있다고… 차마 못 했다" 아저씨 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+야광조끼 하나 걸치고
+초소 불을 켜는 저녁
+순찰일지에 이름을 쓴다
+경비 김 씨 이상 없음
+누구의 아버지였던 사람이
+여기선 그냥 아저씨다
+
+[Pre-Chorus]
+택배 좀 올려달라는 말
+네 하고 웃으며 대답하지
+서운하냐고 묻는다면
+서운할 새도 없었지
+
+[Chorus]
+아저씨 아저씨 부르는 소리에
+네 하고 나는 일어선다
+이 나이에 자존심이 뭐라고
+밥벌이 앞에 다 내려놨다
+그래도 이 초소 등불 하나가
+누군가의 밤을 지킨다
+
+[Verse 2]
+새벽 두 시 순찰을 돈다
+불 꺼진 창들을 올려다본다
+저 안엔 다들 자고 있겠지
+오늘 밤도 별일 없기를
+
+[Break]
+
+[Bridge]
+우리 애들이 오면 어쩌나
+아빠 여기 있다고 못 하겠어서
+모자를 눌러쓰고 고개를 숙였지
+그게 뭐라고 그게 뭐라고
+
+[Final Chorus]
+아저씨라 불러도 좋다
+그 소리에 우리 집 불이 켜진다
+이 조끼가 내 양복이고
+이 초소가 내 사무실이다
+누가 뭐래도 나는 아직
+누구의 아버지다
+
+[Outro]
+이상 없습니다
+오늘 밤도… 이상 없습니다`},
+
+{title:"지금 익산쯤", motif:"화물차 · 기사식당 혼밥", type:"han",
+concept:"짐칸엔 남의 짐이 가득, 집까진 사백 킬로 — 그 끝에 불 켜둔 사람이 있어서 달린다.",
+yt:`"여보, 나 지금 익산쯤이야" 지금 익산쯤 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+기사식당 구석 자리
+혼자 밥을 먹는다
+주인장이 계란 하나 얹어주네
+왜 이리 목이 메는지
+짐칸엔 남의 짐이 가득
+내 집까진 사백 킬로
+
+[Pre-Chorus]
+라디오에 옛 노래가 흐르고
+졸음쉼터 불빛이 지나가고
+전화기를 들었다 놨다
+자는 사람 깨울까 봐
+
+[Chorus]
+여보 나 지금 익산쯤이야
+새벽엔 도착할 것 같아
+졸리면 자고 가라는 그 말에
+괜히 창문을 열었네
+사백 킬로 저 끝에
+불 켜진 우리 집이 있다
+
+[Verse 2]
+스무 해를 이 길만 달렸다
+아이 크는 건 사진으로 봤다
+운동회도 졸업식도
+나는 늘 도로 위에 있었지
+
+[Break]
+
+[Bridge]
+미안하단 말은 못 하고
+휴게소 커피만 두 잔 마셨다
+이 핸들을 놓아버리면
+우리 집 불도 꺼질 것 같아서
+
+[Final Chorus]
+여보 나 지금 다 왔어
+동네 어귀가 보이네
+현관 등 하나 켜둔 사람
+그 사람 때문에 달렸다
+사백 킬로 그 끝에
+당신이 서 있어 줘서
+
+[Outro]
+여보 나 왔어
+문 좀… 열어줘`},
+
+{title:"얇은 봉투", motif:"월급봉투 · 밥상 밑", type:"han",
+concept:"얇아서 부끄러워 밥상 밑에 밀어 넣은 봉투 — 아내는 그 빈 봉투를 십수 년 모아두고 있었다.",
+yt:`"열어보지도 않고, 웃기만 하더라" 얇은 봉투 - 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+월급날은 왜 이리 부끄러운지
+봉투 하나 손에 쥐고
+버스 한 정거장을 더 걸었다
+바람이나 좀 쐬려고
+숫자를 세 번을 세도
+숫자는 늘지를 않더라
+
+[Pre-Chorus]
+꽃이라도 사갈까 하다가
+그 돈이 아까워 돌아섰다
+당신이 좋아하던 그 빵집
+앞에서 한참을 서 있었다
+
+[Chorus]
+얇은 봉투 하나
+내 한 달이 여기 다 들었다
+미안하다는 말도 못 하고
+밥상 밑에 밀어 넣었다
+당신은 열어보지도 않고
+수고했다며 웃기만 했다
+
+[Verse 2]
+철없던 신혼 그 시절엔
+많이 벌어다 주겠다 했지
+큰소리는 다 어디로 가고
+머리만 하얗게 셌구나
+
+[Break]
+
+[Bridge]
+장롱 서랍을 열어보니
+빈 봉투가 차곡차곡
+버리지도 못하고 모아둔
+당신의 세월이 거기 있었다
+
+[Final Chorus]
+얇은 봉투 하나
+당신 손에 가면 무거워졌다
+쌀이 되고 책이 되고
+아이들 운동화가 되었다
+못난 남편 이 봉투를
+훈장처럼 모아둔 사람
+고맙단 말이 늦었지만
+당신이 나를 살렸다
+
+[Outro]
+여보
+이번 달은… 좀 두껍게 해볼게`},
+
+{title:"오늘은 내가 쏜다", motif:"퇴근 · 불판 위 삼겹살 (흥형)", type:"heung",
+concept:"작업복 먼지 탈탈 털고 고기 굽는 집으로 — 내일 걱정은 내일 하고 오늘은 웃고 보자.",
+yt:`"내일 걱정은 내일 하고!" 오늘은 내가 쏜다 - 강한결 자작곡 (신나는 트로트)`,
+lyrics:
+`[Verse 1]
+작업복에 묻은 먼지 탈탈 털고
+장갑을 벗어 던진다
+오늘 일 끝 오늘 일 끝
+이 소리가 제일 좋다
+형님 어디로 갑니까
+당연히 고기 굽는 데지
+
+[Pre-Chorus]
+지글지글 익어가는 소리에
+하루가 다 씻겨 내려가네
+
+[Chorus]
+오늘은 내가 쏜다
+잔이나 채워라 채워라
+불판 위에 삼겹살 뒤집듯이
+인생도 한번 뒤집자
+내일 걱정은 내일 하고
+오늘은 웃고 보자
+얼씨구 좋다 우리 인생
+아직 끝나지 않았다
+
+[Verse 2]
+통장은 늘 비어 있어도
+웃음까지 마르진 않았지
+땀 흘려 번 돈이라서
+쓸 때도 안 부끄럽다
+
+[Chorus]
+오늘은 내가 쏜다
+잔이나 채워라 채워라
+상추에 고기 한 점 크게 싸서
+서로 입에 넣어주자
+내일 걱정은 내일 하고
+오늘은 웃고 보자
+얼씨구 좋다 우리 인생
+이제부터 시작이다
+
+[Outro]
+오늘은 내가 쏜다
+내일은 니가 사라`}
+];
+
+let idx=0;
+const DKEY='hangyeol4_done';
+function getDone(){try{return JSON.parse(localStorage.getItem(DKEY)||'[]');}catch(e){return[];}}
+function setDone(a){localStorage.setItem(DKEY,JSON.stringify(a));}
+function toggleDone(){
+  const a=getDone();const on=document.getElementById('donebox').checked;
+  const i=a.indexOf(idx);
+  if(on&&i<0)a.push(idx); if(!on&&i>=0)a.splice(i,1);
+  setDone(a);paint();
+}
+function paint(){
+  const a=getDone();
+  document.getElementById('cdone').textContent=a.length;
+  document.getElementById('pbar').style.width=(a.length/SONGS.length*100)+'%';
+  document.querySelectorAll('.dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===idx);
+    d.classList.toggle('finished',a.includes(i));
+  });
+}
+function render(){
+  const s=SONGS[idx];
+  document.getElementById('songno').textContent=idx+1;
+  document.getElementById('title').textContent=s.title;
+  document.getElementById('cnow').textContent=idx+1;
+  const heung=s.type==='heung';
+  document.getElementById('tags').innerHTML=
+    `<span class="tag ${heung?'hot':''}">${heung?'흥형 (밝고 신나게)':'한형 (애절·세미트로트)'}</span>`+
+    `<span class="tag">소재 · ${s.motif}</span>`+
+    `<span class="tag">남성 보컬</span>`;
+  document.getElementById('concept').textContent=s.concept;
+  document.getElementById('lyrics').value=s.lyrics;
+  document.getElementById('style').value=heung?STYLE_HEUNG:STYLE_HAN;
+  document.getElementById('excl').value=heung?EXCL_HEUNG:EXCL_HAN;
+  document.getElementById('yt').value=s.yt;
+  document.getElementById('donebox').checked=getDone().includes(idx);
+  document.getElementById('prev').disabled=idx===0;
+  document.getElementById('next').disabled=idx===SONGS.length-1;
+  paint();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function go(d){idx=Math.min(SONGS.length-1,Math.max(0,idx+d));render();}
+function jump(i){idx=i;render();}
+function copyBox(id,btn){
+  const t=document.getElementById(id);
+  navigator.clipboard.writeText(t.value).then(()=>{
+    const o=btn.textContent;btn.textContent='복사됨!';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1200);
+  });
+}
+const dotsEl=document.getElementById('dots');
+SONGS.forEach((_,i)=>{const b=document.createElement('button');b.className='dot';
+  b.textContent=i+1;b.onclick=()=>jump(i);dotsEl.appendChild(b);});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
+render();
+</script>
+</body>
+</html>
