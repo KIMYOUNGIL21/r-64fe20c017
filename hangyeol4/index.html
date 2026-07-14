@@ -4,71 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>강한결 4집 「생계·땀」 7곡 · 수노 작사 작업판</title>
-<style>
-@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
-  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,sans-serif;}
-body{background:#1a100c;color:#f4ece2;min-height:100vh;padding:28px 16px 60px;
-  background-image:radial-gradient(circle at 20% 0%,#422014 0%,#1a100c 55%);}
-.wrap{max-width:740px;margin:0 auto;}
-header{text-align:center;margin-bottom:18px;}
-header h1{font-size:23px;font-weight:800;letter-spacing:-.5px;color:#f0a878;}
-header p{font-size:13px;color:#b59482;margin-top:5px;}
-.counter{display:inline-block;margin-top:12px;font-size:13px;color:#e0b08c;
-  background:#2e170f;border:1px solid #55301c;border-radius:999px;padding:5px 16px;}
-
-.anatomy{background:#241209;border:1px solid #55301c;border-radius:14px;
-  padding:16px 18px;margin-bottom:18px;font-size:13px;line-height:1.8;color:#d8c0ae;}
-.anatomy b{color:#f0a878;display:block;margin-bottom:6px;font-size:13.5px;}
-
-.progress{height:8px;background:#2e170f;border-radius:99px;overflow:hidden;margin-bottom:18px;border:1px solid #55301c;}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,#c05a2e,#f0a878);width:0;transition:.3s;}
-
-.card{background:#26130b;border:1px solid #55301c;border-radius:18px;padding:26px 24px 28px;
-  box-shadow:0 14px 40px rgba(0,0,0,.45);}
-.songhead{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
-.songno{font-size:14px;font-weight:800;color:#1a100c;background:#f0a878;
-  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
-.title{font-size:25px;font-weight:800;letter-spacing:-.5px;color:#fff;flex:1;}
-.donechk{display:flex;align-items:center;gap:6px;font-size:13px;color:#d8c0ae;cursor:pointer;user-select:none;}
-.donechk input{width:18px;height:18px;accent-color:#f0a878;cursor:pointer;}
-.tags{margin:10px 0 6px;display:flex;gap:7px;flex-wrap:wrap;}
-.tag{font-size:12px;color:#eac09a;background:#38180d;border:1px solid #653a20;
-  border-radius:7px;padding:4px 10px;}
-.tag.hot{color:#ffb4b4;background:#3a1c1c;border-color:#6a2f2f;}
-.concept{font-size:13.5px;color:#c9ac97;margin:4px 0 18px;line-height:1.6;}
-
-.section{margin-top:20px;}
-.slabel{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.slabel span{font-size:14px;font-weight:700;color:#f0a878;}
-.copybtn{font-size:12.5px;font-weight:700;color:#1a100c;background:#f0a878;border:none;
-  border-radius:8px;padding:7px 15px;cursor:pointer;transition:.15s;}
-.copybtn:hover{background:#ffc79c;}
-.copybtn.done{background:#7bd88f;color:#0e2a14;}
-textarea{width:100%;background:#170c06;color:#f4ece2;border:1px solid #55301c;border-radius:11px;
-  padding:14px 15px;font-size:14.5px;line-height:1.85;resize:vertical;letter-spacing:-.2px;}
-.lyrics{min-height:320px;}
-.style{min-height:130px;font-size:13px;line-height:1.7;color:#dcc6b4;}
-.excl{min-height:50px;font-size:13px;color:#dcc6b4;}
-.yt{min-height:46px;font-size:13.5px;color:#dcc6b4;}
-
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;}
-.navbtn{flex:1;font-size:15px;font-weight:700;color:#f4ece2;background:#38180d;
-  border:1px solid #653a20;border-radius:12px;padding:14px;cursor:pointer;transition:.15s;}
-.navbtn:hover:not(:disabled){background:#4a2210;}
-.navbtn:disabled{opacity:.3;cursor:not-allowed;}
-.dots{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
-.dot{width:34px;height:34px;border-radius:8px;border:1px solid #653a20;background:#26130b;
-  color:#b59482;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;position:relative;}
-.dot:hover{border-color:#f0a878;}
-.dot.active{background:#f0a878;color:#1a100c;border-color:#f0a878;}
-.dot.finished::after{content:'✓';position:absolute;top:-7px;right:-5px;font-size:11px;color:#7bd88f;}
-.hint{text-align:center;font-size:12px;color:#8f7361;margin-top:24px;line-height:1.7;}
-
-details.review{margin-top:26px;background:#241209;border:1px solid #55301c;border-radius:14px;padding:14px 18px;}
-details.review summary{font-size:13.5px;font-weight:700;color:#f0a878;cursor:pointer;}
-details.review ul{margin:12px 0 4px 18px;font-size:12.5px;line-height:1.9;color:#c9ac97;}
-</style>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>:root{--acc:#f0a878;--bg:#1a100c;--card:#26130b;--line:#55301c;--dim:#b59482;--txt:#f4ece2;--field:#170c06;}</style>
 </head>
 <body>
 <div class="wrap">
@@ -77,6 +14,7 @@ details.review ul{margin:12px 0 4px 18px;font-size:12.5px;line-height:1.9;color:
     <p>강한결의 트로트 TV · 한형 6곡 + 흥형 1곡 · 남성 보컬</p>
     <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
   </header>
+  <div style="text-align:center"><a class="home" href="../">← 작사 공방</a></div>
 
   <div class="anatomy">
     <b>스타일 해부 (4집 = 일하는 남자의 하루)</b>
@@ -86,48 +24,10 @@ details.review ul{margin:12px 0 4px 18px;font-size:12.5px;line-height:1.9;color:
     ④ 톤: "불쌍한 노동자"가 아니라 <b style="display:inline">제 손으로 세상을 버틴 남자</b> — 모든 곡 파이널은 자부심·따뜻함으로 올라감<br>
     ⑤ 사운드: 한형 6곡 = 세미트로트 70BPM(3집 스타일 그대로) / 7번 흥형만 120BPM 뽕짝으로 확실히 털어내며 닫음
   </div>
-
+  
   <div class="progress"><i id="pbar"></i></div>
 
-  <div class="card">
-    <div class="songhead">
-      <div class="songno" id="songno">1</div>
-      <div class="title" id="title">제목</div>
-      <label class="donechk"><input type="checkbox" id="donebox" onchange="toggleDone()">완료</label>
-    </div>
-    <div class="tags" id="tags"></div>
-    <div class="concept" id="concept"></div>
-
-    <div class="section">
-      <div class="slabel"><span>① 가사 (Lyrics 칸)</span>
-        <button class="copybtn" onclick="copyBox('lyrics',this)">가사 복사</button></div>
-      <textarea class="lyrics" id="lyrics" readonly></textarea>
-    </div>
-
-    <div class="section">
-      <div class="slabel"><span>② 스타일 (Style of Music 칸)</span>
-        <button class="copybtn" onclick="copyBox('style',this)">스타일 복사</button></div>
-      <textarea class="style" id="style" readonly></textarea>
-    </div>
-
-    <div class="section">
-      <div class="slabel"><span>③ 제외 (Exclude Styles 칸)</span>
-        <button class="copybtn" onclick="copyBox('excl',this)">제외 복사</button></div>
-      <textarea class="excl" id="excl" readonly></textarea>
-    </div>
-
-    <div class="section">
-      <div class="slabel"><span>④ 유튜브 롱폼 제목</span>
-        <button class="copybtn" onclick="copyBox('yt',this)">제목 복사</button></div>
-      <textarea class="yt" id="yt" readonly></textarea>
-    </div>
-
-    <div class="nav">
-      <button class="navbtn" id="prev" onclick="go(-1)">◀ 이전 곡</button>
-      <button class="navbtn" id="next" onclick="go(1)">다음 곡 ▶</button>
-    </div>
-    <div class="dots" id="dots"></div>
-  </div>
+  <div id="board"></div>
 
   <details class="review">
     <summary>셀프 검토표 (곡별 고친 점)</summary>
@@ -156,13 +56,11 @@ details.review ul{margin:12px 0 4px 18px;font-size:12.5px;line-height:1.9;color:
       <li><b>원곡 대조</b> — 「아빠의 청춘」("원더풀 원더풀 아빠의 청춘"), 「타타타」("수지맞는 장사잖소"/"알몸으로 태어나서"), 「인생은 미완성」("쓰다가 마는 편지"), 「보릿고개」("아야 뛰지마라 배 꺼질라"), 「막걸리 한잔」(아버지·막걸리 후렴) 실제 가사 웹 대조 완료. 어구·제목 겹침 없음.</li>
     </ul>
   </details>
-
   <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
   곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
 </div>
 
 <script>
-// ===== 공용 스타일 — 강한결(남성 보컬) · 3집 검증값 그대로 =====
 const STYLE_HAN = `emotional Korean adult-contemporary ballad with a subtle trot (teuroteu) flavor, gentle and understated, NOT heavy ppongjjak, sung by a young male vocalist in his early thirties with a warm clear slightly husky tone and only light delicate vibrato (no heavy kkeokki, no exaggerated trembling), calm tender flowing melody, intimate arrangement of soft piano and warm strings with gentle electric guitar and a faint electronic organ, smooth mellow rhythm rather than a strong two-beat, slow tempo around 70 BPM, minor pentatonic, nostalgic and melancholic longing (han), refined modern and restrained, tasteful and tearful`;
 const EXCL_HAN = `trumpet, brass, saxophone, heavy ppongjjak, strong vibrato, loud drums, fast tempo, cheerful, female vocal, spoken word`;
 
@@ -531,60 +429,21 @@ lyrics:
 내일은 니가 사라`}
 ];
 
-let idx=0;
-const DKEY='hangyeol4_done';
-function getDone(){try{return JSON.parse(localStorage.getItem(DKEY)||'[]');}catch(e){return[];}}
-function setDone(a){localStorage.setItem(DKEY,JSON.stringify(a));}
-function toggleDone(){
-  const a=getDone();const on=document.getElementById('donebox').checked;
-  const i=a.indexOf(idx);
-  if(on&&i<0)a.push(idx); if(!on&&i>=0)a.splice(i,1);
-  setDone(a);paint();
-}
-function paint(){
-  const a=getDone();
-  document.getElementById('cdone').textContent=a.length;
-  document.getElementById('pbar').style.width=(a.length/SONGS.length*100)+'%';
-  document.querySelectorAll('.dot').forEach((d,i)=>{
-    d.classList.toggle('active',i===idx);
-    d.classList.toggle('finished',a.includes(i));
-  });
-}
-function render(){
-  const s=SONGS[idx];
-  document.getElementById('songno').textContent=idx+1;
-  document.getElementById('title').textContent=s.title;
-  document.getElementById('cnow').textContent=idx+1;
-  const heung=s.type==='heung';
-  document.getElementById('tags').innerHTML=
-    `<span class="tag ${heung?'hot':''}">${heung?'흥형 (밝고 신나게)':'한형 (애절·세미트로트)'}</span>`+
-    `<span class="tag">소재 · ${s.motif}</span>`+
-    `<span class="tag">남성 보컬</span>`;
-  document.getElementById('concept').textContent=s.concept;
-  document.getElementById('lyrics').value=s.lyrics;
-  document.getElementById('style').value=heung?STYLE_HEUNG:STYLE_HAN;
-  document.getElementById('excl').value=heung?EXCL_HEUNG:EXCL_HAN;
-  document.getElementById('yt').value=s.yt;
-  document.getElementById('donebox').checked=getDone().includes(idx);
-  document.getElementById('prev').disabled=idx===0;
-  document.getElementById('next').disabled=idx===SONGS.length-1;
-  paint();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function go(d){idx=Math.min(SONGS.length-1,Math.max(0,idx+d));render();}
-function jump(i){idx=i;render();}
-function copyBox(id,btn){
-  const t=document.getElementById(id);
-  navigator.clipboard.writeText(t.value).then(()=>{
-    const o=btn.textContent;btn.textContent='복사됨!';btn.classList.add('done');
-    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1200);
-  });
-}
-const dotsEl=document.getElementById('dots');
-SONGS.forEach((_,i)=>{const b=document.createElement('button');b.className='dot';
-  b.textContent=i+1;b.onclick=()=>jump(i);dotsEl.appendChild(b);});
-document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);});
-render();
+window.WB = {
+  key: 'hangyeol4_done',
+  songs: SONGS,
+  tags: s => [
+    {t: s.type === 'heung' ? '흥형 (밝고 신나게)' : '한형 (애절·세미트로트)', hot: s.type === 'heung'},
+    {t: '소재 · ' + s.motif},
+    {t: '남성 보컬'},
+  ],
+  lyrics:  s => s.lyrics,
+  style:   s => s.type === 'heung' ? STYLE_HEUNG : STYLE_HAN,
+  excl:    s => s.type === 'heung' ? EXCL_HEUNG  : EXCL_HAN,
+  yt:      s => s.yt,
+  concept: s => s.concept,
+};
 </script>
+<script src="../assets/workboard.js"></script>
 </body>
 </html>

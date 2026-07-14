@@ -4,68 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>중년가요방 · 10곡 작업판</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family:"Pretendard Variable", Pretendard, sans-serif;
-    background:#17141f; color:#efe9dc; padding:28px 16px 80px;
-  }
-  .wrap { max-width:860px; margin:0 auto; }
-  header { text-align:center; margin-bottom:14px; }
-  header h1 { font-size:26px; letter-spacing:-0.5px; }
-  header h1 .disco { color:#ffb84d; }
-  header p { color:#a89ec4; margin-top:6px; font-size:14px; }
-  .progress {
-    background:#241f31; border:1px solid #383050; border-radius:14px;
-    padding:14px 18px; margin:18px 0 10px; display:flex; align-items:center; gap:14px;
-  }
-  .progress .bar { flex:1; height:12px; background:#383050; border-radius:6px; overflow:hidden; }
-  .progress .fill { height:100%; width:0%; background:linear-gradient(90deg,#ffb84d,#ff6f91); border-radius:6px; transition:width .3s; }
-  .progress .num { font-weight:700; color:#ffb84d; white-space:nowrap; }
-  .hashtags {
-    background:#241f31; border:1px solid #383050; border-radius:14px;
-    padding:12px 18px; margin-bottom:24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-  }
-  .hashtags code { color:#8fd3a8; font-size:13px; flex:1; min-width:200px; }
-  .card {
-    background:#241f31; border:1px solid #383050; border-radius:16px;
-    padding:20px 22px; margin-bottom:20px;
-  }
-  .card.done { opacity:.55; border-color:#2e5c3f; }
-  .card-top { display:flex; align-items:flex-start; gap:12px; margin-bottom:6px; }
-  .no {
-    background:#ffb84d; color:#241f31; font-weight:800; border-radius:10px;
-    min-width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:17px;
-  }
-  .card h2 { font-size:20px; flex:1; padding-top:5px; letter-spacing:-0.3px; }
-  .theme { font-size:11.5px; font-weight:700; border-radius:6px; padding:3px 8px; margin-top:8px; white-space:nowrap; }
-  .theme.love { background:#4a2436; color:#ff9db4; }
-  .theme.etc { background:#2c3a52; color:#8fc1ff; }
-  .genre { color:#c9bfe4; font-size:12.5px; font-weight:600; padding-top:9px; white-space:nowrap; }
-  .donechk { display:flex; align-items:center; gap:6px; cursor:pointer; padding-top:7px; user-select:none; }
-  .donechk input { width:20px; height:20px; accent-color:#4caf7d; cursor:pointer; }
-  .donechk span { font-size:13px; color:#a89ec4; }
-  .concept { color:#c9bfe4; font-size:14px; line-height:1.55; margin:4px 0 14px 50px; }
-  .block { margin:12px 0 0 0; }
-  .block-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-  .block-head b { font-size:13.5px; color:#ffb84d; }
-  .copybtn {
-    background:#383050; color:#efe9dc; border:none; border-radius:8px;
-    padding:7px 16px; font-size:13px; font-weight:600; cursor:pointer;
-    font-family:inherit;
-  }
-  .copybtn:hover { background:#4a4066; }
-  .copybtn.ok { background:#2e7d4f; }
-  pre {
-    background:#17141f; border:1px solid #302a44; border-radius:10px;
-    padding:14px 16px; font-family:inherit; font-size:13.5px; line-height:1.65;
-    white-space:pre-wrap; color:#ddd5c6; max-height:200px; overflow-y:auto;
-  }
-  pre.small { max-height:120px; color:#b7d9c4; }
-  .yt { background:#17141f; border:1px dashed #4a4066; border-radius:10px; padding:11px 14px; font-size:13.5px; color:#f0c9d8; line-height:1.5; }
-  footer { text-align:center; color:#6f658c; font-size:12.5px; margin-top:30px; line-height:1.8; }
-</style>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>:root{--acc:#ffb84d;--bg:#17141f;--card:#241f31;--line:#3d3550;--dim:#a89ec4;--txt:#efe9dc;--field:#120f1a;}</style>
 </head>
 <body>
 <div class="wrap">
@@ -73,20 +13,19 @@
     <h1>🪩 중년가요방 <span class="disco">10곡 작업판</span> <span style="font-size:14px;color:#a89ec4;">v2</span></h1>
     <p>사랑·이별 중심(8곡) + 인생·가족(2곡) · 텐션 상한 = 중년애창곡 · 곡마다 [복사] → 수노 → 완료 ✅</p>
   </header>
+  <div style="text-align:center"><div class="counter"><span id="cnow">1</span> / 10곡 · 완료 <span id="cdone">0</span>곡</div><a class="home" href="../">← 작사 공방</a></div>
 
-  <div class="progress">
-    <div class="num" id="prognum">0 / 10 곡 완료</div>
-    <div class="bar"><div class="fill" id="progfill"></div></div>
-  </div>
-
-  <div class="hashtags">
-    <b style="color:#ffb84d;font-size:13.5px;">고정 해시태그</b>
+  
+  <div class="topbox">
+    <b style="color:var(--acc);font-size:13px;">고정 해시태그</b>
     <code id="tags">#중년의노래 #7080노래 #감성발라드 #인생노래 #까페음악 #듣기좋은노래</code>
-    <button class="copybtn" onclick="copyText(document.getElementById('tags').textContent,this)">복사</button>
+    <button class="copybtn" id="tagcopy">복사</button>
   </div>
+  <div class="progress"><i id="pbar"></i></div>
 
-  <div id="songs"></div>
+  <div id="board"></div>
 
+  
   <footer>
     체크 표시는 이 컴퓨터에 자동 저장됩니다 · 벤치마크 썸네일은 <b>자료실\벤치마크_썸네일_소리곳간</b> 폴더 참고<br>
     유튜브 제목 공식: 시청자 반응 인용 + 곡명 + [중년의 노래]
@@ -549,74 +488,29 @@ const SONGS = [
 
 const EXCLUDE = "rap, EDM, trap, autotune, spoken word intro, heavy metal, aggressive party energy, modern pop production";
 
-function copyText(t, btn){
-  const done = () => { btn.classList.add('ok'); btn.textContent='복사됨!'; setTimeout(()=>{btn.classList.remove('ok'); btn.textContent='복사';},1200); };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(t).then(done).catch(()=>fallback(t,done));
-  } else fallback(t,done);
-}
-function fallback(t,done){
-  const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
-  ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done();
-}
-
-function render(){
-  const box=document.getElementById('songs');
-  SONGS.forEach((s,i)=>{
-    const card=document.createElement('div'); card.className='card'; card.id='card'+i;
-    const themeCls = s.theme === '사랑·이별' ? 'love' : 'etc';
-    card.innerHTML=`
-      <div class="card-top">
-        <div class="no">${i+1}</div>
-        <h2>${s.title}</h2>
-        <div class="theme ${themeCls}">${s.theme}</div>
-        <div class="genre">${s.genre}</div>
-        <label class="donechk"><input type="checkbox" data-i="${i}"><span>완료</span></label>
-      </div>
-      <div class="concept">${s.concept}</div>
-      <div class="block">
-        <div class="block-head"><b>① 가사 (수노 Lyrics 칸)</b><button class="copybtn">복사</button></div>
-        <pre>${s.lyrics}</pre>
-      </div>
-      <div class="block">
-        <div class="block-head"><b>② 스타일 프롬프트 (수노 Styles 칸)</b><button class="copybtn">복사</button></div>
-        <pre class="small">${s.style}</pre>
-      </div>
-      <div class="block">
-        <div class="block-head"><b>③ Exclude Styles</b><button class="copybtn">복사</button></div>
-        <pre class="small">${EXCLUDE}</pre>
-      </div>
-      <div class="block">
-        <div class="block-head"><b>④ 유튜브 제목 (업로드용)</b><button class="copybtn">복사</button></div>
-        <div class="yt">${s.yt}</div>
-      </div>`;
-    box.appendChild(card);
-    const btns=card.querySelectorAll('.copybtn');
-    btns[0].onclick=()=>copyText(s.lyrics,btns[0]);
-    btns[1].onclick=()=>copyText(s.style,btns[1]);
-    btns[2].onclick=()=>copyText(EXCLUDE,btns[2]);
-    btns[3].onclick=()=>copyText(s.yt,btns[3]);
-  });
-  const saved=JSON.parse(localStorage.getItem('gayobang10v2')||'{}');
-  document.querySelectorAll('.donechk input').forEach(chk=>{
-    const i=chk.dataset.i;
-    if(saved[i]){ chk.checked=true; document.getElementById('card'+i).classList.add('done'); }
-    chk.onchange=()=>{
-      saved[i]=chk.checked;
-      localStorage.setItem('gayobang10v2',JSON.stringify(saved));
-      document.getElementById('card'+i).classList.toggle('done',chk.checked);
-      updateProg();
-    };
-  });
-  updateProg();
-}
-function updateProg(){
-  const saved=JSON.parse(localStorage.getItem('gayobang10v2')||'{}');
-  const n=Object.values(saved).filter(Boolean).length;
-  document.getElementById('prognum').textContent=`${n} / ${SONGS.length} 곡 완료`;
-  document.getElementById('progfill').style.width=(n/SONGS.length*100)+'%';
-}
-render();
+/* 예전 완료 체크(객체형)를 새 형식(배열)으로 한 번만 옮긴다 — 체크 표시 안 잃게 */
+(function(){ const OLD='gayobang10v2', NEW='gayobang10_done';
+  if(!localStorage.getItem(NEW) && localStorage.getItem(OLD)){
+    try{ const o = JSON.parse(localStorage.getItem(OLD) || '{}');
+      localStorage.setItem(NEW, JSON.stringify(Object.keys(o).filter(k=>o[k]).map(Number)));
+    }catch(e){}
+  }})();
+document.getElementById('tagcopy').onclick = function(){
+  navigator.clipboard.writeText(document.getElementById('tags').textContent);
+  const b=this, o=b.textContent; b.textContent='복사됨!'; b.classList.add('done');
+  setTimeout(()=>{b.textContent=o; b.classList.remove('done');},1200);
+};
+window.WB = {
+  key: 'gayobang10_done',
+  songs: SONGS,
+  tags: s => [{t: s.theme, hot: s.theme === '사랑·이별'}, {t: s.genre}],
+  lyrics:  s => s.lyrics,
+  style:   s => s.style,
+  excl:    s => EXCLUDE,
+  yt:      s => s.yt,
+  concept: s => s.concept,
+};
 </script>
+<script src="../assets/workboard.js"></script>
 </body>
 </html>
