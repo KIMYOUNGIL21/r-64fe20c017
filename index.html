@@ -1,3 +1,158 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>작사 공방</title>
-<style>body{font-family:sans-serif;background:#17141f;color:#efe9dc;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center}p{color:#a89ec4}</style>
-</head><body><div><h1>🎼 작사 공방</h1><p>작업판은 각 폴더 주소로 열립니다.<br>이 첫 화면은 목차 없이 비워둡니다.</p></div></body></html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>작사 공방 · 3채널 마더페이지</title>
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,sans-serif;-webkit-tap-highlight-color:transparent;}
+
+:root{
+  --acc:#c9bfe4; --bg:#12101a; --card:#1c1926; --line:#332e44; --dim:#9a92b0; --txt:#efe9dc;
+}
+body{background:var(--bg);color:var(--txt);min-height:100vh;padding:24px 14px 70px;
+  background-image:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--acc) 14%,transparent) 0%,var(--bg) 60%);
+  transition:background-image .35s,background-color .35s;}
+.wrap{max-width:760px;margin:0 auto;}
+
+header{text-align:center;margin-bottom:20px;}
+header h1{font-size:22px;font-weight:800;letter-spacing:-.5px;color:var(--acc);transition:color .35s;}
+header p{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.6;}
+
+/* 탭 */
+.tabs{display:flex;gap:7px;position:sticky;top:0;z-index:9;padding:10px 0 12px;
+  background:linear-gradient(to bottom,var(--bg) 72%,transparent);}
+.tab{flex:1;border:1px solid var(--line);background:var(--card);color:var(--dim);
+  border-radius:12px;padding:11px 6px;cursor:pointer;transition:.2s;text-align:center;}
+.tab b{display:block;font-size:13.5px;font-weight:700;letter-spacing:-.3px;}
+.tab i{display:block;font-style:normal;font-size:11px;margin-top:3px;opacity:.75;}
+.tab:hover{border-color:var(--acc);}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#14111c;}
+.tab.on i{opacity:.7;}
+
+/* 카드 */
+.album{display:block;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;margin-bottom:12px;
+  transition:.18s;position:relative;}
+.album:hover{border-color:var(--acc);transform:translateY(-2px);
+  box-shadow:0 10px 26px rgba(0,0,0,.4);}
+.ahead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.aname{font-size:19px;font-weight:800;letter-spacing:-.4px;color:#fff;}
+.acnt{font-size:12px;color:var(--acc);font-weight:700;}
+.new{font-size:10.5px;font-weight:800;color:#14111c;background:var(--acc);
+  border-radius:5px;padding:2px 6px;letter-spacing:.3px;}
+.aconcept{font-size:13px;color:var(--dim);margin-top:7px;line-height:1.6;}
+.asongs{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+.song{font-size:11.5px;color:#d7cfe6;background:color-mix(in srgb,var(--acc) 11%,transparent);
+  border:1px solid color-mix(in srgb,var(--acc) 26%,transparent);border-radius:6px;padding:3px 8px;}
+.ameta{display:flex;justify-content:space-between;align-items:center;margin-top:13px;
+  padding-top:11px;border-top:1px dashed var(--line);font-size:12px;color:var(--dim);}
+.ameta .go{color:var(--acc);font-weight:700;}
+
+.empty{text-align:center;color:var(--dim);font-size:13px;padding:44px 0;line-height:1.8;}
+
+/* 도구 */
+.tools{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);}
+.tools h2{font-size:12.5px;color:var(--dim);font-weight:700;margin-bottom:10px;letter-spacing:.2px;}
+.tgrid{display:flex;gap:8px;flex-wrap:wrap;}
+.tool{flex:1;min-width:150px;text-decoration:none;background:var(--card);border:1px solid var(--line);
+  border-radius:11px;padding:12px 13px;transition:.18s;}
+.tool:hover{border-color:var(--acc);}
+.tool b{display:block;font-size:13px;color:var(--txt);font-weight:700;}
+.tool span{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;}
+
+footer{text-align:center;font-size:11.5px;color:#6b6480;margin-top:26px;line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎼 작사 공방</h1>
+    <p>3채널 작사 작업판 한자리 · 곡 카드를 누르면 수노 복붙 작업판이 열립니다</p>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="list"></div>
+
+  <div class="tools">
+    <h2>도구</h2>
+    <div class="tgrid">
+      <a class="tool" href="mj/"><b>미드저니 프롬프트 생성기</b><span>윤하경 · 강한결 이미지</span></a>
+      <a class="tool" href="dash/"><b>3채널 주간 대시보드</b><span>조회수 · 구독 추이</span></a>
+      <a class="tool" href="workflow/"><b>워크플로 전체 그림</b><span>작사 → 발매 파이프라인</span></a>
+    </div>
+  </div>
+
+  <footer>새 작업판이 나오면 이 페이지에 자동으로 쌓입니다.<br>주소만 저장해 두세요.</footer>
+</div>
+
+<script>
+/* ────────────────────────────────────────────────────────────
+   새 작사 작업판이 나오면 여기 WORKS 맨 앞에 한 덩어리만 추가하면 된다.
+   channel: geubam | hangyeol | gayobang
+   ──────────────────────────────────────────────────────────── */
+const CHANNELS = [
+  {key:'geubam',   name:'그 밤 라디오', sub:'윤하경 · 발라드', acc:'#8fb3ff', bg:'#0f1424', card:'#1a2138', line:'#2c3654', dim:'#8b96b5'},
+  {key:'hangyeol', name:'강한결',       sub:'트로트',         acc:'#f0a878', bg:'#1a100c', card:'#26130b', line:'#55301c', dim:'#b59482'},
+  {key:'gayobang', name:'중년가요방',   sub:'7090 레트로',    acc:'#ffb84d', bg:'#17141f', card:'#241f31', line:'#3d3550', dim:'#a89ec4'},
+];
+
+const WORKS = [
+  {channel:'hangyeol', slug:'hangyeol4', album:'4집 「생계·땀」', count:7, date:'2026-07-14', isNew:true,
+   concept:'일하는 남자의 하루 — 야간택시·새벽시장·공사판·경비실·화물차. 한형 6 + 흥형 1',
+   note:'작사 완료 · 수노 대기',
+   songs:['새벽을 태우고','언 손','밥값','아저씨','지금 익산쯤','얇은 봉투','오늘은 내가 쏜다']},
+
+  {channel:'hangyeol', slug:'hangyeol7', album:'3집 「못다 한 말」', count:7, date:'2026-07-12',
+   concept:'사람과 관계 — 차마 못 했던 말, 그리고 끝내 뱉는 말. 한형 6 + 흥형 1',
+   note:'수노 완료 · 발매 대기',
+   songs:['막차는 떠나고','그 반지','잘 살아요 그대','시집가는 날','우리 누나','아들아 밥 먹자','두근두근']},
+
+  {channel:'geubam', slug:'moksum7', album:'90s 처절 발라드', count:7, date:'2026-07-13',
+   concept:'목숨 걸고 매달리는 90년대식 절규 — 록발라드 5 + 소울발라드 2',
+   songs:['우리가 죄라면','심장도 가져가','내가 여기 있을게','나를 미워해','다음 생엔 내가 먼저','나 없는 날들에게','돌아온다 했잖아']},
+
+  {channel:'gayobang', slug:'gayobang10', album:'1집 10곡', count:10, date:'2026-07-12',
+   concept:'사랑·이별 8곡 + 인생·가족 2곡 — 텐션 상한은 중년애창곡(뽕짝파티 금지)',
+   songs:['오늘은 내 이름으로','못 본 척','눈물은 집에 가서','그 노래가 나오면','서랍 속 그 사람','동창회 가는 길','가슴이 왜 이래','우리 딸 시집가던 날','미워도 당신','당신 없이 맞는 봄']},
+];
+
+const KEY='workshop_tab';
+let cur = localStorage.getItem(KEY) || 'hangyeol';
+if(!CHANNELS.some(c=>c.key===cur)) cur='hangyeol';
+
+const tabsEl=document.getElementById('tabs'), listEl=document.getElementById('list');
+
+function theme(ch){
+  const r=document.documentElement.style;
+  r.setProperty('--acc',ch.acc); r.setProperty('--bg',ch.bg);
+  r.setProperty('--card',ch.card); r.setProperty('--line',ch.line); r.setProperty('--dim',ch.dim);
+}
+function render(){
+  const ch=CHANNELS.find(c=>c.key===cur);
+  theme(ch);
+  tabsEl.innerHTML=CHANNELS.map(c=>
+    `<button class="tab ${c.key===cur?'on':''}" onclick="pick('${c.key}')">
+       <b>${c.name}</b><i>${c.sub}</i></button>`).join('');
+
+  const mine=WORKS.filter(w=>w.channel===cur);
+  listEl.innerHTML = mine.length ? mine.map(w=>`
+    <a class="album" href="${w.slug}/">
+      <div class="ahead">
+        <span class="aname">${w.album}</span>
+        <span class="acnt">${w.count}곡</span>
+        ${w.isNew?'<span class="new">NEW</span>':''}
+      </div>
+      <div class="aconcept">${w.concept}</div>
+      <div class="asongs">${w.songs.map(s=>`<span class="song">${s}</span>`).join('')}</div>
+      <div class="ameta"><span>${w.date}${w.note?' · '+w.note:''}</span><span class="go">작업판 열기 →</span></div>
+    </a>`).join('')
+    : `<div class="empty">아직 이 채널 작업판이 없습니다.<br>작사가 끝나면 여기 쌓입니다.</div>`;
+}
+function pick(k){ cur=k; localStorage.setItem(KEY,k); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+render();
+</script>
+</body>
+</html>
