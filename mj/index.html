@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>미드저니 프롬프트 생성기 — 윤하경 비주얼 v3</title>
+<title>미드저니 프롬프트 생성기 — 윤하경 · 강한결 v4</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -14,6 +14,19 @@
   h1 { font-size:22px; font-weight:800; letter-spacing:-0.5px; }
   h1 small { font-size:13px; font-weight:400; color:#8b8f98; margin-left:10px; }
   .sub { color:#8b8f98; font-size:13px; margin-top:6px; line-height:1.6; }
+
+  /* 가수 탭 */
+  .tabs { display:flex; gap:8px; margin-top:20px; }
+  .tab {
+    flex:1; text-align:center; padding:14px 10px; border-radius:12px; cursor:pointer;
+    border:1px solid #2e333e; background:#181b21; color:#8b8f98;
+    font-size:15px; font-weight:700; user-select:none; transition:all .12s;
+  }
+  .tab:hover { border-color:#4a5160; }
+  .tab.on { color:#15171c; font-weight:800; }
+  .tab.on.yoon { background:#e8e6e1; border-color:#e8e6e1; }
+  .tab.on.kang { background:#e2b25a; border-color:#e2b25a; }
+  .tab small { display:block; font-size:11.5px; font-weight:400; margin-top:3px; opacity:.75; }
 
   .panel { background:#181b21; border:1px solid #262a33; border-radius:14px; padding:20px; margin-top:20px; }
   .row { margin-bottom:18px; }
@@ -27,6 +40,7 @@
   }
   .chip:hover { border-color:#4a5160; }
   .chip.on { background:#e8e6e1; color:#15171c; border-color:#e8e6e1; font-weight:700; }
+  body.kang .chip.on { background:#e2b25a; border-color:#e2b25a; }
 
   /* 작업방식 */
   .mode { background:#15242e; border:1px solid #24485c; border-radius:12px; padding:16px 18px; margin-top:20px; }
@@ -53,6 +67,7 @@
     background:#e8e6e1; color:#15171c; font-size:17px; font-weight:800; cursor:pointer;
     font-family:inherit; transition:transform .08s;
   }
+  body.kang .go { background:#e2b25a; }
   .go:active { transform:scale(0.99); }
 
   .card { background:#181b21; border:1px solid #262a33; border-radius:14px; padding:18px 20px; margin-top:14px; }
@@ -82,10 +97,13 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>미드저니 프롬프트 생성기 <small>윤하경 · v3 (무드보드 + 얼굴참조 방식)</small></h1>
+  <h1>미드저니 프롬프트 생성기 <small>윤하경 · 강한결 — v4 (무드보드 + 얼굴참조 방식)</small></h1>
   <div class="sub">
     스타일은 <b>무드보드</b>가, 얼굴은 <b>얼굴참조</b>가 잡습니다. 프롬프트는 <b>"무슨 장면이냐"만</b> 말하면 됩니다.
   </div>
+
+  <!-- 가수 탭 -->
+  <div class="tabs" id="tabs"></div>
 
   <!-- 작업 방식 -->
   <div class="mode">
@@ -96,9 +114,9 @@
     <details>
       <summary>▸ 디스코드에서 쓰시나요? (웹에서 하시면 열 필요 없습니다)</summary>
       <div class="dc">
-        <label>무드보드 코드 <span style="font-weight:400;color:#5f7e8e">— 미드저니 무드보드 페이지에서 복사한 코드</span></label>
+        <label>무드보드 코드 <span style="font-weight:400;color:#5f7e8e">— 이 가수의 무드보드 페이지에서 복사한 코드 (가수별로 따로 저장됩니다)</span></label>
         <input id="pCode" type="text" placeholder="예: abc123 (--p 뒤에 붙는 코드만)">
-        <label>얼굴 참조 이미지 주소 <span style="font-weight:400;color:#5f7e8e">— 디스코드에 올린 얼굴 사진의 링크</span></label>
+        <label>얼굴 참조 이미지 주소 <span style="font-weight:400;color:#5f7e8e">— 디스코드에 올린 이 가수 얼굴 사진의 링크</span></label>
         <input id="orefUrl" type="text" placeholder="https://...jpg">
       </div>
     </details>
@@ -113,6 +131,10 @@
     <div class="row">
       <div class="label">장면 <span>배경은 어차피 다 뭉개집니다. "무슨 색 빛이 번지느냐"만 정하는 거예요</span></div>
       <div class="chips" id="scene"></div>
+    </div>
+    <div class="row" id="micRow" style="display:none">
+      <div class="label">마이크 <span>강한결 시그니처 소품 — 참조가 못 잡아주니 프롬프트에 남깁니다</span></div>
+      <div class="chips" id="mic"></div>
     </div>
     <div class="row">
       <div class="label">비율</div>
@@ -132,38 +154,41 @@
   <div id="out"><div class="empty">감정을 고르고 버튼을 눌러주세요</div></div>
 
   <div class="tip">
-    <span class="hd">v2에서 왜 에러가 났나 (--sw 사건)</span>
-    <span class="warn">⚠ <b>무드보드(--p)는 --sw(스타일 강도)와 같이 쓸 수 없습니다.</b></span> 미드저니 공식 제약입니다.
-    사장님이 무드보드로 작업하시는데 프롬프트에 <code>--sw</code>가 붙어 있으니 매번 에러가 났던 겁니다.
-    <b>v3에서 --sw를 완전히 들어냈습니다.</b> 이제 안 붙습니다.
+    <span class="hd">가수별 공식의 근거</span>
+    <b>윤하경</b> — best 폴더 6장의 공통점: 얼굴이 화면 1/3을 채우는 <b>클로즈업</b>, <b>카메라 정면 응시</b>,
+    <b>형체도 없이 뭉개진 배경</b>, <b>흰색/아이보리 옷</b>. 참조가 대신 못 해주는 것들이라 프롬프트에 계속 남깁니다.<br>
+    <b>강한결</b> — 기존 사진이 'AI틱'했던 원인은 <span class="warn">왁스처럼 매끈한 피부 · 쨍한 채도 · 전부 또렷한 초점</span>(스톡사진 느낌)입니다.
+    그래서 강한결 탭은 ① <b>캔디드 공연사진 프레이밍</b>(프레스석에서 망원으로 잡은 듯) ② <b>필름 질감</b>(할레이션·그레인·모공 살린 생피부)
+    ③ <b>망원 얕은 심도 + 헤이즈 낀 조명</b>으로 배경 뭉개기 — 를 박습니다.
+    <b>정장 + 빈티지 크롬 마이크 + 금빛 스포트라이트</b>는 강한결 정체성이라 유지합니다.<br>
+    감정은 두 가수 모두 <b>형용사로 쓰지 않습니다.</b> 미드저니는 "애절한" 같은 말을 거의 안 듣습니다.
+    대신 <b>시선·눈·입·고개 각도·손</b>으로 씁니다.
 
     <span class="hd">무드보드를 쓰면 프롬프트가 달라집니다</span>
     무드보드가 이미 <b>필름 질감·색감·그레인</b>을 다 잡아줍니다. 그런데 프롬프트에 또 "Cinestill 800T, 바랜 색, 굵은 그레인"을 박으면
     <b>둘이 싸워서 무드보드가 흐려집니다.</b> 그래서 무드보드 모드에서는 스타일 문구를 <b>일부러 뺐습니다.</b><br>
-    얼굴참조도 마찬가지입니다. 얼굴참조가 인물을 결정하는데 프롬프트에 "20대 초반, 민낯, 긴 흑발"을 또 쓰면 참조 얼굴과 충돌합니다.
+    얼굴참조도 마찬가지입니다. 얼굴참조가 인물을 결정하는데 프롬프트에 외모 묘사를 또 쓰면 참조 얼굴과 충돌합니다.
     그래서 <b>얼굴참조를 쓰면 외모 묘사도 뺍니다.</b><br>
-    남는 건 <b>구도 · 표정/시선 · 옷 · 배경</b> — 참조가 대신 못 해주는 것들뿐입니다.
+    남는 건 <b>구도 · 표정/시선 · 옷 · 소품 · 배경</b> — 참조가 대신 못 해주는 것들뿐입니다.
 
-    <span class="hd">미드저니 웹에서 하는 순서</span>
-    <b>1.</b> 무드보드를 켭니다 (설정의 🙋 <b>Personalization</b> 버튼을 켜두면 매번 자동으로 붙습니다).<br>
-    <b>2.</b> 마음에 드는 <b>얼굴 사진</b>을 프롬프트창에 드래그 → <b>Omni Reference</b>(얼굴/인물 참조)로 지정.<br>
+    <span class="hd">미드저니 웹에서 하는 순서 (가수마다 무드보드·얼굴참조를 따로!)</span>
+    <b>1.</b> 그 가수의 무드보드를 켭니다 (설정의 🙋 <b>Personalization</b>). <span class="warn">⚠ 윤하경 무드보드 켠 채로 강한결 뽑으면 섞입니다.</span><br>
+    <b>2.</b> 그 가수의 <b>얼굴 사진</b>을 프롬프트창에 드래그 → <b>Omni Reference</b>(얼굴/인물 참조)로 지정.<br>
     <b>3.</b> 여기서 프롬프트를 복사해 붙여넣고 실행.<br>
-    <b>4.</b> 얼굴이 덜 닮았으면 미드저니 화면의 <b>얼굴 강도 슬라이더를 400 근처</b>까지 올립니다.
+    <b>4.</b> 얼굴이 덜 닮았으면 <b>얼굴 강도 슬라이더를 400 근처</b>까지 올립니다.<br>
+    강한결 얼굴참조 원본은 <code>D:\work\trot-singer\트롯작업실\강한결</code>의 기존 사진 중 정면·이목구비 또렷한 컷을 쓰면 됩니다
+    (스타일은 무드보드가 갈아끼우니 원본이 AI틱해도 얼굴만 가져옵니다).
 
     <span class="hd">알아두실 제약</span>
-    얼굴참조(Omni Reference)를 쓰면 <b>GPU를 2배 씁니다.</b> 그리고 <b>드래프트 모드·빠른 모드에서는 안 됩니다.</b> (미드저니가 알아서 일반 모드로 돌립니다)
+    얼굴참조(Omni Reference)를 쓰면 <b>GPU를 2배 씁니다.</b> 그리고 <b>드래프트 모드·빠른 모드에서는 안 됩니다.</b> (미드저니가 알아서 일반 모드로 돌립니다)<br>
+    <span class="warn">⚠ <b>무드보드(--p)는 --sw(스타일 강도)와 같이 쓸 수 없습니다.</b></span> v2 때 에러 원인. v3부터 --sw는 안 붙습니다.
 
     <span class="hd">잘 안 나올 때 — 한 번에 하나씩만</span>
     <b>1.</b> 얼굴이 안 닮았다 → 얼굴 강도를 <b>400</b>까지 올린다. (그 이상은 오히려 이상해집니다)<br>
     <b>2.</b> 무드보드 느낌이 안 난다 → 프롬프트에 스타일 문구가 섞여 있는지 본다. 있으면 뺀다.<br>
-    <b>3.</b> 배경이 너무 또렷하다 → <code>f/1.4</code>를 <code>f/1.2</code>로 바꾼다.<br>
-    <b>4.</b> 얼굴이 너무 멀다 → <code>bust-up close-up</code>을 <code>tight head-and-shoulders close-up</code>으로.<br>
+    <b>3.</b> 배경이 너무 또렷하다 → <code>f/1.4</code>(윤하경)·<code>f/1.8</code>(강한결)을 한 단계 더 연다 (<code>f/1.2</code>).<br>
+    <b>4.</b> 여전히 AI틱하다(강한결) → "참조 없이 프롬프트만" 모드로 한 번 뽑아 필름 문구가 통째로 들어간 결과와 비교해본다.<br>
     <b>5.</b> 마음에 드는 게 나오면 그 프롬프트를 <b>통째로 저장</b>하고, 다음부턴 <b>단어 하나씩만</b> 바꾸세요.
-
-    <span class="hd">공식의 근거</span>
-    사장님이 <b>best</b> 폴더에 고른 6장의 공통점 — 얼굴이 화면 1/3을 채우는 <b>클로즈업</b>, <b>카메라 정면 응시</b>,
-    <b>형체도 없이 뭉개진 배경</b>, <b>흰색/아이보리 옷</b>. 이 네 가지는 참조가 대신 못 해주므로 프롬프트에 계속 남깁니다.<br>
-    감정은 <b>형용사로 쓰지 않습니다.</b> 미드저니는 "우울한" 같은 말을 거의 안 듣습니다. 대신 <b>시선·눈·입술·고개 각도</b>로 씁니다.
 
     <span class="hd">파일 위치</span>
     D:\work\ai-singer\미드저니_프롬프트생성기.html · 온라인판 kimyoungil21.github.io/r-64fe20c017/mj/
@@ -175,97 +200,20 @@
 //  참조가 대신 못 해주는 것만 프롬프트에 남긴다.
 //   · 무드보드    → 스타일(필름·색감·그레인)을 잡는다  ⇒ 프롬프트에서 뺀다
 //   · 얼굴참조     → 인물 외모를 잡는다                ⇒ 프롬프트에서 뺀다
-//   · 프롬프트     → 구도 · 표정/시선 · 옷 · 배경       ⇒ 여기만 쓴다
+//   · 프롬프트     → 구도 · 표정/시선 · 옷 · 소품 · 배경 ⇒ 여기만 쓴다
 // ═══════════════════════════════════════════════════════
-const FRAME   = 'Candid photograph, bust-up close-up, her face filling a third of the frame';
-const SUBJECT_FULL = 'A Korean woman in her early 20s, bare face, no makeup, long dark wavy hair with loose strands drifting across her cheek';
-const SUBJECT_LEAN = 'A young Korean woman';   // 얼굴참조가 외모를 잡을 때
-const OPTICS  = 'Background completely dissolved into soft out-of-focus bokeh, only her face is sharp. 85mm lens at f/1.4, extremely shallow depth of field.';
-const STYLE   = 'FILM. Washed-out muted color, lifted blacks, halation glow on the highlights, heavy visible film grain, real skin texture, no retouching.';
 
 const MODES = [
   { id:'board', name:'무드보드 + 얼굴참조 (지금 방식)',
     desc:'스타일은 <b>무드보드</b>가, 얼굴은 <b>얼굴참조</b>가 잡습니다. 그래서 프롬프트에서 <b>필름·색감·외모 묘사를 뺍니다.</b> ' +
-         '참조와 싸우지 않게 하려는 거예요. 프롬프트에는 <b>구도·표정·옷·배경</b>만 남습니다.<br>' +
+         '참조와 싸우지 않게 하려는 거예요. 프롬프트에는 <b>구도·표정·옷·소품·배경</b>만 남습니다.<br>' +
          '<b>--sw는 붙지 않습니다</b> (무드보드와 같이 못 쓰는 옵션이라 에러가 났던 겁니다).' },
   { id:'boardOnly', name:'무드보드만 (얼굴참조 없음)',
     desc:'스타일은 <b>무드보드</b>가 잡고, <b>얼굴은 프롬프트로 만듭니다.</b> ' +
-         '그래서 외모 묘사(20대 초반·민낯·긴 흑발)는 남기고, 필름·색감 문구만 뺍니다.' },
+         '그래서 외모 묘사는 남기고, 필름·색감 문구만 뺍니다.' },
   { id:'plain', name:'참조 없이 프롬프트만',
     desc:'무드보드도 얼굴참조도 안 쓸 때. <b>스타일·외모를 전부 프롬프트에 박습니다.</b> ' +
-         'best 6장 공식이 통째로 들어갑니다. 참조를 쓸 때보다 결과가 들쭉날쭉합니다.' },
-];
-
-// ── 감정: 형용사 금지. 시선·눈·입·고개·어깨 같은 "보이는 것"으로만.
-const EMOTIONS = [
-  { id:'heartbreak', name:'이별·그리움', looks:[
-    'Looking straight into the lens, eyes wet and glassy, lips slightly parted, chin tilted down a little',
-    'Facing the lens, one tear held at the lash line, mouth closed tight, shoulders drawn in',
-    'Staring into the lens, eyes reddened at the rims, a strand of hair stuck to her damp cheek',
-  ]},
-  { id:'regret', name:'미련·후회', looks:[
-    'Turning back over her shoulder toward the lens, eyes steady on the camera, mouth closed, hair swinging across her jaw',
-    'Half-turned away but her eyes come back to the lens, lips pressed together, one hand near her collarbone',
-    'Glancing back into the lens, eyebrows slightly raised, breath caught, lips barely open',
-  ]},
-  { id:'flutter', name:'설렘·첫사랑', looks:[
-    'Looking into the lens with a small closed-mouth smile, cheeks flushed, eyes slightly narrowed',
-    'Smiling at the camera with her teeth just showing, wind lifting her hair off her shoulder',
-    'Chin resting on her hand, eyes on the lens, an unguarded quiet smile',
-  ]},
-  { id:'comfort', name:'잔잔한 위로', looks:[
-    'Facing the lens calmly, a faint soft smile, shoulders relaxed, eyes warm and steady',
-    'Looking at the camera with her head tilted slightly, a gentle unhurried smile',
-    'Eyes on the lens, breathing slowly, mouth relaxed, no tension in her face',
-  ]},
-  { id:'alone', name:'혼자만의 밤', looks:[
-    'Staring straight into the lens with no expression, eyes wide and still, lips closed',
-    'Looking into the camera as if she forgot it was there, gaze unfocused, mouth slack',
-    'Facing the lens, eyes half-lidded and tired, a long slow exhale',
-  ]},
-  { id:'letgo', name:'체념·담담함', looks:[
-    'Looking into the lens with an empty calm gaze, mouth relaxed, head slightly tilted',
-    'Eyes on the camera, perfectly still, no smile, no frown, wind moving only her hair',
-    'Facing the lens with a settled quiet face, the ghost of a smile at one corner',
-  ]},
-];
-
-// ── 장면: 배경은 어차피 뭉개진다. "무슨 색 빛이 번지느냐"만 쓴다.
-const SCENES = [
-  { id:'neon',      name:'밤거리 네온',  night:true,
-    bg:'Behind her, a night street dissolved into round bokeh of red, amber and teal lights' },
-  { id:'alley',     name:'밤 골목',      night:true,
-    bg:'Behind her, a dark alley at night, distant amber streetlamps melted into soft glowing orbs, everything else near black' },
-  { id:'rainglass', name:'비 오는 창가', night:true,
-    bg:'Behind her, a rain-streaked window at night, cold blue city light smeared through the wet glass' },
-  { id:'river',     name:'강변 야경',    night:true,
-    bg:'Behind her, dark water and far-off city lights melted into warm floating bokeh' },
-  { id:'park',      name:'밤 산책로',    night:true,
-    bg:'Behind her, dark trees and a few warm streetlamps blurred into golden orbs' },
-  { id:'room',      name:'어두운 방',    night:true,
-    bg:'Behind her, a dark room, a single lamp glowing out of focus, the rest swallowed in shadow' },
-  { id:'sea_dusk',  name:'바다 (노을)',  night:false,
-    bg:'Behind her, the out-of-focus sea at dusk, muted blue-grey water filling the whole background, low warm sun' },
-  { id:'sea_dawn',  name:'바다 (새벽)',  night:false,
-    bg:'Behind her, a pale hazy sea at dawn, soft blue-grey water and blurred sand, cold flat light' },
-  { id:'cafe',      name:'카페 창가',    night:false,
-    bg:'Behind her, a cafe interior melted into pale blur, soft window daylight, out-of-focus people' },
-  { id:'bus',       name:'버스·지하철',  night:false,
-    bg:'Behind her, blurred pastel-blue seats and out-of-focus passengers, soft light through a window' },
-  { id:'field',     name:'노을 들판',    night:false,
-    bg:'Behind her, a blurred grass field in golden backlight, warm haze' },
-  { id:'street_day',name:'낮 거리',      night:false,
-    bg:'Behind her, a summer street melted into pale green and white blur, hazy afternoon light' },
-];
-
-// ── 옷: best 6장 전부 흰색/아이보리. 참조가 옷까지 잡아주진 않으므로 계속 남긴다.
-const CLOTHES = [
-  'a plain white cotton t-shirt',
-  'a loose white linen shirt, collar open',
-  'an ivory fuzzy knit sweater',
-  'a white blouse with a wide neckline',
-  'a cream lace-trimmed camisole',
-  'an oversized white shirt slipping off one shoulder',
+         '공식이 통째로 들어갑니다. 참조를 쓸 때보다 결과가 들쭉날쭉합니다.' },
 ];
 
 const RATIOS = [
@@ -273,91 +221,306 @@ const RATIOS = [
   { id:'9:16', name:'세로 9:16 (쇼츠)' },
   { id:'1:1',  name:'정사각 1:1' },
 ];
-
 const SPACES = [
   { id:'none',  name:'없음 (인물 중앙)' },
   { id:'left',  name:'왼쪽 비우기' },
   { id:'right', name:'오른쪽 비우기' },
 ];
-
 const OWS = [
   { id:'100', name:'100 (기본)' },
   { id:'200', name:'200' },
   { id:'400', name:'400 (얼굴 확실히)' },
 ];
 
-const FILM_NIGHT = 'Shot on Cinestill 800T';
-const FILM_DAY   = 'Shot on Kodak Portra 400';
+const SINGERS = {
+
+  // ─────────────────────────────────────────────
+  //  윤하경 (그 밤 라디오) — v3 공식 그대로
+  // ─────────────────────────────────────────────
+  yoon: {
+    tabName:'윤하경', tabSub:'그 밤 라디오 · 발라드',
+    FRAME:'Candid photograph, bust-up close-up, her face filling a third of the frame',
+    SUBJECT_FULL:'A Korean woman in her early 20s, bare face, no makeup, long dark wavy hair with loose strands drifting across her cheek',
+    SUBJECT_LEAN:'A young Korean woman',
+    OPTICS:'Background completely dissolved into soft out-of-focus bokeh, only her face is sharp. 85mm lens at f/1.4, extremely shallow depth of field.',
+    STYLE:'FILM. Washed-out muted color, lifted blacks, halation glow on the highlights, heavy visible film grain, real skin texture, no retouching.',
+    FILM_NIGHT:'Shot on Cinestill 800T',
+    FILM_DAY:'Shot on Kodak Portra 400',
+    wear:'She wears', spacePose:'She sits',
+
+    EMOTIONS: [
+      { id:'heartbreak', name:'이별·그리움', looks:[
+        'Looking straight into the lens, eyes wet and glassy, lips slightly parted, chin tilted down a little',
+        'Facing the lens, one tear held at the lash line, mouth closed tight, shoulders drawn in',
+        'Staring into the lens, eyes reddened at the rims, a strand of hair stuck to her damp cheek',
+      ]},
+      { id:'regret', name:'미련·후회', looks:[
+        'Turning back over her shoulder toward the lens, eyes steady on the camera, mouth closed, hair swinging across her jaw',
+        'Half-turned away but her eyes come back to the lens, lips pressed together, one hand near her collarbone',
+        'Glancing back into the lens, eyebrows slightly raised, breath caught, lips barely open',
+      ]},
+      { id:'flutter', name:'설렘·첫사랑', looks:[
+        'Looking into the lens with a small closed-mouth smile, cheeks flushed, eyes slightly narrowed',
+        'Smiling at the camera with her teeth just showing, wind lifting her hair off her shoulder',
+        'Chin resting on her hand, eyes on the lens, an unguarded quiet smile',
+      ]},
+      { id:'comfort', name:'잔잔한 위로', looks:[
+        'Facing the lens calmly, a faint soft smile, shoulders relaxed, eyes warm and steady',
+        'Looking at the camera with her head tilted slightly, a gentle unhurried smile',
+        'Eyes on the lens, breathing slowly, mouth relaxed, no tension in her face',
+      ]},
+      { id:'alone', name:'혼자만의 밤', looks:[
+        'Staring straight into the lens with no expression, eyes wide and still, lips closed',
+        'Looking into the camera as if she forgot it was there, gaze unfocused, mouth slack',
+        'Facing the lens, eyes half-lidded and tired, a long slow exhale',
+      ]},
+      { id:'letgo', name:'체념·담담함', looks:[
+        'Looking into the lens with an empty calm gaze, mouth relaxed, head slightly tilted',
+        'Eyes on the camera, perfectly still, no smile, no frown, wind moving only her hair',
+        'Facing the lens with a settled quiet face, the ghost of a smile at one corner',
+      ]},
+    ],
+
+    SCENES: [
+      { id:'neon',      name:'밤거리 네온',  night:true,
+        bg:'Behind her, a night street dissolved into round bokeh of red, amber and teal lights' },
+      { id:'alley',     name:'밤 골목',      night:true,
+        bg:'Behind her, a dark alley at night, distant amber streetlamps melted into soft glowing orbs, everything else near black' },
+      { id:'rainglass', name:'비 오는 창가', night:true,
+        bg:'Behind her, a rain-streaked window at night, cold blue city light smeared through the wet glass' },
+      { id:'river',     name:'강변 야경',    night:true,
+        bg:'Behind her, dark water and far-off city lights melted into warm floating bokeh' },
+      { id:'park',      name:'밤 산책로',    night:true,
+        bg:'Behind her, dark trees and a few warm streetlamps blurred into golden orbs' },
+      { id:'room',      name:'어두운 방',    night:true,
+        bg:'Behind her, a dark room, a single lamp glowing out of focus, the rest swallowed in shadow' },
+      { id:'sea_dusk',  name:'바다 (노을)',  night:false,
+        bg:'Behind her, the out-of-focus sea at dusk, muted blue-grey water filling the whole background, low warm sun' },
+      { id:'sea_dawn',  name:'바다 (새벽)',  night:false,
+        bg:'Behind her, a pale hazy sea at dawn, soft blue-grey water and blurred sand, cold flat light' },
+      { id:'cafe',      name:'카페 창가',    night:false,
+        bg:'Behind her, a cafe interior melted into pale blur, soft window daylight, out-of-focus people' },
+      { id:'bus',       name:'버스·지하철',  night:false,
+        bg:'Behind her, blurred pastel-blue seats and out-of-focus passengers, soft light through a window' },
+      { id:'field',     name:'노을 들판',    night:false,
+        bg:'Behind her, a blurred grass field in golden backlight, warm haze' },
+      { id:'street_day',name:'낮 거리',      night:false,
+        bg:'Behind her, a summer street melted into pale green and white blur, hazy afternoon light' },
+    ],
+
+    CLOTHES: [
+      'a plain white cotton t-shirt',
+      'a loose white linen shirt, collar open',
+      'an ivory fuzzy knit sweater',
+      'a white blouse with a wide neckline',
+      'a cream lace-trimmed camisole',
+      'an oversized white shirt slipping off one shoulder',
+    ],
+
+    MICS: null,
+  },
+
+  // ─────────────────────────────────────────────
+  //  강한결 (강한결의 트로트 TV) — 신규 공식
+  //  AI틱 제거 3종: 캔디드 공연사진 프레이밍 · 필름 질감(모공·그레인·할레이션) · 망원 얕은 심도+헤이즈
+  //  정체성 유지: 정장 · 빈티지 크롬 마이크 · 금빛 스포트라이트
+  // ─────────────────────────────────────────────
+  kang: {
+    tabName:'강한결', tabSub:'강한결의 트로트 TV',
+    FRAME:'Candid live concert photograph caught mid-performance, bust-up close-up, his face filling a third of the frame',
+    SUBJECT_FULL:'A Korean man in his late 20s, short black textured hair, clean-shaven, natural un-retouched skin with visible pores',
+    SUBJECT_LEAN:'A young Korean man',
+    OPTICS:'Background completely dissolved into soft out-of-focus bokeh, only his face is sharp. Shot from the press pit on a 135mm telephoto lens at f/1.8, extremely shallow depth of field, thin atmospheric haze drifting through the stage lights.',
+    STYLE:'FILM. Washed-out muted color, lifted blacks, halation glow blooming off the stage lights, heavy visible film grain, real skin texture with visible pores, no retouching.',
+    FILM_NIGHT:'Shot on Cinestill 800T',
+    FILM_DAY:'Shot on Kodak Portra 400',
+    wear:'He wears', spacePose:'He stands',
+
+    // 감정 = 형용사 금지. 눈·입·고개·목·손으로만. (마이크는 별도 옵션이라 여기서 언급 안 함)
+    EMOTIONS: [
+      { id:'belt', name:'애절한 열창', looks:[
+        'Eyes squeezed shut, brow deeply furrowed, mouth wide open mid-belt, neck tendons standing out, one hand pressed flat on his chest',
+        'Head tilted back, eyes shut tight, jaw stretched open on a long high note, free hand clenched into a fist at his side',
+        'Face crumpled around closed eyes, mouth open in full cry, shoulders pulled up, one hand clutching his jacket over the heart',
+      ]},
+      { id:'miss', name:'사무치는 그리움', looks:[
+        'Eyes closed, chin tipped slightly upward, lips just parted on a soft note, one hand resting over his heart',
+        'Eyes closed with brows drawn together, a single tear track down his cheek, head bowed a little',
+        'Eyes shut, head tilted to one side holding a quiet note, fingers spread on his chest',
+      ]},
+      { id:'calm', name:'담담한 고백', looks:[
+        'Looking straight into the lens, eyes glassy at the rims, a small restrained almost-smile, head tilted a fraction',
+        'Facing the lens calmly, mouth closed, jaw set, one eyebrow slightly drawn',
+        'Eyes steady on the camera, lips pressed together, chin lowered just a touch',
+      ]},
+      { id:'tear', name:'눈물의 무대', looks:[
+        'Looking into the lens with reddened glassy eyes, a tear held at the lash line, jaw tight, mouth closed',
+        'Eyes toward the lens brimming wet, chin crumpled, lips pressed into a thin line',
+        'Face half lowered, eyes lifted to the lens shining wet, one hand wiping at his cheekbone',
+      ]},
+      { id:'smile', name:'따뜻한 미소·인사', looks:[
+        'Looking into the lens with a warm open smile, teeth showing, eyes crinkled at the corners',
+        'Smiling straight at the camera, eyes narrowed to crescents, one hand raised in a small wave',
+        'A relaxed closed-mouth smile at the lens, head tilted slightly, shoulders easy',
+      ]},
+      { id:'joy', name:'신명·흥', looks:[
+        'Grinning wide mid-song, one arm flung out to the side, eyes almost closed with laughter, body leaning into the beat',
+        'Mouth open on a bright chorus, free hand clapping toward the crowd, eyes wide at the lens',
+        'Caught mid-laugh between lines, head thrown back a little, fingers snapping beside his hip',
+      ]},
+    ],
+
+    SCENES: [
+      { id:'gold',    name:'골드 스포트라이트', night:true,
+        bg:'Behind him, a black stage swallowed in darkness, one warm golden spotlight beam cutting down through faint haze, gold dust drifting out of focus' },
+      { id:'blue',    name:'콘서트 블루',       night:true,
+        bg:'Behind him, deep blue concert beams crossing through haze, melted into soft streaks of light, tiny far-off stage lights as bokeh' },
+      { id:'burgundy',name:'버건디 극장',       night:true,
+        bg:'Behind him, a deep burgundy theater curtain dissolved into soft dark red blur, one amber side light grazing the folds' },
+      { id:'empty',   name:'빈 극장',           night:true,
+        bg:'Behind him, rows of empty theater seats fading into darkness, a single pale work light glowing far upstage' },
+      { id:'pocha',   name:'밤 포차 골목',      night:true,
+        bg:'Behind him, a Korean night alley of street-food stalls melted into warm orange and red bokeh, strings of bare bulbs out of focus' },
+      { id:'rainneon',name:'비 오는 밤 네온',   night:true,
+        bg:'Behind him, rain-streaked glass at night, red and teal neon signs smeared through the wet pane' },
+      { id:'sunset',  name:'노을 야외무대',     night:false,
+        bg:'Behind him, an outdoor stage at dusk dissolved into warm haze, low orange sun flaring softly, the crowd melted into dark silhouettes' },
+      { id:'smoke',   name:'연기 낀 무대',      night:true,
+        bg:'Behind him, white stage smoke drifting through a single cool backlight, everything else near black' },
+    ],
+
+    // 옷 = 정장 정체성 유지 (참조가 옷까지 잡아주진 않는다)
+    CLOTHES: [
+      'a navy suit over a crisp white open-collar dress shirt',
+      'a midnight-blue suit with a white pocket square, no tie',
+      'a black tuxedo with a black bow tie',
+      'a charcoal grey suit over a black open-collar shirt',
+      'a deep burgundy suit jacket over a white shirt',
+      'an ivory-white suit over a black open-collar shirt',
+    ],
+
+    MICS: [
+      { id:'stand', name:'빈티지 스탠드마이크 (기본)',
+        text:'He sings into a vintage chrome microphone on a stand' },
+      { id:'hand',  name:'빈티지 핸드마이크',
+        text:'He holds a vintage chrome microphone in one hand' },
+      { id:'modern',name:'무선 마이크',
+        text:'He holds a wireless stage microphone in one hand' },
+      { id:'none',  name:'마이크 없음 (화보컷)', text:'' },
+    ],
+  },
+};
 
 // ═══════════════════════════════════════════════════════
-const state = { mode:'board', emo:'heartbreak', scene:'auto', ratio:'16:9', space:'left', ow:'400' };
+//  가수별 상태 — 탭을 오가도 각자 선택이 보존된다
+// ═══════════════════════════════════════════════════════
+const states = {
+  yoon: { mode:'board', emo:'heartbreak', scene:'auto', ratio:'16:9', space:'left', ow:'400', mic:null,    pCode:'', oref:'' },
+  kang: { mode:'board', emo:'belt',       scene:'auto', ratio:'16:9', space:'left', ow:'400', mic:'stand', pCode:'', oref:'' },
+};
+let active = 'yoon';
+const S  = () => SINGERS[active];
+const st = () => states[active];
 
 function renderChips(elId, items, key) {
   const el = document.getElementById(elId);
   el.innerHTML = '';
   items.forEach(it => {
     const c = document.createElement('div');
-    c.className = 'chip' + (state[key] === it.id ? ' on' : '');
+    c.className = 'chip' + (st()[key] === it.id ? ' on' : '');
     c.textContent = it.name;
-    c.onclick = () => { state[key] = it.id; renderAll(); };
+    c.onclick = () => { st()[key] = it.id; renderAll(); };
     el.appendChild(c);
   });
 }
 
+function renderTabs() {
+  const el = document.getElementById('tabs');
+  el.innerHTML = '';
+  Object.keys(SINGERS).forEach(id => {
+    const s = SINGERS[id];
+    const t = document.createElement('div');
+    t.className = 'tab ' + id + (active === id ? ' on' : '');
+    t.innerHTML = s.tabName + '<small>' + s.tabSub + '</small>';
+    t.onclick = () => switchSinger(id);
+    el.appendChild(t);
+  });
+}
+
+function switchSinger(id) {
+  if (active === id) return;
+  active = id;
+  document.body.className = id === 'kang' ? 'kang' : '';
+  document.getElementById('pCode').value   = st().pCode;
+  document.getElementById('orefUrl').value = st().oref;
+  document.getElementById('out').innerHTML = '<div class="empty">감정을 고르고 버튼을 눌러주세요</div>';
+  renderAll();
+}
+
 function renderAll() {
+  renderTabs();
   renderChips('mode', MODES, 'mode');
-  renderChips('emo', EMOTIONS, 'emo');
-  renderChips('scene', [{id:'auto',name:'자동 (여러 장면 섞기)'}].concat(SCENES.map(s=>({id:s.id,name:s.name}))), 'scene');
+  renderChips('emo', S().EMOTIONS, 'emo');
+  renderChips('scene', [{id:'auto',name:'자동 (여러 장면 섞기)'}].concat(S().SCENES.map(s=>({id:s.id,name:s.name}))), 'scene');
   renderChips('ratio', RATIOS, 'ratio');
   renderChips('space', SPACES, 'space');
   renderChips('ow', OWS, 'ow');
 
-  document.getElementById('modeDesc').innerHTML = MODES.find(m => m.id === state.mode).desc;
+  document.getElementById('micRow').style.display = S().MICS ? '' : 'none';
+  if (S().MICS) renderChips('mic', S().MICS, 'mic');
+
+  document.getElementById('modeDesc').innerHTML = MODES.find(m => m.id === st().mode).desc;
   // 얼굴 강도는 얼굴참조를 쓸 때만 의미가 있다
-  document.getElementById('owRow').style.display = (state.mode === 'board') ? '' : 'none';
+  document.getElementById('owRow').style.display = (st().mode === 'board') ? '' : 'none';
 }
 
 const pick = arr => arr[Math.floor(Math.random()*arr.length)];
 function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function buildPrompt(scene) {
-  const emo      = EMOTIONS.find(e => e.id === state.emo);
-  const useFace  = state.mode === 'board';    // 얼굴참조가 외모를 잡는다
-  const useBoard = state.mode !== 'plain';    // 무드보드가 스타일을 잡는다
+  const sg = S(), s = st();
+  const emo      = sg.EMOTIONS.find(e => e.id === s.emo);
+  const useFace  = s.mode === 'board';    // 얼굴참조가 외모를 잡는다
+  const useBoard = s.mode !== 'plain';    // 무드보드가 스타일을 잡는다
 
-  let p = FRAME + '. '
-        + (useFace ? SUBJECT_LEAN : SUBJECT_FULL) + '. '
+  let p = sg.FRAME + '. '
+        + (useFace ? sg.SUBJECT_LEAN : sg.SUBJECT_FULL) + '. '
         + pick(emo.looks) + '. '
-        + 'She wears ' + pick(CLOTHES) + '. '
-        + scene.bg + '. ';
+        + sg.wear + ' ' + pick(sg.CLOTHES) + '. ';
 
-  if (state.space !== 'none') {
-    const side  = state.space === 'left' ? 'right' : 'left';
-    const empty = state.space === 'left' ? 'left'  : 'right';
-    p += 'She sits in the ' + side + ' half of the frame; the ' + empty + ' half is empty blurred background. ';
+  if (sg.MICS) {
+    const mic = sg.MICS.find(m => m.id === s.mic);
+    if (mic && mic.text) p += mic.text + '. ';
   }
 
-  p += OPTICS;
+  p += scene.bg + '. ';
+
+  if (s.space !== 'none') {
+    const side  = s.space === 'left' ? 'right' : 'left';
+    const empty = s.space === 'left' ? 'left'  : 'right';
+    p += sg.spacePose + ' in the ' + side + ' half of the frame; the ' + empty + ' half is empty blurred background. ';
+  }
+
+  p += sg.OPTICS;
 
   // 무드보드가 스타일을 잡는 모드에서는 필름·색감 문구를 넣지 않는다 (참조와 충돌)
   if (!useBoard) {
-    p += ' ' + STYLE.replace('FILM', scene.night ? FILM_NIGHT : FILM_DAY);
+    p += ' ' + sg.STYLE.replace('FILM', scene.night ? sg.FILM_NIGHT : sg.FILM_DAY);
   }
 
-  p += ' --ar ' + state.ratio + ' --style raw';
+  p += ' --ar ' + s.ratio + ' --style raw';
 
   // 디스코드용 파라미터 — 주소/코드가 실제로 있을 때만 붙인다.
   // (--ow 는 --oref 가, --sw 는 무드보드가 있으면 못 쓴다. v2 에러의 원인이었다.)
-  const pCode = document.getElementById('pCode').value.trim();
-  const oref  = document.getElementById('orefUrl').value.trim();
-  if (useBoard && pCode) p += ' --p ' + pCode;
-  if (useFace && oref)   p += ' --oref ' + oref + ' --ow ' + state.ow;
+  if (useBoard && s.pCode) p += ' --p ' + s.pCode;
+  if (useFace && s.oref)   p += ' --oref ' + s.oref + ' --ow ' + s.ow;
 
   return p;
 }
 
 function generate() {
-  let candidates = state.scene === 'auto' ? SCENES : [SCENES.find(s => s.id === state.scene)];
+  const sg = S(), s = st();
+  let candidates = s.scene === 'auto' ? sg.SCENES : [sg.SCENES.find(sc => sc.id === s.scene)];
 
   const combos = [];
   let pool = shuffle(candidates);
@@ -375,7 +538,7 @@ function generate() {
     card.innerHTML =
       '<div class="card-top">' +
         '<div class="card-title">' + (i+1) + '. ' + sc.name +
-          '<span class="tag">' + EMOTIONS.find(e=>e.id===state.emo).name + '</span></div>' +
+          '<span class="tag">' + sg.tabName + ' · ' + sg.EMOTIONS.find(e=>e.id===s.emo).name + '</span></div>' +
         '<div class="btns">' +
           '<button class="mini" data-act="re">🔄 다시</button>' +
           '<button class="mini" data-act="copy">📋 복사</button>' +
@@ -396,6 +559,10 @@ function generate() {
   });
   out.scrollIntoView({ behavior:'smooth', block:'start' });
 }
+
+// 디스코드 입력값은 가수별로 따로 저장
+document.getElementById('pCode').oninput   = function(){ st().pCode = this.value.trim(); };
+document.getElementById('orefUrl').oninput = function(){ st().oref  = this.value.trim(); };
 
 renderAll();
 </script>
