@@ -85,6 +85,17 @@ ol.steps>li .sub{display:block;font-size:13.5px;color:var(--soft);margin-top:3px
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;font-weight:600;}
 .warnline{background:#fff5f2;border:1px solid #ffd3c2;border-radius:9px;padding:9px 12px;
   font-size:13.5px;color:#b5431a;margin:4px 0 2px;line-height:1.6;}
+.ai-ask{display:block;background:#f3efe8;border:1px solid #e3dccf;border-radius:8px;
+  padding:10px 12px;margin:8px 0 2px;font-size:13.5px;color:#4a443b;line-height:1.62;}
+.ai-ask::before{content:"🗣️ AI에게 이렇게: ";font-weight:800;color:var(--orange);}
+.arrow-note{font-size:13.5px;color:var(--soft);margin-top:8px;line-height:1.62;}
+.arrow-note b{color:var(--charcoal);}
+/* 각 편 끝 미니 챌린지 */
+.challenge{background:linear-gradient(135deg,#fff6ef,#fdeee3);border:1px solid #ffd8bf;
+  border-radius:14px;padding:15px 16px;margin:18px 0 6px;}
+.challenge .h{font-weight:800;font-size:14px;color:#d24d1e;margin-bottom:7px;display:flex;gap:6px;align-items:center;}
+.challenge p{margin:0;font-size:14.5px;color:#4a443b;line-height:1.65;}
+.challenge b{color:var(--charcoal);}
 
 .tags{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
   font-size:12.5px;color:#a99cff;}
@@ -120,16 +131,17 @@ footer{text-align:center;font-size:12px;color:var(--dim);margin-top:30px;line-he
 <article id="ep1">
   <div class="meta"><span>바이브코딩 실전기</span><span>왕초보 가이드</span><span>1편</span></div>
   <h2><span class="ep">1편.</span> 유튜브 채널 현황, 매일 아침 텔레그램으로 자동으로 받는 방법</h2>
-  <div class="summary"><b>세 줄 요약.</b> 유튜브 스튜디오 앱을 매일 열어보는 대신, 프로그램 하나가 아침마다 구독자·조회수 증감을 정리해 <b>텔레그램 메시지로 보내줍니다.</b> 준비물은 ① 유튜브 열쇠(API 키) ② 텔레그램 봇 두 가지. <b>이 글을 처음부터 끝까지 그대로 따라만 하면 됩니다.</b> 코딩 몰라도 됩니다.</div>
+  <div class="summary"><b>세 줄 요약.</b> 프로그램 하나가 아침마다 유튜브 구독자·조회수 증감을 정리해 <b>텔레그램으로 보내줍니다.</b> 준비물은 ① 정보 가져오는 창구(API 키) ② 나에게 배달하는 우체부(텔레그램 봇) 두 가지. <b>이 두 재료면 유튜브뿐 아니라 뉴스·날씨·주가도 매일 자동으로 받을 수 있어요</b> — 그래서 이 글 뒤에 <b>따라 할 연습 예제</b>도 같이 넣었습니다. 코딩 몰라도, 그대로 따라만 하면 됩니다.</div>
 
   <p class="lead">저는 음악 유튜브 채널을 세 개 운영합니다. 아침에 눈 뜨면 제일 먼저 하는 일이 스튜디오 앱을 세 번 여는 거였어요. 어제보다 구독자가 늘었나, 어떤 영상이 조금 튀었나. 별것 아닌데 매일 하려니 은근히 귀찮고, 세 개를 왔다 갔다 하다 보면 헷갈리기도 하고요.</p>
   <p>그래서 생각했습니다. <mark>이 반복을 컴퓨터한테 시키면 안 되나?</mark> 결론부터 말하면 됐습니다. 지금은 아침 9시에 카톡 대신 텔레그램으로 "채널 3개 현황"이 한 장으로 날아옵니다.</p>
   <p>이번 편은 <b>진짜 왕초보</b> 기준으로 씁니다. 컴퓨터 잘 몰라도, 아래 순서를 <b>글자 그대로</b> 따라 하시면 됩니다. 중간에 모르는 단어가 나와도 그때그때 쉽게 풀어드릴게요.</p>
 
-  <h3>먼저, 준비물 두 가지가 뭔지부터</h3>
-  <p>① <b>유튜브 열쇠(API 키)</b> — 유튜브한테 "내 채널 숫자 좀 알려줘"라고 물어볼 수 있는 <b>출입증</b>이라고 보시면 됩니다. 이게 있어야 프로그램이 유튜브에서 숫자를 받아옵니다.<br>
-  ② <b>텔레그램 봇</b> — 그 숫자를 매일 아침 나한테 <b>대신 메시지로 보내주는 우체부</b>입니다.</p>
-  <p>이 둘을 만드는 게 오늘의 전부예요. 하나씩 갑니다.</p>
+  <h3>이 글이 진짜 알려주는 것 — '나만의 정보 비서' 재료 2개</h3>
+  <p>본론은 유튜브지만, 사실 여기서 배우는 건 <b>어디에나 쓰는 재료 두 개</b>예요. 이 둘만 알면 유튜브 말고 <b>뉴스·날씨·주가</b>도 매일 자동으로 내 폰에 배달시킬 수 있습니다.</p>
+  <p>① <b>정보를 가져오는 창구(API 키)</b> — "야, 그 숫자 좀 알려줘"라고 물어보는 <b>출입증</b>이에요. 유튜브엔 유튜브 열쇠, 날씨엔 날씨 열쇠… 대상만 다르지 원리는 똑같습니다.<br>
+  ② <b>나에게 배달하는 우체부(텔레그램 봇)</b> — 가져온 정보를 내 폰으로 <b>대신 보내주는</b> 심부름꾼입니다. 한 번 만들면 뭐든 배달시킬 수 있어요.</p>
+  <p><b>그래서 이 글은 유튜브를 예로 이 둘을 만들어보고, 뒤에서 뉴스·시세 같은 다른 연습도 같이 해봅니다.</b> 유튜브에 관심 없어도 '재료' 배우러 읽을 가치가 있어요. 자, 하나씩 갑니다.</p>
 
   <h3>STEP 1. 유튜브 열쇠(API 키) 받기 — 약 5분</h3>
   <div class="stepbox">
@@ -160,22 +172,47 @@ footer{text-align:center;font-size:12px;color:var(--dim);margin-top:30px;line-he
     </ol>
   </div>
 
-  <h3>STEP 3. 이걸 매일 아침 보내주게 만들기 (코딩은 AI에게 시킵니다)</h3>
-  <p>여기서 겁먹지 마세요. 이 블로그의 정신이 <b>"코딩 몰라도 AI로 만든다"</b>잖아요. 프로그램은 <b>직접 안 짭니다.</b> AI(클로드나 ChatGPT)한테 시키면 됩니다.</p>
+  <h3>STEP 3. 첫 성공 — 봇이 나한테 진짜로 말 걸게 해보기 (3분)</h3>
+  <p>재료 두 개를 만들었으니, <b>가장 작은 성공</b>부터 맛봅시다. 거창한 것 말고, 내 봇이 나에게 "안녕"이라고 보내게만 해보는 거예요. 이게 되면 <mark>"어, 진짜 되네?"</mark> 하는 감이 확 옵니다. 코딩은 역시 AI에게 시켜요.</p>
   <div class="stepbox">
-    <div class="cap">📍 AI에게 이렇게 시키세요</div>
+    <div class="cap">📍 클로드나 ChatGPT에 그대로 붙여넣기</div>
     <ol class="steps">
-      <li><b>내 채널 번호(채널 ID)부터 찾습니다.</b> <span class="sub"><span class="path">유튜브 스튜디오 <span class="arw">›</span> 왼쪽 아래 설정(톱니) <span class="arw">›</span> 채널 <span class="arw">›</span> 고급 설정</span> 으로 가면 맨 아래에 <b>'채널 ID'</b>가 있습니다. 복사해서 저장. <b>(채널 '이름'이 아니라 이 'ID'를 써야 정확합니다 — 이유는 아래 삽질에서.)</b></span></li>
-      <li><b>AI에게 아래처럼 부탁합니다.</b> <span class="sub">클로드나 ChatGPT를 열고 이렇게 그대로 붙여넣으세요:<br>
-        <span style="display:block;background:#f3efe8;border:1px solid #e3dccf;border-radius:8px;padding:9px 11px;margin:6px 0;font-size:13.5px;color:#4a443b;line-height:1.6">"파이썬으로, 유튜브 Data API 키·텔레그램 봇 토큰·내 챗 ID·채널 ID를 넣으면, 그 채널의 구독자 수와 조회수를 <b>어제 값과 비교</b>해서 매일 텔레그램으로 보내주는 코드를 만들어줘. 어제 값은 파일에 저장했다가 다음 날 빼는 방식으로. 초보라서 실행 방법도 하나하나 알려줘."</span></span></li>
-      <li><b>AI가 준 코드에 내 값 4개를 채웁니다.</b> <span class="sub">지금까지 메모장에 모은 ① 유튜브 열쇠 ② 봇 토큰 ③ 내 챗 ID ④ 채널 ID — 이 네 개를 AI가 알려주는 자리에 그대로 붙여넣으면 끝입니다. 실행하는 법도 AI가 이어서 설명해 줍니다.</span></li>
+      <li><b>AI에게 부탁합니다.</b>
+        <span class="ai-ask">"내 <b>텔레그램 봇 토큰</b>이랑 <b>내 챗 ID</b>를 넣으면, 텔레그램으로 '안녕! 나 잘 작동해' 라고 한 번 보내는 <b>가장 간단한 파이썬 코드</b>를 줘. 컴퓨터에 파이썬 까는 것부터 실행까지 왕초보용으로 알려줘."</span></li>
+      <li><b>두 값을 넣고 실행합니다.</b> <span class="sub">STEP 2에서 저장해 둔 봇 토큰·챗 ID를 넣고 AI가 시키는 대로 실행 → <b>텔레그램에 메시지가 '띵' 하고 오면 성공.</b> 축하합니다. 방금 당신은 <b>프로그램으로 스스로에게 메시지를 보낸</b> 거예요.</span></li>
     </ol>
   </div>
-  <p>여기까지 하면 <b>내가 실행할 때마다</b> 채널 현황이 텔레그램으로 옵니다. "내 컴퓨터를 안 켜도, 매일 아침 알아서 오게" 만드는 건 바로 다음 <b>2편</b>에서 이어집니다.</p>
+  <p>이 작은 성공이 왜 중요하냐면 — <b>"봇이 나한테 뭔가 보낼 수 있다"가 확인된 순간, 그 '뭔가'에 뭘 넣느냐만 바꾸면 되기 때문</b>입니다. 그럼 이제 재밌는 걸 넣어볼까요?</p>
+
+  <h3>STEP 4. 뭐든 배달시켜보기 — 따라 하기 좋은 연습 3종</h3>
+  <p><b>쉬운 순서</b>대로입니다. 하나만 해봐도 감이 확 옵니다. 전부 "AI에게 이렇게 시키세요"만 하면 돼요.</p>
+  <div class="stepbox">
+    <div class="cap">🎯 연습 ① — 매일 아침 뉴스 헤드라인 받기 (제일 쉬움)</div>
+    <span class="ai-ask">"매일 아침, <b>무료 뉴스 소스</b>에서 오늘 주요 뉴스 제목 5개를 가져와 내 텔레그램으로 보내는 파이썬 코드를 줘. 봇 토큰·챗 ID는 내가 넣을게. 어떤 무료 소스 쓰는지랑 실행법까지 왕초보용으로."</span>
+    <p class="arrow-note">→ 별도 열쇠가 거의 필요 없어서 <b>가장 먼저 해보기 좋아요.</b> '뉴스' 자리에 '오늘 날씨'를 넣으면 아침 날씨 알림이 됩니다.</p>
+  </div>
+  <div class="stepbox">
+    <div class="cap">🎯 연습 ② — 관심 종목·환율·코인 시세 받기</div>
+    <span class="ai-ask">"내가 관심 있는 <b>종목(또는 환율·코인)</b> 시세를 <b>무료로</b> 가져와서, 매일 저녁 텔레그램으로 보내는 코드를 줘. 어떤 무료 소스를 쓰는지랑 실행법도 초보용으로 알려줘."</span>
+    <p class="arrow-note">→ 시세는 소스마다 방식이 조금씩 달라서 뉴스보다 살짝 손이 갑니다. 그래도 <b>AI가 무료 소스까지 골라줘요.</b></p>
+  </div>
+  <div class="stepbox">
+    <div class="cap">🎯 연습 ③ — 좋아하는 유튜브 채널들 분석하기 (본편으로 가는 다리)</div>
+    <span class="ai-ask">"내가 좋아하는 <b>유튜브 채널 몇 개</b>의 최신 영상과 조회수를 유튜브 API로 가져와, 요즘 어떤 채널이 잘나가는지 텔레그램으로 정리해 보내줘. API 키·봇 토큰·챗 ID는 내가 넣을게. 실행법도 초보용으로."</span>
+    <p class="arrow-note">→ 이때 드디어 <b>STEP 1에서 만든 유튜브 열쇠</b>가 쓰입니다. 여기서 딱 한 걸음만 더 가면 — 남의 채널이 아니라 <b>'내 채널'을</b> 매일 자동으로 챙기는 게 이 시리즈의 본편이에요.</p>
+  </div>
+
+  <h3>그래서 이 시리즈가 하는 일</h3>
+  <p>눈치채셨나요? <b>유튜브 채널 자동 관리도 결국 위 연습의 연장선</b>입니다. "창구(API)에서 데이터 가져와 → 우체부(봇)로 나한테 배달"이라는 똑같은 뼈대에, 내 채널·매일 자동 실행·AI 답글을 하나씩 얹어간 거예요. 그 과정을 2편부터 풀어갑니다.</p>
+  <p>혹시 <b>내 채널</b> 숫자를 자동으로 받고 싶다면, 연습 ③에서 '좋아하는 채널' 대신 <b>내 채널 번호(채널 ID)</b>를 넣으면 됩니다. 채널 ID는 <span class="path">유튜브 스튜디오 <span class="arw">›</span> 설정(톱니) <span class="arw">›</span> 채널 <span class="arw">›</span> 고급 설정</span> 맨 아래에서 복사하세요.</p>
+
+  <div class="challenge"><div class="h">🎁 오늘의 미션 — '내 것'으로 바꿔보기</div>
+    <p>위 연습 셋 중 <b>딱 하나만</b> 골라 따라 해보세요. 제일 쉬운 <b>①번(아침 뉴스)</b> 추천. 성공하면 그 순간 당신은 "AI로 뭔가 만들어본 사람"이 됩니다. 막히면 그 화면을 그대로 AI에게 보여주며 "이렇게 나오는데 어떻게 해?"라고 물어보세요 — 그게 바이브코딩입니다.</p>
+  </div>
 
   <div class="call dig"><div class="h">🕳️ 여기서 삽질했습니다</div>
     <ul>
-      <li><b>채널 '이름'으로 찾으니 엉뚱한 채널이 잔뜩.</b> 이름이 비슷한 채널이 세상에 너무 많아서, 남의 채널 숫자가 딸려 왔어요. 그래서 위 STEP 3처럼 <b>내 채널 고유번호(채널 ID)</b>로 콕 집어야 정확합니다.</li>
+      <li><b>채널 '이름'으로 찾으니 엉뚱한 채널이 잔뜩.</b> 이름이 비슷한 채널이 세상에 너무 많아서, 남의 채널 숫자가 딸려 왔어요. 그래서 위에서 말한 것처럼 <b>내 채널 고유번호(채널 ID)</b>로 콕 집어야 정확합니다.</li>
       <li><b>구독자 수가 실제와 조금 달랐어요.</b> 알고 보니 유튜브가 구독자를 <b>반올림</b>해서 줍니다(예: 1,847명 → 1,800명). 큰 흐름 보는 데는 문제없지만, "왜 숫자가 딱 안 맞지?" 당황하지 마세요. 원래 그렇습니다.</li>
     </ul>
   </div>
