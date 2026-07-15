@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>연재 6편 초안 · AI 바이브코딩 성장기</title>
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;}
+:root{
+  --cream:#FAF6F0; --orange:#FF7A45; --charcoal:#232323;
+  --paper:#ffffff; --line:#ece4d8; --dim:#8a8175; --soft:#5c554c;
+}
+body{background:var(--cream);color:var(--charcoal);line-height:1.72;
+  padding:22px 14px 90px;font-size:16px;letter-spacing:-.2px;}
+.wrap{max-width:720px;margin:0 auto;}
+
+/* 헤더 */
+header{text-align:center;margin-bottom:18px;padding:20px 14px 22px;
+  background:linear-gradient(135deg,#fff,#fdf3ec);border:1px solid var(--line);
+  border-radius:18px;}
+header .kicker{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:1px;}
+header h1{font-size:21px;font-weight:800;margin:8px 0 6px;letter-spacing:-.5px;}
+header p{font-size:13px;color:var(--soft);line-height:1.65;}
+header .note{margin-top:12px;font-size:12px;color:var(--dim);
+  background:#fff6f0;border:1px dashed #ffcbb2;border-radius:10px;padding:8px 10px;}
+
+/* 목차 */
+.toc{margin:16px 0 26px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 12px;}
+.toc b{display:block;font-size:12px;color:var(--dim);font-weight:800;letter-spacing:.5px;margin:0 4px 8px;}
+.toc a{display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--charcoal);
+  padding:9px 8px;border-radius:9px;transition:.15s;}
+.toc a:hover{background:var(--cream);}
+.toc a .n{flex:0 0 22px;height:22px;line-height:22px;text-align:center;border-radius:7px;
+  background:var(--orange);color:#fff;font-size:12px;font-weight:800;}
+.toc a .t{font-size:14px;font-weight:600;letter-spacing:-.3px;}
+
+/* 글 카드 */
+article{background:var(--paper);border:1px solid var(--line);border-radius:18px;
+  padding:26px 20px 30px;margin-bottom:22px;scroll-margin-top:14px;}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.meta span{font-size:11px;font-weight:700;color:var(--orange);
+  background:#fff2ea;border:1px solid #ffdcc8;border-radius:20px;padding:3px 9px;}
+article h2{font-size:20px;font-weight:800;line-height:1.4;letter-spacing:-.6px;margin-bottom:16px;}
+article h2 .ep{color:var(--orange);}
+
+/* 요약 박스 (AI 브리핑용 결론 먼저) */
+.summary{background:var(--cream);border-left:4px solid var(--orange);border-radius:0 12px 12px 0;
+  padding:13px 15px;margin-bottom:20px;font-size:14.5px;color:var(--soft);line-height:1.65;}
+.summary b{color:var(--charcoal);}
+
+article h3{font-size:16.5px;font-weight:800;margin:24px 0 10px;letter-spacing:-.3px;
+  padding-left:11px;border-left:3px solid var(--charcoal);}
+article p{margin:0 0 14px;color:#2f2a24;}
+article .lead{font-size:16px;color:#3a352e;}
+mark{background:linear-gradient(transparent 55%,#ffd9a8 55%);padding:0 1px;font-weight:600;}
+
+/* 삽질 / 팁 콜아웃 */
+.call{border-radius:12px;padding:13px 15px;margin:16px 0;font-size:14.5px;line-height:1.66;}
+.call .h{font-weight:800;font-size:13px;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.dig{background:#fff5f2;border:1px solid #ffd3c2;}
+.dig .h{color:#d24d1e;}
+.tip{background:#f2f8f4;border:1px solid #cfe7d6;}
+.tip .h{color:#2f8f52;}
+.call ul{margin:2px 0 0;padding-left:18px;}
+.call li{margin-bottom:5px;}
+
+.tags{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:#a99cff;}
+.tags span{color:var(--dim);font-weight:600;margin-right:7px;}
+.tags b{color:var(--orange);font-weight:600;font-size:13px;margin-right:4px;}
+
+.top{display:block;text-align:center;font-size:12px;color:var(--dim);
+  text-decoration:none;margin-top:14px;}
+footer{text-align:center;font-size:12px;color:var(--dim);margin-top:30px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">AI 바이브코딩 성장기 · 연재 초안</div>
+  <h1>유튜브 채널 자동화 6편 — 발행 전 미리보기</h1>
+  <p>운영 중인 음악 유튜브 3개를 하루 만에 자동으로 굴리게 만든 이야기.<br>한 편씩 삽질과 해결을 담은 검색형 글 6편입니다.</p>
+  <div class="note">📌 이건 <b>발행 전 검토용 초안</b>이에요. 결·길이·제목 보시고 고칠 곳 말씀해 주시면 반영합니다. (아직 네이버엔 안 올렸습니다)</div>
+</header>
+
+<nav class="toc">
+  <b>목차 — 눌러서 바로 이동</b>
+  <a href="#ep1"><span class="n">1</span><span class="t">매일 아침 유튜브 현황을 텔레그램으로 자동으로 받는 법</span></a>
+  <a href="#ep2"><span class="n">2</span><span class="t">컴퓨터를 꺼도 돌아가는 자동화 — 깃허브 액션 무료 스케줄러</span></a>
+  <a href="#ep3"><span class="n">3</span><span class="t">새 댓글·구독자 변동을 1시간 안에 알림받기</span></a>
+  <a href="#ep4"><span class="n">4</span><span class="t">텔레그램에 한 마디 치면 대답하는 봇 만들기</span></a>
+  <a href="#ep5"><span class="n">5</span><span class="t">유튜브 스튜디오급 분석 자동 리포트 — 인증 삽질기</span></a>
+  <a href="#ep6"><span class="n">6</span><span class="t">AI가 내 유튜브 댓글에 답글을 달아준다</span></a>
+</nav>
+
+<!-- ================= 1편 ================= -->
+<article id="ep1">
+  <div class="meta"><span>바이브코딩 실전기</span><span>왕초보 가이드</span><span>1편</span></div>
+  <h2><span class="ep">1편.</span> 유튜브 채널 현황, 매일 아침 텔레그램으로 자동으로 받는 방법</h2>
+  <div class="summary"><b>세 줄 요약.</b> 유튜브 스튜디오 앱을 매일 열어보는 대신, 파이썬 스크립트 하나가 아침마다 구독자·조회수 증감을 정리해 <b>텔레그램 메시지로 보내줍니다.</b> 준비물은 유튜브 API 키와 텔레그램 봇 두 가지뿐. 프로그래머가 아니어도 하루면 됩니다.</div>
+
+  <p class="lead">저는 음악 유튜브 채널을 세 개 운영합니다. 아침에 눈 뜨면 제일 먼저 하는 일이 스튜디오 앱을 세 번 여는 거였어요. 어제보다 구독자가 늘었나, 어떤 영상이 조금 튀었나. 별것 아닌데 매일 하려니 은근히 귀찮고, 세 개를 왔다 갔다 하다 보면 헷갈리기도 하고요.</p>
+  <p>그래서 생각했습니다. <mark>이 반복을 컴퓨터한테 시키면 안 되나?</mark> 결론부터 말하면 됐습니다. 지금은 아침 9시에 카톡 대신 텔레그램으로 "채널 3개 현황"이 한 장으로 날아옵니다.</p>
+
+  <h3>준비물은 딱 두 가지</h3>
+  <p>첫째, <b>유튜브 API 키</b>. API는 어렵게 생각할 것 없이 "유튜브가 내 프로그램한테 숫자를 넘겨주는 창구"라고 보시면 됩니다. 구글 클라우드 콘솔이라는 곳에서 5분이면 발급받아요(발급 화면은 글 아래 스크린샷으로 붙일 예정).</p>
+  <p>둘째, <b>텔레그램 봇</b>. 텔레그램 안에서 'BotFather'라는 공식 봇에게 말만 걸면 내 전용 봇이 하나 생깁니다. 이 봇이 매일 아침 저에게 메시지를 대신 보내주는 우체부 역할을 해요.</p>
+
+  <div class="call dig"><div class="h">🕳️ 여기서 삽질했습니다</div>
+    <ul>
+      <li><b>채널 이름으로 찾으니 엉뚱한 채널이 잔뜩.</b> 이름이 비슷한 채널이 세상에 너무 많더군요. 결국 채널마다 붙어 있는 <b>고유 번호(채널 ID)</b>로 콕 집어 지정해야 정확했습니다.</li>
+      <li><b>구독자 수가 실제와 조금 달랐어요.</b> 알고 보니 API는 구독자를 <b>반올림</b>해서 줍니다(예: 1,847명 → 1,800명). 큰 그림 보는 데는 문제없지만, 정확한 숫자가 필요하면 이 점을 알고 있어야 해요.</li>
+    </ul>
+  </div>
+
+  <div class="call tip"><div class="h">💡 알아두면 좋은 팁</div>
+    <p style="margin:0">"어제 조회수"는 API가 직접 안 알려줍니다. 그래서 저는 <b>매일 그날 숫자를 파일에 저장</b>해두고, 다음 날 숫자에서 빼는 방식으로 '증감'을 만들었어요. 어제 나를 오늘의 내가 기억하게 해주는 것 — 이걸 '스냅샷 비교'라고 부릅니다.</p>
+  </div>
+
+  <p>이게 이 연재의 1편이자 가장 진입장벽이 낮은 편입니다. 여기까지만 해도 "내 채널을 매일 챙겨보는 습관"이 자동으로 생겨요. 다음 편에서는 <b>컴퓨터를 꺼놔도 이게 알아서 돌아가게</b> 만드는 방법으로 넘어갑니다.</p>
+
+  <div class="tags"><span>태그</span><b>#바이브코딩</b><b>#유튜브API</b><b>#텔레그램봇</b><b>#파이썬입문</b><b>#직장인사이드프로젝트</b><b>#자동화</b></div>
+  <a class="top" href="#ep1">↑ 위로</a>
+</article>
+
+<!-- ================= 2편 ================= -->
+<article id="ep2">
+  <div class="meta"><span>삽질 &amp; 에러 해결</span><span>바이브코딩 실전기</span><span>2편</span></div>
+  <h2><span class="ep">2편.</span> 컴퓨터를 꺼도 돌아가는 자동화 — 깃허브 액션으로 무료 스케줄러 만들기</h2>
+  <div class="summary"><b>세 줄 요약.</b> 내 컴퓨터에서 예약을 걸면 컴퓨터를 꺼두는 순간 멈춥니다. <b>깃허브 액션</b>이라는 무료 서비스에 일을 맡기면, 내 컴퓨터가 꺼져 있어도 매일 정해진 시간에 코드가 알아서 돌아갑니다. 서버 비용 0원.</p></div>
+
+  <p class="lead">1편에서 아침 리포트를 만들긴 했는데, 문제가 하나 있었습니다. 제 노트북에 "매일 9시에 실행해라"라고 예약을 걸어놨더니, <mark>정작 아침에 노트북이 꺼져 있으면 아무 일도 안 일어나더라고요.</mark> 당연한 얘기죠. 자는 컴퓨터는 일을 못 하니까.</p>
+  <p>"그럼 항상 켜둬야 하나?" 전기세도 아깝고 현실적이지 않았습니다. 그래서 <b>남의 컴퓨터(정확히는 깃허브의 서버)</b>에 일을 맡기기로 했습니다.</p>
+
+  <h3>깃허브 액션이 뭔가요?</h3>
+  <p>깃허브는 원래 개발자들이 코드를 보관하는 창고인데, 여기엔 <b>"정해진 시간에 코드를 대신 실행해주는 기능"</b>이 공짜로 딸려 있습니다. 이게 깃허브 액션이에요. 내 노트북 대신 24시간 깨어 있는 남의 컴퓨터가 매일 9시에 내 스크립트를 돌려주는 셈입니다. 개인 용도로는 한 달에 넉넉히 무료예요.</p>
+
+  <div class="call dig"><div class="h">🕳️ 여기서 세 번 넘어졌습니다</div>
+    <ul>
+      <li><b>로그인 승인을 허공에 날렸어요.</b> 깃허브에 로그인할 때 화면에 뜬 코드를 승인해야 하는데, 실수로 <b>이미 꺼진 옛날 창의 코드</b>를 승인해버렸습니다. 당연히 아무 일도 안 일어났죠. 새 코드로 다시 하니 됐습니다.</li>
+      <li><b>"너는 이 작업을 올릴 권한이 없다"고 거부당함.</b> 자동화 설정 파일을 올리려는데 권한이 막혀 있었어요. 로그인할 때 <b>권한 하나를 더 체크</b>해서 다시 인증하니 통과됐습니다.</li>
+      <li><b>9시에 걸었는데 밤에 실행됨.</b> 알고 보니 이 서버는 세계 표준시(영국 시간)로 움직입니다. 우리 9시는 거기선 0시라, <b>시차 9시간을 계산</b>해서 다시 걸어야 했어요.</li>
+    </ul>
+  </div>
+
+  <div class="call tip"><div class="h">💡 이걸 몰랐으면 두 달 뒤 조용히 멈췄을 팁</div>
+    <ul>
+      <li>깃허브는 <b>60일 동안 아무 활동이 없으면 예약 실행을 스스로 꺼버립니다.</b> 그래서 매일 실행할 때 아주 작은 기록 파일 하나를 같이 남기게 했어요. 그러면 "활동 중"으로 인식돼서 안 꺼집니다.</li>
+      <li>정확히 정각(9:00)에 걸면 사용자가 몰려서 몇 분씩 밀립니다. 저는 일부러 <b>9시 30분처럼 애매한 시각</b>에 걸어 밀림을 피했어요.</li>
+    </ul>
+  </div>
+
+  <p>이 편의 핵심 메시지는 하나입니다. <b>"자동화의 진짜 시작은, 내가 없어도 돌아가게 만드는 것."</b> 여기까지 오면 노트북을 덮고 여행을 가도 리포트가 옵니다.</p>
+
+  <div class="tags"><span>태그</span><b>#깃허브액션</b><b>#무료자동화</b><b>#스케줄러</b><b>#서버없이</b><b>#바이브코딩</b><b>#삽질기록</b></div>
+  <a class="top" href="#ep2">↑ 위로</a>
+</article>
+
+<!-- ================= 3편 ================= -->
+<article id="ep3">
+  <div class="meta"><span>바이브코딩 실전기</span><span>왕초보 가이드</span><span>3편</span></div>
+  <h2><span class="ep">3편.</span> 새 댓글·구독자 변동, 1시간 안에 알림 받기 — 유튜브 실시간 감시</h2>
+  <div class="summary"><b>세 줄 요약.</b> 유튜브는 새 댓글이 달려도, 영상이 갑자기 떡상해도 <b>먼저 알려주지 않습니다.</b> 그래서 30분마다 스스로 확인해보는 '감시병'을 만들었습니다. 변화가 있을 때만 텔레그램으로 콕 집어 알려줘요.</div>
+
+  <p class="lead">한번은 제 영상 하나가 조회수가 확 튀었는데, 저는 그걸 <mark>사흘이나 지나서 알았습니다.</mark> 알고리즘을 탄 그 golden time에 댓글도 못 달고, 추가 홍보도 못 하고 그냥 흘려보낸 거죠. 너무 아까웠습니다.</p>
+  <p>문제는 유튜브가 "야, 너 영상 지금 뜨고 있어!"라고 먼저 알려주지 않는다는 겁니다. 그래서 <b>제가 대신 자주 물어보기로</b> 했어요.</p>
+
+  <h3>'푸시'가 없으면 '폴링'으로</h3>
+  <p>카톡은 메시지가 오면 알아서 띵 하고 울리죠(이걸 '푸시'라고 합니다). 그런데 유튜브 데이터는 그런 알림을 안 줍니다. 그래서 반대로 갑니다 — <b>30분에 한 번씩 내가 유튜브한테 "뭐 바뀐 거 있어?"라고 물어보는 방식</b>이에요. 이걸 '폴링(polling)'이라고 부릅니다. 어려운 개념 아니고, 그냥 부지런히 확인 전화 돌리는 거예요.</p>
+  <p>감시 항목은 네 가지로 정했습니다. ① 새 댓글 ② 구독자 늘고 줄고 ③ 구독자 1,000명 같은 <b>기념비적인 숫자</b> 돌파 ④ 평소보다 확 튀는 <b>급상승</b>. 그리고 중요한 건, <b>변화가 있을 때만</b> 알림을 보낸다는 겁니다. 아무 일 없는데 30분마다 울리면 그게 스팸이니까요.</p>
+
+  <div class="call tip"><div class="h">💡 "급상승"을 어떻게 판단할까</div>
+    <p style="margin:0">단순히 "조회수 100 넘으면 알림" 식으로 하면, 큰 채널은 맨날 울리고 작은 채널은 영영 안 울립니다. 그래서 <b>"이 영상의 평소 속도보다 몇 배 빠른가"</b>를 기준으로 잡았어요. 최근 흐름을 부드럽게 평균 낸 값과 지금을 비교하는 방식인데(전문 용어로는 EMA), 쉽게 말하면 <b>"얘 오늘따라 유난히 빠르네?"를 숫자로 알아채는</b> 겁니다.</p>
+  </div>
+
+  <p>여기에 더해, 새 영상을 올리면 <b>24시간 뒤 자동으로 성적표</b>를 받게도 했습니다. 과거 영상들의 중간값과 비교해서 🚀(대박) / 😊(선방) / 😐(평타) / 🐢(느림)로 채점해줘요. 감으로 "이번 건 좀 되나?" 하던 걸 숫자가 대신 판단해줍니다.</p>
+
+  <div class="tags"><span>태그</span><b>#유튜브분석</b><b>#실시간알림</b><b>#폴링</b><b>#급상승감지</b><b>#바이브코딩</b><b>#채널운영</b></div>
+  <a class="top" href="#ep3">↑ 위로</a>
+</article>
+
+<!-- ================= 4편 ================= -->
+<article id="ep4">
+  <div class="meta"><span>AI 코딩 도구 후기</span><span>바이브코딩 실전기</span><span>4편</span></div>
+  <h2><span class="ep">4편.</span> 텔레그램 봇에게 "/현황" 치면 즉시 대답 — 클라우드플레어 워커 입문</h2>
+  <div class="summary"><b>세 줄 요약.</b> 아침 리포트를 기다릴 것 없이, 궁금할 때 텔레그램에 <b>"/현황"</b> 한 마디 치면 봇이 바로 채널 상태를 답해줍니다. 24시간 깨어 있어야 하는데, <b>월 0원짜리 무료 서버(클라우드플레어)</b>로 해결했어요.</div>
+
+  <p class="lead">아침 리포트가 오는 건 좋은데, 낮에 문득 "지금 구독자 몇이지?"가 궁금할 때가 있잖아요. 그때마다 스튜디오 앱을 열면 또 원점입니다. 그래서 <mark>언제든 물어보면 대답하는 비서</mark>를 만들기로 했습니다.</p>
+
+  <h3>24시간 깨어 있으려면 '서버'가 필요한데…</h3>
+  <p>"/현황"이라고 쳤을 때 즉시 답하려면, 그 요청을 받아줄 무언가가 <b>항상 켜져 있어야</b> 합니다. 보통은 서버를 빌리고 매달 돈을 내야 하죠. 여기서 <b>클라우드플레어 워커</b>라는 걸 썼습니다.</p>
+  <p>이건 "내 서버를 통째로 빌리는" 게 아니라, <b>"요청이 올 때만 잠깐 깨어나서 일하고 다시 자는"</b> 방식이에요(그래서 '서버리스', 서버 없는 것처럼 쓴다고 부릅니다). 요청이 없을 땐 비용도 안 나가서, 개인 용도로는 사실상 공짜입니다.</p>
+
+  <div class="call tip"><div class="h">💡 아무나 못 쓰게 막는 두 가지 잠금장치</div>
+    <ul>
+      <li><b>비밀 열쇠(시크릿 토큰).</b> 텔레그램과 내 봇 사이에만 아는 암호를 걸어서, 남이 엉뚱하게 명령을 흘려보내도 무시하게 했습니다.</li>
+      <li><b>내 채팅만 응답.</b> 봇이 세상 아무한테나 내 채널 숫자를 알려주면 안 되니까, <b>내 텔레그램 계정에서 온 요청이 아니면 그냥 무응답</b>으로 처리했어요.</li>
+    </ul>
+  </div>
+
+  <p>이 편은 "자동으로 오는 리포트"에서 <b>"내가 부르면 오는 비서"</b>로 넘어가는 지점입니다. 월 0원인데 24시간 깨어 있는 내 전용 비서가 생긴 거죠. 문과 출신인 저에게도 어렵지 않았으니, 개념만 잡으면 누구나 됩니다.</p>
+
+  <div class="tags"><span>태그</span><b>#클라우드플레어</b><b>#서버리스</b><b>#텔레그램봇</b><b>#무료서버</b><b>#바이브코딩</b><b>#챗봇만들기</b></div>
+  <a class="top" href="#ep4">↑ 위로</a>
+</article>
+
+<!-- ================= 5편 ================= -->
+<article id="ep5">
+  <div class="meta"><span>삽질 &amp; 에러 해결</span><span>바이브코딩 실전기</span><span>5편</span></div>
+  <h2><span class="ep">5편.</span> 유튜브 스튜디오급 분석을 자동 리포트로 — 인증(OAuth) 삽질기</h2>
+  <div class="summary"><b>세 줄 요약.</b> 조회수 같은 공개 숫자 말고 <b>시청시간·유입경로·수익</b> 같은 진짜 속살 데이터를 자동으로 받으려면, 유튜브에 "이건 내 채널이 맞다"고 <b>로그인 인증</b>을 해줘야 합니다. 이 인증 과정에서 세 번 크게 막혔고, 특히 <b>"7일 뒤 전체가 멈추는 함정"</b>이 있었습니다.</div>
+
+  <p class="lead">1~3편의 데이터는 '누구나 볼 수 있는' 공개 숫자였습니다. 그런데 <mark>시청시간, 어디서 유입됐는지, 수익</mark> 같은 건 채널 주인만 볼 수 있죠. 이걸 자동으로 받으려면 유튜브에게 "나 이 채널 주인 맞아"라고 인증(OAuth)을 해줘야 하는데 — 여기가 이 연재에서 제일 험난했습니다.</p>
+
+  <h3>세 번 막히고 세 번 뚫었습니다</h3>
+  <div class="call dig"><div class="h">🕳️ 삽질 3연타</div>
+    <ul>
+      <li><b>"액세스가 차단되었습니다".</b> 처음엔 내가 만든 프로그램인데도 로그인이 막혔어요. 원인은 <b>"이 앱을 쓸 사람 명단에 나를 안 넣어서"</b>였습니다. 테스트 사용자로 내 계정을 등록하니 풀렸어요.</li>
+      <li><b>"확인되지 않은 앱"이라는 무서운 경고.</b> 빨간 경고 화면이 떠서 겁먹었는데, 이건 <b>구글 심사를 안 받은 개인 앱이면 다 뜨는 정상 경고</b>였습니다. '고급 → 계속 이동'을 누르면 통과됩니다.</li>
+      <li><b>일주일 뒤 시스템 전체가 죽는 함정.</b> 이게 제일 무서웠어요. 테스트 상태로 받은 인증은 <b>딱 7일 만에 만료</b>됩니다. 이걸 모르면 잘 돌던 자동화가 일주일 뒤 조용히 전멸해요. 해결책은 앱을 <b>'게시(정식) 상태'로 전환</b>하는 것. 이 한 줄 몰라서 며칠 헤맬 수 있으니 꼭 기억하세요.</li>
+    </ul>
+  </div>
+
+  <div class="call tip"><div class="h">💡 헛수고 방지 팁</div>
+    <ul>
+      <li><b>CTR(클릭률)과 노출수는 이 방법으로 못 가져옵니다.</b> 그건 유튜브 스튜디오 화면 전용이라, 아무리 코드를 짜도 안 나와요. 저는 이걸 모르고 한참 시도하다 포기했습니다. 여러분은 처음부터 빼세요.</li>
+      <li>채널이 여러 개면(브랜드 계정), <b>채널마다 인증을 따로</b> 해줘야 합니다. 하나 해놓고 다 될 줄 알았다가 또 한 번 놀랐어요.</li>
+    </ul>
+  </div>
+
+  <p>고생한 만큼, 이 편이 <b>검색으로 사람들이 제일 많이 찾아올 글</b>이라고 봅니다. "유튜브 API 액세스 차단" 같은 걸로 헤매는 사람이 저 말고도 분명 많을 테니까요. 삽질이 곧 콘텐츠가 되는 순간입니다.</p>
+
+  <div class="tags"><span>태그</span><b>#OAuth</b><b>#유튜브API</b><b>#액세스차단</b><b>#인증오류</b><b>#바이브코딩</b><b>#에러해결</b></div>
+  <a class="top" href="#ep5">↑ 위로</a>
+</article>
+
+<!-- ================= 6편 ================= -->
+<article id="ep6">
+  <div class="meta"><span>AI 코딩 도구 후기</span><span>바이브코딩 실전기</span><span>6편</span></div>
+  <h2><span class="ep">6편.</span> AI가 내 유튜브 댓글에 답글을 달아준다 — 승인 버튼 하나로</h2>
+  <div class="summary"><b>세 줄 요약.</b> 시청자 댓글이 달리면 AI가 답글 초안을 써서 텔레그램으로 보내줍니다. 저는 <b>[게시] 버튼만 한 번 누르면</b> 그대로 유튜브에 올라가요. 완전 자동이 아니라 <b>'사람이 마지막에 승인'</b>하는 방식 — 이게 핵심입니다.</div>
+
+  <p class="lead">여기까지 오니 욕심이 났습니다. "댓글 답글도 AI가 달아주면 안 되나?" 그런데 막상 <b>완전 자동</b>으로 답글이 나가게 하려니 무섭더라고요. AI가 엉뚱하거나 무례한 답을 달면 그대로 제 채널에 박제되니까요.</p>
+  <p>그래서 타협점을 찾았습니다. <mark>AI는 초안까지만, 최종 게시는 사람이.</mark> 댓글이 달리면 AI가 답글을 써서 텔레그램으로 "이렇게 달까요?"라고 물어봐요. 저는 [게시] 또는 [무시] 버튼만 누르면 됩니다. 탭 한 번으로 끝.</p>
+
+  <h3>자동화의 수위를 정하는 문제</h3>
+  <p>이 편에서 진짜 하고 싶은 이야기는 기술이 아니라 <b>"어디까지 기계에 맡길 것인가"</b>입니다. 편하자고 다 맡기면 사고가 나고, 다 직접 하면 자동화한 의미가 없죠. <b>"AI가 90%, 내가 마지막 10%"</b> — 이 지점을 찾는 게 바이브코딩의 진짜 실력이라고 느꼈습니다.</p>
+
+  <div class="call dig"><div class="h">🕳️ 여기서 삽질했습니다</div>
+    <ul>
+      <li><b>AI가 자꾸 빈 답을 뱉었어요.</b> 분명 요청했는데 답글이 텅 비어서 왔습니다. 알고 보니 AI가 <b>속으로 생각(추론)하는 데 정해진 분량을 다 써버려서</b> 정작 내놓을 답이 없던 거였어요. "너무 깊게 고민하지 말고 바로 답해"라고 설정을 바꾸니 해결됐습니다.</li>
+      <li><b>댓글 '고정'은 자동이 안 됩니다.</b> 답글을 다는 것까지는 자동인데, 그 댓글을 맨 위에 고정하는 건 유튜브가 자동으로 못 하게 막아놨어요. 그건 어쩔 수 없이 손으로 합니다.</li>
+    </ul>
+  </div>
+
+  <div class="call tip"><div class="h">💡 소소하지만 중요한 예외 처리</div>
+    <ul>
+      <li><b>스팸 댓글엔 답 안 달기.</b> AI에게 "광고·스팸이면 그냥 SKIP만 답해"라고 시켜서, 쓸데없는 답글이 나가지 않게 걸렀습니다.</li>
+      <li><b>내가 단 댓글엔 답 안 하기.</b> 안 그러면 AI가 제 댓글에 또 답글을 달고, 거기 또 답하고… 무한 반복이 될 뻔했어요. 그래서 "채널 주인 댓글이면 건너뛰기" 예외를 넣었습니다.</li>
+    </ul>
+  </div>
+
+  <p>이렇게 6편이 끝납니다. 아침 리포트로 시작해서, 컴퓨터를 꺼도 돌아가게 만들고, 실시간 감시와 즉답 봇을 붙이고, 속살 데이터까지 끌어오고, 마지막엔 AI가 답글까지 — <b>전부 무료로, 하루 만에.</b> 개발자가 아니어도, AI와 함께라면 여기까지 옵니다. 저는 이걸 "AI로 양산"이 아니라 <b>"AI로 증폭"</b>이라고 부르고 싶어요.</p>
+
+  <div class="tags"><span>태그</span><b>#AI자동화</b><b>#OpenAI</b><b>#댓글관리</b><b>#반자동승인</b><b>#바이브코딩</b><b>#유튜브운영</b></div>
+  <a class="top" href="#ep6">↑ 위로</a>
+</article>
+
+<footer>
+  검토용 초안 · AI 바이브코딩 성장기 연재 6편<br>
+  고칠 곳(결·길이·제목·순서) 말씀해 주시면 반영해서 다시 올립니다.
+</footer>
+
+</div>
+</body>
+</html>
