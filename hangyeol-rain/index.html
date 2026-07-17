@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강한결 5집 「그 비는 아직 안 그쳤다」 7곡 · 수노 작사 작업판</title>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>:root{--acc:#f0a878;--bg:#1a100c;--card:#26130b;--line:#55301c;--dim:#b59482;--txt:#f4ece2;--field:#170c06;}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>강한결 5집 「그 비는 아직 안 그쳤다」 7곡</h1>
+    <p>강한결의 트로트 TV · 한형 6곡 + 흥형 1곡 · 남성 보컬</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+  <div style="text-align:center"><a class="home" href="../">← 작사 공방</a></div>
+
+  <div class="anatomy">
+    <b>스타일 해부 (5집 = 비 오는 날 떠오르는 사람)</b>
+    ① 정서: 비 오는 날 그 사람이 떠오르는 한(恨)과 그리움. 단 <b style="display:inline">7곡이 비를 전부 다르게 쓴다</b> — 비가 이 앨범의 소재가 아니라 <b style="display:inline">시계</b>다<br>
+    ② 비 사용법: 오기 전(무릎 예보) · 비를 막는 것(우산) · 남의 도시에 오는 비(일기예보) · 비를 안 쓰고 젖은 것만 · 비를 피하는 자리(처마) · 비 갠 뒤(웅덩이) · 비가 중매쟁이(소나기)<br>
+    ③ <b style="display:inline">창밖에 비 오는 오프닝 0곡</b> — 1집 「가을비 내리는 밤」(킥 = "창밖에 비가 내려")의 재탕 회피가 이 앨범 설계의 1번 제약<br>
+    ④ 공식 깨기: 4집까지 전곡이 "못 한 말 → 파이널에 뱉기". 5집은 <b style="display:inline">못 뱉고 끝나는 곡 2곡</b>(2·6번) 배치, 실질 "뱉는" 곡은 2곡뿐<br>
+    ⑤ 개척지: 3인칭 관찰 화자(4번, 카탈로그 41곡 최초) · 지명 2개(3번 서울/군산) · 세월·몸 축(1번 무릎)<br>
+    ⑥ 사운드: 한형 70BPM 4곡 + 한형 85BPM 2곡(3·4번) + 7번 흥형 120BPM. <b style="display:inline">수노 프롬프트는 2026-07-17 7칸 양식 신규판</b>
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div id="board"></div>
+
+  <details class="review">
+    <summary>① 변주 격자 (앨범이 왜 안 지루한가)</summary>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="border-bottom:1px solid var(--line)"><th>#</th><th>곡</th><th>비 사용법</th><th>화자</th><th>시간</th><th>착지</th><th>어미</th><th>구조</th><th>온도</th></tr>
+      <tr><td>1</td><td>무릎이 먼저 안다</td><td>비 오기 전 (예보)</td><td>독백</td><td>지금</td><td>자부심·버팀</td><td>~다체</td><td>8단</td><td>70</td></tr>
+      <tr><td>2</td><td>우산은 하나였고</td><td>비를 막는 것 (우산)</td><td>호명 (여보)</td><td>회상</td><td>못 뱉고 끝남 <span style="opacity:.7">(안 하기로 선택)</span></td><td>~습니다체</td><td>훅 오픈</td><td>70</td></tr>
+      <tr><td>3</td><td>군산엔 비가 온답니다</td><td>남의 도시에 오는 비 (일기예보)</td><td>독백</td><td>지금</td><td>축복 (보내주기)</td><td>~죠체</td><td>8단</td><td>85</td></tr>
+      <tr><td>4</td><td>신발이 마르질 않아</td><td>비를 안 씀 · 젖은 것만 남음</td><td>관찰 (3인칭)</td><td>지금</td><td>체념·수용</td><td>반말</td><td>2절 없는 짧은 곡</td><td>85</td></tr>
+      <tr><td>5</td><td>처마 밑에서</td><td>비를 피하는 자리 (안 맞음)</td><td>대화</td><td>회상</td><td>항변·분노</td><td>~다체</td><td>대화 삽입</td><td>70</td></tr>
+      <tr><td>6</td><td>비 갠 자리</td><td>비 그친 뒤 (웅덩이)</td><td>호명</td><td>가정</td><td>못 뱉고 끝남 <span style="opacity:.7">(기회 소멸)</span></td><td>~죠체</td><td>브릿지 없이 후렴 반복</td><td>70</td></tr>
+      <tr><td>7</td><td>그 소나기가 중매쟁이</td><td>비가 큐피드</td><td>독백</td><td>회상 → 다짐</td><td>유머·해방</td><td>반말</td><td>8단</td><td>120</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>제약 검사 통과</b> — 화자 4종(독백3·호명2·관찰1·대화1) ≥ 3 ✅ / 착지 <b style="display:inline">6종</b> ≥ 4 ✅ / 구조 5종 ≥ 3 ✅ / 흥형 1곡 마지막 ✅ / 같은 축 같은 값 3연속 0건 ✅</li>
+      <li><b>비 축이 이 앨범의 척추</b> — 7곡의 비 사용법이 전부 다르다. 비가 실제로 <b style="display:inline">내리는</b> 곡은 3·5·7번뿐이고, 1번은 오기 전, 4번은 안 오는데 젖고, 6번은 그친 뒤다.</li>
+      <li><b>어미 배치</b> — 다/습니다/죠/반말/다/죠/반말. 4종 전부 사용, 3연속 0건. (1집 전곡 ~죠체, 2집 전곡 ~습니다체와의 인상 겹침 회피)</li>
+      <li><b>앨범 아치</b> — 5번의 킥("나한테는 비가 아직 안 그쳤다")이 앨범 제목이고, 7번이 그걸 통째로 뒤집으며("나는 비만 오면 웃음이 나서") 닫는다. 1번의 "그날 못 뛴 값"과 7번의 "비 올 때 뛰지 않은 사람이에요"가 수미상관 — 같은 행동(안 뛰었다)이 한 곡에선 평생의 후회, 다른 곡에선 결혼의 이유가 된다.</li>
+      <li><b>온도 곡선</b> — 70 / 70 / 85 / 85 / 70 / 70 / 120. 3연속 없음. 침울 구간(5·6)이 붙어 있어 장면을 완전히 갈라놨다(5=삼십 년 전 소나기 속, 6=오늘 아침 갠 하늘).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>② 훅 캠프 — 곡당 후렴 3개 중 채택 (버린 것은 훅노트로)</summary>
+    <ul>
+      <li><b>1. 무릎이 먼저 안다</b> — ①사물(무릎/뼈) ②질문("너는 어디서 비를 맞고 있느냐") ③역설("아픈 게 아니라 반가운 거다").<br>
+      <b style="display:inline">채택 ①</b> — "하늘도 모르는 걸 이 뼈가 먼저 안다"가 5060의 몸 경험과 직결되고 제목이 후렴 첫 줄에 박힌다. ②는 화자가 갑자기 밖을 보게 만들어 이 곡의 폐쇄성(내 몸 안에서 다 일어남)을 깬다. ③의 뒤집기는 버리기 아까워 <b style="display:inline">파이널 후렴에 흡수</b>("아픈 게 아니다 이건 벌도 아니다").</li>
+      <li><b>2. 우산은 하나였고</b> — ①사물(우산 하나·젖은 반쪽 어깨) ②질문("여보 그때 왜 안 물었소") ③역설("비를 막으려고 든 게 아니오").<br>
+      <b style="display:inline">채택 ①</b> — "~고 ~고 ~고" 로 계속 이어지다 마지막 "안 했습니다"에서 딱 멈추는 <b style="display:inline">문장 구조 자체가 이 곡의 착지(못 뱉고 끝남)를 소리로 구현</b>한다. ③의 정신은 벌스1로 내려 "가운데는 늘 당신 쪽이었습니다"가 됐다.</li>
+      <li><b>3. 군산엔 비가 온답니다</b> — ①장면(일기예보) ②질문("거긴 우산 챙겼나요") ③역설("나는 그게 반갑죠 / 누군가 우산을 씌워주겠죠").<br>
+      <b style="display:inline">채택 ①+③ 통합</b> — ①만으로는 상황만 있고 한 방이 없고, ③만으로는 왜 그 도시 날씨를 아는지가 안 선다. 붙이니 후렴 4줄 안에 <b style="display:inline">상황(뉴스) → 발견(그쪽만 젖는다) → 마음(걸린다) → 놓아줌(누가 씌워주겠죠)</b>이 다 들어갔다. ②는 훅노트로.</li>
+      <li><b>4. 신발이 마르질 않아</b> — ①사물(마르지 않는 구두) ②질문("비도 안 오는데 왜 젖었어") ③역설("저건 비가 아니라 이슬이야").<br>
+      <b style="display:inline">채택 ①</b> — 제목이 첫 줄에 박히고, 3인칭 관찰("저 사람만 젖어 있어")이 후렴 안에서 성립하는 유일한 안이다. ②는 프리코러스로, ③은 <b style="display:inline">브릿지의 반전</b>("이슬이야 그건 비가 아니라 이슬이야")으로 내렸다 — 후렴에 뒀으면 3초 만에 답을 다 줘버렸을 것.</li>
+      <li><b>5. 처마 밑에서</b> — ①장면("이십 분을 서 있었다 / 할 말은 다 끝났는데 비가 안 그쳤다") ②질문("왜 그때 안 잡았냐고 묻지 마라") ③역설("나를 살린 것도 죽인 것도 그 소나기였다").<br>
+      <b style="display:inline">채택 ①</b> — "할 말은 다 끝났는데 비가 안 그쳤다" 한 줄이 이 곡의 상황과 잔인함을 동시에 세운다. ②는 프리코러스(항변 착지의 문), ③은 브릿지로.</li>
+      <li><b>6. 비 갠 자리</b> — ①사물/장면(웅덩이에 고인 하늘 · 당신은 밟고 나는 돌아섰다) ②질문("그날로 돌아가면 나도 밟을까요") ③역설("나는 하늘을 피해서 걸었죠").<br>
+      <b style="display:inline">채택 ①</b> — 장면(웅덩이·당신·나) 셋이 4줄 안에 다 서고 마지막 줄에 킥이 있다("그 양복은 옷장에 있고 당신은 없죠" = 아낀 것이 남고 사람이 없다). ③은 한 줄로는 아름답지만 <b style="display:inline">상황이 안 서서 후렴이 못 된다</b> → 파이널 후렴의 뒤집는 줄로 흡수. ②는 벌스2로.</li>
+      <li><b>7. 그 소나기가 중매쟁이</b> — ①장면(시장 좌판·비닐 한 장) ②질문("비 온다 여보 오늘 뭐 할래") ③역설("남들은 비 오면 우산을 찾는데 나는 비 오면 웃음이 나").<br>
+      <b style="display:inline">채택 ①</b> — 흥형은 사연이 명확해야 신난다. 제목이 첫 줄이고 구체 장면이 붙는다. ③은 <b style="display:inline">앨범 6곡의 비를 통째로 뒤집는 줄</b>이라 파이널 후렴에 배치 — 앨범 전체의 마지막 한 방으로 아꼈다. ②는 아웃트로 씨앗으로 남았다("비 온다 여보 / 장바구니 어딨어").</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>③ 소리내어 부르기 — 후렴 음절 수 실측 (편차 ±2 이내)</summary>
+    <ul>
+      <li><b>1. 무릎이 먼저 안다</b> — 14 / 14 / 14 / 13 (편차 1). 후렴 첫 음절 "비", 끝 음절 "다" — 받침 없음, 고음 자리 안전.</li>
+      <li><b>2. 우산은 하나였고</b> — 14 / 14 / 14 / 13 (편차 1). "~고" 개음절 3연속이 끝을 열어두다 "습니다"에서 닫는다.</li>
+      <li><b>3. 군산엔 비가 온답니다</b> — 16 / 14 / 16 / 15 (편차 2). 파이널 16 / 16 / 15 / 15.</li>
+      <li><b>4. 신발이 마르질 않아</b> — 16 / 15 / 14 / 14 (편차 2). 파이널 15 / 15 / 15 / 15 (편차 0).</li>
+      <li><b>5. 처마 밑에서</b> — 15 / 14 / 14 / 13 (편차 2). 파이널 15 / 15 / 13 / 15.</li>
+      <li><b>6. 비 갠 자리</b> — 13 / 14 / 14 / 14 (편차 1). 파이널 14 / 13 / 14 / 14.</li>
+      <li><b>7. 그 소나기가 중매쟁이</b> — 12 / 11 / 13 / 12 (편차 2). 흥형이라 후렴 줄을 짧게 유지(120BPM에 실린다). 파이널 12 / 12 / 11 / 12.</li>
+      <li><b>고친 것</b> — 1번 초안 후렴이 14/14/10/6으로 무너져 3·4행 전면 재작성. 3번 "당신 사는 그쪽만 젖는답니다"(12)를 "그쪽에만 비가 온답니다"(14)로. 4번 "누가 좀 말려줬으면 좋겠는데"(12) → "누가 좀 말려주면 될 텐데 그걸 못 해"(14). 5번 "처마 밑에서 우리는"(16) → "처마 밑에 우리는"(15). 6번 파이널 "오늘도 그냥 돌아서 가죠"(10) → "오늘도 나는 그냥 돌아서 가고 말죠"(14).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>④ 자기복제 대조 — 「가을비 내리는 밤」 정면 대조 + 카탈로그 41곡 + 앨범 내부</summary>
+    <p><b>1집 「가을비 내리는 밤」 정면 대조</b> (원곡 전문 확인: <code>song\SRT\1집\가을비 내리는 밤.txt</code>)</p>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="border-bottom:1px solid var(--line)"><th>「가을비 내리는 밤」의 것</th><th>5집에서의 처리</th></tr>
+      <tr><td>킥 = "창밖에 비가 내려" (창밖 오프닝)</td><td><b>7곡 전부 금지.</b> 1번은 아예 <b>"오늘은 오겠구나 창을 보지 않아도"</b>로 창을 명시적으로 거부하며 연다 — 이 줄이 앨범의 선언이다</td></tr>
+      <tr><td>"유리창 흐른 빗물" / "빗물에 묻는 이름"</td><td>유리창·빗물에 이름 쓰기 계열 <b>전면 회피</b>. 5집의 사물은 무릎 / 우산 / 일기예보 화면 / 구두 / 처마 / 웅덩이 / 비닐</td></tr>
+      <tr><td>"빗소리에 실려오는 그 사람의 목소리"</td><td>비를 <b>소리</b>로 쓰는 곡 0곡. 5집의 비는 예보·차단물·정보·흔적·무대·잔여물·인연으로만 기능</td></tr>
+      <tr><td>"우산도 없이 걷던 그 골목 그 빗속을"</td><td>2번은 정확히 반대다 — <b>우산이 있었고, 그래서 상대는 안 젖었다.</b> 골목은 카탈로그 포화(1집 「그 골목 첫사랑」·2집 「그골목엔 내 청춘이 삽니다」)라 5집에 골목 0곡</td></tr>
+      <tr><td>"이 비가 그치고 나면 괜찮아질 줄 알았죠 / 그러다 비가 오면 또 그대를 부르죠"</td><td>⚠️ 가장 위험한 지점. 6번이 "비 그친 뒤"라 정면충돌 각. → 6번은 <b>비가 그친 걸 슬퍼하지 않는다.</b> 갠 뒤 <b>웅덩이에 고인 하늘</b>이라는 새 사물을 세우고, 못 잊는 이야기가 아니라 <b>평생 밟지 못한 사람</b>의 이야기로 축을 완전히 틀었다</td></tr>
+      <tr><td>어미 = 전곡 ~죠체 / 화자 = 독백 / 착지 = 못 벗어남</td><td>5집 ~죠체 2곡(3·6)뿐. 화자 4종, 착지 6종</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:14px"><b>카탈로그 41곡 대조 — 걸려서 실제로 고친 것</b></p>
+    <ul>
+      <li><b>6번 「비 갠 자리」</b> — 초안 사물이 <b style="display:inline">구두</b>였다("나는 돌아서 갔죠 구두가 젖을까 봐"). 2집 「아버지 그 구두는 너무 컸습니다」와 사물 충돌 + 4번 「신발이 마르질 않아」와 앨범 내부 충돌(2중 충돌). → <b style="display:inline">양복 바짓단</b>으로 전면 교체. 덤으로 킥이 세졌다: "그 양복은 옷장에 있고 당신은 없죠".</li>
+      <li><b>3번 「군산엔 비가 온답니다」</b> — 파이널 초안 "잘 살아요 당신"이 3집 「잘 살아요 그대」와 제목째 충돌. → "부디 아프지 말아요 비 오는 날은 쉬고"로 교체.</li>
+      <li><b>7번 「그 소나기가 중매쟁이」</b> — 초안이 "우산을 일부러 하나만 들고 간다"였는데 2번 「우산은 하나였고」와 앨범 내부 정면 충돌. 다시 짠 초안은 처마 밑 첫 만남 → 이번엔 5번 「처마 밑에서」와 충돌. → <b style="display:inline">시장 좌판 + 비닐 한 장</b>으로 3차 교체. 결과적으로 흥형이 유일하게 "비를 피하는 도구"가 없는 곡이 됐다(그냥 맞는다) — 흥형답다.</li>
+      <li><b>5번 「처마 밑에서」</b> — 첫 후렴 "사십 년보다 길었다"와 파이널 "삼십 년째"가 곡 안에서 안 맞아 삼십으로 통일.</li>
+      <li><b>3번</b> — 프리코러스 "다 들은 겁니다"가 ~죠체 곡에 ~습니다체로 새서 "다 들은 거죠"로. 6번 파이널 "돌아서 갑니다" → "가고 말죠" 동일 사유.</li>
+      <li><b>지뢰 확인 후 통과</b> — 1번 무릎 = 훅노트 「무릎이 먼저 안다」 재고에서 꺼냄(세월·몸 축 🟢 미개척). 4번 3인칭 관찰 = 카탈로그 41곡 최초. 3번 지명 = 훅노트 "1순위 개척지"(기존 지명곡은 4집 「지금 익산쯤」 하나뿐, 익산≠군산/서울).</li>
+      <li><b>남은 리스크(인지하고 진행)</b> — 2번이 ~습니다체 + "여보" 호명이라 2집 10곡(전곡 ~습니다체)과 인상이 겹칠 소지. 다만 2집엔 "~고 ~고 → 안 했습니다"로 <b style="display:inline">말을 삼키며 끝나는</b> 구조가 없고(2집 「당신 몫의 밥을 또 지었습니다」는 반복 행위, 이 곡은 안 한 것), 사물도 밥↔우산으로 다르다.</li>
+      <li><b>금지 상투어 검사</b> — "아 옛날이여"/"인생은 나그네"/"세월이 약이다"/"돌고 도는 인생"/"밥은 먹고 다니냐"/"꽃길"/"그 한마디" — 7곡 전체 0건 ✅</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑤ 히트곡제조기 통독 (완성본을 처음 보는 눈으로) — 걸린 곡은 실제로 고쳤다</summary>
+    <ul>
+      <li><b>1. 무릎이 먼저 안다</b> — 타겟 적합성 최상. 5060 남성은 비 오기 전 무릎이 아프다. <b style="display:inline">이 앨범에서 유일하게 몸이 소재</b>라 첫 곡으로 문을 열기 좋다. 킥 = "하늘도 모르는 걸 이 뼈가 먼저 안다". <b style="display:inline">고친 것</b>: 벌스2가 "병원 가라 / 사진 찍어라"로 착한 설명만 늘어놓길래 뒤집는 줄을 박았다 — "닳은 건 무릎이 아니라 기다린 날들이다". 아웃트로 초안 "나는 안 뛴다 이제는"이 착지(자부심·버팀)를 배신하는 체념이라 "괜찮다 나는 아직 걷는다"로 교체.</li>
+      <li><b>2. 우산은 하나였고</b> — 여성 청취자가 "우리 남편" 으로 받는 곡. 눈물 지점 = 브릿지의 <b style="display:inline">"이제는 우산이 두 개고 / 젖는 어깨가 없습니다"</b>. <b style="display:inline">고친 것</b>: 브릿지가 사실 나열로만 끝나 밋밋해서 뒤집는 줄 추가 — "그게 이렇게 서운할 줄은 몰랐습니다". 안 젖는 게 서운하다는 게 이 곡의 전부다.</li>
+      <li><b>3. 군산엔 비가 온답니다</b> — <b style="display:inline">앨범 최강 후보.</b> 킥의 발상 자체가 새롭다(일기예보로 안부를 듣는 남자). 브릿지가 진짜 한 방 — 내려갔다가 <b style="display:inline">우산만 사서 그냥 올라왔다</b>. 이 채널에 지명이 잘 먹힌다는 건 4집 「지금 익산쯤」으로 이미 확인됨. <b style="display:inline">고친 것</b>: 파이널 "나는 여기서 그 비를 다 맞고 있죠"(13, 편차 초과)를 "나는 여기 맑은 데서 그 비를 다 맞고 있죠"(16)로 늘렸더니 <b style="display:inline">음절도 맞고 곡 최고의 역설도 생겼다</b> — 맑은 데서 비를 다 맞는다.</li>
+      <li><b>4. 신발이 마르질 않아</b> — 카탈로그 41곡 최초의 3인칭 관찰. 시점 자체가 앨범의 환기창이다. 킥 = "비는 그쳤다는데 저 사람만 젖어 있어". 브릿지 반전(이슬)이 곡을 세운다. <b style="display:inline">판단</b>: 관찰자가 마지막에 "그 남자가 나였다"로 뒤집는 안을 검토했으나 <b style="display:inline">기각</b> — 너무 뻔하고, 3인칭을 끝까지 지키는 게 이 곡의 값이다. 대신 파이널을 "그런 게 사람한테 하나쯤은 있는 거야"로 열어 듣는 사람이 스스로 자기를 대입하게 뒀다.</li>
+      <li><b>5. 처마 밑에서</b> — 킥 = <b style="display:inline">"나한테는 비가 아직 안 그쳤다 아직도"</b> (앨범 제목이 여기서 나왔다). 대화 삽입 벌스2가 잔인하다 — 마지막으로 나눈 말이 날씨 얘기였다는 것. <b style="display:inline">고친 것</b>: 착지가 항변인데 초안엔 항변할 대상이 없어 프리코러스에 "왜 그때 안 잡았냐고 묻지 마라"를 세워 <b style="display:inline">말 거는 대상</b>(따지는 사람들)을 만들었다.</li>
+      <li><b>6. 비 갠 자리</b> — 앨범에서 가장 조용한 곡. 킥 = "그 양복은 옷장에 있고 당신은 없죠". <b style="display:inline">약한 곡이었다</b> — 초안은 "웅덩이 밟고 웃던 당신이 그립다"로 착한 말만 있었다. 프리코러스에 <b style="display:inline">"오십 넘은 남자가 젖으면 안 되니까"</b>라는 자기 변명을 넣자 화자가 비겁해지면서 곡이 살았다. 파이널 "나는 평생 하늘을 피해서 걸었죠"가 그 변명의 대가다.</li>
+      <li><b>7. 그 소나기가 중매쟁이</b> — 6곡의 비를 털어내는 문. 따라 부를 줄 = "그 소나기가 우리 중매쟁이야". <b style="display:inline">앨범 설계의 보석</b> = 벌스2의 <b style="display:inline">"비 올 때 뛰지 않은 사람이에요"</b> — 1번 곡의 "그날 못 뛴 값을 이 뼈가 갚고 있다"와 정확히 대구를 이룬다. 같은 행동(안 뛰었다)이 1번에선 평생의 후회, 7번에선 결혼의 이유다. 앨범 수미상관.</li>
+      <li><b>앨범 곡선</b> — 버팀(1) → 삼킨 말(2) → 놓아줌(3) → 관찰의 거리(4) → 항변(5) → 자책(6) → 해방(7). 비슷한 온도 3연속 없음. 아내를 부르는 곡(2·7)은 앨범 양 끝에 떼어 배치(2=못 뱉음 / 7=다 뱉고 웃음).</li>
+      <li><b>선공개 권장</b> — 3번 「군산엔 비가 온답니다」(발상의 신선함 + 지명 검색 유입) 또는 5번 「처마 밑에서」(앨범 제목곡).</li>
+      <li><b>어미 반복 검사</b> — 곡 내부 동일 어미 3줄 연속 0건. 2번의 "~고" 3연속은 <b style="display:inline">의도된 장치</b>(멈추기 위해 이어붙임)라 유지.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑥ 원곡 웹 대조 (기억 대조 금지 — 실제로 연 것만)</summary>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="border-bottom:1px solid var(--line)"><th>대조 곡</th><th>웹에서 확인한 것</th><th>충돌 여부 · 조치</th></tr>
+      <tr><td><b>「비와 당신」</b> 럼블피쉬 (원곡 박중훈 / 방준석 작사)</td><td>gasazip 322329 실제 열람. 첫 소절 = 그립지 <b>않다는 부정</b>으로 시작 / 후렴 첫 줄 = 괜찮다는 부정의 반복. 구조 = <b>"안 그립다"고 부정하다 무너지는 역설</b></td><td>❌ 충돌 없음. <b>선제 회피</b>: 5집 7곡 중 <b>"그립지 않다 / 괜찮다"고 부정하며 여는 곡 0곡</b>. 우리 화자는 처음부터 인정하고 들어간다. 제목 「비와 당신」 미사용</td></tr>
+      <tr><td><b>「비와 당신의 이야기」</b> 부활 (김태원)</td><td>첫 소절 = <b>비가 너를 그리워한다</b>(비를 주체로 의인화) / 후렴 = 사랑해 반복</td><td>⚠️ <b>설계 단계에서 걸러냄.</b> 변주 격자에 "비가 화자인 곡"을 넣으려 했으나 이 곡이 정확히 그 자리다 → <b>비 의인화 곡 전면 삭제.</b> 5집에서 비는 끝까지 <b>객체</b>다(예보 대상·차단 대상·정보·흔적). "비가 대신 운다/그리워한다" 계열 0줄. 제목 「비와 당신의 이야기」 미사용</td></tr>
+      <tr><td><b>「비처럼 음악처럼」</b> 김현식</td><td>첫 소절 = <b>비가 내리고 음악이 흐르면</b> (조건절 오프닝)</td><td>❌ 충돌 없음. <b>선제 회피</b>: "비가 내리고 ~하면" 조건절 오프닝 0곡. 이 채널 QA 사고 이력(다른 채널, 이 곡 첫 소절 verbatim)이 있어 특히 주의해 대조. 제목 미사용</td></tr>
+      <tr><td><b>「목포의 눈물」</b>(이난영) · <b>「목포는 항구다」</b></td><td>실존 확인. 목포 = 트로트 지명 계보의 <b>포화 지대</b></td><td>✅ <b>조치함.</b> 3번 지명 후보에서 <b>목포 탈락</b>. 대전(「대전 블루스」)·춘천(「춘천 가는 기차」)도 동일 사유 탈락 → <b>군산</b> 채택(검색 결과 동명·유사 트로트 곡 없음)</td></tr>
+      <tr><td><b>「빗속의 여인」</b>(장현) · <b>「빗물」</b>(채은옥) · <b>「빗물아 너에게 묻는다」</b></td><td>실존 확인. 비 소재 기성곡 제목군</td><td>✅ 제목 회피 완료. 특히 <b>「빗물아 너에게 묻는다」</b> 때문에 <b>"비/빗물에게 말 거는 곡" 0곡</b>으로 설계. 5집 제목 7개 중 "빗물"·"빗속" 단어 사용 0건</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>제목 최종 확인</b> — 무릎이 먼저 안다 / 우산은 하나였고 / 군산엔 비가 온답니다 / 신발이 마르질 않아 / 처마 밑에서 / 비 갠 자리 / 그 소나기가 중매쟁이. <b style="display:inline">기성 유명곡과 동명 0건.</b> 금지 제목(비와 당신 · 비와 당신의 이야기 · 비처럼 음악처럼) 미사용 ✅</li>
+      <li><b>기억 대조 금지 준수</b> — 위 3곡(럼블피쉬·부활·김현식)은 전부 <b style="display:inline">웹에서 실제 가사를 열어</b> 첫 소절·후렴 첫 줄을 확인한 뒤 판정했다. 어느 곡의 문장·고유 표현도 가져오지 않았다 — 가져온 것은 "비 오는 날 사람이 떠오른다"는 <b style="display:inline">정서의 결</b>뿐이고, 그건 장르 공유 자산이다.</li>
+      <li><b>수노 스타일 칸</b> — 가수명·곡명 0건(Suno 차단 회피). 전부 묘사로만.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑦ 수노 프롬프트 — 2026-07-17 신규 7칸 양식 · 검사기 실행 결과</summary>
+    <ul>
+      <li><b>⚠️ 한형 프롬프트는 지금 검증 대기 상태다.</b> 작사카드 §10에 적힌 대로, 구버전 한형엔 다이내믹 지시가 아예 없었다(시종 잔잔). 신버전엔 <code>soaring chorus</code> · <code>powerful mixed-belt on the title line</code> · 파이널 폭발 · Development 6문장이 <b style="display:inline">새로 들어갔고 아직 소리로 확인 못 했다.</b> 방향은 카드 §2("눌러 담다가 마지막에 터뜨린다")·§7 킥 공식과 맞지만 <b style="display:inline">3·4집은 이 폭발 없이 성과가 났다.</b> 이 앨범이 첫 실사용이다 — 결과 나오면 구버전(카드 §10 하단 <code>&lt;details&gt;</code>)과 비교해 판정할 것.</li>
+      <li><b>검사기 실행 결과</b> — <code>py D:\work\작사공용\트리거검사기.py</code>
+        <ul>
+          <li>한형 70BPM (카드 원본): 940/940자 · L1 <code>soaring chorus</code> = <b style="display:inline">의도됨</b> 표기 확인 · BLOCKER 0 · ✅ 통과</li>
+          <li>한형 85BPM (3·4번용, <code>Slow tempo around 70 BPM</code> → <code>Mid tempo around 85 BPM</code> 1곳만 교체): <b style="display:inline">939/940자</b> · L1 <code>soaring chorus</code> 1건(카드에 의도 표기됨) · BLOCKER 0 · ✅ 통과</li>
+          <li>흥형 120BPM (카드 원본): 927/940자 · <b style="display:inline">트리거 0건</b> · ✅ 통과</li>
+        </ul>
+      </li>
+      <li><b>일부러 켜 둔 트리거 (딸려 온 게 아니라 시킨 것)</b> — 한형 <code>soaring chorus</code>(L1). 파이널 폭발이 이 채널의 생명(카드 §2·§7③). DB 대체어 <code>lifted melodic chorus</code>로 낮추면 그 한 방이 밋밋해진다. <b style="display:inline">안전망</b> = Exclude의 L 차단(<code>arena reverb</code>·<code>crowd vocals</code>·<code>live concert ambience</code>)으로 <b style="display:inline">군중만 막고 치솟음은 남긴다.</b> 흥형 <code>ppongjjak two-beat groove</code>도 카드 §2("정통 뽕짝 창법 아님")의 의도적 예외로, 흥형 1곡에만 허용.</li>
+      <li><b>새 프롬프트 안 만듦</b> — 7곡 전부 카드의 기존 2종(한형·흥형)으로 커버됐다. 85BPM은 카드가 명시한 공인 변주(1곳만 교체)라 새 종이 아니다. 따라서 카드 환류 대상 없음.</li>
+      <li><b>검사기의 한계 인지</b> — 방법론이 경고하듯 <code>soaring final chorus</code>처럼 단어가 끼면 검사기가 못 잡는다. 이번 프롬프트엔 그런 변형 없음(<code>soaring chorus</code> 원형 그대로)을 눈으로 확인했다.</li>
+    </ul>
+  </details>
+
+  <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
+  곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
+</div>
+
+<script>
+const STYLE_HAN70 = `Emotional Korean adult-contemporary ballad with subtle trot (teuroteu) flavor, gentle and understated, NOT heavy ppongjjak. Nostalgic, melancholic longing (han). Soft piano, warm strings, gentle electric guitar, faint electronic organ; calm tender melody, smooth mellow rhythm, no strong two-beat. Young male vocalist, early thirties, warm clear slightly husky, light delicate vibrato only (no heavy kkeokki, no exaggerated trembling). Slow tempo around 70 BPM, minor pentatonic. Very dry, minimal reverb, single clear lead vocal, centered close-mic, instruments spread wide. Starts with bare piano and held string. Verse stays hushed and conversational, drums out. Pre-chorus builds as low strings enter and guitar answers each line. Chorus opens into a soaring chorus, powerful mixed-belt on the title line. Bridge drops down to piano and voice alone. Final chorus returns with fullest strings and the most open belt, then thins to piano.`;
+
+const STYLE_HAN85 = STYLE_HAN70.replace('Slow tempo around 70 BPM', 'Mid tempo around 85 BPM');
+
+const EXCL_HAN = `trumpet, brass, saxophone, heavy ppongjjak, strong vibrato, loud drums, fast tempo, cheerful, female vocal, spoken word, crowd vocals, audience cheering, live concert ambience, arena reverb, gang vocals, choir-like crowd, pub singalong, festival crowd, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, harmony vocals, backing vocals, choir, group vocals, wide vocals, wide stereo vocals, wide chorus`;
+
+const STYLE_HEUNG = `Upbeat cheerful Korean trot (teuroteu) with a bright bouncy ppongjjak two-beat groove. Giddy butterflies, falling-in-love-again, feel-good. Bright synth, accordion, electric guitar and punchy drums, lively major-key melody. Sung by a young male vocalist in his early thirties, clear bright energetic warm tone, light playful kkeokki, single clear lead vocal. Mid-up tempo around 120 BPM, major key. Clean bright studio mix, dry close-mic vocal, instruments spread wide. Starts with an accordion hook over the two-beat pulse. Verse stays light and playful, bass and drums keeping it bouncing. Pre-chorus gradually builds as the drums tighten and the synth climbs. Chorus opens with a catchy melodic hook, personal vocal focus, strong studio chorus, the hook landing hard. Bridge drops down to accordion and voice over a teasing half-time beat. Final chorus returns with the full band and the hook repeated with brighter accents.`;
+
+const EXCL_HEUNG = `sad, slow, heavy ballad, gloomy, mournful, dark, female vocal, spoken word, crowd vocals, audience cheering, live concert ambience, arena reverb, gang vocals, pub singalong, festival crowd, stadium chant, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, harmony vocals, backing vocals, choir, group vocals, wide vocals, wide chorus, vocal chops, EDM drop, future bass, nightcore`;
+
+const SONGS = [
+{title:"무릎이 먼저 안다", motif:"비 오기 전 · 무릎 (예보)", type:"han70",
+concept:"비 오기 전날이면 무릎이 먼저 안다 — 하늘도 모르는 걸 이 뼈가 먼저 안다. 그날 안 뛴 값을 몸이 갚고 있다.",
+yt:`"비 오는 날이면 이 무릎이 먼저 압니다…" 듣는 내내 눈물 나는 노래 - 무릎이 먼저 안다 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+아침에 눈을 뜨면 먼저 다리를 짚는다
+오늘은 오겠구나 창을 보지 않아도
+사십 년 시멘트 밥 이 무릎이 다 받았다
+누구도 안 물어본 그 세월을 받았다
+
+[Pre-Chorus]
+약을 먹어도 안 낫는 자리가 있다
+비가 오면 그 자리가 네 이름을 부른다
+
+[Chorus]
+비 오기 전날이면 무릎이 먼저 안다
+하늘도 모르는 걸 이 뼈가 먼저 안다
+사십 년 접었다 편 그 자리 그 자리에
+거기 네가 산다 아직도 네가 산다
+
+[Verse 2]
+남들은 병원 가라 사진을 찍어보라
+찍어봐야 안 나온다 거기 뭐가 사는지
+연골이 닳았다고 의사는 말하지만
+닳은 건 무릎이 아니라 기다린 날들이다
+
+[Break]
+
+[Bridge]
+그날도 이 무릎이 먼저 알았다
+버스가 떠나기 전에 뛰어가라고
+나는 안 뛰었다 다 큰 남자가
+비 맞고 뛰는 게 우스울까 봐
+
+[Final Chorus]
+비 오기 전날이면 무릎이 먼저 안다
+그날 못 뛴 값을 이 뼈가 갚고 있다
+아픈 게 아니다 이건 벌도 아니다
+너를 여태 안 놓은 내 몸의 대답이다
+
+[Outro]
+오늘도 무릎이 먼저 안다
+괜찮다 나는 아직 걷는다`},
+
+{title:"우산은 하나였고", motif:"우산 · 반쪽만 젖은 어깨", type:"han70",
+concept:"우산은 하나였고 당신은 안 젖었고 — 사십 년 반쪽 어깨로 걸었으면서, 그 말은 오늘도 안 했습니다.",
+yt:`"여보, 그 우산은 하나였소…" 남편이 끝내 못 한 말 - 우산은 하나였고 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Chorus]
+우산은 하나였고 당신은 안 젖었고
+나는 반쪽 어깨로 사십 년을 걸었고
+당신은 그걸 끝까지 모르고 살았고
+나도 끝까지 그 말은 안 했습니다
+
+[Verse 1]
+비 오는 날 마중을 나가면 여보
+당신은 늘 우산 가운데로 걸었습니다
+가운데인 줄 알았겠지요 당신은
+가운데는 늘 당신 쪽이었습니다
+
+[Pre-Chorus]
+집에 와서 벗어놓은 내 옷 한쪽
+왜 한쪽만 젖냐고 당신은 웃었습니다
+
+[Chorus]
+우산은 하나였고 당신은 안 젖었고
+나는 반쪽 어깨로 사십 년을 걸었고
+당신은 그걸 끝까지 모르고 살았고
+나도 끝까지 그 말은 안 했습니다
+
+[Verse 2]
+현관에 아직 그 우산이 서 있습니다
+살이 하나 부러진 채로 서 있습니다
+고치라고 고치라고 당신이 말했는데
+안 고쳤습니다 거기 당신 손자국이 있어서
+
+[Break]
+
+[Bridge]
+이제는 우산이 두 개고
+젖는 어깨가 없습니다
+비가 와도 나는 안 젖습니다
+그게 이렇게 서운할 줄은 몰랐습니다
+
+[Final Chorus]
+우산은 하나였고 당신은 안 젖었고
+나는 반쪽 어깨로 사십 년을 걸었고
+지금 이 말을 하려고 여기 서 있는데
+여보 나는 오늘도 그 말은 안 했습니다
+
+[Outro]
+비가 그칩니다
+말은 아직… 여기 있습니다`},
+
+{title:"군산엔 비가 온답니다", motif:"아홉 시 뉴스 일기예보 · 지도 위 파란 점", type:"han85",
+concept:"일기예보로 그 사람 안부를 듣는 남자 — 여기 서울은 맑은데, 나는 그 비를 다 맞고 있죠.",
+yt:`"그 사람 사는 동네에 비가 온다길래… 그냥 한 잔 했습니다" - 군산엔 비가 온답니다 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+아홉 시 뉴스 끝에 일기예보가 나오죠
+나는 그때만 소리를 키우죠
+서울 경기 맑음 그리고 조금 있다가
+호남 지방 비 그 한 줄을 기다리죠
+
+[Pre-Chorus]
+지도 위에 파란 점이 하나 뜨면
+나는 오늘 당신 소식을 다 들은 거죠
+
+[Chorus]
+군산엔 비가 온답니다 여기 서울은 맑고
+당신 사는 그쪽에만 비가 온답니다
+당신은 비를 싫어했죠 그게 자꾸 걸리죠
+이제는 누가 우산을 씌워주고 있겠죠
+
+[Verse 2]
+번호는 아직 있죠 지운 적이 없으니
+누르지 않을 걸 알면서 그냥 두죠
+비 온다고 전화하면 그게 무슨 말이 되나요
+십 년 만에 날씨 얘기를 하겠다고
+
+[Break]
+
+[Bridge]
+한 번은 내려가 봤죠 역 앞까지
+비가 오더군요 예보대로 오더군요
+우산 파는 그 가게 앞에서
+나는 우산을 사고 그냥 올라왔죠
+
+[Final Chorus]
+군산엔 비가 온답니다 여기 서울은 맑고
+나는 여기 맑은 데서 그 비를 다 맞고 있죠
+부디 아프지 말아요 비 오는 날은 쉬고
+누가 우산을 씌워주면 그 손 꼭 잡아요
+
+[Outro]
+오늘도 호남 지방 비
+나는 그 한 줄이 좋죠`},
+
+{title:"신발이 마르질 않아", motif:"현관 앞 신문지 · 마르지 않는 구두 (3인칭 관찰)", type:"han85",
+concept:"비는 사흘 전에 그쳤는데 저 사람 신발만 안 마른다 — 그건 비가 아니라 새벽마다 걷는 사람의 이슬이다.",
+yt:`"비도 안 오는데 저 사람 신발은 왜 젖었을까…" 듣는 내내 먹먹한 노래 - 신발이 마르질 않아 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+현관 앞에 신문지를 깔고
+구두 두 짝을 엎어놨어
+사흘 됐어 비 그친 지가
+근데 저건 아직도 축축해
+
+[Pre-Chorus]
+비 안 와 오늘도 안 와
+그런데 저 신발은 매일 젖어
+
+[Chorus]
+신발이 마르질 않아 사흘째 마르질 않아
+비는 그쳤다는데 저 사람만 젖어 있어
+누가 좀 말려주면 될 텐데 그걸 못 해
+말려줄 사람이 없어서 저러고 있어
+
+[Break]
+
+[Bridge]
+새벽 네 시에 나가는 걸 봤어
+우산도 없이 나가더라 비도 안 오는데
+풀밭을 가로질러 어딘가를 다녀와
+이슬이야 그건 비가 아니라 이슬이야
+
+[Final Chorus]
+신발이 마르질 않아 이제는 알 것 같아
+비 때문이 아니었어 저 사람 때문이야
+말려도 말려도 안 마르는 게 있는 거야
+그런 게 사람한테 하나쯤은 있는 거야
+
+[Outro]
+오늘도 신문지를 깐다
+오늘도… 안 마른다`},
+
+{title:"처마 밑에서", motif:"헤어지던 날의 소나기 · 이십 분", type:"han70",
+concept:"할 말은 다 끝났는데 비가 안 그쳤다 — 잡을 시간을 이십 분이나 줬는데 나는 그걸 다 쓰고도 아무 말을 못 했다.",
+yt:`"그 소나기만 안 왔어도… 그냥 한 잔 했습니다" - 처마 밑에서 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+그날은 예보에 없던 비였다
+가겠다고 일어선 참이었다
+문을 밀고 나가려는데
+하늘이 쏟아졌다 딱 그때
+
+[Pre-Chorus]
+왜 그때 안 잡았냐고 묻지 마라
+비 그치기를 같이 기다려본 사람은 안다
+
+[Chorus]
+처마 밑에 우리는 이십 분을 서 있었다
+할 말은 다 끝났는데 비가 안 그쳤다
+어깨가 닿을 만큼 좁은 자리였는데
+그 이십 분이 삼십 년보다 길었다
+
+[Verse 2]
+"우산 없어?"
+"없어"
+"그럼 좀 기다려"
+그게 우리가 나눈 마지막 말이었다
+날씨 얘기 그게 다였다
+
+[Break]
+
+[Bridge]
+그날 나를 살린 게 그 소나기였고
+그날 나를 죽인 것도 그 소나기였다
+잡을 시간을 이십 분이나 줬는데
+나는 그걸 다 쓰고도 아무 말을 못 했다
+
+[Final Chorus]
+처마 밑에 우리는 이십 분을 서 있었다
+비가 그치고 당신은 그냥 걸어 나갔다
+나는 아직 거기 서 있다 삼십 년째
+나한테는 비가 아직 안 그쳤다 아직도
+
+[Outro]
+지금도 소나기가 오면
+나는… 처마 밑으로 들어간다`},
+
+{title:"비 갠 자리", motif:"비 갠 아침 웅덩이 · 양복 바짓단", type:"han70",
+concept:"비 갠 자리마다 하늘이 고여 있는데 나는 평생 하늘을 피해서 걸었죠 — 그 양복은 옷장에 있고 당신은 없죠.",
+yt:`"당신은 웅덩이를 밟고 웃었는데 나는 돌아서 갔소…" 듣는 내내 눈물 나는 노래 - 비 갠 자리 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+비가 갰어요 아침 공기가 씻겨서
+세상이 다 새것 같죠
+아이들이 웅덩이를 밟고 지나가요
+첨벙 첨벙 하늘이 부서지죠
+
+[Pre-Chorus]
+나는 그걸 피해서 걷죠
+오십 넘은 남자가 젖으면 안 되니까
+
+[Chorus]
+비 갠 자리마다 하늘이 고여 있죠
+당신은 그걸 밟고 아이처럼 웃었죠
+나는 돌아서 갔죠 바짓단 젖을까 봐
+그 양복은 옷장에 있고 당신은 없죠
+
+[Verse 2]
+그날로 돌아간다면 나는 밟을까요
+아마 또 돌아서 가겠죠 나는 그런 사람이니
+그러니 당신 잘못이 아니죠
+기다려준 것만 해도 오래 기다린 거죠
+
+[Chorus]
+비 갠 자리마다 하늘이 고여 있죠
+당신은 그걸 밟고 아이처럼 웃었죠
+나는 돌아서 갔죠 바짓단 젖을까 봐
+그 양복은 옷장에 있고 당신은 없죠
+
+[Final Chorus]
+비 갠 자리마다 하늘이 고여 있는데
+나는 평생 하늘을 피해서 걸었죠
+지금이라도 한번 밟아볼까 하다가
+오늘도 나는 그냥 돌아서 가고 말죠
+
+[Outro]
+웅덩이가 마르네요
+그럼… 그렇죠`},
+
+{title:"그 소나기가 중매쟁이", motif:"사십 년 전 시장 좌판 · 비닐 한 장 (흥형)", type:"heung",
+concept:"소나기 오던 시장 바닥에서 비닐 한 장 덮어준 게 인연이 돼서 — 나는 비만 오면 웃음이 난다.",
+yt:`"여보, 그 소나기가 우리 중매쟁이야!" 듣고 나면 웃음 나는 노래 - 그 소나기가 중매쟁이 | 강한결 자작곡 (신나는 트로트)`,
+lyrics:
+`[Verse 1]
+사십 년 전 남대문 그 좌판 앞
+갑자기 하늘이 터졌어
+다들 뛰는데 그 아가씨만
+비닐을 못 찾고 발만 동동
+
+[Pre-Chorus]
+내가 뭘 잘해서 그런 게 아니야
+그냥 그때 내 손에 비닐이 있었을 뿐
+
+[Chorus]
+그 소나기가 우리 중매쟁이야
+사십 년 전 그 시장 바닥에서
+비닐 한 장 덮어준 게 인연이 돼서
+나는 아직도 이 사람 짐을 들어
+
+[Verse 2]
+장모님이 물으셨지 뭐 하는 사람이냐고
+나는 대답을 못 하고 서 있었어
+그때 이 사람이 대신 말했지
+"비 올 때 뛰지 않은 사람이에요"
+
+[Break]
+
+[Bridge]
+오늘도 하늘이 컴컴하네
+여보 시장 가자 오늘
+비 오면 좋고 안 오면 말고
+어차피 나는 당신 짐을 들 거니까
+
+[Final Chorus]
+그 소나기가 우리 중매쟁이야
+남들은 비 오면 우산을 찾는데
+나는 비만 오면 웃음이 나서
+사십 년째 이 사람을 보고 웃어
+
+[Outro]
+비 온다 여보
+장바구니 어딨어`}
+];
+
+window.WB = {
+  key: 'hangyeol-rain_done',
+  songs: SONGS,
+  tags: s => [
+    {t: s.type === 'heung' ? '흥형 (밝고 신나게 · 120BPM)' : (s.type === 'han85' ? '한형 (애절 · 미디엄 85BPM)' : '한형 (애절 · 세미트로트 70BPM)'), hot: s.type === 'heung'},
+    {t: '소재 · ' + s.motif},
+    {t: '남성 보컬'},
+  ],
+  lyrics:  s => s.lyrics,
+  style:   s => s.type === 'heung' ? STYLE_HEUNG : (s.type === 'han85' ? STYLE_HAN85 : STYLE_HAN70),
+  excl:    s => s.type === 'heung' ? EXCL_HEUNG  : EXCL_HAN,
+  yt:      s => s.yt,
+  concept: s => s.concept,
+};
+</script>
+<script src="../assets/workboard.js"></script>
+</body>
+</html>

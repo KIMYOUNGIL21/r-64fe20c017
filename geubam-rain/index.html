@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윤하경 「비가 오면 다들 그 사람이 생각난다지만」 7곡 · 수노 작사 작업판</title>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>
+:root{--acc:#8fb3ff;--bg:#0b1120;--card:#121a30;--line:#2c3654;--dim:#8b96b5;--txt:#e8ecf5;--field:#0f1626;}
+/* 이 페이지 전용 — 공용 스킨(assets/workboard.css)엔 표 스타일이 없어 검토표용으로만 여기에 둔다.
+   공용 파일은 3채널이 함께 쓰므로 건드리지 않는다. */
+details.review table{width:100%;border-collapse:collapse;margin:12px 0 4px;font-size:12px;}
+details.review th,details.review td{border:1px solid var(--line);padding:7px 9px;text-align:left;
+  vertical-align:top;line-height:1.65;}
+details.review th{background:var(--field);color:var(--acc);font-weight:700;white-space:nowrap;}
+details.review td{color:var(--dim);}
+details.review td b{color:var(--txt);}
+/* 넓은 표는 페이지가 아니라 표 자신이 가로 스크롤한다 */
+details.review .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+details.review .tscroll table{min-width:720px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>윤하경 「비가 오면 다들 그 사람이 생각난다지만」 7곡</h1>
+    <p>그 밤 라디오 · 비를 7가지 방식으로 쓴 이별 발라드 · 여성 보컬</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+  <div style="text-align:center"><a class="home" href="../">← 작사 공방</a></div>
+
+  <div class="anatomy">
+    <b>스타일 해부 (이 앨범 = 비를 7번 다르게 쓰는 법)</b>
+    ① 이 앨범의 최대 위험: 발행곡 <b style="display:inline">「비처럼 음악처럼」</b>이 이미 "비가 오면 당신을 생각한다"는 자리를 먹었다. <b style="display:inline">그 문장으로 도착하는 곡은 7곡 중 0곡</b>이다<br>
+    ② 그래서 <b style="display:inline">"비를 어떻게 쓰는가"를 변주 격자의 축으로 승격</b> — 안 옴 / 배경 / 공범 / 고립 / 시간제한 / 지워짐 / 선택. 7곡 전부 다른 값<br>
+    ③ 앨범 곡선: <b style="display:inline">비가 안 오는 곡(1번)으로 열고, 비를 맞기로 하는 곡(7번)으로 닫는다.</b> 마른 우산 → 거절한 우산의 수미상관<br>
+    ④ 킥 공식: 전부 <b style="display:inline">파이널에서 뒤집힌다</b> (안 젖던 우산을 젖히러 나감 / 비가 그치자 들킴 / 개기를 포기하고 젖은 채 살기로 함 / 지워져서 슬픔)<br>
+    ⑤ 사운드: 4축(록·OST·어쿠스틱·시티팝)에 <b style="display:inline">피아노 발라드·소울 발라드 2축을 신설</b>해 6종. 전 곡 <code>centered dry lead vocal</code> + <code>instruments spread wide</code> — 웅장함은 악기로, 목소리는 끝까지 한 명
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div id="board"></div>
+
+  <details class="review">
+    <summary>① 변주 격자 (앨범이 왜 안 지루한가)</summary>
+    <div class="tscroll">
+    <table>
+      <tr><th>#</th><th>제목</th><th>★비 사용</th><th>화자</th><th>이별 시점</th><th>착지(온도)</th><th>어법</th><th>장르</th><th>온도</th></tr>
+      <tr><td>1</td><td>우산 두 개</td><td>비 안 옴 (마른 우산)</td><td>남은 사람</td><td>며칠 뒤</td><td>자기위로</td><td>존댓말</td><td>어쿠스틱 카페</td><td>45</td></tr>
+      <tr><td>2</td><td>먼저 놓은 손</td><td>배경 (회상 속 비)</td><td>★떠난 사람</td><td>1년 뒤</td><td>미안·고백</td><td>반말</td><td>록 발라드</td><td>90</td></tr>
+      <tr><td>3</td><td>네가 그치면 들켜</td><td>공범 (은폐물)</td><td>남은 사람 → 비에게 호명</td><td>그날 밤</td><td>미련</td><td>반말</td><td>드라마 OST</td><td>75</td></tr>
+      <tr><td>4</td><td>우리 집만 비가 와요</td><td>고립 (안 그침·국지적)</td><td>남은 사람</td><td>아직 못 보냄</td><td>원망</td><td>존댓말</td><td>피아노 발라드</td><td>60</td></tr>
+      <tr><td>5</td><td>비 그치기 전까지만</td><td>시간제한 (그치면 끝)</td><td>★짝사랑</td><td>시작도 못 함</td><td>체념</td><td>반말</td><td>소울 발라드</td><td>70</td></tr>
+      <tr><td>6</td><td>와이퍼를 껐어</td><td>지워짐 (지우는 도구)</td><td>남은 사람</td><td>지금 · 운전 중</td><td>미련</td><td>반말</td><td>시티팝</td><td>55</td></tr>
+      <tr><td>7</td><td>비 좀 맞다 갈게요</td><td>선택 (맞기로 함)</td><td>남은 사람</td><td>재회</td><td>축복</td><td>존댓말</td><td>드라마 OST</td><td>80</td></tr>
+    </table>
+    </div>
+    <p><b>제약 검사 (작사카드 8번)</b></p>
+    <ul>
+      <li><b>비 사용 축</b> — 7곡 7값, 중복 0. <b>창밖에 비 오는 장면으로 여는 곡은 3번 하나뿐</b>이다.</li>
+      <li><b>장르 2종 이상</b> ✅ 6종 (어쿠스틱·록·OST·피아노·소울·시티팝). OST 2곡(3·7)은 연속 아님.</li>
+      <li><b>화자 2종 이상</b> ✅ 3종. 같은 값 3연속 금지 → 남은 사람이 3·4로 2연속, 5(짝사랑)가 끊고, 6·7로 2연속. 3연속 없음.</li>
+      <li><b>온도 4종 이상</b> ✅ 5종 (자기위로·고백·미련·원망·체념·축복 = 실제 6종). 45→90→75→60→70→55→80, 같은 온도 3연속 없음.</li>
+      <li><b>어법</b> — 존/반/반/존/반/반/존. 반말 3연속 없음 (1번을 존댓말로 배정해 해소).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>② 훅 캠프 — 고른 것과 버린 것 (곡당 후보 3개 → 1개 채택)</summary>
+    <ul>
+      <li><b>1. 우산 두 개</b> — 후보: ⓐ「우산 두 개」(사물에 맺기) ⓑ「젖을 일이 없어서」(역설) ⓒ「현관은 그대로예요」(장면).
+        <b>채택 = ⓐ 제목 + ⓑ 킥.</b> 사물 하나로 곡을 통일하는 하얀거짓말 결에 ⓑ의 역설("안 젖는 게 슬프다")을 얹었다 — 「비처럼 음악처럼」의 정반대 자리(비가 안 온다)로 앨범을 여는 게 이 앨범의 선언이다. <i>버림 → 훅노트</i></li>
+      <li><b>2. 먼저 놓은 손</b> — 후보: ⓐ「나도 젖었어」 ⓑ「너는 못 봤겠지만」 ⓒ「나쁜 사람으로 남을게」.
+        <b>전원 탈락 후 재캠프 → 「먼저 놓은 손」.</b> ⓒ가 제일 셌지만 <b>카탈로그 「나를 미워해」</b>와 킥이 부딪혀 폐기. ⓐ는 우산이 또 나와 1·7번과 3중 충돌. 최종 킥 "먼저 놓은 손이 더 오래 저려"는 <b>떠난 쪽이 더 오래 앓는다</b>는 역설 — 채널 33곡 전부가 남은 사람의 노래인 최대 공백을 정면으로 판다. <i>버림 → 훅노트</i></li>
+      <li><b>3. 네가 그치면 들켜</b> — 후보: ⓐ「오늘은 네가 울어」(비에게 대신 울어달라) ⓑ「비야, 조금만 더」(그치면 들킨다) ⓒ「소리 좀 크게」(빗소리로 울음 가리기).
+        <b>채택 = ⓑ+ⓒ 합성.</b> 비를 계기(비 오면 네 생각)가 아니라 <b>공범</b>으로 쓴다. 「비처럼 음악처럼」과 비의 역할 자체가 반대다. <i>버림 → 훅노트</i></li>
+      <li><b>4. 우리 집만 비가 와요</b> — 후보: ⓐ「장마」 ⓑ「예보를 안 봐요」 ⓒ「장마전선」 ⓓ「우리 집만 비가 와요」.
+        <b>채택 = ⓓ.</b> ⓐⓑ는 "내 마음엔 아직 비가 내린다"는 <b>죽은 비유</b>로 도착해서 버렸다(그리고 ⓐ는 「비처럼 음악처럼」의 회상 구도에 너무 가까웠다). ⓓ는 같은 감정을 <b>옆집 빨래</b>라는 물리적 장면으로 바꿔놨다. <i>버림 → 훅노트</i></li>
+      <li><b>5. 비 그치기 전까지만</b> — 후보: ⓐ「비 그치기 전까지만」 ⓑ「처마 밑」 ⓒ「그치지 마」.
+        <b>채택 = ⓐ 제목.</b> ⓒ 킥("그치지 마 조금만 더")은 3번 킥("조금만 더 쏟아져 줘")과 앨범 안에서 정면 충돌해 폐기 → "비가 그치면 나는 남이 돼"로 교체. 비를 <b>관계의 타이머</b>로 쓴다. 짝사랑은 카탈로그 33곡에 0곡. <i>버림 → 훅노트</i></li>
+      <li><b>6. 와이퍼를 껐어</b> — 후보: ⓐ「와이퍼」("지워도 다시 맺혀" — 뻔함) ⓑ「와이퍼를 껐어」 ⓒ「신호 두 번」.
+        <b>채택 = ⓑ.</b> 킥 "흐려지니까 그제야 보여" — <b>선명하면 안 보이고 흐려야 보인다</b>는 뒤집기. 비를 유일하게 <b>지우는 쪽</b>으로 쓴 곡. 훅노트가 지적한 "시티팝 축이 카탈로그에 거의 없다"도 여기서 해결. <i>버림 → 훅노트</i></li>
+      <li><b>7. 비 좀 맞다 갈게요</b> — 후보: ⓐ「우산을 접었어요」 ⓑ「젖어도 괜찮아요」 ⓒ「먼저 가세요」.
+        <b>채택 = ⓒ 킥을 제목으로 승격.</b> ⓐ는 "우산을 접는다"가 같이 쓰자는 뜻으로 읽혀 축복이 안 됐다. 재회에서 <b>내미는 우산을 거절</b>하는 장면 하나로 보내주기를 완성한다. <i>버림 → 훅노트</i></li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>③ 소리내어 검수 (후렴 음절 수 · ±2 이내)</summary>
+    <ul>
+      <li><b>1. 우산 두 개</b> — 10 / 11 / 11 / 12 · 파이널 12 / 11 / 12 / 12 ✅</li>
+      <li><b>2. 먼저 놓은 손</b> — 11 / 12 / 12 / 11 ✅</li>
+      <li><b>3. 네가 그치면 들켜</b> — 10 / 10 / 11 / 10 · 파이널 10 / 9 / 10 / 10 ✅ (초안 "네가 그치면 내가 들켜" 9음절 → "나는 들켜" 10으로 맞춤)</li>
+      <li><b>4. 우리 집만 비가 와요</b> — 11 / 10 / 11 / 10 · 파이널 11 / 11 / 12 / 11 ✅</li>
+      <li><b>5. 비 그치기 전까지만</b> — 12 / 11 / 11 / 12 ✅ (초안 "개면 나는 다시 남이 돼" 9음절이 편차 3 → "그냥 남이 되는데" 11로 교체)</li>
+      <li><b>6. 와이퍼를 껐어</b> — 10 / 11 / 10 / 10 · 파이널 11 / 11 / 11 / 10 ✅</li>
+      <li><b>7. 비 좀 맞다 갈게요</b> — 12 / 10 / 12 / 11 ✅ (초안 "저는 비 좀 맞다 갈게요" 9 → "맞다가" 10, "젖는 건 제가 잘하니까요" 10 → "제가 좀" 11)</li>
+    </ul>
+    <p>고음 자리(후렴 첫·끝 음절) 받침 몰림 점검 — 7번 파이널 끝줄 "제가 맞을게요", 2번 "나만 다 알아" 등 <b>끝음절을 개음절(모음 종결)로</b> 정리해 벨팅 자리를 열어뒀다.</p>
+  </details>
+
+  <details class="review">
+    <summary>④ 자기복제 대조 — 카탈로그 33곡 + 앨범 내부 (실제로 고친 것)</summary>
+    <p><b>카탈로그 대조 (킥 단위)</b></p>
+    <ul>
+      <li><b>★「비처럼 음악처럼」(발행곡)</b> 킥 = "비가 내리고 음악이 흐르면 난 당신을 생각해요". <b>이 앨범 7곡 중 이 자리로 도착하는 곡 0개</b>(⑦ 근거 항목 참조). 그리고 <b>7곡 어디에도 '음악·라디오가 흘러서 당신이 생각난다'는 구도가 없다</b> — 6번 벌스의 라디오는 볼륨을 줄여 끄다시피 켜둔 소품이다.</li>
+      <li><b>「내가 먼저 돌아선 이유」(발행곡)</b> 킥 = "그날 밤 비는 오래도 내렸어". 2번이 같은 <b>먼저 떠난 화자</b>라 가장 위험했다. → 그 곡은 <b>떠난 이유를 해명</b>하는 곡, 2번은 <b>떠난 뒤 1년의 후유증</b>. 도착점이 반대고 킥에 비가 없다(비는 벌스 배경으로 내렸다). 제목도 설명형 vs 사물형으로 형태가 다르다.</li>
+      <li><b>「나를 미워해」(작사완료)</b> — 2번 훅 후보 ⓒ("네가 나를 미워해야 네가 살아")가 정면 충돌 → <b>후보째 폐기</b>하고 재캠프했다.</li>
+      <li><b>「너는 잘 지내더라」(훅노트 재고)</b> — 2번 브릿지 초안 "너는 잘 산다더라"가 이 재고를 소진해버려 <b>"네 이름이 검색되더라"로 교체</b>(재고 보존 + 더 구체적).</li>
+      <li><b>「네가 빌어준 행복」</b> 킥 "너는 웃으며 잘 살라 했지" — 7번 재회곡이 인접. 7번은 <b>말이 아니라 우산이라는 사물</b>로 보내주고, 축복하는 쪽이 반대(그 곡은 상대가 빌어줌 / 7번은 내가 빌어줌).</li>
+    </ul>
+    <p><b>앨범 내부 대조 (실제로 고친 것)</b></p>
+    <ul>
+      <li><b>"조금만 더" 충돌</b> — 3번 킥 "비야 조금만 더 쏟아져 줘"와 5번 킥 "그러니까 조금만 더 늦게 개"가 <b>둘 다 비에게 더 오라고 애원</b>했다. 두 곡이 같은 노래로 들린다. → 5번을 "그러니까 오늘 하루만 늦게 개"로 바꾸고 킥의 무게를 "비가 그치면 나는 남이 돼"로 이동.</li>
+      <li><b>우산 3중 충돌</b> — 1·7번이 우산 곡인데 2번 벌스 초안에도 "우산도 없이 걸었어"가 있었다. → 2번을 <b>"아무것도 안 챙기고 나왔어"</b>로 교체. 우산은 1번(마른 우산)·7번(거절한 우산) 둘만 남기고, 이건 <b>의도된 수미상관</b>으로 유지한다(앨범을 여닫는 같은 사물, 정반대 각도).</li>
+      <li><b>창문 연속 충돌</b> — 3번(창문을 다 열어놨어)과 4번(창문만 얼룩져요 / 아웃트로 "창문을 좀 열어둘게요")이 <b>연속 트랙에서 같은 소품</b>. → 4번을 "마당만 계속 질척여요" + 아웃트로 "빨래를 다시 널어요"로 교체(4번의 핵심 소품인 빨래로 통일돼 오히려 더 좋아졌다). 창문은 3번 전용.</li>
+      <li><b>"젖다/맞다" 과밀</b> — 1·2·4·7번에 분산돼 있었다. 컨셉상 자연스럽지만 2번 벌스 "천천히 젖어가면서 갔어"가 7번 후렴 "이 비를 다 맞고 갈게요"와 결이 겹쳐 → 2번을 "비가 쏟아지는데 하나도 안 추웠어"로 교체. <b>"젖는다"의 소유권은 7번(마지막 곡)에 몰아줬다.</b></li>
+      <li><b>어미</b> — 1·4·7 존댓말(~요/~니다), 2·3·5·6 반말. 한 곡 안에서 통일 ✅. 3연속 없음. 5·6이 반말 연속이라 5는 ~야/~어, 6은 ~어/~더라로 종결을 갈라놨다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑤ 히트곡제조기 통독 (노래로 상상하며 · 걸린 곳은 고쳤다)</summary>
+    <ul>
+      <li><b>1. 우산 두 개</b> — 킥 = "젖어야 우산인데 안 젖으면 그냥 짐인데 / 저도 그래요 요즘 울지 않아서 더 무거워요". <b>브릿지가 이 곡의 칼</b>이다. 초안은 후렴만 예쁘고 브릿지가 후렴 설명이었다 → "안 우는 게 더 무겁다"는 새 정보를 넣어 살렸다. 파이널에서 우산을 들고 나가 처음 젖는 것으로 뒤집힌다. 앨범 오프너로 45도 온도, 담백.</li>
+      <li><b>2. 먼저 놓은 손</b> — <b>앨범 최강 후보이자 채널의 빈 땅.</b> "떠난 쪽이 안 아픈 줄 알았지"는 이 채널 33곡 어디에도 없던 문장이다. 파이널 "나는 그날 이후로 개인 적이 없어"가 비 은유를 한 번만, 마지막에 쓴다. 록 발라드 90도.</li>
+      <li><b>2번 타겟 적합성 재검</b> — 떠난 사람 시점은 청취자가 이입 못 할 위험이 있다. 그래서 <b>"너는 몰라도 돼 나는 다 알아"</b>를 후렴 끝에 고정 리프레인으로 박았다 — 남은 사람이 들어도 "그 사람도 저랬을까"로 받는다. 마음치유 컨셉과도 맞다(원망 대신 이해를 준다).</li>
+      <li><b>3. 네가 그치면 들켜</b> — 킥 = "비가 그쳤어 나만 남았어 / 이제 우는 건 나 하나야". 첫 후렴은 비에게 부탁, 파이널은 <b>비가 부탁을 안 들어준 결과</b>. 사건이 파이널에서 끝난다. 드라마 OST 축이 이 폭발을 받는다.</li>
+      <li><b>4. 우리 집만 비가 와요</b> — 초안 착지가 "언제 개나요"로만 끝나 <b>징징댐</b>이었다(치유 컨셉 위반). → 파이널을 "언제 갤지 모르면 그냥 살래요 / 젖은 채로도 사람은 살아요"로 바꿔 <b>개기를 기다리는 사람에서 젖은 채 사는 사람으로</b> 넘겼다. 브릿지 "사람 하나 크기로 딱 그만큼만 오래도 내리는 비가 있어요"가 이 곡의 이미지.</li>
+      <li><b>5. 비 그치기 전까지만</b> — 킥 = "너한테 비는 잠깐 멈춘 거고 / 나한테 비는 전부였는데". 같은 비가 두 사람에게 정반대 크기라는 것. 아웃트로 "혼자 있는 처마는 넓다" 한 줄로 닫는다. 소울 발라드의 허스키가 이 체념을 받는다.</li>
+      <li><b>6. 와이퍼를 껐어</b> — 킥 = "앞이 훤해졌어 갈 수는 있어 / 그게 제일 슬픈 밤이었어". <b>지울 수 있게 된 게 슬프다</b> — 미련의 가장 늦은 단계. 벌스 "조수석엔 아무도 안 앉는데 / 안전벨트 경고음은 안 울려"가 설명 없이 부재를 그린다. 앨범의 숨 고르기(55도)이자 유일한 그루브.</li>
+      <li><b>7. 비 좀 맞다 갈게요</b> — <b>앨범을 닫는 곡.</b> 킥 = "당신 몫까지 제가 맞을게요". 브릿지 "뒤를 안 돌아보는 게 고마웠어요 정말로"가 이 곡의 품격 — 원망 한 줄 없이 축복이 된다. 마지막 줄 <b>"비가 참 따뜻하네요"</b>가 앨범 전체의 착지다(1번의 마른 우산에서 출발해 여기서 비를 받아들인다).</li>
+      <li><b>앨범 곡선</b> — 45 → 90 → 75 → 60 → 70 → 55 → 80. 2번에서 일찍 터뜨리고 6번에서 가장 낮춘 뒤 7번으로 조용히 올려 닫는다. 비슷한 온도가 연달아 붙은 구간 없음. 선공개 권장 = <b>2번(먼저 놓은 손)</b> — 채널에 없던 시점이라 제목·썸네일 모두 새 각도가 나온다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑥ 원곡 웹 대조 (기억 대조 금지 — 실제로 열었다)</summary>
+    <p>「비처럼 음악처럼」 사고(첫 소절 verbatim 인용, QA 적발) 재발 방지. 비 소재 한국 발라드는 지뢰밭이라 <b>소재·제목·도착점을 웹에서 실제로 확인</b>했다.</p>
+    <div class="tscroll">
+    <table>
+      <tr><th>대조한 곡</th><th>확인 방법</th><th>결과</th></tr>
+      <tr><td><b>김현식 「비처럼 음악처럼」</b> (1986, 작사 박성식)</td><td>나무위키 · 벅스 · 가사 페이지 웹 조회</td><td>✅ <b>겹침 없음.</b> 원곡 = 비+음악이 계기가 되어 당신을 회상(존댓말). 이 앨범은 비를 계기로 쓰지 않는다. 어구·첫 소절 일치 0. <b>'음악/라디오가 흘러서 그 사람이 생각난다'는 구도 자체를 7곡에서 금지</b>했다</td></tr>
+      <tr><td><b>럼블피쉬 「비와 당신」</b> (원곡 박중훈)</td><td>가사집 페이지 실제 조회 → 소재·도착점 추출</td><td>✅ <b>겹침 없음.</b> 원곡 소재 = 빗소리·눈물·발걸음, 도착점 = "괜찮다 하지만 눈물이 흐른다". 이 앨범에서 <b>"빗소리에 운다"로 도착하는 곡 0개</b> — 3번이 가장 가까웠으나 정반대다(빗소리로 울음을 <b>숨긴다</b>, 그리고 비가 그쳐서 들킨다)</td></tr>
+      <tr><td><b>부활 「비와 당신의 이야기」</b></td><td>나무위키 곡 배경·후렴 성립 경위 조회</td><td>✅ <b>겹침 없음.</b> 원곡 = 바닷가 모래사장의 두 발자국, 후렴 = "사랑해" 반복. 이 앨범엔 바다·모래·발자국 소재 0, "사랑해" 리프레인 0</td></tr>
+      <tr><td><b>비스트 「비가 오는 날엔」</b></td><td>나무위키 조회 (비 오면 차트인하는 대표곡이라 추가 대조)</td><td>✅ <b>겹침 없음.</b> "비 오는 날엔 네 생각"이라는 도착점 — 이 앨범 7곡 중 해당 0개</td></tr>
+      <tr><td><b>에픽하이/윤하 「우산」</b></td><td>멜론 · 벅스 · 나무위키 조회 (1·7번이 우산 곡이라 필수 대조)</td><td>✅ <b>겹침 없음.</b> 제목 상이(「우산」 vs 「우산 두 개」·「비 좀 맞다 갈게요」). 원곡은 랩 기반 + 우산=너라는 은유. 이 앨범의 우산은 은유가 아니라 <b>현관에 실제로 놓인 물건</b>(1번) / <b>내밀었다가 거절당하는 물건</b>(7번)</td></tr>
+      <tr><td><b>「우산 두 개」 제목 검색</b></td><td>가요 제목 검색</td><td>✅ <b>동명곡 없음</b> (검색 결과는 전부 에픽하이·윤하·보카로 「우산」)</td></tr>
+      <tr><td><b>「먼저 놓은 손」 제목 검색</b></td><td>가사·제목 검색</td><td>✅ <b>동명곡 없음.</b> 인접 = bSound 「니가 먼저 내 손을 놓은 거야」(무명). 제목 상이 + <b>방향이 반대</b>(그 곡=네가 놓았다는 원망 / 이 곡=내가 놓았고 내가 더 아프다)</td></tr>
+      <tr><td><b>「와이퍼」 제목 검색</b></td><td>발라드 제목 검색</td><td>✅ <b>동명곡 없음</b> (한국 발라드에 해당 제목 곡 미확인)</td></tr>
+      <tr><td><b>「비 그치기 전까지만」 제목 검색</b></td><td>제목 검색</td><td>✅ <b>동명곡 없음.</b> 인접 = 보카로 「팔 일째, 비가 그치기 전에」(일본곡, 무관)</td></tr>
+      <tr><td>「네가 그치면 들켜」 · 「우리 집만 비가 와요」 · 「비 좀 맞다 갈게요」</td><td>제목 검색</td><td>✅ <b>동명곡 없음</b> — 전부 신규 창작 제목</td></tr>
+    </table>
+    </div>
+    <p><b>금지 제목 준수</b> ✅ — 「비와 당신」 · 「비와 당신의 이야기」 · 「비처럼 음악처럼」 전부 미사용.<br>
+    <b>수노 스타일 칸 가수명·곡명</b> ✅ 0건 (전 곡 묘사로만).</p>
+  </details>
+
+  <details class="review">
+    <summary>⑦ 수노 프롬프트 (7칸 양식 · 검사기 통과 기록)</summary>
+    <ul>
+      <li>작사카드 4축(①록 발라드 ②드라마 OST ③어쿠스틱 카페 ④시티팝)에서 5곡을 배정했다 — 2번=①, 3·7번=②, 1번=③, 6번=④.</li>
+      <li><b>2축 신설</b>: 4번(피아노 발라드) · 5번(소울 발라드)은 기존 4축에 안 맞아 <b>7칸 양식으로 새로 짰다.</b> 검사기 실측 = <b>피아노 888자 / 소울 882자, 트리거 잔존 0, exit 0.</b> 둘 다 940자 이내 통과.</li>
+      <li><b>Development는 전 곡 흐름 문장</b>(Starts with… / Verse stays… / Pre-chorus gradually builds… / Chorus opens with… / Bridge drops down to… / Final chorus returns with…) — 그밤식 빌드업(첫 코러스 약·파이널 최강)을 프롬프트에 직접 박았다.</li>
+      <li><b>의도적으로 켜둔 트리거</b> — 2번(록 발라드)의 <code>the most explosive chorus of the song</code>(L1). 카드 9번 ①축의 기존 판정을 그대로 따른다: 파이널 1회로만 유지, <code>centered dry close-mic lead vocal</code>로 딸려오는 군중·홀 울림 상쇄. <b>딸려온 게 아니라 시킨 것이다.</b></li>
+      <li><b>신설 2축은 L·D 트리거를 하나도 켜지 않았다</b> — 4번은 원망을 <b>참는</b> 곡, 5번은 체념하는 곡이라 폭발이 정체성이 아니다. 두 곡 다 <code>a clear emotional rise</code> + <code>let go rather than pushed</code>(4번) / <code>the voice fraying on the last line</code>(5번)으로 착지한다.</li>
+      <li><b>전 곡 공통</b>: <code>one voice only</code> + <code>centered dry close-mic lead vocal</code> + <code>instruments spread wide</code>. 윤하경은 <b>한 명이 참다가 무너지는</b> 목소리다 — 웅장함은 편성으로 만들지 목소리 수로 만들지 않는다. Exclude에 <code>choir</code>·<code>layered vocals</code> 계열 전량 유지.</li>
+    </ul>
+  </details>
+
+  <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
+  곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
+</div>
+
+<script>
+const S_ROCK = `1990s Korean rock ballad. Desperate, aching, defiant. Clean electric guitar arpeggios and music-box-like piano, distorted guitar wall, separated strings, deep tom drums, guitar solo before the last chorus. Single clear female lead vocal, restrained and almost whispered in the verse, opening into a raspy mixed-belt that cracks at the top, one voice only. 73 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, roomy reverb on the drums and strings only, clean separated mix. Starts with the chorus hook at half strength over lone piano. Verse stays hushed and close, arpeggios only. Pre-chorus gradually builds as strings and drums enter. Chorus opens with the full guitar wall and a powerful mixed-belt. Bridge drops down to bare piano and a trembling near-silent voice. Final chorus returns with the most explosive chorus of the song, half-time drums, strings at full height, the voice breaking on the last line.`;
+
+const S_OST = `Korean drama OST ballad. Cinematic, aching, tender. Soft grand piano intro, full orchestra with sweeping strings, oboe and cello counter-melodies, timpani and orchestral swells, no synths. Single clear female lead vocal, conversational and restrained, opening into a powerful mixed-belt with a fragile break, one voice only. 74 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide across the stereo field, orchestral depth with controlled reverb, clean separated mix. Starts with the chorus melody quietly over lone piano. Verse stays intimate and close, piano and low strings only. Pre-chorus gradually builds as the string section rises underneath. Chorus opens with the full orchestra lifting under a strong lead-vocal line. Bridge drops down to bare piano and a near-whispered voice. Final chorus returns a whole level higher, strings at full height, a lifted melodic climax carried by the single voice.`;
+
+const S_ACOU = `Korean acoustic pop ballad. Warm, bittersweet, intimate. Fingerpicked steel-string acoustic guitar, soft brushed drums, gentle cello and upright bass, a little rhodes. Single clear female lead vocal, close and conversational, breathy in the low register, gently belted at the peak, one voice only. 90 BPM, major key with a minor turn. Very dry studio recording, close-mic vocal centered and upfront, crisp acoustic guitar, instruments spread wide, minimal reverb, clean vivid mix. Starts with the chorus sung softly over a single guitar. Verse stays quiet and unhurried, guitar and brushed drums only. Pre-chorus gradually builds as cello and bass slip in underneath. Chorus opens with fuller strumming and a warmer, rounder vocal. Bridge drops down to voice and guitar alone, almost breathing. Final chorus returns with the whole band and a controlled emotional rise, the last line let go rather than pushed.`;
+
+const S_CITY = `Korean city pop. Nostalgic, lonely, bittersweet. Retro 80s analog synths, smooth electric piano, mellow funky bassline, clean chorus-effect guitar, brushed gated drums, saxophone line in the outro. Single clear female lead vocal, cool and understated, breathy phrasing, opening into a soft belt at the peak, one voice only. 100 BPM, minor key with major-seventh color. Centered dry close-mic lead vocal, instruments spread wide, lush analog reverb on the instruments only, warm tape saturation, clean separated mix. Starts with the chorus hook over electric piano. Verse stays laid-back on a walking bass and light groove. Pre-chorus gradually builds as synth pads and hi-hats open up. Chorus opens with the full retro groove and a lifted melodic line. Bridge drops down to electric piano and a hushed voice. Final chorus returns with the saxophone answering the vocal and the groove at full width.`;
+
+const S_PIANO = `Korean piano ballad. Melancholic, subdued, quietly resentful. Solo grand piano throughout, sparse cello, a thin high string line entering late, brushed drums only in the final section, no synths. Single clear female lead vocal, conversational and restrained, opening into a controlled mixed-belt with a fragile break, one voice only. 66 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, natural piano room tone, minimal reverb, clean separated mix. Starts with the chorus melody over lone piano, unaccompanied. Verse stays hushed and close, piano only. Pre-chorus gradually builds as the cello slips in underneath. Chorus opens with fuller piano voicing and a warmer vocal. Bridge drops down to a near-whispered voice and single piano notes. Final chorus returns with strings and brushed drums and a clear emotional rise, the last line let go rather than pushed.`;
+
+const S_SOUL = `Korean soul ballad. Aching, smoky, restrained longing. Warm rhodes electric piano, gospel-tinged organ pad, upright bass, soft rimshot drums, a lone muted trumpet answering in the final section. Single clear female lead vocal, husky and low in the verse, opening into a raspy gospel-inflected belt, one voice only. 68 BPM, minor key with bluesy sevenths. Centered dry close-mic lead vocal, instruments spread wide, warm analog room on the instruments only, clean separated mix. Starts with the chorus hook over lone rhodes. Verse stays low and conversational, rhodes and brushed rimshot only. Pre-chorus gradually builds as organ and upright bass swell underneath. Chorus opens with the full band and a husky belt. Bridge drops down to voice and rimshot alone. Final chorus returns with the trumpet answering the vocal and a clear emotional rise, the voice fraying on the last line.`;
+
+const E_BASE = `crowd vocals, audience cheering, crowd clapping, live concert ambience, arena reverb, stadium chant, gang vocals, choir-like crowd, sing-along, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, vocal stack, harmony vocals, vocal harmonies, backing vocals, background vocals, choir, group vocals, wide vocals, wide stereo vocals, wide chorus, spoken word intro, rap, hip hop, EDM, trap, autotune, male vocal, duet, modern idol pop production, trot`;
+
+const E_ROCK = E_BASE + `, heavy metal, metalcore, screamo, upbeat dance beat`;
+const E_BAL  = E_BASE + `, upbeat dance beat`;
+const E_CITY = E_BASE + `, EDM drop, vocal chops`;
+
+const SONGS = [
+{title:"우산 두 개", motif:"현관의 마른 우산 · 비가 안 옴", style:S_ACOU, excl:E_BAL, genre:"어쿠스틱 카페 · 90 BPM",
+concept:"현관에 우산이 아직 두 개인데 하나는 오래 젖지 못했다 — 젖어야 우산인데, 안 젖어서 짐이 됐다.",
+yt:`"안 우는 게 더 무겁다는 걸 처음 알았습니다.." 담담하게 부르다 마지막 한 줄에서 놓치는 노래, '우산 두 개' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white cotton shirt, standing just inside a dim entryway. She is looking straight into the camera, chin slightly lowered, eyes steady and dry. Behind her, deeply out of focus, two umbrellas lean against the wall — extreme bokeh, only their shapes readable. Soft cool daylight from a doorway on the left, deep shadow on the right side of her face. Shallow depth of field, 85mm, cinematic muted blue-grey grade, film grain. No text.`,
+shorts:`현관에 우산이 아직 두 개예요. 하나는 몇 달째 마른 채로. 젖어야 우산인데.. 🌂 #윤하경 #우산두개 #이별노래 #감성발라드`,
+lyrics:
+`[Chorus]
+현관엔 아직 우산이 두 개
+하나는 오래 젖지 못했어요
+비가 와도 꺼내지 않는 우산
+그게 당신인 걸 이제 압니다
+
+[Verse 1]
+먼지가 앉았어요 손잡이 위로
+당신 손이 마지막이었던 자리
+버리자 버리자 몇 번을 했는데
+손이 자꾸 다른 걸 집어요
+
+[Pre-Chorus]
+장마가 왔다 갔고
+여름이 다 지났는데
+저 하나만 아직도
+그날에 서 있어요
+
+[Chorus]
+현관엔 아직 우산이 두 개
+하나는 오래 젖지 못했어요
+쓰지도 버리지도 못한 채로
+마른 채로 저를 닮아갑니다
+
+[Bridge]
+젖어야 우산인데
+안 젖으면 그냥 짐인데
+저도 그래요 요즘
+울지 않아서 더 무거워요
+
+[Final Chorus]
+오늘은 그 우산을 들고 나가요
+당신 없는 비를 처음 맞아요
+접지 않을게요 다 젖을 때까지
+이제야 우산이 우산이 됩니다
+
+[Outro]
+현관엔 이제 우산이 하나`},
+
+{title:"먼저 놓은 손", motif:"떠난 사람의 1년 뒤 · 비는 회상 속 배경", style:S_ROCK, excl:E_ROCK, genre:"록 발라드 (90s 처절) · 73 BPM",
+concept:"★채널 33곡 전부 남은 사람의 노래였다. 이건 떠난 쪽의 노래 — 먼저 놓은 손이 더 오래 저리다.",
+yt:`"떠난 사람은 안 아픈 줄 알았습니다.." 후반부에 목이 갈라지며 무너지는 록발라드, '먼저 놓은 손' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, photographed from slightly below. She is looking directly into the camera, jaw tight, one hand half-raised near her chest with the fingers open, as if she has just let go of something. Harsh single light from the upper right, the left half of her face falling into deep shadow. Background is a rain-blurred night street, extreme bokeh of scattered streetlight orbs. 85mm, shallow depth of field, desaturated cinematic grade, heavy film grain. No text.`,
+shorts:`떠난 사람은 안 아픈 줄 알았죠? 먼저 놓은 손이 더 오래 저려요. 나는 그날 이후로 갠 적이 없어. #윤하경 #먼저놓은손 #록발라드 #이별`,
+lyrics:
+`[Chorus]
+먼저 놓은 손이 더 오래 저려
+네가 아는 나는 나쁜 사람이야
+그렇게 둘게 그게 나은 거니까
+너는 몰라도 돼 나는 다 알아
+
+[Verse 1]
+그날 나는 아무것도 안 챙기고 나왔어
+비가 쏟아지는데 하나도 안 추웠어
+울면 붙잡힐까 봐 뛰지도 못하고
+뒤도 안 돌아보고 그냥 걸었어
+
+[Pre-Chorus]
+너는 창가에 있었지
+내 뒷모습만 봤겠지
+돌아서는 얼굴은
+아무도 못 봤어
+
+[Chorus]
+먼저 놓은 손이 더 오래 저려
+네가 아는 나는 나쁜 사람이야
+그래야 네가 나를 지울 수 있어
+너는 몰라도 돼 나는 다 알아
+
+[Bridge]
+일 년이 지났는데
+네 이름이 검색되더라
+나는 아직 그 골목
+그 비 속에 서 있어
+
+[Final Chorus]
+먼저 놓은 손이 먼저 부서져
+떠난 쪽이 안 아픈 줄 알았지
+나는 그날 이후로 개인 적이 없어
+너는 몰라도 돼 나만 다 알아
+
+[Outro]
+잘 지내 나는 여기서`},
+
+{title:"네가 그치면 들켜", motif:"비에게 말 걸기 · 비가 공범", style:S_OST, excl:E_BAL, genre:"드라마 OST · 74 BPM",
+concept:"빗소리로 울음을 숨긴 밤 — 비야 조금만 더 쏟아져 줘, 네가 그치면 나는 들켜.",
+yt:`"비가 그치는 순간 무너집니다.." 빗소리 뒤에 숨어 우는 사람의 노래, '네가 그치면 들켜' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, sitting in an unlit room beside a wide-open window at night. She is looking straight into the camera, expression composed, absolutely dry-eyed. Rain streaks the window behind her, city lights dissolving into extreme bokeh. Only cold blue window light reaches her face; the rest of the room is black. 85mm, shallow depth of field, cinematic teal-and-shadow grade, film grain. No text.`,
+shorts:`비야, 조금만 더 쏟아져 줘. 네가 그치면 나는 들켜. ..그리고 비가 그쳤어요. #윤하경 #네가그치면들켜 #비오는날 #이별발라드`,
+lyrics:
+`[Chorus]
+비야 조금만 더 쏟아져 줘
+네가 그치면 나는 들켜
+네 소리에 내 소리를 숨겼어
+오늘 밤만 나를 좀 덮어 줘
+
+[Verse 1]
+창문을 다 열어놨어 시끄럽게
+누가 우는지 모르게 해 놓고
+불도 안 켜고 그냥 앉아 있었어
+어두우면 얼굴도 안 보이니까
+
+[Pre-Chorus]
+사람들은 비를 싫어해
+나는 오늘 고마웠어
+세상에서 유일하게
+내 편을 들어준 게 너야
+
+[Chorus]
+비야 조금만 더 쏟아져 줘
+네가 그치면 나는 들켜
+네 소리에 내 소리를 숨겼어
+오늘 밤만 나를 좀 덮어 줘
+
+[Bridge]
+새벽 네 시가 넘고
+빗줄기가 가늘어져
+안 돼 아직 아니야
+나 아직 안 끝났어
+
+[Final Chorus]
+비가 그쳤어 나만 남았어
+이제 우는 건 나 하나야
+숨을 데가 없어서 알았어
+나는 진작 무너져 있었어
+
+[Outro]
+창밖이 조용해`},
+
+{title:"우리 집만 비가 와요", motif:"옆집 빨래 · 국지적인 비", style:S_PIANO, excl:E_BAL, genre:"피아노 발라드 (신설 축) · 66 BPM",
+concept:"옆집은 빨래를 다 걷었는데 우리 집만 아직 비가 온다 — 사람 하나 크기로 딱 그만큼만 내리는 비.",
+yt:`"세상에서 나만 아직 안 갠 것 같을 때.." 피아노 한 대로 시작해 마지막에 터지는 노래, '우리 집만 비가 와요' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white cotton shirt, standing on a small veranda holding a damp shirt she has just taken off the line. She looks straight into the camera, mouth closed, eyes tired but calm. Behind her the sky is split — bright dry sunlight far in the background, grey drizzle close around her, extreme bokeh. Flat overcast light on her face. 85mm, shallow depth of field, muted cinematic grade, film grain. No text.`,
+shorts:`옆집은 빨래를 다 걷었는데, 우리 집만 아직 비가 와요. 지도에 안 나오는 비가 있어요. ☔ #윤하경 #우리집만비가와요 #피아노발라드`,
+lyrics:
+`[Chorus]
+옆집은 빨래를 다 걷었는데
+우리 집만 아직 비가 와요
+해가 저 집 위에만 뜨나 봐요
+저는 언제 개나요 언제쯤
+
+[Verse 1]
+사람들은 우산을 접고 웃어요
+바닥이 마르고 아이들이 뛰어요
+같은 하늘 아래 같은 동네인데
+저희 집 마당만 계속 질척여요
+
+[Pre-Chorus]
+당신이 두고 간 게
+이 비였나 봐요
+치우고 치워도
+자꾸 고여 있어요
+
+[Chorus]
+옆집은 빨래를 다 걷었는데
+우리 집만 아직 비가 와요
+그 사람도 지금쯤 개었겠죠
+저만 여기 남아서 젖어요
+
+[Bridge]
+기상청도 모르는 게 있어요
+지도에 안 나오는 비가 있어요
+사람 하나 크기로 딱 그만큼만
+오래도 내리는 비가 있어요
+
+[Final Chorus]
+빨래를 걷었어요 오늘 처음
+아직 축축한 채로 걷었어요
+언제 갤지 모르면 그냥 살래요
+젖은 채로도 사람은 살아요
+
+[Outro]
+빨래를 다시 널어요`},
+
+{title:"비 그치기 전까지만", motif:"처마 밑 짝사랑 · 비가 타이머", style:S_SOUL, excl:E_BAL, genre:"소울 발라드 (신설 축) · 68 BPM",
+concept:"★카탈로그에 짝사랑 곡이 0곡이었다. 비 그치기 전까지만 네 옆 — 개면 나는 그냥 남이 된다.",
+yt:`"고백도 못 해본 사람만 압니다.." 허스키한 목소리로 끝까지 참다가 갈라지는 노래, '비 그치기 전까지만' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, standing pressed under a narrow shop eave during rain. She is looking straight into the camera, shoulders drawn in, arms held close to her body, a small restrained smile that does not reach her eyes. Rain falls in a bright blurred curtain just past her shoulder; the street beyond dissolves into extreme bokeh. Warm shop light from behind, cool rain light on her face. 85mm, shallow depth of field, cinematic amber-and-grey grade, film grain. No text.`,
+shorts:`비 그치기 전까지만 네 옆이야. 개면 나는 그냥 남이 되는데.. 그러니까 오늘 하루만 늦게 개. #윤하경 #비그치기전까지만 #짝사랑 #소울발라드`,
+lyrics:
+`[Chorus]
+비 그치기 전까지만 네 옆이야
+개면 나는 그냥 남이 되는데
+처마 밑 이 한 뼘이 내 자리야
+그러니까 오늘 하루만 늦게 개
+
+[Verse 1]
+버스는 십 분마다 오는데
+너는 두 대를 그냥 보냈어
+비 때문이라고 했지 웃으면서
+나는 그 말을 오래 씹었어
+
+[Pre-Chorus]
+어깨가 닿을 듯 말 듯
+그 사이가 딱 우리야
+좁힐 수도 없고
+벌릴 수도 없는
+
+[Chorus]
+비 그치기 전까지만 네 옆이야
+개면 나는 그냥 남이 되는데
+처마 밑 이 한 뼘이 내 자리야
+그러니까 오늘 하루만 늦게 개
+
+[Bridge]
+네 전화가 울렸어
+너는 등을 돌리고
+목소리가 달라져
+나는 이미 알았어
+
+[Final Chorus]
+비가 갰어 너는 바로 뛰어갔어
+나는 한참 처마 밑에 있었어
+너한테 비는 잠깐 멈춘 거고
+나한테 비는 전부였는데
+
+[Outro]
+혼자 있는 처마는 넓다`},
+
+{title:"와이퍼를 껐어", motif:"갓길 · 비를 지우는 도구", style:S_CITY, excl:E_CITY, genre:"시티팝 (레트로) · 100 BPM",
+concept:"와이퍼가 자꾸 너를 지워서 껐다 — 흐려지니까 그제야 보이고, 선명한 밤엔 네가 없더라.",
+yt:`"차 안에서 혼자 듣다가 갓길에 세웠습니다.." 밤 드라이브 시티팝인데 가사가 아픈 노래, '와이퍼를 껐어' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, sitting in the driver's seat of a parked car at night, hands still resting on the wheel. She is looking straight into the camera, eyes unfocused and heavy. The windshield behind her is covered in unwiped rain, city neon smearing into extreme bokeh of red and blue orbs. Dashboard glow underlights her face, everything else dark. 85mm, shallow depth of field, retro 80s cinematic grade, film grain. No text.`,
+shorts:`갓길에 차를 세우고 와이퍼를 껐어. 흐려지니까 그제야 보여. 선명한 밤엔 너는 없더라. 🚗 #윤하경 #와이퍼를껐어 #시티팝 #밤드라이브`,
+lyrics:
+`[Chorus]
+갓길에 차를 세우고 껐어
+와이퍼가 자꾸 너를 지워서
+흐려지니까 그제야 보여
+선명한 밤엔 너는 없더라
+
+[Verse 1]
+라디오는 켜둔 채로 볼륨만 줄여
+네가 좋아하던 채널 그대로야
+조수석엔 아무도 안 앉는데
+안전벨트 경고음은 안 울려
+
+[Pre-Chorus]
+와이퍼는 참 성실해
+한 번에 다 지워버려
+나도 저렇게 되면
+편하긴 하겠지
+
+[Chorus]
+갓길에 차를 세우고 껐어
+와이퍼가 자꾸 너를 지워서
+흐려지니까 그제야 보여
+선명한 밤엔 너는 없더라
+
+[Bridge]
+유리에 번진 불빛이
+네 웃는 눈을 닮았어
+초점을 안 맞추면
+아직 옆에 있는 것 같아
+
+[Final Chorus]
+다시 켰어 이제 가야 되니까
+와이퍼가 너를 한 번에 지워
+앞이 훤해졌어 갈 수는 있어
+그게 제일 슬픈 밤이었어
+
+[Outro]
+깜빡이를 켜고 나왔어`},
+
+{title:"비 좀 맞다 갈게요", motif:"재회 · 내미는 우산을 거절", style:S_OST, excl:E_BAL, genre:"드라마 OST · 74 BPM",
+concept:"삼 년 만에 마주친 횡단보도, 당신이 우산을 내밀었다 — 그 우산은 이제 두 사람 거니까 저는 비 좀 맞다 갈게요.",
+yt:`"마지막 한 줄에서 결국 무너집니다.." 원망 한 줄 없이 보내주는 노래, '비 좀 맞다 갈게요' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt soaked through at the shoulders, standing at a crosswalk in the rain without an umbrella. She is looking straight into the camera, water running down her face, a faint calm smile, eyes open and unflinching. Far behind her, an umbrella and two blurred figures walk away — extreme bokeh, unreadable. Cool rain light with warm traffic light spill. 85mm, shallow depth of field, cinematic grade, film grain. No text.`,
+shorts:`삼 년 만에 마주쳤는데 우산을 내밀더라고요. 그 우산은 이제 두 사람 거잖아요. 먼저 가세요. #윤하경 #비좀맞다갈게요 #재회 #이별발라드`,
+lyrics:
+`[Chorus]
+먼저 가세요 우산 쓰고 가세요
+저는 비 좀 맞다가 갈게요
+그 우산은 이제 두 사람 거니까
+젖는 건 제가 좀 잘하니까요
+
+[Verse 1]
+횡단보도 앞에서 마주쳤어요
+삼 년 만인데 바로 알아봤어요
+당신은 웃었고 저도 웃었고
+옆에 선 분이 참 고우시더라고요
+
+[Pre-Chorus]
+우산을 내밀길래
+손이 먼저 물러났어요
+그 자리 하나 남은 걸
+제가 왜 모르겠어요
+
+[Chorus]
+먼저 가세요 우산 쓰고 가세요
+저는 비 좀 맞다가 갈게요
+그 우산은 이제 두 사람 거니까
+젖는 건 제가 좀 잘하니까요
+
+[Bridge]
+신호가 바뀌었고
+당신은 건너갔고
+뒤를 안 돌아보는 게
+고마웠어요 정말로
+
+[Final Chorus]
+잘 가세요 그 우산 놓지 마세요
+저는 이 비를 다 맞고 갈게요
+오늘 다 젖으면 다 마를 테니까
+당신 몫까지 제가 맞을게요
+
+[Outro]
+비가 참 따뜻하네요`}
+];
+
+window.WB = {
+  key: 'geubamrain_done',
+  songs: SONGS,
+  tags: s => [
+    {t: s.genre, hot: true},
+    {t: '소재 · ' + s.motif},
+    {t: '여성 보컬 · 한 명만'},
+  ],
+  lyrics:  s => s.lyrics,
+  style:   s => s.style,
+  excl:    s => s.excl,
+  yt:      s => s.yt,
+  thumb:   s => s.thumb,
+  concept: s => s.concept,
+};
+</script>
+<script src="../assets/workboard.js"></script>
+</body>
+</html>
