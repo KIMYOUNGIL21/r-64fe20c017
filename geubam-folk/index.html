@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윤하경 「지나온 밤들」 7곡 · 수노 작사 작업판</title>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>
+:root{--acc:#8fb3ff;--bg:#0b1120;--card:#121a30;--line:#2c3654;--dim:#8b96b5;--txt:#e8ecf5;--field:#0f1626;}
+/* 이 페이지 전용 — 공용 스킨(assets/workboard.css)엔 표 스타일이 없어 검토표용으로만 여기에 둔다.
+   공용 파일은 3채널이 함께 쓰므로 건드리지 않는다. */
+details.review table{width:100%;border-collapse:collapse;margin:12px 0 4px;font-size:12px;}
+details.review th,details.review td{border:1px solid var(--line);padding:7px 9px;text-align:left;
+  vertical-align:top;line-height:1.65;}
+details.review th{background:var(--field);color:var(--acc);font-weight:700;white-space:nowrap;}
+details.review td{color:var(--dim);}
+details.review td b{color:var(--txt);}
+/* 넓은 표는 페이지가 아니라 표 자신이 가로 스크롤한다 */
+details.review .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+details.review .tscroll table{min-width:760px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>윤하경 「지나온 밤들」 7곡</h1>
+    <p>그 밤 라디오 · 김광석의 결로 부르는 삶·세월·청춘 · 여성 보컬</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+  <div style="text-align:center"><a class="home" href="../">← 작사 공방</a></div>
+
+  <div class="anatomy">
+    <b>스타일 해부 (이 앨범 = 이별 채널에 "삶"을 들이는 김광석 접목)</b>
+    ① 카탈로그 44곡은 <b style="display:inline">거의 전부 연인 이별</b>이다. 김광석의 결은 이별만이 아니라 <b style="display:inline">나이 듦·떠남·상실·위로·청춘·세월</b>을 담담하게 노래한다 — 그래서 이 앨범은 <b style="display:inline">카탈로그의 최대 빈 땅(이별 아닌 삶)을 판다.</b> 겹치지 않는 이유이자 정체성<br>
+    ② 김광석 대표곡의 <b style="display:inline">정서(결)만</b> 하나씩 대응시키고 <b style="display:inline">가사·소재는 전부 새로</b> 썼다 — 서른 즈음에→나이 / 이등병의 편지→떠남 / 사랑했지만→세월 속 첫사랑 / 먼지가 되어→상실 / 일어나→위로 / 그날들→청춘 / 음악→마무리<br>
+    ③ 킥은 전부 <b style="display:inline">일상의 사물·장면 하나</b>로 잡았다 (케이크 초 / 벽의 액자 자국 / 서랍 속 사진 / 녹슨 자전거 / 각자 피는 꽃 / 자취방 소주 한 병 / 밤의 마지막 한 곡)<br>
+    ④ 폭발이 아니라 <b style="display:inline">놓아주는</b> 마무리 — 김광석은 절규하지 않는다. 그밤식 빌드업은 유지하되 파이널을 <code>let go rather than pushed</code>로 착지시켰다 (상실곡 4번, 청춘곡 6번만 밴드로 열어둠)<br>
+    ⑤ 사운드: <b style="display:inline">포크 발라드 축(통기타+하모니카)을 신설</b>해 김광석 질감을 잡고, 피아노·시티팝·OST·어쿠스틱과 섞어 5종. 전 곡 <code>centered dry lead vocal</code> + <code>instruments spread wide</code> — 웅장함은 악기로, 목소리는 끝까지 한 명
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div id="board"></div>
+
+  <details class="review">
+    <summary>① 변주 격자 (앨범이 왜 안 지루한가)</summary>
+    <div class="tscroll">
+    <table>
+      <tr><th>#</th><th>제목</th><th>★김광석 결</th><th>흘러간 것</th><th>화자</th><th>착지(온도)</th><th>어법</th><th>장르</th><th>온도</th></tr>
+      <tr><td>1</td><td>스물아홉의 밤</td><td>서른 즈음에 (나이)</td><td>청춘·나이</td><td>자기 자신</td><td>담담한 수용</td><td>반말</td><td>포크 발라드(신설)</td><td>50</td></tr>
+      <tr><td>2</td><td>이사 가던 날</td><td>이등병의 편지 (떠남)</td><td>정든 집</td><td>독백 · 집 호명</td><td>애틋한 작별</td><td>존댓말</td><td>피아노 발라드</td><td>55</td></tr>
+      <tr><td>3</td><td>첫사랑 그 앤 잘 살까</td><td>사랑했지만 (세월)</td><td>첫사랑</td><td>회상 독백</td><td>따뜻한 안부</td><td>반말</td><td>시티팝</td><td>45</td></tr>
+      <tr><td>4</td><td>아버지의 자전거</td><td>먼지가 되어 (상실)</td><td>아버지</td><td>아버지 호명</td><td>먹먹함→위로</td><td>존댓말</td><td>드라마 OST</td><td>65</td></tr>
+      <tr><td>5</td><td>천천히 가도 돼</td><td>일어나 (위로)</td><td>조급함</td><td>너에게(위로)</td><td>따뜻한 응원</td><td>반말</td><td>어쿠스틱 카페</td><td>40</td></tr>
+      <tr><td>6</td><td>스무 살의 우리</td><td>그날들 (청춘)</td><td>친구들·청춘</td><td>우리(회상)</td><td>아련함→긍정</td><td>반말</td><td>포크 발라드(신설)</td><td>70</td></tr>
+      <tr><td>7</td><td>마지막 한 곡</td><td>음악 (마무리)</td><td>지나온 세월</td><td>청자에게</td><td>잔잔한 착지</td><td>존댓말</td><td>드라마 OST</td><td>60</td></tr>
+    </table>
+    </div>
+    <p><b>제약 검사 (작사카드 8번)</b></p>
+    <ul>
+      <li><b>장르 2종 이상</b> ✅ 5종 (포크·피아노·시티팝·OST·어쿠스틱). 포크(1·6)·OST(4·7) 각각 연속 아님. 같은 값 3연속 없음.</li>
+      <li><b>온도 4종 이상</b> ✅ 6종 (수용·작별·안부·상실·응원·긍정·착지). 50→55→45→65→40→70→60, 같은 온도 3연속 없음.</li>
+      <li><b>화자 2종 이상</b> ✅ 실질 6종 (자기 자신 / 집 호명 / 회상 독백 / 아버지 호명 / 너에게 / 우리). 3연속 없음.</li>
+      <li><b>어법</b> — 반/존/반/존/반/반/존. 5·6이 반말 2연속(끊어주려 6은 밝은 회상체로 결을 갈랐다). 반말 3연속 없음.</li>
+      <li><b>이 앨범 특별 축 = "김광석의 어느 결인가"</b>(비 앨범이 "비를 어떻게 쓰는가"를 축으로 승격했던 방식). 7곡이 7개 원곡 정서에 각각 착지 — 소재 하나(김광석)를 <b>7개 서로 다른 역할</b>로 쪼개 자기복제를 막았다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>② 훅 캠프 — 고른 것과 버린 것 (곡당 후보 3개 → 1개 채택)</summary>
+    <ul>
+      <li><b>1. 스물아홉의 밤</b> — 후보: ⓐ「스물아홉의 밤」(시간에 맺기) ⓑ「달력을 넘기다」(사물) ⓒ「엄마를 닮아가」(거울 장면).
+        <b>채택 = ⓐ.</b> 「서른 즈음에」와 정면 대조되지 않게 <b>서른이 아니라 서른 "전날"</b>로 잡았다 — 도착점을 "두려워하던 서른이 와보니 아무렇지 않더라"는 자기축복으로 뒤집는다. ⓑⓒ는 벌스·브릿지로 흡수. <i>버림 → 훅노트</i></li>
+      <li><b>2. 이사 가던 날</b> — 후보: ⓐ「이사 가던 날」 ⓑ「텅 빈 방」 ⓒ「키 재던 자국」.
+        <b>채택 = ⓐ 제목 + ⓑ 킥("텅 빈 방이 이렇게 넓었네요").</b> <b>시간을 공간으로</b> 바꾼 게 이 곡의 칼 — 채워져 있을 땐 몰랐던 방의 크기. 김광석 「이등병의 편지」의 "두고 떠남"을 군대가 아니라 <b>정든 집</b>으로 옮겼다(카탈로그의 기차 2곡을 피하려 장소를 집으로). <i>버림 → 훅노트</i></li>
+      <li><b>3. 첫사랑 그 앤 잘 살까</b> — 후보: ⓐ「첫사랑 그 앤 잘 살까」 ⓑ「그 여름은 그 여름에」 ⓒ「이젠 그마저 고마워」.
+        <b>채택 = ⓐ.</b> ⓑ는 아웃트로로, ⓒ는 브릿지로 흡수. 카탈로그 「스무 해 늦은 말」(늦은 고백)·「그날 말하지 못한 이유」와 부딪히지 않게 <b>미련·고백이 아니라 담담한 안부</b>로 각도를 완전히 틀었다 — "보고 싶은 게 아니라 잘 지내면 됐다". <i>버림 → 훅노트</i></li>
+      <li><b>4. 아버지의 자전거</b> — 후보: ⓐ「아버지의 자전거」 ⓑ「창고엔 아직」 ⓒ「철드니까 안 계세요」.
+        <b>채택 = ⓐ.</b> 상실은 카탈로그 44곡에 <b>0곡</b>. 유품(녹슨 자전거)이라는 사물 하나로 애도를 그리고, 파이널에서 <b>못 버리던 자전거를 처음 탄다</b>(애도의 진전)로 뒤집는다. ⓒ("철들면 잘하려 했는데 철드니 안 계세요")는 이 곡 최고 라인이라 브릿지 심장으로. <i>버림 → 훅노트</i></li>
+      <li><b>5. 천천히 가도 돼</b> — 후보: ⓐ「천천히 가도 돼」 ⓑ「너의 계절에 피면 돼」 ⓒ「지도를 접어」.
+        <b>채택 = ⓐ 제목 + ⓑ 킥 리프레인.</b> 김광석 「일어나」의 재기(再起)를 <b>"일어나"라는 단어 없이</b>(원곡 시그니처라 회피) 조급함 내려놓기로 옮겼다. 마음치유 컨셉의 정수 — 후벼파지 않고 감싼다. <i>버림 → 훅노트</i></li>
+      <li><b>6. 스무 살의 우리</b> — 후보: ⓐ「스무 살의 우리」 ⓑ「자취방」 ⓒ「그 노래 아직 다 외워」.
+        <b>채택 = ⓐ.</b> 앨범의 <b>유일한 밝은 밴드 트랙</b>(70도). 청춘·우정은 카탈로그 빈 땅. "가진 건 없어도 밤이 짧았어"로 가난한 청춘을 눈부시게. ⓒ는 아웃트로로. <i>버림 → 훅노트</i></li>
+      <li><b>7. 마지막 한 곡</b> — 후보: ⓐ「오래된 노래」 ⓑ「마지막 한 곡」 ⓒ「이 노래가 나를 안아」.
+        <b>ⓐ 폐기 → ⓑ 채택.</b> <b>「오래된 노래」는 스탠딩에그 유명곡(2012)과 제목·소재(옛 노래에 그 사람이 돌아옴)가 정면 충돌</b>(⑥ 원곡 대조 참조) → 「마지막 한 곡」으로 개제하고 킥을 "오늘 밤 마지막 한 곡을 틀어요"로 교체. 앨범을 닫는 곡, 착지 = "노래가 저 대신 울어줘요". <i>버림 → 훅노트</i></li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>③ 소리내어 검수 (후렴 음절 수 · ±2 이내)</summary>
+    <ul>
+      <li><b>1. 스물아홉의 밤</b> — 11 / 10 / 11 / 10 · 파이널 10 / 10 / 11 / 11 ✅ (초안 파이널 3행 "어른은 오늘도 그냥 사는 거더라" 13 → "그냥" 삭제해 11)</li>
+      <li><b>2. 이사 가던 날</b> — 11 / 10 / 11 / 10 · 파이널 12 / 10 / 12 / 10 ✅ (초안 파이널 3행 "배웅을 하네요" 13 → "배웅하네요" 12)</li>
+      <li><b>3. 첫사랑 그 앤 잘 살까</b> — 10 / 11 / 10 / 11 · 파이널 11 / 11 / 11 / 10 ✅</li>
+      <li><b>4. 아버지의 자전거</b> — 12 / 10 / 11 / 11 ✅ (초안 킥 4행 "거기 아직 아버지가 앉아 있어서" 13 → "아직" 삭제해 11)</li>
+      <li><b>5. 천천히 가도 돼</b> — 11 / 10 / 11 / 10 · 파이널 13 / 12 / 12 / 11 ✅ (파이널은 벨팅 자리라 한 음절 길게 허용, 내부 편차 ±2)</li>
+      <li><b>6. 스무 살의 우리</b> — 11 / 11 / 12 / 10 · 파이널 12 / 12 / 12 / 11 ✅</li>
+      <li><b>7. 마지막 한 곡</b> — 12 / 11 / 12 / 12 · 파이널 12 / 11 / 10 / 10 ✅</li>
+    </ul>
+    <p>고음 자리(후렴 첫·끝 음절) 받침 몰림 점검 — 끝음절을 개음절/유성종성으로 정리(1번 "왜 이러지", 3번 "그거면 됐지", 5번 "피면 돼", 7번 "저를 안아요")해 벨팅·놓아주기 자리를 열었다. 파이널 끝줄은 전 곡 <b>모음/유음 종결</b>("말해"·"봐요"·"둬"·"고마워요"·"도착해"·"있어"·"켜요")로 맺어 김광석식 "놓아주는" 마무리를 살렸다.</p>
+  </details>
+
+  <details class="review">
+    <summary>④ 자기복제 대조 — 카탈로그 44곡 + 앨범 내부 (실제로 고친 것)</summary>
+    <p><b>카탈로그 대조 (킥·소재 단위)</b></p>
+    <ul>
+      <li><b>★기차/새벽차 2곡</b> — 「새벽 첫차」·「떠나는 표는 내 것이었다」가 이미 "떠남"을 기차로 썼다. 2번(이등병의 편지=떠남 결)이 가장 위험했다. → 기차·역·플랫폼을 <b>전부 피하고 "정든 집을 떠남"으로</b> 장면을 옮겼다. 이 앨범엔 기차 소재 0.</li>
+      <li><b>「그날 말하지 못한 이유」·「스무 해 늦은 말」(발행곡)</b> — 둘 다 "사랑했는데 말 못했다"는 늦은 고백. 3번(사랑했지만 결)이 인접. → 3번을 <b>고백·미련이 아니라 담담한 안부</b>("보고 싶은 건 아니야")로 도착시켜 결을 반대로 뒀다.</li>
+      <li><b>「비처럼 음악처럼」(발행곡)</b> 킥 = "음악이 흐르면 난 당신을 생각해요". 7번(음악 소재)이 위험. → 7번은 <b>특정 연인 회상이 아니라 삶 전체의 위로</b>로 도착("노래가 저 대신 울어줘요"). 그 사람 언급은 프리코러스 한 번뿐, 후렴·파이널엔 없다.</li>
+      <li><b>「되감기 끝의 목소리」(발행곡)</b> 킥 = "노래가 끝난 뒤에야". 7번과 소재 인접하나 방향이 반대(그 곡=노래가 끝나서 아프다 / 7번=노래를 켜서 위로받는다).</li>
+      <li><b>「그 밤 라디오」(발행곡)</b> — "밤·라디오·그 시절" 소재. 7번이 인접해 보였으나, 7번에서 <b>라디오·방송 진행 톤을 전부 뺐다</b>(청취자가 밤에 마지막 곡을 트는 장면). 채널명과의 공명은 남기되 소재 중복은 제거.</li>
+      <li><b>상실(4번)·나이(1번)·청춘(6번)·위로(5번)</b> — 카탈로그 44곡에 <b>해당 소재 0곡</b>. 완전한 빈 땅이라 킥 충돌 없음.</li>
+    </ul>
+    <p><b>앨범 내부 대조 (실제로 고친 것)</b></p>
+    <ul>
+      <li><b>"스무 살 우리는 참 ___했지" 충돌</b> — 3번 벌스 초안 "스무 살 우리는 참 서툴렀지"가 6번 후렴 "스무 살 우리는 참 반짝였지"와 <b>같은 문형</b>이었다(두 곡이 같은 노래로 들림). → 3번을 <b>"그 시절 우리는 참 서툴렀지"</b>로 교체. "스무 살"은 6번(청춘곡) 전용으로 몰아줬다.</li>
+      <li><b>"사진" 소재</b> — 3번(서랍 속 옛 사진, 실물)과 6번 파이널("바래지 않는 사진처럼", 비유)에 분산. 실물 vs 직유로 층위가 달라 유지하되, 3번은 <b>서랍</b>, 6번은 <b>안 바래는 사진</b>으로 수식을 갈라 겹침을 최소화.</li>
+      <li><b>"밤" 과밀</b> — 1·5·6번에 "밤"이 반복. 1번(서른 전야의 밤)·5번 벌스("앞서가는 것 같은 밤" 3연 anaphora, 의도)·6번("밤이 짧았어"). 세 곡의 밤이 각각 <b>나이/조급함/청춘</b>으로 결이 달라 살렸다(같은 단어, 다른 무게).</li>
+      <li><b>봄/꽃 은유(5번)</b> — 5번에만 집중, 다른 곡엔 계절 은유 0. 김광석 「일어나」의 "봄의 새싹" 이미지와 계열은 같으나(봄=희망) 문장·표현은 전부 다르다(⑥ 참조).</li>
+      <li><b>어법 통일</b> — 2번(존댓말 서술)의 집 호명("잘 있어 이 방아"), 6번의 "그 노래 아직 다 외워"는 <b>대상에게 던지는 호격/혼잣말</b>로, 곡의 서술 register와 별개의 의도된 texture(비 앨범 4번과 같은 처리). 서술 어법은 각 곡 안에서 통일.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑤ 히트곡제조기 통독 (노래로 상상하며 · 걸린 곳은 고쳤다)</summary>
+    <ul>
+      <li><b>1. 스물아홉의 밤</b> — 킥 "어른은 조용히 오는 거더라". 초안 브릿지가 후렴 설명이었다 → <b>"거울 속 내 얼굴이 엄마를 닮아가더라"</b>는 새 정보(장면)로 교체. 파이널에서 두려워하던 서른이 와보니 아무렇지 않다 + "잘 왔어 나에게"로 자기축복. 앨범 오프너로 담담(50).</li>
+      <li><b>2. 이사 가던 날</b> — 킥 "텅 빈 방이 이렇게 넓었네요". 브릿지 "현관문을 잠그면 이제 남의 집이에요 / 비밀번호도 곧 남의 것이 되겠죠"가 이 곡의 칼 — <b>공간의 소유권이 넘어가는 순간</b>. 파이널 "빈 집도 사람처럼 배웅하네요"에서 집을 인격으로. 피아노가 이 애틋함을 받는다.</li>
+      <li><b>3. 첫사랑 그 앤 잘 살까</b> — 킥 "첫사랑 그 앤 잘 살까 문득". 브릿지 "그때 그렇게 아파봐서 지금 사랑을 알아"가 이 곡의 성숙. 파이널 "사진을 다시 서랍에 넣어둬 / 좋았던 건 좋았던 채로 둬" = <b>미련 없는 놓아줌</b>. 시티팝의 옅은 그루브가 회상을 밝게 받친다(45도).</li>
+      <li><b>4. 아버지의 자전거</b> — <b>앨범의 깊이(65).</b> 킥 "아버지 자전거가 아직 있어요 / 거기 아버지가 앉아 있어서". 브릿지 "철들면 잘하려고 했는데 / 철드니까 안 계세요"가 심장. 파이널에서 <b>못 버리던 자전거를 처음 탄다</b> — 아버지가 가르친 것으로 넘어짐을 견딘다(애도의 진전). 눈물을 강요하지 않고 담담히. 마음치유 컨셉과 정확히 맞다. OST가 마지막에만 조용히 열린다.</li>
+      <li><b>5. 천천히 가도 돼</b> — <b>앨범의 가장 밝은 위로(40).</b> 킥 "천천히 가도 돼 늦지 않았어". 브릿지 "넘어진 김에 잠깐 / 하늘이나 보고 가"가 이 곡의 여유 — 넘어짐을 실패가 아니라 <b>하늘 볼 기회</b>로 뒤집는다. 순수 위로곡, 후벼파지 않고 감싼다. 어쿠스틱 카페가 이 온기를 받는다.</li>
+      <li><b>6. 스무 살의 우리</b> — <b>앨범의 밝은 피크(70).</b> 킥 "스무 살 우리는 참 반짝였지". 벌스 "자취방에 넷이 모여 라면을 끓이고 / 누구 하난 기타를 잡고 노랠 했지"가 장면. 브릿지 "축의금 봉투 위에 그 시절이 스쳐 가"가 <b>어른이 된 지금</b>과 청춘을 한 줄에 겹친다. 파이널 "그때가 있어서 지금이 있어" = 긍정. 포크 밴드가 밝게 열린다.</li>
+      <li><b>7. 마지막 한 곡</b> — <b>앨범을 닫는 곡(60).</b> 킥 "오늘 밤 마지막 한 곡을 틀어요". 벌스 "슬픈 가산데 이상하게 위로가 돼요 / 아플 땐 슬픈 노래가 약이에요"가 이 채널이 파는 것의 자기고백. 파이널 "잘 견뎠다고 참 애썼다고 / 노래가 저 대신 울어줘요"가 앨범 전체의 착지 — 마음치유의 요약. 채널명(그 밤 라디오)과 수미상관.</li>
+      <li><b>앨범 곡선</b> — 50 → 55 → 45 → 65 → 40 → 70 → 60. 4번(상실)에서 한 번 깊이 내려갔다가 5번(가장 밝은 위로)으로 끌어올리고, 6번(청춘)에서 터뜨린 뒤 7번으로 조용히 닫는다. 비슷한 온도 연속 없음. <b>선공개 권장 = 4번(아버지의 자전거)</b> — 채널에 없던 상실 소재라 제목·썸네일 모두 새 각도가 나온다. 차선 = 6번(밝고 떼창감).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑥ 원곡 웹 대조 (기억 대조 금지 — 실제로 열었다)</summary>
+    <p>「비처럼 음악처럼」 사고(첫 소절 verbatim 인용, QA 적발) 재발 방지. 김광석 대표곡을 컨셉으로 삼았으므로 <b>원곡 가사·제목을 웹에서 실제로 확인</b>했다.</p>
+    <div class="tscroll">
+    <table>
+      <tr><th>대조한 곡</th><th>확인 방법</th><th>결과</th></tr>
+      <tr><td><b>김광석 「서른 즈음에」</b> (1994, 작사 강승원)</td><td>벅스·나무위키·가사 페이지 웹 조회</td><td>✅ <b>겹침 없음.</b> 원곡 = "또 하루 멀어져 간다 / 내뿜은 담배연기처럼 / 매일 이별하며 살고 있구나". 1번은 "케이크에 초를 스물아홉 꽂다가"·"어른은 조용히 오는 거더라" — 어구·첫 소절 일치 0. 서른 "전날"로 시점을 달리하고 도착점(자기축복)도 반대</td></tr>
+      <tr><td><b>김광석 「이등병의 편지」</b> (작사·작곡 김현성)</td><td>벅스·위키백과·나무위키 조회</td><td>✅ <b>겹침 없음.</b> 원곡 = "집 떠나와 열차 타고 훈련소로 가는 날 / 부모님께 큰절하고". 2번은 <b>기차·군대·훈련소를 전부 배제</b>하고 "텅 빈 방"·"액자 자국"으로. 소재·어구 일치 0</td></tr>
+      <tr><td><b>김광석 「사랑했지만」</b> (1991, 작사 한동준)</td><td>벅스·가사집·나무위키 조회</td><td>✅ <b>겹침 없음.</b> 원곡 = "어제는 하루종일 비가 내렸어 / 그대 음성 빗속으로 사라져". 3번은 비 없이 "서랍에서 옛 사진"·"첫사랑 그 앤 잘 살까". 어구 일치 0</td></tr>
+      <tr><td><b>김광석 「일어나」</b> (1994, 작사 김광석)</td><td>가사·듣기 페이지 웹 조회</td><td>✅ <b>겹침 없음.</b> 원곡 = "검은 밤의 가운데 서있어 / 일어나 일어나 다시 한번 해보는 거야 / 봄의 새싹들처럼". 5번은 <b>"일어나" 단어를 아예 안 쓰고</b> "천천히 가도 돼"로. 봄=희망은 관용 은유이나 "봄의 새싹" 등 원곡 표현은 미사용, 문장 전부 상이</td></tr>
+      <tr><td><b>김광석 「먼지가 되어」</b> · <b>「그날들」</b></td><td>제목·후렴 성립 조회</td><td>✅ <b>겹침 없음.</b> 4번(아버지의 자전거)·6번(스무 살의 우리)은 원곡과 <b>소재 자체가 다름</b>(먼지·바람 → 녹슨 자전거 / 그날들 후렴 → 자취방·라면·소주). 어구 일치 0</td></tr>
+      <tr><td><b>★스탠딩에그 「오래된 노래」</b> (2012)</td><td>벅스·나무위키·멜론 조회</td><td>⚠️→✅ <b>충돌 발견·해소.</b> 원곡 = 제목 「오래된 노래」 + "옛날에 함께 듣던 노래가 다시 들려 그 사람을 떠올리고 다시 만날 것 같다". 7번 초안 제목·소재와 정면 충돌 → <b>제목을 「마지막 한 곡」으로 개제, 킥을 "오늘 밤 마지막 한 곡을 틀어요"로 교체, 도착점을 재회 기대가 아니라 삶 전체의 위로로</b> 갈랐다</td></tr>
+      <tr><td>「스물아홉의 밤」·「이사 가던 날」·「첫사랑 그 앤 잘 살까」·「천천히 가도 돼」·「스무 살의 우리」·「마지막 한 곡」 제목 검색</td><td>가요 제목 검색</td><td>✅ <b>동명 히트곡 없음.</b> 인접 = 「첫사랑」(백아·에피톤 등, 제목 상이)·「오래된 노래」(위에서 회피). 「아버지의 자전거」는 시·그림책·무명곡이 있으나 <b>유명 가요 아님</b> — 제목 유지</td></tr>
+    </table>
+    </div>
+    <p><b>금지/충돌 제목 준수</b> ✅ — 김광석 곡명 전량 미사용, 「오래된 노래」 회피.<br>
+    <b>수노 스타일 칸 가수명·곡명</b> ✅ 0건 (전 곡 묘사로만 — "김광석 스타일" 같은 표현 없음).</p>
+  </details>
+
+  <details class="review">
+    <summary>⑦ 수노 프롬프트 (7칸 양식 · 검사기 통과 기록)</summary>
+    <ul>
+      <li>작사카드 4축 중 3축을 배정 — 2번=피아노 발라드, 3번=시티팝, 4·7번=드라마 OST, 5번=어쿠스틱 카페.</li>
+      <li><b>포크 발라드 축 신설</b>: 1·6번은 김광석의 <b>통기타+하모니카</b> 질감을 잡으려 기존 4축에 없는 축을 <b>7칸 양식으로 새로 짰다.</b> 검사기 실측 = <b>927자, 트리거 잔존 0, exit 0</b> (940자 이내 통과). 담담한 1번과 밝은 밴드로 여는 6번을 같은 축이 받는다(파이널 Development만 곡별로 다르게 상상).</li>
+      <li><b>이 앨범은 L·D 트리거를 하나도 켜지 않았다</b> — 김광석의 결은 <b>절규가 아니라 놓아주기</b>다. 전 곡 파이널을 <code>a controlled emotional rise</code> + <code>the last line let go rather than pushed</code>로 착지시켰다. 폭발(파이널 최강)은 이 앨범의 정체성이 아니라 <b>일부러 껐다.</b> 상실(4번 OST)·청춘(6번 포크)만 밴드/오케스트라가 조용히 열린다.</li>
+      <li><b>전 곡 공통</b>: <code>one voice only</code> + <code>centered dry close-mic lead vocal</code> + <code>instruments spread wide</code>. 윤하경은 <b>한 명이 참다가 놓치는</b> 목소리 — 웅장함은 편성으로, 목소리는 끝까지 한 명. Exclude에 <code>choir</code>·<code>layered vocals</code> 계열 전량 유지.</li>
+      <li><b>새 프롬프트는 작사카드에 환류</b> — 포크 발라드 축(76 BPM)을 카드 9번에 추가하고 누적 로그에 근거를 남긴다.</li>
+    </ul>
+  </details>
+
+  <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
+  곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
+</div>
+
+<script>
+const S_FOLK = `Korean folk ballad. Warm, plain-spoken, nostalgic. Fingerpicked steel-string acoustic guitar, a lone harmonica, soft upright bass, gentle brushed drums entering late, no synths. Single clear female lead vocal, conversational and unadorned, breathy in the verse, gently opening at the peak, one voice only. 76 BPM, major key with a wistful minor turn. Very dry studio recording, close-mic vocal centered and upfront, instruments spread wide, minimal reverb, clean vivid mix. Starts with the chorus sung softly over a single guitar. Verse stays quiet and unhurried, guitar and harmonica only. Pre-chorus gradually builds as upright bass and brushed drums slip in. Chorus opens with fuller strumming and a warmer, rounder vocal. Bridge drops down to voice and guitar alone, almost speaking. Final chorus returns with the whole band and a gentle harmonica line, a controlled emotional rise, the last line let go rather than pushed.`;
+
+const S_PIANO = `Korean piano ballad. Melancholic, tender, quietly aching. Solo grand piano throughout, sparse cello, a thin high string line entering late, brushed drums only in the final section, no synths. Single clear female lead vocal, conversational and restrained, opening into a controlled mixed-belt with a fragile break, one voice only. 68 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, natural piano room tone, minimal reverb, clean separated mix. Starts with the chorus melody over lone piano, unaccompanied. Verse stays hushed and close, piano only. Pre-chorus gradually builds as the cello slips in underneath. Chorus opens with fuller piano voicing and a warmer vocal. Bridge drops down to a near-whispered voice and single piano notes. Final chorus returns with strings and brushed drums and a clear emotional rise, the last line let go rather than pushed.`;
+
+const S_CITY = `Korean city pop. Nostalgic, warm, bittersweet. Retro 80s analog synths, smooth electric piano, mellow funky bassline, clean chorus-effect guitar, brushed gated drums, saxophone line in the outro. Single clear female lead vocal, cool and understated, breathy phrasing, opening into a soft belt at the peak, one voice only. 98 BPM, major key with major-seventh color. Centered dry close-mic lead vocal, instruments spread wide, lush analog reverb on the instruments only, warm tape saturation, clean separated mix. Starts with the chorus hook over electric piano. Verse stays laid-back on a walking bass and light groove. Pre-chorus gradually builds as synth pads and hi-hats open up. Chorus opens with the full retro groove and a lifted melodic line. Bridge drops down to electric piano and a hushed voice. Final chorus returns with the saxophone answering the vocal and the groove at full width.`;
+
+const S_OST = `Korean drama OST ballad. Cinematic, aching, tender. Soft grand piano intro, full orchestra with sweeping strings, oboe and cello counter-melodies, timpani and orchestral swells, no synths. Single clear female lead vocal, conversational and restrained, opening into a powerful mixed-belt with a fragile break, one voice only. 74 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide across the stereo field, orchestral depth with controlled reverb, clean separated mix. Starts with the chorus melody quietly over lone piano. Verse stays intimate and close, piano and low strings only. Pre-chorus gradually builds as the string section rises underneath. Chorus opens with the full orchestra lifting under a strong lead-vocal line. Bridge drops down to bare piano and a near-whispered voice. Final chorus returns a whole level higher, strings at full height, a lifted melodic climax carried by the single voice.`;
+
+const S_ACOU = `Korean acoustic pop ballad. Warm, hopeful, gently comforting. Fingerpicked steel-string acoustic guitar, soft brushed drums, gentle cello and upright bass, a little rhodes. Single clear female lead vocal, close and conversational, breathy in the low register, gently belted at the peak, one voice only. 92 BPM, major key. Very dry studio recording, close-mic vocal centered and upfront, crisp acoustic guitar, instruments spread wide, minimal reverb, clean vivid mix. Starts with the chorus sung softly over a single guitar. Verse stays quiet and unhurried, guitar and brushed drums only. Pre-chorus gradually builds as cello and bass slip in underneath. Chorus opens with fuller strumming and a warmer, rounder vocal. Bridge drops down to voice and guitar alone, almost breathing. Final chorus returns with the whole band and a controlled emotional rise, the last line let go rather than pushed.`;
+
+const E_BASE = `crowd vocals, audience cheering, crowd clapping, live concert ambience, arena reverb, stadium chant, gang vocals, choir-like crowd, sing-along, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, vocal stack, harmony vocals, vocal harmonies, backing vocals, background vocals, choir, group vocals, wide vocals, wide stereo vocals, wide chorus, spoken word intro, rap, hip hop, EDM, trap, autotune, male vocal, duet, modern idol pop production, trot`;
+
+const E_BAL  = E_BASE + `, upbeat dance beat`;
+const E_CITY = E_BASE + `, EDM drop, vocal chops`;
+
+const SONGS = [
+{title:"스물아홉의 밤", motif:"서른 되기 전날 밤 · 케이크의 초", style:S_FOLK, excl:E_BAL, genre:"포크 발라드(신설) · 76 BPM",
+concept:"서른 되기 전날 밤. 두려워하던 어른이 와보니 조용히, 아무렇지 않게 오더라 — 잘 왔어 나에게.",
+yt:`"서른 되기 전날 밤에 이 노래 듣다가 멍해졌습니다.." 담담하게 부르다 마지막에 스스로를 안아주는 노래, '스물아홉의 밤' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white cotton shirt, sitting alone at a small table late at night. She is looking straight into the camera, chin slightly lowered, a calm unreadable expression, eyes dry and steady. In front of her, deeply out of focus, a small cake with a few unlit candles — extreme bokeh, only warm shapes readable. Soft warm lamplight from the left, deep shadow on the right side of her face. Shallow depth of field, 85mm, cinematic warm-amber grade, film grain. No text.`,
+shorts:`스물아홉의 마지막 밤이에요. 어른은 조용히 오더라고요. 울 일도 아닌데 왜 이러지.. 🕯️ #윤하경 #스물아홉의밤 #서른즈음 #포크발라드`,
+lyrics:
+`[Chorus]
+스물아홉의 마지막 밤이야
+뭐가 그리 급했나 싶은 밤
+어른은 조용히 오는 거더라
+울 일도 아닌데 왜 이러지
+
+[Verse 1]
+케이크에 초를 스물아홉 꽂다가
+하나가 모자라서 웃었어
+작년 그 초는 어디다 뒀더라
+그런 걸 세는 나이가 됐어
+
+[Pre-Chorus]
+달력을 넘기는 손이
+왜 이렇게 무거운지
+한 장인데 한 장인데
+계절이 다 넘어가
+
+[Chorus]
+스물아홉의 마지막 밤이야
+뭐가 그리 급했나 싶은 밤
+어른은 조용히 오는 거더라
+울 일도 아닌데 왜 이러지
+
+[Bridge]
+거울 속 내 얼굴이
+엄마를 닮아가더라
+무섭진 않았어 그냥
+좀 낯설었을 뿐이야
+
+[Final Chorus]
+서른의 첫 아침이 밝았어
+생각보다 아무렇지 않아
+어른은 오늘도 사는 거더라
+잘 왔어 나에게 그렇게 말해
+
+[Outro]
+초 하나를 더 챙겨둘게`},
+
+{title:"이사 가던 날", motif:"오래 산 집을 떠나는 날 · 벽의 액자 자국", style:S_PIANO, excl:E_BAL, genre:"피아노 발라드 · 68 BPM",
+concept:"십 년 산 집을 떠나는 날. 텅 비니 방이 이렇게 넓었구나 — 시간이 거기 다 있어요.",
+yt:`"이사하던 날 텅 빈 방을 보다가 울컥했습니다.." 피아노 한 대로 시작해 마지막에 집과 작별하는 노래, '이사 가던 날' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, standing in the middle of a completely empty apartment room. She is looking straight into the camera, a faint wistful smile, eyes glossy but not crying. Behind her, deeply out of focus, a bare wall with faint rectangular sun-faded marks where picture frames used to hang — extreme bokeh. Flat pale daylight from an uncurtained window. Shallow depth of field, 85mm, cinematic muted grade, film grain. No text.`,
+shorts:`텅 빈 방이 이렇게 넓었네요. 십 년을 여기서 살았는데. 벽에 남은 액자 자국만 봐도.. 🏠 #윤하경 #이사가던날 #피아노발라드 #세월`,
+lyrics:
+`[Chorus]
+텅 빈 방이 이렇게 넓었네요
+십 년을 여기서 살았는데
+벽에 남은 액자 자국만 봐도
+그 시간이 거기 다 있어요
+
+[Verse 1]
+문지방에 키를 재던 연필 자국
+해마다 조금씩 올라갔었죠
+이건 두고 가야 하는 거래요
+지울 수도 없는데 두고 가래요
+
+[Pre-Chorus]
+짐은 다 실었는데
+발이 안 떨어져요
+잘 있어 이 방아
+나 여기서 컸어
+
+[Chorus]
+텅 빈 방이 이렇게 넓었네요
+십 년을 여기서 살았는데
+벽에 남은 액자 자국만 봐도
+그 시간이 거기 다 있어요
+
+[Bridge]
+현관문을 잠그면
+이제 남의 집이에요
+비밀번호도 곧
+남의 것이 되겠죠
+
+[Final Chorus]
+불을 끄고 마지막 인사를 해요
+잘 있었어 정말 고마웠어
+빈 집도 사람처럼 배웅하네요
+창문으로 오래 내다봐요
+
+[Outro]
+잘 살아 나의 옛날 집아`},
+
+{title:"첫사랑 그 앤 잘 살까", motif:"서랍에서 나온 옛 사진 · 담담한 안부", style:S_CITY, excl:E_CITY, genre:"시티팝(레트로) · 98 BPM",
+concept:"서랍 정리하다 옛 사진이 나와서 문득 — 보고 싶은 게 아니라, 잘 지내면 됐다.",
+yt:`"서랍 정리하다 첫사랑 사진이 나와서 한참 앉아 있었습니다.." 미련이 아니라 안부로 끝나는 노래, '첫사랑 그 앤 잘 살까' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, sitting on the floor beside an open drawer. She is looking straight into the camera with a soft, faintly amused warmth, eyes calm. In her slightly out-of-focus hand she loosely holds an old photograph, its image unreadable. Behind her, warm late-afternoon light dissolves into extreme bokeh. Shallow depth of field, 85mm, retro warm cinematic grade, film grain. No text.`,
+shorts:`첫사랑 그 앤 잘 살까 문득. 서랍에서 옛 사진이 나와서. 보고 싶은 건 아니야, 잘 지내면 됐지. 📷 #윤하경 #첫사랑 #시티팝 #감성`,
+lyrics:
+`[Chorus]
+첫사랑 그 앤 잘 살까 문득
+서랍에서 옛 사진이 나와서
+보고 싶은 건 아니야 그냥
+잘 지내면 됐지 그거면 됐지
+
+[Verse 1]
+그 시절 우리는 참 서툴렀지
+손 한 번 잡는 데 여름이 걸렸어
+헤어진 이유도 이제 흐릿해
+그냥 어렸었다 그 말이 맞아
+
+[Pre-Chorus]
+지금쯤 아빠가 됐을까
+닮은 아이가 있을까
+잘 어울리는 사람이랑
+웃고 있으면 좋겠어
+
+[Chorus]
+첫사랑 그 앤 잘 살까 문득
+서랍에서 옛 사진이 나와서
+보고 싶은 건 아니야 그냥
+잘 지내면 됐지 그거면 됐지
+
+[Bridge]
+미워한 적도 있었는데
+이젠 그마저 고마워
+그때 그렇게 아파봐서
+지금 사랑을 알아
+
+[Final Chorus]
+첫사랑 그 앤 잘 살 거야 아마
+나도 이만하면 잘 살고 있어
+사진을 다시 서랍에 넣어둬
+좋았던 건 좋았던 채로 둬
+
+[Outro]
+그 여름은 그 여름에 두고`},
+
+{title:"아버지의 자전거", motif:"창고의 녹슨 자전거 · 상실", style:S_OST, excl:E_BAL, genre:"드라마 OST · 74 BPM",
+concept:"창고에 아버지 자전거가 아직 그대로 — 아무도 안 타는데 못 버려요, 거기 아버지가 앉아 있어서.",
+yt:`"돌아가신 아버지 자전거를 아직도 못 버렸습니다.." 마지막 소절에서 결국 무너지는 노래, '아버지의 자전거' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, standing in a dim storage shed with one hand resting on the seat of an old rusted bicycle. She is looking straight into the camera, eyes brimming but composed, lips pressed. Behind her, the rusted bicycle frame dissolves into extreme bokeh, a single shaft of dusty light from a small window. 85mm, shallow depth of field, cinematic warm-grey grade, film grain. No text.`,
+shorts:`아버지 자전거가 아직 있어요. 아무도 안 타는데 못 버려요. 거기 아직 아버지가 앉아 있어서.. 🚲 #윤하경 #아버지의자전거 #그리움`,
+lyrics:
+`[Chorus]
+아버지 자전거가 아직 있어요
+녹슨 채로 창고에 그대로
+아무도 안 타는데 못 버려요
+거기 아버지가 앉아 있어서
+
+[Verse 1]
+뒷자리에 저를 태우고 다니던
+그 길을 이제 저 혼자 걸어요
+페달 소리가 들릴 것만 같아서
+자꾸 뒤를 돌아보게 돼요
+
+[Pre-Chorus]
+잘 계시냐고 못 물어요
+대답이 없을 테니까
+그냥 자전거만 닦아요
+그게 인사인 것처럼
+
+[Chorus]
+아버지 자전거가 아직 있어요
+녹슨 채로 창고에 그대로
+아무도 안 타는데 못 버려요
+거기 아버지가 앉아 있어서
+
+[Bridge]
+철들면 잘하려고 했는데
+철드니까 안 계세요
+그 말을 못 한 게
+제일 오래 아파요
+
+[Final Chorus]
+오늘은 자전거를 타 봤어요
+아버지가 잡아주던 그 자리
+넘어질 것 같으면 뒤에서
+잡아줄 것만 같아서 탔어요
+
+[Outro]
+잘 가르쳐 주셔서 고마워요`},
+
+{title:"천천히 가도 돼", motif:"뒤처진 것 같은 사람에게 · 각자 피는 꽃", style:S_ACOU, excl:E_BAL, genre:"어쿠스틱 카페 · 92 BPM",
+concept:"다들 앞서가는 것 같은 밤에 건네는 말 — 천천히 가도 돼, 꽃도 다 다른 날에 피니까 너의 계절에 피면 돼.",
+yt:`"자꾸 뒤처진 것 같을 때 이 노래가 어깨를 토닥여줍니다.." 후벼파지 않고 감싸는 위로 노래, '천천히 가도 돼' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, sitting on grass and leaning back slightly to look up. She is looking straight into the camera with a gentle, reassuring half-smile, eyes soft and warm. Behind her, out-of-focus wildflowers and a bright open sky dissolve into extreme bokeh. Soft golden-hour light on her face from above. 85mm, shallow depth of field, warm hopeful cinematic grade, film grain. No text.`,
+shorts:`천천히 가도 돼, 늦지 않았어. 꽃들도 다 다른 날에 피는데. 너는 너의 계절에 피면 돼. 🌷 #윤하경 #천천히가도돼 #위로 #응원`,
+lyrics:
+`[Chorus]
+천천히 가도 돼 늦지 않았어
+남들 속도는 남들 거잖아
+꽃들도 다 다른 날에 피는데
+너는 너의 계절에 피면 돼
+
+[Verse 1]
+다들 앞서가는 것 같은 밤
+혼자 뒤처진 것 같은 밤
+그런 밤엔 지도를 접어
+길은 원래 여러 갈래야
+
+[Pre-Chorus]
+빨리 핀 꽃이 먼저 지고
+늦게 온 봄이 더 길어
+조급한 마음만 잠깐
+내려놓고 숨을 쉬어
+
+[Chorus]
+천천히 가도 돼 늦지 않았어
+남들 속도는 남들 거잖아
+꽃들도 다 다른 날에 피는데
+너는 너의 계절에 피면 돼
+
+[Bridge]
+넘어진 김에 잠깐
+하늘이나 보고 가
+누워서 보는 하늘도
+꽤 괜찮은 풍경이야
+
+[Final Chorus]
+천천히 가도 돼 이미 잘하고 있어
+여기까지 온 것도 대단한 거야
+너의 봄은 아직 오지 않았을 뿐
+반드시 온다 그건 내가 알아
+
+[Outro]
+천천히 가도 다 도착해`},
+
+{title:"스무 살의 우리", motif:"자취방·라면·소주 한 병 · 청춘", style:S_FOLK, excl:E_BAL, genre:"포크 발라드(신설) · 76 BPM",
+concept:"가진 건 없어도 밤이 짧던 스무 살 — 지금은 다 흩어져도, 그 밤들이 나를 다 키웠어.",
+yt:`"스무 살 그 시절 친구들 생각나서 한참 웃다 울었습니다.." 가난했지만 눈부셨던 청춘을 부르는 노래, '스무 살의 우리' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, caught mid-laugh looking straight into the camera, eyes crinkled and bright, genuinely warm. Behind her, deeply out of focus, a cozy cluttered small room with warm string lights and the neck of an acoustic guitar — extreme bokeh, only warm glowing shapes. Warm tungsten light across her face. 85mm, shallow depth of field, nostalgic warm cinematic grade, film grain. No text.`,
+shorts:`스무 살 우리는 참 반짝였지. 가진 건 없어도 밤이 짧았어. 그 밤들이 나를 다 키웠어. 🍜 #윤하경 #스무살의우리 #청춘 #포크`,
+lyrics:
+`[Chorus]
+스무 살 우리는 참 반짝였지
+가진 건 없어도 밤이 짧았어
+지금은 다 흩어져 살고 있지만
+그 밤들이 나를 다 키웠어
+
+[Verse 1]
+자취방에 넷이 모여 라면을 끓이고
+누구 하난 기타를 잡고 노랠 했지
+돈이 없어 나눠 먹던 소주 한 병에
+세상을 다 가진 것 같았어
+
+[Pre-Chorus]
+꿈이 다 이뤄질 줄 알았어
+겁이 하나도 없었어
+그래서 그때가 그렇게
+눈부셨나 봐 지금 보면
+
+[Chorus]
+스무 살 우리는 참 반짝였지
+가진 건 없어도 밤이 짧았어
+지금은 다 흩어져 살고 있지만
+그 밤들이 나를 다 키웠어
+
+[Bridge]
+가끔 연락이 와
+결혼한다 애를 낳는다
+축의금 봉투 위에
+그 시절이 스쳐 가
+
+[Final Chorus]
+스무 살 우리는 아직 거기 있어
+바래지 않는 사진처럼 웃으며
+어른이 된 게 나쁘지만은 않아
+그때가 있어서 지금이 있어
+
+[Outro]
+그 노래 아직 다 외워`},
+
+{title:"마지막 한 곡", motif:"밤에 트는 마지막 한 곡 · 삶 전체의 위로", style:S_OST, excl:E_BAL, genre:"드라마 OST · 74 BPM",
+concept:"오늘 밤 마지막 한 곡을 틀면 그 시절이 다 돌아와요 — 가사는 그대론데 저만 변했죠. 노래가 저 대신 울어줘요.",
+yt:`"밤마다 트는 노래 한 곡이 저를 살렸습니다.." 마지막 소절이 대신 울어주는 노래, '마지막 한 곡' | 윤하경 자작곡`,
+thumb:`Extreme close-up portrait of a Korean woman in her late twenties, bare face no makeup, wearing a plain white shirt, lying with her head near a small glowing speaker in a dark room at night, eyes half-closed then open toward the camera, a calm tear-streaked but peaceful face. Behind her, the faint glow of the speaker and a window of city night dissolve into extreme bokeh. Cool blue night light with a warm point glow. 85mm, shallow depth of field, cinematic night grade, film grain. No text.`,
+shorts:`오늘 밤 마지막 한 곡을 틀어요. 가사는 그대론데 저만 변했죠. 노래가 저 대신 울어줘요. 🌙 #윤하경 #마지막한곡 #그밤라디오 #발라드`,
+lyrics:
+`[Chorus]
+오늘 밤 마지막 한 곡을 틀어요
+그때 그 시절이 다 돌아와요
+가사는 그대론데 저만 변했죠
+그래도 이 노래가 저를 안아요
+
+[Verse 1]
+누구나 노래 한 곡쯤 있잖아요
+힘들 때마다 꺼내 듣는 노래
+슬픈 가산데 이상하게 위로가 돼요
+아플 땐 슬픈 노래가 약이에요
+
+[Pre-Chorus]
+그 사람도 이 노랠 알까요
+어디선가 듣고 있을까요
+같은 노래 아래 우리는
+아직 조금 이어져 있어요
+
+[Chorus]
+오늘 밤 마지막 한 곡을 틀어요
+그때 그 시절이 다 돌아와요
+가사는 그대론데 저만 변했죠
+그래도 이 노래가 저를 안아요
+
+[Bridge]
+좋았던 날도
+아팠던 날도
+한 곡 안에 다 있어요
+그래서 못 지워요
+
+[Final Chorus]
+오늘 밤 그 노래를 따라 불러요
+지나온 밤들이 다 대답해요
+잘 견뎠다고 참 애썼다고
+노래가 저 대신 울어줘요
+
+[Outro]
+오늘 밤도 이 노래를 켜요`}
+];
+
+window.WB = {
+  key: 'geubamfolk_done',
+  songs: SONGS,
+  tags: s => [
+    {t: s.genre, hot: true},
+    {t: '소재 · ' + s.motif},
+    {t: '여성 보컬 · 한 명만'},
+  ],
+  lyrics:  s => s.lyrics,
+  style:   s => s.style,
+  excl:    s => s.excl,
+  yt:      s => s.yt,
+  thumb:   s => s.thumb,
+  concept: s => s.concept,
+};
+</script>
+<script src="../assets/workboard.js"></script>
+</body>
+</html>
