@@ -167,6 +167,44 @@ details.plain summary::before{content:'📄';font-size:14px;top:16px;}
 .need .nm{font-size:16px;font-weight:800;line-height:1.5;}
 .need .why{font-size:14px;color:var(--dim);line-height:1.6;margin-top:2px;}
 
+/* ── 클로드 앱 화면(그림) ── */
+.app{border:1.5px solid #DDD3C4;border-radius:14px;overflow:hidden;margin:14px 0;
+  box-shadow:0 6px 20px rgba(80,60,40,.10);background:#fff;}
+.app .atop{background:#F7F4EF;border-bottom:1px solid #EBE2D6;padding:10px 12px;
+  display:flex;align-items:center;gap:8px;position:relative;}
+.app .atop .dot{width:9px;height:9px;border-radius:50%;background:#D3C9BA;flex:none;}
+.app .a3{display:flex;gap:5px;margin:0 auto;}
+.app .a3 span{font-size:13.5px;font-weight:700;color:#8A837A;padding:6px 16px;border-radius:9px;}
+.app .a3 span.on{background:#1F1D1A;color:#fff;}
+.app .a3 span.mark{background:#D96C3F;color:#fff;box-shadow:0 0 0 4px rgba(217,108,63,.22);}
+.app .abody{display:flex;min-height:150px;}
+.app .aside{width:104px;flex:none;background:#FBF9F5;border-right:1px solid #F0EAE0;padding:10px 8px;}
+.app .aside .sh{font-size:10.5px;font-weight:800;color:#A9A093;letter-spacing:.4px;margin-bottom:7px;}
+.app .aside .si{background:#fff;border:1px solid #EFE8DC;border-radius:7px;
+  padding:6px 7px;font-size:10.5px;color:#6B645B;margin-bottom:5px;line-height:1.4;}
+.app .aside .si.on{border-color:#D96C3F;background:#FFF6F1;color:#A8431A;font-weight:700;}
+.app .amain{flex:1;padding:14px 13px;display:flex;flex-direction:column;justify-content:flex-end;}
+.app .ph{font-size:13px;color:#A9A093;text-align:center;margin:auto 0;line-height:1.7;}
+.app .abox{border:1.5px solid #DDD3C4;border-radius:12px;padding:10px 11px;background:#fff;}
+.app .abox .ln{font-size:13.5px;color:#A9A093;margin-bottom:9px;}
+.app .chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+.app .chip{font-size:11.5px;font-weight:700;border:1px solid #E1D8C9;background:#FBF9F5;
+  border-radius:999px;padding:4px 10px;color:#5C554C;white-space:nowrap;}
+.app .chip.hi{border-color:#D96C3F;background:#FFF3ED;color:#A8431A;}
+.app .send{margin-left:auto;background:#1F1D1A;color:#fff;border-radius:50%;
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;}
+.appcap{font-size:13.5px;color:var(--dim);text-align:center;margin:-4px 0 16px;line-height:1.7;}
+.appcap b{color:var(--soft);}
+
+/* 번호 붙은 지시선 */
+.pin{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+  border-radius:50%;background:#D96C3F;color:#fff;font-size:12.5px;font-weight:800;
+  margin-right:7px;vertical-align:1px;flex:none;}
+.pinrow{display:flex;align-items:flex-start;gap:0;margin:11px 0;font-size:15.5px;line-height:1.7;}
+.pinrow .pt{flex:1;}
+.pinrow .pt b{font-weight:800;}
+.pinrow .pt small{display:block;font-size:13.5px;color:var(--dim);line-height:1.6;margin-top:1px;}
+
 /* 말시키기 카드 */
 .say{background:var(--tri-lt);border:1.5px solid var(--tri-line);border-radius:14px;
   padding:16px 18px;margin:14px 0;}
@@ -1176,6 +1214,54 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
   <div class="callout c-ok">
     ✅ 다 깔았으면 클로드에게 <b>"파이썬 잘 깔렸는지 확인해줘"</b> 라고 하세요.
     직접 확인하려고 애쓰실 필요 없습니다.
+  </div>
+</div>
+
+<!-- 노드 -->
+<div class="step">
+  <div class="step-no">3</div>
+  <h2>직접 깔고 싶다면 — Node.js (노드)</h2>
+  <p class="lead"><b>홈페이지나 웹앱을 만들 때만</b> 필요합니다.
+  그게 아니면 <b>건너뛰셔도 됩니다.</b></p>
+
+  <div class="screen">
+    <div class="bar">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="addr">nodejs.org/en/download<span class="cursor">|</span></div>
+    </div>
+    <div class="caption">↑ 주소 칸에 이렇게 치고 <b>엔터</b></div>
+  </div>
+
+  <div class="callout c-warn">
+    🚨 <b>이 페이지는 함정이 있습니다. 꼭 읽어주세요.</b><br>
+    화면을 열면 위쪽에 <b>새까만 상자에 영어 명령어</b>가 잔뜩 나옵니다.
+    <b>그건 우리가 쓸 게 아닙니다.</b> 전문가용입니다.<br>
+    위에 있는 <b>네모난 선택칸(Windows, Docker 같은 것)도 건드리지 마세요.</b>
+  </div>
+
+  <div class="do">
+    <span class="lbl">이렇게</span><b>검은 상자를 지나 아래로 쭉 내리세요.</b>
+    <b>초록색 버튼 두 개</b>가 나옵니다. 거기가 진짜입니다.
+  </div>
+
+  <div class="shot">
+    <img src="img/node-download.png" alt="노드 다운로드 페이지 아래쪽. 초록색 Windows Installer (.msi) 버튼과 Standalone Binary (.zip) 버튼이 나란히 있다.">
+    <div class="cap"><span class="real">실제 화면</span>
+      왼쪽 <b>Windows Installer (.msi)</b> 를 누르세요. 오른쪽 <b>.zip</b> 은 아닙니다.</div>
+  </div>
+
+  <p>받아진 파일을 열면 설치 창이 뜹니다. <b>깃 때와 똑같습니다</b> —
+  나오는 화면마다 <b>Next</b> 만 누르시면 됩니다. 중간에 동의하는 칸(I accept…)이 나오면
+  <b>체크하고 Next</b> 를 누르세요.</p>
+
+  <div class="callout c-note">
+    설치 중에 <b>"Tools for Native Modules"</b> 같은 화면에서
+    <b>추가로 뭘 더 깔겠냐</b>고 물어볼 수 있습니다.
+    <b>체크하지 말고 그냥 Next</b> 하세요. 안 해도 됩니다.
+  </div>
+
+  <div class="callout c-ok">
+    ✅ 끝나면 클로드에게 <b>"노드 잘 깔렸는지 확인해줘"</b> 라고 하세요.
   </div>
 </div>
 
