@@ -867,7 +867,7 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
     btns.forEach(function(b){ b.classList.toggle('on', b.dataset.t === String(t)); });
     for (var k in panels) panels[k].classList.toggle('on', k === String(t));
     window.scrollTo({top:0, behavior: push ? 'smooth' : 'auto'});
-    if (push) history.replaceState(null, '', t === 2 ? '#step2' : '#step1');
+    if (push) history.replaceState(null, '', String(t) === '2' ? '#step2' : '#step1');
   }
 
   btns.forEach(function(b){ b.addEventListener('click', function(){ go(b.dataset.t, true); }); });
