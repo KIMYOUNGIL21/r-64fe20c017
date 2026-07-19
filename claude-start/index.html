@@ -737,11 +737,11 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
   <div class="wiz">
     <div class="wtb"><span class="ico"></span>Git Setup<span class="x">✕</span></div>
     <div class="whd">
-      <div class="t">Select Components</div>
-      <div class="s">Which components should be installed?</div>
+      <div class="t">Adjusting your PATH environment</div>
+      <div class="s">How would you like to use Git from the command line?</div>
     </div>
     <div class="wbd">
-      <div class="box">☑ Windows Explorer integration<br>☑ Git LFS<br>☑ Associate .git* files …</div>
+      <div class="box">◯ Use Git from Git Bash only<br>◉ Git from the command line and also from 3rd-party software<br>◯ Use Git and optional Unix tools …</div>
     </div>
     <div class="wft">
       <div class="wb">&lt; Back</div><div class="wb hot">Next &gt;</div><div class="wb">Cancel</div>
@@ -751,7 +751,7 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
     <b>안에 있는 건 하나도 건드리지 마세요.</b> Next만 누르시면 됩니다.</div>
 
   <div class="repeat">
-    🔁 이 화면이 <b>열 번 넘게</b> 반복됩니다
+    🔁 이 화면이 <b>열다섯 번쯤</b> 반복됩니다
     <small>제목이 계속 바뀌지만 하는 일은 똑같습니다 — Next, Next, Next…</small>
   </div>
 
@@ -761,27 +761,51 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
     괜히 바꾸면 오히려 탈이 납니다. <b>그냥 Next만 누르는 게 정답입니다.</b>
   </div>
 
+  <details style="border:1px solid var(--line);border-radius:12px;background:#FBF9F5;margin:14px 0;padding:0 14px">
+    <summary style="font-size:15.5px">지나갈 화면 제목들 — 미리 보고 싶다면</summary>
+    <div class="ans" style="padding-left:26px;font-size:14.5px">
+      순서대로 이렇게 지나갑니다. <b>전부 Next만 누르면 됩니다.</b><br><br>
+      Information (사용 조건)<br>
+      Select Destination Location (설치 위치)<br>
+      Select Components (구성 요소)<br>
+      Select Start Menu Folder (시작 메뉴)<br>
+      Choosing the default editor used by Git<br>
+      Adjusting the name of the initial branch…<br>
+      Adjusting your PATH environment<br>
+      Choosing the SSH executable<br>
+      Choosing HTTPS transport backend<br>
+      Configuring the line ending conversions<br>
+      Configuring the terminal emulator…<br>
+      Choose the default behavior of `git pull`<br>
+      Choose a credential helper<br>
+      Configuring extra options<br>
+      <b>Configuring experimental options</b> ← 여기서 Install 이 나옵니다<br><br>
+      <span style="color:var(--dim)">컴퓨터 상황에 따라 한두 개는 안 나올 수도 있습니다. 정상입니다.</span>
+    </div>
+  </details>
+
   <div class="arrow-down">↓</div>
 
   <div class="wiz">
     <div class="wtb"><span class="ico"></span>Git Setup<span class="x">✕</span></div>
     <div class="whd">
-      <div class="t">Ready to Install</div>
-      <div class="s">Setup is now ready to begin installing Git on your computer.</div>
+      <div class="t">Configuring experimental options</div>
+      <div class="s">These features are developed actively. Would you like to try them?</div>
     </div>
     <div class="wbd">
-      <div class="box">Destination location:<br>&nbsp;&nbsp;&nbsp;C:\Program Files\Git</div>
+      <div class="box">☐ Enable experimental …<br>☐ Enable experimental …</div>
     </div>
     <div class="wft">
       <div class="wb">&lt; Back</div><div class="wb go">Install</div><div class="wb">Cancel</div>
     </div>
   </div>
-  <div class="wizcap">✋ <b>여기서 버튼 글씨가 바뀝니다.</b> Next 자리에 <b>Install</b> 이 나옵니다.<br>
+  <div class="wizcap">✋ <b>마지막 화면입니다.</b> 여기서만 버튼 글씨가
+    <b>Next 에서 Install 로 바뀝니다.</b><br>
     이게 <b>"이제 진짜 설치합니다"</b> 라는 뜻입니다. <b>Install</b> 을 누르세요.</div>
 
   <div class="do">
-    <span class="lbl">기억할 것</span>버튼 글씨가 <b>Next 에서 Install 로 바뀌면</b> 거의 끝난 겁니다.
-    그다음엔 막대기가 차오릅니다. <b>1~2분</b> 기다리세요.
+    <span class="lbl">기억할 것</span>버튼 글씨가 <b>Next 에서 Install 로 바뀌면</b> 그게 마지막입니다.
+    누르면 막대기가 차오릅니다. <b>1~2분</b> 기다리세요.
   </div>
 
   <div class="arrow-down">↓</div>
@@ -793,14 +817,18 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
       <div class="s">Setup has finished installing Git on your computer.</div>
     </div>
     <div class="wbd">
-      <div class="box">☐ Launch Git Bash<br>☐ View Release Notes</div>
+      <div class="box">☐ Launch Git Bash<br>☑ View Release Notes</div>
     </div>
     <div class="wft">
       <div class="wb go">Finish</div>
     </div>
   </div>
-  <div class="wizcap">마지막 화면입니다. <b>Finish</b> 를 누르면 설치 끝.<br>
-    안에 네모칸(☐)이 있으면 <b>전부 빈 칸으로 두고</b> Finish를 누르세요.</div>
+  <div class="wizcap">설치가 끝난 화면입니다. <b>Finish</b> 를 누르면 완전히 끝.</div>
+
+  <div class="callout c-note">
+    Finish를 누르면 <b>영어로 된 안내 창(Release Notes)이 하나 열릴 수 있습니다.</b>
+    안 봐도 되는 내용이니 <b>그냥 X를 눌러 닫으세요.</b> 잘못된 게 아닙니다.
+  </div>
 
   <div class="callout c-note">
     설치가 끝나도 <b>화면에 아무 변화가 없습니다. 정상입니다.</b>
