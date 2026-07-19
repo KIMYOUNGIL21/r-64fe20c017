@@ -138,6 +138,8 @@ ul.mini li{margin-bottom:9px;padding-left:4px;}
   background:var(--pro-lt);border:1.5px dashed var(--pro-line);border-radius:12px;
   padding:12px;margin:14px 0;line-height:1.6;}
 .repeat small{display:block;font-weight:400;font-size:13px;color:var(--dim);margin-top:3px;}
+details.plain summary{padding-left:24px;}
+details.plain summary::before{content:'📄';font-size:14px;top:16px;}
 
 /* 채팅 목업 */
 .chat{background:#fff;border:1.5px solid #DDD3C4;border-radius:12px;padding:16px;margin:14px 0;}
@@ -761,7 +763,7 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
     괜히 바꾸면 오히려 탈이 납니다. <b>그냥 Next만 누르는 게 정답입니다.</b>
   </div>
 
-  <details style="border:1px solid var(--line);border-radius:12px;background:#FBF9F5;margin:14px 0;padding:0 14px">
+  <details class="plain" style="border:1px solid var(--line);border-radius:12px;background:#FBF9F5;margin:14px 0;padding:0 14px">
     <summary style="font-size:15.5px">지나갈 화면 제목들 — 미리 보고 싶다면</summary>
     <div class="ans" style="padding-left:26px;font-size:14.5px">
       순서대로 이렇게 지나갑니다. <b>전부 Next만 누르면 됩니다.</b><br><br>
