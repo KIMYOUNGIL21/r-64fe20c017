@@ -100,6 +100,45 @@ ul.mini li{margin-bottom:9px;padding-left:4px;}
 .win .wbtn{background:#fff;border:1px solid #ADA79E;border-radius:4px;padding:7px 18px;font-size:14px;color:#3D382F;}
 .win .wbtn.on{background:#0E5BBF;border-color:#0E5BBF;color:#fff;font-weight:700;}
 
+/* 실제 화면 캡처 */
+.shot{margin:14px 0;}
+.shot img{width:100%;display:block;border:1.5px solid #DDD3C4;border-radius:12px;
+  box-shadow:0 4px 14px rgba(80,60,40,.08);}
+.shot .cap{background:#FBF8F3;border:1px solid #EBE2D6;border-top:0;
+  border-radius:0 0 12px 12px;margin-top:-12px;padding:10px 13px 9px;
+  font-size:13.5px;color:var(--dim);text-align:center;line-height:1.65;}
+.shot .real{display:inline-block;background:var(--ok);color:#fff;font-size:11px;font-weight:800;
+  border-radius:5px;padding:1px 7px;margin-right:6px;letter-spacing:.3px;vertical-align:1px;}
+
+/* 설치 마법사(그림) */
+.wiz{border:1.5px solid #B9B3AA;border-radius:8px;overflow:hidden;margin:12px 0;
+  box-shadow:0 4px 14px rgba(60,50,40,.10);background:#F0F0F0;}
+.wiz .wtb{background:linear-gradient(#FBFBFB,#EFEFEF);border-bottom:1px solid #DCD8D2;
+  padding:8px 11px;font-size:13px;font-weight:700;color:#3D382F;display:flex;align-items:center;gap:7px;}
+.wiz .wtb .ico{width:14px;height:14px;border-radius:3px;background:#F05133;flex:none;}
+.wiz .wtb .x{margin-left:auto;color:#8A837A;font-weight:400;}
+.wiz .whd{background:#fff;border-bottom:1px solid #DCD8D2;padding:13px 15px;}
+.wiz .whd .t{font-size:14.5px;font-weight:800;color:#1F1D1A;line-height:1.4;}
+.wiz .whd .s{font-size:13px;color:#6B645B;margin-top:3px;line-height:1.5;}
+.wiz .wbd{background:#fff;padding:16px 15px;font-size:13.5px;color:#4C463E;line-height:1.7;min-height:76px;}
+.wiz .wbd .box{border:1px solid #CFC9C1;background:#FCFCFC;border-radius:3px;
+  padding:9px 11px;font-size:12.5px;color:#6B645B;line-height:1.65;}
+.wiz .wft{padding:11px 13px;display:flex;gap:7px;justify-content:flex-end;
+  border-top:1px solid #DCD8D2;background:#F0F0F0;}
+.wiz .wb{background:#fff;border:1px solid #ADA79E;border-radius:4px;padding:7px 17px;
+  font-size:13.5px;color:#3D382F;}
+.wiz .wb.dis{color:#B5AFA6;border-color:#D3CEC6;}
+.wiz .wb.hot{background:#0E5BBF;border-color:#0E5BBF;color:#fff;font-weight:800;
+  box-shadow:0 0 0 3px rgba(14,91,191,.18);}
+.wiz .wb.go{background:#2F6B45;border-color:#2F6B45;color:#fff;font-weight:800;
+  box-shadow:0 0 0 3px rgba(47,107,69,.18);}
+.wizcap{font-size:13.5px;color:var(--dim);text-align:center;margin:-4px 0 16px;line-height:1.65;}
+.wizcap b{color:var(--soft);}
+.repeat{text-align:center;font-size:14.5px;font-weight:800;color:var(--pro);
+  background:var(--pro-lt);border:1.5px dashed var(--pro-line);border-radius:12px;
+  padding:12px;margin:14px 0;line-height:1.6;}
+.repeat small{display:block;font-weight:400;font-size:13px;color:var(--dim);margin-top:3px;}
+
 /* 채팅 목업 */
 .chat{background:#fff;border:1.5px solid #DDD3C4;border-radius:12px;padding:16px;margin:14px 0;}
 .chat .tabs{display:flex;gap:6px;justify-content:center;margin-bottom:16px;}
@@ -655,25 +694,118 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
     <div class="caption">↑ 인터넷 창 주소 칸에 이렇게 치고 <b>엔터</b></div>
   </div>
 
-  <ol class="mini">
-    <li>화면에서 <b>64-bit Git for Windows Setup</b> 이라고 적힌 걸 클릭합니다.
-      <br><small style="color:var(--dim)">여러 개 보이면 <b>Setup</b> 이라는 글자가 들어간 <b>맨 위</b> 걸 고르세요.</small></li>
-    <li>받아진 파일을 엽니다. <span style="color:var(--dim);font-size:14.5px">(1단계 4번과 똑같습니다)</span></li>
-    <li>설치 창이 뜹니다. <b>화면이 열 번 넘게 계속 나옵니다.</b></li>
-  </ol>
+  <p>이런 화면이 나옵니다. <b>맨 위 파란 글씨</b>만 누르면 됩니다.</p>
 
-  <div class="do">
-    <span class="lbl">이렇게</span>나오는 화면 전부 <b>아무것도 건드리지 말고</b>
-    <b>Next(다음)</b>만 계속 누르세요. 마지막에 <b>Install(설치)</b>가 나오면 그걸 누릅니다.
+  <div class="shot">
+    <img src="img/git-download.png" alt="깃 다운로드 페이지 화면. 맨 위에 Click here to download 라는 파란 글씨 링크가 있다.">
+    <div class="cap"><span class="real">실제 화면</span>
+      맨 윗줄 <b>Click here to download</b> (파란 글씨)를 클릭하세요.</div>
+  </div>
+
+  <div class="callout c-warn">
+    ⚠️ 아래에 <b>Other Git for Windows downloads</b> 라며 파란 글씨가 여러 개 더 보입니다.
+    <b>그건 누르지 마세요.</b> 맨 위 첫 줄 하나만 누르시면 됩니다.
+  </div>
+
+  <p>파일이 받아지면 엽니다. <span style="color:var(--dim);font-size:15px">(1단계 4번과 똑같은 방법입니다)</span>
+  1단계 5번의 <b>파란 경고창</b>이 또 나올 수 있는데, 똑같이 <b>추가 정보 → 실행</b> 하시면 됩니다.</p>
+
+  <hr class="sep">
+
+  <p><b>설치 창이 뜨면 — 이렇게 생겼습니다</b>
+  <br><small style="color:var(--dim);font-size:13.5px">아래 넷은 실제 화면을 <b>그림으로 옮긴 것</b>입니다.
+  글자와 위치가 조금 다를 수 있지만, <b>버튼 자리와 누를 순서는 같습니다.</b></small></p>
+
+  <div class="wiz">
+    <div class="wtb"><span class="ico"></span>Git Setup<span class="x">✕</span></div>
+    <div class="whd">
+      <div class="t">Information</div>
+      <div class="s">Please read the following important information before continuing.</div>
+    </div>
+    <div class="wbd">
+      <div class="box">GNU GENERAL PUBLIC LICENSE<br>Version 2, June 1991 …</div>
+    </div>
+    <div class="wft">
+      <div class="wb dis">&lt; Back</div><div class="wb hot">Next &gt;</div><div class="wb">Cancel</div>
+    </div>
+  </div>
+  <div class="wizcap">첫 화면입니다. 영어가 잔뜩 나오지만 <b>읽지 않으셔도 됩니다.</b><br>
+    오른쪽 아래 <b>파란 Next</b> 를 누르세요.</div>
+
+  <div class="arrow-down">↓</div>
+
+  <div class="wiz">
+    <div class="wtb"><span class="ico"></span>Git Setup<span class="x">✕</span></div>
+    <div class="whd">
+      <div class="t">Select Components</div>
+      <div class="s">Which components should be installed?</div>
+    </div>
+    <div class="wbd">
+      <div class="box">☑ Windows Explorer integration<br>☑ Git LFS<br>☑ Associate .git* files …</div>
+    </div>
+    <div class="wft">
+      <div class="wb">&lt; Back</div><div class="wb hot">Next &gt;</div><div class="wb">Cancel</div>
+    </div>
+  </div>
+  <div class="wizcap">제목만 바뀐 <b>비슷한 화면이 계속 나옵니다.</b><br>
+    <b>안에 있는 건 하나도 건드리지 마세요.</b> Next만 누르시면 됩니다.</div>
+
+  <div class="repeat">
+    🔁 이 화면이 <b>열 번 넘게</b> 반복됩니다
+    <small>제목이 계속 바뀌지만 하는 일은 똑같습니다 — Next, Next, Next…</small>
   </div>
 
   <div class="callout c-ok">
-    ✅ 영어가 잔뜩 나와도 겁먹지 마세요. <b>처음 설정된 그대로가 가장 안전합니다.</b>
-    바꿀 게 하나도 없습니다. Next만 누르시면 됩니다.
+    ✅ <b>왜 아무것도 안 건드려도 되나요?</b><br>
+    처음 찍혀 있는 값이 <b>대부분의 사람에게 맞는 값</b>으로 미리 골라져 있기 때문입니다.
+    괜히 바꾸면 오히려 탈이 납니다. <b>그냥 Next만 누르는 게 정답입니다.</b>
   </div>
 
-  <p>마지막 화면에서 <b>Finish(마침)</b>를 누르면 끝입니다. 화면에 아무 변화가 없어도 정상입니다.
-  깃은 뒤에서 조용히 일하는 프로그램이라 아이콘이 안 생깁니다.</p>
+  <div class="arrow-down">↓</div>
+
+  <div class="wiz">
+    <div class="wtb"><span class="ico"></span>Git Setup<span class="x">✕</span></div>
+    <div class="whd">
+      <div class="t">Ready to Install</div>
+      <div class="s">Setup is now ready to begin installing Git on your computer.</div>
+    </div>
+    <div class="wbd">
+      <div class="box">Destination location:<br>&nbsp;&nbsp;&nbsp;C:\Program Files\Git</div>
+    </div>
+    <div class="wft">
+      <div class="wb">&lt; Back</div><div class="wb go">Install</div><div class="wb">Cancel</div>
+    </div>
+  </div>
+  <div class="wizcap">✋ <b>여기서 버튼 글씨가 바뀝니다.</b> Next 자리에 <b>Install</b> 이 나옵니다.<br>
+    이게 <b>"이제 진짜 설치합니다"</b> 라는 뜻입니다. <b>Install</b> 을 누르세요.</div>
+
+  <div class="do">
+    <span class="lbl">기억할 것</span>버튼 글씨가 <b>Next 에서 Install 로 바뀌면</b> 거의 끝난 겁니다.
+    그다음엔 막대기가 차오릅니다. <b>1~2분</b> 기다리세요.
+  </div>
+
+  <div class="arrow-down">↓</div>
+
+  <div class="wiz">
+    <div class="wtb"><span class="ico"></span>Git Setup<span class="x">✕</span></div>
+    <div class="whd">
+      <div class="t">Completing the Git Setup Wizard</div>
+      <div class="s">Setup has finished installing Git on your computer.</div>
+    </div>
+    <div class="wbd">
+      <div class="box">☐ Launch Git Bash<br>☐ View Release Notes</div>
+    </div>
+    <div class="wft">
+      <div class="wb go">Finish</div>
+    </div>
+  </div>
+  <div class="wizcap">마지막 화면입니다. <b>Finish</b> 를 누르면 설치 끝.<br>
+    안에 네모칸(☐)이 있으면 <b>전부 빈 칸으로 두고</b> Finish를 누르세요.</div>
+
+  <div class="callout c-note">
+    설치가 끝나도 <b>화면에 아무 변화가 없습니다. 정상입니다.</b>
+    깃은 뒤에서 조용히 일하는 프로그램이라 바탕화면에 아이콘이 안 생깁니다.
+  </div>
 
   <hr class="sep">
 
