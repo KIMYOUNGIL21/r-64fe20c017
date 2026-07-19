@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>클로드(Claude) 처음 설치하기 — 왕초보 PC 설치 안내서</title>
-<meta name="description" content="컴퓨터를 잘 몰라도 따라 할 수 있는 클로드 데스크탑 설치 안내서. 다운로드부터 첫 대화까지 그림으로 하나씩.">
+<title>클로드(Claude) 시작하기 — 왕초보 PC 설치 + 클로드 코드 환경설정</title>
+<meta name="description" content="컴퓨터를 잘 몰라도 따라 할 수 있는 안내서. 1단계 클로드 설치(무료) → 2단계 클로드 코드 환경설정(유료).">
 <style>
 @font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
   src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
@@ -16,6 +16,7 @@
   --paper:#fff; --line:#EBE2D6;
   --ok:#2F6B45; --ok-bg:#F1F8F3; --ok-line:#CDE5D5;
   --warn:#A8431A; --warn-bg:#FFF4EF; --warn-line:#FFD2BE;
+  --pro:#5B4B8A; --pro-lt:#F4F1FA; --pro-line:#DCD4EE;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--ink);line-height:1.85;font-size:17px;letter-spacing:-.2px;
@@ -140,6 +141,54 @@ footer{text-align:center;font-size:13px;color:var(--dim);margin-top:28px;line-he
 a{color:var(--orange);font-weight:700;}
 hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
 
+/* ── 탭 ── */
+.tabbar{display:flex;gap:8px;position:sticky;top:0;z-index:20;
+  padding:10px 0 12px;background:linear-gradient(to bottom,var(--cream) 74%,transparent);margin-bottom:4px;}
+.tbn{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:14px;
+  padding:12px 8px;cursor:pointer;text-align:center;transition:.18s;color:var(--dim);}
+.tbn b{display:block;font-size:16px;font-weight:800;letter-spacing:-.4px;color:var(--soft);line-height:1.35;}
+.tbn i{display:block;font-style:normal;font-size:12.5px;font-weight:700;margin-top:3px;}
+.tbn:hover{border-color:#D9CEBE;}
+.tbn.on{background:var(--orange);border-color:var(--orange);}
+.tbn.on b{color:#fff;}
+.tbn.on i{color:#FFE3D6;}
+.tbn[data-t="2"].on{background:var(--pro);border-color:var(--pro);}
+.tbn[data-t="2"].on i{color:#DCD4EE;}
+.panel{display:none;}
+.panel.on{display:block;animation:fade .28s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* ── 2단계(유료) 색 변형 ── */
+.p2 .step-no{background:var(--pro);}
+.p2 .do{background:var(--pro-lt);border-color:var(--pro-line);}
+.p2 .do .lbl{background:var(--pro);}
+.p2 .do b{color:var(--pro);}
+.p2 summary::before{color:var(--pro);}
+.p2 header{background:linear-gradient(150deg,#fff,#F4F1FA);}
+.p2 h3{border-left-color:var(--pro);}
+.c-pro{background:var(--pro-lt);border:1.5px solid var(--pro-line);color:#3E3163;}
+
+/* 가격표 */
+.price{background:#fff;border:1.5px solid var(--pro-line);border-radius:16px;
+  padding:20px 18px;margin:16px 0;text-align:center;}
+.price .tag{font-size:12.5px;font-weight:800;color:var(--pro);letter-spacing:1px;}
+.price .amt{font-size:30px;font-weight:800;letter-spacing:-1px;margin:8px 0 2px;}
+.price .amt span{font-size:16px;font-weight:700;color:var(--dim);}
+.price .sub2{font-size:14px;color:var(--dim);line-height:1.7;}
+
+/* 할 수 있는 것 목록 */
+.can{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin:16px 0;}
+.can li{list-style:none;padding:12px 0 12px 32px;border-bottom:1px solid #F4EEE5;position:relative;font-size:16px;line-height:1.7;}
+.can li:last-child{border-bottom:0;}
+.can li::before{content:'▸';position:absolute;left:8px;top:12px;color:var(--pro);font-weight:800;}
+.can li small{display:block;font-size:13.5px;color:var(--dim);margin-top:1px;}
+
+/* 체크리스트 */
+.chk{background:#FBF9F5;border:1.5px dashed #DDD3C4;border-radius:14px;padding:18px;margin:16px 0;}
+.chk .ct{font-size:15px;font-weight:800;margin-bottom:10px;}
+.chk li{list-style:none;padding:7px 0 7px 30px;position:relative;font-size:15.5px;}
+.chk li::before{content:'☐';position:absolute;left:4px;top:7px;font-size:17px;color:var(--pro);}
+
 @media (max-width:420px){
   body{font-size:16.5px;padding:14px 11px 70px;}
   header h1{font-size:22px;}
@@ -151,8 +200,17 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
 <body>
 <div class="wrap">
 
+<!-- ═══ 탭 ═══ -->
+<div class="tabbar">
+  <div class="tbn on" data-t="1"><b>1단계 · 설치</b><i>무료 · 10분</i></div>
+  <div class="tbn" data-t="2"><b>2단계 · 클로드 코드</b><i>유료 · 20분</i></div>
+</div>
+
+<!-- ═════════ 패널 1 : 설치 ═════════ -->
+<div class="panel on p1" id="p1">
+
 <header>
-  <div class="kicker">왕초보 설치 안내서</div>
+  <div class="kicker">1단계 · 왕초보 설치 안내서</div>
   <h1>컴퓨터에 <span style="color:var(--orange)">클로드</span>를<br>처음 설치하는 방법</h1>
   <p>컴퓨터를 잘 몰라도 괜찮습니다.<br>위에서부터 하나씩, 순서대로만 따라 하시면 됩니다.</p>
   <div class="time">⏱ 다 하는 데 10분이면 충분합니다</div>
@@ -480,12 +538,345 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
   중요한 일(돈·건강·법 관련)은 클로드 말만 믿지 마시고 꼭 확인해 보세요.
 </div>
 
+<div class="callout c-pro" style="text-align:center">
+  여기까지가 <b>1단계(무료)</b>입니다. 이것만으로도 충분히 쓰실 수 있습니다.<br>
+  <span style="font-size:14.5px;color:var(--dim)">컴퓨터로 뭔가를 <b>만들고</b> 싶으시면 →</span><br>
+  <span class="btn-mock" style="background:var(--pro);margin-top:10px;cursor:pointer" data-go="2">2단계 · 클로드 코드 준비하기</span>
+</div>
+
+</div><!-- /패널1 -->
+
+
+<!-- ═════════ 패널 2 : 클로드 코드 ═════════ -->
+<div class="panel p2" id="p2">
+
+<header>
+  <div class="kicker" style="color:var(--pro)">2단계 · 클로드 코드 환경설정</div>
+  <h1>클로드에게<br><span style="color:var(--pro)">일을 시키는</span> 준비</h1>
+  <p>1단계 클로드는 <b>말동무</b>였습니다.<br>2단계 클로드 코드는 <b>내 컴퓨터에서 직접 손을 쓰는 직원</b>입니다.</p>
+  <div class="time">⏱ 준비하는 데 20분 · 💳 유료</div>
+</header>
+
+<!-- 뭘 할 수 있나 -->
+<div class="can">
+  <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px">이런 걸 대신 해 줍니다</div>
+  <div style="font-size:14.5px;color:var(--dim);margin-bottom:8px">말로 시키면 <b>파일을 직접 만들고 고칩니다.</b></div>
+  <ul>
+    <li>홈페이지·간단한 프로그램 만들기
+      <small>"우리 가게 소개 홈페이지 하나 만들어줘" → 진짜 파일이 생깁니다</small></li>
+    <li>엑셀·문서 여러 개를 한꺼번에 정리
+      <small>"이 폴더 엑셀들 합쳐서 한 장으로 만들어줘"</small></li>
+    <li>사진·파일 이름 한꺼번에 바꾸기
+      <small>손으로 하면 몇 시간 걸릴 일을 몇 분에</small></li>
+    <li>내 컴퓨터 안의 자료를 읽고 정리
+      <small>1단계 클로드는 못 하는 일입니다. 파일을 못 보거든요</small></li>
+  </ul>
+</div>
+
+<!-- 유료 경고 -->
+<div class="callout c-warn">
+  💳 <b>여기서부터는 돈이 듭니다. 분명히 말씀드립니다.</b><br>
+  1단계 대화(Chat)는 계속 무료지만, <b>클로드 코드는 유료 구독을 해야만 켜집니다.</b>
+  구독을 안 하면 버튼을 눌러도 "업그레이드하세요" 안내만 나옵니다.
+</div>
+
+<div class="price">
+  <div class="tag">가장 싼 이용권 · PRO</div>
+  <div class="amt">월 20달러<span> 정도</span></div>
+  <div class="sub2">
+    1년 치를 한 번에 내면 월 17달러로 조금 싸집니다.<br>
+    <b>우리 돈으로 대략 3만 원 안팎</b>입니다. (환율·세금에 따라 달라집니다)<br>
+    <span style="color:var(--pro);font-weight:700">언제든 해지할 수 있습니다.</span>
+  </div>
+</div>
+
+<div class="callout c-note">
+  <b>부담되시면 여기서 멈추셔도 됩니다.</b> 1단계만으로도 물어보고, 글 쓰고, 요약하는 건 다 됩니다.
+  2단계는 <b>컴퓨터로 뭔가를 만들어 보고 싶은 분</b>께 권합니다.
+</div>
+
+<!-- 준비물 체크 -->
+<div class="chk">
+  <div class="ct">📋 2단계를 위해 준비할 것 — 딱 3가지</div>
+  <ul>
+    <li><b>유료 이용권(Pro)</b> 결제 — 카드 필요</li>
+    <li><b>깃(Git)</b>이라는 프로그램 설치 — 무료, 이게 없으면 아예 안 켜집니다</li>
+    <li><b>작업할 폴더</b> 하나 만들기 — 클로드가 일할 방입니다</li>
+  </ul>
+  <div style="font-size:14px;color:var(--dim);margin-top:10px;padding-left:4px">
+    아래 1~3번에서 이 세 가지를 차례로 합니다.
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<div class="step">
+  <div class="step-no">1</div>
+  <h2>유료 이용권 켜기</h2>
+  <p class="lead">클로드 창에서 바로 하실 수 있습니다.</p>
+  <ol class="mini">
+    <li>클로드 화면 <b>맨 위 가운데</b>의 <b>Code</b> 글자를 클릭합니다.</li>
+    <li>구독이 없으면 <b>업그레이드하라는 안내</b>가 나옵니다. 여기서 안내대로 <b>Pro</b>를 고릅니다.</li>
+    <li>카드 정보를 넣고 결제합니다.</li>
+  </ol>
+
+  <div class="do">
+    <span class="lbl">고를 때</span><b>Monthly(월간)</b>로 시작하시길 권합니다.
+    1년 치가 조금 싸지만, 우선 한 달 써 보고 마음에 들면 그때 바꾸셔도 됩니다.
+  </div>
+
+  <div class="callout c-note">
+    <b>해지는 어떻게 하나요?</b> 클로드 화면의 <b>설정(Settings)</b> → <b>Billing(결제)</b> 에서
+    언제든 해지할 수 있습니다. 해지해도 그달 남은 기간은 계속 쓸 수 있습니다.
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <div class="step-no">2</div>
+  <h2>깃(Git) 설치 — 이게 제일 중요합니다</h2>
+  <p class="lead">클로드 코드는 <b>깃(Git)</b>이라는 프로그램이 있어야 켜집니다.
+  없으면 결제를 했어도 안 열립니다. 무료입니다.</p>
+
+  <div class="callout c-warn">
+    ⚠️ <b>2단계에서 막히는 사람 열에 아홉이 여기입니다.</b> 꼭 하고 넘어가세요.
+  </div>
+
+  <p><b>깃이 뭔가요?</b> 파일이 바뀐 걸 기록해 주는 도구입니다. 클로드가 내 파일을 고칠 때
+  <b>"뭘 어떻게 바꿨는지" 보여주고, 잘못되면 되돌리기 위해</b> 씁니다. 안전장치라고 보시면 됩니다.</p>
+
+  <hr class="sep">
+
+  <p><b>설치 방법</b></p>
+  <div class="screen">
+    <div class="bar">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="addr">git-scm.com/downloads/win<span class="cursor">|</span></div>
+    </div>
+    <div class="caption">↑ 인터넷 창 주소 칸에 이렇게 치고 <b>엔터</b></div>
+  </div>
+
+  <ol class="mini">
+    <li>화면에서 <b>64-bit Git for Windows Setup</b> 이라고 적힌 걸 클릭합니다.
+      <br><small style="color:var(--dim)">여러 개 보이면 <b>Setup</b> 이라는 글자가 들어간 <b>맨 위</b> 걸 고르세요.</small></li>
+    <li>받아진 파일을 엽니다. <span style="color:var(--dim);font-size:14.5px">(1단계 4번과 똑같습니다)</span></li>
+    <li>설치 창이 뜹니다. <b>화면이 열 번 넘게 계속 나옵니다.</b></li>
+  </ol>
+
+  <div class="do">
+    <span class="lbl">이렇게</span>나오는 화면 전부 <b>아무것도 건드리지 말고</b>
+    <b>Next(다음)</b>만 계속 누르세요. 마지막에 <b>Install(설치)</b>가 나오면 그걸 누릅니다.
+  </div>
+
+  <div class="callout c-ok">
+    ✅ 영어가 잔뜩 나와도 겁먹지 마세요. <b>처음 설정된 그대로가 가장 안전합니다.</b>
+    바꿀 게 하나도 없습니다. Next만 누르시면 됩니다.
+  </div>
+
+  <p>마지막 화면에서 <b>Finish(마침)</b>를 누르면 끝입니다. 화면에 아무 변화가 없어도 정상입니다.
+  깃은 뒤에서 조용히 일하는 프로그램이라 아이콘이 안 생깁니다.</p>
+
+  <hr class="sep">
+
+  <div class="callout c-warn">
+    🔁 <b>깃을 설치했으면 클로드를 반드시 껐다 켜세요.</b><br>
+    그냥 창만 닫는 게 아니라 <b>완전히 종료</b>해야 합니다.<br>
+    → 화면 오른쪽 아래 <b>작은 화살표(∧)</b>를 눌러 클로드 아이콘이 있으면
+    <b>마우스 오른쪽 클릭 → 종료(Quit)</b> → 다시 실행.<br>
+    <span style="font-size:14.5px">이걸 안 하면 깃을 깔고도 "깃이 없다"고 나옵니다.</span>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <div class="step-no">3</div>
+  <h2>클로드가 일할 폴더 만들기</h2>
+  <p class="lead">클로드 코드는 <b>폴더 하나를 정해 주면 그 안에서만</b> 일합니다.
+  아무 데나 헤집고 다니지 않으니 안심하세요.</p>
+
+  <ol class="mini">
+    <li><b>바탕화면</b>의 빈 곳에서 <b>마우스 오른쪽 버튼</b>을 클릭합니다.</li>
+    <li><b>새로 만들기</b> → <b>폴더</b> 를 클릭합니다.</li>
+    <li>이름을 <b>claude-work</b> 라고 칩니다. (영어로, 띄어쓰기 없이)</li>
+    <li><span class="key">Enter ↵</span> 를 누릅니다.</li>
+  </ol>
+
+  <div class="callout c-note">
+    <b>왜 영어 이름인가요?</b> 한글이나 띄어쓰기가 들어간 폴더 이름은 가끔 말썽을 부립니다.
+    처음이니 안전하게 <b>claude-work</b> 로 하시길 권합니다.
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step">
+  <div class="step-no">4</div>
+  <h2>Code 화면 열고 폴더 지정하기</h2>
+  <p class="lead">이제 준비가 다 됐습니다. 연결만 하면 됩니다.</p>
+
+  <div class="chat">
+    <div class="tabs">
+      <div class="tb">Chat</div><div class="tb">Cowork</div><div class="tb on">Code</div>
+    </div>
+    <div style="text-align:center;padding:8px 0 4px">
+      <div style="font-size:14px;color:var(--dim);margin-bottom:10px">어디서 일할까요?</div>
+      <span class="btn-mock" style="background:var(--pro);font-size:14px;padding:10px 22px">Local</span>
+      <span class="btn-mock sm" style="margin-left:6px">Remote</span>
+      <span class="btn-mock sm">SSH</span>
+    </div>
+    <div style="text-align:center;margin-top:12px">
+      <span class="btn-mock sm" style="font-size:14px">📁 Select folder</span>
+    </div>
+  </div>
+
+  <ol class="mini">
+    <li>화면 <b>맨 위 가운데</b>의 <b>Code</b> 를 클릭합니다.</li>
+    <li><b>Local</b> 을 고릅니다. <small style="color:var(--dim)">(= 내 컴퓨터에서 일하기. Remote·SSH·WSL은 무시하세요)</small></li>
+    <li><b>Select folder(폴더 선택)</b> 를 누릅니다.</li>
+    <li>아까 바탕화면에 만든 <b>claude-work</b> 폴더를 찾아 고르고 <b>확인</b>을 누릅니다.</li>
+  </ol>
+
+  <div class="callout c-ok">
+    ✅ 여기까지 오면 <b>환경설정 끝</b>입니다. 이제 말만 걸면 됩니다.
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step">
+  <div class="step-no">5</div>
+  <h2>안전장치 확인 — 꼭 보고 가세요</h2>
+  <p class="lead">클로드가 내 파일을 마음대로 고치면 곤란하겠죠.
+  <b>허락받고 고치도록</b> 되어 있는지 확인합니다.</p>
+
+  <p>글 쓰는 칸 <b>옆(보내기 버튼 근처)</b>에 작은 글씨로 모드를 고르는 곳이 있습니다.</p>
+
+  <div class="do">
+    <span class="lbl">확인</span>거기가 <b>Manual(수동)</b> 로 되어 있으면 그대로 두세요.
+    <br>처음 쓰는 분에게 <b>공식적으로 권장되는 설정</b>입니다.
+  </div>
+
+  <ul class="mini">
+    <li><b>Manual</b> — 뭘 고치기 전에 <b>매번 물어봅니다</b>. ✅ 이걸로 시작</li>
+    <li><b>Accept edits</b> — 안 물어보고 알아서 고칩니다. 익숙해진 뒤에</li>
+    <li><b>Plan</b> — 안 고치고 <b>계획만</b> 세워서 보여줍니다. 큰일 시킬 때</li>
+  </ul>
+
+  <div class="callout c-ok">
+    ✅ Manual이면 클로드가 파일을 고치기 전에 <b>"이렇게 바꿀게요"</b> 하고 보여줍니다.
+    <b>초록색은 새로 넣을 것, 빨간색은 지울 것</b>입니다.
+    마음에 들면 <b>Accept(수락)</b>, 아니면 <b>Reject(거절)</b>를 누르세요.
+    <b>거절하면 파일은 하나도 안 바뀝니다.</b>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step">
+  <div class="step-no">6</div>
+  <h2>첫 일 시켜보기</h2>
+  <p class="lead">이제 시켜봅시다. <b>한글로 말해도 됩니다.</b></p>
+
+  <div class="chat">
+    <div class="me">내 소개 홈페이지를 아주 간단하게 하나 만들어줘. 이름은 홍길동이야.</div>
+    <div class="ai">네, index.html 파일을 만들겠습니다. 이렇게 작성할게요 —<br>
+      <span style="font-size:13.5px;color:var(--ok)">+ 초록색 줄들…</span></div>
+    <div style="text-align:right;margin-top:10px">
+      <span class="btn-mock sm" style="background:#F1F8F3;border-color:#CDE5D5;color:#245A38;font-weight:700">✓ Accept</span>
+      <span class="btn-mock sm">✕ Reject</span>
+    </div>
+  </div>
+
+  <div class="try" style="background:var(--pro-lt);border-color:var(--pro-line)">
+    💬 <b>이렇게 시켜보세요</b><br>
+    · "내 소개 홈페이지를 간단하게 만들어줘"<br>
+    · "이 폴더에 오늘 할 일 목록 파일을 만들어줘"<br>
+    · "방금 만든 걸 좀 더 예쁘게 고쳐줘"
+  </div>
+
+  <p style="margin-top:14px">막히면 클로드에게 그냥 물어보세요.
+  <b>"방금 뭘 한 건지 쉬운 말로 설명해줘"</b> 라고 하면 설명해 줍니다.</p>
+</div>
+
+<!-- FAQ 2 -->
+<div class="faq">
+  <h2>2단계에서 막히셨나요?</h2>
+  <div class="sub">거의 다 아래 다섯 가지 중 하나입니다.</div>
+
+  <details>
+    <summary>Code를 눌렀는데 "업그레이드하세요"만 나와요</summary>
+    <div class="ans">아직 <b>유료 구독이 안 켜진</b> 상태입니다. 1번 단계로 돌아가 Pro 결제를 하세요.
+    결제를 방금 하셨다면 클로드를 <b>완전히 껐다 켜</b> 보세요.</div>
+  </details>
+
+  <details>
+    <summary>깃(Git)을 깔았는데 계속 없다고 나와요</summary>
+    <div class="ans"><b>클로드를 완전히 종료하지 않아서</b> 그렇습니다. 창의 X만 누르면 뒤에서 계속 켜져 있습니다.
+    화면 <b>오른쪽 아래 작은 화살표(∧)</b>를 눌러 클로드 아이콘을 찾고,
+    <b>마우스 오른쪽 클릭 → 종료</b>한 다음 다시 실행하세요. 그래도 안 되면 <b>컴퓨터를 재부팅</b>하면 해결됩니다.</div>
+  </details>
+
+  <details>
+    <summary>Error 403 / 권한 오류 같은 게 나와요</summary>
+    <div class="ans">공식 해결 순서입니다. ① <b>로그아웃했다가 다시 로그인</b>하세요 — 이게 가장 잘 듣습니다.
+    ② 유료 구독이 살아 있는지 확인하세요. ③ 클로드를 <b>완전히 종료</b>했다가 다시 켜고 로그인하세요.
+    ④ 인터넷 연결도 확인해 보세요.</div>
+  </details>
+
+  <details>
+    <summary>클로드가 내 컴퓨터를 망가뜨리면 어쩌죠?</summary>
+    <div class="ans">세 겹으로 막혀 있습니다. ① <b>정해준 폴더 안에서만</b> 일합니다.
+    ② <b>Manual 모드</b>면 고치기 전에 매번 물어봅니다. ③ 거절하면 <b>아무것도 안 바뀝니다.</b><br>
+    그래도 걱정되시면 <b>claude-work 폴더에는 중요한 원본 파일을 넣지 마세요.</b>
+    사본을 넣고 시키시면 마음이 편합니다.</div>
+  </details>
+
+  <details>
+    <summary>돈을 그만 내고 싶어요</summary>
+    <div class="ans">클로드 화면의 <b>설정(Settings)</b> → <b>Billing(결제)</b> 에서 해지하시면 됩니다.
+    해지해도 <b>이미 낸 그달 말까지는 그대로 쓸 수 있고</b>, 그 뒤로는 자동으로 무료(Chat)로 돌아갑니다.
+    만들어 둔 파일은 내 컴퓨터에 그대로 남습니다.</div>
+  </details>
+</div>
+
+<div class="done" style="background:linear-gradient(150deg,#fff,#F4F1FA);border-color:var(--pro-line)">
+  <div class="big">🛠️</div>
+  <h2 style="color:var(--pro)">환경설정 완료</h2>
+  <p>이제 클로드가 내 컴퓨터에서 <b>직접 손을 씁니다.</b><br>
+  처음엔 작은 것부터 시켜보세요. 익숙해지는 게 먼저입니다.</p>
+</div>
+
+<div class="callout c-note">
+  <b>천천히 하셔도 됩니다.</b> 한 번에 다 알 필요 없습니다.
+  모르는 게 나오면 클로드에게 <b>"이게 무슨 뜻이야? 쉽게 설명해줘"</b> 라고 물어보시는 게 가장 빠릅니다.
+</div>
+
+</div><!-- /패널2 -->
+
 <footer>
-  왕초보를 위한 클로드 설치 안내서<br>
-  공식 다운로드 주소 · <a href="https://claude.ai/download">claude.ai/download</a><br>
-  <span style="font-size:12px;opacity:.75">2026년 7월 기준</span>
+  왕초보를 위한 클로드 시작 안내서<br>
+  공식 다운로드 · <a href="https://claude.ai/download">claude.ai/download</a><br>
+  깃(Git) 내려받기 · <a href="https://git-scm.com/downloads/win">git-scm.com/downloads/win</a><br>
+  <span style="font-size:12px;opacity:.75">2026년 7월 기준 · 가격과 화면은 바뀔 수 있습니다</span>
 </footer>
 
 </div>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.tbn');
+  var panels = {1: document.getElementById('p1'), 2: document.getElementById('p2')};
+
+  function go(t, push){
+    btns.forEach(function(b){ b.classList.toggle('on', b.dataset.t === String(t)); });
+    for (var k in panels) panels[k].classList.toggle('on', k === String(t));
+    window.scrollTo({top:0, behavior: push ? 'smooth' : 'auto'});
+    if (push) history.replaceState(null, '', t === 2 ? '#step2' : '#step1');
+  }
+
+  btns.forEach(function(b){ b.addEventListener('click', function(){ go(b.dataset.t, true); }); });
+  document.querySelectorAll('[data-go]').forEach(function(el){
+    el.addEventListener('click', function(){ go(el.dataset.go, true); });
+  });
+
+  if (location.hash === '#step2') go(2, false);
+})();
+</script>
 </body>
 </html>
