@@ -18,6 +18,7 @@
   --warn:#A8431A; --warn-bg:#FFF4EF; --warn-line:#FFD2BE;
   --pro:#5B4B8A; --pro-lt:#F4F1FA; --pro-line:#DCD4EE;
   --tri:#2C6E63; --tri-lt:#EFF7F5; --tri-line:#CBE3DD;
+  --four:#2E6FA8; --four-lt:#EFF5FB; --four-line:#C9DDEE;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--ink);line-height:1.85;font-size:17px;letter-spacing:-.2px;
@@ -152,6 +153,17 @@ details.plain summary::before{content:'📄';font-size:14px;top:16px;}
 .tbn[data-t="3"].on{background:var(--tri);border-color:var(--tri);}
 .tbn[data-t="3"].on i{color:#CBE3DD;}
 .c-tri{background:var(--tri-lt);border:1.5px solid var(--tri-line);color:#1E5049;}
+
+/* ── 4단계(참고) 색 변형 ── */
+.p4 .step-no{background:var(--four);}
+.p4 .do{background:var(--four-lt);border-color:var(--four-line);}
+.p4 .do .lbl{background:var(--four);}
+.p4 .do b{color:var(--four);}
+.p4 summary::before{color:var(--four);}
+.p4 header{background:linear-gradient(150deg,#fff,#EFF5FB);}
+.tbn[data-t="4"].on{background:var(--four);border-color:var(--four);}
+.tbn[data-t="4"].on i{color:#CFE3F3;}
+.c-four{background:var(--four-lt);border:1.5px solid var(--four-line);color:#1E4A6E;}
 
 /* 필요/불필요 표 */
 .need{background:#fff;border:1px solid var(--line);border-radius:16px;
@@ -305,10 +317,10 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
   header h1{font-size:22px;}
   .step h2{font-size:19.5px;}
   .step,.prep,.faq{padding:22px 16px;}
-  .tabbar{gap:5px;}
-  .tbn{padding:10px 3px;border-radius:11px;}
-  .tbn b{font-size:13.5px;letter-spacing:-.6px;}
-  .tbn i{font-size:11px;}
+  .tabbar{gap:4px;}
+  .tbn{padding:9px 2px;border-radius:10px;}
+  .tbn b{font-size:12px;letter-spacing:-.5px;}
+  .tbn i{font-size:9.5px;}
   .need .mk{width:52px;font-size:11px;}
   .need .nm{font-size:15px;}
 }
@@ -322,6 +334,7 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
   <div class="tbn on" data-t="1"><b>1단계<br>설치</b><i>무료 · 10분</i></div>
   <div class="tbn" data-t="2"><b>2단계<br>클로드 코드</b><i>유료 · 20분</i></div>
   <div class="tbn" data-t="3"><b>3단계<br>도구 더</b><i>선택 · 10분</i></div>
+  <div class="tbn" data-t="4"><b>4단계<br>어디서 쓰나</b><i>참고 · 5분</i></div>
 </div>
 
 <!-- ═════════ 패널 1 : 설치 ═════════ -->
@@ -1317,7 +1330,146 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
   </div>
 </div>
 
+<div class="callout c-four" style="text-align:center">
+  준비는 다 됐습니다.<br>
+  <span style="font-size:14.5px;color:var(--dim)">그 화면이 <b>뭘 보여주는지</b> 궁금하시면 →</span><br>
+  <span class="btn-mock" style="background:var(--four);margin-top:10px;cursor:pointer" data-go="4">4단계 · 화면 훑어보기</span>
+</div>
+
 </div><!-- /패널3 -->
+
+
+<!-- ═════════ 패널 4 : 클로드 코드 어디서 쓰나 ═════════ -->
+<div class="panel p4" id="p4">
+
+<header>
+  <div class="kicker" style="color:var(--four)">4단계 · 클로드 코드 어디서 쓰나</div>
+  <h1>Code 화면이<br><span style="color:var(--four)">뭘 보여주는지</span> 정리했습니다</h1>
+  <p>2단계에서 이미 다 켜 두셨습니다.<br>이번엔 <b>그 화면이 뭘 보여주는지</b> 지도처럼 훑어봅니다. 몰라도 되는 참고용 챕터입니다.</p>
+  <div class="time">⏱ 참고만 하세요 · 5분</div>
+</header>
+
+<div class="callout c-note">
+  <b>이건 새로 뭘 하는 단계가 아닙니다.</b> 2단계에서 하신 것들이 화면 어디에 나타나는지
+  <b>그림으로 짚어드리는 것</b>뿐입니다. 다시 화면을 여실 때 낯설지 않으시라고요.
+</div>
+
+<!-- Code 화면 개념도 -->
+<div class="app">
+  <div class="atop">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="a3">
+      <span>Chat</span><span>Cowork</span><span class="on mark">Code</span>
+    </div>
+  </div>
+  <div class="abody">
+    <div class="aside">
+      <div class="sh">지난 일들</div>
+      <div class="si on">홈페이지 만들기</div>
+      <div class="si">엑셀 정리</div>
+      <div class="si">사진 이름 바꾸기</div>
+    </div>
+    <div class="amain">
+      <div class="ph">여기서 말을 걸면<br>클로드가 진짜 파일을 만듭니다</div>
+      <div class="abox">
+        <div class="ln">여기에 시킬 일을 쓰세요…</div>
+        <div class="chips">
+          <span class="chip hi">📁 Local</span>
+          <span class="chip hi">claude-work</span>
+          <span class="chip">Sonnet</span>
+          <span class="chip">Manual</span>
+          <span class="send">↑</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="appcap">↑ <b>실제 화면이 아니라 개념을 그린 그림</b>입니다. 자리와 이름은 맞지만, 색이나 모양은 다를 수 있습니다.<br>
+  왼쪽은 <b>지금까지 시킨 일 목록</b>, 아래 알약 모양 네 개가 오늘 짚어드릴 <b>네 가지 설정</b>입니다.</div>
+
+<!-- 네 가지 설정 -->
+<div class="step">
+  <div class="step-no">1</div>
+  <h2>입력창 옆 알약 네 개, 이런 뜻입니다</h2>
+  <p class="lead">말을 걸기 전에 화면에 작게 표시돼 있는 네 가지입니다. <b>대부분 손댈 일이 없습니다.</b></p>
+
+  <div class="pinrow"><span class="pin">1</span><div class="pt"><b>Environment(환경) — Local</b>
+    <small>내 컴퓨터에서 일한다는 뜻입니다. 2단계에서 이미 고르셨고, 계속 그대로 두시면 됩니다.</small></div></div>
+
+  <div class="pinrow"><span class="pin">2</span><div class="pt"><b>Project folder(작업 폴더)</b>
+    <small>클로드가 일할 그 폴더 이름입니다. 2단계에서 만드신 <b>claude-work</b>가 여기 표시됩니다.</small></div></div>
+
+  <div class="pinrow"><span class="pin">3</span><div class="pt"><b>Model(모델)</b>
+    <small>클로드의 '두뇌 종류'를 고르는 칸입니다. 처음 보실 텐데, <b>기본으로 찍혀 있는 값 그대로 두시면 됩니다.</b> 일부러 바꾸실 필요 없습니다.</small></div></div>
+
+  <div class="pinrow"><span class="pin">4</span><div class="pt"><b>Permission mode(허락 모드)</b>
+    <small>2단계 5번에서 정한 <b>Manual</b>이 여기 표시됩니다. 뭘 고치기 전에 매번 물어보는 그 안전장치입니다.</small></div></div>
+
+  <div class="callout c-four">
+    ✅ <b>정리하면</b> — 이 네 개는 <b>한 번 정해두면 계속 그대로</b> 씁니다. 매번 새로 고르는 게 아닙니다.
+  </div>
+</div>
+
+<!-- 왼쪽 목록 -->
+<div class="step">
+  <div class="step-no">2</div>
+  <h2>왼쪽 목록 — 시킨 일들이 쌓이는 곳</h2>
+  <p class="lead">말을 걸고 <span class="key">Enter ↵</span> 를 누르는 순간, 왼쪽에 <b>줄이 하나 생깁니다.</b></p>
+
+  <p>일 하나를 시킬 때마다 <b>대화 한 덩어리(세션)</b>가 만들어지고, 그게 왼쪽에 쌓입니다.
+  카톡으로 치면 <b>대화방이 하나씩 늘어나는 것</b>과 비슷합니다.</p>
+
+  <div class="callout c-four">
+    <b>지난 일로 돌아가고 싶으면</b> 왼쪽에서 그 줄을 <b>클릭</b>하면 됩니다.<br>
+    <b>완전히 새 일을 시키고 싶으면</b> 위에서 <b>Local → 폴더 선택</b>부터 다시 하면 새 줄이 하나 더 생깁니다.
+  </div>
+
+  <p>지금 당장 다 이해하실 필요 없습니다. <b>몇 번 써 보시면 저절로 손에 익습니다.</b></p>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h2>4단계 궁금한 것</h2>
+  <div class="sub">참고용이라 짧게만 정리했습니다.</div>
+
+  <details>
+    <summary>세션이 뭔가요?</summary>
+    <div class="ans">클로드와 나눈 <b>대화 한 덩어리</b>를 말합니다. 일을 하나 시킬 때마다
+    새 세션이 하나씩 생긴다고 보시면 됩니다. 카톡 대화방 하나하나와 비슷합니다.</div>
+  </details>
+
+  <details>
+    <summary>Model(모델)은 꼭 골라야 하나요?</summary>
+    <div class="ans">아닙니다. <b>기본으로 찍혀 있는 값</b>을 쓰시면 됩니다.
+    나중에 궁금해지시면 그때 클로드에게 <b>"모델이 뭐가 다른지 쉽게 설명해줘"</b> 라고 물어보세요.</div>
+  </details>
+
+  <details>
+    <summary>왼쪽 목록이 너무 많아지면 어떡하죠?</summary>
+    <div class="ans">그냥 두셔도 문제없습니다. 안 쓰는 옛날 대화는 <b>안 보셔도 상관없습니다.</b>
+    새 일은 늘 새 줄로 또렷하게 시작됩니다.</div>
+  </details>
+
+  <details>
+    <summary>Local 말고 Remote·SSH는 뭔가요?</summary>
+    <div class="ans">둘 다 <b>다른 컴퓨터(서버)</b>에서 일 시킬 때 쓰는 겁니다. 지금 우리는 안 씁니다.
+    화면에 보여도 <b>무시하시면 됩니다.</b></div>
+  </details>
+</div>
+
+<div class="done" style="background:linear-gradient(150deg,#fff,#EFF5FB);border-color:var(--four-line)">
+  <div class="big">🗺️</div>
+  <h2 style="color:var(--four)">여기까지가 전부입니다</h2>
+  <p>1단계부터 4단계까지, 클로드를 켜고 · 코드를 준비하고 · 화면까지 훑어봤습니다.<br>
+  이제 남은 건 <b>직접 써 보시는 것</b>뿐입니다.</p>
+  <div class="try" style="background:#fff;border-color:var(--four-line)">
+    💬 <b>막힐 때 만능 문장</b><br>
+    · "이 화면이 지금 뭘 보여주는 거야?"<br>
+    · "다음에 뭘 하면 돼?"
+  </div>
+</div>
+
+</div><!-- /패널4 -->
 
 <footer>
   왕초보를 위한 클로드 시작 안내서<br>
@@ -1333,7 +1485,7 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
 (function(){
   var btns = document.querySelectorAll('.tbn');
   var panels = {1: document.getElementById('p1'), 2: document.getElementById('p2'),
-                3: document.getElementById('p3')};
+                3: document.getElementById('p3'), 4: document.getElementById('p4')};
 
   function go(t, push){
     t = String(t);
@@ -1348,7 +1500,7 @@ hr.sep{border:0;border-top:1px dashed #E1D8C9;margin:20px 0;}
     el.addEventListener('click', function(){ go(el.dataset.go, true); });
   });
 
-  var m = (location.hash || '').match(/^#step([123])$/);
+  var m = (location.hash || '').match(/^#step([1234])$/);
   if (m) go(m[1], false);
 })();
 </script>
