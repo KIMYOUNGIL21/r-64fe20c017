@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>쿠파스 × 쓰레드 — 밤샘 실측 보고서</title>
+<style>
+  :root{--bg:#0f1115;--card:#181b22;--line:#2a2f3a;--tx:#e8eaf0;--sub:#9aa3b2;--acc:#ffb454;--good:#5dd39e;--bad:#ff6b6b;--blue:#6ab0ff;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--tx);font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;line-height:1.65;padding:20px 14px 80px;max-width:760px;margin:0 auto;}
+  h1{font-size:22px;margin:8px 0 4px;}
+  .date{color:var(--sub);font-size:13px;margin-bottom:18px;}
+  h2{font-size:17px;color:var(--acc);margin:30px 0 10px;padding-top:18px;border-top:1px solid var(--line);}
+  h3{font-size:15px;margin:14px 0 6px;color:var(--blue);}
+  p,li{font-size:14.5px;}
+  ul{padding-left:18px;margin:6px 0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0;}
+  .big{font-size:16px;font-weight:700;}
+  .good{color:var(--good);} .bad{color:var(--bad);} .acc{color:var(--acc);} .sub{color:var(--sub);}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+  th,td{border:1px solid var(--line);padding:6px 7px;text-align:left;vertical-align:top;}
+  th{background:#1d212a;color:var(--sub);font-weight:600;white-space:nowrap;}
+  .tag{display:inline-block;background:#242936;border-radius:6px;padding:1px 7px;font-size:12px;margin:1px 2px;color:var(--blue);}
+  .pair{background:#141820;border-left:3px solid var(--acc);padding:10px 12px;border-radius:0 8px 8px 0;margin:8px 0;font-size:13.5px;}
+  .quote{background:#141820;border-left:3px solid var(--good);padding:8px 12px;border-radius:0 8px 8px 0;margin:6px 0;font-size:13.5px;color:#cdd3de;}
+  .warn{background:#1f1518;border-left:3px solid var(--bad);padding:8px 12px;border-radius:0 8px 8px 0;margin:6px 0;font-size:13.5px;}
+  .num{font-variant-numeric:tabular-nums;}
+  .scroll{overflow-x:auto;}
+  .persona{border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0;background:#151920;}
+  .persona b{color:var(--acc);}
+  .foot{color:var(--sub);font-size:12px;margin-top:40px;border-top:1px solid var(--line);padding-top:12px;}
+</style>
+</head>
+<body>
+<h1>🛒 쿠파스 × 쓰레드 밤샘 실측 보고서</h1>
+<div class="date">2026-07-23 새벽 · 검색 4쿼리 + 실전 계정 12개 프로필 실측 · 표본 60여 건</div>
+
+<div class="card">
+  <div class="big">한 줄 결론</div>
+  <p>이 판은 이미 <b>공식이 도는 시장</b>입니다. 벤치마크 계정들의 시간표·글 공식·링크 배치를 그대로 확보했고, 우리 기존 인프라(threads-autopost 큐+텔레그램)에 꽂으면 <b>글 생산은 내일부터 가능</b>합니다. 남은 결정은 딱 하나 — <b>1호 계정 페르소나 (아래 3안 중 택1)</b>.</p>
+</div>
+
+<h2>1. 핵심 발견 4가지</h2>
+<div class="card">
+<ul>
+  <li><b class="good">① 팔로워 없어도 터진다.</b> 팔로워 <span class="num">10명</span>짜리 계정이 최근 조회수 <span class="num">5.0만</span>(live4items), <span class="num">2,150명</span>이 <span class="num">49만</span>(4.mama). 조회수는 팔로워가 아니라 <b>추천피드</b>가 만든다 → 새 계정 페널티가 작다.</li>
+  <li><b class="good">② 표준 전술 = "2연타 페어".</b> 본문(일상 훅, 링크 없음) → 몇 초~몇 분 뒤 답글로 [광고]고지+쿠팡링크. 실전 계정 대부분이 이 구조. 우리 모객 실측(본문링크 도달 반토막)과 동일 원리.</li>
+  <li><b class="good">③ 최강 도달 공식 = 참여형(UGC).</b> "다이소 화장품 재구매템 <b>적고가줘</b>" 글이 <b class="num">좋아요 9,700 / 댓글 867</b>. 댓글창 자체가 콘텐츠가 되는 글이 조회수를 쓸어감.</li>
+  <li><b class="acc">④ 수익의 현실.</b> 성숙 실전러 4.mama(조회 49만/월 수준)가 일 수익 <b class="num">최대 39,827원</b>, 저조기 "7월 누적 5만원". 월 수십만 원부터가 현실적 목표. 대박은 다계정·물량으로 만드는 구조.</li>
+</ul>
+</div>
+
+<h2>2. 벤치마크 계정 (팔로우 추천 순)</h2>
+<div class="scroll"><table>
+<tr><th>계정</th><th>정체</th><th>팔로워/조회</th><th>훔칠 것</th></tr>
+<tr><td><b>@4.mama</b> 포마마 ★</td><td>절약 엄마, '돈벌기힘들다' 커뮤</td><td class="num">2,150 / 49만</td><td>다이어트 서사(389♥)로 조회 벌고 딜글로 수익. 여정 공유 리듬</td></tr>
+<tr><td><b>@sallim.ggomggom</b> ★</td><td>살림꼼꼼 (릴스+쓰레드)</td><td class="num">2,204 / -</td><td>"댓글로 '그리들' 남겨주세요" — 댓글 키워드→링크 발송 공식</td></tr>
+<tr><td><b>@live4items</b></td><td>지수의 인생꿀템 (신규 시스템형)</td><td class="num">10 / 5.0만</td><td>하루 6~8글, 1.5~2h 간격, 페어 2~3회 시간표</td></tr>
+<tr><td><b>@stylebyyou_lol</b></td><td>데일리꿀템 + litt.ly</td><td class="num">935 / 2.4만</td><td>제품 3연발 버스트 + 연예이슈 글로 도달 벌충, 프로필 링크트리</td></tr>
+<tr><td><b>@binteumshop</b></td><td>🏡빈틈없는 하루 (정성 페르소나)</td><td class="num">28 / 1.2만</td><td>브랜딩 bio + 인포크에 쿠팡 카탈로그 20개</td></tr>
+<tr><td><b>@_today_woori_</b></td><td>육아맘 (쿠파스 한달차)</td><td class="num">31 / 7.3천</td><td>레시피 정보값에 재료 링크 얹기. 하소연 글이 커뮤에서 43/71</td></tr>
+</table></div>
+<p class="sub">그 외 관찰: @hohomallpro(1일1페어), @sujung_market67(1일1판매글·시즌캠핑템), @harutem365(판매 전 팔로워 육성), @seaunni_pick(순수 살포 — 반면교사)</p>
+
+<h2>3. 하루 운영 시간표 (실측 종합)</h2>
+<div class="card">
+<p><b>골든타임 = 저녁 19~24시 집중 + 아침 7~9시 보조.</b> (실전 계정들 발행시각 실측 일치)</p>
+<div class="scroll"><table>
+<tr><th>시각</th><th>예열기(1~2주)</th><th>안정기(3주~)</th></tr>
+<tr><td>07:30~08:30</td><td>일상/공감 1</td><td>일상 1</td></tr>
+<tr><td>19:30~21:00</td><td>UGC요청 or 정보 1</td><td>UGC/정보 1 + 판매페어 1</td></tr>
+<tr><td>22:00~23:30</td><td>일상 1 (판매페어는 주2~3회만)</td><td>일상 1~2 + 판매페어 1</td></tr>
+</table></div>
+<ul>
+  <li>일상:판매 = 예열 <b>4:1</b> → 안정 <b>2:1</b> (판매글만 쏘는 계정은 팔로워 3~10에서 정체)</li>
+  <li>주 2회: 쿠파스 여정 인증(진짜 수치만) + 커뮤 태그 <span class="tag">쿠파스</span><span class="tag">스하리1000명프로젝트</span><span class="tag">돈벌기힘들다</span> — 이 판은 품앗이(스하리)로 초기 온도를 올림</li>
+  <li>주 1회: 텐트폴 개인 서사 (4.mama의 다이어트 같은 축 — 페르소나 확정 후 설계)</li>
+</ul>
+</div>
+
+<h2>4. 판매 페어 규격 (그대로 복붙되는 구조)</h2>
+<div class="pair">
+<b>1탄 (본문)</b> — 링크 없음, 광고 티 없음<br>
+"된장 숟가락으로 뜰 때 들러붙는 거 손가락으로 훑어내던 사람 싹 다 나와라... 이거 푹 찍어 넣고 물에 쓱 흔들면 속 뚫림 ㅋㅋㅋ" + 실사용 사진
+</div>
+<div class="pair">
+<b>2탄 (1탄에 답글, 1~10분 내)</b><br>
+[광고] 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.<br>
+link.coupang.com/... <br>
+"클릭해도 가격은 그대로예요 👇"
+</div>
+<p>+ 제3의 링크 자리 = 프로필의 인포크/릿틀리 페이지(쿠팡 상품 카탈로그 10~20개, 실물 확인함)</p>
+
+<h3>훅 공식 8종 (판매카드 v1에 정리)</h3>
+<ul>
+  <li><b>C1 UGC요청</b> "하나만 적고 가" (9.7천♥ 표본) · <b>C2 신뢰프레임</b> "광고 절대 금지, 찐만" · <b>C3 명령강추</b> "무조건 사. 아니 강추"</li>
+  <li><b>C4 실패담후기</b> "우습게 봤다가 뜨거 죽는줄" · <b>C5 역정+증거</b> "리뷰 3,000개 넘는다길래" · <b>C6 문제해결 3단</b></li>
+  <li><b>C7 상황서사</b> (방학 삼식이→7분 피자→또띠아 링크) · <b>C8 여정공유</b> (첫수익 인증 102♥/111댓글)</li>
+</ul>
+
+<h2>5. 🔴 결정 필요: 1호 계정 페르소나 (택1)</h2>
+<div class="persona">
+<b>A안. "월급 외 수익 도전기 + 생활꿀템" (추천)</b>
+<p>40대 직장인이 쿠파스에 도전하는 실황 그 자체를 콘텐츠로. 여정글(C8)은 커뮤에서 가장 잘 터지는 장르(43~111댓글 실측)이고, <b>전부 진짜라서 날조 제로</b>. 꿀템 큐레이션을 얹어 수익화. 단점: 쿠파스인 트래픽 비중이 높아 구매 전환은 2~3주 뒤 일반 도달이 커져야 나옴.</p>
+</div>
+<div class="persona">
+<b>B안. "생활꿀템 큐레이터" (live4items형)</b>
+<p>정체 숨긴 큐레이터 컨셉(○○의 인생꿀템). 물량+시간표로 승부, 페르소나 부담 없음. 다계정 확장의 표준형. 단점: 차별화 없으면 그저 그런 살포 계정이 됨 — 우리 글 공식이 무기.</p>
+</div>
+<div class="persona">
+<b>C안. "자취/1인 생활" (rentedroom형)</b>
+<p>혼자 사는 남자의 살림 정복기. 서사와 큐레이션의 중간. "고수 누나들 도와줘" 류 UGC와 궁합 최고. 단점: 소재 폭이 A·B보다 좁음.</p>
+</div>
+<p class="sub">※ 다계정 로드맵: 1호로 4~6주 공식 검증 → 성과 데이터로 2·3호(뷰티/육아 등 아키타입 분산) 복제. 아키타입 4종은 분석 문서에 정리해둠.</p>
+
+<h2>6. 리스크 (실측 사례 있음)</h2>
+<div class="warn"><b>파트너스 계정 정지 실사례</b> — @uni_joaa "돈 벌어보지도 못했는데 정지". 자기클릭·가족구매 금지, [광고] 고지 생략 금지(과태료 500만), 방치 금지.</div>
+<div class="warn"><b>소비자가 이미 경계 중</b> — "링크 들어가기만 해도 수익 생기나? 현혹되는 내가 싫다"(일반 유저 글). 광고 티 죽이기(실패담·구체 숫자·진짜 결)가 갈수록 생명.</div>
+<div class="warn"><b>수수료 현실</b> — 대부분 카테고리 1~3%, 뷰티/패션 등만 ~10%. 쿠키 24시간. "사게 하는 글"보다 "눌러보게 하는 글"이 절반의 일.</div>
+
+<h2>7. 내일 할 일</h2>
+<div class="card">
+<p><b>사장님 (10분)</b></p>
+<ul>
+  <li>① 페르소나 A/B/C 택1 (카톡으로 "A" 한 글자면 됩니다)</li>
+  <li>② 쓰레드 새 계정 생성(공개 계정) — 계정명 후보는 페르소나 확정 후 제가 10개 뽑아드림</li>
+  <li>③ 쿠팡 파트너스 가입 여부 확인 (미가입이면 가입+정산계좌 — 금융이라 사장님 몫)</li>
+</ul>
+<p><b>클로드 (자동)</b></p>
+<ul>
+  <li>페르소나 확정 즉시: 계정명·bio·인포크 구성안 + 온보딩 글 + 첫 3일치 글(일상4:판매1) draft 큐 생성 → 텔레그램 발송</li>
+  <li>발행은 기존 원칙대로 사장님 폰에서 (무인 발행 금지)</li>
+</ul>
+</div>
+
+<div class="foot">
+근거 파일: D:\work\threads-cupas\ (운영카드·판매카드·benchmark\운영패턴_분석·profiles_snap·dataset 3종)<br>
+수집 방법: 쓰레드 웹 실측(검색 인기/최근 + 프로필 12개) + 파트너스 수수료 외부 리서치. 표본 반응 수치는 수집 시점 값.
+</div>
+</body>
+</html>
