@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>4종 상품 시판 검증 — QA 3차 실측 보고서</title>
+<title>4종 상품 시판 검증 — QA 3~4차 실측 보고서</title>
 <style>
   :root{
     --bg:#0f1115; --card:#181b22; --card2:#1f2330; --line:#2a2f3d;
@@ -50,9 +50,22 @@
 </head>
 <body>
 
-<h1>🔍 4종 상품 시판 검증 — QA 3차 (실측)</h1>
+<h1>🔍 4종 상품 시판 검증 — QA 3~4차 (실측)</h1>
 <p class="sub">2026-07-22 · 대상: <code>D:\work\selling-auto\</code> 블로그·유튜브·쓰레드·인스타 4종 판매 패키지<br>
 방식: 기존 QA 1·2차의 "닫힘" 주장을 믿지 않고, <b>구매자에게 실제로 나갈 실물(zip / _dist)을 직접 풀어 설치·실행</b>해 재검증</p>
+
+<div class="card" style="border-color:var(--accent); border-width:2px;">
+<b>🔄 4차 업데이트 (같은 날 추가) — "클로드 구독 필수"를 걷어냈습니다</b>
+<p>사장님 판단: 클로드코드 유료 구독자만 쓸 수 있으면 대부분이 못 씁니다. → <b>4종 전부 재미나이(Gemini) 무료 API 키를 1순위로, 클로드 구독은 폴백으로</b> 개편했습니다(코드 삭제 없이 분기 추가 = 듀얼 엔진).</p>
+<ul>
+<li>📝 블로그 — 엔진 파일 한 곳만 분기(호출부 7곳 무수정). 가짜키→Gemini 진입 확인, 키없음→claude 폴백 확인. <code>설치.bat</code>+설치 마법사 신설(클로드 없이 완전 설치 가능)</li>
+<li>🧵 쓰레드 — 원래 AI 호출이 코드에 없던 제품(전부 클로드 에이전트가 작문). <code>gen_posts.py</code> 신설로 같은 과정(모객카드 규칙·링크금지·자기복제검사)을 재미나이로 재현</li>
+<li>🖼 인스타 — 마찬가지로 코드에 AI 호출 0건이던 제품. <code>gen_deck.mjs</code> 신설로 9종 레이아웃 규칙을 재미나이 프롬프트화 + 자가점검 + 렌더까지 자동</li>
+<li>🎵 유튜브 — 원래 AI 글쓰기가 없는 제품이라 대상 아님. 대신 "클로드 없이 명령어 직접" 경로(<code>설치.bat</code>) 신설 중 <b>실제 설치 버그를 발견</b>: <code>yt-auto/</code>에 playwright <code>package.json</code>이 없어 <code>npm install</code>이 조용히 아무것도 안 하고 있었음 → 실제 <code>npm install</code> 재현으로 확인·수정</li>
+</ul>
+<p><b>재미나이 무료 키 발급 가이드(4종 공용, 그림+FAQ):</b> <a href="https://kimyoungil21.github.io/r-64fe20c017/gemini-key/" style="color:var(--accent)">kimyoungil21.github.io/r-64fe20c017/gemini-key/</a> (구글 공식 문서 대조 작성)</p>
+<p class="sub">교훈: <code>node --check</code>/<code>py_compile</code>은 문법만 본다 — 의존성이 실제로 설치되는지는 <code>npm install</code>을 진짜로 돌려봐야 안다. 아래 3차 내용은 원 기록 그대로 보존.</p>
+</div>
 
 <h2>① 한눈 성적표</h2>
 <div class="grid">
