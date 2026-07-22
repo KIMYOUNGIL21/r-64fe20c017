@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>4종 상품 시판 검증 — QA 3차 실측 보고서</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#181b22; --card2:#1f2330; --line:#2a2f3d;
+    --txt:#e8eaf0; --sub:#9aa3b5; --accent:#ff6b35;
+    --ok:#3fb765; --warn:#e6b23a; --bad:#e05d5d; --info:#5b9dd9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--txt); font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; line-height:1.65; padding:16px; max-width:860px; margin:0 auto;}
+  h1{font-size:1.45rem; margin:12px 0 4px;}
+  h2{font-size:1.15rem; margin:34px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--accent);}
+  h3{font-size:1.02rem; margin:20px 0 8px; color:var(--accent);}
+  p{margin:8px 0; color:var(--txt);}
+  .sub{color:var(--sub); font-size:.86rem;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:12px 0;}
+  table{width:100%; border-collapse:collapse; font-size:.85rem; margin:10px 0;}
+  th,td{border:1px solid var(--line); padding:8px 9px; text-align:left; vertical-align:top;}
+  th{background:var(--card2); white-space:nowrap;}
+  .badge{display:inline-block; padding:2px 10px; border-radius:20px; font-size:.78rem; font-weight:700; white-space:nowrap;}
+  .b-ok{background:rgba(63,183,101,.15); color:var(--ok); border:1px solid var(--ok);}
+  .b-warn{background:rgba(230,178,58,.15); color:var(--warn); border:1px solid var(--warn);}
+  .b-bad{background:rgba(224,93,93,.15); color:var(--bad); border:1px solid var(--bad);}
+  .b-info{background:rgba(91,157,217,.15); color:var(--info); border:1px solid var(--info);}
+  .score{font-size:1.6rem; font-weight:800;}
+  .score small{font-size:.85rem; color:var(--sub); font-weight:400;}
+  details{background:var(--card2); border:1px solid var(--line); border-radius:10px; margin:10px 0; overflow:hidden;}
+  summary{cursor:pointer; padding:11px 14px; font-weight:700; font-size:.92rem; user-select:none;}
+  summary:hover{background:rgba(255,107,53,.08);}
+  .tree{font-family:'D2Coding',Consolas,monospace; font-size:.78rem; line-height:1.75; padding:6px 14px 14px; overflow-x:auto; white-space:pre;}
+  .tree b{color:var(--accent); font-weight:700;}
+  .tree i{color:var(--sub); font-style:normal;}
+  ul{padding-left:20px; margin:8px 0;}
+  li{margin:5px 0;}
+  .fix{border-left:4px solid var(--ok); padding:10px 14px; background:rgba(63,183,101,.06); border-radius:0 8px 8px 0; margin:10px 0; font-size:.9rem;}
+  .risk{border-left:4px solid var(--warn); padding:10px 14px; background:rgba(230,178,58,.06); border-radius:0 8px 8px 0; margin:10px 0; font-size:.9rem;}
+  .crit{border-left:4px solid var(--bad); padding:10px 14px; background:rgba(224,93,93,.06); border-radius:0 8px 8px 0; margin:10px 0; font-size:.9rem;}
+  code{background:var(--card2); border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-size:.82em; font-family:Consolas,monospace; word-break:break-all;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin:14px 0;}
+  .kpi{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; text-align:center;}
+  .kpi .name{font-size:.85rem; color:var(--sub); margin-bottom:4px;}
+  .foot{margin:40px 0 20px; text-align:center; color:var(--sub); font-size:.78rem;}
+  @media (max-width:600px){ body{padding:10px;} th,td{padding:6px;} }
+</style>
+</head>
+<body>
+
+<h1>🔍 4종 상품 시판 검증 — QA 3차 (실측)</h1>
+<p class="sub">2026-07-22 · 대상: <code>D:\work\selling-auto\</code> 블로그·유튜브·쓰레드·인스타 4종 판매 패키지<br>
+방식: 기존 QA 1·2차의 "닫힘" 주장을 믿지 않고, <b>구매자에게 실제로 나갈 실물(zip / _dist)을 직접 풀어 설치·실행</b>해 재검증</p>
+
+<h2>① 한눈 성적표</h2>
+<div class="grid">
+  <div class="kpi"><div class="name">🖼 인스타 카드뉴스</div><div class="score">9<small> /10</small></div><span class="badge b-ok">시판 가능</span></div>
+  <div class="kpi"><div class="name">🧵 쓰레드 AI직원</div><div class="score">8.5<small> /10</small></div><span class="badge b-ok">시판 가능</span></div>
+  <div class="kpi"><div class="name">📝 블로그 자동화</div><div class="score">8<small> /10</small></div><span class="badge b-warn">조건부 가능</span></div>
+  <div class="kpi"><div class="name">🎵 유튜브 노래영상</div><div class="score">7<small> /10</small></div><span class="badge b-warn">조건부 가능</span></div>
+</div>
+
+<div class="card">
+<b>총평 한 줄</b>
+<p>4종 모두 "코드·문서·개인정보 위생"은 판매 수준에 도달했으나, <b>이번 3차 실측에서 치명 결함 1건(블로그 판매 zip 오염)과 기능 결함 3건(유튜브)을 새로 잡아 수정 완료</b>했습니다.
+기존 QA 2차가 "닫았다"고 한 항목 중 실물 검사에서 뒤집힌 게 있었다는 뜻이라, <b>판매 직전 "zip 열어 내용물 대조"는 앞으로도 필수 절차</b>입니다.
+남은 것은 코드가 아니라 사람 몫(빈 PC 완주 실측 + 판매페이지·GIF·면책)입니다.</p>
+</div>
+
+<h2>② 이번 QA가 실제로 돌려본 것 (말이 아니라 실행)</h2>
+<div class="card">
+<table>
+<tr><th>제품</th><th>실측 내용</th><th>결과</th></tr>
+<tr><td>📝 블로그</td><td>판매 zip을 새 폴더에 풀고 → <code>npm ci</code> → 설명서대로 .env 생성 → <code>prisma migrate</code> → 서버 기동 → 홈/온보딩/새글 화면 접속</td><td><span class="badge b-ok">완주</span> 홈→온보딩 마법사 자동 진입, 전 페이지 200</td></tr>
+<tr><td>📝 블로그</td><td>글 생성 엔진(클로드 헤드리스 스폰) — 앱과 같은 방식으로 <code>claude -p</code> 호출</td><td><span class="badge b-ok">정상</span> 구독 인증으로 응답 수신 (API키 불필요 확인)</td></tr>
+<tr><td>🎵 유튜브</td><td>_dist 전체: 파이썬 28개 컴파일 + JS 20개 문법검사 + 설정 JSON 3종 파싱 + 발행 가드(치환자 차단) 코드 확인</td><td><span class="badge b-ok">전부 통과</span></td></tr>
+<tr><td>🧵 쓰레드</td><td>파이썬 8종 컴파일 + <code>deliver.py --peek</code> 실행 + 설정 4종 JSON 파싱 + 개인정보 전수 grep</td><td><span class="badge b-ok">전부 통과</span> · 개인정보 0건 · <b>외부 라이브러리 의존 0(표준만)</b></td></tr>
+<tr><td>🖼 인스타</td><td><code>npm install</code> → 예시 덱 <b>실제 렌더</b> → 카드 10장 + 대조시트 생성 → <b>이미지 육안검수</b></td><td><span class="badge b-ok">완주</span> 한글 타이포 정상, 개인정보 0, 목업 전부 중립 플레이스홀더</td></tr>
+<tr><td>공통</td><td>판매 zip 3종(블로그·쓰레드·인스타) 내용물 전수 대조 (민감파일·내부문서·개인식별자)</td><td><span class="badge b-ok">최종 유출 0건</span> (블로그는 아래 결함 수정 후)</td></tr>
+</table>
+</div>
+
+<h2>③ 발견한 결함과 처리 (전부 이번 세션에서 수정 완료)</h2>
+
+<div class="crit">
+<b>🔴 [블로그] 판매 zip이 오염된 채 출하 대기 중이었음 — 가장 큰 발견</b><br>
+dist에 있던 판매 zip을 열어보니 패키저가 "제외한다"고 명시한 것들이 그대로 들어 있었습니다:
+<ul>
+<li><b>내부 검수문서 <code>_판매점검\비밀정보_스캔.md</code> 동봉</b> — 개인 네이버 아이디·개인 폴더 경로가 "어디서 발견돼 지웠는지" 이력이 통째로 적힌 문서. 구매자에게 가면 정화 작업이 도로 무효.</li>
+<li>디버그·개인용 스크립트 41개 동봉 (허용목록 8개만 남기게 되어 있었음)</li>
+<li>그 결과 <b><code>npm test</code>가 켜자마자 실패</b> (개인 원고용 테스트가 없는 파일을 import)</li>
+</ul>
+<b>원인:</b> 패키저(<code>배포본_만들기.ps1</code>)가 UTF-8 <b>BOM 없이</b> 저장돼 있어, PowerShell 5.1이 한글 제외 규칙을 깨진 글자로 읽음 → <b>에러 없이 "완료"라고 뜨면서 제외가 전부 무시</b>됨. 실행해도 잡을 수 없고 zip을 열어봐야만 보이는 유형.
+</div>
+<div class="fix">
+<b>✅ 처리:</b> ps1을 UTF-8 BOM으로 재저장 → zip 재생성 → 재검증(238→210파일, 내부문서 제거, 스크립트 41→14개, <code>npm test</code> 전부 통과, 개인식별자 0건).
+오염됐던 구버전 zip은 <code>...zip.QA3백업_구버전</code>으로 물증 보존. <b>다른 두 신규 패키저에도 BOM 강제 + "유출 시 중단" 안전검사 내장.</b>
+</div>
+
+<div class="crit">
+<b>🔴 [유튜브] 자막 폰트 파일이 판매본에 없음</b><br>
+롱폼·쇼츠 템플릿 4종이 전부 <code>assets/fonts/GowunBatang-Bold.ttf</code>(고운바탕 캘리체)를 요구하는데, 판매 사본과 _dist 어디에도 없었음(운영 원본에만 존재). 렌더가 죽지는 않지만 <b>구매자 영상 자막이 전부 밋밋한 시스템 폰트로 조용히 바뀜</b> — 데모와 다른 결과물이 나가는 결함.
+</div>
+<div class="fix">✅ 처리: 원본에서 폰트 복사(고운바탕 = OFL 오픈라이선스, 재배포 가능) + 패키저 화이트리스트 등재 + _dist 재생성 확인.</div>
+
+<div class="risk">
+<b>🟡 [유튜브] requirements.txt에 pillow 누락</b> — 세로 배경 크롭 도구(<code>make_vertical.py</code>)가 PIL을 쓰는데 설치 목록에 없어, 쓰는 순간 크래시. → <b>추가 완료.</b><br><br>
+<b>🟡 [유튜브] 즉사 코드 3개 동봉</b> — <code>playlist_*.py</code> 3개가 _dist에 없는 모듈(<code>playlist_common</code>)을 import → 실행 즉시 사망. 재생목록 기능은 판매 범위 밖이므로 화이트리스트에서 제외하고 _dist 재생성. → <b>제거 완료.</b><br><br>
+<b>🟡 [쓰레드·인스타] 판매 zip 자동화 부재</b> — "손으로 zip 만들라"는 절차만 있었음. 블로그 사고와 동일한 유형의 사고 대기 상태. → <b>두 제품 모두 패키저 신설(BOM·안전검사 내장) + zip 생성·검증 완료.</b>
+</div>
+
+<div class="card">
+<b>오탐 정정(결함 아님):</b> 유튜브 <code>onset_check.py</code>의 scipy import는 requirements 누락이 아니라 soundfile→scipy→wave <b>3단 폴백 구조</b>의 2순위였음. soundfile이 설치 목록에 있어 정상 동작.
+</div>
+
+<h2>④ 제품별 상세</h2>
+
+<!-- ═══════════ 블로그 ═══════════ -->
+<h3>📝 1. 블로그 자동화 (vibe-blog-product) — 8/10 조건부</h3>
+<div class="card">
+<p><b>뭘 파는 물건인가:</b> 소재(메모·기사·유튜브)를 넣으면 AI가 네이버 블로그 글로 다듬어 <b>임시저장까지</b> 자동. 공개 버튼은 사람이 직접(계정 보호 설계). 글 생성은 구매자의 클로드 구독으로 돌아 추가 과금 없음.</p>
+<p><b>판매 실물:</b> <code>블로그\dist\vibe-blog-product_sale_20260722.zip</code> (재생성본 · 210파일 · 0.6MB)</p>
+<table>
+<tr><th>검증 항목</th><th>판정</th></tr>
+<tr><td>zip 풀어 설명서 순서 그대로 설치→서버 기동→온보딩 진입</td><td><span class="badge b-ok">실측 통과</span></td></tr>
+<tr><td>클로드 구독(헤드리스) 글 엔진 스폰</td><td><span class="badge b-ok">실측 통과</span> (이 PC 기준)</td></tr>
+<tr><td>zip 민감파일(.env·dev.db·얼굴사진·내부문서)</td><td><span class="badge b-ok">0건</span> (수정 후)</td></tr>
+<tr><td><code>npm test</code> / <code>npm run build</code>(설치 후)</td><td><span class="badge b-ok">통과</span></td></tr>
+<tr><td>빈 PC(클로드 구독만 있는 새 컴퓨터) 완주</td><td><span class="badge b-warn">미실측</span> — 사장님 실기 필요</td></tr>
+</table>
+</div>
+<details><summary>📂 구조도 + 파일 설명 (판매 zip 기준 210파일)</summary>
+<div class="tree"><b>vibe-blog-product/</b>
+├ <b>사용설명서.md</b>        <i>← 구매자가 처음 여는 문서 (0단계=클로드 켜기부터 클릭 단위)</i>
+├ <b>여기서_클로드코드_켜기.bat</b> <i>← 더블클릭하면 이 폴더에서 claude 실행되는 런처</i>
+├ <b>CLAUDE.md</b>            <i>← 구매자의 클로드코드가 읽는 작업 지침("설치해줘"→자동 설치 절차)</i>
+├ AGENTS.md / README.md      <i>← 개발 참고 배너(초보는 안 봐도 됨을 명시)</i>
+├ package.json / package-lock.json <i>← 의존성 정의(Next.js 16·Prisma 7·Playwright)</i>
+├ .env.example               <i>← 설정 틀(네이버ID·암호화키만 필수, AI키는 "채우지 마라" 경고)</i>
+├ start-server.bat           <i>← 서버 실행 배치(3100 포트)</i>
+├ <b>prisma/</b>              <i>← DB 정의 + 마이그레이션 27개("설치해줘"가 자동 적용)</i>
+├ public/                    <i>← 아이콘·썸네일 템플릿(워드마크 중립화 완료)</i>
+├ <b>scripts/</b> (14개)      <i>← 자동화 tick·이미지 반입·품질채점·회귀테스트만(디버그 41개 제거됨)</i>
+├ <b>src/app/</b>             <i>← 화면: 온보딩 마법사·새 글·글 편집·달력·이미지·발행</i>
+├ <b>src/lib/ai/</b>          <i>← 두뇌: 글쓰기 프롬프트·페르소나 생성·클로드 헤드리스 호출</i>
+├ <b>src/lib/automation/</b>  <i>← 네이버 로그인·글쓰기 자동 조작(임시저장까지만)</i>
+├ src/lib/quality/           <i>← 품질 채점기(네이버 상위글 실측 기준)</i>
+└ docs/qa/                   <i>← 채점 기준의 실측 근거(제목 600건 벤치마크)</i></div>
+</details>
+<div class="risk"><b>잔여 리스크:</b> ① 빈 PC 완주 미실측(특히 Node 미설치 상태에서 "설치해줘" 흐름) ② 네이버 로그인 캡차·기기확인은 첫 회 사람 개입 필요(설명서에 안내됨) ③ 네이버 화면 개편 시 자동 임시저장 로직이 깨질 수 있음 — 면책·업데이트 정책에 반영 권장.</div>
+
+<!-- ═══════════ 유튜브 ═══════════ -->
+<h3>🎵 2. 유튜브 노래영상 (ai-singer-product) — 7/10 조건부</h3>
+<div class="card">
+<p><b>뭘 파는 물건인가:</b> 음원(mp3)+가사+배경이미지 2장 → 가사영상 롱폼+쇼츠 3컷 자동 렌더 → 유튜브 <b>비공개 예약까지</b> 자동. 3채널 운영에서 실전 검증된 엔진(타이밍 정렬·검수·발행 가드) 그대로.</p>
+<p><b>판매 실물:</b> <code>유튜브-노래영상\ai-singer-product\_dist\</code> (재생성본 · 71파일) — <b>zip은 아직 안 만듦</b>(이 폴더 압축이 곧 판매본)</p>
+<table>
+<tr><th>검증 항목</th><th>판정</th></tr>
+<tr><td>_dist 파이썬 28·JS 20 전부 문법/컴파일</td><td><span class="badge b-ok">통과</span></td></tr>
+<tr><td>개인정보(가수명·채널ID·개인경로) 전수 grep</td><td><span class="badge b-ok">0건</span></td></tr>
+<tr><td>치환자 미교체 발행 가드(롱폼·쇼츠)</td><td><span class="badge b-ok">코드 확인</span></td></tr>
+<tr><td>자막 폰트·pillow·즉사코드 3건</td><td><span class="badge b-ok">이번에 수정</span></td></tr>
+<tr><td>실제 렌더 완주(whisper·demucs·ffmpeg)</td><td><span class="badge b-bad">미실측</span> — 4종 중 유일하게 "실행 자체"를 못 돌려봄(설치 2~3GB·수십 분). 판매 전 1회 필수</td></tr>
+</table>
+</div>
+<details><summary>📂 구조도 + 파일 설명 (_dist 기준 71파일)</summary>
+<div class="tree"><b>_dist/</b>
+├ <b>사용설명서.md</b>        <i>← 구매자 첫 문서(0단계 포함) · CLAUDE.md=클로드 지침(설치 레시피 winget)</i>
+├ README.md / 약속.md        <i>← 개요 · QA 기준(발행 전 검수 규칙)</i>
+├ <b>channel.config.json</b>  <i>← 구매자가 채우는 유일한 설정(가수명·채널명·채널ID·발행시각…)</i>
+├ <b>온보딩.py</b>            <i>← 대화형으로 위 설정을 채워주는 마법사(필수값 엔터 통과 불가)</i>
+├ channel_config.py          <i>← 설정 로더(파이썬쪽)</i>
+├ requirements.txt           <i>← faster-whisper·demucs·torch·pillow… (용량 정직 고지)</i>
+├ <b>song/</b>                <i>← 제작 엔진</i>
+│ ├ SRT/                     <i>← 재료 넣는 곳(mp3·가사txt·배경png 2장) + 안내문</i>
+│ ├ songs/ _TEMPLATE.json·sample.json <i>← 곡 매니페스트 틀 + 연습용 샘플</i>
+│ ├ pipe_setup→timing→build→render <i>← 파이프라인 4단(셋업→타이밍→조립→렌더)</i>
+│ ├ align_blocks/align_lines.py <i>← 가사-음성 정렬 핵심(실전 검증 엔진)</i>
+│ ├ 검수.py + _check/ 8종    <i>← 자막 싱크 검수 + onset 실측 도구(렌더 전 필수)</i>
+│ ├ *.template.html 4종      <i>← 롱폼·쇼츠 영상 디자인 틀(치환자 방식)</i>
+│ └ assets/ fonts+_brand     <i>← 자막 캘리 폰트(이번에 동봉)·쇼츠 로고 플레이스홀더</i>
+└ <b>yt-auto/</b>             <i>← 유튜브 자동화(로그인·업로드·예약·댓글켜짐 가드·QA실사) 22개</i>
+  └ cfg/                     <i>← 발행 설정 자동 생성 자리(빈 폴더)</i></div>
+</details>
+<div class="risk"><b>잔여 리스크:</b> ① <b>렌더 완주 실측 0회</b>(빈 PC에서 whisper·demucs 설치→샘플 1곡 완주가 판매 전 절대조건) ② 판매 zip 미생성(_dist 압축 필요) ③ 영상 템플릿이 CDN(gsap)을 로드 → <b>렌더 시 인터넷 필요</b>(설명서에 없음, 한 줄 추가 권장) ④ 유튜브 화면 개편 시 업로드 자동화 취약(면책 필수) ⑤ 블로그와 달리 "여기서_클로드코드_켜기.bat" 런처가 없음(통일 권장).</div>
+
+<!-- ═══════════ 쓰레드 ═══════════ -->
+<h3>🧵 3. 쓰레드 AI직원 (threads-product) — 8.5/10 가능</h3>
+<div class="card">
+<p><b>뭘 파는 물건인가:</b> 브랜드 설정 한 파일만 채우면 클로드가 모객 공식(K1~K8 실측)대로 쓰레드 글을 큐에 쌓고, 하루 2회 텔레그램으로 배달 → 사람이 보고 올리는 반자동. 계정 안 죽는 상한이 코드로 강제됨.</p>
+<p><b>판매 실물:</b> <code>쓰레드\dist\threads-product_sale_20260722.zip</code> (이번에 생성 · 21파일 · 43KB)</p>
+<table>
+<tr><th>검증 항목</th><th>판정</th></tr>
+<tr><td>파이썬 8종 컴파일 + <code>deliver.py --peek</code> 실행</td><td><span class="badge b-ok">실측 통과</span></td></tr>
+<tr><td>외부 pip 의존</td><td><span class="badge b-ok">0개</span> — 표준 라이브러리만. 파이썬만 깔리면 끝(초보 설치 부담 최소)</td></tr>
+<tr><td>개인정보·토큰·개인 URL 전수 grep</td><td><span class="badge b-ok">0건</span> (내부문서는 _빌더전용으로 격리 확인)</td></tr>
+<tr><td>zip 내용물 = 배포_포함목록 문서와 대조</td><td><span class="badge b-ok">21/21 일치</span></td></tr>
+<tr><td>텔레그램 실배달·GitHub Actions 실구동</td><td><span class="badge b-warn">미실측</span> (구매자 봇 토큰 필요 — 빈 PC 실측 때 함께)</td></tr>
+</table>
+</div>
+<details><summary>📂 구조도 + 파일 설명 (판매 zip 21파일 전체)</summary>
+<div class="tree"><b>threads-product/</b>
+├ <b>사용설명서.md</b>        <i>← 구매자 첫 문서(0단계·텔레그램 봇 만들기 5분 포함)</i>
+├ <b>CLAUDE.md</b>            <i>← "쓰레드 글 뽑아줘" 라우팅(클로드 지침)</i>
+├ .claude/agents/threads-hooker.md <i>← 모객 전용 에이전트(글쓰기 공정 내장)</i>
+├ <b>모객카드.md</b>          <i>← 상품의 값: K1~K8 실측 공식·모객:예열 4:10 격자·금지</i>
+├ 운영안전카드.md            <i>← 계정 안 죽는 상한(팔로우10/답글5/좋아요20)</i>
+├ <b>브랜드.config.json</b>   <i>← 구매자가 채우는 유일한 파일(브랜드·상품·미끼·DM문안)</i>
+├ config.example.json        <i>← 비밀정보 틀(토큰 등 — 복사해 config.json 생성)</i>
+├ accounts.json / queue.json <i>← 계정 템플릿 · 예시 글 2건(견본임이 명시됨)</i>
+├ common.py                  <i>← 공용 로직(큐·설정 로드)</i>
+├ <b>deliver.py</b>           <i>← 핵심: 큐→텔레그램 배달(--peek·--dry-run 지원)</i>
+├ engagement_guard.py        <i>← 교류 상한·복붙 차단 가드</i>
+├ poster.py / threads_api.py <i>← (고급 선택) Meta API 자동발행 — 기본은 꺼짐</i>
+├ get_token.py / refresh_token.py / setup_telegram.py <i>← 토큰·봇 셋업 도우미</i>
+└ .github/workflows/ 3종     <i>← 클라우드 자동배달(deliver 켜짐·post 꺼짐·token 갱신)</i></div>
+</details>
+<div class="risk"><b>잔여 리스크:</b> ① 텔레그램·Actions 실구동 미실측 ② Meta API 티어는 셋업 장벽 높음(기본 텔레그램 모드로 파는 포지셔닝 유지) ③ 계정 리스크 면책 문안 필수.</div>
+
+<!-- ═══════════ 인스타 ═══════════ -->
+<h3>🖼 4. 인스타 카드뉴스 (carousel-product) — 9/10 가능</h3>
+<div class="card">
+<p><b>뭘 파는 물건인가:</b> 글/주제를 주면 클로드가 덱 JSON을 짜고, 명령 한 줄로 인스타 카드뉴스(1080×1350) 10장 PNG + 대조시트가 나옴. 레이아웃 9종·실측 설계원칙 8개·정량 가드레일 내장. 업로드는 사람이.</p>
+<p><b>판매 실물:</b> <code>인스타그램\dist\carousel-product_sale_20260722.zip</code> (이번에 생성 · 19파일 · 6.9MB)</p>
+<table>
+<tr><th>검증 항목</th><th>판정</th></tr>
+<tr><td><code>npm install</code> → 예시 덱 <b>실렌더</b> → 카드 10장+대조시트</td><td><span class="badge b-ok">실측 완주</span></td></tr>
+<tr><td>결과 이미지 <b>육안검수</b>(개인정보·한글·목업)</td><td><span class="badge b-ok">통과</span> — 핸들 중립·목업 플레이스홀더·타이포 정상</td></tr>
+<tr><td>zip 내용물(내부문서·재생성물 제외)</td><td><span class="badge b-ok">유출 0건</span></td></tr>
+<tr><td>의존성</td><td><span class="badge b-ok">playwright 1개</span> (chromium 자동 설치)</td></tr>
+</table>
+</div>
+<details><summary>📂 구조도 + 파일 설명 (판매 zip 19파일 전체)</summary>
+<div class="tree"><b>carousel-product/</b>
+├ <b>사용설명서.md</b>        <i>← 구매자 첫 문서(0단계 포함, 클릭 단위)</i>
+├ <b>CLAUDE.md</b>            <i>← 핵심 두뇌: 덱 형식·레이아웃 9종·설계원칙 8개·렌더 전 자가점검</i>
+├ package.json               <i>← 의존 playwright 1개(설치 시 브라우저 자동 다운로드)</i>
+├ <b>render.mjs</b>           <i>← 실행기: node render.mjs 덱.json → PNG</i>
+├ <b>renderer.mjs</b>         <i>← 그리기 엔진(레이아웃 9종·자동 세로중앙 배치)</i>
+├ lab.html                   <i>← 브라우저에서 미리보는 실험실</i>
+├ fontcheck.mjs              <i>← 폰트 깨짐 점검 도구</i>
+├ fonts/ Pretendard 6종      <i>← 한글 폰트 번들(OFL — 구매자 PC에 폰트 없어도 안 깨짐)</i>
+├ decks/ example-ep2.json    <i>← 완성 예시 덱(10장) · _template.json=빈 틀</i>
+└ images/samples/ 2장        <i>← 중립 플레이스홀더 목업 이미지(개인 스크린샷 교체 자리)</i></div>
+</details>
+<div class="risk"><b>잔여 리스크(경미):</b> ① 예시 덱 문구에 1인칭 경험담("채널 3개를 혼자 굴리고…")이 포함 — 견본이지만 구매자가 그대로 올리면 허위 1인칭이 됨. 설명서에 "본인 이야기로 바꿔 쓰세요" 한 줄 권장 ② 데모 GIF만 만들면 바로 등록 가능(4종 중 가장 가까움).</div>
+
+<h2>⑤ 이번 세션에서 바뀐 것 (수정 이력)</h2>
+<div class="card">
+<ul>
+<li>📝 <code>블로그\배포본_만들기.ps1</code> — UTF-8 BOM 재저장(제외 규칙 복구) → <b>판매 zip 재생성·재검증</b>. 오염 구버전은 <code>.QA3백업_구버전</code>으로 보존</li>
+<li>🎵 <code>ai-singer-product</code> — 자막 폰트 동봉(+화이트리스트) · requirements에 pillow 추가 · 즉사 playlist_* 3개 제외 → <b>_dist 재생성(71파일)</b></li>
+<li>🧵 <code>쓰레드\_빌더전용\배포본_만들기.ps1</code> <b>신설</b> → 판매 zip 첫 생성(21파일, 포함목록과 일치)</li>
+<li>🖼 <code>인스타그램\배포본_만들기.ps1</code> <b>신설</b> → 판매 zip 첫 생성(19파일, 유출 0)</li>
+<li>📋 QA 물증: <code>selling-auto\_QA\4종_QA_3차_실측통합.md</code></li>
+<li>운영 원본(<code>codex\vibe-blog</code>·<code>ai-singer</code>·<code>threads-autopost</code>)은 <b>일절 안 건드림</b>(유튜브 폰트는 원본에서 읽어 복사만)</li>
+</ul>
+</div>
+
+<h2>⑥ 사장님 검증 순서 (제안)</h2>
+<div class="card">
+<ol style="padding-left:20px">
+<li><b>인스타부터</b> — zip을 다른 폴더에 풀고 클로드코드 켜서 "설치해줘 → 예시 렌더해줘". 10분 안에 카드 10장이 나오면 합격. (가장 쉬운 완주)</li>
+<li><b>쓰레드</b> — zip 풀고 "설치해줘" → 텔레그램 봇 만들기(5분) → <code>deliver.py --dry-run</code> 배달 확인.</li>
+<li><b>블로그</b> — zip 풀고 설명서 0단계부터 ⑥임시저장까지. 네이버 로그인 첫 회는 직접.</li>
+<li><b>유튜브(최중량)</b> — 본인 곡 1개로 샘플 완주(설치 2~3GB·곡당 수십 분). <b>이게 통과해야 판매 개시.</b></li>
+<li>완주 중 막힌 지점을 그대로 적어 클로드에게 주면 수정 → 그 다음이 판매페이지·GIF·면책(4종 공통).</li>
+</ol>
+</div>
+
+<p class="foot">QA 3차 실측 보고서 · 2026-07-22 · 물증: selling-auto\_QA\ · 이 페이지는 검색엔진 비노출(noindex)</p>
+</body>
+</html>
