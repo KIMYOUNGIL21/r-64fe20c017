@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쓰레드 터진 글 아카이브</title>
+<meta name="description" content="쓰레드에서 실측으로 조회수·반응이 터진 글을 오픈카톡방 모객·일상 바이럴·전자책 판매 3갈래로 모은 학습용 스와이프 파일">
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,sans-serif;-webkit-tap-highlight-color:transparent;}
+:root{--acc:#f2c14e; --bg:#121016; --card:#1c1a22; --line:#332f3c; --dim:#9a92a6; --txt:#efe9dc; --l:#ff6b81; --r:#5ec1ff; --rp:#7ee89a; --s:#c99bff;}
+body{background:var(--bg);color:var(--txt);min-height:100vh;padding:22px 14px 80px;
+  background-image:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--acc) 12%,transparent) 0%,var(--bg) 55%);}
+.wrap{max-width:820px;margin:0 auto;}
+header{text-align:center;margin-bottom:18px;}
+header h1{font-size:23px;font-weight:800;letter-spacing:-.5px;color:var(--acc);}
+header p{font-size:12.5px;color:var(--dim);margin-top:8px;line-height:1.7;}
+header .meta{font-size:11px;color:#6b6478;margin-top:8px;}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0 6px;font-size:11px;color:var(--dim);}
+.legend span{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 9px;}
+
+.tabs{display:flex;gap:7px;position:sticky;top:0;z-index:9;padding:14px 0 12px;
+  background:linear-gradient(to bottom,var(--bg) 78%,transparent);}
+.tab{flex:1;border:1px solid var(--line);background:var(--card);color:var(--dim);
+  border-radius:12px;padding:11px 6px;cursor:pointer;transition:.18s;text-align:center;}
+.tab b{display:block;font-size:13.5px;font-weight:700;letter-spacing:-.3px;}
+.tab i{display:block;font-style:normal;font-size:10.5px;margin-top:3px;opacity:.8;}
+.tab:hover{border-color:var(--acc);}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#191510;}
+.tab.on i{opacity:.75;}
+
+.pane{display:none;}
+.pane.on{display:block;}
+
+.insight{background:color-mix(in srgb,var(--acc) 9%,var(--card));border:1px solid color-mix(in srgb,var(--acc) 35%,var(--line));
+  border-radius:14px;padding:15px 16px;margin-bottom:16px;font-size:12.5px;line-height:1.8;color:#e9e2cf;}
+.insight b{color:var(--acc);}
+.insight ul{margin:6px 0 0 18px;}
+.insight li{margin-bottom:3px;}
+
+.subgroup{font-size:12px;font-weight:800;color:var(--dim);margin:18px 2px 8px;letter-spacing:.3px;
+  display:flex;align-items:center;gap:8px;}
+.subgroup::after{content:"";flex:1;height:1px;background:var(--line);}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px 16px 13px;margin-bottom:10px;position:relative;}
+.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.rank{font-size:11px;font-weight:800;color:#191510;background:var(--acc);border-radius:6px;padding:1px 7px;}
+.handle{font-size:14px;font-weight:800;color:#fff;text-decoration:none;}
+.handle:hover{color:var(--acc);}
+.date{font-size:11px;color:#6b6478;}
+.tagchip{font-size:10.5px;font-weight:700;color:#191510;background:color-mix(in srgb,var(--acc) 70%,#fff 10%);
+  border-radius:6px;padding:2px 7px;margin-left:auto;}
+.hook{font-size:13.5px;line-height:1.72;color:#efe9dc;white-space:pre-line;margin-bottom:10px;}
+.stats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+.stat{font-size:11px;font-weight:700;border-radius:7px;padding:3px 8px;background:#242028;border:1px solid var(--line);}
+.stat.l{color:var(--l);} .stat.r{color:var(--r);} .stat.rp{color:var(--rp);} .stat.s{color:var(--s);} .stat.v{color:var(--dim);}
+.note{font-size:12px;color:var(--dim);line-height:1.6;padding-top:8px;border-top:1px dashed var(--line);}
+.note b{color:#cfc7dd;}
+.go{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:700;color:var(--acc);text-decoration:none;}
+.go:hover{text-decoration:underline;}
+
+footer{text-align:center;font-size:11.5px;color:#6b6480;margin-top:30px;line-height:1.9;}
+footer a{color:var(--dim);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🧵 쓰레드 터진 글 아카이브</h1>
+    <p>내가 직접 훅을 쓸 수 있게 되려고 만든 학습용 스와이프 파일.<br>계정 눌러 원문까지 바로 가서 댓글창·리액션까지 읽어볼 것.</p>
+    <div class="meta">2026-07-24 실측 수집 · 로그인 세션 쓰레드 검색/프로필 직접 열람 · 숫자는 조회 시점 기준(변동 가능)</div>
+  </header>
+
+  <div class="legend">
+    <span style="color:var(--l)">❤️ L 좋아요</span>
+    <span style="color:var(--r)">💬 R 답글(댓글)</span>
+    <span style="color:var(--rp)">🔁 RP 리포스트</span>
+    <span style="color:var(--s)">📤 S 공유</span>
+    <span style="color:var(--dim)">👁 조회수</span>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="panes"></div>
+
+  <footer>
+    자료 = ebook-feed/research(카톡방유입_실측·수집데이터_요약·market 9계정 census) + 2026-07-24 쓰레드 실검색 추가수집<br>
+    전부 실제 공개 게시글, 계정명 그대로 표기(원문 확인용) · 상업적 재배포 목적 아님, 개인 학습 자료<br>
+    <a href="../index.html">← 마더페이지로</a>
+  </footer>
+</div>
+
+<script>
+const DATA = {
+  mogaek: {
+    label: "오픈카톡방 모객", tag: "38개 실측",
+    insight: `<b>핵심 지표는 R(답글)이다.</b> 좋아요는 도달의 부산물이고, "댓글에 한 단어 남기면 링크 준다"가 실제로 사람을 움직인다.
+    <ul>
+      <li><b>순위:</b> 댓글 키워드(한 단어) ≈ 댓글→DM 2단 > 수요조사 > DM 단독 > 자유댓글 > 본문직접링크 > 프로필링크 > 구글폼</li>
+      <li><b>K1 한 단어 문지방</b> — 받는 법을 링크가 아니라 <b>댓글에 쓸 단어 하나</b>로 지정 (gaondrawer, 팔로워 300에 R1,600)</li>
+      <li><b>K2 링크 없는 초대</b> — 본문에 링크 0개, "모이면 초대할게"로 끝맺어 댓글을 유일한 문으로 만듦</li>
+      <li><b>K4 마찰의 역설</b> — 인증 단계를 걸수록(자격 심사) 오히려 R/L이 오른다. 단, "누구를 막는지"가 명확할 때만</li>
+      <li>본문에 카톡 링크를 직접 박으면 R이 죽는다(행동의 종착지가 쓰레드 밖이라 댓글 쓸 이유가 사라짐) — 대신 RP·S는 산다</li>
+      <li>이 장르는 계정 크기와 무관 — 팔로워 300에 평소 ♥1인 계정도 모객 글 하나로 R1,600</li>
+    </ul>`,
+    posts: [
+      {h:"gaondrawer", t:"댓글에 독서노트라고 남겨주시면 쪽지로 링크보내드리겠습니다", L:279,R:1600,RP:19,S:5, tag:"한 단어 문지방★", note:"댓글키워드→쪽지. 팔로워 300·평소 ♥1인 계정이 이 글 하나로 R1,600 — 이 장르 최고 단일 사례."},
+      {h:"sunshine_00617", t:"널시그 하실 분 ...? 파 우 방톡단 으로 !!!", L:557,R:669,RP:29,S:3, tag:"링크 없는 초대★", note:"본문 링크 0개, 댓글이 유일한 문. R>L로 뒤집힘."},
+      {h:"blog_kj91", t:"2년만에 원룸에서 84타입 국평으로 이사하게 해준 …전자책 무료로 풉니다", L:500,R:523,RP:377,S:24, tag:"성과 서사+배포", note:"4단계(팔로우+리포스트+댓글+네이버폼) 계단인데도 R523 — 보상(원룸→국평)이 계단값을 압도."},
+      {h:"raonpdya_", t:"상품상 없는 사과 무료나눔! 2kg 5명 지금부터 댓글 시작! 댓글 \"밥피디퐘\"", L:418,R:426,RP:74,S:2, tag:"한 단어 문지방", note:"지정 단어 하나로 R426."},
+      {h:"seb_yuk", t:"스친이들 안녕!! 내일 걍 무료나눔 한 번 진행할게!!", L:339,R:294,RP:116,S:3, tag:"보답 서사", note:"자유 댓글."},
+      {h:"kevin_md_86", t:"요즘 날씨 추워지면서…\"스하리\" 하고 언능 댓글로 신청해!", L:156,R:271,RP:97,S:3, tag:"마감 나눔", note:"댓글키워드('스하리')+마감일 조합."},
+      {h:"dyno.kr", t:"스레드 클립 무료나눔 …댓글 남겨주시면 디엠 드릴게요 (선착순 100명)", L:288,R:235,RP:12,S:5, tag:"선착순 나눔", note:"댓글→DM+선착순."},
+      {h:"story.prompt", t:"사주 봐줄 테니 오픈채팅방으로 오라고 할 때는 아무도 안 오더니 DM 보내라고 하니까 디엠 폭발함", L:346,R:225,RP:1,S:15, tag:"장치 비교 실측★★", note:"운영자 본인의 1차 증언. \"오세요\"보다 \"DM 주세요\"가 먹힌다는 걸 스스로 실측해서 공유."},
+      {h:"just_follow_buy", t:"지금 실제로 올리브유를…스하리 하고 디엠주면 제품 나눔해볼까해서!", L:160,R:223,RP:88,S:6, tag:"DM 나눔", note:"댓글 아니라 DM 단독 유도."},
+      {h:"jini_bini2024", t:"AI 수익화 초보(시니어) 전자책…함께 챌린지 할 친구들 있을까? (무료챌린지)", L:236,R:215,RP:101,S:9, tag:"직접 경쟁자", note:"AI 챌린지 모집. 팔로우+하트+리포스트 요구."},
+      {h:"chloe.pakk", t:"제품생성부터…자료 배포하면 수요 있으려나요.. 댓글로 수요 조사 합니다", L:507,R:197,RP:74,S:39, tag:"수요 조사", note:"완성품 아니라 \"만들까?\"로 먼저 물음."},
+      {h:"sunshine_00617", t:"안녕하세요 !! ㅇㅍ 단톡방 개설자입니다. 첫번째 단톡방 374명 두번째 단톡방 260명", L:123,R:187,RP:11,S:6, tag:"인원 실황+문턱 낮춤★", note:"현재 인원을 숫자로 공개 + 눈팅만 해도 된다는 부담 완화."},
+      {h:"daejangboo_brothers", t:"내일 출근하니 이벤트 한 번 가보겠습니다…아무 댓글 남겨주시면", L:205,R:167,RP:45,S:1, tag:"아무 댓글", note:"키워드조차 지정 안 하고 \"아무 댓글\"."},
+      {h:"sikdolakshop", t:"과일 무료나눔 무료 이벤트 진행할까 하는데 관심 있는 스친들 있어?", L:109,R:164,RP:31,S:1, tag:"수요 조사", note:"질문형으로 끝맺기."},
+      {h:"tajo.dino_ostrich_land", t:"전국민 단톡방 타조 키워보실분 연락주십쇼.", L:204,R:160,RP:9,S:14, tag:"병맛 초대", note:"진지하지 않은 컨셉으로도 R160."},
+      {h:"science_clean", t:"카카오톡 오픈채팅을 시작해 보세요…open.kakao.com/o/sSI…", L:278,R:154,RP:220,S:6, tag:"단골 감사", note:"직접 링크를 걸었는데도 RP(220)가 R(154)보다 높음 — 링크 글은 \"퍼가는 글\"이지 \"모으는 글\"이 아님을 보여주는 대조 사례."},
+      {h:"muth.official_", t:"무료나눔 …댓글과 스하리하면 1명 뽑아서", L:120,R:119,RP:64,S:null, tag:"브랜드 오픈", note:"댓글키워드형."},
+      {h:"barleedays", t:"양가 부모님께 아기 사진 공유하는 채널로 ⭐️카톡 오픈채팅방⭐️을 팠습니다", L:459,R:94,RP:25,S:81, tag:"용도 발명", note:"모객 목적이 아닌데도 오픈채팅 \"용도\" 자체가 신선해 L459."},
+      {h:"wiz_hynnn", t:"야구 빌런 톡방 모집합니다 각 구단 3명씩 모을겁니다", L:161,R:92,RP:1,S:5, tag:"자격 지정 모집", note:"구단별 정원 지정으로 희소성."},
+      {h:"joshuacho_", t:"무료 라이브 세션…메세지로 참여 여부 남겨주시면, 나중에 줌 링크 보내드릴께요", L:93,R:87,RP:13,S:13, tag:"세션 초대", note:"DM→링크 순서."},
+      {h:"psych_of_loves2", t:"🔥무료 전자책 나눔 이벤트🔥…댓글창에 본인 '띠' 적기 (ex. 소띠)", L:58,R:80,RP:21,S:3, tag:"초저마찰 키워드★", note:"R80>L58. 생각할 필요 없고 개인정보도 아닌 \"띠\" — 문지방 설계의 정점으로 꼽힘."},
+      {h:"ai_margin_", t:"안티그래비티 왕초급 18편짜리 무료전자책 배포합니다…프로필링크에 무료전자책 수령", L:115,R:81,RP:19,S:21, tag:"배포", note:"프로필링크형(직접링크보다는 약함)."},
+      {h:"jurri_love", t:"카톡은 검열때문에…댓글 달아주면 초대할께~", L:301,R:74,RP:16,S:4, tag:"정치 결집", note:"소재 자체가 결집형이라 L 높음."},
+      {h:"tongola2", t:"[도서나눔] 박경리/ 토지 전21권", L:96,R:79,RP:5,S:2, tag:"추첨 나눔", note:"신청→DM 추첨."},
+      {h:"ju0o___", t:"[4회차 무료나눔]…참여 방법은 아주 간단하게 '댓글' 만 쓰셔도 됩니다", L:65,R:61,RP:14,S:null, tag:"반복 나눔", note:"4회차 — 반복 이벤트도 매번 반응 옴."},
+      {h:"engineeronthefield", t:"K-POP 관련업계 오픈채팅방이 있어…입장방법은 디엠으로 문의해줘. 리포스트 좋아요 👍", L:110,R:55,RP:25,S:23, tag:"비밀 결사★", note:"DM 입장 심사형."},
+      {h:"dew.grapher", t:"🗣️ 대한민국 국민 인증 오픈카톡 채팅방 개설 …필수 인증 항목 (4가지 모두 제출)", L:62,R:55,RP:7,S:4, tag:"극단 문지방", note:"4단계 인증인데도 살아남음 — 막는 대상이 명확해서."},
+      {h:"silv.er7774", t:"무료 전자책 받는 방법: 프로필 링크 카카오톡 채널 친추하고 응원메세지 하나만", L:69,R:48,RP:5,S:6, tag:"하루 마감", note:"프로필링크→카톡채널."},
+      {h:"golden.f_219", t:"총무 직무쪽…무료 전자책 나눔 이벤트…아래 서식 폼을 작성해주시면", L:177,R:49,RP:28,S:9, tag:"배포(폼)", note:"구글폼 = 실측 최약 장치(R/L 0.28). L177인데 R49밖에 안 남."},
+      {h:"0vyct20", t:"이렇게까지 솔직하게 다 공유해도 되나 싶은 찐 이야기들…세가지 인증을 받을거니", L:12,R:43,RP:1,S:7, tag:"자격 심사★", note:"3단계 인증. R/L 3.58 — 전 표본 1위 전환율."},
+      {h:"0vyct20", t:"실장 단톡방 만들면 들어올 실장님들 !!!?", L:18,R:38,RP:null,S:null, tag:"수요조사+순수성★", note:"방을 만들기도 전에 수요부터 물음."},
+      {h:"reachon.story", t:"오픈 채팅방 운영 어떻게 해야 할까? 하소연 좀 하자..", L:19,R:38,RP:1,S:null, tag:"방장 하소연", note:"모객 글이 아닌 척하는 모객 글. 표본이 작아 실험 등급."},
+      {h:"kooky.ai", t:"무료 전자책 PDF 받는 방법: 스하리하고 댓글로 이메일만 남겨줘!", L:23,R:33,RP:6,S:3, tag:"배포", note:"이메일 요구는 한 단어보다 약함."},
+      {h:"noah.aiart", t:"전자책 무료나눔이라고 완전 대충하진 않았어~ 일부 공개할께", L:35,R:29,RP:4,S:1, tag:"품질 방어", note:"\"대충 아니다\"로 무료판 품질 선제 방어."},
+      {h:"crack.your.egg", t:"📖전자책 무료나눔 이벤트📖 대학원 진학 고민중인 사람 있어?", L:34,R:25,RP:21,S:1, tag:"배포", note:"3단계인데도 보상이 약해 R21에 그침 — 계단이 아니라 보상이 문제라는 대조 사례."},
+      {h:"upper_son", t:"스친들아 나 한번만 도와줄래? 과일 무료나눔 할 건데 사람이 없어서", L:16,R:6,RP:5,S:3, tag:"약자 호소", note:"직접링크형, 반응 약함."},
+      {h:"simbi__tarot", t:"무타 이벤트💝 …프로필 링크 클릭 후 카카오톡 오픈채팅으로 들어와 주세요", L:14,R:1,RP:4,S:null, tag:"선착순 상담", note:"프로필링크→오카방 직행. L14인데 R1 — 링크가 R을 죽이는 가장 극단적 사례."},
+    ]
+  },
+  daily: {
+    label: "일상·바이럴", tag: "31개 실측",
+    insight: `쓰레드는 <b>계정이 아니라 글 단위로 추천</b>된다. 팔로워 6.5만짜리 계정도 평소 글은 좋아요 5개, 그런데 형식이 맞는 글 하나로 L1,600~3,200까지 뛴다.
+    <ul>
+      <li><b>폭발하는 형식 4가지:</b> ①참조가치(매뉴얼·큐레이션→RP/S) ②사건 서사(비밀·대비·1인칭→L) ③참여 장치(질문·나눔·축하→R) ④전문가 단언(직함+소신)</li>
+      <li><b>지표별 동인이 다르다:</b> L=공감·감탄, R=질문·나눔·친목, RP/S=저장하고 싶은 참조가치. 도달을 더 넓히는 건 RP/S(남의 팔로워에게 퍼짐)</li>
+      <li><b>일반론은 죽는다.</b> 같은 계정 안에서도 1인칭 구체 서사(494)와 일반 조언(15)의 차이가 30배 — 모든 문장에 '나의 숫자·사건'이 박혀야 함</li>
+    </ul>`,
+    groups: [
+      {name:"퇴사·직장인 서사", posts:[
+        {h:"limsangjin12", t:"퇴사 후 한 달 동안 AI로 앱 30개를 만들었다. 나는 15년 경력 개발자다", L:2500,R:296,RP:369,S:743, tag:"숫자 실험 선언+스펙"},
+        {h:"namneunn", t:"안녕, 난 93년생, 몇 달 전 삼성전자를 퇴사했어", L:2100,R:512,RP:82,S:33, tag:"데뷔 자기소개 스펙 서사"},
+        {h:"mr__daniele", t:"직장에서 지혜롭게 퇴사하는 방법 1~5", L:676,R:8,RP:57,S:41, tag:"국룰 매뉴얼 리스트"},
+        {h:"moomoo_nyang", t:"퇴사 후 7년 방황, 그 끝에서 몰랐던 나의 무기를 발견했다 (약점→무기 7개)", L:616,R:50,RP:95,S:12, tag:"반전 리스트"},
+        {h:"ai__frontier", t:"드디어 오늘 퇴사 통보 완료!", L:581,R:103,RP:16,S:5, tag:"실시간 사건 중계"},
+        {h:"hello.butty", t:"퇴사 유형 5가지, 너는 어떤 이유야?", L:537,R:153,RP:29,S:13, tag:"유형분류+질문 참여"},
+        {h:"mr__daniele", t:"13년 대기업 퇴사 시점 후회 5가지", L:464,R:28,RP:18,S:15, tag:"후회 리스트"},
+        {h:"myden_tity", t:"0원에서 첫 수익 만드는 현실 루틴 (12개)", L:443,R:25,RP:97,S:64, tag:"루틴 매뉴얼"},
+        {h:"lucid__insight", t:"스레드에서 이런 분에게 닿고 싶다 (3부류)", L:391,R:224,RP:61,S:0, tag:"대상 지목+닿기"},
+        {h:"semicongram", t:"퇴사 사유 면접 답변, 3축으로 짜면 의심이 사라집니다", L:280,R:10,RP:104,S:106, tag:"실용 정보(RP·S 특화)"},
+        {h:"careernomad_", t:"퇴사자들 90%는 이걸 몰라서 망한다", L:187,R:33,RP:31,S:35, tag:"손실 경고 초단문"},
+      ]},
+      {name:"부업·돈", posts:[
+        {h:"ulti_ultradesign", t:"낮엔 공장근무 밤에는 AI디자인 하면 벌어지는 일", L:1000,R:179,RP:46,S:42, tag:"대비 초단문"},
+        {h:"seniorkyj", t:"컴퓨터 전원만 킬 줄 아는 누나한테 블로그 부업 다시 알려준 후기", L:549,R:69,RP:99,S:70, tag:"최약체 증명"},
+        {h:"turtle_step_", t:"지인들이 했던 돈되는 부업들 요약(4탄)", L:519,R:15,RP:43,S:51, tag:"시리즈 요약"},
+        {h:"living_sidejob", t:"부업 7개…", L:465,R:210,RP:97,S:14, tag:"리스트+참여"},
+        {h:"gemmastudio_official", t:"회사 다니면서 새벽에 몰래 부업 시작했어 → 여기서 하나씩 풀어볼게", L:391,R:228,RP:73,S:12, tag:"비밀 사건 서사+연재 예고"},
+        {h:"kongkey__", t:"숏폼이 여전히 블루오션인 이유 → 내 프로필 글 10개 읽어봐", L:188,R:7,RP:25,S:30, tag:"리스트+프로필 유도"},
+        {h:"sidejob_story00", t:"스레드 무료강의(딱10일). 왜 300씩 내고 배워? 필요한 사람 댓글", L:168,R:575,RP:44,S:2, tag:"무료 나눔+댓글 트리거"},
+      ]},
+      {name:"동기부여·어록", posts:[
+        {h:"tokhee_note", t:"돈 안 들이고 귀티 나고 싶을 때 보는 유튜버 6명 (6번=자기)", L:3200,R:58,RP:715,S:392, tag:"욕망 큐레이션+셀프플러그"},
+        {h:"happycafe777", t:"사업가의 멘탈 관리법 (6개), 댓글에 이어서", L:907,R:291,RP:270,S:16, tag:"매뉴얼+댓글 연장"},
+        {h:"jickjin2025", t:"내가 좋아하는 이지영 강사님 명언", L:797,R:30,RP:61,S:9, tag:"명언 인용"},
+        {h:"songchangmin78", t:"자기 기운을 강화시키는 법", L:533,R:18,RP:63,S:27, tag:"어록 리스트"},
+      ]},
+      {name:"다이어트·변화 기록", posts:[
+        {h:"polar.diet", t:"다이어트 답 드립니다. (11개 단언)", L:4000,R:317,RP:653,S:332, tag:"전문가 단언 매뉴얼"},
+        {h:"fairlee.detox", t:"다이어트 한의사, 소신발언합니다 → 앞으로 저와 함께하세요", L:3900,R:51,RP:1000,S:1400, tag:"직함+소신발언+동행 CTA"},
+        {h:"torong_skin", t:"30kg 뺄 때 매일 했던 '10분' 홈트 → 요일별로 저장해두고 따라해", L:2400,R:44,RP:747,S:566, tag:"숫자대비+저장 지시"},
+        {h:"pomi_forme", t:"하루 딱 40분으로 -13kg 부위별 홈트", L:1300,R:30,RP:355,S:609, tag:"숫자대비"},
+        {h:"by.hyelee", t:"다이어트 231일차 (55.8→46.0kg)", L:904,R:77,RP:82,S:46, tag:"N일차 변화 중계"},
+        {h:"kimdongan_95", t:"솔직히 고백합니다. 9년 PT… 돈이 안 되니까. 오늘 전부 까발립니다", L:676,R:70,RP:69,S:123, tag:"내부자 폭로"},
+        {h:"yozmlog", t:"솔직히 뼈말라 한 번쯤은…", L:762,R:524,RP:132,S:89, tag:"공감 고백+참여"},
+      ]},
+      {name:"글쓰기·친목 확인", posts:[
+        {h:"healua_", t:"스니들, 나 좀 축하해줄래? 브런치…", L:458,R:291,RP:null,S:null, tag:"축하 요청=답글 엔진"},
+        {h:"writerpansy", t:"작가 지망생이야, 스친하자", L:289,R:155,RP:null,S:null, tag:"스친 모집"},
+      ]},
+    ],
+    compare: [
+      {acc:"sienna__ai (6.5만)", hot:"배포 이벤트 L1600 R1400 RP1000", cold:"일반 꿀팁 L5~10", ratio:"~200배"},
+      {acc:"tokhee_note", hot:"큐레이션 L3200 RP715", cold:"일상 글 L4~13", ratio:"~250배"},
+      {acc:"gemmastudio_official", hot:"\"몰래 부업\" 서사 L391 R228", cold:"정보 조각 글 L0~3", ratio:"~100배+"},
+      {acc:"mr__daniele", hot:"자기 증명 서사 L494 / 국룰 매뉴얼 L676", cold:"일반 조언 리스트 L13~38", ratio:"~30배"},
+    ]
+  },
+  sale: {
+    label: "전자책 판매", tag: "14개 실측(신규)",
+    insight: `2026-07-24 새로 검색해서 모은 것. <b>이 장르는 카톡방 모객과 정반대다</b> — 오카방 모객은 "댓글 한 단어"로 R을 극대화하는 게 정답인데, 전자책 판매는 실제로 <b>돈이 오가는 순간을 본문에서 안 보여준다.</b> 결제는 프로필 링크·DM 뒤로 숨기고, 타임라인 글은 신뢰를 쌓는 역할만 한다(9곳 계정 census에서도 "판매" 라벨 글이 거의 0이었던 것과 일치).
+    <ul>
+      <li><b>실적 숫자 공개가 제일 세다</b> — "천만원 벌었다 정정합니다, 2287만원입니다"(yun_ja_dong), "15만원짜리 1400부"(ykh_dp)처럼 반박하기 힘든 숫자를 던짐</li>
+      <li><b>얼리버드 가격 인상</b>이 흔한 장치 — "한 권 팔릴 때마다 1,000원씩 오릅니다"(yeong_sa_won), "업데이트 시 상승 예정"(jaeha.house) — 지금 안 사면 손해라는 프레임</li>
+      <li><b>노하우/판매채널 정보 글</b>도 잘 먹힘 — 직접 판매 대신 "전자책 파는 법"(editorviewee)처럼 메타 정보로 신뢰를 쌓는 방식</li>
+      <li><b>정직한 실패 공개</b>도 하나의 훅이다 — yeong_sa_won은 "매출 0원, 판매 0부"를 그대로 올려서 오히려 진정성으로 소비됨</li>
+      <li>무료 배포글(devdesign.kr류)이 오히려 제일 크게 터짐(L463) — 유료 전환 전 단계인 무료판이 곧 카톡방모객 K1(한 단어 문지방)과 겹친다는 뜻</li>
+    </ul>`,
+    posts: [
+      {h:"yun_ja_dong", t:"스레드에 독을 풀어 논란이 되고 있는 윤자동입니다.\n우선 전자책으로 천만원 벌었다고 했는데 정정합니다.\n2287만4천원 벌었습니다.\n구매자가 113명인데, 이분들의 반응은 어땠을까요?", d:"3일 전", L:167,R:29,RP:11,S:36, tag:"정정+과시 숫자", note:"\"틀렸다, 사실은 더 벌었다\" 정정 프레임으로 숫자를 두 번 노출."},
+      {h:"ykh_dp", t:"스친들아 남말 듣지말고 하고픈거 꼭 해.\n나 전자책 쓴다할때 책팔이니머니 그게 팔리겠냐느니 오만가지 소리 다 들었는데\n15만원짜리 1400부 넘겼다\n걍 해!", d:"2026-03-10", L:641,R:96,RP:41,S:24, tag:"역경 증명+고가고volume", note:"이 카테고리 최고 좋아요. 조롱받던 서사→반박불가 숫자로 마무리."},
+      {h:"devdesign.kr", t:"📑 전자책 무료 배포\n비개발자가 이거 따라 만들면 바이브코딩 레벨이 아예 달라짐\n…무료 전자책에 다 풀어둠\n👇받는 방법\n1. 좋아요+팔로우+리포스트  2. 댓글에 \"나도\"  3. DM으로 무료 구매 링크 보내드림", d:"2026-05-07", L:463,R:513,RP:326,S:30, tag:"통째공개+3단계 문지방", note:"무료판 리드마그넷 단계. 카톡방모객 K1(댓글키워드)과 동일 장치를 그대로 씀 — R이 L보다 높다."},
+      {h:"doya_bookstore", t:"스레드 마케팅 정석 전자책 v5.0\n출시 딱 한 달 만에 100부 판매 돌파했어 🎉\n…아직 고민 중인 사람들을 위해 만원 할인 쿠폰 준비했어 🎟️\n필요한 사람은 댓글 남겨줘!", d:"2025-03-06", L:215,R:107,RP:190, tag:"판매실적 공개+할인쿠폰 트리거", note:"\"100부 돌파\"로 사회적 증거→댓글 트리거로 즉시 전환 시도."},
+      {h:"ai_moohan", t:"Aix스레드 오늘까지\n3일간 매출 735만 원…\n내가 ai활용해서 스레드로 매출 낸 방법 공유 하려고 하는데,\n전자책 받아보고 싶은 사람 있어?", d:"2025-06-23", L:37,R:111,RP:2,S:1, tag:"매출 공개+수요조사", note:"L보다 R이 3배 높음 — 질문형 마무리가 댓글을 직접 끌어냄."},
+      {h:"jinhodan", t:"오래간만에 짬내서 발간한\n\"원가를 읽는 CEO\"\n교보문고나 작가와 출판사에\n담주부터 판매예정입니다\n많은 사랑과 구독 부탁드립니다", d:"2026-07-04", L:161,R:15,RP:20, tag:"신간 출간 공지", note:"담백한 발간 소식만으로도 L161 — 팔로워층이 응원 문화라 반응이 붙음."},
+      {h:"translator_jimin", t:"이번에 여섯 번째 바이링구얼 책을 냈어! …\n비빔밥 책은 오늘까지 무료로 전자책 볼 수 있으니까 궁금한 스친들은 많이 읽어줘", d:"2025-06-03", L:164,R:20,RP:9,S:7, tag:"시리즈 신간+한정 무료", note:"기존 히트작(김밥책) 언급으로 신뢰 확보 후 신작을 한정 무료로."},
+      {h:"editorviewee", t:"뜬금없이 영업 좀 해봄\n전자책 팔아서 수익내고픈 사람들이 꼭! 회원가입 해놔야 할 필수 서비스\n1. 서점 전자책 등록은 \"작가와\" (무료)\n2. PDF 전자책 판매는 \"래피드\" (수수료 저렴, 크몽 20% 뜯기지 말자)", d:"2024-08-14", L:38,R:22,RP:4,S:2, tag:"판매채널 노하우", note:"직접 자기 책을 안 팔고 \"파는 법\" 정보로 신뢰를 쌓는 메타 전략."},
+      {h:"goodvibesonlydaon", t:"⚠️ 생기부 전자책 구매 안내\n…이 책 한 권이면 생기부 이해하기 엄청 쉬울꺼야!\n2026학년도 대입 내용은 업데이트 예정, 판매가 잘되면 더 알차게 업데이트할 수 있을 것 같아", d:"2024-10-23", L:14,R:1, tag:"판매 재개 공지+가격인상 예고", note:"\"업데이트되면 가격도 오른다\"로 지금 구매를 유도."},
+      {h:"yeong_sa_won", t:"정정합니다. 판매, 이미 시작했습니다.\n📕 전자책 「팔로워 0, 자료 0 — 빈 컴퓨터에서 AI 혼자 돈 벌기」\n· 26쪽 PDF, 얼리버드 9,900원\n· 한 권 팔릴 때마다 1,000원씩 오릅니다\n경과 27시간 / 남은 45시간\n매출: 0원 / 팔로워: 2명 / 판매: 0부\n숫자가 초라한 것도 실험 결과입니다.", d:"2일 전", L:5,R:null,RP:null,S:null, tag:"실시간 실험 공개(정직 마케팅)", note:"조회수는 낮지만 정직하게 0을 공개하는 컨셉 자체가 배울 점 — 실패도 콘텐츠가 된다."},
+      {h:"jaeha.house", t:"4번째 블로그 전자책 발간했습니다.\n1. 체험단 대행사 대표가 직접 공개합니다\n…4. 현재 가격은 1만원대로 극혜자입니다\n6. 금액은 업데이트 시 상승될 예정입니다", d:"3일 전", L:13,R:1, tag:"혜택 리스트+가격인상 예고", note:"번호 매긴 혜택 나열 + 가격 인상 예고 조합."},
+      {h:"h__cn1", t:"전자책 구매하고 후기 남겨주시면 드리는 게 있다.\n5년치 노하우가 담긴 황금 소싱 리스트 PDF다.\n0원에서 억대 매출까지 실제로 검증된 상품군.", d:"2026-06-10", L:3,R:6, tag:"구매자 보너스(후기 유도)", note:"구매 후 후기 캡처→DM 인증하면 보너스 자료 — 구매 후 행동까지 설계."},
+      {h:"qn__me", t:"저 사실..\n스레드 전자책 유료로 팝니다\n누가 사? 라고 하지만 많은분들이 구매를 해주셨습니다.\nAI가 적은 전자책을 판매하는게 아닌 제가 직접 겪은 저만의 노하우들을 적었습니다.\n…내용이 짜치는 내용이라면 100% 환불 해드리고 있습니다.", d:"2026-04-16", L:16,R:3, tag:"자기의심 반전+환불보장", note:"\"누가 사?\"로 먼저 의심을 대신 말해준 뒤 반박, 환불 보장으로 리스크 제거."},
+      {h:"turtle_step_", t:"전자책 리더기 구매 가이드\n2010년 부터 킨들, 페이퍼, 오닉스 등 여러 기기를 사용해본 경험을 정리해봐요.", d:"2025-11-09", L:176,R:26,RP:33,S:14, tag:"제품 구매 가이드", note:"전자책 '판매'는 아니고 전자책 '리더기' 구매 가이드지만, 검색 상위에 뜬 참조가치형 리스티클이라 참고용으로 포함."},
+    ]
+  }
+};
+
+const TABS = [
+  {key:"mogaek", emoji:"💬"},
+  {key:"daily", emoji:"🔥"},
+  {key:"sale", emoji:"📕"},
+];
+
+function fmt(n){ return (n===null || n===undefined) ? "–" : n.toLocaleString(); }
+
+function statsHtml(p){
+  return `<div class="stats">
+    <span class="stat l">❤️ ${fmt(p.L)}</span>
+    <span class="stat r">💬 ${fmt(p.R)}</span>
+    <span class="stat rp">🔁 ${fmt(p.RP)}</span>
+    <span class="stat s">📤 ${fmt(p.S)}</span>
+    ${p.views ? `<span class="stat v">👁 ${p.views}</span>` : ""}
+  </div>`;
+}
+
+function cardHtml(p, rank){
+  const url = "https://www.threads.com/@" + p.h;
+  return `<div class="card">
+    <div class="chead">
+      ${rank ? `<span class="rank">#${rank}</span>` : ""}
+      <a class="handle" href="${url}" target="_blank" rel="noopener">@${p.h}</a>
+      ${p.d ? `<span class="date">${p.d}</span>` : ""}
+      ${p.tag ? `<span class="tagchip">${p.tag}</span>` : ""}
+    </div>
+    <div class="hook">${p.t}</div>
+    ${statsHtml(p)}
+    ${p.note ? `<div class="note">${p.note}</div>` : ""}
+    <a class="go" href="${url}" target="_blank" rel="noopener">@${p.h} 계정 바로 가기 →</a>
+  </div>`;
+}
+
+function renderMogaekOrSale(key, data){
+  const sorted = [...data.posts].sort((a,b)=> (key==="mogaek" ? (b.R||0)-(a.R||0) : (b.L||0)-(a.L||0)));
+  return `<div class="insight">${data.insight}</div>` + sorted.map((p,i)=>cardHtml(p,i+1)).join("");
+}
+
+function renderDaily(data){
+  let html = `<div class="insight">${data.insight}</div>`;
+  data.groups.forEach(g=>{
+    html += `<div class="subgroup">${g.name}</div>`;
+    const sorted = [...g.posts].sort((a,b)=>(b.L||0)-(a.L||0));
+    html += sorted.map((p,i)=>cardHtml(p, i+1)).join("");
+  });
+  html += `<div class="subgroup">터진 글 vs 평소 글 (같은 계정 내부 비교)</div>`;
+  html += `<div class="insight" style="font-size:12px;line-height:1.9;">` +
+    data.compare.map(c=>`<b>${c.acc}</b> — 터진 글: ${c.hot} / 평소 글: ${c.cold} → <b style="color:var(--l)">${c.ratio}</b>`).join("<br>") +
+  `</div>`;
+  return html;
+}
+
+const tabsEl = document.getElementById("tabs");
+const panesEl = document.getElementById("panes");
+
+TABS.forEach((t,i)=>{
+  const d = DATA[t.key];
+  const btn = document.createElement("div");
+  btn.className = "tab" + (i===0 ? " on" : "");
+  btn.dataset.key = t.key;
+  btn.innerHTML = `<b>${t.emoji} ${d.label}</b><i>${d.tag}</i>`;
+  btn.onclick = ()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll(".pane").forEach(x=>x.classList.remove("on"));
+    btn.classList.add("on");
+    document.getElementById("pane-"+t.key).classList.add("on");
+  };
+  tabsEl.appendChild(btn);
+
+  const pane = document.createElement("div");
+  pane.className = "pane" + (i===0 ? " on" : "");
+  pane.id = "pane-"+t.key;
+  pane.innerHTML = t.key==="daily" ? renderDaily(d) : renderMogaekOrSale(t.key, d);
+  panesEl.appendChild(pane);
+});
+</script>
+</body>
+</html>
