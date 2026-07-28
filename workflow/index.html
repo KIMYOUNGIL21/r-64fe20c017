@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>음악 3채널 워크플로 — 전체 그림</title>
+<title>음악 3채널 워크플로 — 전체 그림 (v2)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:"Pretendard Variable", Pretendard, sans-serif; background:#14121c; color:#efe9dc; padding:28px 16px 90px; line-height:1.65; }
-  .wrap { max-width:820px; margin:0 auto; }
+  .wrap { max-width:880px; margin:0 auto; }
   header { text-align:center; margin-bottom:26px; }
   header h1 { font-size:26px; letter-spacing:-0.5px; }
   header h1 em { color:#ffb84d; font-style:normal; }
   header p { color:#a89ec4; margin-top:8px; font-size:14px; }
-  h2 { font-size:20px; color:#ffb84d; margin:38px 0 14px; padding-bottom:8px; border-bottom:1px solid #383050; letter-spacing:-0.3px; }
-  h3 { font-size:16px; color:#8fc1ff; margin:20px 0 8px; }
+  .badge-new { display:inline-block; background:#2e4a38; color:#8fd3a8; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; margin-left:6px; vertical-align:2px; }
+  h2 { font-size:20px; color:#ffb84d; margin:44px 0 14px; padding-bottom:8px; border-bottom:1px solid #383050; letter-spacing:-0.3px; }
+  h3 { font-size:16px; color:#8fc1ff; margin:22px 0 8px; }
+  h4 { font-size:14px; color:#efe9dc; margin:14px 0 6px; }
   p, li { font-size:14.5px; color:#ddd5c6; }
-  ul { margin:6px 0 10px 20px; }
+  ul, ol { margin:6px 0 10px 20px; }
   .card { background:#211d2e; border:1px solid #383050; border-radius:14px; padding:18px 20px; margin:14px 0; }
   .flow { display:flex; flex-direction:column; gap:0; margin:16px 0; }
   .fstep { background:#211d2e; border:1px solid #383050; border-radius:12px; padding:13px 16px; }
+  .fstep.newstep { border-color:#3f6b4e; background:#1b2620; }
   .fstep b { color:#ffb84d; font-size:15px; }
   .fstep .who { float:right; font-size:12px; padding:2px 9px; border-radius:20px; font-weight:700; }
   .who.boss { background:#4a2436; color:#ff9db4; }
@@ -27,7 +30,7 @@
   .who.agent { background:#2e4a38; color:#8fd3a8; }
   .fstep p { font-size:13.5px; color:#b9b0a0; margin-top:4px; }
   .arrow { text-align:center; color:#6f658c; font-size:16px; padding:3px 0; }
-  .code { background:#0f0d16; border:1px solid #302a44; border-radius:10px; padding:12px 14px; margin:10px 0; font-size:13px; color:#a8d8b9; }
+  .code { background:#0f0d16; border:1px solid #302a44; border-radius:10px; padding:12px 14px; margin:10px 0; font-size:13px; color:#a8d8b9; overflow-x:auto; }
   .code b { color:#ffd28a; display:block; margin-bottom:5px; font-size:12.5px; }
   .code span { color:#8f86a8; }
   table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
@@ -37,8 +40,13 @@
   .warn { background:#2e2233; border-left:4px solid #ff6f91; border-radius:8px; padding:11px 14px; margin:10px 0; font-size:13.5px; }
   .tip { background:#1e2a24; border-left:4px solid #4caf7d; border-radius:8px; padding:11px 14px; margin:10px 0; font-size:13.5px; }
   code { background:#0f0d16; border:1px solid #302a44; border-radius:5px; padding:1px 6px; font-size:12.5px; color:#c7ecd4; font-family:Consolas, monospace; }
+  .tree { font-size:12.5px; line-height:1.9; white-space:pre; overflow-x:auto; }
+  .toc { background:#211d2e; border:1px solid #383050; border-radius:14px; padding:16px 20px; margin:16px 0; }
+  .toc a { color:#8fc1ff; text-decoration:none; font-size:13.5px; }
+  .toc a:hover { text-decoration:underline; }
+  .toc ol { columns:2; margin:6px 0 0 18px; }
   footer { text-align:center; color:#6f658c; font-size:12px; margin-top:44px; line-height:1.8; }
-  @media (max-width:600px){ body{padding:20px 10px 70px;} .fstep .who{float:none; display:inline-block; margin-bottom:4px;} th,td{padding:7px 8px; font-size:12.5px;} }
+  @media (max-width:600px){ body{padding:20px 10px 70px;} .fstep .who{float:none; display:inline-block; margin-bottom:4px;} th,td{padding:7px 8px; font-size:12.5px;} .toc ol{columns:1;} }
 </style>
 </head>
 <body>
@@ -46,164 +54,323 @@
 
 <header>
   <h1>🎼 음악 3채널 <em>워크플로 전체 그림</em></h1>
-  <p>사장님 한마디가 유튜브 발매까지 가는 길 · End-to-End · 2026-07-12 판</p>
+  <p>사장님 한마디가 유튜브 발매까지 가는 길 · End-to-End 완전판 · 2026-07-29 v2</p>
 </header>
 
-<h2>0. 한눈에 보기</h2>
-<div class="flow">
-  <div class="fstep"><span class="who boss">사장님</span><b>① 지시</b><p>"내사랑내곁에 스타일 10곡 만들자" / "가요방에 OO 발매해줘, 오늘 7시"</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who ai">총괄PD</span><b>② 채널 판별 + 배차</b><p>어느 채널 일인지 판단하고, 작사 일이면 작사가에게 / 발매 일이면 제작 라인으로</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who agent">작사가</span><b>③ 작사 (스타일 특화)</b><p>스타일 해부 → 초벌 → 스스로 검토 → 완성본 → 복붙용 HTML 작업판 → 폰으로 URL 전송</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who boss">사장님</span><b>④ 곡 생성 (수노) + 이미지 준비</b><p>작업판에서 [가사 복사][스타일 복사] → 수노에서 곡 뽑기 → wav 다운 + 썸네일 이미지 3종</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who ai">총괄PD</span><b>⑤ 제작 (타이밍→빌드)</b><p>가사 자막의 초 단위 싱크를 자동 계산하고, 영상 설계도(HTML)를 만든다</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who ai">총괄PD</span><b>⑥ 검수 게이트 1 — 제작 검수</b><p>자막 싱크·쇼츠 규격 검사. 통과 못 하면 렌더 금지</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who ai">총괄PD</span><b>⑦ 렌더 (영상 굽기)</b><p>롱폼 1개 + 쇼츠 3컷 → mp4. 쇼츠는 G드라이브로 자동 복사(폰에서 확인)</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who ai">총괄PD</span><b>⑧ 발행 (업로드+예약)</b><p>업로드 로봇이 유튜브 스튜디오를 직접 조작 — 제목·설명·썸네일·예약시각까지</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who agent">검수반장</span><b>⑨ 검수 게이트 2 — 발행 실사 (QA 성적표)</b><p>제작에 관여 안 한 별도 에이전트가 유튜브 실물을 열어 약속 이행을 채점</p></div>
-  <div class="arrow">▼</div>
-  <div class="fstep"><span class="who boss">사장님</span><b>⑩ 보고 받기</b><p>링크 + 예약시각 + QA 성적표 요약을 한 번에. 성적표 없이 "완료" 보고 금지가 규칙</p></div>
+<div class="toc">
+  <b style="color:#ffb84d;">목차</b>
+  <ol>
+    <li><a href="#s0">0. 한눈에 보기 (12단계)</a></li>
+    <li><a href="#s1">1. 등장인물</a></li>
+    <li><a href="#s2">2. 채널 3개 비교</a></li>
+    <li><a href="#s3">3. ③ 작사 상세</a></li>
+    <li><a href="#s4">4. ④ 수노 음원 생성 <span class="badge-new">NEW</span></a></li>
+    <li><a href="#s5">5. ⑤ 썸네일 투입 · 재료확인</a></li>
+    <li><a href="#s6">6. ⑥ 제작: 타이밍 → 빌드</a></li>
+    <li><a href="#s7">7. ⑦ 검수 게이트 1</a></li>
+    <li><a href="#s8">8. ⑧ 렌더</a></li>
+    <li><a href="#s9">9. ⑨ 발행 (업로드+예약)</a></li>
+    <li><a href="#s10">10. ⑩ 검수 게이트 2 — QA</a></li>
+    <li><a href="#s11">11. 폴더 지도 (전체)</a></li>
+    <li><a href="#s12">12. 매니페스트 필드 사전</a></li>
+    <li><a href="#s13">13. 스크립트 사전 (전체 한 장)</a></li>
+    <li><a href="#s14">14. 발행 시간표</a></li>
+    <li><a href="#s15">15. 철칙 — 사고에서 배운 것</a></li>
+    <li><a href="#s16">16. 사장님 치트시트</a></li>
+  </ol>
 </div>
 
-<h2>1. 등장인물 (에이전트 조직도)</h2>
+<h2 id="s0">0. 한눈에 보기 — 12단계</h2>
+<div class="flow">
+  <div class="fstep"><span class="who boss">사장님</span><b>① 지시</b><p>"그밤라디오에 김경호 금지된 사랑 컨셉으로 7곡 작사해" / "가요방에 OO 발매해줘"</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who ai">총괄PD</span><b>② 채널 판별</b><p>말투·소재로 그밤/트로트/가요방 중 하나 확정. 애매하면 사장님께 확인</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who agent">작사가</span><b>③ 작사 (lyricist 에이전트)</b><p>변주 격자 → 훅 캠프 → 역산 작사 → 자기복제 대조 → 원곡 웹대조 → 수노 스타일 확정 → 작업판 배포+마더페이지 등록</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep newstep"><span class="who ai">총괄PD</span><b>④ 수노 음원 생성 <span class="badge-new">NEW 2026-07-29</span></b><p>총괄PD가 직접 브라우저로 수노 접속 → 채널 보이스 장착 → 곡마다 가사·스타일·Exclude 입력·생성 → 2버전 다운 → 에너지 곡선 실측 A/B 판정 → 확정본 저장</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who boss">사장님</span><b>⑤ 썸네일 투입</b><p>클린가로·썸네일가로·세로 3종을 앨범 폴더에 넣고 "재료 확인해" (음원·가사는 ④에서 이미 자동 완료)</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who ai">총괄PD</span><b>⑥ 제작: 타이밍 → 빌드</b><p>보컬 분리 → 발성 덩어리 정렬로 줄별 시작초 계산 → 롱폼/쇼츠3컷 설계도(HTML) 생성</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who ai">총괄PD</span><b>⑦ 검수 게이트 1 — 제작 검수</b><p>자막싱크·쇼츠 규격·온셋 실측. 통과 못 하면 렌더 금지</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who ai">총괄PD</span><b>⑧ 렌더</b><p>롱폼 1개 + 쇼츠 3컷 → mp4. 쇼츠는 G드라이브로 자동 복사</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who ai">총괄PD</span><b>⑨ 발행 (업로드+예약)</b><p>채널 전용 크롬으로 유튜브 스튜디오 직접 조작 — 제목·설명·썸네일·예약시각</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who agent">검수반장</span><b>⑩ 검수 게이트 2 — QA 성적표</b><p>제작에 관여 안 한 별도 에이전트가 유튜브 실물을 열어 약속 이행 채점</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who ai">총괄PD</span><b>⑪ 고정댓글 문안</b><p>공개 후 붙일 고정댓글 문안을 작성해 텔레그램/카톡으로 전송 (붙이기는 사장님이 직접)</p></div>
+  <div class="arrow">▼</div>
+  <div class="fstep"><span class="who boss">사장님</span><b>⑫ 보고 받기</b><p>링크+예약시각+QA 성적표 요약+고정댓글을 한 번에. 성적표 없이 "완료" 보고 금지</p></div>
+</div>
+<div class="tip"><b>핵심 변화(2026-07-29):</b> 예전엔 ④에서 사장님이 수노를 직접 조작해 wav를 뽑아 <code>작업실\</code>에 넣어야 했다. 이제 총괄PD가 그 단계까지 대신하고, 사장님은 <b>⑤ 썸네일 3종만</b> 넣으면 된다. 단, 브라우저 자동화가 자주 끊겨서(30초+ 멈춤·세션 끊김·요청 한도) 이 단계는 사장님이 옆에서 지켜보는 걸 전제로 한다.</div>
+
+<h2 id="s1">1. 등장인물</h2>
 <table>
   <tr><th>역할</th><th>정체</th><th>하는 일</th></tr>
-  <tr><td><b>사장님</b></td><td>김영일</td><td>지시·수노 곡 생성·이미지 준비·최종 판단. 명령어 외울 필요 없이 평소 말로.</td></tr>
-  <tr><td><b>총괄PD</b></td><td>메인 클로드<br>(오케스트라)</td><td>채널 판별, 제작 지휘, 문제 수리, 카톡 전송. 헌법 = <code>D:\work\CLAUDE.md</code> (매 대화 자동 적용)</td></tr>
-  <tr><td><b>작사가</b></td><td>lyricist 에이전트</td><td>"OO 스타일 N곡" 전담. 초벌→셀프검토→완성→작업판 배포까지</td></tr>
-  <tr><td><b>프로듀서 3명</b></td><td>producer-yoonhakyung<br>producer-trot<br>producer-gayobang</td><td>채널 전담 제작자. 여러 채널 동시 작업 때 투입 (평소엔 총괄PD가 직접 지휘)</td></tr>
-  <tr><td><b>검수반장</b></td><td>qa-inspector 에이전트</td><td>발매마다 약속.md 기준 채점. 고치지 않고 채점만 — 만든 사람이 자기 숙제 채점 금지 원칙</td></tr>
+  <tr><td><b>사장님</b></td><td>김영일</td><td>지시·컨셉 판단·썸네일 준비·최종 판단. 명령어 외울 필요 없이 평소 말로.</td></tr>
+  <tr><td><b>총괄PD</b></td><td>메인 클로드 (오케스트라)</td><td>채널 판별, 작사 지시, <b>수노 음원 생성</b>, 제작 지휘, 문제 수리, 카톡 전송. 헌법 = <code>D:\work\CLAUDE.md</code> (매 대화 자동 적용)</td></tr>
+  <tr><td><b>작사가</b></td><td>lyricist 에이전트</td><td>"OO 컨셉 N곡" 전담. 변주 격자→훅 캠프→완성→작업판 배포까지. 음원 생성은 안 함(그건 총괄PD가 이어받음)</td></tr>
+  <tr><td><b>프로듀서 3명</b></td><td>producer-yoonhakyung · producer-trot · producer-gayobang</td><td>채널 전담 제작자. 여러 채널 동시 작업 때 투입 (평소엔 총괄PD가 직접 지휘)</td></tr>
+  <tr><td><b>검수반장</b></td><td>qa-inspector 에이전트</td><td>발매마다 <code>약속.md</code> 기준 채점. 고치지 않고 채점만 — 만든 사람이 자기 숙제 채점 금지 원칙</td></tr>
 </table>
 
-<h2>2. 채널 3개</h2>
+<h2 id="s2">2. 채널 3개 비교</h2>
 <table>
   <tr><th></th><th>그 밤 라디오 (윤하경)</th><th>강한결의 트로트 TV</th><th>중년가요방</th></tr>
   <tr><td><b>장르</b></td><td>감성 이별·위로 발라드</td><td>정통 트로트 (한 9 : 흥 1)</td><td>7090 레트로 가요·디스코</td></tr>
   <tr><td><b>가수</b></td><td>윤하경 (여)</td><td>강한결 (남)</td><td>고정 가수 없음 (여성 보컬)</td></tr>
   <tr><td><b>폴더</b></td><td><code>ai-singer\</code></td><td><code>trot-singer\</code></td><td><code>gayobang\</code></td></tr>
-  <tr><td><b>발행 기본</b></td><td>쇼츠 07:30/12:30/17:30<br>롱폼 20:00</td><td>지시 따름</td><td>월 2~4곡 소량<br>(히트곡은 5변주)</td></tr>
-  <tr><td><b>고유 규칙</b></td><td>후렴 먼저·짧게·스포큰 금지<br>롱폼 CTA는 2절 직전</td><td>벌스 시작 OK(예외)<br>보컬 젊게·곡 짧게</td><td>텐션 상한=중년애창곡<br>상투어 금지·사물 디테일 필수</td></tr>
+  <tr><td><b>수노 보이스</b> <span class="badge-new">NEW</span></td><td><code>찐윤하경</code></td><td><code>강한결 트롯발라드</code></td><td><code>가요방</code></td></tr>
+  <tr><td><b>작업실 폴더명</b></td><td><code>작업실\</code></td><td><code>트롯작업실\</code></td><td><code>가요방작업실\</code></td></tr>
+  <tr><td><b>고유 규칙</b></td><td>후렴 먼저·짧게·스포큰 인트로 금지<br>롱폼 CTA는 2절 직전</td><td>벌스 시작 OK(예외)<br>보컬 젊게·곡 짧게</td><td>텐션 상한=중년애창곡<br>상투어 금지·사물 디테일 필수</td></tr>
 </table>
 <p>각 채널의 지켜야 할 약속 전체 = <code>&lt;채널&gt;\약속.md</code> — QA 채점 기준이자 규칙의 원본. 규칙을 바꾸면 이 파일만 고치면 제작·QA가 함께 따라온다.</p>
 
-<h2>3. 단계별 상세 — 실제 코드에서는 이렇게 돈다</h2>
-
-<h3>③ 작사</h3>
+<h2 id="s3">3. ③ 작사 상세</h2>
 <div class="card">
-  <p><b>무슨 일:</b> 참조곡(예: 내사랑내곁에)의 정서·어법·구조의 '결'만 해부(가사 베끼기 금지) → N곡 초벌 → 스스로 검토(곡끼리 소재 겹침·상투어·채널 약속 위반) → 고쳐서 완성 → 복붙용 작업판.</p>
+  <p><b>무슨 일:</b> 컨셉(있으면 참조곡 결·없으면 사장님께 3안 제시) → 변주 격자로 곡마다 다른 소재 배정 → 훅 캠프(곡당 후렴 후보 3개 중 채택) → 역산 작사 → 소리내어 검수(음절수) → 자기복제 대조 → 원곡 웹 대조(표절/유사 인용 확인) → 수노 스타일 프롬프트 확정.</p>
   <div class="code"><b>코드에서는</b>
-  ① 에이전트가 <code>약속.md</code>·채널기획서를 읽고 시작<br>
-  ② 완성본을 HTML로 생성 → <code>&lt;채널&gt;\작사\&lt;작업명&gt;.html</code> (곡마다 [가사 복사][스타일 복사] 버튼, 완료 체크는 브라우저에 자동 저장)<br>
-  ③ <code>D:\work\lyrics-pages\&lt;작업명&gt;\index.html</code>로 복사 → <code>git push</code> → 1~2분 뒤 <code>kimyoungil21.github.io/r-64fe20c017/&lt;작업명&gt;/</code> 에 생김<br>
-  ④ 총괄PD가 그 URL을 카톡 나챗방으로 전송</div>
-  <div class="tip">수노 스타일 프롬프트에는 가수·곡명을 안 쓴다(수노가 차단). "1990s Korean soul ballad, raspy warm male vocal"처럼 묘사로 자동 변환.</div>
+  ① lyricist 에이전트가 <code>&lt;채널&gt;\작사\작사카드.md</code>(페르소나·킥공식·변주격자)·<code>작사공용\수노_프롬프트_방법론.md</code>(7칸 양식·트리거DB 139개)·<code>&lt;채널&gt;\작사\카탈로그.md</code>(전곡목록, 겹침금지)·<code>&lt;채널&gt;\작사\훅노트.md</code>(제목·훅 재고)를 읽고 시작<br>
+  ② 완성본을 HTML 작업판으로 생성 → <code>&lt;채널&gt;\작사\&lt;작업명&gt;.html</code> (곡마다 가사·스타일·Exclude가 이미 채워져 있음)<br>
+  ③ <code>D:\work\lyrics-pages\&lt;작업명&gt;\index.html</code>로 복사 → git push → <code>kimyoungil21.github.io/r-64fe20c017/&lt;작업명&gt;/</code>에 생김<br>
+  ④ 카탈로그·훅노트에 새 곡 환류(<code>python D:\work\tools\build_catalog.py</code>)<br>
+  ⑤ 총괄PD가 그 URL을 카톡 나챗방으로 전송 → 곧바로 ④단계(수노 생성)로 자동 진행</div>
+  <div class="tip">수노 스타일 프롬프트에는 가수·곡명·원곡명을 안 쓴다(수노가 차단). "1990s Korean rock ballad, raspy female vocal"처럼 장르·악기·보컬 질감 묘사로만 쓴다.</div>
 </div>
 
-<h3>④ 곡 생성 — 사장님 담당 구간</h3>
+<h2 id="s4">4. ④ 수노 음원 생성 <span class="badge-new">NEW 2026-07-29</span></h2>
 <div class="card">
-  <p>작업판에서 복사 → 수노에서 생성 → 마음에 드는 버전의 <b>wav 다운로드</b>. 이미지 3종 준비: <b>가로 클린</b>(글자 없음, 영상 배경용) / <b>가로 제목본</b>(유튜브 썸네일, 2MB 이하) / <b>세로 제목본</b>(쇼츠 배경).</p>
-  <div class="code"><b>재료 넣는 곳 (파일 5종, 곡명으로 통일)</b>
-  <code>곡명.wav</code>(음원) · <code>곡명.txt</code>(가사) · <code>곡명-클린.png</code> · <code>곡명.png</code> · <code>곡명숏츠.png</code><br>
-  → 채널의 <code>작업실\</code> 폴더에 넣고 "발매해줘" 하면 끝. wav→mp3 변환은 클로드가 알아서.</div>
+  <p><b>무슨 일:</b> 예전엔 사장님이 수노에서 직접 곡을 뽑아야 했다. 이제 총괄PD가 브라우저 자동화로 작업판에 이미 있는 가사·스타일·Exclude를 그대로 옮겨 넣어 곡을 뽑고, 나온 두 버전을 실측 비교해 하나를 고른다. <b>사장님이 옆에서 지켜보는 걸 전제</b>로 진행 — 수노 웹앱 렌더러가 30초+ 멈추거나 세션이 끊기는 일이 잦지만, 끊길 때마다 재접속해서 이어간다.</p>
+  <h4>4-1. 보이스 장착</h4>
+  <p>수노 Create → 고급(Advanced) 모드 → <b>+ 보이스</b> → 채널 이름으로 검색 → 장착. 페이지를 새로 열면 보이스가 풀리므로 곡마다 재확인해야 한다. (표 = 위 "채널 3개 비교" 참고)</p>
+  <h4>4-2. 곡마다 입력하는 4칸</h4>
+  <table>
+    <tr><th>칸</th><th>어디서 가져오나</th><th>비고</th></tr>
+    <tr><td><b>가사</b></td><td>작업판의 <code>lyrics</code> 필드</td><td>구조 태그 포함 그대로: <code>[Chorus - half strength, lone piano]</code> <code>[Verse 1 - hushed]</code> <code>[Bridge]</code> <code>[Guitar Solo]</code> 등. 이 태그가 곡의 빌드업 설계(숨죽인 벌스→파이널 폭발)를 수노에 지시한다.</td></tr>
+    <tr><td><b>스타일</b></td><td>작업판의 <code>style</code> 필드</td><td>900자 안팎, 장르·BPM·악기·보컬 질감·곡 전개(Starts~/Verse~/Chorus~/Bridge~/Final chorus~)까지 문장으로 서술</td></tr>
+    <tr><td><b>Exclude</b></td><td>작업판의 <code>excl</code> 필드</td><td>공용 베이스(관중소리·합창·랩·EDM·남성보컬·트로트 등) + 채널별 추가(록 계열은 heavy metal·upbeat dance beat 추가)</td></tr>
+    <tr><td><b>제목</b></td><td>작업판의 <code>title</code></td><td>그대로 입력 후 만들기 → 2버전 동시 생성</td></tr>
+  </table>
+  <h4>4-3. A/B 판정 — 에너지 곡선 실측</h4>
+  <p>두 버전 다 MP3 다운로드 → ffmpeg로 rms→dB 추출 → 0.5초 창 10구간 평균 곡선 + 피크 시점 + 파이널 구간 리프트(뒤 25% 평균 − 중간 25% 평균)를 계산한다. 곡 설계 의도(숨죽인 벌스→파이널 코러스 폭발)에 맞는 쪽, 즉 <b>피크가 후반부(80%+)에 있고 파이널 리프트가 양수/근접한 쪽</b>을 고른다.</p>
+  <div class="code"><b>실측 원리 (파이썬)</b>
+raw = ffmpeg -i &lt;파일&gt; -f f32le -ac 1 -ar 22050 -  <span># PCM 추출</span><br>
+rms = sqrt(mean(y[창]**2))  →  db = 20*log10(rms)     <span># 0.5초 창마다</span><br>
+curve = 10구간 평균  /  peak_t = argmax(rms)*0.5      <span># 곡선 모양 + 피크 시점</span><br>
+final_lift = mean(db[뒤25%]) - mean(db[중간25%])       <span># 파이널이 진짜 터졌는지</span></div>
+  <div class="warn">길이가 6분을 넘으면 구조가 늘어진 것으로 의심 — 짧은 쪽을 우선 검토한다 (실측 사례: 6:12 vs 4:17 중 4:17 채택).</div>
+  <h4>4-4. 저장</h4>
+  <p>확정본만 채널 작업실 폴더에 번호를 매겨 저장. 탈락본은 폐기하지 않고 같은 폴더 안에 보관(재검토용).</p>
+  <div class="tree">&lt;채널&gt;\&lt;작업실&gt;\&lt;앨범명&gt;\
+├─ 1. 곡제목.mp3        ← 확정 음원
+├─ 1. 곡제목.txt        ← 태그 뺀 순수 가사 (song\SRT\ 원본과 동일 내용)
+├─ 2. 곡제목.mp3
+├─ 2. 곡제목.txt
+├─ ... (곡 수만큼)
+└─ _후보탈락\
+   ├─ 곡제목_B.mp3       ← 떨어진 버전 (삭제 아님, 재검토용)
+   └─ ...</div>
+  <p>전곡 완료되면 사장님께 이 폴더 경로를 알리고 "여기에 썸네일(클린가로·썸네일가로·세로)만 넣어주시면 이어서 진행합니다"로 마무리한다.</p>
 </div>
 
-<h3>⑤ 제작: 타이밍 → 빌드</h3>
+<h2 id="s5">5. ⑤ 썸네일 투입 · 재료확인</h2>
 <div class="card">
-  <p><b>무슨 일:</b> "가사 자막이 노래에 착착 맞게 뜨는" 비밀이 이 단계. 노래에서 목소리만 분리해 AI가 받아쓰기하고, 원래 가사와 글자를 맞춰 <b>줄마다 시작 초</b>를 계산한다. 그다음 영상 설계도를 만든다.</p>
-  <div class="code"><b>코드에서는</b>
-  ① <code>songs\&lt;slug&gt;.json</code> <b>(매니페스트)</b> — 곡 정보가 전부 이 파일 하나에: 제목·파일명·색보정·쇼츠 컷 구간·예약 일시. <span>곡마다 새 스크립트 금지, 이 파일만 바꾼다 — 사고 방지 핵심 설계.</span><br>
-  ② <code>pipe_setup.py</code> — 재료를 작업폴더로 복사 + 가사에서 [Chorus] 태그 정리<br>
-  ③ <code>pipe_timing.sh</code> → demucs(보컬 분리) + whisper(받아쓰기) + 글자 정렬 → <code>&lt;slug&gt;.timing.json</code> (줄별 시작 초)<br>
-  ④ <code>pipe_build.py</code> → 롱폼 설계도 <code>&lt;slug&gt;-mvB-fx.html</code> <span>(영상 설계도가 HTML 파일이다! 배경사진+자막+구독카드+효과가 코드로 박힘)</span><br>
-  ⑤ <code>build_shorts3.py</code> → 쇼츠 3컷: ffmpeg로 오디오 20초씩 자르고 컷별 설계도 3개 생성</div>
-  <div class="tip">쇼츠 3컷 규칙: ①1절 후렴 ②2절 후렴 ③클라이맥스 (2절 없으면 ①후렴 ②브릿지→파이널 진입 ③반전 펀치라인). 각 20초 강제 컷이라 <b>펀치라인이 안 잘리게 뒤에서부터 역산</b>해 컷 시작점을 잡는다.</div>
+  <p>사장님이 이미지 3종을 위 앨범 폴더(또는 곡별 <code>SRT\</code>)에 넣는다: <b>클린가로</b>(글자 없음, 영상 배경용) · <b>썸네일가로</b>(유튜브 썸네일, 2MB 이하) · <b>세로</b>(쇼츠 배경). 넣고 "재료 확인해"라고 하면:</p>
+  <ol>
+    <li>곡마다 이미지 3종이 다 있는지 점검. 부족하면 부족분만 짚어 알리고 <b>대기</b>(렌더 진행 금지, 채근하지 않음)</li>
+    <li>세로 배경이 없으면 가로에서 만들 수도 있다: <code>python make_vertical.py &lt;가로.png&gt; "SRT\곡제목숏츠.png" --cx 0.51 --montage</code> (인물 얼굴 중심 좌표 지정, <code>--montage</code>로 나온 확인용 이미지를 눈으로 검수)</li>
+    <li>다 있으면 그대로 ⑥ 제작으로 자동 진행 — 곡마다 재승인 요청 안 함(가사·음원 단계에서 이미 사장님이 감독했으므로)</li>
+  </ol>
 </div>
 
-<h3>⑥ 검수 게이트 1 — 제작 검수</h3>
+<h2 id="s6">6. ⑥ 제작: 타이밍 → 빌드</h2>
+<div class="card">
+  <p><b>무슨 일:</b> "가사 자막이 노래에 착착 맞게 뜨는" 비밀이 이 단계. 노래에서 목소리만 분리해 AI가 받아쓰기하고, 원래 가사와 글자를 맞춰 <b>발성 덩어리(구절) 단위</b>로 줄마다 시작 초를 계산한다. 그다음 영상 설계도(HTML)를 만든다.</p>
+  <div class="code"><b>코드에서는 (song\ 안에서 실행, &lt;slug&gt;=곡의 영문 약칭)</b>
+① <code>songs\&lt;slug&gt;.json</code> <b>매니페스트</b> — 곡 정보가 전부 이 파일 하나에. 곡마다 새 스크립트 금지, 이 파일만 바꾼다<br>
+② <code>python pipe_setup.py &lt;slug&gt;</code> — SRT→assets 복사 + 가사 태그 정리<br>
+③ <code>python separate-vocals.py assets\&lt;slug&gt;\&lt;slug&gt;.mp3 assets\&lt;slug&gt;\&lt;slug&gt;-vocals.wav</code> — demucs로 보컬만 분리<br>
+④ <code>python align_blocks.py &lt;slug&gt; --write</code> — <b>표준 정렬기(v3)</b>. 무음(숨)으로 끊은 발성 덩어리를 진짜 구절 경계로 보고, 덩어리 하나씩만 whisper 전사 → <code>&lt;slug&gt;.timing.json</code><br>
+⑤ <code>python _check\verify_align.py &lt;slug&gt;</code> · <code>_check\verify_blocks.py &lt;slug&gt; --cuts</code> — 정렬 결과 에너지 검증<br>
+⑥ <code>python pipe_build.py &lt;slug&gt;</code> — 롱폼 설계도 <code>&lt;slug&gt;-mvB(-fx).html</code> 생성 (배경사진+자막+구독카드+효과가 코드로 박힘)<br>
+⑦ <code>python build_shorts3.py &lt;slug&gt;</code> — 쇼츠 3컷: ffmpeg로 오디오 20초씩 자르고 컷별 설계도 3개 생성</div>
+  <div class="warn"><b>⚠️ 폐기된 방법:</b> <code>pipe_timing.sh</code>(=자동타이밍.py, whisper 곡 전체 1회 전사)는 뒤로 갈수록 밀리는 사고가 나서 <b>쓰지 않는다</b>. 반드시 <code>align_blocks.py</code>(v3)를 쓴다.</div>
+  <div class="tip">쇼츠 3컷 규칙: ①1절 후렴 ②2절 후렴 ③클라이맥스(2절 없으면 ①후렴 ②브릿지→파이널 진입 ③반전 펀치라인). 각 20초 강제 컷이라 <b>펀치라인이 안 잘리게 뒤에서부터 역산</b>해 컷 시작점을 잡는다.</div>
+</div>
+
+<h2 id="s7">7. ⑦ 검수 게이트 1 — 제작 검수</h2>
 <div class="card">
   <p><b>무슨 일:</b> 굽기 전에 자막 싱크와 쇼츠 규격을 검사. 여기 통과 못 하면 렌더 금지.</p>
   <div class="code"><b>코드에서는</b>
-  ① <code>검수.py</code> — 구운 자막 시각 vs AI가 다시 들은 시각을 줄 단위 비교 (0.35초 이내 ✅)<br>
-  ② <code>validate_short_fx.mjs</code> — 쇼츠 표준 검사: 구독 CTA 위치, 길이, 상단 채널 타이틀<br>
-  ③ 검수가 ❌ 준 줄은 <b>맹신 금지</b> — 분리한 보컬의 <b>소리 크기 그래프(에너지 온셋)</b>로 실측해서 최종 판정 <span>(신나는 곡은 비트를 목소리로 착각하는 오탐이 잦다. 실제로 1호곡에서 22줄 지적 중 진짜 오류는 2줄뿐이었음)</span></div>
+① <code>python 검수.py &lt;slug&gt; c1</code>(/c2/c3) — 구운 자막 시각 vs AI가 다시 들은 시각을 줄 단위 비교 (0.35초 이내 ✅, 0.7초 이내 ⚠️, 그 이상 ❌)<br>
+② <code>node validate_short_fx.mjs</code> — 쇼츠 표준 검사: 구독 CTA 위치·길이·상단 채널 타이틀. <code>render_shorts3.sh</code>가 렌더 전에 자동 호출<br>
+③ <code>python _check\onset_check.py &lt;slug&gt;</code> <span class="badge-new">2026-07-19 신설, 전곡 필수</span> — 위스퍼 없이 몇 초 만에 분리보컬의 에너지 온셋만 실측. 첫 보컬 진입줄·쇼츠 컷 시작줄은 |diff| &lt; 0.35초 필수, 나머지는 |diff| ≥ 0.8초인 줄만 손보정. 결과 txt를 <code>_check\</code>에 물증으로 남긴다</div>
+  <div class="warn"><b>검수.py의 ⚠️/❌는 맹신 금지.</b> 믹스(비트·브라스)를 목소리로 착각하는 오탐이 잦다. <code>_check\blocks_at.py &lt;slug&gt; &lt;t0&gt; &lt;t1&gt;</code>로 그 구간의 실제 발성 덩어리 시작을 보고 <b>자막 = 덩어리시작 + 0.40초</b>면 정상 — 이게 최종 판정 기준이다. 실측 사례: 지적 5건이 전부 오탐이었던 경우도 있음.</div>
 </div>
 
-<h3>⑦ 렌더</h3>
+<h2 id="s8">8. ⑧ 렌더</h2>
 <div class="card">
-  <p><b>무슨 일:</b> HTML 설계도를 mp4 영상으로 굽는다. 롱폼 3분짜리 기준 약 12분, 쇼츠 3컷까지 총 20~30분.</p>
+  <p><b>무슨 일:</b> HTML 설계도를 mp4 영상으로 굽는다(hyperframes로 크롬을 열어 녹화하듯). 롱폼 3분짜리 기준 약 12분, 쇼츠 3컷까지 총 20~30분.</p>
   <div class="code"><b>코드에서는</b>
-  ① <code>pipe_render.sh</code> → hyperframes(HTML을 크롬으로 열어 녹화하듯 굽는 도구)로 렌더<br>
-  ② 결과: <code>renders\곡명_가로16-9_MV.mp4</code> + <code>곡명_쇼츠1~3_MV_fx.mp4</code><br>
-  ③ 쇼츠 3개는 <code>G:\내 드라이브\AI가수_숏폼\</code>로 자동 복사 → 폰에서 바로 확인 가능<br>
-  <span>오래 걸리는 작업이라 별도 프로세스로 분리해 돌리고 로그만 지켜본다 (중간에 끊기는 사고 방지)</span></div>
+① <code>bash pipe_render.sh &lt;slug&gt;</code> — 롱폼(fx 있으면 fx판 우선) + 쇼츠3컷 렌더 → <code>renders\</code> + 쇼츠 G드라이브 자동 복사<br>
+② 쇼츠만 다시 렌더할 땐 <code>bash render_shorts3.sh &lt;slug&gt;</code> (1컷만이면 <code>--only 1</code>)<br>
+③ 결과: <code>renders\곡명_가로16-9_MV.mp4</code> + <code>곡명_쇼츠1~3_MV_fx.mp4</code> → <code>G:\내 드라이브\AI가수_숏폼\</code>에도 자동 복사(폰에서 바로 확인)</div>
+  <div class="warn">렌더 2개 동시 금지(CPU 과부하), 렌더 중 업로드 금지. 30분+ 걸리는 작업이라 <b>분리 실행(&amp;)+로그 폴링</b>으로 돌리고 클로드 셸에 직접 물지 않는다.</div>
 </div>
 
-<h3>⑧ 발행 (업로드+예약)</h3>
+<h2 id="s9">9. ⑨ 발행 (업로드+예약)</h2>
 <div class="card">
-  <p><b>무슨 일:</b> 업로드 로봇이 채널 전용 크롬(로그인 저장됨)을 열고 유튜브 스튜디오를 사람처럼 눌러가며 업로드→썸네일→태그→예약까지. 화면에 크롬 창이 뜨는 게 이 로봇이다.</p>
-  <div class="code"><b>코드에서는</b>
-  ① <code>pipe_cfg.py</code> — 업로드 설정 json 생성 (제목/설명/태그/썸네일 경로. <b>AI 고지는 맨 아래 한 줄</b> 자동 배치, 썸네일 2MB 초과면 여기서 정지)<br>
-  ② <code>upload-one.js</code> — 비공개 업로드 → 영상 ID 확보<br>
-  ③ <code>schedule-video.js</code> — 지정 날짜·시각으로 예약 (+ AI 합성콘텐츠 "예" 체크)<br>
-  ④ 쇼츠는 <code>run_shorts3_upload.js</code> — 3개 일괄 업로드+예약, 예약표에 완료 기록(재실행해도 중복 안 됨)<br>
-  <span>채널마다 크롬 프로필이 완전 분리(profile / profile-trot / profile-gayobang) — 채널이 섞이는 사고 원천 차단. 같은 프로필로 두 작업 동시 실행 절대 금지.</span></div>
+  <p><b>무슨 일:</b> 업로드 로봇이 채널 전용 크롬(로그인 저장됨)을 열고 유튜브 스튜디오를 사람처럼 눌러가며 업로드→썸네일→태그→예약까지.</p>
+  <div class="code"><b>코드에서는 (yt-auto\ 안에서)</b>
+① <code>python pipe_cfg.py &lt;slug&gt;</code> — 롱폼 업로드 설정 json 생성 (제목/설명/태그/썸네일 경로. AI 고지는 맨 아래 한 줄 자동 배치, 썸네일 없거나 2MB 초과면 여기서 정지)<br>
+② <code>python ..\song\make_shorts_cfg.py &lt;slug&gt;</code> — 쇼츠 3컷 cfg + 예약표(<code>_shorts3_schedule.json</code>) 병합<br>
+③ <code>bash pipe_publish.sh &lt;slug&gt;</code> — 롱폼: 비공개 업로드(<code>upload-one.js</code>) → 예약(<code>schedule-video.js</code>, 매니페스트 날짜, AI 합성콘텐츠 "예" 체크)<br>
+④ <code>node run_shorts3_upload.js &lt;slug&gt;</code> — 쇼츠 3컷 일괄 업로드+예약, 성공하면 예약표에 <code>done:true</code> 기록(재실행해도 중복 안 됨)</div>
+  <table>
+    <tr><th>안전장치</th><th>막는 사고</th></tr>
+    <tr><td>빈 제목/설명이면 업로드 전 중단</td><td>설명란 누락 발행</td></tr>
+    <tr><td>영상 ID는 출력 VIDEO_ID 또는 <b>제목 정확일치</b>만</td><td>"최신 영상" 폴백 → 남의 영상 재예약</td></tr>
+    <tr><td>예약: 날짜/시간 형식·존재 검증, 지난 날짜 거부(<code>7. 0.</code> 자리표시 차단)</td><td>미채움 매니페스트로 발행</td></tr>
+    <tr><td>채널마다 크롬 프로필 완전 분리(profile/profile-trot/profile-gayobang)</td><td>채널 섞임</td></tr>
+    <tr><td>같은 프로필 병렬 실행 절대 금지</td><td>세션 충돌</td></tr>
+    <tr><td>예약 직후 <code>fix-comments.js</code> 강제 댓글 켜짐</td><td>댓글 꺼진 채 발행(1호 업로드 사고)</td></tr>
+    <tr><td>재생목록 파라미터는 비움(<code>playlist=""</code>)</td><td>사장님이 나중에 직접 정리하기로 함(2026-07-12)</td></tr>
+  </table>
+  <p>공개 후 <b>고정댓글</b>은 수동으로 붙인다(예약 영상엔 댓글 불가) — 총괄PD가 문안만 작성해 전송.</p>
 </div>
 
-<h3>⑨ 검수 게이트 2 — QA 성적표</h3>
+<h2 id="s10">10. ⑩ 검수 게이트 2 — QA 성적표</h2>
 <div class="card">
-  <p><b>무슨 일:</b> 제작에 관여하지 않은 검수반장이 <code>약속.md</code>를 채점표 삼아 [기계] 항목은 스크립트로, [판단] 항목(제목 후킹·컷 각도·가사 결)은 내용을 읽고 채점. 결과는 <b>합격 / 조건부 합격 / 불합격</b>.</p>
+  <p><b>무슨 일:</b> 제작에 관여하지 않은 검수반장(qa-inspector)이 <code>약속.md</code>를 채점표 삼아 [기계] 항목은 스크립트로, [판단] 항목(제목 후킹·컷 각도·가사 결)은 내용을 읽고 채점. 결과는 <b>합격/조건부 합격/불합격</b>.</p>
   <div class="code"><b>코드에서는</b>
-  ① <code>qa-live.js</code> — 유튜브 스튜디오 실물에서 제목·설명 첫줄/끝줄·시청자층·<b>댓글 켜짐</b>·공개상태를 읽어 json으로<br>
-  ② 업로드 설정 json(기대값) vs 실물 대조, 렌더 파일·G드라이브·예약표 확인<br>
-  ③ 성적표 형식 고정: ❌(즉시 조치) / ⚠️(주의) / ✅(통과 개수) / 검증 못 한 항목</div>
-  <div class="tip"><b>실패 처리 정책:</b> 기계적 문제(댓글 꺼짐·예약 오류·설명 누락)는 총괄PD가 즉시 수정 후 재검. 콘텐츠 판단(제목이 밋밋함 등)은 수정안과 함께 사장님 보고.</div>
+① <code>yt-auto\qa-live.js &lt;videoId&gt; ...</code> — 유튜브 스튜디오 실물에서 제목·설명 첫줄/끝줄·시청자층·<b>댓글 켜짐</b>·공개상태를 읽어 json으로<br>
+② 업로드 설정 json(기대값) vs 실물 대조, <code>renders\</code>·G드라이브·예약표 확인<br>
+③ 성적표 형식 고정: ❌(즉시 조치)/⚠️(주의)/✅(통과 개수)/검증 못 한 항목</div>
+  <div class="tip"><b>실패 처리 정책:</b> 기계적 문제(댓글 꺼짐·예약 오류·설명 누락·썸네일·재생목록)는 총괄PD가 즉시 수정 후 재검. 콘텐츠 판단(제목이 밋밋함 등)은 수정안과 함께 사장님 보고.</div>
 </div>
 
-<h2>4. 폴더 지도</h2>
-<div class="code" style="font-size:12.5px; line-height:1.9;">
-D:\work\<br>
-├─ <b>CLAUDE.md</b> ← 총괄 헌법 (라우팅·워크플로·철칙, 매 대화 자동 적용)<br>
-├─ <b>.claude\agents\</b> ← 에이전트 5명 정의 (작사가·프로듀서3·검수반장)<br>
-├─ <b>ai-singer\</b> · <b>trot-singer\</b> · <b>gayobang\</b> ← 채널 3개 (구조 동일)<br>
-│&nbsp;&nbsp;&nbsp;├─ 약속.md ← 그 채널의 QA 채점표<br>
-│&nbsp;&nbsp;&nbsp;├─ 작업실\ ← 사장님이 재료 넣는 곳<br>
-│&nbsp;&nbsp;&nbsp;├─ song\ ← 제작 스크립트+매니페스트+렌더 결과 (_파이프라인_사용법.md)<br>
-│&nbsp;&nbsp;&nbsp;└─ yt-auto\ ← 업로드 로봇+채널 크롬 프로필+QA 도구<br>
-├─ <b>lyrics-pages\</b> ← 작사 작업판 배포 저장소 (깃허브 페이지)<br>
-├─ ebook-feed\ · music-radar\ · geubam-dashboard\ · thumb-gen\ ← 보조 도구<br>
-└─ archive\ ← 안 쓰는 프로젝트 창고 (_창고안내.md)
+<h2 id="s11">11. 폴더 지도 (전체)</h2>
+<div class="code tree">
+D:\work\
+├─ CLAUDE.md              ← 총괄 헌법 (라우팅·전체 워크플로·철칙, 매 대화 자동 적용)
+├─ .claude\agents\        ← 에이전트 정의 (lyricist·qa-inspector·producer×3 등)
+├─ 작사공용\               ← 3채널 공용 수노 프롬프트 방법론·트리거DB (단일 진실)
+├─ tools\                 ← build_catalog.py 등 3채널 공용 점검 도구
+├─ channel-data\          ← 주간 로데이터(유튜브API→구글시트) weekly.py
+├─ lyrics-pages\          ← 작사 작업판 + 이 문서 배포 저장소 (GitHub Pages)
+│
+├─ ai-singer\   trot-singer\   gayobang\     ← 채널 3개 (구조 동일)
+│   ├─ 약속.md                  ← 그 채널의 QA 채점표 (규칙 원본)
+│   ├─ 작업실\ (또는 트롯작업실\ / 가요방작업실\)
+│   │   └─ &lt;앨범명&gt;\
+│   │       ├─ 1. 곡제목.mp3 / .txt   ← ④단계 확정 음원+가사
+│   │       └─ _후보탈락\             ← A/B에서 떨어진 버전 보관
+│   ├─ 작사\
+│   │   ├─ 작사카드.md          ← 페르소나·킥공식·변주격자·누적 성과 로그
+│   │   ├─ 카탈로그.md          ← 전곡 목록 (자동생성, 손대지 않음)
+│   │   ├─ 훅노트.md            ← 제목·훅 재고
+│   │   └─ &lt;작업명&gt;.html       ← 작업판 (가사+스타일+Exclude 완비)
+│   ├─ song\
+│   │   ├─ _파이프라인_사용법.md  ← 제작 절차 단일 진실
+│   │   ├─ SRT\                 ← 원재료(mp3·가사txt·배경png·썸네일jpg)
+│   │   ├─ songs\&lt;slug&gt;.json   ← 곡별 매니페스트 (전체 파이프라인의 중심)
+│   │   ├─ assets\&lt;slug&gt;\      ← 분리보컬·timing.json 등 작업 중간산물
+│   │   ├─ _check\              ← 실측 스크립트 + QA 물증(onset_check 결과 등)
+│   │   ├─ pipe_setup.py / separate-vocals.py / align_blocks.py
+│   │   ├─ pipe_build.py / build_shorts3.py / 검수.py
+│   │   ├─ pipe_render.sh / render_shorts3.sh
+│   │   └─ renders\             ← 완성 mp4 (롱폼+쇼츠3)
+│   └─ yt-auto\
+│       ├─ cfg\                 ← 업로드 설정 json (pipe_cfg.py 산출물)
+│       ├─ profile\             ← 채널 전용 크롬 로그인 세션
+│       ├─ pipe_cfg.py / pipe_publish.sh / run_shorts3_upload.js
+│       ├─ qa-live.js           ← QA 게이트2 실사 도구
+│       └─ _shorts3_schedule.json  ← 쇼츠 예약표 (done 기록)
+│
+└─ archive\               ← 안 쓰는 프로젝트 창고
 </div>
 
-<h2>5. 철칙 — 사고에서 배운 것들</h2>
+<h2 id="s12">12. 매니페스트 필드 사전 <code>songs\&lt;slug&gt;.json</code></h2>
+<table>
+  <tr><th>필드</th><th>의미</th></tr>
+  <tr><td><code>slug</code></td><td>영문 약칭 (예: <code>ijeya</code>) — 모든 산출물 파일명의 접두어</td></tr>
+  <tr><td><code>src.mp3/txt/bg/bg_vert</code></td><td>SRT\ 안 원재료 파일명</td></tr>
+  <tr><td><code>build.dur</code></td><td>곡 길이(초). 0이면 mp3에서 자동측정</td></tr>
+  <tr><td><code>build.v2</code></td><td>2절 시작 줄 번호(0-base) — 롱폼 구독 CTA 위치</td></tr>
+  <tr><td><code>build.chorus_start/end</code></td><td>1절 후렴 첫/마지막 줄 (타이밍 완료 후 채움)</td></tr>
+  <tr><td><code>build.fx_regions</code></td><td>FX판 렌더 시 chorus_1/chorus_2/bridge/final_chorus 구간 줄번호</td></tr>
+  <tr><td><code>visual.fx / visual.rain</code></td><td>효과 강도(1.0/2.0배) · 빗줄기 on/off</td></tr>
+  <tr><td><code>cfg.playlist/title/story/tags/htags</code></td><td>유튜브 업로드용 재생목록·제목·설명·태그 (재생목록은 현재 빈 문자열 정책)</td></tr>
+  <tr><td><code>shorts3.cuts</code></td><td>[[후렴 시작줄,끝줄,여운초]×3] — ①1절후렴 ②2절후렴 ③클라이맥스</td></tr>
+  <tr><td><code>shorts3.date/titles/hashtag</code></td><td>쇼츠 3컷 발행일·후킹 제목 3개</td></tr>
+  <tr><td><code>schedule.date_long/time_long</code></td><td>롱폼 예약 일시. <code>7. 0.</code>은 자리표시 — 진짜 날짜 전엔 발행 도구가 멈춤</td></tr>
+</table>
+
+<h2 id="s13">13. 스크립트 사전 (전체 한 장)</h2>
+<table>
+  <tr><th>스크립트</th><th>위치</th><th>역할</th></tr>
+  <tr><td><code>pipe_setup.py</code></td><td>song\</td><td>SRT→assets 복사, 가사 [태그] 정리</td></tr>
+  <tr><td><code>separate-vocals.py</code></td><td>song\</td><td>demucs로 보컬만 분리(wav)</td></tr>
+  <tr><td><code>align_blocks.py</code></td><td>song\</td><td>표준 정렬기(v3). 발성 덩어리 단위로 whisper 전사→timing.json</td></tr>
+  <tr><td><code>_check/verify_align.py</code>, <code>verify_blocks.py</code>, <code>blocks_at.py</code></td><td>song\_check\</td><td>정렬 에너지 검증 · 특정 구간 덩어리 조회(분쟁 시 최종심)</td></tr>
+  <tr><td><code>_check/onset_check.py</code></td><td>song\_check\</td><td>렌더 전 전곡 필수 온셋 실측 (첫 보컬줄·컷 시작줄)</td></tr>
+  <tr><td><code>pipe_build.py</code></td><td>song\</td><td>롱폼 영상 설계도(mvB/mvB-fx html) 생성</td></tr>
+  <tr><td><code>build_shorts3.py</code></td><td>song\</td><td>쇼츠 3컷: 오디오 컷 + cut-data + fx html 생성</td></tr>
+  <tr><td><code>검수.py</code></td><td>song\</td><td>자막 싱크 재검증(줄 단위 0.35/0.7초 판정, 믹스 오탐 있음)</td></tr>
+  <tr><td><code>make_vertical.py</code></td><td>song\</td><td>가로 배경→9:16 세로 인물중심 크롭</td></tr>
+  <tr><td><code>pipe_render.sh</code>, <code>render_shorts3.sh</code></td><td>song\</td><td>hyperframes로 HTML→mp4 렌더 + G드라이브 복사</td></tr>
+  <tr><td><code>validate_short_fx.mjs</code></td><td>song\</td><td>쇼츠 렌더 전 규격 검증(CTA 위치·길이·파일명 규칙)</td></tr>
+  <tr><td><code>pipe_cfg.py</code></td><td>yt-auto\</td><td>롱폼 업로드 설정 json 생성</td></tr>
+  <tr><td><code>make_shorts_cfg.py</code></td><td>song\</td><td>쇼츠 3컷 cfg + 예약표 병합</td></tr>
+  <tr><td><code>pipe_publish.sh</code></td><td>yt-auto\</td><td>롱폼 비공개 업로드→예약 (upload-one.js + schedule-video.js 호출)</td></tr>
+  <tr><td><code>run_shorts3_upload.js</code></td><td>yt-auto\</td><td>쇼츠 3컷 일괄 업로드+예약, 예약표 done 기록</td></tr>
+  <tr><td><code>fix-comments.js</code></td><td>yt-auto\</td><td>예약 직후 댓글 강제 켜짐</td></tr>
+  <tr><td><code>qa-live.js</code></td><td>yt-auto\</td><td>QA 게이트2: 유튜브 실물 상태 읽기</td></tr>
+  <tr><td><code>build_catalog.py</code></td><td>tools\</td><td>3채널 카탈로그.md 자동 생성(발행 매니페스트+SRT+작업판 취합)</td></tr>
+  <tr><td><code>weekly.py</code></td><td>channel-data\</td><td>주 1회 유튜브API 수집→구글시트 적재(곡마스터+스냅샷)</td></tr>
+  <tr><td><code>채널_공용파일_대조.py</code></td><td>tools\</td><td>3채널 공용 스크립트가 서로 갈라졌는지 대조(수정 역이식 판단용)</td></tr>
+</table>
+<div class="warn"><b>폐기됨(쓰지 말 것):</b> <code>pipe_timing.sh</code>=<code>자동타이밍.py</code>(whisper small 곡 전체 1회 전사, 밀림 사고) · <code>align_lines.py</code>(v1)·<code>remeasure_lines.py</code>(v2, 같은 매처 버그 상속) — 전부 <code>align_blocks.py</code>(v3)로 대체됨.</div>
+
+<h2 id="s14">14. 발행 시간표 <span style="font-weight:400; font-size:13px; color:#a89ec4;">(2026-07-14 확정 — 사장님이 시각 지정하면 그게 우선)</span></h2>
+<table>
+  <tr><th>채널</th><th>롱폼</th><th>쇼츠 3개(같은 날)</th></tr>
+  <tr><td>그 밤 라디오</td><td>20:00</td><td>07:00 / 12:00 / 21:30</td></tr>
+  <tr><td>강한결의 트로트 TV</td><td>06:00</td><td>07:30 / 12:30 / 19:30</td></tr>
+  <tr><td>중년가요방</td><td>10:30</td><td>08:00 / 13:00 / 21:00</td></tr>
+</table>
+
+<h2 id="s15">15. 철칙 — 사고에서 배운 것</h2>
 <ul>
   <li><b>영상 ID는 정확일치만.</b> "최신 영상" 추측으로 잡으면 남의 영상을 재예약하는 사고가 난다 (실제 있었음).</li>
   <li><b>렌더 2개 동시 금지, 렌더 중 업로드 금지.</b> 컴퓨터가 버벅이면 둘 다 망한다.</li>
   <li><b>설명란 AI 고지는 맨 아래 한 줄.</b> 위에 있으면 감성 인트로가 죽는다. 업로더가 자동 교정.</li>
-  <li><b>발행 후 댓글 켜짐 확인.</b> 1호 업로드가 댓글 꺼진 채 나간 사고 → 이제 QA 필수 항목.</li>
-  <li><b>검수 도구의 ❌는 실측으로 재판정.</b> 신나는 곡에서 오탐 잦음.</li>
+  <li><b>발행 후 댓글 켜짐 확인.</b> 1호 업로드가 댓글 꺼진 채 나간 사고 → 이제 예약 직후 강제 켜짐 + QA 필수 항목.</li>
+  <li><b>검수 도구의 ❌는 실측으로 재판정.</b> 신나는 곡·긴 절창에서 오탐 잦음. 최종심은 항상 분리보컬 에너지.</li>
+  <li><b>3채널은 복사 이식 — 버그는 같이 가지만 수정은 안 따라온다.</b> 공용 스크립트 고치면 <code>채널_공용파일_대조.py</code>로 다른 채널도 확인. 단, 채널마다 소재 특성이 달라 무조건 역이식하면 오히려 파탄난다(트로트 매처 사례) — 역이식 전 온셋 실측으로 확인.</li>
+  <li><b>원곡·유명곡과 겹치는 소재는 웹에서 실제 가사 대조.</b> 기억으로 "자작" 판정 금지 — 놓치면 QA가 나중에 적발.</li>
   <li><b>QA 성적표 없이 "발매 완료" 보고 금지.</b></li>
+  <li><b>수노 자동화는 끊겨도 밀고 나간다.</b> 30초+ 멈춤·세션 끊김은 정상 범위 — 재접속해서 계속. 크레딧/한도 걸리면 사장님께 상황만 보고.</li>
 </ul>
 
-<h2>6. 사장님 치트시트</h2>
+<h2 id="s16">16. 사장님 치트시트</h2>
 <table>
   <tr><th>이렇게 말하면</th><th>이렇게 굴러간다</th></tr>
-  <tr><td>"내사랑내곁에 스타일 노래 10개 만들자"</td><td>작사가 투입 → 작업판 URL 카톡 도착 → 폰에서 복붙</td></tr>
-  <tr><td>"가요방 작업실에 재료 놨어. 오늘 7시 롱폼, 내일 8·14·19시 발매"</td><td>제작→검수→렌더→업로드→예약→QA 성적표 보고</td></tr>
+  <tr><td>"그밤라디오에 OO 컨셉으로 7곡 작사해"</td><td>작사 → 곧바로 수노 음원 생성까지 자동 진행 → "썸네일만 넣어주세요" 안내 도착</td></tr>
+  <tr><td>(썸네일 3종 폴더에 넣고) "재료 확인해"</td><td>재료 점검 → 통과 시 제작→검수→렌더→업로드→예약→QA 성적표까지 한 번에</td></tr>
+  <tr><td>"가요방 작업실에 재료 다 놨어. 오늘 7시 발매"</td><td>매니페스트 확인 후 표준 파이프라인대로 진행, 시각은 지정값 우선</td></tr>
   <tr><td>"트로트 작업하자"</td><td>강한결 채널 체제로 시작</td></tr>
   <tr><td>"그밤라디오 채널 분석하고 카톡 보내줘"</td><td>주간 채널 리포트 갱신+카톡 (주 1회)</td></tr>
-  <tr><td>"쇼츠 이제 4컷으로 하자" 같은 규칙 변경</td><td>해당 채널 약속.md 수정 → 제작·QA 자동 반영</td></tr>
+  <tr><td>"쇼츠 이제 4컷으로 하자" 같은 규칙 변경</td><td>해당 채널 <code>약속.md</code> 수정 → 제작·QA 자동 반영</td></tr>
 </table>
 
 <footer>
-  2026-07-12 · 오케스트라 체제 v1 · 수정 요청은 클로드에게 말하거나 노션 페이지에서 직접<br>
-  규칙 원본: D:\work\CLAUDE.md + 채널별 약속.md
+  2026-07-29 · 오케스트라 체제 v2 (수노 자동화 편입) · 수정 요청은 클로드에게 말하기<br>
+  규칙 원본: D:\work\CLAUDE.md + 채널별 약속.md + song\_파이프라인_사용법.md
 </footer>
 
 </div>
