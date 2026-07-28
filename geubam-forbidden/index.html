@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윤하경 「이름을 가질 수 없던 사랑」 7곡 · 수노 작사 작업판</title>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>
+:root{--acc:#8fb3ff;--bg:#0b1120;--card:#121a30;--line:#2c3654;--dim:#8b96b5;--txt:#e8ecf5;--field:#0f1626;}
+/* 이 페이지 전용 — 공용 스킨(assets/workboard.css)엔 표 스타일이 없어 검토표용으로만 여기에 둔다.
+   공용 파일은 3채널이 함께 쓰므로 건드리지 않는다. */
+details.review table{width:100%;border-collapse:collapse;margin:12px 0 4px;font-size:12px;}
+details.review th,details.review td{border:1px solid var(--line);padding:7px 9px;text-align:left;
+  vertical-align:top;line-height:1.65;}
+details.review th{background:var(--field);color:var(--acc);font-weight:700;white-space:nowrap;}
+details.review td{color:var(--dim);}
+details.review td b{color:var(--txt);}
+details.review .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+details.review .tscroll table{min-width:760px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>윤하경 「이름을 가질 수 없던 사랑」 7곡</h1>
+    <p>그 밤 라디오 · 이룰 수 없는 사랑 격정 록발라드 · 여성 보컬 한 명</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+  <div style="text-align:center"><a class="home" href="../">← 작사 공방</a></div>
+
+  <div class="anatomy">
+    <b>스타일 해부 (이 앨범 = 무엇이 이 사랑을 금지했는가)</b>
+    ① 이 앨범의 최대 위험: 작업판 <b style="display:inline">「90s 처절 발라드」의 '우리가 죄라면'</b>이 이미 "세상이 반대해도 너 하나"라는 정면을 먹었다. 그 자리로 도착하는 곡은 <b style="display:inline">7곡 중 0곡</b>이다<br>
+    ② 그래서 <b style="display:inline">"무엇이 금지했는가"를 변주 격자의 축으로 승격</b> — 이름 / 증인 없음 / 세계의 거리 / 너무 가까움 / 가족의 눈물 / 나 자신 / 시간. 7곡 전부 다른 값<br>
+    ③ 앨범 곡선: <b style="display:inline">금지가 시작되는 곡(1번)으로 열고, 금지가 풀린 뒤의 곡(7번)으로 닫는다.</b> 못 부른 이름 → 부를 수 있게 됐는데 없는 사람의 수미상관<br>
+    ④ 킥 공식: 전부 <b style="display:inline">파이널에서 뒤집힌다</b> (숨기던 이름을 제 이름으로 바꿔놓고 부를 데가 없어짐 / 열두 번이 열한 번으로 줄어 사랑이 증명됨 / 세상은 이겼는데 계단 하나를 못 넘음)<br>
+    ⑤ 사운드: <b style="display:inline">록발라드 4 + 드라마OST 1 + 피아노 1 + 소울 1</b>. 격정 축이지만 4곡 연속 록이 되지 않게 3·4·6번을 사이에 끼웠다. 전 곡 <code>centered dry lead vocal</code> + <code>instruments spread wide</code> — 웅장함은 악기로, 목소리는 끝까지 한 명
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div id="board"></div>
+
+  <details class="review">
+    <summary>① 변주 격자 (앨범이 왜 안 지루한가)</summary>
+    <div class="tscroll">
+    <table>
+      <tr><th>#</th><th>곡</th><th>금지한 것 ★특별축</th><th>장르</th><th>온도</th><th>시점</th><th>어법</th><th>구조</th><th>열</th></tr>
+      <tr><td>1</td><td><b>다른 이름으로 저장했어</b></td><td>이름 — 부를 호칭이 없다</td><td>록 73</td><td>미련·긴장</td><td>진행 중</td><td>반말 독백</td><td>훅오픈·2절</td><td>70</td></tr>
+      <tr><td>2</td><td><b>우릴 아는 사람이 없어</b></td><td>증인 — 아무도 우릴 몰랐다</td><td>록 70</td><td>외로움·통한</td><td>이별 직후</td><td>반말 독백</td><td>벌스오픈·2절</td><td>75</td></tr>
+      <tr><td>3</td><td><b>삼층 맨 끝에서</b></td><td>세계의 거리 — 못 따라간 자리</td><td>OST 74</td><td>자부심·축복</td><td>지금</td><td>존댓말 호명</td><td>훅오픈·2절</td><td>60</td></tr>
+      <tr><td>4</td><td><b>하루에 열두 번</b></td><td>너무 가까움 — 매일 스친다</td><td>피아노 66</td><td>참음·체념</td><td>진행 중</td><td>반말 독백</td><td>벌스오픈·2절없음</td><td>55</td></tr>
+      <tr><td>5</td><td><b>세상은 이겼는데</b></td><td>가족의 눈물 — 굴복</td><td>록 76</td><td>죄책·격정</td><td>그날 밤</td><td>반말 호명</td><td>훅오픈·2절</td><td>90</td></tr>
+      <tr><td>6</td><td><b>나한테 졌어요</b></td><td>나 자신 — 자격 없다고 정함</td><td>소울 64</td><td>후회·자기위로</td><td>1년 뒤</td><td>존댓말 독백</td><td>벌스오픈·2절</td><td>50</td></tr>
+      <tr><td>7</td><td><b>이제 아무도 안 막는데</b></td><td>시간 — 금지가 풀린 뒤</td><td>록 72</td><td>통한→받아들임</td><td>오랜 세월 뒤</td><td>반말 독백</td><td>훅오픈·2절</td><td>95</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>제약 검사 통과</b> — 장르 4종(≥2) · 온도 7종(≥4) · 화자 어법 2종 · 같은 값 3곡 연속 0건. 록이 1·2 연속이지만 3·4가 끊고, 5·7은 각각 단독이라 <b>록 3연속 없음</b>.</li>
+      <li><b>온도 곡선</b> 70→75→60→55→<b>90</b>→50→<b>95</b>. 격정 두 봉우리(5·7) 사이에 가장 낮은 곡(6번 소울)을 넣어 파이널이 더 커지게 배치.</li>
+      <li><b>존댓말은 3·6번 두 곡</b>뿐이고 연속이 아니다. 나머지 5곡은 반말이되 호명(5번)과 독백을 갈랐다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>② 훅 캠프 (곡당 후보 3개 → 채택 1개 · 탈락은 훅노트로)</summary>
+    <ul>
+      <li><b>1. 다른 이름으로 저장했어</b> — ⓐ사물: "네 이름을 다른 이름으로 저장해" / ⓑ질문: "나는 너를 뭐라고 불러야 해" / ⓒ역설: "오늘 네 이름을 네 이름으로 바꿨어, 부를 일이 없어서".
+        <b>채택 ⓐ+ⓒ</b> — ⓐ는 첫 3초에 장면(불 켜지는 휴대폰)이 서고, ⓒ가 그 장면의 완성이라 <b>한 곡 안에서 서사 후렴</b>이 된다. ⓑ는 장면이 없어 탈락 → 훅노트.</li>
+      <li><b>2. 우릴 아는 사람이 없어</b> — ⓐ사물: "빈 의자 하나" / ⓑ질문: "누구한테 헤어졌다고 말해" / ⓒ역설: "우린 아무 일도 없었던 게 됐어".
+        <b>채택 ⓑ</b>를 후렴 1행("헤어졌는데 아무도 안 물어봐")으로 육화. ⓐ는 사물이 약하고, ⓒ는 4번 「하루에 열두 번」의 '없었던 사이' 정서와 앨범 안에서 충돌해 탈락.</li>
+      <li><b>3. 삼층 맨 끝에서</b> — ⓐ사물: "제일 싼 자리" / ⓑ질문: "제가 보이나요" / ⓒ역설: "오늘 박수는 제가 제일 컸어요".
+        <b>채택 ⓐ(제목·후렴)+ⓒ(파이널 뒤집기)</b> — ⓑ는 팬레터 톤이라 페르소나(참다가 무너지는 사람)와 안 맞아 탈락.</li>
+      <li><b>4. 하루에 열두 번</b> — ⓐ사물: "엘리베이터 3초" / ⓑ질문: "우리 오늘 몇 번 스쳤을까" / ⓒ역설: "제일 가까운 자리에서 제일 멀게 서 있어".
+        <b>채택 ⓒ</b>를 후렴 3·4행에, ⓐ는 벌스1로 흡수. 파이널은 <b>ⓑ를 숫자로 뒤집어</b> "오늘은 열한 번밖에 못 봤어"로 착지 — 세는 행위 자체가 사랑의 증거가 된다.</li>
+      <li><b>5. 세상은 이겼는데</b> — ⓐ사물: "밥은 먹었냐고만 물었어" / ⓑ질문: "너였으면 어떻게 했을까" / ⓒ역설: "세상은 이겼는데 엄마한테 졌어".
+        <b>채택 ⓒ(제목·후렴 3행)</b>, ⓐ는 벌스1 마지막 줄로. ⓑ는 상대에게 책임을 미루는 톤이라 탈락 → 훅노트.
+        ⚠️ 이 곡은 「우리가 죄라면」(맞서 도피)과 <b>같은 땅에 정반대로 착지</b>시켜 자기복제를 피했다 — 그쪽은 이기는 곡, 이쪽은 <b>지는 곡</b>이다.</li>
+      <li><b>6. 나한테 졌어요</b> — ⓐ사물: "부치지 않은 편지" / ⓑ질문: "누가 안 된다고 했더라" / ⓒ역설: "아무도 안 막았는데 내가 나를 막았어".
+        <b>채택 ⓒ</b>. ⓐ는 죽은 소재(편지)라 즉시 폐기, ⓑ는 후렴이 아니라 브릿지 논리로 흡수.</li>
+      <li><b>7. 이제 아무도 안 막는데</b> — ⓐ사물: "헐린 골목" / ⓑ질문: "이제 와서 누굴 원망해" / ⓒ역설: "이제 아무도 안 막는데 막을 사랑이 없어".
+        <b>채택 ⓒ</b> — 앨범 전체의 착지점. ⓐ는 벌스1로 흡수, ⓑ는 벌스2("미워할 사람이 없어지니까")로 흡수해 셋 다 살렸다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>③ 자기복제 대조 · 실제로 고친 것</summary>
+    <ul>
+      <li><b>카탈로그 「너의 이름을 지운 밤」 충돌</b>(작업실 금지된사랑 폴더, 2026-07-04) — 1번이 '이름'을 다뤄 정면 위험. <b>행위를 반대로 뒤집어 해소</b>: 그쪽은 수첩에서 <i>지우는</i> 곡, 1번은 <i>저장하는</i> 곡이고 파이널에서 오히려 <b>제 이름으로 되돌려놓는다</b>. 1번 전체에서 '지우다'라는 동사를 뺐다.</li>
+      <li><b>「우리가 죄라면」 충돌</b> — 5번 초안 후렴이 "세상이 막아도"로 시작해 그 곡의 후렴과 문형이 같았다. → <b>"세상 앞에선 한 번도 안 울었어"로 전면 교체</b>하고, 이 곡의 적을 세상이 아니라 <b>현관 앞에 앉아 있던 어머니</b>로 옮겼다.</li>
+      <li><b>「비 좀 맞다 갈게요」·「우산 두 개」 충돌</b> — 6번 벌스2 초안이 "건넨 우산을 못 받고 비를 맞고 걸었다"였다. 훅노트가 <b>"비·우산은 당분간 금지"</b>로 못 박아둔 자리라 <b>"내민 손을 못 본 척했다"로 통째 교체</b>. 이 앨범 7곡 전체에 <b>비·우산이 한 번도 안 나온다</b>(의도).</li>
+      <li><b>앨범 내부 — 1번과 4번 '이름' 중복</b>: 4번 프리코러스 초안이 "이름을 부르면 다 무너질까 봐"였다. 1번이 이름을 독점해야 해서 <b>"한마디만 해도 다 무너질까 봐"</b>로 바꿨다.</li>
+      <li><b>앨범 내부 — 6번과 7번 제목 정면 충돌</b>: 6번 가제가 「아무도 안 막았는데」, 7번이 「이제 아무도 안 막는데」로 <b>거의 같은 제목</b>이었다. 6번을 후렴 4행에서 뽑아 <b>「나한테 졌어요」</b>로 개제.</li>
+      <li><b>앨범 내부 — 6번과 7번 브릿지 논지 중복</b>: 7번 브릿지 초안이 "반대는 밖에 있었는데 문은 안에서 잠갔더라"로 <b>6번의 주제를 그대로 반복</b>했다. → <b>"막던 사람들이 다 잊었다는 거 / 평생을 걸었던 우리만 아직 그 자리에 서 있어"</b>로 교체(주제를 자기검열에서 <b>시간</b>으로 되돌림).</li>
+      <li><b>토이 「세 사람」 충돌로 2곡 폐기</b> — 설계 초안에 ⑴친구의 결혼식에서 축가를 부르는 곡 ⑵친구가 먼저 좋아한다고 말해 물러난 곡이 있었다. 웹 대조에서 <b>「세 사람」(2014)이 정확히 그 삼각(내가 사랑한 사람 + 가장 친한 친구 + 결혼식 축가)을 이미 대표곡으로 갖고 있다</b>는 걸 확인하고 <b>둘 다 폐기</b>, 2번(증인 없음)·4번(너무 가까움)으로 교체했다. 태양 「Wedding Dress」·윤종신 「너의 결혼식」까지 같은 땅이라 결혼식 소재는 이 앨범에서 <b>전면 배제</b>.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>④ 소리내어 부르기 (후렴 음절 수 실측)</summary>
+    <div class="tscroll">
+    <table>
+      <tr><th>곡</th><th>후렴 줄별 음절</th><th>편차</th><th>판정</th></tr>
+      <tr><td>1 다른 이름으로 저장했어</td><td>13 / 12 / 14 / 14</td><td>2</td><td>✅</td></tr>
+      <tr><td>2 우릴 아는 사람이 없어</td><td>13 / 12 / 14 / 13</td><td>2</td><td>✅</td></tr>
+      <tr><td>3 삼층 맨 끝에서</td><td>12 / 12 / 13 / 12</td><td>1</td><td>✅ 최상</td></tr>
+      <tr><td>4 하루에 열두 번</td><td>13 / 13 / 14 / 13</td><td>1</td><td>✅ 최상</td></tr>
+      <tr><td>5 세상은 이겼는데</td><td>14 / 13 / 14 / 12</td><td>2</td><td>✅</td></tr>
+      <tr><td>6 나한테 졌어요</td><td>11 / 12 / 12 / 12</td><td>1</td><td>✅ 최상</td></tr>
+      <tr><td>7 이제 아무도 안 막는데</td><td>12 / 13 / 11 / 11</td><td>2</td><td>✅</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>고음 자리 받침 정리</b> — 1번 후렴 첫 음절이 초안에 '넻(네 이름을)'이 아니라 받침 많은 '끝내'였다 → 열린 소리로 교체. 3번 후렴 첫 단어 '삼층'은 받침이 겹치지만 <b>OST축은 첫 음이 낮은 데서 시작</b>(Starts with the chorus melody quietly over lone piano)이라 통과.</li>
+      <li><b>혀 걸림 교정 2건</b> — 1번 벌스1 "ㄱ부터 ㅎ까지 다 지나도"는 부를 수가 없어 <b>"처음부터 끝까지 다 지나도"</b>로. 2번 프리코러스 초안 "장례도 못 치른 사랑처럼"은 무겁고 발음이 걸려 <b>"이름표도 없는 사랑이라"</b>로.</li>
+      <li><b>쉼표 위치 통일</b> — 모든 후렴이 4행 구조에서 2행 뒤에 한 번 숨을 쉬도록 끊었다(1·2번은 3행이 가장 길어 그 앞에서 벌리게 배치).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑤ 히트곡제조기 통독 (프로듀서 소견 · 고친 것 포함)</summary>
+    <ul>
+      <li><b>1. 다른 이름으로 저장했어</b> — 킥="이제야 부를 수 있는데 네가 없어". 휴대폰 화면이 켜지는 장면 하나로 곡 전체를 통일했다. 벌스2 "이름 대신 회사라고 둘러대"가 이 곡의 칼. <b>고침</b>: 초안 벌스2 마지막이 "네가 더 선명해지는 게 무서워"였는데 '선명'이 카탈로그 「젖은 사진」의 핵심어라 <b>'또렷해지는'</b>으로 교체.</li>
+      <li><b>2. 우릴 아는 사람이 없어</b> — 이 앨범에서 <b>가장 안 나와 있던 감각</b>: 이별을 신고할 데가 없다. 파이널 "많이 아팠니 응 많이 아팠어"가 자문자답으로 무너지는 지점. <b>고침</b>: 초안 파이널 마지막이 "누가 안 봐줘도 사랑은 사랑이었어"(16음절)라 길고 과거형이라 힘이 빠졌다 → <b>"아무도 안 봤어도 사랑은 사랑이야"</b>(현재형 15).</li>
+      <li><b>3. 삼층 맨 끝에서</b> — 앨범의 숨 고르기이자 <b>유일한 축복 착지</b>. 벌스2 "붙잡았으면 없었을 오늘이 저렇게 환한 게 다행이에요"가 이 채널 컨셉(감싼다)의 정수. <b>고침</b>: 초안 후렴 1행이 "제일 높은 자리에서 당신을 봐요"라 <b>제목이 후렴 안에서 안 터졌다</b> → "삼층 맨 끝에서"로 바꿔 제목=훅 성립.</li>
+      <li><b>4. 하루에 열두 번</b> — 앨범 최저 온도인데 <b>가장 아플 수 있는 곡</b>. "매일 보는 사람은 그립지도 못해"가 뒤집는 줄. <b>고침</b>: 초안엔 2절이 아예 없어 파이널 뒤집기(열한 번)가 갑작스러웠다 → 탕비실 2행("컵을 두 개 꺼냈다 넣었어")을 넣어 <b>세는 습관을 미리 깔았다</b>.</li>
+      <li><b>5. 세상은 이겼는데</b> — 앨범 격정 피크. "밥은 먹었냐고만 물었어"가 눈물 지점이고, 파이널 "집 앞 계단 하나를 못 넘었어"가 한 방. <b>고침</b>: 브릿지 초안이 "나는 못난 사람이야"로 자기비하만 하다 끝나 착한 말이 됐다 → <b>"내가 딱 여기까지인 사람이라"</b>로 바꿔 자기 인정으로 세웠다.</li>
+      <li><b>6. 나한테 졌어요</b> — 브릿지 "막힌 길인 줄 알았던 그 앞엔 문도 안 달려 있었어요"가 이 곡의 심장. 아웃트로 "그게 당신이 아니어도"가 치유 착지. <b>고침</b>: 초안 아웃트로가 "다시 만나면 잡을게요"라 <b>미련으로 되돌아갔다</b> → 다음 사람에게 열어두는 문장으로 교체(마음치유 컨셉).</li>
+      <li><b>7. 이제 아무도 안 막는데</b> — 앨범 최강 파이널. 벌스2 "미워할 사람이 없어지니까 남는 건 우리뿐이더라"가 이 곡의 품격. <b>고침</b>: 파이널 태그 초안 "그 사랑이 진짜였던 건 아직 안 늙었어"(18음절)가 길어 못 부른다 → <b>"그 사랑만은 아직 안 늙었어"</b>(13).</li>
+      <li><b>어미 감사</b> — 앨범 전체에서 <code>~어</code> 종결이 몰려 3번(존댓말 <code>~요/~죠</code>)·6번(<code>~요</code>)·7번(<code>~더라</code> 섞음)로 갈랐다. 한 곡 안에서 같은 어미 3줄 연속은 <b>0건</b>.</li>
+      <li><b>가장 약했던 곡</b> — 초안 4번은 "짝사랑 사무실"이라는 소재만 있고 킥이 없었다. 후렴을 통째로 다시 써서 <b>"제일 가까운 자리에서 제일 멀게"</b> 역설을 세우고 나서야 곡이 됐다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑥ 원곡 웹 대조 (기억 판정 0건 · 전부 실제로 열어봄)</summary>
+    <div class="tscroll">
+    <table>
+      <tr><th>대조한 곡</th><th>왜 봤나</th><th>확인한 것</th><th>결과</th></tr>
+      <tr><td><b>김경호 「금지된 사랑」</b>(1997, 작사 강은경)</td><td>이번 앨범의 참조 결</td><td>후렴 첫 줄, 고유 이미지(새겨진 이름·젖어버린 초대장·무릎 꿇은 세상), 화자의 요구(같은 날 떠나자·약속해줘)</td><td>✅ 어구 겹침 0. <b>고유 이미지 3개를 전부 금지어로 걸고</b> 작사 — 이 앨범에 초대장·무릎·"약속해줘" 없음. 원곡은 <b>둘이 함께 맞서는</b> 곡, 이 앨범은 <b>끝내 못 맞선 7가지 방식</b>이라 방향이 반대</td></tr>
+      <tr><td><b>토이 「세 사람」</b>(2014)</td><td>초안 5번(축가) 소재</td><td>내가 사랑한 사람 + 가장 친한 친구 + 결혼식 축가 삼각</td><td>⚠️ <b>정면 충돌 적발 → 초안 2곡 폐기.</b> 이번 앨범 최대 수확</td></tr>
+      <tr><td><b>태양 「Wedding Dress」</b>(2009)</td><td>같은 땅 재확인</td><td>짝사랑 상대가 다른 사람과 결혼하는 걸 지켜봄</td><td>⚠️ 결혼식 소재 <b>전면 배제</b> 확정</td></tr>
+      <tr><td><b>윤종신 「너의 결혼식」</b>(1992)</td><td>같은 땅 재확인</td><td>제목·소재 선점 여부</td><td>⚠️ 위와 동일 판정</td></tr>
+      <tr><td>「이룰 수 없는 사랑」(둘다섯/장철웅/김란영 등 동명 다수)</td><td>앨범 제목 후보였음</td><td>동명이곡이 여럿이라 제목으로 못 씀</td><td>✅ 앨범명을 <b>「이름을 가질 수 없던 사랑」</b>으로 확정</td></tr>
+      <tr><td>「저장된 이름」/「다른 이름으로 저장」</td><td>1번 제목</td><td>동명 가요 존재 여부</td><td>✅ 검색 결과 없음 — 사용 가능</td></tr>
+      <tr><td>「엄마가 운다」/「어머니가 울어」</td><td>5번 초기 제목</td><td>동명 가요 존재 여부</td><td>✅ 없음. 다만 제목을 역설형 <b>「세상은 이겼는데」</b>로 승격</td></tr>
+      <tr><td>스탠딩에그 「오래된 노래」</td><td>지난 앨범 교훈(비슷한 제목의 다른 히트곡까지 볼 것)</td><td>이번 7개 제목 중 유명곡과 겹치는 것</td><td>✅ 7개 전부 겹침 없음</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>수노 스타일 칸에 가수명·곡명 0건</b>(Suno 차단 회피) — 참조는 전부 묘사로 변환.</li>
+      <li>트리거 검사기 결과: 7곡 전부 <b>940자 이하 / 위험도2 트리거 0</b>. 록 4곡의 <code>the most explosive chorus of the song</code>(L1)은 작사카드 9번 ①의 <b>의도된 유지</b>(파이널 최강 = 이 채널 정체성)이며 파이널 1회로만 켰다.</li>
+    </ul>
+  </details>
+
+</div>
+
+<script>
+const S_ROCK1 = `1990s Korean rock ballad. Secretive, aching, defiant. Clean electric guitar arpeggios and music-box-like piano, distorted guitar wall, separated strings, deep tom drums, guitar solo before the last chorus. Single clear female lead vocal, restrained and almost whispered in the verse, opening into a raspy mixed-belt that cracks at the top, one voice only. 73 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, roomy reverb on the drums and strings only, clean separated mix. Starts with the chorus hook at half strength over lone piano. Verse stays hushed and close, arpeggios only. Pre-chorus gradually builds as strings and drums enter. Chorus opens with the full guitar wall and a powerful mixed-belt. Bridge drops down to bare piano and a trembling near-silent voice. Final chorus returns with the most explosive chorus of the song, half-time drums, strings at full height, the voice breaking on the last line.`;
+
+const S_ROCK2 = `1990s Korean rock ballad. Lonely, aching, defiant. Clean electric guitar arpeggios and lone piano, distorted guitar wall entering late, separated strings, deep tom drums, short guitar solo before the last chorus. Single clear female lead vocal, restrained and almost whispered in the verse, opening into a raspy mixed-belt that cracks at the top, one voice only. 70 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, roomy reverb on the drums and strings only, clean separated mix. Starts hushed and close on the verse, arpeggios only. Pre-chorus gradually builds as strings and drums enter. Chorus opens with the full guitar wall and a powerful mixed-belt. Bridge drops down to bare piano and a trembling near-silent voice. Final chorus returns with the most explosive chorus of the song, half-time drums, strings at full height, the voice breaking on the last line.`;
+
+const S_ROCK5 = `1990s Korean rock ballad. Aching, guilty, desperate. Clean electric guitar arpeggios and low piano chords, distorted guitar wall, separated strings, heavy floor toms, guitar solo before the last chorus. Single clear female lead vocal, restrained and almost whispered in the verse, opening into a raspy mixed-belt that cracks at the top, one voice only. 76 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, roomy reverb on the drums and strings only, clean separated mix. Starts with the chorus hook at half strength over lone piano. Verse stays hushed and close, arpeggios only. Pre-chorus gradually builds as strings and drums enter. Chorus opens with the full guitar wall and a powerful mixed-belt. Bridge drops down to bare piano and a trembling near-silent voice. Final chorus returns with the most explosive chorus of the song, half-time drums, strings at full height, the voice breaking on the last line.`;
+
+const S_ROCK7 = `1990s Korean rock ballad. Aching, weary, defiant. Clean electric guitar arpeggios and warm piano, distorted guitar wall, separated strings, deep tom drums, long guitar solo before the last chorus. Single clear female lead vocal, restrained and almost whispered in the verse, opening into a raspy mixed-belt that cracks at the top, one voice only. 72 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, roomy reverb on the drums and strings only, clean separated mix. Starts with the chorus hook at half strength over lone piano. Verse stays hushed and close, arpeggios only. Pre-chorus gradually builds as strings and drums enter. Chorus opens with the full guitar wall and a powerful mixed-belt. Bridge drops down to bare piano and a trembling near-silent voice. Final chorus returns with the most explosive chorus of the song, half-time drums, strings at full height, the voice breaking on the last line.`;
+
+const S_OST = `Korean drama OST ballad. Cinematic, aching, tender. Soft grand piano intro, full orchestra with sweeping strings, oboe and cello counter-melodies, timpani and orchestral swells, no synths. Single clear female lead vocal, conversational and restrained, opening into a powerful mixed-belt with a fragile break, one voice only. 74 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide across the stereo field, orchestral depth with controlled reverb, clean separated mix. Starts with the chorus melody quietly over lone piano. Verse stays intimate and close, piano and low strings only. Pre-chorus gradually builds as the string section rises underneath. Chorus opens with the full orchestra lifting under a strong lead-vocal line. Bridge drops down to bare piano and a near-whispered voice. Final chorus returns a whole level higher, strings at full height, a lifted melodic climax carried by the single voice.`;
+
+const S_PIANO = `Korean piano ballad. Melancholic, subdued, quietly aching. Solo grand piano throughout, sparse cello, a thin high string line entering late, brushed drums only in the final section, no synths. Single clear female lead vocal, conversational and restrained, opening into a controlled mixed-belt with a fragile break, one voice only. 66 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide, natural piano room tone, minimal reverb, clean separated mix. Starts hushed and close on the verse, piano only. Pre-chorus gradually builds as the cello slips in underneath. Chorus opens with fuller piano voicing and a warmer vocal. Bridge drops down to a near-whispered voice and single piano notes. Final chorus returns with strings and brushed drums and a clear emotional rise, the last line let go rather than pushed.`;
+
+const S_SOUL = `Korean soul ballad. Aching, smoky, restrained longing. Warm rhodes electric piano, gospel-tinged organ pad, upright bass, soft rimshot drums, a lone muted trumpet answering in the final section. Single clear female lead vocal, husky and low in the verse, opening into a raspy gospel-inflected belt, one voice only. 64 BPM, minor key with bluesy sevenths. Centered dry close-mic lead vocal, instruments spread wide, warm analog room on the instruments only, clean separated mix. Starts low and conversational on the verse, rhodes and brushed rimshot only. Pre-chorus gradually builds as organ and upright bass swell underneath. Chorus opens with the full band and a husky belt. Bridge drops down to voice and rimshot alone. Final chorus returns with the trumpet answering the vocal and a clear emotional rise, the voice fraying on the last line.`;
+
+const E_BASE = `crowd vocals, audience cheering, crowd clapping, live concert ambience, arena reverb, stadium chant, gang vocals, choir-like crowd, sing-along, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, vocal stack, harmony vocals, vocal harmonies, backing vocals, background vocals, choir, group vocals, wide vocals, wide stereo vocals, wide chorus, spoken word intro, rap, hip hop, EDM, trap, autotune, male vocal, duet, modern idol pop production, trot`;
+const E_ROCK = E_BASE + `, heavy metal, metalcore, screamo, upbeat dance beat`;
+const E_BAL  = E_BASE + `, upbeat dance beat`;
+
+const SONGS = [
+{title:"다른 이름으로 저장했어", motif:"휴대폰 주소록 · 금지한 것 = 이름", style:S_ROCK1, excl:E_ROCK, genre:"록 발라드 · 73 BPM",
+concept:"세상이 알면 안 되는 사람이라 이름부터 지웠다 — 화면이 켜질 때마다 심장이 먼저 알아보는 두 글자. 파이널에서 드디어 제 이름으로 바꿔놓지만, 그건 부를 일이 없어졌다는 뜻이다.",
+yt:`"휴대폰에 그 사람 이름을 못 넣어봤다면 모릅니다.." 숨죽여 부르다 마지막 한 줄에서 무너지는 록발라드, '다른 이름으로 저장했어' | 윤하경 자작곡`,
+shorts:`이름조차 숨겨야 했던 사랑, 끝나고 나서야 제 이름으로 저장했다 #윤하경 #그밤라디오 #이별노래`,
+lyrics:
+`[Chorus - half strength, lone piano]
+네 이름을 다른 이름으로 저장해
+아무도 모르게 두 글자만 남겨
+화면이 켜지면 심장이 먼저 알아
+세상은 끝까지 몰라야 하는 사람
+
+[Verse 1 - hushed]
+버스 유리에 이마를 대고
+주소록을 한참 내려봤어
+처음부터 끝까지 다 지나도
+네가 있어야 할 자리는 비어
+
+[Pre-Chorus - building]
+같이 찍은 사진 한 장 없이
+나는 널 어디에 두고 사니
+
+[Chorus]
+네 이름을 다른 이름으로 저장해
+아무도 모르게 두 글자만 남겨
+화면이 켜지면 심장이 먼저 알아
+세상은 끝까지 몰라야 하는 사람
+
+[Verse 2 - quiet]
+전화가 오면 창가로 나가
+이름 대신 회사라고 둘러대
+거짓말이 하나씩 늘어갈수록
+네가 더 또렷해지는 게 무서워
+
+[Bridge - bare piano, trembling]
+너를 부를 이름 하나가
+이렇게 어려운 사랑이면
+나는 널 사랑한 게 맞을까
+아니 그것만은 확실해
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+오늘은 네 이름을 네 이름으로 바꿔
+이제 숨길 일이 하나도 없으니까
+화면이 켜져도 심장이 조용해
+이제야 부를 수 있는데 네가 없어
+
+[Outro]
+두 글자로 살다 간 사람아`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 밤 시내버스 뒷자리, 20대 후반 한국 여성이 창가에 이마를 대고 무릎 위 휴대폰 화면을 내려다본다. 화면의 푸른 빛만 얼굴 아래쪽을 비추고 눈가는 어둠에 잠겨 있다. 창밖 도시 불빛은 길게 흘러 번진다. 얕은 심도, 차가운 청색 색감, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+
+{title:"우릴 아는 사람이 없어", motif:"아무도 모르는 이별 · 금지한 것 = 증인", style:S_ROCK2, excl:E_ROCK, genre:"록 발라드 · 70 BPM",
+concept:"비밀이었던 사랑이 끝나면 위로해줄 사람도 없다 — 헤어졌는데 아무도 안 물어보는 밤. 결국 자기가 자기한테 물어봐 주는 것으로 이별을 치른다.",
+yt:`"헤어졌는데 위로해줄 사람이 한 명도 없었습니다.." 아무도 몰랐던 사랑의 끝을 혼자 치르는 노래, '우릴 아는 사람이 없어' | 윤하경 자작곡`,
+shorts:`아무도 몰랐던 사랑은 끝나도 아무도 안 물어봐 준다 #윤하경 #그밤라디오 #이별발라드`,
+lyrics:
+`[Verse 1 - hushed]
+사람들 앞에서 웃는 건 쉬워
+아무도 내 얼굴을 안 보니까
+괜찮냐는 말을 못 들은 지
+벌써 며칠이 지났는지 몰라
+
+[Pre-Chorus - building]
+이름표도 없는 사랑이라
+어디에 놓아야 할지 몰라
+
+[Chorus]
+헤어졌는데 아무도 안 물어봐
+울어도 이유를 댈 데가 없어
+우릴 아는 사람이 하나도 없어서
+이별도 나 혼자 다 치러야 해
+
+[Verse 2 - quiet]
+네 소식은 남의 입으로 와
+잘 지낸다더라 그 한마디에
+표정 하나 안 바꾸고 웃었어
+그게 내가 할 수 있는 전부야
+
+[Chorus]
+헤어졌는데 아무도 안 물어봐
+울어도 이유를 댈 데가 없어
+우릴 아는 사람이 하나도 없어서
+이별도 나 혼자 다 치러야 해
+
+[Bridge - bare piano]
+사랑은 둘이서 했는데
+끝은 왜 나 혼자 나지
+봐준 사람이 없는 밤은
+아침이 와도 안 끝나
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+헤어졌는데 아무도 안 물어봐
+그래서 오늘은 내가 나한테 물어
+많이 아팠니 응 많이 아팠어
+아무도 안 봤어도 사랑은 사랑이야
+
+[Outro]
+아무도 안 봤어도`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 늦은 밤 사람 많은 지하철 안, 20대 후반 한국 여성 혼자만 정면을 보고 서 있고 주변 사람들은 모두 흐릿하게 뭉개져 있다. 무표정한데 눈에만 물기가 있다. 형광등의 창백한 빛, 손잡이를 쥔 손. 얕은 심도, 군중 속 고립감, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+
+{title:"삼층 맨 끝에서", motif:"공연장 삼층 객석 · 금지한 것 = 세계의 거리", style:S_OST, excl:E_BAL, genre:"드라마 OST 발라드 · 74 BPM",
+concept:"제일 싼 자리 표를 끊어 그 사람을 보러 간다 — 가까우면 들킬 것 같아서 일부러 제일 먼 자리. 붙잡았으면 없었을 오늘이 저렇게 환한 게 다행이라고, 등 뒤에서 축하하고 먼저 일어난다.",
+yt:`"끝까지 담담하다가 마지막 한 줄에서 무너집니다.." 제일 먼 자리에서 부르는 축복, '삼층 맨 끝에서' | 윤하경 자작곡`,
+shorts:`가까우면 들킬까 봐 제일 싼 자리를 끊었다 #윤하경 #그밤라디오 #짝사랑`,
+lyrics:
+`[Chorus - quietly over lone piano]
+삼층 맨 끝에서 당신을 봐요
+얼굴은 안 보여도 다 알아요
+웃을 때 손을 드는 그 버릇까지
+그건 나만 아는 줄 알았는데
+
+[Verse 1 - intimate]
+표를 끊는 손이 조금 떨렸어요
+제일 싼 자리로 달라고 했죠
+가까우면 들킬 것 같아서
+멀수록 오래 볼 수 있으니까
+
+[Pre-Chorus - strings rising]
+불이 꺼지고 당신이 나와요
+숨을 참는 건 여기도 같아요
+
+[Chorus]
+삼층 맨 끝에서 당신을 봐요
+얼굴은 안 보여도 다 알아요
+웃을 때 손을 드는 그 버릇까지
+그건 나만 아는 줄 알았는데
+
+[Verse 2 - quiet]
+어울려요 그 자리가 참
+내가 못 데려다준 곳이라
+붙잡았으면 없었을 오늘이
+저렇게 환한 게 다행이에요
+
+[Bridge - bare piano]
+앙코르가 끝나고
+불이 다 켜지기 전에
+나는 먼저 일어날게요
+등 뒤에서 축하해요
+
+[Final Chorus - a whole level higher]
+삼층 맨 끝에서 당신을 봐요
+당신은 나를 영영 못 볼 자리죠
+오늘 박수는 제가 제일 컸어요
+사랑은 이렇게도 되더라고요
+
+[Outro]
+잘 가요 무대 위로`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 큰 공연장 삼층 맨 뒷줄, 20대 후반 한국 여성이 어둠 속에 혼자 앉아 아래 무대를 내려다본다. 멀리 무대 조명만 작고 환하게 빛나고 여성의 얼굴엔 그 빛이 아주 옅게 닿는다. 박수를 치려다 멈춘 두 손. 얕은 심도, 깊은 명암, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+
+{title:"하루에 열두 번", motif:"엘리베이터 · 탕비실 · 금지한 것 = 너무 가까움", style:S_PIANO, excl:E_BAL, genre:"피아노 발라드 · 66 BPM",
+concept:"매일 열두 번을 스치는데 한 번도 못 부른다 — 세상에서 제일 가까운 자리에서 세상에서 제일 멀게 서 있는 사람. 파이널에서 그가 반차를 낸 날 열한 번으로 줄어들며 사랑이 들통난다.",
+yt:`"매일 보는데 삼 년째 한 번도 못 불러봤습니다.." 숨죽인 피아노로 참다가 마지막에 놓치는 노래, '하루에 열두 번' | 윤하경 자작곡`,
+shorts:`멀리 있으면 그리워라도 하지, 매일 보는 사람은 그립지도 못한다 #윤하경 #그밤라디오 #짝사랑`,
+lyrics:
+`[Verse 1 - hushed, piano only]
+엘리베이터 문이 열리면
+숫자만 보고 서 있어
+네가 누른 층이 켜질 때
+그 불빛까지 외워버렸어
+
+[Pre-Chorus - cello slips in]
+한마디만 해도 다 무너질까 봐
+오늘도 목까지 왔다 삼켜
+
+[Chorus]
+하루에 열두 번 너를 지나가
+어깨가 닿아도 아무 일 없어
+세상에서 제일 가까운 자리에서
+세상에서 제일 멀게 서 있어
+
+[Verse 2 - hushed]
+탕비실에서 마주친 날엔
+컵을 두 개 꺼냈다 넣었어
+
+[Bridge - near-whisper, single piano notes]
+멀리 있으면 그리워라도 하지
+매일 보는 사람은 그립지도 못해
+안녕 그 두 글자만
+삼 년째 하고 있어
+
+[Final Chorus - strings and brushed drums]
+하루에 열두 번 너를 지나가
+오늘은 열한 번밖에 못 봤어
+네가 반차를 냈다는 말에
+하루가 이렇게 긴 줄 몰랐어
+
+[Outro]
+내일은 열두 번 다 보자`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 사무실 건물 엘리베이터 안, 20대 후반 한국 여성이 층수 표시등만 올려다보고 서 있다. 옆에는 다른 사람의 어깨와 팔만 프레임 가장자리에 걸쳐 보이고 얼굴은 나오지 않는다. 차가운 금속 벽면과 형광등 반사. 얕은 심도, 무채색에 가까운 색감, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+
+{title:"세상은 이겼는데", motif:"현관 앞에 앉아 있던 어머니 · 금지한 것 = 가족의 눈물", style:S_ROCK5, excl:E_ROCK, genre:"록 발라드 · 76 BPM",
+concept:"세상 앞에선 한 번도 안 울었는데, 불도 안 켜고 기다리다 밥은 먹었냐고만 묻는 어머니 앞에서 무너진다 — 사랑의 크기가 부족했던 게 아니라 내가 딱 여기까지인 사람이었다는 고백.",
+yt:`"세상하곤 끝까지 싸웠는데, 엄마 앞에선 못 싸웠습니다.." 피 토하듯 부르는 90년대식 록발라드, '세상은 이겼는데' | 윤하경 자작곡`,
+shorts:`세상은 이겼는데 집 앞 계단 하나를 못 넘었다 #윤하경 #그밤라디오 #록발라드`,
+lyrics:
+`[Chorus - half strength, lone piano]
+세상 앞에선 한 번도 안 울었어
+누가 뭐래도 네 손 안 놓았어
+세상은 이겼는데 엄마한테 졌어
+그날 밤 나는 다 무너졌어
+
+[Verse 1 - hushed]
+현관 앞에 앉아 있던 뒷모습
+불도 안 켜고 나를 기다렸어
+혼내지도 않고 묻지도 않고
+밥은 먹었냐고만 물었어
+
+[Pre-Chorus - building]
+차라리 소리를 질렀으면
+나는 끝까지 버텼을 텐데
+
+[Chorus]
+세상 앞에선 한 번도 안 울었어
+누가 뭐래도 네 손 안 놓았어
+세상은 이겼는데 엄마한테 졌어
+그날 밤 나는 다 무너졌어
+
+[Verse 2 - quiet]
+너한테 뭐라고 말해야 할까
+사랑이 부족한 게 아니라
+내가 못난 거라고 하면
+네가 나를 덜 미워할까
+
+[Bridge - bare piano, breaking]
+너는 세상하고 싸울 줄 알았지
+나는 우리 엄마랑 못 싸웠어
+이건 사랑의 크기가 아니라
+내가 딱 여기까지인 사람이라
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+세상 앞에선 한 번도 안 울었어
+누가 뭐래도 네 손 안 놓았어
+세상은 이겼는데 엄마한테 졌어
+그날 밤 나는 다 무너졌어
+미안해 나는 세상은 이겼는데
+집 앞 계단 하나를 못 넘었어
+
+[Outro]
+그 계단에 아직 앉아 있어`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 밤 오래된 빌라 현관 계단, 20대 후반 한국 여성이 계단 중간에 주저앉아 무릎에 얼굴을 반쯤 묻고 있다. 위쪽 현관문은 불이 꺼져 있고 계단 센서등만 하나 켜져 있다. 젖은 눈, 흐트러진 머리. 얕은 심도, 따뜻한 등불과 푸른 밤의 대비, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+
+{title:"나한테 졌어요", motif:"내밀었던 손 · 금지한 것 = 나 자신", style:S_SOUL, excl:E_BAL, genre:"소울 발라드 · 64 BPM",
+concept:"아무도 우릴 막은 적이 없다 — 세상은 관심조차 없었고, 안 된다고 말한 사람은 나였다. 막힌 길인 줄 알았던 그 앞엔 문도 안 달려 있었다는 걸 일 년이 지나서야 안다.",
+yt:`"아무도 안 막았는데, 제가 저를 막았습니다.." 허스키한 목소리로 일 년 만에 꺼내는 고백, '나한테 졌어요' | 윤하경 자작곡`,
+shorts:`막힌 길인 줄 알았던 그 앞엔 문도 안 달려 있었다 #윤하경 #그밤라디오 #소울발라드`,
+lyrics:
+`[Verse 1 - low, husky]
+그땐 제가 너무 초라해서
+당신 옆이 안 어울릴까 봐
+좋아한다는 말 대신에
+잘 지내라는 말을 골랐어요
+
+[Pre-Chorus - organ swells]
+용기가 없던 게 아니라
+자격이 없다고 믿었어요
+
+[Chorus - husky belt]
+아무도 우릴 안 막았는데
+세상은 관심조차 없었는데요
+안 된다 한 사람은 나였어요
+나는 나한테 지고 말았어요
+
+[Verse 2 - low]
+당신이 내민 손을 못 봤어요
+아니 봤는데 못 본 척했죠
+그 손이 얼마나 오래 있었는지
+그때는 세어보지 않았어요
+
+[Chorus]
+아무도 우릴 안 막았는데
+세상은 관심조차 없었는데요
+안 된다 한 사람은 나였어요
+나는 나한테 지고 말았어요
+
+[Bridge - voice and rimshot alone]
+일 년이 지나서야 알았어요
+당신은 기다리고 있었다는 걸
+막힌 길인 줄 알았던 그 앞엔
+문도 안 달려 있었어요
+
+[Final Chorus - trumpet answering]
+아무도 우릴 안 막았는데
+세상은 관심조차 없었는데요
+안 된다 한 사람은 나였어요
+이제는 나를 좀 용서할게요
+
+[Outro]
+다음엔 겁내지 않을게요
+그게 당신이 아니어도`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 늦은 오후 오래된 카페 창가, 20대 후반 한국 여성이 테이블 위에 손바닥을 펴 놓고 자기 손을 내려다보고 있다. 맞은편 의자는 비어 있다. 창으로 드는 낮고 긴 빛이 손등에만 떨어진다. 얕은 심도, 따뜻한 갈색조, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+
+{title:"이제 아무도 안 막는데", motif:"헐린 골목 · 금지한 것 = 시간", style:S_ROCK7, excl:E_ROCK, genre:"록 발라드 · 72 BPM",
+concept:"반대하던 사람들은 다 늙었고 숨던 담벼락은 헐렸다 — 드디어 자유로운데 자유로워질 우리가 없다. 막던 쪽은 다 잊었는데 평생을 걸었던 우리만 아직 그 자리에 서 있다.",
+yt:`"끝까지 듣고 나면 한참을 못 일어납니다.." 다 지나간 뒤에야 풀려버린 금지, '이제 아무도 안 막는데' | 윤하경 자작곡`,
+shorts:`드디어 자유로운데, 자유로워질 우리가 없다 #윤하경 #그밤라디오 #록발라드`,
+lyrics:
+`[Chorus - half strength, lone piano]
+이제 아무도 우릴 안 막아
+반대하던 사람들은 다 늙었어
+드디어 우린 자유로운데
+자유로워질 우리가 없어
+
+[Verse 1 - hushed]
+그 골목이 다 헐리고
+새 건물이 들어섰더라
+우리가 숨었던 담벼락도
+이제는 아무 데도 없어
+
+[Pre-Chorus - building]
+그때 우릴 말리던 목소리들이
+지금은 하나도 안 들려
+
+[Chorus]
+이제 아무도 우릴 안 막아
+반대하던 사람들은 다 늙었어
+드디어 우린 자유로운데
+자유로워질 우리가 없어
+
+[Verse 2 - quiet]
+누가 그러더라 너 잘 산다고
+그 말이 이상하게 안 아파
+미워할 사람이 없어지니까
+남는 건 우리뿐이더라
+
+[Bridge - bare piano]
+억울한 게 뭔지 알아
+막던 사람들이 다 잊었다는 거
+평생을 걸었던 우리만
+아직 그 자리에 서 있어
+
+[Guitar Solo]
+
+[Final Chorus - strongest]
+이제 아무도 우릴 안 막아
+반대하던 사람들은 다 늙었어
+드디어 우린 자유로운데
+자유로워질 우리가 없어
+그래도 하나는 이긴 것 같아
+그 사랑만은 아직 안 늙었어
+
+[Outro]
+안 늙은 게 하나 있어`,
+thumb:`실사 영화 스틸컷 감성의 이미지를 만들어줘. 재개발로 새 건물이 들어선 거리, 30대 후반 한국 여성이 낡은 코트를 입고 혼자 서서 높은 신축 건물을 올려다본다. 발밑엔 옛 담벼락의 흔적만 남은 콘크리트 자국. 해 질 녘 주황빛이 옆얼굴에 길게 걸린다. 얕은 심도, 세월감 있는 색보정, 필름 그레인, 시네마틱, 16:9, 이미지에 글자 없음.`},
+];
+
+window.WB = {
+  key: 'geubamforbidden_done',
+  songs: SONGS,
+  tags: s => [
+    {t: s.genre, hot: true},
+    {t: '소재 · ' + s.motif},
+    {t: '여성 보컬 · 한 명만'},
+  ],
+  lyrics:  s => s.lyrics,
+  style:   s => s.style,
+  excl:    s => s.excl,
+  yt:      s => s.yt,
+  thumb:   s => s.thumb,
+  concept: s => s.concept,
+};
+</script>
+<script src="../assets/workboard.js"></script>
+</body>
+</html>
