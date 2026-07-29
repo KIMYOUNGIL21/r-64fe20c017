@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강한결 「사랑한다 말 대신」 7곡 · 수노 작사 작업판</title>
+<link rel="stylesheet" href="../assets/workboard.css">
+<style>:root{--acc:#f0a878;--bg:#1a100c;--card:#26130b;--line:#55301c;--dim:#b59482;--txt:#f4ece2;--field:#170c06;}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>강한결 「사랑한다 말 대신」 7곡</h1>
+    <p>강한결의 트로트 TV · 임영웅 스타일 정통 트로트 발라드 · 한형 6곡 + 온기형 1곡 · 남성 보컬</p>
+    <div class="counter"><span id="cnow">1</span> / 7곡 · 완료 <span id="cdone">0</span>곡</div>
+  </header>
+  <div style="text-align:center"><a class="home" href="../">← 작사 공방</a></div>
+
+  <div class="anatomy">
+    <b>스타일 해부 (임영웅 스타일 = 담백하고 절제된 애절함)</b>
+    ① 정서: 「이제 나만 믿어요」·「사랑은 늘 도망가」의 결. <b style="display:inline">울부짖지 않고 눌러 담는다.</b> 슬픔을 파는 게 아니라 <b style="display:inline">말수 적은 남자가 오래 지킨 것</b>을 판다<br>
+    ② 앨범 척추: <b style="display:inline">이 남자는 "사랑한다"를 입으로 못 한다.</b> 대신 바늘귀를 꿰고(1), 목도리를 두르고(2), 라디오를 못 끄고(3), 종이에 적기만 하고(4), 등으로 막고(5), 사진을 닦는다(6). 그러다 마지막 곡에서 처음으로 "이제는 안 아낄게"라고 다짐한다(7) — 제목이 여기서 갚아진다<br>
+    ③ 공식 깨기: 카드 §7 경고 이행. "못 한 말 → 파이널에 뱉기"는 <b style="display:inline">7번 한 곡뿐</b>. 4번은 아예 <b style="display:inline">못 뱉고 끝나고</b>(전화 끊음), 2·3·6번은 말 대신 사물·축복으로 대신한다<br>
+    ④ 소재 개척: 카탈로그 포화지(비·소주·어머니·아버지·노동·계절)를 전부 피했다. 노안·바늘귀(세월·몸 🟢) · 형제(🟢 완전 미개척) · 라디오 옛노래 · 통화 신호음(훅노트 flagged) · 흑백 결혼사진 — <b style="display:inline">전부 카탈로그 첫 등장</b><br>
+    ⑤ 시점: 3인칭 관찰 1곡(5번 형, 앨범의 환기창) · 호명 3곡 · 독백 3곡 · 대화 1곡<br>
+    ⑥ 사운드: 한형 70BPM 3곡 + 한형 85BPM 3곡 + <b style="display:inline">온기형 90BPM 1곡(신규)</b>. 콘셉트가 애절 발라드라 <b style="display:inline">뽕짝 흥형을 넣지 않았다</b> — 흥형 자리를 임영웅식 따뜻한 장조 발라드(별빛 결)로 대체
+  </div>
+
+  <div class="progress"><i id="pbar"></i></div>
+
+  <div id="board"></div>
+
+  <details class="review">
+    <summary>① 변주 격자 (앨범이 왜 안 지루한가)</summary>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="border-bottom:1px solid var(--line)"><th>#</th><th>곡</th><th>소재(전부 카탈로그 신규)</th><th>화자</th><th>시간</th><th>착지</th><th>어미</th><th>구조</th><th>온도</th></tr>
+      <tr><td>1</td><td>바늘귀</td><td>노안·바늘귀·돋보기</td><td>호명 (여보)</td><td>지금</td><td>위로·함께</td><td>~다체</td><td>8단</td><td>85</td></tr>
+      <tr><td>2</td><td>그 목도리</td><td>손뜨개 목도리 (올 풀린)</td><td>독백</td><td>회상</td><td>체념·수용</td><td>~죠체</td><td>8단</td><td>70</td></tr>
+      <tr><td>3</td><td>그 노래가 나오면</td><td>라디오 · 둘의 옛 노래</td><td>호명 (당신)</td><td>지금→회상</td><td>축복 (보내주기)</td><td>~다체</td><td>브릿지 없이 후렴 반복</td><td>85</td></tr>
+      <tr><td>4</td><td>신호음</td><td>통화 신호음 · 못 부친 종이</td><td>독백</td><td>지금</td><td>못 뱉고 끝남</td><td>반말</td><td>훅 오픈</td><td>70</td></tr>
+      <tr><td>5</td><td>형은 말이 없었다</td><td>형 · 넓은 등 (형제)</td><td>관찰 (3인칭)</td><td>회상</td><td>자부심·버팀</td><td>~습니다체</td><td>대화 삽입</td><td>70</td></tr>
+      <tr><td>6</td><td>결혼사진</td><td>빛바랜 흑백 결혼사진</td><td>대화 (사진 속 당신)</td><td>가정</td><td>항변 → 수용</td><td>~죠체</td><td>2절 없는 짧은 곡</td><td>85</td></tr>
+      <tr><td>7</td><td>이제부터 좋은 날</td><td>남은 생 · 못 간 신혼여행</td><td>호명 (여보)</td><td>다짐</td><td>자부심·해방</td><td>반말</td><td>8단</td><td>90 (온기)</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>제약 검사 통과</b> — 화자 4종(호명3·독백3·관찰1·대화1) ≥ 3 ✅ / 착지 <b style="display:inline">7종</b> ≥ 4 ✅ / 구조 5종 ≥ 3 ✅ / 어미 4종 전부 사용 ✅ / 같은 축 같은 값 3연속 0건 ✅</li>
+      <li><b>어미 배치</b> — 다/죠/다/반말/습니다/죠/반말. 인접 중복 0건, 3연속 0건. (1집 전곡 ~죠체, 2집 전곡 ~습니다체와의 인상 겹침을 어미 분산으로 회피)</li>
+      <li><b>화자 3연속 방지</b> — 독백이 2·4번에 있지만 3번(호명)이 사이를 끊는다. 독립 3연속 없음.</li>
+      <li><b>온도 곡선</b> — 85 / 70 / 85 / 70 / 70 / 85 / 90. 4·5번만 70이 붙고(2연속), 3연속 없음. 침울 최저점(4번 못 뱉음 · 5번 형)을 가운데 몰되 3번(축복 · 85)과 6번(가정 · 85)이 양옆에서 온도를 받쳐 앨범이 가라앉지 않는다.</li>
+      <li><b>앨범 아치</b> — 1번(말 대신 바늘귀를 꿴다)이 문을 열고, 7번(이제는 안 아낄게 · 여보 사랑해)이 그 침묵을 깨며 닫는다. 제목 <b style="display:inline">「사랑한다 말 대신」</b>이 6곡 동안 쌓였다가 마지막 곡에서 처음으로 값을 치른다.</li>
+      <li><b>흥형 없음(의도)</b> — 카드 §6 "7곡=흥형 1곡" 관례를 이번엔 <b style="display:inline">콘셉트가 눌렀다.</b> 지향점이 임영웅 정통 발라드(애절)라 120BPM 뽕짝 흥형을 넣으면 앨범 정체성이 깨진다. 대신 흥형이 담당하던 <b style="display:inline">온도 리프트·해방 착지</b>를 7번 온기형(장조 90BPM · 임영웅 「별빛 같은 나의 사랑아」/「이제 나만 믿어요」 결)이 맡는다. 카드 환류 대상(§13).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>② 훅 캠프 — 곡당 후렴 3개 중 채택 (버린 것은 훅노트로)</summary>
+    <ul>
+      <li><b>1. 바늘귀</b> — ①사물("이제 바늘귀는 내가 꿰어줄게") ②질문("당신이 다 꿰매준 이 옷들을 이제 내가 기워도 되겠소") ③역설("사랑한단 말은 여태 못 했는데 바늘귀 하나는 꿸 수 있다").<br>
+      <b style="display:inline">채택 ①</b> — 제목이 후렴 첫 줄에 박히고 노안이라는 5060의 몸 경험과 직결된다. ③의 역설이 이 앨범 제목의 씨앗이라 <b style="display:inline">브릿지·파이널에 흡수</b>("그 말 대신 오늘도 그걸 꿰고 있다"). ②는 훅노트로.</li>
+      <li><b>2. 그 목도리</b> — ①사물("그 목도리 아직도 색이 바랜 채로") ②질문("이 겨울은 뭘로 견디냐고 묻지 마라") ③역설("따뜻한 게 죄라서 못 버리고 있죠").<br>
+      <b style="display:inline">채택 ①+③ 통합</b> — 사물만으론 밋밋하고 역설만으론 상황이 안 선다. 붙이니 "왜 못 버리나 → 따뜻해서, 그 따뜻함이 죄"라는 <b style="display:inline">담백한 자기 변명</b>이 후렴에 들어갔다. 「잘 살아요 그대」 교훈(뒤집는 줄)의 이행.</li>
+      <li><b>3. 그 노래가 나오면</b> — ①장면("그 노래가 나오면 나는 못 일어난다") ②질문("당신 아직 이 노래 좋아하나") ③역설("그 노래로 다 말했는데 나는 그때 못 알아들었다").<br>
+      <b style="display:inline">채택 ①</b> — 라디오에서 <b style="display:inline">둘의 노래</b>가 나오는 3초 장면이 곡의 상황을 즉시 세운다. ③(그땐 못 알아들었다)은 벌스2로 내려 후렴이 답을 미리 주지 않게 했다. ②는 벌스1 마지막 줄로.</li>
+      <li><b>4. 신호음</b> — ①사물("세 번이 울리기 전에 나는 끊었어") ②질문("받으면 대체 무슨 말을 하려고") ③역설("차라리 안 받았으면 좋겠어 그럼 못 한 게 아니라 못 닿은 거니까").<br>
+      <b style="display:inline">채택 ①</b> — 훅노트 flagged("실제로 걸었다가 끊는 곡, 아직 안 씀")를 꺼내 세웠다. ③이 이 곡의 <b style="display:inline">비겁함</b>(화자를 흠 있게 만드는 줄)이라 브릿지에 심었다 — 안 닿기를 바라는 남자. ②는 후렴 2행에 흡수.</li>
+      <li><b>5. 형은 말이 없었다</b> — ①사물/장면("형은 말이 없었습니다 늘 등만 봤습니다") ②질문("형은 왜 한 번을 안 힘들다 했을까") ③역설("말 대신 형은 그냥 다 짊어졌습니다").<br>
+      <b style="display:inline">채택 ①+③ 통합</b> — 3인칭 관찰이 후렴 안에서 성립하는 유일한 안. "등"이라는 사물 하나로 형의 평생을 세웠다. ③("말 대신")이 <b style="display:inline">앨범 제목을 형제 축으로 확장</b>한다. ②는 대화 삽입 벌스로.</li>
+      <li><b>6. 결혼사진</b> — ①장면("벽에 걸린 흑백 사진 속에 우리가 있죠") ②명령/항변("그렇게 웃지 마요 먼저 갈 거면서") ③역설("사진 속 당신은 아직 스물다섯인데 나만 늙어가서 미안하다").<br>
+      <b style="display:inline">채택 ②+③ 통합</b> — 이 곡은 <b style="display:inline">사진 속 당신에게 말을 거는</b> 대화체다. 항변("웃지 마")으로 후렴을 열고 역설(당신만 안 늙는다)로 받아, 파이널에서 항변이 수용("그렇게 웃어요 나 좀 기다려주죠")으로 뒤집힌다. ①은 벌스1로.</li>
+      <li><b>7. 이제부터 좋은 날</b> — ①선언("이제부터 좋은 날이야 우리한테도 온다") ②질문("우리 언제 한번 웃고 살아보나") ③고백("이제는 안 아낄게 여보 사랑해 오늘부터 매일").<br>
+      <b style="display:inline">채택 ①</b> — 파이널은 반드시 해방·따뜻함으로 착지(카드 §4). "차례야"·"시작이야"로 미래를 연다. ③은 <b style="display:inline">앨범 전체의 단 하나뿐인 "뱉는" 순간</b>이라 브릿지에 아껴 뒀다 — 6곡의 침묵이 여기서 처음 깨진다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>③ 소리내어 부르기 — 후렴 음절 수 실측 (편차 ±2 이내)</summary>
+    <ul>
+      <li><b>1. 바늘귀</b> — 12 / 13 / 14 / 13 (편차 2). 파이널 12 / 13 / 12 / 13 (편차 1). 첫 음절 "이", 끝 음절 "게/자" 개음절 — 고음 자리 안전.</li>
+      <li><b>2. 그 목도리</b> — 13 / 14 / 13 / 13 (편차 1). 파이널 14 / 13 / 13 / 13. 후렴 끝 "죠" 통일로 호흡 위치 고정.</li>
+      <li><b>3. 그 노래가 나오면</b> — 14 / 14 / 15 / 14 (편차 1). 파이널 14 / 13 / 13 / 14.</li>
+      <li><b>4. 신호음</b> — 13 / 12 / 13 / 13 (편차 1). 파이널 13 / 13 / 13 / 13 (편차 0). 반말·훅오픈이라 짧게 유지.</li>
+      <li><b>5. 형은 말이 없었다</b> — 16 / 15 / 16 / 14 (편차 2). ~습니다체라 줄이 길지만 70BPM에 실린다. 파이널 16 / 14 / 14 / 15.</li>
+      <li><b>6. 결혼사진</b> — 15 / 14 / 14 / 15 (편차 1). 파이널 15 / 15 / 13 / 14.</li>
+      <li><b>7. 이제부터 좋은 날</b> — 16 / 16 / 15 / 16 (편차 1). 파이널 14 / 15 / 13 / 15 (편차 2). 온기형이라 후렴을 넉넉하게 열어 90BPM 장조에 실었다.</li>
+      <li><b>고친 것</b> — 1번 후렴 "이제 바늘귀는 내가 꿸게"(10)를 "꿰어줄게"(12)로 늘려 편차 확보. 2번 "겨울마다 내 목을 감고 있죠"(11) → "겨울마다 오늘도 내 목을 감고 있죠"(14). 4번 "세 번을 울리기 전에 끊었어"(11)를 "세 번이 울리기 전에 나는 끊었어"(13)로, 파이널 "그게 내 전부야"(11) → "그게 아직 내 전부야"(13). 6번 항변 후렴 1·2행 편차 3(16/13) → "웃지 마요"·"그리도"로 15/14 정렬. 7번 "당신 좋아하던 데 어디든 다 가자"(13) → "당신이 좋아하던 데 어디든 다 가보자"(15).</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>④ 자기복제 대조 — 카탈로그 48곡 + 앨범 내부 + 임영웅 지향점</summary>
+    <p><b>카탈로그 포화지 회피 (훅노트 "안 판 땅" 지도 대조)</b></p>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="border-bottom:1px solid var(--line)"><th>포화지(🔴)</th><th>이 앨범의 처리</th></tr>
+      <tr><td>비 / 소주·혼술 / 노동·생계</td><td>4·5집이 방금 소진 → <b>7곡 전부 0건.</b> 비 오는 장면, 술잔, 새벽 노동 없음</td></tr>
+      <tr><td>어머니·아버지</td><td>소재로 안 씀. 5번 형제 곡에 "아버지 일찍 가시고"·"어머니 산소"가 <b>배경으로만</b> 스치되, 곡의 주인공은 끝까지 <b>형</b></td></tr>
+      <tr><td>계절·자연 은유</td><td>1집 14곡이 통째로 판 땅 → 은유 축 회피. 2번 "겨울"은 <b>목도리를 감는 실제 계절</b>이지 은유가 아니다. 7번 초안 "이제 봄이야"는 <b>"이제 우리 차례야"로 교체</b>(계절 은유 제거)</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:14px"><b>카탈로그 48곡 킥·소재 대조 — 걸려서 실제로 고친 것</b></p>
+    <ul>
+      <li><b>7번 「이제부터 좋은 날」</b> — 벌스2 초안이 "젊어서 <b style="display:inline">못 사준 반지</b> 하나 사러 가자"였다. 발행곡 <b style="display:inline">「그 반지」(7곡 중 최강 평가)</b>와 사물 정면 충돌. → <b style="display:inline">"신혼여행도 못 갔잖아 우리 / 바다 한번 보러 가자"</b>로 전면 교체(신혼여행 = 카탈로그 신규).</li>
+      <li><b>4번 「신호음」</b> — 초안 소재가 <b style="display:inline">멈춘 손목시계</b>였으나, 웹 대조에서 나훈아 「고장난 벽시계」·류정란 「멈췄던 시계가 다시 돌아간다」와 트로트 "멈춘 시계=세월" 트로프 충돌 확인 → <b style="display:inline">소재 폐기, 통화 신호음으로 교체.</b> 훅노트 flagged("전화 걸었다 끊는 곡, 5집은 '안 누른다'까지만 갔다")를 계승하되 <b style="display:inline">실제로 걸었다가 끊는</b> 지점까지 밀었다(5집 3번과 구분).</li>
+      <li><b>2번 「그 목도리」</b> — 5집 「군산엔 비가 온답니다」의 "이제는 누가 우산을 씌워주겠죠"(남이 그 사람을 돌봐줌)와 정서 인접. → 이 곡은 <b style="display:inline">상대가 이미 갔고, 남은 건 사물뿐</b>이라 각도가 다르다. "우산 씌워줌"류 안부 상상 0줄.</li>
+      <li><b>4·1번 손·바늘 계열</b> — 1번(바늘귀 꿴다)과 4번(엄지가 통화버튼에서 떤다)이 둘 다 손을 쓰지만, 1번은 <b style="display:inline">사랑하는 사람을 위한 손</b>, 4번은 <b style="display:inline">닿지 못하는 손</b>이라 기능이 반대. 의도적 대구.</li>
+      <li><b>지명 축 휴식</b> — 5집이 군산·서울을 썼기에 이번엔 <b style="display:inline">지명곡 0곡.</b> 강릉 완행열차 안을 검토했으나 「춘천 가는 기차」(김현철) 구조와 인상 충돌 + 지명 연속 앨범 피로 → 삭제.</li>
+      <li><b>금지 상투어 검사</b> — "아 옛날이여"/"인생은 나그네"/"세월이 약이다"/"돌고 도는 인생"/"밥은 먹고 다니냐"/"꽃길"/"그 한마디" 7곡 전체 0건 ✅. (4번 초안 "여보세요 <b style="display:inline">그 한마디</b>만" → "그 목소리만"으로 교체, 5번 초안 "잘 있어라 <b style="display:inline">그 한마디</b>가" → "그 말만 남기고 갔습니다"로 교체 — 곡 제목 「그 한마디」 저촉 회피)</li>
+      <li><b>앨범 내부 대조</b> — 부부 대상 곡 3곡(1·6·7)을 각각 <b style="display:inline">살아있는 현재(1) / 떠난 뒤 사진(6) / 남은 미래(7)</b>로 시간축을 갈라 배치. 어미도 다/죠/반말로 분산.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑤ 히트곡제조기 통독 (완성본을 처음 보는 눈으로) — 걸린 곡은 실제로 고쳤다</summary>
+    <ul>
+      <li><b>1. 바늘귀</b> — <b style="display:inline">앨범을 여는 온기.</b> 채널은 늘 회한으로 문을 여는데 이 앨범은 <b style="display:inline">살아있는 아내에게 하는 조용한 약속</b>으로 연다(임영웅 「이제 나만 믿어요」 결). 킥 = "이제 바늘귀는 내가 꿰어줄게". <b style="display:inline">고친 것</b>: 벌스2가 "쉬어도 되는데"로 착하게만 끝나 밋밋 → "못 하겠으면 달라고 왜 말을 못 해"로 <b style="display:inline">약한 타박</b>을 넣어 부부의 실감을 살렸다.</li>
+      <li><b>2. 그 목도리</b> — 여성 청취자가 "우리 남편이 아직도…"로 받는 곡. 눈물 지점 = "따뜻한 게 죄라서 못 버리고 있죠". <b style="display:inline">고친 것</b>: 브릿지가 사실 나열로만 끝나 밋밋 → "백화점 부드러운 것들 다 만져만 보고 다시 놓고 나왔죠 / 내 건 여기 목에 이미 감겨 있으니까"로 <b style="display:inline">고르지 않는 이유</b>를 심었다.</li>
+      <li><b>3. 그 노래가 나오면</b> — 임영웅 팬층이 가장 사랑하는 <b style="display:inline">메타 구조</b>(노래에 대한 노래). 브릿지 없이 후렴을 세 번 돌려 <b style="display:inline">라디오가 곡을 트는 3분</b> 자체를 흉내 낸다. <b style="display:inline">판단</b>: "당신은 이 노래로 다 말했는데 나는 그때 못 알아들었다"를 후렴에 올릴까 검토했으나 <b style="display:inline">기각</b> — 3초 만에 답을 줘버린다. 벌스2로 내려 여운을 남겼다.</li>
+      <li><b>4. 신호음</b> — 앨범의 최저점(못 뱉음). 킥 = "세 번이 울리기 전에 나는 끊었어". <b style="display:inline">이 곡의 값은 비겁함</b>이다 — 브릿지 "차라리 안 받았으면 좋겠어 / 그럼 못 한 게 아니라 못 닿은 거니까"에서 화자가 스스로를 변호한다. <b style="display:inline">판단</b>: 마지막에 상대가 받는 반전을 넣고 싶었으나 기각 — 이 남자는 끝까지 못 건다. 그게 진실이다.</li>
+      <li><b>5. 형은 말이 없었다</b> — <b style="display:inline">앨범의 환기창(3인칭 관찰).</b> 전곡 부부·이별인데 형제 한 곡이 숨통을 튼다. 킥 = "말 대신 형은 그냥 다 짊어졌습니다". 대화 삽입 벌스("괜찮다 딱 한마디 / 먹었다 또 한마디")가 말 없는 형을 소리로 세운다. <b style="display:inline">고친 것</b>: 브릿지에 "환갑 지나서야 형이 처음 울었다 / 나도 사실 무서웠다고 / 그 말 하는 데 육십 년이 걸렸다"를 넣어 <b style="display:inline">침묵이 깨지는 단 한 순간</b>을 만들었다.</li>
+      <li><b>6. 결혼사진</b> — 앨범에서 가장 아픈 곡(아내 먼저 떠남). 킥 = "그렇게 웃지 마요 먼저 갈 거면서". <b style="display:inline">약했던 곡</b> — 초안은 "웃던 당신이 그립다"로 착한 말뿐이었다. <b style="display:inline">사진 속 당신에게 화를 내는</b> 항변("웃지 마")으로 후렴을 바꾸자 곡이 살았고, 파이널에서 그 화가 "그렇게 웃어요 나 좀 기다려주죠"로 <b style="display:inline">수용으로 뒤집힌다.</b> 2절 없는 짧은 곡이라 감정이 새지 않는다.</li>
+      <li><b>7. 이제부터 좋은 날</b> — 6곡의 침묵을 여는 문. 따라 부를 줄 = "이제부터 좋은 날이야 우리한테도 온다". <b style="display:inline">앨범 설계의 심장</b> = 브릿지 "이제는 안 아낄게 매일 할게 / 여보 사랑해 오늘부터 매일" — <b style="display:inline">앨범 통틀어 "사랑해"가 나오는 유일한 자리.</b> 1번의 "말 대신 그저 꿴다"와 정확히 수미상관: 못 하던 남자가 마지막에 하기로 한다. <b style="display:inline">고친 것</b>: 파이널 "울던 날은 다 세어봤자"가 「꽃피는 날 온다」("울던 날도 많았지")와 겹쳐 "힘든 날은 다 세어봤자"로 교체.</li>
+      <li><b>앨범 곡선</b> — 약속(1) → 못 버림(2) → 놓아줌(3) → 못 닿음(4) → 형의 침묵(5) → 사진 앞 항변(6) → 처음으로 뱉는 사랑(7). 비슷한 온도 3연속 없음. "사랑해"를 앨범 <b style="display:inline">맨 끝 단 한 번</b>으로 아낀 게 이 앨범의 절제(임영웅 정서)다.</li>
+      <li><b>선공개 권장</b> — 1번 「바늘귀」(임영웅 「이제 나만 믿어요」 직계 · 노안이라는 즉시 공감 소재) 또는 3번 「그 노래가 나오면」(메타 구조 · 임영웅 팬 소구).</li>
+      <li><b>어미 반복 검사</b> — 곡 내부 동일 어미 3줄 연속 0건. 5번 대화 삽입의 짧은 반말 인용은 <b style="display:inline">의도된 장치</b>(말 없는 형의 재현)라 유지.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑥ 원곡 웹 대조 (기억 대조 금지 — 실제로 연 것만)</summary>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr style="border-bottom:1px solid var(--line)"><th>대조 곡</th><th>웹에서 확인한 것</th><th>충돌 여부 · 조치</th></tr>
+      <tr><td><b>「이제 나만 믿어요」</b> 임영웅 <span style="opacity:.7">(지향점)</span></td><td>후렴 핵심구 = <b>"이제 나만 믿어요"</b> 반복 (믿음·약속의 warm ballad)</td><td>❌ 충돌 없음. 1·7번이 <b>warm promise 정서</b>를 공유하되 문장은 <b>"이제 바늘귀는 내가 꿰어줄게"</b>·<b>"이제부터 좋은 날"</b>로 전혀 다르다. <b>"나만 믿어요/믿어줘" 계열 0줄.</b> 가져온 것은 <b>담백한 약속</b>이라는 장르 정서뿐</td></tr>
+      <tr><td><b>「사랑은 늘 도망가」</b> 임영웅 <span style="opacity:.7">(지향점, 원곡 이문세)</span></td><td>첫 소절 = <b>"눈물이 난다 이 길을 걸으면 그 사람 손길이 자꾸 생각이 난다"</b></td><td>❌ 충돌 없음. <b>"눈물이 난다"·"이 길을 걸으면"·"손길이 생각난다" 계열 0줄.</b> 제목·후렴구 「사랑은 늘 도망가」 미사용</td></tr>
+      <tr><td><b>「별빛 같은 나의 사랑아」</b> 임영웅 <span style="opacity:.7">(온기형 참조)</span></td><td>밝은 장조 사랑 발라드 (제목이 후렴 반복구)</td><td>❌ 충돌 없음. 7번은 <b>사운드 결(장조·따뜻함)만</b> 참조. "별빛"·"사랑아" 등 표현 미사용. 수노 스타일 칸에 <b>가수명·곡명 0건</b>(묘사로만)</td></tr>
+      <tr><td><b>「고장난 벽시계」</b> 나훈아 · <b>「멈췄던 시계가 다시 돌아간다」</b> 류정란</td><td>트로트 "멈춘 시계 = 흘러간 세월" 트로프의 대표곡</td><td>✅ <b>조치함.</b> 4번 초안 소재 <b>멈춘 손목시계 폐기</b> → 통화 신호음으로 교체. 시계·세월 트로프 저촉 회피</td></tr>
+      <tr><td><b>「춘천 가는 기차」</b> 김현철</td><td>완행열차 · 지명 + 기차 구조의 아이콘</td><td>✅ <b>조치함.</b> 강릉 완행열차 곡 <b>설계 단계에서 삭제.</b> "○○ 가는 기차/완행" 구조 미사용</td></tr>
+      <tr><td><b>「손이 참 곱던 그대」</b> 임영웅</td><td>"손"을 제목·소재로 쓴 임영웅 곡</td><td>✅ <b>회피.</b> 1번 warm promise 곡의 소재를 <b>손이 아니라 바늘귀(노안)</b>로 잡은 이유. "손이 곱다/거칠다"는 7번에 한 줄만("당신 손이 왜 이렇게 거칠어졌나") 스치되 제목·후렴 아님</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><b>제목 최종 확인</b> — 바늘귀 / 그 목도리 / 그 노래가 나오면 / 신호음 / 형은 말이 없었다 / 결혼사진 / 이제부터 좋은 날. <b style="display:inline">기성 유명곡과 동명 0건.</b> 임영웅 곡명(이제 나만 믿어요·사랑은 늘 도망가·별빛 같은 나의 사랑아·손이 참 곱던 그대) 미사용 ✅</li>
+      <li><b>기억 대조 금지 준수</b> — 임영웅 두 지향점 곡은 <b style="display:inline">웹에서 실제 후렴구·첫 소절을 확인</b>한 뒤 판정했다. 어느 곡의 문장·고유 표현도 가져오지 않았다 — 가져온 것은 "담백하고 절제된 애절함"이라는 <b style="display:inline">창법·정서의 결</b>뿐이고, 그건 장르 공유 자산이다.</li>
+    </ul>
+  </details>
+
+  <details class="review">
+    <summary>⑦ 수노 프롬프트 — 방법론 대조 · 검사기 실행 결과</summary>
+    <ul>
+      <li><b>사용한 종 3가지</b> — 한형 70BPM(카드 원본, 2·4·5번) · 한형 85BPM(카드 공인 변주, 1·3·6번) · <b style="display:inline">온기형 90BPM(신규, 7번)</b>. 흥형은 이번 콘셉트(애절 발라드)에 안 맞아 사용 안 함.</li>
+      <li><b>온기형 신규 설계 근거</b> — 흥형 자리를 임영웅 「별빛 같은 나의 사랑아」/「이제 나만 믿어요」식 <b style="display:inline">따뜻한 장조 발라드</b>로 대체. 한형 7칸 양식을 뼈대로 <code>minor pentatonic, melancholic</code> → <code>major key, bright and consoling, warm hopeful, a quiet promise of better days</code>로 바꾸고, <code>light brushed drums entering late</code>를 넣어 90BPM 미디엄 온기를 만들었다. <b style="display:inline">뽕짝이 아니다</b> — <code>NOT heavy ppongjjak</code>·<code>no strong two-beat</code> 유지, 악기는 여전히 피아노·스트링·기타 발라드 편성. Development는 카드 규칙대로 흐름 6문장(Starts→Verse→Pre→Chorus→Bridge→Final).</li>
+      <li><b>Exclude</b> — 온기형도 한형 Exclude(EXCL_HAN) 그대로 사용. <code>cheerful, fast tempo, loud drums, heavy ppongjjak</code>를 <b style="display:inline">일부러 남겨</b> 곡이 giddy 흥형으로 튀지 않고 <b style="display:inline">따뜻한 발라드</b>에 머물게 잠갔다. L(군중)·D(보컬겹침) 차단은 전곡 공통.</li>
+      <li><b>검사기 실행 결과</b> — <code>py D:\work\작사공용\트리거검사기.py -t "..."</code>
+        <ul>
+          <li>온기형 90BPM (신규): <b style="display:inline">938/940자</b> · <b style="display:inline">트리거 0건</b> · ✅ 통과</li>
+          <li>한형 70·85BPM: 카드 §10 검증값 그대로(각 940/939자, L1 <code>soaring chorus</code> 의도 표기됨, BLOCKER 0) — 5집에서 이미 통과한 프롬프트</li>
+        </ul>
+      </li>
+      <li><b>카드 환류 예정(§13)</b> — ① 흥형 없이 온기형으로 마감한 첫 앨범(콘셉트가 관례를 누른 사례) ② 온기형 90BPM 신규 종을 카드 §10에 추가 등재 후보(수노 결과로 검증되면). <b style="display:inline">판정 전까지 다른 앨범 확산 금지</b> — 5집 신규 한형 프롬프트와 마찬가지로 이 앨범이 온기형 첫 실사용이다.</li>
+    </ul>
+  </details>
+
+  <p class="hint">수노 가사칸에는 <b>가사</b>를, 스타일칸에는 <b>스타일</b>을, 제외칸에는 <b>제외</b>를 각각 붙여넣으세요.<br>
+  곡 구조 태그([Verse]/[Chorus]…)는 그대로 두면 수노가 알아서 구간을 나눕니다.</p>
+</div>
+
+<script>
+const STYLE_HAN70 = `Emotional Korean adult-contemporary ballad with subtle trot (teuroteu) flavor, gentle and understated, NOT heavy ppongjjak. Nostalgic, melancholic longing (han). Soft piano, warm strings, gentle electric guitar, faint electronic organ; calm tender melody, smooth mellow rhythm, no strong two-beat. Young male vocalist, early thirties, warm clear slightly husky, light delicate vibrato only (no heavy kkeokki, no exaggerated trembling). Slow tempo around 70 BPM, minor pentatonic. Very dry, minimal reverb, single clear lead vocal, centered close-mic, instruments spread wide. Starts with bare piano and held string. Verse stays hushed and conversational, drums out. Pre-chorus builds as low strings enter and guitar answers each line. Chorus opens into a soaring chorus, powerful mixed-belt on the title line. Bridge drops down to piano and voice alone. Final chorus returns with fullest strings and the most open belt, then thins to piano.`;
+
+const STYLE_HAN85 = STYLE_HAN70.replace('Slow tempo around 70 BPM', 'Mid tempo around 85 BPM');
+
+const STYLE_ONGI = `Warm hopeful Korean adult-contemporary ballad with a gentle trot (teuroteu) flavor, tender and sincere, NOT heavy ppongjjak. Comforting, hopeful, a quiet promise of better days. Soft piano, warm strings, gentle guitar, light brushed drums entering late; flowing melody, smooth mellow rhythm, no strong two-beat. Young male vocalist, early thirties, warm clear slightly husky, light delicate vibrato only (no heavy kkeokki). Mid tempo around 90 BPM, major key, bright and consoling. Very dry, minimal reverb, single clear lead vocal, centered close-mic, instruments spread wide. Starts with warm piano and held strings. Verse stays gentle and conversational, drums light. Pre-chorus builds as strings swell and guitar warms each line. Chorus opens bright and uplifting, warm open belt on the title line. Bridge drops down to piano and voice alone. Final chorus returns with fullest strings and the warmest open belt, then settles to piano.`;
+
+const EXCL_HAN = `trumpet, brass, saxophone, heavy ppongjjak, strong vibrato, loud drums, fast tempo, cheerful, female vocal, spoken word, crowd vocals, audience cheering, live concert ambience, arena reverb, gang vocals, choir-like crowd, pub singalong, festival crowd, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, harmony vocals, backing vocals, choir, group vocals, wide vocals, wide stereo vocals, wide chorus`;
+
+const SONGS = [
+{title:"바늘귀", motif:"노안 · 바늘귀 · 돋보기", type:"han85",
+concept:"당신이 사십 년 우리 옷을 다 기웠으니, 이제 바늘귀는 내가 꿴다. 사랑한단 말은 끝내 못 하지만, 이 바늘 하나로 그 말을 대신한다.",
+yt:`"여보, 이제 바늘귀는 내가 꿸게…" 듣는 내내 눈물 나는 노래 - 바늘귀 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+당신 요새 바늘귀를 잘 못 꿰더라
+실 끝을 침 발라 몇 번을 대보다가
+예전엔 눈 감고도 다 하던 사람이
+이제는 나 좀 보라며 나를 부르네
+
+[Pre-Chorus]
+돋보기 하나 새로 맞춰서 왔다
+당신 말고 이번엔 내가 쓰려고
+
+[Chorus]
+이제 바늘귀는 내가 꿰어줄게
+침침해진 그 눈은 내가 대신 볼게
+사십 년 우리 옷을 당신이 기웠으니
+남은 건 내가 기울게 그렇게 살자
+
+[Verse 2]
+뜯어진 소매 하나 내밀지를 못하고
+당신은 그냥 접어서 서랍에 넣더라
+못 하겠으면 달라고 왜 말을 못 해
+평생을 꿰매던 손이 이제 쉬어도 되는데
+
+[Break]
+
+[Bridge]
+사랑한다 그 말은 여태 못 했다
+쑥스러워 목 끝에서 늘 돌아섰다
+그래도 바늘귀 하나는 꿸 수 있다
+그 말 대신 오늘도 그걸 꿰고 있다
+
+[Final Chorus]
+이제 바늘귀는 내가 꿰어줄게
+어두워진 그 눈 앞을 내가 밝힐게
+사랑한다 말은 끝내 못 하지만
+이 바늘 하나로 그 말을 대신할게
+
+[Outro]
+실을 꿴다 오늘도
+말 대신 그저 꿴다`},
+
+{title:"그 목도리", motif:"손뜨개 목도리 · 올이 다 풀린", type:"han70",
+concept:"헤어진 그 사람이 떠준 목도리, 색이 다 바래고 올이 풀렸는데 겨울마다 목에 감는다. 따뜻한 게 죄라서 못 버리고 있다.",
+yt:`"그 사람이 떠준 목도리를 아직도… 그냥 한 잔 했습니다" - 그 목도리 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+장롱 깊이 넣어둔 목도리를 꺼냈죠
+겨울이 왔으니까 그냥 그래서 꺼냈죠
+당신이 떠준 거란 건 이제 상관없죠
+목이 시리면 감는 거지 별 뜻은 없죠
+
+[Pre-Chorus]
+올이 다 풀려서 이제 실밥만 남았는데
+버리려다 버리려다 또 목에 감죠
+
+[Chorus]
+그 목도리 아직도 색이 바랜 채로
+겨울마다 오늘도 내 목을 감고 있죠
+당신은 갔는데 이건 왜 안 가는지
+따뜻한 게 죄라서 못 버리고 있죠
+
+[Verse 2]
+손뜨개는 서툴러서 한쪽이 늘어졌죠
+그게 흠이라고 당신은 미안해했죠
+나는 그 늘어진 쪽이 제일 좋았는데
+그 말을 못 해준 게 겨울마다 걸리죠
+
+[Break]
+
+[Bridge]
+새것 사라고들 하죠 요새 좋은 거 많다고
+백화점에 걸린 그 부드러운 것들
+다 만져만 보고 다시 놓고 나왔죠
+내 건 여기 목에 이미 감겨 있으니까
+
+[Final Chorus]
+그 목도리 아직도 내 목을 감고 있죠
+당신 손이 지나간 그 자리 그대로
+버리면 겨울이 더 추울 것 같아서
+올이 다 풀리도록 그냥 두고 있죠
+
+[Outro]
+올 하나를 쥐어보죠
+아직 따뜻하죠`},
+
+{title:"그 노래가 나오면", motif:"라디오 · 둘이 듣던 옛 노래", type:"han85",
+concept:"라디오에서 둘의 노래가 나오면 못 일어난다. 노래가 끝날 때까지만 당신을 보고, 후주가 잦아들면 놓아준다. 잘 가라 그 시절아, 잘 가라 당신도.",
+yt:`"라디오에서 그 노래만 나오면… 그냥 한 잔 했습니다" - 그 노래가 나오면 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+라디오를 켜놓고 밥을 먹다가
+그 노래 전주가 흘러나온다
+숟가락을 놓는다 나도 모르게
+당신 이 노래 아직도 좋아하나
+
+[Pre-Chorus]
+채널을 돌리려다 손이 멈춘다
+딱 한 소절만 딱 그만큼만 듣자고
+
+[Chorus]
+그 노래가 나오면 나는 못 일어난다
+당신하고 나 사이 그 시절이 흐른다
+잘 지내라 어디서든 잘 지내고 있어라
+이 노래 끝날 때까지만 당신을 본다
+
+[Verse 2]
+가사가 그때는 그냥 좋았는데
+이제는 한 줄 한 줄 다 아프다
+그때 왜 그 말뜻을 몰랐을까
+당신은 이 노래로 다 말했는데
+
+[Chorus]
+그 노래가 나오면 나는 못 일어난다
+당신하고 나 사이 그 시절이 흐른다
+잘 지내라 어디서든 잘 지내고 있어라
+이 노래 끝날 때까지만 당신을 본다
+
+[Final Chorus]
+그 노래가 끝나간다 이제 놓아준다
+후주가 잦아들면 나도 일어난다
+잘 가라 그 시절아 잘 가라 당신도
+다음에 또 나오면 그때 또 보면 된다
+
+[Outro]
+라디오를 끈다
+또 나오겠지 언젠가`},
+
+{title:"신호음", motif:"통화 신호음 · 못 부친 종이 한 장", type:"han70",
+concept:"십 년 만에 번호를 눌렀다가, 세 번 울리기 전에 끊는다. 할 말을 다 적어놓고도 못 했다. 차라리 안 받았으면 좋겠다 — 그럼 못 한 게 아니라 못 닿은 게 되니까.",
+yt:`"그 번호를 눌렀다가… 신호음 두 번에 끊었습니다" 듣는 내내 먹먹한 노래 - 신호음 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Chorus]
+세 번이 울리기 전에 나는 끊었어
+받으면 대체 무슨 말을 하려고
+할 말을 다 적어놓고도 또 못 했어
+신호음 두 번에 나는 오늘도 졌어
+
+[Verse 1]
+번호는 안 바뀌었더라 십 년이 지나도
+누르는 데 십 년 걸렸어 이 열한 자리
+엄지가 통화 버튼 위에서 떨었어
+심장이 먼저 뛰고 손이 따라 떨었어
+
+[Pre-Chorus]
+여보세요 그 목소리만 들으면
+나는 아마 아무 말도 못 할 거야
+
+[Chorus]
+세 번이 울리기 전에 나는 끊었어
+받으면 대체 무슨 말을 하려고
+할 말을 다 적어놓고도 또 못 했어
+신호음 두 번에 나는 오늘도 졌어
+
+[Verse 2]
+적어둔 종이엔 잘 지내냐 한 줄
+그 밑엔 나는 잘 못 지낸다 한 줄
+지우고 또 적고 지우고 또 적고
+결국엔 걸었다가 결국엔 끊고
+
+[Break]
+
+[Bridge]
+차라리 안 받았으면 좋겠어
+그럼 못 한 게 아니라 못 닿은 거니까
+울리다 울리다 그냥 끊기면
+그건 내 잘못이 아닌 게 되니까
+
+[Final Chorus]
+오늘도 세 번을 못 넘기고 끊었어
+받았으면 나는 어쩔 뻔했나 싶어
+할 말은 아직도 그 종이에 남았어
+신호음 두 번 그게 아직 내 전부야
+
+[Outro]
+종이를 접어서 넣어
+내일 또 걸어보지 뭐`},
+
+{title:"형은 말이 없었다", motif:"말 없는 형 · 넓은 등 (형제)", type:"han70",
+concept:"아버지 자리에 말없이 들어선 장남. 힘들다는 말 한 번 없이 등으로 다 막고 살았다. 말 대신 형은 그냥 다 짊어졌다.",
+yt:`"형은 평생 말이 없었습니다…" 듣는 내내 눈물 나는 노래 - 형은 말이 없었다 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+형은 어려서부터 말이 없었습니다
+막내인 내가 떠들면 그냥 웃기만 했습니다
+아버지 일찍 가시고 그 빈자리에
+형은 아무 말 없이 그냥 들어섰습니다
+
+[Pre-Chorus]
+공장 간다고 짐을 싸던 날 아침
+잘 있어라 그 말만 남기고 갔습니다
+
+[Chorus]
+형은 말이 없었습니다 늘 등만 봤습니다
+그 넓은 등으로 다 막고 서 있었습니다
+힘들다는 말 한 번을 안 하고 살았습니다
+말 대신 형은 그냥 다 짊어졌습니다
+
+[Verse 2]
+"형 힘들지" 물으면
+"괜찮다" 딱 한마디
+"밥은 먹었어" 물으면
+"먹었다" 또 한마디
+
+[Break]
+
+[Bridge]
+환갑이 지나서야 형이 울었습니다
+어머니 산소 앞에서 처음 울었습니다
+막내야 나도 사실 무서웠다고
+그 말 하는 데 육십 년이 걸렸습니다
+
+[Final Chorus]
+형은 말이 없었지만 다 사랑이었습니다
+그 침묵으로 우리를 다 키웠습니다
+이제는 내가 형의 등이 되겠습니다
+형 이제 말 좀 해요 내가 다 듣겠습니다
+
+[Outro]
+형은 오늘도 말이 없습니다
+그 등이 참 넓습니다`},
+
+{title:"결혼사진", motif:"벽에 걸린 빛바랜 흑백 결혼사진", type:"han85",
+concept:"먼저 떠난 아내. 벽에 걸린 흑백 결혼사진 속 당신은 아직 스물다섯인데 나만 늙어간다. 그렇게 웃지 마 — 먼저 갈 거면서. 나도 곧 갈 테니 그때까지만 웃고 기다려줘요.",
+yt:`"사진 속 당신은 아직 스물다섯인데…" 듣는 내내 눈물 나는 노래 - 결혼사진 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+벽에 걸린 흑백 사진 속에 우리가 있죠
+스물다섯 당신하고 스물여덟의 내가
+뭐가 그리 좋은지 활짝 웃고 있죠
+그때 우린 몰랐죠 이렇게 될 줄은
+
+[Pre-Chorus]
+사진 속 당신한테 자꾸 말을 걸죠
+여보 그때로 돌아가면 안 될까요
+
+[Chorus]
+그렇게 웃지 마요 이 사람아 웃지 마요
+먼저 갈 거면서 뭐가 그리도 좋다고
+사진 속 당신은 아직 스물다섯인데
+나만 자꾸 늙어가서 미안하고 그렇죠
+
+[Break]
+
+[Bridge]
+액자 유리를 소매로 닦아주죠
+당신 얼굴에 먼지 앉으면 안 되니까
+못 지킨 약속이 참 많은데
+사진은 그런 것도 모르고 웃고 있죠
+
+[Final Chorus]
+그렇게 웃어요 이 사람아 계속 웃어요
+거기선 안 아프고 잘 웃고 있다는 거죠
+나도 곧 따라갈 테니 그때까지만
+그 웃는 얼굴로 나 좀 기다려주죠
+
+[Outro]
+사진에 인사를 하죠
+잘 자요 여보`},
+
+{title:"이제부터 좋은 날", motif:"남은 생 · 못 간 신혼여행 (온기형)", type:"ongi",
+concept:"빚도 다 갚고 애들도 다 컸다. 이제 남은 건 당신하고 나뿐. 사랑한단 말도 참 아꼈는데, 이제는 안 아낄게 — 여보, 사랑해, 오늘부터 매일.",
+yt:`"여보, 이제부터는 좋은 날만 오자…" 듣고 나면 마음 따뜻해지는 노래 - 이제부터 좋은 날 | 강한결 자작곡 (감성 트로트)`,
+lyrics:
+`[Verse 1]
+여보 우리 이제 좀 웃고 살자
+안 좋은 날은 이만하면 됐잖아
+빚도 다 갚았고 애들도 다 컸고
+이제 남은 건 당신하고 나뿐이야
+
+[Pre-Chorus]
+고생했어 그 말을 이제야 하네
+당신 손이 왜 이렇게 거칠어졌나
+
+[Chorus]
+이제부터 좋은 날이야 우리한테도 온다
+안 좋은 건 다 지나갔어 이제 우리 차례야
+당신이 좋아하던 데 어디든 다 가보자
+남은 날은 다 당신 거야 이제부터 좋은 날
+
+[Verse 2]
+젊어서 신혼여행도 못 갔잖아 우리
+이제라도 바다 한번 보러 가자
+좋은 데서 사진도 한 장 찍고
+늦었지만 늦은 대로 다 좋은 거야
+
+[Break]
+
+[Bridge]
+미안했어 여태 고생만 시켜서
+사랑한단 말도 참 아꼈네 여태
+이제는 안 아낄게 매일 할게
+여보 사랑해 오늘부터 매일
+
+[Final Chorus]
+이제부터 좋은 날이야 진짜로 온다
+당신하고 나하고 이제부터 시작이야
+힘든 날은 다 세어봤자 뭐 하겠어
+남은 웃을 날만 세자 이제부터 좋은 날
+
+[Outro]
+손 잡자 여보
+이제부터 좋은 날`}
+];
+
+window.WB = {
+  key: 'hangyeol6_done',
+  songs: SONGS,
+  tags: s => [
+    {t: s.type === 'ongi' ? '온기형 (따뜻·희망 · 장조 90BPM)' : (s.type === 'han85' ? '한형 (애절 · 미디엄 85BPM)' : '한형 (애절 · 세미트로트 70BPM)'), hot: s.type === 'ongi'},
+    {t: '소재 · ' + s.motif},
+    {t: '남성 보컬'},
+  ],
+  lyrics:  s => s.lyrics,
+  style:   s => s.type === 'ongi' ? STYLE_ONGI : (s.type === 'han85' ? STYLE_HAN85 : STYLE_HAN70),
+  excl:    s => EXCL_HAN,
+  yt:      s => s.yt,
+  concept: s => s.concept,
+};
+</script>
+<script src="../assets/workboard.js"></script>
+</body>
+</html>
