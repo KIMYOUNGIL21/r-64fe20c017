@@ -1,0 +1,539 @@
+<title>그밤PD 챌린지 1기 — 프로젝트 현황판</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --ground:#0a0c10;
+    --raised:#12151c;
+    --raised-2:#171b24;
+    --line: rgba(255,255,255,0.09);
+    --line-strong: rgba(255,255,255,0.18);
+    --ink:#edeff2;
+    --ink-mid:#a7aebc;
+    --ink-dim:#767e8d;
+
+    --lamp:#f0a431;
+    --lamp-soft: rgba(240,164,49,0.11);
+    --lamp-line: rgba(240,164,49,0.32);
+
+    --signal:#7c9ce6;
+    --signal-soft: rgba(124,156,230,0.11);
+    --signal-line: rgba(124,156,230,0.32);
+
+    --ok:#5bc38e;
+    --ok-soft: rgba(91,195,142,0.10);
+    --ok-line: rgba(91,195,142,0.30);
+
+    --alarm:#e0574f;
+    --alarm-soft: rgba(224,87,79,0.10);
+    --alarm-line: rgba(224,87,79,0.32);
+
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    --serif: "Gowun Batang", "Nanum Myeongjo", "Batang", serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, D2Coding, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(58rem 34rem at 86% -10%, var(--lamp-soft), transparent 60%),
+      radial-gradient(48rem 32rem at -10% 22%, var(--signal-soft), transparent 60%),
+      var(--ground);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.7;
+    word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:var(--mono); font-variant-numeric:tabular-nums;}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 20px 90px;}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:9px;
+    font-size:12px;font-weight:700;letter-spacing:0.09em;
+    color:var(--lamp);text-transform:uppercase;margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(26px,4.6vw,36px);
+    line-height:1.34;margin:0 0 12px;font-weight:700;
+  }
+  .sub{color:var(--ink-mid);font-size:14.6px;margin:0 0 6px;}
+  .stamp{
+    display:inline-block;margin-top:10px;padding:5px 12px;border-radius:20px;
+    background:var(--raised-2);border:1px solid var(--line);
+    font-family:var(--mono);font-size:11.8px;color:var(--ink-dim);
+  }
+
+  h2{
+    font-size:19.5px;margin:52px 0 4px;font-weight:700;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  h2 .n{font-family:var(--mono);font-size:12px;color:var(--lamp);letter-spacing:0.1em;}
+  .lead{color:var(--ink-dim);font-size:14px;margin:0 0 16px;}
+
+  /* 숫자 카드 */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin:26px 0 8px;}
+  .kpi{
+    background:var(--raised);border:1px solid var(--line);border-radius:12px;padding:15px 16px;
+  }
+  .kpi .k{font-size:11.6px;color:var(--ink-dim);letter-spacing:0.04em;margin-bottom:5px;}
+  .kpi .v{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.15;}
+  .kpi .v small{font-size:14px;color:var(--ink-dim);font-weight:400;}
+  .kpi .m{font-size:12.2px;color:var(--ink-mid);margin-top:3px;}
+  .kpi.good{border-color:var(--ok-line);background:var(--ok-soft);}
+  .kpi.good .v{color:var(--ok);}
+  .kpi.warn{border-color:var(--lamp-line);background:var(--lamp-soft);}
+  .kpi.warn .v{color:var(--lamp);}
+  .kpi.bad{border-color:var(--alarm-line);background:var(--alarm-soft);}
+  .kpi.bad .v{color:var(--alarm);}
+
+  /* 표 */
+  .tbl{width:100%;overflow-x:auto;margin:14px 0 4px;}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px;}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{color:var(--ink-dim);font-size:11.8px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+     background:var(--raised-2);border-bottom:1px solid var(--line-strong);}
+  td b{font-weight:700;}
+  tr:last-child td{border-bottom:none;}
+
+  .pill{
+    display:inline-block;padding:1.5px 8px;border-radius:5px;font-size:11.5px;
+    font-family:var(--mono);white-space:nowrap;border:1px solid var(--line);
+  }
+  .p-done{background:var(--ok-soft);color:var(--ok);border-color:var(--ok-line);}
+  .p-todo{background:var(--alarm-soft);color:var(--alarm);border-color:var(--alarm-line);}
+  .p-part{background:var(--lamp-soft);color:var(--lamp);border-color:var(--lamp-line);}
+  .p-info{background:var(--signal-soft);color:var(--signal);border-color:var(--signal-line);}
+
+  .note{
+    margin:16px 0;padding:13px 16px;border-radius:10px;font-size:14.2px;
+    background:var(--lamp-soft);border:1px solid var(--lamp-line);
+  }
+  .note b{color:var(--lamp);}
+  .note.red{background:var(--alarm-soft);border-color:var(--alarm-line);}
+  .note.red b{color:var(--alarm);}
+  .note.green{background:var(--ok-soft);border-color:var(--ok-line);}
+  .note.green b{color:var(--ok);}
+  .note.blue{background:var(--signal-soft);border-color:var(--signal-line);}
+  .note.blue b{color:var(--signal);}
+
+  ul.plain{margin:10px 0;padding-left:19px;}
+  ul.plain li{margin-bottom:6px;}
+  ul.plain li:last-child{margin-bottom:0;}
+  em{color:var(--ink-mid);font-style:normal;}
+
+  .card{background:var(--raised);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;}
+  .card h3{margin:0 0 8px;font-size:15.6px;}
+  .card p{margin:0 0 8px;font-size:14.2px;color:var(--ink-mid);}
+  .card p:last-child{margin-bottom:0;}
+
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+
+  pre.tree{
+    margin:12px 0;padding:16px 17px;overflow-x:auto;
+    background:var(--ground);border:1px solid var(--line-strong);border-radius:10px;
+    font-family:var(--mono);font-size:12.4px;line-height:1.68;color:var(--ink-mid);
+  }
+  pre.tree b{color:var(--ink);font-weight:700;}
+  pre.tree i{color:var(--ok);font-style:normal;}
+  pre.tree u{color:var(--lamp);text-decoration:none;}
+  pre.tree s{color:var(--ink-dim);text-decoration:none;}
+
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:14px;}
+  a.lk{
+    display:block;padding:12px 15px;border-radius:10px;text-decoration:none;
+    background:var(--raised);border:1px solid var(--line);color:var(--ink);
+  }
+  a.lk:hover{border-color:var(--lamp-line);background:var(--raised-2);}
+  a.lk .t{font-weight:700;font-size:14.4px;}
+  a.lk .u{font-family:var(--mono);font-size:11.4px;color:var(--ink-dim);word-break:break-all;}
+
+  .ck{list-style:none;padding:0;margin:12px 0;}
+  .ck li{
+    padding:10px 13px;margin-bottom:8px;border-radius:9px;font-size:14.2px;
+    background:var(--raised);border:1px solid var(--line);
+  }
+  .ck li b{color:var(--ink);}
+  .ck li.hot{border-color:var(--alarm-line);background:var(--alarm-soft);}
+  .ck li.done{border-color:var(--ok-line);background:var(--ok-soft);color:var(--ink-mid);}
+
+  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);
+         font-size:12.6px;color:var(--ink-dim);}
+</style>
+
+<div class="wrap">
+
+  <div class="eyebrow">◆ Internal / 운영자 전용 현황판</div>
+  <h1>그밤PD 챌린지 1기<br>프로젝트 현황</h1>
+  <p class="sub">AI 왕초보 입문 챌린지 · 4주 코호트 · 정원 10명 · 59,000원</p>
+  <div class="stamp">2026-07-30 기준 · 개강 8/3(월) <b>D-4</b></div>
+
+  <div class="note blue" style="margin-top:22px;">
+    <b>이 페이지는 내부용입니다.</b> 어디에도 링크되어 있지 않은 주소이고 검색에도 안 잡히게 해뒀습니다.
+    참가자에게 공유하는 주소는 <span class="mono">/challenge-1ki/</span> 쪽입니다.
+  </div>
+
+  <!-- ══════════ 1. 한눈에 ══════════ -->
+  <h2><span class="n">01</span> 한눈에</h2>
+  <p class="lead">숫자는 전부 실제 기록에서 가져왔습니다. 추정치는 넣지 않았습니다.</p>
+
+  <div class="kpis">
+    <div class="kpi good">
+      <div class="k">결제 완료</div>
+      <div class="v">8<small> / 10명</small></div>
+      <div class="m">잔여 2석 · 노션 DB 실집계</div>
+    </div>
+    <div class="kpi warn">
+      <div class="k">개강까지</div>
+      <div class="v">D-4</div>
+      <div class="m">8/3(월) 킥오프</div>
+    </div>
+    <div class="kpi bad">
+      <div class="k">배포 재료</div>
+      <div class="v">1<small> / 5종</small></div>
+      <div class="m">시황 키트만 완료</div>
+    </div>
+    <div class="kpi bad">
+      <div class="k">온보딩 체크</div>
+      <div class="v">0<small> / 8명</small></div>
+      <div class="m">가입·방입장·자기소개 전부 0</div>
+    </div>
+  </div>
+
+  <div class="note red">
+    <b>⚠️ 지금 가장 급한 것 — 온보딩 기록이 비어 있습니다.</b>
+    노션 DB의 <span class="mono">가입완료 · 방입장 · 자기소개완료</span> 체크박스가
+    결제자 8명 전원 <b>0개</b>입니다. 이게 <em>"아직 아무도 안 했다"</em>인지
+    <em>"했는데 기록을 안 했다"</em>인지는 데이터로 판단할 수 없습니다 — 확인이 필요합니다.
+    <br><br>
+    운영플레이북 §3의 핵심이 <b>"승부는 Day 1이 아니라 Day 0 이전에 난다"</b>이고,
+    세팅 미완이 왕초보 이탈 1순위입니다. <b>8/2(일) 밤이 마지노선</b>이니 남은 3일이 실제 승부처입니다.
+  </div>
+
+  <div class="note">
+    <b>결제 기록 참고.</b> 8건 모두 결제일이 <span class="mono">2026-07-28</span>로 찍혀 있습니다 —
+    노션 DB를 만든 날이라 <b>일괄 입력된 것으로 보입니다.</b> 실제 개별 결제 시각과 다를 수 있으니,
+    "U자 유입 패턴"(운영플레이북 §2-1) 판단 근거로는 쓰지 마세요.
+  </div>
+
+  <!-- ══════════ 2. 개강 전 남은 일 ══════════ -->
+  <h2><span class="n">02</span> 개강 전 남은 일</h2>
+  <p class="lead">운영플레이북 §0 + 프로젝트 헌법의 미완 항목을 합친 것입니다.</p>
+
+  <ul class="ck">
+    <li class="hot"><b>① 배포 재료 4종 제작</b> — 특히 <b>깃허브 캡처 안내서</b>가 W1D2(화) 진행의 전제입니다.
+      깃허브 화면이 전부 영어라 "캡처 안내서를 드립니다"라고 페이지에 이미 약속돼 있습니다.</li>
+    <li class="hot"><b>② 온보딩 3종 확인·기록</b> — 유료구독 가입 / 오픈채팅방 입장 / 자기소개. 8/2 밤까지.</li>
+    <li class="hot"><b>③ 예습 페이지 <span class="mono">UNLOCKED_WEEK</span>를 1로</b> — 지금 <span class="mono">4</span>(전체공개, 검토용)입니다. 배포 직전 필수.</li>
+    <li><b>④ 노션 커넥터 쓰기 가능 여부 실측</b> — claude.ai / 챗GPT 계정별로. 안 되는 갈래는 W2D1 성공판정을 "직접 붙여넣기"로 이미 낮춰뒀습니다.</li>
+    <li><b>⑤ 수요일 저녁 "같이 화면 보는 시간" 일정 확정</b> — 페이지에 이미 약속했습니다.</li>
+    <li><b>⑥ 오픈카톡방 최종 공지 게시</b> + 방 규칙 고정 공지(운영플레이북 §4-2)</li>
+    <li><b>⑦ 래피드 결제 플로우에 사전 설문 3문항</b> — 4주 뒤 후기의 <b>비포 데이터</b>. 지금 안 찍으면 애프터만 남습니다.</li>
+    <li><b>⑧ 웰컴 메일 2통 발송</b> — 메일1(안심) / 메일2(과제 3개). 템플릿은 운영플레이북 §3-1에 완성돼 있습니다.</li>
+    <li><b>⑨ Day1 킥오프 체크리스트</b> — 과제 총 개수 숫자 확정 · 주말 규칙 · 답변 시간대 · 사례 공개 동의. <em>여기서 정한 게 4주를 지배합니다.</em></li>
+    <li class="done"><b>✔ 시황 키트 제작·검증·배포 완료</b> (2026-07-30)</li>
+  </ul>
+
+  <!-- ══════════ 3. 배포 재료 ══════════ -->
+  <h2><span class="n">03</span> 배포 재료 5종</h2>
+  <p class="lead">참가자 예습 페이지가 <b>이미 약속해버린</b> 물건들입니다. 약속했으니 개강 전에 있어야 합니다.</p>
+
+  <div class="tbl">
+  <table>
+    <tr><th>재료</th><th>언제</th><th>상태</th></tr>
+    <tr>
+      <td><b>시황 키트</b><br><em>검증된 스크립트 + README</em></td>
+      <td class="mono">W1D2 (화)</td>
+      <td><span class="pill p-done">완료</span> 2026-07-30 · 배포·검증 끝</td>
+    </tr>
+    <tr>
+      <td><b>깃허브 캡처 안내서</b><br><em>가입 → 저장소 → Pages</em></td>
+      <td class="mono">W1D2 (화)</td>
+      <td><span class="pill p-todo">미제작</span> 1주차 전제 · <b>최우선</b></td>
+    </tr>
+    <tr>
+      <td><b>노션 연결 안내서</b></td>
+      <td class="mono">W2D1</td>
+      <td><span class="pill p-part">초안</span> <span class="mono">연동설치가이드.md</span> v1 — UI 경로 미검증</td>
+    </tr>
+    <tr>
+      <td><b>영상 키트</b><br><em>자막 화면 틀 + 조립 README</em></td>
+      <td class="mono">W3D1</td>
+      <td><span class="pill p-todo">미제작</span> <span class="mono">youtube-os</span> 영상공장 간소판</td>
+    </tr>
+    <tr>
+      <td><b>쓰레드 일일 문장 재료</b></td>
+      <td class="mono">매일</td>
+      <td><span class="pill p-part">재사용 가능</span> <span class="mono">threads-autopost\모객카드.md</span> K공식</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>환경 세팅 안내서</b>(<span class="mono">환경세팅안내서.md</span>)는 v1 텍스트가 있으나
+    <b>[스크린샷 자리]가 비어 있습니다.</b> 왕초보 대상이라 캡처 없이는 반쪽입니다.
+  </div>
+
+  <!-- ══════════ 4. 시황 키트 ══════════ -->
+  <h2><span class="n">04</span> 시황 키트 <span class="pill p-done">오늘 완료</span></h2>
+  <p class="lead">1주차 트랙 B(자동화)의 척추. 화요일에 받아서 한 번 돌리고, 수요일에 깃허브 액션에 얹습니다.</p>
+
+  <div class="note green">
+    <b>왜 키트로 고정했나.</b> 시황을 어디서 가져올지 각자 AI에게 맡기면
+    <b>10명이 10가지 구현</b>이 됩니다. 전형적 실패는 <em>"내 컴퓨터에선 되는데 깃허브 액션에선 IP가 막혀 안 됨"</em> —
+    1인 케어가 감당 못 하는 폭탄이라 검증된 키트 하나로 통일했습니다.
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>✔ 양쪽에서 실측 검증</h3>
+      <p><b>국내 PC</b>(Win11 · Python 3.12) 통과<br>
+      <b>깃허브 액션</b>(미국 버지니아 IP · Azure) 통과</p>
+      <p>주 소스 6종 + 예비 소스 3종 <b>전부 응답</b>, 텔레그램 경로 정상,
+      한국시간 변환 정확(UTC 09:38 → 오후 6시 38분).</p>
+    </div>
+    <div class="card">
+      <h3>✔ 설치할 프로그램 0개</h3>
+      <p>파이썬 표준 기능만 씁니다. <span class="mono">pip install</span> 단계를 없앤 게
+      왕초보 실패 지점 하나를 통째로 지운 겁니다.</p>
+      <p>주 소스 = 야후 파이낸스 / 예비 = 네이버·프랑크푸르터·업비트.
+      <b>한 항목이 실패해도 나머지는 발송</b>됩니다.</p>
+    </div>
+  </div>
+
+  <div class="note red">
+    <b>실측으로 잡은 버그 3건 — 특히 첫 번째.</b>
+    <ul class="plain" style="margin-top:8px;">
+      <li><b>깃허브 액션은 job 이름에 한글을 못 씁니다.</b> <span class="mono">jobs: 보내기:</span> 로 쓰면
+        워크플로 파일 자체가 거부됩니다. <b>못 잡았으면 수요일에 10명 전원이 같은 벽에 부딪혔습니다.</b></li>
+      <li><b>야후의 <span class="mono">chartPreviousClose</span>는 전일 종가가 아닙니다.</b>
+        그대로 쓰면 코스피가 −5.98% 대신 <b>−16.7%</b>로 찍힙니다. 종가 배열에서 직접 계산하도록 고치고
+        네이버 공식 수치와 6종목 대조(오차 0.004%p)했습니다.</li>
+      <li>관심종목 중복 출력 · 야후가 이름 대신 쓰레기값을 주는 문제 — 둘 다 수정.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🛡 케어 부담을 줄이려 넣은 것</h3>
+    <p><b><span class="mono">점검.py</span></b> — 뭐가 되고 안 되는지 한 화면에 찍어줍니다.
+    <b>토큰이 ●●●●로 가려져서 캡처를 단톡방에 그대로 올려도 안전</b>합니다.</p>
+    <p><b>오류 번역</b> — <span class="mono">chat not found</span> → <em>"봇에게 /start 먼저 보내세요"</em>처럼
+    손댈 수 있는 말로 바꿔 보여줍니다.</p>
+    <p><b>AI 가드레일</b> — README 하단에 "이 키트를 고치는 AI에게" 기술 메모.
+    AI가 친절하게 <span class="mono">yfinance</span>로 갈아엎어 액션에서 터지는 걸 막습니다.</p>
+    <p><b>열쇠 유출 2중 방어</b> — <span class="mono">.gitignore</span>가 설정 파일을 빼고(실측 확인),
+    점검 화면은 토큰을 마스킹합니다.</p>
+  </div>
+
+  <div class="note">
+    <b>남은 것 2가지.</b>
+    ① 임시 검증 저장소 <span class="mono">sihwang-kit-verify</span> 삭제(권한 문제로 사장님이 직접)
+    ② <b>사장님 봇으로 액션 실발송 리허설 1회</b> — 액션에서는 텔레그램 서버 도달까지만 확인했습니다.
+  </div>
+
+  <!-- ══════════ 5. 커리큘럼 ══════════ -->
+  <h2><span class="n">05</span> 4주 커리큘럼 구조</h2>
+  <p class="lead">하루 3블록 + 습관 2개. 하루 2~2.5시간. 매일 "✔ 성공 판정" 한 줄이 붙어 있고, 그게 완주판정 근거가 됩니다.</p>
+
+  <div class="tbl">
+  <table>
+    <tr><th>주차</th><th>정체성</th><th>트랙 A · 만들기</th><th>트랙 B · 자동화</th><th>➕ AI 다루는 기술</th></tr>
+    <tr>
+      <td><b>1</b><br><em>기초 체력</em></td><td>말로 시켰더니<br>프로그램이 나온다</td>
+      <td>나만의 도구 → Pages 배포 → 폰에서 사용 → 도구함 대문</td>
+      <td>텔레그램 봇 → <b>시황 키트</b> → 액션 예약 → 도착 확인·개조</td>
+      <td>작업방 정리 · Plan Mode · 막힐 때 묻는 법 · CLAUDE.md</td>
+    </tr>
+    <tr>
+      <td><b>2</b><br><em>글 채널</em></td><td>내 기록이<br>글이 되어 쌓인다</td>
+      <td>노션 연결 → 블로그 개설·첫 글 → AI 채점 → 3편</td>
+      <td>글감 수집기 → <b>클플 워커 양방향 봇</b> → 액션 2호</td>
+      <td>인터뷰 기법 · 제목 10개 · 개인정보 가리기</td>
+    </tr>
+    <tr>
+      <td><b>3</b><br><em>영상 채널</em></td><td>내 목소리로<br>내 영상이 나온다</td>
+      <td>대본 → 일레븐랩스 음성 → <b>영상 키트로 조립</b> → 업로드</td>
+      <td>채널 개설 · 주간 자동화 점검 · 세 채널 잇기</td>
+      <td>컨셉 한 줄 · 발음 함정 · 벤치마킹</td>
+    </tr>
+    <tr>
+      <td><b>4</b><br><em>수익화</em></td><td>이제 혼자서도<br>굴러가게</td>
+      <td>쿠파스 링크 → 데려오는 글쓰기 → 1소스 멀티유즈</td>
+      <td>링크 관리표 · <b>글 대기열</b>(무인 발행 금지)</td>
+      <td>대가성 표기(법) · DM 템플릿 · CLAUDE.md 최종판</td>
+    </tr>
+  </table>
+  </div>
+
+  <p style="font-size:14px;color:var(--ink-mid);">
+    습관(전 주차 관통): 🧵 쓰레드 매일 발행 · 📓 노션 3줄 일지.
+    왕초보·전문가 <b>2중 QA를 통과</b>했고, 지적 30건 전부 반영했습니다.
+  </p>
+
+  <!-- ══════════ 6. 타임라인 ══════════ -->
+  <h2><span class="n">06</span> 타임라인</h2>
+  <div class="tbl">
+  <table>
+    <tr><th>시점</th><th>할 일</th><th>상태</th></tr>
+    <tr><td class="mono">7/28~8/1</td><td>모집 · 리마인드 캐던스 · 쓰레드 외부 유입</td><td><span class="pill p-info">진행 중</span></td></tr>
+    <tr><td class="mono">~8/2 (일)</td><td><b>온보딩 3종 완료</b> · 방 규칙 고정 · D-1 리마인드</td><td><span class="pill p-todo">미착수</span></td></tr>
+    <tr><td class="mono">8/3 (월)</td><td><b>Day 1 킥오프</b> — 과제 개수·주말 규칙·답변 시간대 확정</td><td><span class="pill p-part">D-4</span></td></tr>
+    <tr><td class="mono">8/3~8/28</td><td>4주 운영 · 2일 무발행 시 개인 DM · 주 1회 베스트 글 3개</td><td>—</td></tr>
+    <tr><td class="mono">8/24~28</td><td>자동화 시연 + 완주 집계</td><td>—</td></tr>
+    <tr><td class="mono">8/28 (금)</td><td>마무리 세리머니 → <b>직후 48시간이 후기 골든타임</b></td><td>—</td></tr>
+    <tr><td class="mono">이후</td><td>완주 보상 발송 → 2기(79,000원) 준비</td><td>—</td></tr>
+  </table>
+  </div>
+
+  <!-- ══════════ 7. 리스크 ══════════ -->
+  <h2><span class="n">07</span> 운영 리스크</h2>
+  <p class="lead">전문가 QA가 지적한 것들. 케어 배분의 근거로 씁니다.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>🔴 큰 산이 하루에 몰린다</h3>
+      <p>W1 <b>수</b>(액션+Secrets) · W2 <b>목</b>(워커+웹훅) · W3 <b>수</b>(설치+렌더).
+      10명 × 실패 1회 = <b>그날 저녁 캡처 10장 동시 도착.</b></p>
+      <p>→ "수요일 저녁 같이 화면 보는 시간"을 페이지에 이미 약속했으니 <b>일정을 실제로 잡아야</b> 합니다.</p>
+    </div>
+    <div class="card">
+      <h3>🔴 이탈 최대 위험 = 1주차</h3>
+      <p>이탈감지 DM 케어를 1주차에 몰아야 합니다. <b>2일 연속 무발행 → 당일 개인 DM</b>, 공개 호출 절대 금지.</p>
+    </div>
+    <div class="card">
+      <h3>🟡 무료 티어 4개 의존</h3>
+      <p>챗GPT 이미지 · 일레븐랩스 · 클라우드플레어 · 깃허브.
+      정책 하나 바뀌면 특정 요일이 무너집니다.
+      <b>매 기수 개강 직전 전 구간 리허설이 숨은 운영 원가.</b></p>
+    </div>
+    <div class="card">
+      <h3>🟡 정원 10명이 구조적 상한</h3>
+      <p>1:1 케어가 이 상품의 유일한 팔림 포인트라 늘릴 수 없습니다.
+      2기 가격 인상 판단 시 이 병목을 근거로 쓸 수 있습니다.</p>
+    </div>
+    <div class="card">
+      <h3>🟡 액션 60일 자동 중지</h3>
+      <p>저장소를 60일간 안 건드리면 깃허브가 자동화를 멈춥니다.
+      종료 두 달 뒤 전원의 자동화가 죽으면 "혼자 굴러가는 시스템" 약속이 파탄 →
+      4주차 졸업일에 "두 달에 한 번 창고 방문" 항목을 넣어뒀습니다.</p>
+    </div>
+    <div class="card">
+      <h3>🟡 완주기준 신규 실습 편입 미결</h3>
+      <p>랜딩에 없던 유튜브·텔레그램·깃허브·쿠파스는 <b>"더 주는" 보너스</b>로만 취급.
+      완주기준(과제 80%)에 넣으면 사후 의무 추가가 됩니다 — 아직 미결정.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ 8. 미결정 ══════════ -->
+  <h2><span class="n">08</span> 미결정 사항 <span class="pill p-todo">임의 결정 금지</span></h2>
+  <ul class="ck">
+    <li><b>오픈채팅 AI봇 기술방식</b> — 안드로이드 공기계+유심 배송 중.
+      후보 A) 매크로드로이드+Claude API  B) 커스텀 접근성서비스 앱  C) 봇 없이 스니펫 복붙.
+      <em>정해지기 전까지 봇 에이전트는 FAQ 콘텐츠 설계까지만 합니다.</em></li>
+    <li><b>발행횟수 자진기록 방식</b> — 쓰레드 API 자동발행이 정지 중이라 자동집계 불가.
+      구글폼/시트 자진기록 vs 육안확인. <em>정해지기 전까지 "집계 불가"를 정직하게 보고하고 추정치를 만들지 않습니다.</em></li>
+  </ul>
+
+  <!-- ══════════ 9. 운영 체계 ══════════ -->
+  <h2><span class="n">09</span> 운영 체계</h2>
+
+  <div class="tbl">
+  <table>
+    <tr><th>서브에이전트</th><th>역할</th></tr>
+    <tr><td class="mono">challenge-ops</td><td>일일 운영 — "오늘 뭐 해야돼", 웰컴메일·이탈감지 DM 초안, 그날 미션 공지</td></tr>
+    <tr><td class="mono">challenge-growth</td><td>모집·전환 카피 — 리마인드 문안, 쓰레드 모집글, 2기 전환</td></tr>
+    <tr><td class="mono">challenge-data</td><td>독립 집계·채점(읽기전용) — 신청현황·완주판정·비포애프터 매칭</td></tr>
+    <tr><td class="mono">challenge-bot</td><td>봇 두뇌 설계 — FAQ뱅크, 응답범위·에스컬레이션 <em>(기술방식 미정)</em></td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>🔒 넘지 않는 선.</b> 어떤 에이전트도 <b>참가자에게 직접 말 걸지 않습니다.</b>
+    이탈감지 DM · 자기소개 환영 답글 · 완주 세리머니는 전부 <b>초안까지만 에이전트, 전송은 사장님</b>.
+    이 챌린지의 유일한 팔림 포인트가 "제가 옆에서 직접 챙긴다"이기 때문입니다 —
+    봇이 대신 말 걸면 그 순간 상품이 죽습니다.
+  </div>
+
+  <div class="note">
+    <b>다른 3개 철칙.</b> ① <b>숫자는 사실만</b> — 신청 수·잔여석·완주율을 부풀리지 않습니다(초라해도 사실을 씁니다).
+    ② <b>완주기준 소급 완화 금지</b> — 아깝게 못 받은 사람은 보상 대신 2기 할인 같은 별도 카드.
+    ③ <b>공지 ≤ 랜딩 ≤ 실제</b> — 늘 말한 것보다 조금 더 줍니다.
+  </div>
+
+  <!-- ══════════ 10. 폴더 트리 ══════════ -->
+  <h2><span class="n">10</span> 폴더 트리</h2>
+  <p class="lead"><i style="color:var(--ok);font-style:normal;">초록</i> = 이번에 새로 코딩한 것 ·
+    <u style="color:var(--lamp);text-decoration:none;">주황</u> = 참가자에게 나가는 실물</p>
+
+<pre class="tree">D:\work\
+│
+├─ <b>gbampd-challenge\</b>          ← 운영 실물 (헌법 = CLAUDE.md)
+│   ├─ CLAUDE.md                 프로젝트 헌법 · 라우팅 · 철칙
+│   ├─ 운영플레이북.md            모집~2기 전환 (원본은 노션, 여긴 미러)
+│   ├─ 커리큘럼_4주.md            요일별 진행의 단일 진실
+│   ├─ 환경세팅안내서.md          클로드/챗GPT 가입·결제 <s>(캡처 미삽입)</s>
+│   ├─ 연동설치가이드.md          노션·카톡·개발도구 <s>(UI 경로 미검증)</s>
+│   ├─ FAQ뱅크.md                 <s>(아직 비어 있음)</s>
+│   ├─ 참가자명단.md              → 노션 DB 포인터 (PII는 git 금지)
+│   └─ <i>키트\</i>
+│       ├─ <u>시황키트_v1.0.zip</u>      ← 배포본 (22KB)
+│       ├─ <i>_검증기록_시황키트.md</i>   운영용 물증
+│       └─ <i>시황키트\</i>
+│           ├─ <i>README.md</i>         참가자 + 그 AI가 함께 읽는 안내
+│           ├─ <i>설정.txt</i>          참가자가 고치는 유일한 파일
+│           ├─ <i>시황.py</i>           본체 (표준 라이브러리만)
+│           ├─ <i>점검.py</i>           자가진단 (토큰 마스킹)
+│           ├─ .gitignore           설정.txt 유출 차단
+│           └─ <i>추가자료\</i>
+│               ├─ 시간표_예시.yml   깃허브 액션 워크플로
+│               └─ 자주묻는질문.md
+│
+├─ mvp-launch\src\app\challenge\    ← <u>랜딩</u> (공개 약속의 단일 진실)
+│   └─ page.tsx                  가격·정원·완주기준·보상
+│
+├─ lyrics-pages\                    ← GitHub Pages 저장소
+│   ├─ <u>challenge-1ki\</u>            참가자 예습 페이지
+│   │   ├─ index.html            4주 커리큘럼 (UNLOCKED_WEEK <s>= 4</s>)
+│   │   └─ <u>sihwang-kit-v1.0.zip</u>  내려받기 대상
+│   └─ <i>challenge-ops-7b2f\</i>       ← 이 현황판
+│
+└─ .claude\agents\                  ← 서브에이전트 4종
+    ├─ challenge-ops.md
+    ├─ challenge-growth.md
+    ├─ challenge-data.md
+    └─ challenge-bot.md
+
+<b>노션</b> (git 밖 · PII 보관)
+├─ 운영플레이북 원본
+└─ 🌱 챌린지 1기 참가자 성장일지 DB
+    ├─ 테이블 = 결제·사전설문·온보딩체크·완주판정
+    └─ 페이지 본문 = 1인 1페이지 4주 성장일지</pre>
+
+  <!-- ══════════ 11. 링크 ══════════ -->
+  <h2><span class="n">11</span> 링크</h2>
+  <div class="links">
+    <a class="lk" href="https://thenightpd.com/challenge" target="_blank" rel="noopener">
+      <div class="t">🌐 랜딩 (공개 약속)</div><div class="u">thenightpd.com/challenge</div></a>
+    <a class="lk" href="https://kimyoungil21.github.io/r-64fe20c017/challenge-1ki/" target="_blank" rel="noopener">
+      <div class="t">📘 참가자 예습 페이지</div><div class="u">…github.io/r-64fe20c017/challenge-1ki/</div></a>
+    <a class="lk" href="https://kimyoungil21.github.io/r-64fe20c017/challenge-1ki/sihwang-kit-v1.0.zip">
+      <div class="t">⬇ 시황 키트 내려받기</div><div class="u">sihwang-kit-v1.0.zip · 22KB</div></a>
+    <a class="lk" href="https://app.notion.com/95a62a1045ab46d9869922f7567ca225" target="_blank" rel="noopener">
+      <div class="t">🌱 참가자 성장일지 DB</div><div class="u">노션 · PII 보관처</div></a>
+    <a class="lk" href="https://app.notion.com/p/3ab72cc75bf68119b0effee0f6e10d8b" target="_blank" rel="noopener">
+      <div class="t">📗 운영플레이북 원본</div><div class="u">노션 · 수정은 여기서</div></a>
+    <a class="lk" href="https://www.latpeed.com/products/PYVOw" target="_blank" rel="noopener">
+      <div class="t">💳 래피드 결제 페이지</div><div class="u">latpeed.com/products/PYVOw</div></a>
+  </div>
+
+  <footer>
+    <b>그밤PD 챌린지 1기 현황판</b> · 2026-07-30 작성<br>
+    숫자 출처 — 결제·온보딩 = 노션 DB 실집계(SQL) · 나머지 = <span class="mono">gbampd-challenge\</span> 문서.
+    추정치는 넣지 않았고, 판단이 갈리는 항목은 갈린다고 적었습니다.<br>
+    이 페이지는 자동 갱신되지 않습니다 — 상황이 바뀌면 다시 만들어야 합니다.
+  </footer>
+
+</div>
