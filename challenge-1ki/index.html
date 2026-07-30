@@ -259,6 +259,15 @@
     white-space:pre-wrap;word-break:break-word;overflow-x:auto;
   }
 
+  .dl{
+    display:inline-flex;align-items:center;gap:10px;margin:13px 0 2px;
+    padding:12px 18px;border-radius:10px;text-decoration:none;
+    background:var(--ok-soft);border:1px solid var(--ok-line);
+    color:var(--ok);font-weight:700;font-size:14.8px;
+  }
+  .dl:hover{filter:brightness(1.14);}
+  .dl .sub{color:var(--ink-dim);font-weight:400;font-size:12.6px;font-family:var(--mono);}
+
   .retry{margin-top:12px;padding:13px 15px;border:1px dashed var(--line-strong);border-radius:10px;font-size:14px;}
   .retry b{color:var(--ink);}
   .rq{
@@ -689,6 +698,10 @@
             <div class="blk-body">
               <p><b>시황 키트</b>(제가 미리 만들어 검증한 시황 프로그램)를 받아, 내 봇에 연결해 <b>딱 한 번</b> 돌려봅니다.</p>
               <p><em>왜 키트인가 — 시황을 어디서 가져오느냐를 각자 AI에게 맡기면 열 명이 열 가지 방식이 되어 서로 도울 수 없습니다. 검증된 키트 하나로 다 같이 갑니다.</em></p>
+
+              <a class="dl" href="sihwang-kit-v1.0.zip" download="시황키트_v1.0.zip">⬇ 시황 키트 내려받기 <span class="sub">시황키트_v1.0.zip · 22KB</span></a>
+              <p style="margin-top:9px;"><em>내려받아 <b>압축을 풀고</b>, 나온 <span class="mono">시황키트</span> 폴더를 통째로 내 작업 폴더에 넣으세요. <b>따로 설치할 프로그램은 없습니다.</b></em></p>
+
               <div class="plabel">붙여넣을 말</div>
 <pre class="prompt">받은 시황 키트 파일을 내 작업 폴더에 넣어뒀어.
 안에 있는 안내를 읽고, 오늘 시황이 내 텔레그램
@@ -698,6 +711,17 @@
 - 파이썬 같은 게 필요하면 설치부터 안내해줘
 - 나는 코딩을 몰라. 한 단계씩 알려줘.</pre>
               <p style="margin-top:10px;"><em>실행하면 검은 창(터미널)이 뜰 수 있습니다 — 고장이 아니라 프로그램이 일하는 모습입니다.</em></p>
+
+              <div class="inline-note">
+                <b>⭐ 먼저 내 봇에게 <span class="mono">/start</span> 를 한 번 보내세요.</b>
+                텔레그램은 내가 먼저 말을 건 적 없는 상대에게 봇이 말 걸지 못하게 막아둡니다.
+                이걸 빼먹어서 안 되는 경우가 제일 많습니다.
+              </div>
+              <div class="inline-note">
+                <b>🛠 그래도 안 되면 이것부터.</b> 키트 폴더에서 <span class="mono">python 점검.py</span> 를 실행하면
+                무엇이 되고 무엇이 안 되는지 하나씩 찍어서 알려줍니다.
+                <b>이 화면은 열쇠가 ●●●● 로 가려져 나오니, 그대로 캡처해서 단톡방에 올리셔도 안전합니다.</b>
+              </div>
               <span class="kw">시황 키트</span><span class="kw">1회 실행 성공</span>
             </div>
             <div class="done"><b>✔ 오늘 성공 판정</b> — 오늘 시황이 내 폰 텔레그램에 도착했다</div>
