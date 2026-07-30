@@ -267,6 +267,12 @@
   }
   .dl:hover{filter:brightness(1.14);}
   .dl .sub{color:var(--ink-dim);font-weight:400;font-size:12.6px;font-family:var(--mono);}
+  .dl-inline{
+    display:inline-block;margin-left:4px;padding:2px 9px;border-radius:7px;
+    background:var(--ok-soft);border:1px solid var(--ok-line);
+    color:var(--ok);text-decoration:none;font-size:13.2px;font-weight:600;white-space:nowrap;
+  }
+  .dl-inline:hover{filter:brightness(1.14);}
 
   .retry{margin-top:12px;padding:13px 15px;border:1px dashed var(--line-strong);border-radius:10px;font-size:14px;}
   .retry b{color:var(--ink);}
@@ -1527,7 +1533,11 @@
 - 어려운 말이 나오면 바로 뒤에 쉬운 말로 풀기
 - 마지막에 구독 부탁 한 줄</pre>
               <p style="margin-top:10px;">받은 대본을 <b>소리내어 두 번 읽습니다.</b> 혀가 꼬이거나 숨이 차는 문장은 AI에게 "이 문장 더 짧게 쪼개줘"라고 시킵니다. <em>이 검수를 건너뛰면 내일 음성에서 그대로 어색합니다.</em></p>
-              <span class="kw">듣는 말 대본</span><span class="kw">900자</span><span class="kw">소리내어 검수</span>
+              <p style="margin-top:14px;"><b>오늘 미리 받아둘 것 — 영상 키트.</b> 수요일에 화면과 자막을 붙일 때 씁니다. 압축을 풀어 나온 <span class="mono">영상키트</span> 폴더를 통째로 내 작업 폴더에 넣어두세요.</p>
+              <p><em>왜 키트인가 — 자막을 목소리에 맞추는 방법을 각자 AI에게 맡기면 열 명이 열 가지가 되고, 무거운 프로그램을 깔다 하루가 날아갑니다. 제가 미리 만들어 검증한 것 하나로 다 같이 갑니다.</em></p>
+              <a class="dl" href="video-kit-v1.0.zip" download="영상키트_v1.0.zip">⬇ 영상 키트 내려받기 <span class="sub">영상키트_v1.0.zip · 21KB</span></a>
+              <p style="margin-top:9px;"><em>수요일에 <b>ffmpeg</b> 라는 프로그램을 딱 한 번 설치합니다 — 키트가 명령어까지 알려줍니다. 미리 해두고 싶으면 키트 안의 <span class="mono">README</span> 를 열어보세요.</em></p>
+              <span class="kw">듣는 말 대본</span><span class="kw">900자</span><span class="kw">소리내어 검수</span><span class="kw">영상 키트 받기</span>
             </div>
             <div class="done"><b>✔ 오늘 성공 판정</b> — 소리내어 읽어도 안 막히는 대본이 파일로 저장됐다</div>
           </div>
@@ -1625,7 +1635,7 @@
           <div class="blk a">
             <div class="blk-head"><span class="blk-lab">🅰 영상 · 3단계 조립</span><span class="blk-time">90분</span></div>
             <div class="blk-body">
-              <p>월요일에 드린 <b>영상 키트</b>(자막 화면 틀 + 조립 안내)를 어제 만든 재료 폴더에 풀고, VS Code에서 AI에게 맡깁니다.</p>
+              <p>월요일에 드린 <b>영상 키트</b>(자막 화면 틀 + 조립 안내)를 어제 만든 재료 폴더에 풀고, VS Code에서 AI에게 맡깁니다. <a class="dl-inline" href="video-kit-v1.0.zip" download="영상키트_v1.0.zip">⬇ 못 받으셨으면 여기서</a></p>
               <div class="plabel">붙여넣을 말</div>
 <pre class="prompt">이 폴더에 영상 키트랑 내 대본(대본.txt),
 음성(음성.mp3)이 있어.
