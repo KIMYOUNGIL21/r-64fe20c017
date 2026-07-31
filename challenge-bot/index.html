@@ -75,8 +75,8 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
   <a href="#s0">0단계 · 5분 생사확인 <span>이게 안 되면 나머지가 다 무의미합니다. 제일 먼저.</span></a>
   <a href="#s1">1단계 · 방장봇 켜기 <span>카카오 공식 기능. 공짜, 5분, 위험 0.</span></a>
   <a href="#s2">2단계 · 매크로드로이드 설치 <span>권한 3개가 핵심입니다.</span></a>
-  <a href="#s3">3단계 · Claude API 키 <span>지금 쓰시는 구독과 별개로 충전이 필요합니다.</span></a>
-  <a href="#s4">4단계 · 매크로 만들기 <span>트리거 → 조건 → 3개 동작.</span></a>
+  <a href="#s3">3단계 · API 키 3개 준비 <span>재미나이 무료 → 유료 → OpenAI 순으로 흘러갑니다.</span></a>
+  <a href="#s4">4단계 · 매크로 만들기 <span>트리거 → 조건 → 동작 5개.</span></a>
   <a href="#s5">5단계 · 안전장치 <span>이걸 안 걸면 상품이 죽습니다.</span></a>
   <a href="#s6">막혔을 때 <span>증상별로 어디가 문제인지.</span></a>
 </section>
@@ -190,29 +190,60 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
 
 <!-- ───────── 3단계 ───────── -->
 <section id="s3">
-  <h2><span class="num">3</span>Claude API 키 발급</h2>
+  <h2><span class="num">3</span>API 키 3개 준비</h2>
+  <p class="lead">한도가 차면 다음 키로 자동으로 흘러가는 구조입니다. <b>재미나이 무료 → 재미나이 유료 → OpenAI</b> 순서. 평소엔 무료 한 개로 거의 다 처리되고, 질문이 몰리는 날에만 뒤 칸이 열립니다.</p>
 
-  <div class="stop box">
-    <b>지금 쓰시는 클로드 구독과 완전히 별개입니다</b><br>
-    월 구독료를 내고 계셔도 API는 <b>따로 돈을 충전</b>해야 씁니다. 이걸 모르면 4단계에서 계속 오류만 납니다.
+  <table>
+    <tr><th>순서</th><th>키</th><th>언제 쓰이나</th></tr>
+    <tr><td>1번</td><td><b>재미나이 무료키</b></td><td>평소 전부. 여기서 끝나는 게 정상입니다</td></tr>
+    <tr><td>2번</td><td><b>재미나이 유료키</b></td><td>무료 한도가 찼을 때만</td></tr>
+    <tr><td>3번</td><td><b>OpenAI 키</b></td><td>위 둘 다 막혔을 때만. 거의 안 열립니다</td></tr>
+  </table>
+
+  <h3>① 재미나이 무료키</h3>
+  <div class="ok box">
+    <b>이미 갖고 계실 수 있습니다.</b> 판매상품(쓰레드·인스타 자동화) 만들 때 쓰던 그 키와 같은 종류입니다. 저장해두신 게 있으면 그대로 쓰시면 됩니다.
   </div>
-
   <ol>
-    <li>폰 브라우저에서 <code>console.anthropic.com</code> 접속 → 로그인</li>
-    <li><b>Billing(결제)</b> 에서 카드를 등록하고 <b>최소 금액을 충전</b>합니다 (5달러면 한참 씁니다 — 아래 비용 참고)</li>
-    <li><b>API Keys</b> 메뉴 → <b>Create Key</b> → 키를 만듭니다</li>
-    <li>키가 딱 한 번만 보입니다. <b>바로 복사</b>해서 폰 메모장에 붙여두세요. 나중에 다시 못 봅니다</li>
+    <li>폰 브라우저에서 <code>aistudio.google.com/apikey</code> 접속 → 구글 계정 로그인</li>
+    <li><b>API 키 만들기</b> 를 누릅니다</li>
+    <li>프로젝트를 고르라고 하면 <b>결제가 연결 안 된</b> 프로젝트를 고릅니다 (그래야 무료 등급)</li>
+    <li>나온 키를 <b>복사</b>해서 폰 메모장에 붙여둡니다</li>
   </ol>
 
+  <h3>② 재미나이 유료키</h3>
   <div class="warn box">
-    <b>키는 비밀번호입니다</b><br>
-    이 키가 남에게 넘어가면 사장님 카드로 돈이 나갑니다. 오픈채팅방·카톡·캡처에 절대 올리지 마세요. 실수로 노출되면 콘솔에서 그 키를 삭제(Revoke)하고 새로 만드시면 됩니다.
+    <b>헷갈리기 쉬운 부분입니다</b><br>
+    무료/유료는 키를 두 종류로 만드는 게 아니라, <b>결제가 연결된 프로젝트에서 만든 키냐 아니냐</b>의 차이입니다. 키 생김새는 똑같습니다.
+  </div>
+  <ol>
+    <li>같은 <code>aistudio.google.com/apikey</code> 화면에서 <b>API 키 만들기</b> 를 한 번 더 누릅니다</li>
+    <li>이번엔 <b>결제(Billing)가 연결된</b> 프로젝트를 고릅니다. 없으면 화면 안내대로 카드를 등록해 프로젝트 하나를 결제 연결하세요</li>
+    <li>나온 키를 복사해둡니다. <b>①번과 헷갈리지 않게 메모에 "유료"라고 적어두세요</b></li>
+  </ol>
+
+  <h3>③ OpenAI 키</h3>
+  <ol>
+    <li>폰 브라우저에서 <code>platform.openai.com/api-keys</code> 접속 → 로그인</li>
+    <li><b>Create new secret key</b> → 키를 만듭니다. <code>sk-</code> 로 시작합니다</li>
+    <li><b>딱 한 번만 보입니다.</b> 바로 복사해서 메모장에 붙여두세요</li>
+    <li>Billing에서 <b>소액이라도 충전</b>해두세요. 잔액 0이면 3번 칸이 무용지물입니다</li>
+  </ol>
+
+  <div class="stop box">
+    <b>키 3개 전부 비밀번호입니다</b><br>
+    남에게 넘어가면 사장님 카드로 돈이 나갑니다. 오픈채팅방·카톡·캡처에 절대 올리지 마세요.
+    실수로 노출되면 각 사이트에서 그 키를 <b>삭제</b>하고 새로 만드시면 됩니다.
   </div>
 
-  <h3>비용이 얼마나 나오나</h3>
-  <p>쓸 모델은 <code>claude-haiku-4-5</code> 입니다. 빠르고 싸서 FAQ 자동응답에 맞습니다. 공식 요금은 <b>입력 100만 글자토큰당 $1, 출력 $5</b>입니다.</p>
-  <p><b>계산 예시</b>(실측 아님 — 아래 가정으로 제가 계산한 값입니다): FAQ 안내문을 매번 2,000토큰쯤 같이 보내고 답이 200토큰이라고 치면, 답변 1건에 약 <b>0.003달러(4원쯤)</b>. 하루 100건이면 <b>400원 안팎</b>입니다. 실제 금액은 콘솔 Usage에서 며칠 지켜보시면 정확히 나옵니다.</p>
-  <p>답변 품질이 아쉬우면 4단계 본문의 모델 이름만 <code>claude-sonnet-5</code> 로 바꾸시면 됩니다(더 똑똑하지만 조금 느리고 비쌉니다).</p>
+  <h3>제게 알려주실 것</h3>
+  <p>키 값 자체는 <b>보내지 마세요.</b> 아래 세 가지만 알려주시면 됩니다.</p>
+  <ul>
+    <li>①②③ 각각 <b>구했다 / 못 구했다</b></li>
+    <li>②번(재미나이 유료)에서 <b>결제 연결된 프로젝트를 만드셨는지</b></li>
+    <li>③번 OpenAI에 <b>잔액을 넣으셨는지</b></li>
+  </ul>
+  <p>키는 사장님 폰 메모장에만 두시고, 4단계에서 그 자리에 직접 붙여넣으시면 됩니다.</p>
 </section>
 
 <!-- ───────── 4단계 ───────── -->
@@ -245,43 +276,94 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
     <li>줄바꿈도 같이 공백으로 바꿔두면 더 안전합니다</li>
   </ul>
 
-  <h3>동작 2 — Claude에 물어보기</h3>
+  <h3>먼저 — 안내문(system)을 변수로 빼두기</h3>
+  <p>같은 안내문을 세 군데에 반복해서 넣으면 나중에 고칠 때 지옥입니다. <b>변수 → 변수 설정</b> 으로 <code>sys</code> 라는 변수를 만들고 아래를 넣으세요. <code>[여기에 FAQ]</code> 부분만 사장님 안내 내용으로 바꾸시면 됩니다.</p>
+<pre><code>너는 그밤PD 왕초보 챌린지 오픈채팅방의 안내 도우미다.
+아래 정보 안에서만 답한다.
+규칙: (1) 3문장 안으로 짧게 답한다.
+(2) 아래 정보에 없는 질문은 지어내지 말고 정확히 '없음' 이 두 글자만 답한다.
+(3) 힘들다, 막혔다, 포기하고 싶다, 저만 이런가요 같은 감정이 섞인 말에는
+    절대 답하지 말고 '없음' 이라고만 답한다. 위로나 격려는 네 역할이 아니다.
+[여기에 FAQ 내용을 적으세요]</code></pre>
+
+  <h3>동작 2 — 1번 칸 : 재미나이 무료키</h3>
   <p><b>연결 → HTTP 요청</b> 을 고르고 이렇게 채웁니다.</p>
   <table>
     <tr><th>칸</th><th>넣을 값</th></tr>
     <tr><td>방식</td><td><b>POST</b></td></tr>
-    <tr><td>URL</td><td><code>https://api.anthropic.com/v1/messages</code></td></tr>
+    <tr><td>URL</td><td class="scroll"><code>https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent</code></td></tr>
     <tr><td>Content Type</td><td><code>application/json</code></td></tr>
-    <tr><td>헤더 1</td><td><code>x-api-key</code> : 3단계에서 받은 키</td></tr>
-    <tr><td>헤더 2</td><td><code>anthropic-version</code> : <code>2023-06-01</code></td></tr>
-    <tr><td>응답 저장</td><td>변수 <code>resp</code> (이름은 아무거나)</td></tr>
+    <tr><td>헤더</td><td><code>x-goog-api-key</code> : <b>①번 무료키</b></td></tr>
+    <tr><td>응답 저장</td><td>변수 <code>resp</code></td></tr>
+    <tr><td>응답 코드 저장</td><td>변수 <code>code</code></td></tr>
   </table>
 
-  <p><b>본문(Body)</b> 에는 아래를 그대로 넣고, <code>[여기에 FAQ]</code> 부분만 사장님 안내 내용으로 바꾸세요.</p>
+  <p>본문(Body):</p>
 <pre><code>{
-  "model": "claude-haiku-4-5",
+  "system_instruction": { "parts": [ { "text": "{lv=sys}" } ] },
+  "contents": [ { "parts": [ { "text": "{lv=q}" } ] } ],
+  "generationConfig": { "maxOutputTokens": 300 }
+}</code></pre>
+
+  <div class="stop box">
+    <b>모델 이름은 반드시 <code>gemini-flash-latest</code> 로 두세요</b><br>
+    구글이 개별 모델을 수시로 없앱니다. 판매상품 만드실 때 <code>gemini-2.5-flash</code> 가 죽어서 새 구매자가 전원 실패했던 그 건과 똑같은 함정입니다.
+    <b><code>-latest</code> 는 구글이 현행 모델로 계속 갱신해주는 별칭</b>이라 잘 안 죽습니다.
+  </div>
+
+  <p>바로 이어서 <b>답 꺼내기</b> 동작을 붙입니다 — <b>JSON 값 가져오기</b>로 경로 <code>candidates[0].content.parts[0].text</code> 를 변수 <code>answer</code> 에 담습니다. (그 기능이 없는 버전이면 문자열 조작으로 <code>"text": "</code> 다음부터 다음 <code>"</code> 앞까지 잘라내면 됩니다.)</p>
+
+  <h3>동작 3 — 2번 칸 : 재미나이 유료키 <span class="tag">조건부</span></h3>
+  <p><b>조건(IF)</b> 을 씌웁니다 — <code>answer</code> 가 <b>비어 있을 때만</b> 실행.</p>
+  <ul>
+    <li>동작 2를 <b>그대로 복제</b>합니다 (매크로드로이드에 동작 복제 기능이 있습니다)</li>
+    <li><b>헤더의 키만 ②번 유료키로 바꿉니다.</b> URL·본문은 손대지 않습니다</li>
+    <li>답 꺼내기 경로도 동일 — <code>candidates[0].content.parts[0].text</code></li>
+  </ul>
+
+  <h3>동작 4 — 3번 칸 : OpenAI <span class="tag">조건부</span></h3>
+  <p>역시 <code>answer</code> 가 <b>아직도 비어 있을 때만</b> 실행되게 조건을 씌웁니다.</p>
+  <table>
+    <tr><th>칸</th><th>넣을 값</th></tr>
+    <tr><td>방식</td><td><b>POST</b></td></tr>
+    <tr><td>URL</td><td><code>https://api.openai.com/v1/chat/completions</code></td></tr>
+    <tr><td>Content Type</td><td><code>application/json</code></td></tr>
+    <tr><td>헤더</td><td><code>Authorization</code> : <code>Bearer ③번키</code> <br><span style="font-size:14px;color:#857C70">— <b>Bearer</b> 와 한 칸 띄우고 키를 붙입니다</span></td></tr>
+    <tr><td>응답 저장</td><td>변수 <code>resp</code></td></tr>
+  </table>
+
+  <p>본문(Body):</p>
+<pre><code>{
+  "model": "gpt-4o-mini",
   "max_tokens": 300,
-  "system": "너는 그밤PD 왕초보 챌린지 오픈채팅방의 안내 도우미다. 아래 정보 안에서만 답한다. 규칙: (1) 3문장 안으로 짧게 답한다. (2) 아래 정보에 없는 질문은 지어내지 말고 정확히 '없음' 이 두 글자만 답한다. (3) 힘들다, 막혔다, 포기하고 싶다, 저만 이런가요 같은 감정이 섞인 말에는 절대 답하지 말고 '없음' 이라고만 답한다. 위로나 격려는 네 역할이 아니다. [여기에 FAQ 내용을 적으세요]",
   "messages": [
-    { "role": "user", "content": "{lv=q}" }
+    { "role": "system", "content": "{lv=sys}" },
+    { "role": "user",   "content": "{lv=q}" }
   ]
 }</code></pre>
 
-  <div class="ok box">
-    <b>가운데 <code>"content": "{lv=q}"</code> 가 참가자 질문이 들어가는 자리입니다.</b> 매크로드로이드에서 변수를 넣는 표기법이며, 앱 버전에 따라 <code>[lv=q]</code> 로 쓰기도 합니다. 변수 넣기 버튼으로 고르시면 알아서 맞는 형태로 들어갑니다.
+  <p>답 꺼내기 경로는 <b>재미나이와 다릅니다</b> — <code>choices[0].message.content</code> 를 <code>answer</code> 에 담습니다.</p>
+
+  <div class="warn box">
+    <b>OpenAI 모델 이름도 언젠가 죽습니다</b><br>
+    <code>gpt-4o-mini</code> 로 시작하시되, 3번 칸이 열렸는데 계속 실패하면 모델 이름부터 의심하세요.
+    <code>platform.openai.com</code> 의 모델 목록에서 현재 살아 있는 이름을 확인해 바꾸시면 됩니다. 3번은 거의 안 열리는 칸이라 급하지 않습니다.
   </div>
 
-  <h3>동작 3 — 답을 꺼내서 카톡에 붙이기</h3>
-  <p>돌아오는 응답은 이렇게 생겼습니다.</p>
-<pre><code>{
-  "content": [ { "type": "text", "text": "여기가 답변입니다" } ],
-  "stop_reason": "end_turn"
-}</code></pre>
+  <h3>동작 5 — 카톡에 답장</h3>
   <ul>
-    <li>매크로드로이드에 <b>JSON 값 가져오기</b> 기능이 있으면 경로를 <code>content[0].text</code> 로 지정해 변수 <code>answer</code> 에 담습니다</li>
-    <li>그 기능이 없는 버전이면, 문자열 조작으로 <code>"text":"</code> 다음부터 다음 <code>"</code> 앞까지를 잘라내면 됩니다</li>
-    <li>마지막으로 <b>알림 → 알림에 답장</b> 동작을 넣고 보낼 내용에 <code>answer</code> 를 넣습니다</li>
+    <li><b>알림 → 알림에 답장</b> 동작을 넣고 보낼 내용에 <code>answer</code> 를 넣습니다</li>
+    <li>앞에 조건 하나 더 — <code>answer</code> 가 <b>비어 있거나</b> <code>없음</code> <b>이면 아무것도 보내지 않고 끝냅니다</b></li>
   </ul>
+
+  <div class="ok box">
+    <b><code>{lv=q}</code> 같은 표기는 변수를 넣는 자리입니다.</b> 앱 버전에 따라 <code>[lv=q]</code> 로 쓰기도 합니다. 직접 타이핑하지 마시고 <b>변수 넣기 버튼</b>으로 고르시면 알아서 맞는 형태로 들어갑니다.
+  </div>
+
+  <div class="ok box">
+    <b>한 칸씩 확인하세요.</b> 동작 2까지만 만들어서 먼저 답이 오는지 보고, 되면 3·4를 붙이세요.
+    세 개를 한꺼번에 만들면 어디가 틀렸는지 못 찾습니다.
+  </div>
 
   <div class="warn box">
     <b>테스트는 꼭 빈 방에서</b><br>
@@ -316,7 +398,10 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
     <tr><th>증상</th><th>거의 이게 원인입니다</th></tr>
     <tr><td>봇이 아예 반응이 없다</td><td>알림 접근 권한이 꺼짐 / 트리거의 방 이름 필터가 실제 방 이름과 다름</td></tr>
     <tr><td>처음엔 되다가 몇 시간 뒤 멈춘다</td><td><b>배터리 최적화.</b> 2단계 표의 두 번째 줄을 다시 하세요</td></tr>
-    <tr><td>답변이 안 오고 빈 값만 온다</td><td>API 키가 틀렸거나 <b>충전 잔액이 0원</b>입니다. 콘솔에서 확인하세요</td></tr>
+    <tr><td>답변이 안 오고 빈 값만 온다</td><td>키가 틀렸거나 3칸이 전부 막힘. <b>동작 2만 남기고</b> 하나씩 테스트해 어느 칸이 죽었는지 찾으세요</td></tr>
+    <tr><td>재미나이가 404 / not available</td><td><b>모델 이름이 죽은 것.</b> <code>gemini-flash-latest</code> 인지 확인하세요. 개별 버전명을 넣으면 이렇게 됩니다</td></tr>
+    <tr><td>OpenAI만 401 / 인증 오류</td><td>헤더에 <code>Bearer</code> 와 키 사이 <b>띄어쓰기</b>가 빠졌거나, 잔액이 0원입니다</td></tr>
+    <tr><td>1번 칸이 자꾸 429</td><td>무료 한도가 찬 것. <b>정상 동작입니다</b> — 2번 칸으로 넘어가는지만 확인하세요</td></tr>
     <tr><td>가끔만 실패한다</td><td>참가자가 <code>"</code> 나 줄바꿈을 씀. 동작 1(따옴표 정리)이 빠졌거나 안 걸림</td></tr>
     <tr><td>봇이 혼자 계속 떠든다</td><td>무한 루프. 즉시 매크로를 끄고 4단계 조건을 다시 넣으세요</td></tr>
     <tr><td>엉뚱한 카톡방에 답한다</td><td>트리거 필터가 비어 있음. 방 이름을 정확히 넣으세요</td></tr>
