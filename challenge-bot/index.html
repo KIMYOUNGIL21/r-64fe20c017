@@ -392,8 +392,26 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
     <tr><td>Content Type</td><td><code>application/json</code></td></tr>
     <tr><td>헤더 이름</td><td><code>x-goog-api-key</code></td></tr>
     <tr><td>헤더 값</td><td><b>①번 무료키</b>를 붙여넣기</td></tr>
-    <tr><td>응답 저장할 변수</td><td><code>resp</code> (새로 만드세요)</td></tr>
+    <tr><td>응답 저장</td><td><b>string형 변수에 http 응답 저장</b> 을 고르고<br>변수 <code>resp</code> 를 새로 만듭니다</td></tr>
   </table>
+
+  <div class="ok box">
+    <b>"응답 저장" 자리에서 헷갈리기 쉽습니다</b><br>
+    설정 화면을 아래로 내리면 비슷한 게 여러 개 나옵니다. <b>딱 하나만</b> 쓰시면 됩니다.
+    <table style="margin-top:10px;">
+      <tr><td>integer형 변수에 http 응답 코드 저장</td><td>❌ 안 씁니다<br><span style="font-size:14px;color:#857C70">200·429 같은 숫자만 나옵니다</span></td></tr>
+      <tr><td>응답 헤더를 사전 변수에 저장</td><td>❌ 안 씁니다</td></tr>
+      <tr><td><b>응답 저장</b> → <b>string형 변수에 http 응답 저장</b></td><td>✅ <b>이겁니다</b></td></tr>
+      <tr><td>응답 저장 → http응답 저장하지 않음</td><td>❌ 버려집니다</td></tr>
+      <tr><td>응답 저장 → http 응답을 파일에 저장</td><td>❌ 파일로 떨어져서 못 읽습니다</td></tr>
+    </table>
+  </div>
+
+  <div class="warn box">
+    <b>같은 화면에 <code>응답을 기다림</code> / <code>블록</code> 스위치가 있으면 켜세요</b><br>
+    안 켜면 답장이 도착하기 <b>전에</b> 다음 동작이 먼저 실행돼서 <code>resp</code> 가 계속 비어 있습니다.
+    변수를 제대로 지정했는데도 답이 안 나오면 십중팔구 이겁니다. 그런 스위치가 없으면 그냥 넘어가세요.
+  </div>
 
   <p><b>본문(Body)</b> 칸에는 아래를 <b>통째로</b> 붙여넣습니다.</p>
 <pre><code>{
