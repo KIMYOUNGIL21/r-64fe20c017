@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>왕초보챌린지 오픈채팅 봇 세팅 순서 (안드로이드)</title>
+<meta name="description" content="새 안드로이드 폰에 카톡 오픈채팅 자동응답 봇을 붙이는 순서. 방장봇(공식) + 매크로드로이드 + Claude API.">
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;}
+:root{
+  --cream:#FAF6F0; --orange:#D96C3F; --orange-lt:#FFF3ED;
+  --ink:#1F1D1A; --soft:#4C463E; --dim:#857C70;
+  --paper:#fff; --line:#EBE2D6;
+  --ok:#2F6B45; --ok-bg:#F1F8F3; --ok-line:#CDE5D5;
+  --warn:#A8431A; --warn-bg:#FFF4EF; --warn-line:#FFD2BE;
+  --stop:#8E2727; --stop-bg:#FDF0F0; --stop-line:#F0CFCF;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);line-height:1.85;font-size:17px;letter-spacing:-.2px;padding:18px 14px 80px;}
+.wrap{max-width:720px;margin:0 auto;}
+header{text-align:center;background:linear-gradient(150deg,#fff,#FDF2EA);border:1px solid var(--line);
+  border-radius:20px;padding:28px 18px 24px;margin-bottom:16px;}
+header .eyebrow{font-size:13px;letter-spacing:1px;color:var(--orange);font-weight:800;margin-bottom:8px;}
+header h1{font-size:25px;font-weight:900;line-height:1.4;letter-spacing:-.8px;}
+header p{font-size:15px;color:var(--soft);margin-top:10px;}
+section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 18px;margin-bottom:14px;}
+h2{font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px;line-height:1.4;}
+h2 .num{display:inline-block;background:var(--orange);color:#fff;border-radius:9px;
+  font-size:14px;padding:2px 10px;margin-right:8px;vertical-align:2px;font-weight:800;}
+h3{font-size:17px;font-weight:800;margin:20px 0 6px;letter-spacing:-.3px;}
+.lead{font-size:15px;color:var(--soft);margin-bottom:14px;}
+ol,ul{padding-left:22px;margin:10px 0;}
+li{margin-bottom:9px;}
+p{margin:10px 0;}
+b,strong{font-weight:800;}
+code{background:#F4EFE8;border:1px solid var(--line);border-radius:6px;padding:1px 6px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;word-break:break-all;}
+pre{background:#221F1B;color:#F3EDE4;border-radius:12px;padding:14px;overflow-x:auto;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;margin:12px 0;}
+pre code{background:none;border:none;padding:0;color:inherit;font-size:13px;}
+.box{border-radius:14px;padding:14px 16px;margin:14px 0;font-size:15.5px;line-height:1.75;border:1px solid;}
+.ok{background:var(--ok-bg);border-color:var(--ok-line);}
+.ok b{color:var(--ok);}
+.warn{background:var(--warn-bg);border-color:var(--warn-line);}
+.warn b{color:var(--warn);}
+.stop{background:var(--stop-bg);border-color:var(--stop-line);}
+.stop b{color:var(--stop);}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:2px 9px;border-radius:20px;
+  background:var(--orange-lt);color:var(--orange);border:1px solid #FFD9C6;margin-left:6px;vertical-align:3px;}
+.tag.free{background:var(--ok-bg);color:var(--ok);border-color:var(--ok-line);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+th{background:#F7F2EA;font-weight:800;font-size:14px;}
+.toc{background:#FFFDFA;}
+.toc a{display:block;padding:9px 4px;border-bottom:1px dashed var(--line);color:var(--ink);
+  text-decoration:none;font-weight:700;font-size:16px;}
+.toc a:last-child{border-bottom:none;}
+.toc a span{color:var(--dim);font-weight:500;font-size:14px;display:block;}
+footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
+.scroll{overflow-x:auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">그밤PD 왕초보 챌린지 1기</div>
+  <h1>오픈채팅 봇 세팅 순서</h1>
+  <p>새로 산 안드로이드 폰에서 그대로 따라 하시면 됩니다.<br>PC는 필요 없습니다 — 전부 폰 안에서 끝납니다.</p>
+</header>
+
+<section class="toc">
+  <a href="#s0">0단계 · 5분 생사확인 <span>이게 안 되면 나머지가 다 무의미합니다. 제일 먼저.</span></a>
+  <a href="#s1">1단계 · 방장봇 켜기 <span>카카오 공식 기능. 공짜, 5분, 위험 0.</span></a>
+  <a href="#s2">2단계 · 매크로드로이드 설치 <span>권한 3개가 핵심입니다.</span></a>
+  <a href="#s3">3단계 · Claude API 키 <span>지금 쓰시는 구독과 별개로 충전이 필요합니다.</span></a>
+  <a href="#s4">4단계 · 매크로 만들기 <span>트리거 → 조건 → 3개 동작.</span></a>
+  <a href="#s5">5단계 · 안전장치 <span>이걸 안 걸면 상품이 죽습니다.</span></a>
+  <a href="#s6">막혔을 때 <span>증상별로 어디가 문제인지.</span></a>
+</section>
+
+<!-- ───────── 0단계 ───────── -->
+<section id="s0">
+  <h2><span class="num">0</span>5분 생사확인</h2>
+  <p class="lead">A안(매크로드로이드) 전체가 이 한 가지에 달려 있습니다. <b>카카오톡 오픈채팅 알림에 "답장" 입력칸이 뜨는가.</b> 이게 안 뜨면 매크로드로이드가 답장을 넣을 자리가 없어서 2단계부터는 해도 소용이 없습니다.</p>
+
+  <div class="warn box">
+    <b>왜 먼저 확인하나</b><br>
+    매크로드로이드의 "알림에 답장" 기능은 왓츠앱·텔레그램에서 되는 건 확인됐지만, <b>카카오톡에서 되는지는 공식 확인된 자료가 없습니다.</b> 제가 확인해드릴 수 없는 유일한 부분이라, 5분 테스트로 먼저 판정하고 들어갑니다.
+  </div>
+
+  <h3>해볼 것</h3>
+  <ol>
+    <li>새 폰에 <b>카카오톡 설치</b> → 새 계정(또는 부계정)으로 로그인</li>
+    <li>챌린지 오픈채팅방에 <b>이 새 계정으로 입장</b> (아직 아무 말 안 하셔도 됩니다)</li>
+    <li>새 폰 설정에서 카카오톡 <b>알림을 켜고</b>, 그 방의 알림도 켜져 있는지 확인</li>
+    <li>메인 폰(원래 쓰시던 폰)으로 그 방에 <b>아무 말이나</b> 한마디 보냅니다</li>
+    <li>새 폰 화면 위에서 아래로 쓸어내려 <b>알림창</b>을 엽니다</li>
+    <li>그 카톡 알림을 <b>손가락으로 아래로 한 번 더 펼쳐</b> 봅니다</li>
+  </ol>
+
+  <div class="ok box">
+    <b>✅ 통과</b> — 알림 안에 <b>"답장"</b> 버튼이나 <b>글자 입력칸</b>이 보인다.<br>
+    → 1단계로 가시면 됩니다.
+  </div>
+  <div class="stop box">
+    <b>❌ 실패</b> — 알림에 답장칸이 전혀 없다. 알림을 눌러야 카톡이 열린다.<br>
+    → <b>여기서 멈추고 저에게 알려주세요.</b> A안이 막힌 것이라 다른 방식으로 다시 짜야 합니다.
+    (1단계 방장봇은 이것과 무관하게 되니까, 그건 그대로 켜두시면 됩니다.)
+  </div>
+</section>
+
+<!-- ───────── 1단계 ───────── -->
+<section id="s1">
+  <h2><span class="num">1</span>방장봇 켜기<span class="tag free">공짜 · 위험 0</span></h2>
+  <p class="lead">카카오가 공식으로 만든 오픈채팅 자동응답 기능입니다. 매크로드로이드가 되든 안 되든 <b>이건 켜두면 무조건 이득</b>이라 먼저 합니다.</p>
+
+  <h3>어디서 켜나</h3>
+  <ol>
+    <li><b>방장 계정</b>(사장님 원래 폰)으로 챌린지 오픈채팅방에 들어갑니다</li>
+    <li>오른쪽 위 <b>줄 세 개(≡)</b> 메뉴를 누릅니다</li>
+    <li>메뉴 안에서 <b>오픈채팅 봇 → 방장봇 활성화</b>를 누릅니다</li>
+    <li><b>설정</b>을 눌러 아래 세 가지를 채웁니다</li>
+  </ol>
+
+  <table>
+    <tr><th>항목</th><th>내용</th></tr>
+    <tr><td><b>환영 메시지</b></td><td>새로 들어온 사람에게 자동으로 뜨는 인사. 방 규칙 + "/" 안내를 넣으세요.</td></tr>
+    <tr><td><b>알림 메시지</b></td><td>정해둔 시각에 자동 발송. 매일 미션 공지에 쓸 수 있습니다.</td></tr>
+    <tr><td><b>질문과 답변</b></td><td><b>최대 10개.</b> 참가자가 입력창에 <code>/</code> 를 치면 목록이 뜨고, 고르면 답이 나옵니다.</td></tr>
+  </table>
+
+  <div class="warn box">
+    <b>한계를 알고 쓰세요</b><br>
+    방장봇은 <b>미리 적어둔 10개</b>만 답합니다. 자유롭게 물어본 질문에는 답을 못 합니다.
+    그래서 <b>방장봇 = 1층(자주 나오는 10개)</b>, <b>매크로드로이드+AI = 2층(나머지 질문)</b> 으로 겹쳐 쓰는 구조입니다.
+  </div>
+
+  <h3>10개에 뭘 넣나</h3>
+  <p>지금 FAQ 뱅크가 비어 있습니다(개강 전이라 실제 질문이 아직 안 쌓임). 우선 이 정도로 채워두고, 개강 후 진짜 반복되는 질문이 나오면 그걸로 교체하세요.</p>
+  <ul>
+    <li>과제 어디에 올리나요</li>
+    <li>완주 기준이 뭔가요</li>
+    <li>클로드 유료 결제 꼭 해야 하나요</li>
+    <li>오늘 미션이 뭔가요</li>
+    <li>자료는 어디서 받나요</li>
+    <li>답변은 몇 시에 해주시나요</li>
+    <li>하루 빠지면 어떻게 되나요</li>
+    <li>수요일 화면 보는 시간 언제인가요</li>
+  </ul>
+</section>
+
+<!-- ───────── 2단계 ───────── -->
+<section id="s2">
+  <h2><span class="num">2</span>매크로드로이드 설치</h2>
+  <p class="lead">0단계를 통과하셨을 때만 진행하세요.</p>
+
+  <ol>
+    <li>새 폰에서 <b>Play 스토어</b> → <b>MacroDroid</b> 검색 → 설치</li>
+    <li>앱을 열고 안내를 넘깁니다</li>
+  </ol>
+
+  <h3>권한 3개 — 이게 진짜 핵심입니다</h3>
+  <table>
+    <tr><th>권한</th><th>왜 필요한가</th><th>어디서</th></tr>
+    <tr>
+      <td><b>알림 접근</b></td>
+      <td>이게 없으면 카톡 메시지를 아예 못 봅니다</td>
+      <td>매크로드로이드가 처음 알림 매크로를 만들 때 알아서 물어봅니다. 뜨면 <b>허용</b></td>
+    </tr>
+    <tr>
+      <td><b>배터리 최적화 제외</b></td>
+      <td><b>이게 제일 자주 사고 납니다.</b> 안 하면 몇 시간 뒤 폰이 앱을 재우고 봇이 조용히 죽습니다</td>
+      <td>폰 설정 → 배터리 → 앱별 관리 → MacroDroid → <b>제한 없음 / 최적화 안 함</b></td>
+    </tr>
+    <tr>
+      <td><b>자동 시작 허용</b></td>
+      <td>폰이 재부팅돼도 봇이 다시 켜지게</td>
+      <td>폰 설정에서 "자동 실행" 또는 "자동 시작" 검색 → MacroDroid 켜기</td>
+    </tr>
+  </table>
+
+  <div class="warn box">
+    <b>메뉴 이름은 폰마다 다릅니다</b><br>
+    삼성·샤오미·구글 픽셀이 다 다르게 부릅니다. "배터리 최적화", "절전", "백그라운드 제한" 같은 말이 보이면 그게 그겁니다. 뜻은 하나 — <b>이 앱은 재우지 마라.</b>
+  </div>
+</section>
+
+<!-- ───────── 3단계 ───────── -->
+<section id="s3">
+  <h2><span class="num">3</span>Claude API 키 발급</h2>
+
+  <div class="stop box">
+    <b>지금 쓰시는 클로드 구독과 완전히 별개입니다</b><br>
+    월 구독료를 내고 계셔도 API는 <b>따로 돈을 충전</b>해야 씁니다. 이걸 모르면 4단계에서 계속 오류만 납니다.
+  </div>
+
+  <ol>
+    <li>폰 브라우저에서 <code>console.anthropic.com</code> 접속 → 로그인</li>
+    <li><b>Billing(결제)</b> 에서 카드를 등록하고 <b>최소 금액을 충전</b>합니다 (5달러면 한참 씁니다 — 아래 비용 참고)</li>
+    <li><b>API Keys</b> 메뉴 → <b>Create Key</b> → 키를 만듭니다</li>
+    <li>키가 딱 한 번만 보입니다. <b>바로 복사</b>해서 폰 메모장에 붙여두세요. 나중에 다시 못 봅니다</li>
+  </ol>
+
+  <div class="warn box">
+    <b>키는 비밀번호입니다</b><br>
+    이 키가 남에게 넘어가면 사장님 카드로 돈이 나갑니다. 오픈채팅방·카톡·캡처에 절대 올리지 마세요. 실수로 노출되면 콘솔에서 그 키를 삭제(Revoke)하고 새로 만드시면 됩니다.
+  </div>
+
+  <h3>비용이 얼마나 나오나</h3>
+  <p>쓸 모델은 <code>claude-haiku-4-5</code> 입니다. 빠르고 싸서 FAQ 자동응답에 맞습니다. 공식 요금은 <b>입력 100만 글자토큰당 $1, 출력 $5</b>입니다.</p>
+  <p><b>계산 예시</b>(실측 아님 — 아래 가정으로 제가 계산한 값입니다): FAQ 안내문을 매번 2,000토큰쯤 같이 보내고 답이 200토큰이라고 치면, 답변 1건에 약 <b>0.003달러(4원쯤)</b>. 하루 100건이면 <b>400원 안팎</b>입니다. 실제 금액은 콘솔 Usage에서 며칠 지켜보시면 정확히 나옵니다.</p>
+  <p>답변 품질이 아쉬우면 4단계 본문의 모델 이름만 <code>claude-sonnet-5</code> 로 바꾸시면 됩니다(더 똑똑하지만 조금 느리고 비쌉니다).</p>
+</section>
+
+<!-- ───────── 4단계 ───────── -->
+<section id="s4">
+  <h2><span class="num">4</span>매크로 만들기</h2>
+  <p class="lead">매크로드로이드에서 <b>매크로 추가(+)</b> 를 누르고 아래 순서대로 채웁니다. 트리거 1개, 조건 2개, 동작 3개입니다.</p>
+
+  <h3>트리거 (언제 작동하나)</h3>
+  <ul>
+    <li><b>알림 → 알림 수신</b> 을 고릅니다</li>
+    <li>앱: <b>카카오톡</b></li>
+    <li>내용 필터에 <b>오픈채팅방 이름</b>을 넣습니다 (다른 카톡방까지 봇이 답하면 사고입니다)</li>
+    <li>메시지 내용은 변수 <code>notification_text</code> 에 담깁니다</li>
+  </ul>
+
+  <h3>조건 (이럴 땐 하지 마라)</h3>
+  <div class="stop box">
+    <b>무한 루프 방지 — 반드시 넣으세요</b><br>
+    봇이 자기가 쓴 답장에 또 반응하면 끝없이 혼자 떠듭니다. 방에서 쫓겨나기 딱 좋습니다.
+  </div>
+  <ul>
+    <li>보낸 사람이 <b>봇 계정 본인이면 중단</b></li>
+    <li>메시지가 물음표(<code>?</code>)로 끝나거나 특정 호출어(예: <code>봇아</code>)로 시작할 때만 작동 — <b>이걸 권합니다.</b> 방의 모든 잡담에 봇이 끼어들면 방 분위기가 죽습니다</li>
+  </ul>
+
+  <h3>동작 1 — 따옴표 정리</h3>
+  <p>참가자가 <code>"</code> 를 쓰면 아래 요청이 깨집니다. 먼저 지워둡니다.</p>
+  <ul>
+    <li><b>변수 → 문자열 조작</b> → <code>notification_text</code> 안의 <code>"</code> 를 <code>'</code> 로 바꿔 새 변수 <code>q</code> 에 저장</li>
+    <li>줄바꿈도 같이 공백으로 바꿔두면 더 안전합니다</li>
+  </ul>
+
+  <h3>동작 2 — Claude에 물어보기</h3>
+  <p><b>연결 → HTTP 요청</b> 을 고르고 이렇게 채웁니다.</p>
+  <table>
+    <tr><th>칸</th><th>넣을 값</th></tr>
+    <tr><td>방식</td><td><b>POST</b></td></tr>
+    <tr><td>URL</td><td><code>https://api.anthropic.com/v1/messages</code></td></tr>
+    <tr><td>Content Type</td><td><code>application/json</code></td></tr>
+    <tr><td>헤더 1</td><td><code>x-api-key</code> : 3단계에서 받은 키</td></tr>
+    <tr><td>헤더 2</td><td><code>anthropic-version</code> : <code>2023-06-01</code></td></tr>
+    <tr><td>응답 저장</td><td>변수 <code>resp</code> (이름은 아무거나)</td></tr>
+  </table>
+
+  <p><b>본문(Body)</b> 에는 아래를 그대로 넣고, <code>[여기에 FAQ]</code> 부분만 사장님 안내 내용으로 바꾸세요.</p>
+<pre><code>{
+  "model": "claude-haiku-4-5",
+  "max_tokens": 300,
+  "system": "너는 그밤PD 왕초보 챌린지 오픈채팅방의 안내 도우미다. 아래 정보 안에서만 답한다. 규칙: (1) 3문장 안으로 짧게 답한다. (2) 아래 정보에 없는 질문은 지어내지 말고 정확히 '없음' 이 두 글자만 답한다. (3) 힘들다, 막혔다, 포기하고 싶다, 저만 이런가요 같은 감정이 섞인 말에는 절대 답하지 말고 '없음' 이라고만 답한다. 위로나 격려는 네 역할이 아니다. [여기에 FAQ 내용을 적으세요]",
+  "messages": [
+    { "role": "user", "content": "{lv=q}" }
+  ]
+}</code></pre>
+
+  <div class="ok box">
+    <b>가운데 <code>"content": "{lv=q}"</code> 가 참가자 질문이 들어가는 자리입니다.</b> 매크로드로이드에서 변수를 넣는 표기법이며, 앱 버전에 따라 <code>[lv=q]</code> 로 쓰기도 합니다. 변수 넣기 버튼으로 고르시면 알아서 맞는 형태로 들어갑니다.
+  </div>
+
+  <h3>동작 3 — 답을 꺼내서 카톡에 붙이기</h3>
+  <p>돌아오는 응답은 이렇게 생겼습니다.</p>
+<pre><code>{
+  "content": [ { "type": "text", "text": "여기가 답변입니다" } ],
+  "stop_reason": "end_turn"
+}</code></pre>
+  <ul>
+    <li>매크로드로이드에 <b>JSON 값 가져오기</b> 기능이 있으면 경로를 <code>content[0].text</code> 로 지정해 변수 <code>answer</code> 에 담습니다</li>
+    <li>그 기능이 없는 버전이면, 문자열 조작으로 <code>"text":"</code> 다음부터 다음 <code>"</code> 앞까지를 잘라내면 됩니다</li>
+    <li>마지막으로 <b>알림 → 알림에 답장</b> 동작을 넣고 보낼 내용에 <code>answer</code> 를 넣습니다</li>
+  </ul>
+
+  <div class="warn box">
+    <b>테스트는 꼭 빈 방에서</b><br>
+    챌린지 방 말고 <b>혼자 만든 테스트 오픈채팅방</b>에서 먼저 돌려보세요. 트리거 필터를 그 방 이름으로 잠깐 바꿔두시면 됩니다. 첫판에 바로 되는 경우는 거의 없습니다.
+  </div>
+</section>
+
+<!-- ───────── 5단계 ───────── -->
+<section id="s5">
+  <h2><span class="num">5</span>안전장치</h2>
+  <p class="lead">기술이 아니라 <b>상품을 지키는</b> 부분입니다. 여기가 이 챌린지의 핵심이라 꼭 지켜주세요.</p>
+
+  <div class="stop box">
+    <b>1:1 케어는 봇이 대신하지 않는다</b><br>
+    이탈 감지 DM, 자기소개 환영 답글, 완주 축하는 <b>전부 사장님이 직접</b> 하십니다.
+    "제가 옆에서 직접 챙깁니다"가 이 챌린지의 유일한 팔림 포인트입니다. 봇이 대신 말 거는 순간 상품이 죽습니다.
+    그래서 4단계 본문의 규칙 (3)번에 <b>감정이 섞인 말에는 봇이 입을 다물도록</b> 이미 넣어뒀습니다.
+  </div>
+
+  <ul>
+    <li><b>모르면 침묵.</b> 답이 <code>없음</code> 으로 오면 아무것도 보내지 말고 매크로를 끝내세요. 지어낸 답변 한 번이 신뢰를 다 깎습니다</li>
+    <li><b>하루 상한.</b> 매크로드로이드 변수로 카운터를 만들어 하루 30~50건 넘으면 멈추게 해두세요. 오류로 폭주할 때 요금을 막아줍니다</li>
+    <li><b>방에 공지.</b> "자주 나오는 질문은 자동응답이 먼저 답합니다. 자세한 건 제가 직접 답합니다" 정도로 미리 알려두세요. 몰래 쓰면 들켰을 때 문제가 됩니다</li>
+    <li><b>첫 주는 지켜보기.</b> 봇이 뭐라고 답했는지 며칠은 눈으로 확인하세요. 이상하면 바로 끄시면 됩니다</li>
+  </ul>
+</section>
+
+<!-- ───────── 6단계 ───────── -->
+<section id="s6">
+  <h2><span class="num">?</span>막혔을 때</h2>
+  <table>
+    <tr><th>증상</th><th>거의 이게 원인입니다</th></tr>
+    <tr><td>봇이 아예 반응이 없다</td><td>알림 접근 권한이 꺼짐 / 트리거의 방 이름 필터가 실제 방 이름과 다름</td></tr>
+    <tr><td>처음엔 되다가 몇 시간 뒤 멈춘다</td><td><b>배터리 최적화.</b> 2단계 표의 두 번째 줄을 다시 하세요</td></tr>
+    <tr><td>답변이 안 오고 빈 값만 온다</td><td>API 키가 틀렸거나 <b>충전 잔액이 0원</b>입니다. 콘솔에서 확인하세요</td></tr>
+    <tr><td>가끔만 실패한다</td><td>참가자가 <code>"</code> 나 줄바꿈을 씀. 동작 1(따옴표 정리)이 빠졌거나 안 걸림</td></tr>
+    <tr><td>봇이 혼자 계속 떠든다</td><td>무한 루프. 즉시 매크로를 끄고 4단계 조건을 다시 넣으세요</td></tr>
+    <tr><td>엉뚱한 카톡방에 답한다</td><td>트리거 필터가 비어 있음. 방 이름을 정확히 넣으세요</td></tr>
+  </table>
+
+  <div class="ok box">
+    <b>2~3번 시도해도 안 되면 그만 붙잡으세요.</b><br>
+    증상과 화면을 캡처해서 알려주시면 어디가 문제인지 같이 봅니다. 혼자 오래 붙들고 계실 일이 아닙니다.
+  </div>
+</section>
+
+<footer>
+  그밤PD 왕초보 챌린지 1기 · 운영 내부 문서<br>
+  0단계 결과부터 알려주세요 — 그다음이 갈립니다.
+</footer>
+
+</div>
+</body>
+</html>
