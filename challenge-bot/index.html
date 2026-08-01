@@ -75,7 +75,7 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
   <b>예전 안내서(매크로드로이드)와 뭐가 달라졌나</b><br>
   방식을 매크로드로이드에서 <b>메신저봇R</b>로 바꿨습니다. 원리는 같지만(알림 읽고 답장),
   메뉴 11칸을 손으로 만드는 대신 <b>완성된 코드 파일을 통째로 붙여넣습니다.</b>
-  키는 <b>재미나이 무료키 하나면 시작</b>됩니다(나머지 둘은 예비 — 나중에). 권한 3개, 방장봇(1층)은 그대로.
+  키는 <b>재미나이 무료키 하나면 시작</b>됩니다(예비는 OpenAI 하나 — 나중에). 권한 3개, 방장봇(1층)은 그대로.
   방장봇은 이미 켜져 있으니 이 문서에선 다루지 않습니다.
 </section>
 
@@ -97,7 +97,7 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
     <tr><th>준비물</th><th>확인할 것</th></tr>
     <tr><td><b>안드로이드 공기계</b></td><td>와이파이 연결, 충전기 꽂아 상시 전원</td></tr>
     <tr><td><b>카톡 부계정</b></td><td>공기계에 로그인돼 있을 것. <b>메인 계정 금지</b> — 자동응답은 비공식 방식이라 만에 하나 제재돼도 부계정만 다치게</td></tr>
-    <tr><td><b>재미나이 무료키 1개</b></td><td>폰 메모장에. <b>이거 하나면 봇이 돌아갑니다.</b> 유료키·OpenAI 키는 예비용이라 나중에(질문이 몰려 무료 한도가 차기 시작하면) 넣어도 됩니다</td></tr>
+    <tr><td><b>재미나이 무료키 1개</b></td><td><b>이거 하나면 봇이 돌아갑니다.</b> OpenAI 키는 예비용이라 나중에(질문이 몰려 무료 한도가 차기 시작하면) 넣어도 됩니다</td></tr>
     <tr><td><b>구글드라이브</b></td><td>공기계에 드라이브 앱 + 사장님 구글 계정 로그인. <b>「조교봇」 폴더</b>에 봇 파일을 올려뒀습니다</td></tr>
   </table>
   <div class="stop box">
@@ -187,15 +187,13 @@ footer{text-align:center;color:var(--dim);font-size:13px;padding:24px 10px;}
     <tr><th>칸</th><th>넣을 것</th><th></th></tr>
     <tr><td><code>ROOMS</code></td><td>봇이 반응할 방 이름. <b>방 상단에 보이는 그대로</b> — 한 글자라도 다르면 무반응입니다. <b>2-2에서 만든 테스트방 이름도 같이</b> 넣어두세요 (아래 예시)</td><td><b>필수</b></td></tr>
     <tr><td><code>GEMINI_FREE</code></td><td>재미나이 무료키</td><td><b>필수</b></td></tr>
-    <tr><td><code>GEMINI_PAID</code></td><td>재미나이 유료키 — <b>지금은 비워두세요.</b> 나중에 넣으면 무료 한도가 찼을 때 자동으로 이어받습니다</td><td>예비</td></tr>
-    <tr><td><code>OPENAI_KEY</code></td><td>OpenAI 키 — 마찬가지로 나중에</td><td>예비</td></tr>
+    <tr><td><code>OPENAI_KEY</code></td><td>OpenAI 키 — <b>지금은 비워두세요.</b> 나중에 넣으면 무료 한도가 찼을 때 자동으로 이어받습니다</td><td>예비</td></tr>
   </table>
 
   <p>예를 들어 이렇게 됩니다 (이름은 실제 값으로):</p>
 <pre><code>ROOMS: ["왕초보 챌린지 1기", "그밤PD"],
 PREFIX: "!조교야",
 GEMINI_FREE: "AIza여기에무료키",
-GEMINI_PAID: "",
 OPENAI_KEY: "",</code></pre>
 
   <div class="stop box">
@@ -220,7 +218,7 @@ OPENAI_KEY: "",</code></pre>
   <h3>테스트 4가지 — 테스트방(1:1)에서, 사장님 본계정으로 보냅니다</h3>
   <table>
     <tr><th>보낼 말</th><th>정상 반응</th></tr>
-    <tr><td><code>!조교야 점검</code></td><td>🔧 상태표 — 기억(DB) 정상 · 무료키 연결됨 ✅ · 시세조회 정상이면 합격. 예비키 두 줄이 "없음 (없어도 됩니다)"로 나오는 건 <b>정상입니다</b></td></tr>
+    <tr><td><code>!조교야 점검</code></td><td>🔧 상태표 — 기억(DB) 정상 · 무료키 연결됨 ✅ · 시세조회 정상이면 합격. 예비키(OpenAI)가 "없음 (없어도 됩니다)"로 나오는 건 <b>정상입니다</b></td></tr>
     <tr><td><code>!조교야 도움말</code></td><td>사용법 안내가 옵니다</td></tr>
     <tr><td><code>!조교야 클로드가 자꾸 엉뚱한 답을 해요</code></td><td>한 줄 조언 + "클로드에 이렇게 붙여넣어 보세요" + 완성된 프롬프트</td></tr>
     <tr><td><code>!조교야 너무 힘들어요</code></td><td><b>아무 답도 없어야 정상입니다.</b> 위로는 봇이 아니라 사장님 몫 — 일부러 그렇게 만들었습니다</td></tr>
