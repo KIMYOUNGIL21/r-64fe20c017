@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-SINGER 팀이 설계한 Suno 스타일 프롬프트 로직. 7칸 구조, Styles와 Exclude 분리, L·C·D 트리거 관리법을 설명합니다.">
+  <meta property="og:title" content="Suno 프롬프트 설계 로직">
+  <meta property="og:description" content="단어를 많이 넣는 대신, 원하는 소리와 딸려오는 부작용을 분리해 통제하는 방법.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#11100e">
+  <title>Suno 프롬프트 설계 로직 | AI-SINGER</title>
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --paper: #f4efe5;
+      --paper-2: #e8dfcf;
+      --night: #11100e;
+      --night-2: #1b1916;
+      --gold: #d7a84e;
+      --gold-soft: #f2d18d;
+      --red: #c95f4b;
+      --blue: #6f9fb4;
+      --line: rgba(28, 26, 23, .16);
+      --muted: #6e685f;
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 2%, rgba(215, 168, 78, .16), transparent 26rem),
+        var(--paper);
+      font-family: Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.72;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(calc(100% - 36px), var(--max)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(17,16,14,.88);
+      color: #fff;
+      backdrop-filter: blur(14px);
+    }
+    .topbar .wrap {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { font-weight: 800; letter-spacing: .08em; }
+    .brand span { color: var(--gold-soft); }
+    nav { display: flex; gap: 18px; font-size: 14px; color: #d8d2c8; }
+    nav a { text-decoration: none; }
+    nav a:hover { color: #fff; }
+
+    .hero {
+      color: #fff;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 34px 34px,
+        radial-gradient(circle at 82% 28%, rgba(215,168,78,.24), transparent 24rem),
+        var(--night);
+      padding: 92px 0 78px;
+      overflow: hidden;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--gold-soft);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1.06;
+      letter-spacing: -.055em;
+    }
+    .hero-copy {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color: #d5d0c7;
+      font-size: clamp(17px, 2.2vw, 22px);
+    }
+    .hero-copy strong { color: #fff; }
+    .thesis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 50px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.12);
+      overflow: hidden;
+    }
+    .thesis div { min-height: 136px; padding: 25px; background: rgba(17,16,14,.92); }
+    .thesis b { display: block; color: var(--gold-soft); font-size: 13px; letter-spacing: .08em; }
+    .thesis strong { display: block; margin-top: 10px; font-size: 19px; line-height: 1.45; }
+
+    main section { padding: 92px 0; }
+    main section + section { border-top: 1px solid var(--line); }
+    .section-head {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 46px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+    .kicker { margin: 0; color: #9b6d22; font-weight: 850; letter-spacing: .08em; }
+    h2 { margin: 0; font-size: clamp(30px, 4.5vw, 52px); line-height: 1.16; letter-spacing: -.04em; }
+    h3 { margin: 0 0 8px; font-size: 22px; line-height: 1.35; }
+    p { margin: 0; }
+    .lead { margin-top: 20px; color: var(--muted); font-size: 18px; }
+
+    .chain {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .chain-card {
+      min-height: 155px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.45);
+    }
+    .chain-card em { color: var(--muted); font-size: 14px; font-style: normal; }
+    .chain-card strong { display: block; margin-top: 12px; font-size: 21px; line-height: 1.38; }
+    .arrow { color: #9b6d22; font-size: 26px; font-weight: 900; }
+    .principle {
+      margin-top: 30px;
+      padding: 28px 32px;
+      border-left: 5px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      background: #fffaf0;
+      font-size: 20px;
+      font-weight: 750;
+    }
+
+    .seven {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      min-height: 210px;
+      padding: 28px 28px 28px 86px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.5);
+      counter-increment: step;
+    }
+    .step::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute;
+      left: 28px;
+      top: 27px;
+      color: #9b6d22;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-weight: 800;
+    }
+    .step p { color: var(--muted); }
+    .step code { display: inline-block; margin-top: 14px; }
+    .step.wide { grid-column: 1 / -1; min-height: auto; }
+    code, pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+    code {
+      padding: 3px 7px;
+      border-radius: 7px;
+      color: #754f13;
+      background: #eee1c8;
+      font-size: .9em;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      padding: 32px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: var(--night-2);
+    }
+    .panel.exclude { color: var(--ink); background: #e4d8c4; }
+    .panel .label {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      color: var(--night);
+      background: var(--gold-soft);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .09em;
+    }
+    .panel h3 { margin-top: 18px; }
+    .panel p { color: #c9c3b8; }
+    .panel.exclude p { color: #5f594f; }
+    .do-dont { margin: 25px 0 0; padding: 0; list-style: none; }
+    .do-dont li { margin-top: 10px; padding-left: 25px; position: relative; }
+    .do-dont li::before { position: absolute; left: 0; font-weight: 900; }
+    .do-dont .yes::before { content: "✓"; color: #7dcc8e; }
+    .do-dont .no::before { content: "×"; color: var(--red); }
+
+    .trigger-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .trigger {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.5);
+    }
+    .trigger-letter {
+      display: grid;
+      width: 52px;
+      height: 52px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--red);
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .trigger:nth-child(2) .trigger-letter { background: var(--blue); }
+    .trigger:nth-child(3) .trigger-letter { background: #75589c; }
+    .trigger h3 { margin-top: 18px; }
+    .trigger p { color: var(--muted); }
+    .warning {
+      margin-top: 24px;
+      padding: 24px 28px;
+      border: 1px dashed #9b6d22;
+      border-radius: 16px;
+      background: rgba(242,209,141,.2);
+    }
+
+    .example {
+      border-radius: 28px;
+      overflow: hidden;
+      color: #fff;
+      background: var(--night);
+      box-shadow: 0 24px 70px rgba(43,34,18,.18);
+    }
+    .example-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      padding: 26px 30px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .example-head p { color: #aaa49a; font-size: 14px; }
+    .copy {
+      flex: 0 0 auto;
+      padding: 10px 15px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      color: #fff;
+      background: transparent;
+      cursor: pointer;
+    }
+    .copy:hover, .copy:focus-visible { border-color: var(--gold-soft); color: var(--gold-soft); outline: none; }
+    pre {
+      margin: 0;
+      padding: 30px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #ece7df;
+      font-size: 14px;
+      line-height: 1.82;
+    }
+    .example + .example { margin-top: 18px; }
+
+    .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .rule {
+      padding: 23px;
+      border-top: 3px solid var(--gold);
+      background: rgba(255,255,255,.44);
+    }
+    .rule b { display: block; margin-bottom: 6px; }
+    .rule span { color: var(--muted); font-size: 14px; }
+
+    .evidence {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .evidence article { padding: 28px; border-radius: var(--radius); }
+    .evidence .confirmed { background: #dfe8db; }
+    .evidence .unconfirmed { background: #e8dfcf; }
+    .evidence p { color: #5f594f; }
+
+    footer { padding: 46px 0; color: #bfb8ad; background: var(--night); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+    footer b { color: #fff; }
+
+    @media (max-width: 820px) {
+      nav { display: none; }
+      .hero { padding: 70px 0 58px; }
+      .thesis, .section-head, .seven, .split, .trigger-grid, .rules, .evidence { grid-template-columns: 1fr; }
+      .section-head { gap: 8px; }
+      .step.wide { grid-column: auto; }
+      .chain { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); text-align: center; }
+      main section { padding: 70px 0; }
+      footer .wrap { display: block; }
+      footer p + p { margin-top: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      .topbar, .copy { display: none; }
+      .hero { padding: 45px 0; }
+      main section { padding: 45px 0; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">AI-SINGER <span>LAB</span></div>
+      <nav aria-label="문서 목차">
+        <a href="#why">왜 이렇게 쓰나</a>
+        <a href="#seven">7칸 구조</a>
+        <a href="#control">부작용 통제</a>
+        <a href="#example">실전 예시</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Suno Prompt Design System</p>
+      <h1>원하는 소리와<br>딸려오는 소리를 분리한다.</h1>
+      <p class="hero-copy">AI-SINGER 팀의 수노 프롬프트는 단어를 많이 넣는 방식이 아닙니다. <strong>음악의 정체성은 살리고, 장르 표현에 딸려오는 부작용은 걷어내는 설계</strong>입니다.</p>
+      <div class="thesis" aria-label="핵심 원칙 세 가지">
+        <div><b>01 · DESIGN</b><strong>장르보다 먼저<br>가수의 정체성을 지킨다.</strong></div>
+        <div><b>02 · SEPARATE</b><strong>원하는 상태는 Styles,<br>막을 소리는 Exclude.</strong></div>
+        <div><b>03 · CONTROL</b><strong>웅장함은 보컬 수가 아니라<br>편성과 전개로 만든다.</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="why">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">왜 이런 로직인가</p>
+          <div>
+            <h2>수노는 단어만 듣지 않는다.<br>그 단어의 음악적 관습까지 데려온다.</h2>
+            <p class="lead">수노는 명령문을 규칙대로 실행하기보다, 프롬프트에 적힌 표현과 자주 함께 나타난 음악적 특징을 확률적으로 불러옵니다.</p>
+          </div>
+        </div>
+        <div class="chain">
+          <div class="chain-card"><em>입력한 표현</em><strong>anthem<br>choir<br>soaring chorus</strong></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="chain-card"><em>함께 따라오는 관습</em><strong>공연장 공간감<br>여러 겹의 보컬<br>군중의 에너지</strong></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="chain-card"><em>의도하지 않은 결과</em><strong>떼창·함성<br>유령 코러스<br>젖은 보컬 믹스</strong></div>
+        </div>
+        <p class="principle">판단 기준은 하나입니다. “이 소리는 내가 시킨 것인가, 다른 표현에 딸려 온 것인가.”</p>
+      </div>
+    </section>
+
+    <section id="seven">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">7칸 설계 순서</p>
+          <div>
+            <h2>한 칸짜리 Styles를<br>일곱 단계로 설계한다.</h2>
+            <p class="lead">7칸은 수노 화면의 입력칸이 아닙니다. 하나의 Styles 프롬프트를 만들기 위한 내부 사고 순서입니다. 완성본에서는 라벨을 빼고 자연스러운 문장으로 합칩니다.</p>
+          </div>
+        </div>
+        <div class="seven">
+          <article class="step"><h3>Genre</h3><p>음악 문법을 하나로 고정합니다. 여러 장르를 욕심내서 섞으면 편곡과 믹스의 중심이 흔들립니다.</p><code>Korean drama OST ballad.</code></article>
+          <article class="step"><h3>Mood</h3><p>정서적 온도만 정합니다. 형용사가 많을수록 정확해지는 것이 아니므로 2~3개로 제한합니다.</p><code>Cinematic, aching, tender.</code></article>
+          <article class="step"><h3>Instruments / Arrangements</h3><p>“웅장하게” 대신 실제 편성을 적습니다. 추상어가 데려오는 떼창과 합창을 줄이는 장치입니다.</p><code>full orchestra, sweeping strings, timpani</code></article>
+          <article class="step"><h3>Vocal Tone / Delivery</h3><p>성별만 적지 않고 벌스부터 파이널까지 목소리의 감정 변화를 지정합니다.</p><code>restrained verse → fragile mixed-belt</code></article>
+          <article class="step"><h3>BPM / Key</h3><p>속도와 정서 방향에 기준점을 줍니다. 같은 발라드 안에서도 곡의 축이 소리로 구분됩니다.</p><code>74 BPM, minor key.</code></article>
+          <article class="step"><h3>Production / Mix</h3><p>보컬과 악기의 공간을 분리합니다. 보컬은 중앙에 한 명, 악기만 좌우로 넓게 둡니다.</p><code>centered dry vocal, instruments spread wide</code></article>
+          <article class="step wide"><h3>Development / Dynamics</h3><p>결과 형용사를 나열하지 않고 곡의 시간 순서를 문장으로 씁니다. 처음부터 세게 나오는 것을 막고, 마지막 후렴에 에너지를 모읍니다.</p><code>Starts with… Verse stays… Pre-chorus builds… Bridge drops… Final chorus returns…</code></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="control">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Styles × Exclude</p>
+          <div>
+            <h2>원하는 것은 긍정문으로.<br>막을 것은 별도 목록으로.</h2>
+            <p class="lead">Styles 안에서 금지 명령을 반복하면, 막으려던 단어 자체가 음악 요소로 활성화될 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="split">
+          <article class="panel">
+            <span class="label">STYLES</span>
+            <h3>원하는 상태를 주문한다.</h3>
+            <p>가수의 정체성, 악기, 믹스와 전개를 긍정형 표현으로 설계합니다.</p>
+            <ul class="do-dont">
+              <li class="yes"><code>one voice only</code></li>
+              <li class="yes"><code>centered dry lead vocal</code></li>
+              <li class="yes"><code>instruments spread wide</code></li>
+              <li class="no"><code>no backing vocals</code></li>
+            </ul>
+          </article>
+          <article class="panel exclude">
+            <span class="label">EXCLUDE</span>
+            <h3>실제로 딸려오는 소리를 막는다.</h3>
+            <p>애초에 나올 가능성이 낮은 장르보다, 생성 결과에서 반복되는 부작용을 우선 차단합니다.</p>
+            <ul class="do-dont">
+              <li class="yes"><code>crowd vocals</code></li>
+              <li class="yes"><code>layered vocals</code></li>
+              <li class="yes"><code>backing vocals</code></li>
+              <li class="yes"><code>arena reverb</code></li>
+            </ul>
+          </article>
+        </div>
+
+        <div style="height:60px"></div>
+        <div class="section-head">
+          <p class="kicker">L · C · D 트리거</p>
+          <div><h2>금지 목록이 아니라<br>부작용 해독기다.</h2></div>
+        </div>
+        <div class="trigger-grid">
+          <article class="trigger"><span class="trigger-letter">L</span><h3>Live crowd</h3><p>떼창, 함성, 공연장 울림이 따라오는 패턴입니다. 강한 후렴과 웅장함을 주문할 때 특히 확인합니다.</p></article>
+          <article class="trigger"><span class="trigger-letter">C</span><h3>Vocal chop</h3><p>보컬이 잘리고 반복 샘플처럼 쓰이는 패턴입니다. EDM, drop, sample, slice 계열 조합에서 위험이 커집니다.</p></article>
+          <article class="trigger"><span class="trigger-letter">D</span><h3>Vocal doubling</h3><p>더블링, 화음, 백업 보컬과 합창이 쌓이는 패턴입니다. 솔로 가수의 인상을 가장 크게 흐립니다.</p></article>
+        </div>
+        <p class="warning"><strong>중요.</strong> 위험 표현을 무조건 삭제하지 않습니다. 곡의 정체성에 필요한 폭발이라면 의도적으로 남기고, 관계없이 딸려오는 소리만 제거합니다.</p>
+      </div>
+    </section>
+
+    <section id="example">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">실전 완성본</p>
+          <div>
+            <h2>한 명이 참다가<br>마지막에 무너지는 발라드.</h2>
+            <p class="lead">보컬은 가운데 마른 소리로 두고, 웅장함은 오케스트라 편성과 악기의 너비로 만듭니다.</p>
+          </div>
+        </div>
+        <article class="example">
+          <div class="example-head"><div><strong>Styles</strong><p>라벨 없이 수노 Styles 칸에 붙여넣습니다.</p></div><button class="copy" data-copy="stylePrompt">복사</button></div>
+          <pre id="stylePrompt">Korean drama OST ballad. Cinematic, aching, tender. Soft grand piano intro, full orchestra with sweeping strings, oboe and cello counter-melodies, timpani and orchestral swells, no synths. Single clear female lead vocal, conversational and restrained, opening into a powerful mixed-belt with a fragile break, one voice only. 74 BPM, minor key. Centered dry close-mic lead vocal, instruments spread wide across the stereo field, orchestral depth with controlled reverb, clean separated mix. Starts with the chorus melody quietly over lone piano. Verse stays intimate and close, piano and low strings only. Pre-chorus gradually builds as the string section rises underneath. Chorus opens with the full orchestra lifting under a strong lead-vocal line. Bridge drops down to bare piano and a near-whispered voice. Final chorus returns a whole level higher, strings at full height, a lifted melodic climax carried by the single voice.</pre>
+        </article>
+        <article class="example">
+          <div class="example-head"><div><strong>Exclude</strong><p>수노 Advanced Options의 Exclude 칸에 붙여넣습니다.</p></div><button class="copy" data-copy="excludePrompt">복사</button></div>
+          <pre id="excludePrompt">crowd vocals, audience cheering, crowd clapping, live concert ambience, arena reverb, stadium chant, gang vocals, choir-like crowd, sing-along, vocal doubling, double-tracked vocal, layered vocals, stacked vocals, vocal stack, harmony vocals, vocal harmonies, backing vocals, background vocals, choir, group vocals, wide vocals, wide stereo vocals, wide chorus, spoken word intro, rap, hip hop, EDM, trap, autotune, male vocal, duet, modern idol pop production, trot, upbeat dance beat</pre>
+        </article>
+
+        <div style="height:60px"></div>
+        <div class="rules">
+          <div class="rule"><b>장르는 하나</b><span>서로 다른 음악 문법의 충돌을 줄입니다.</span></div>
+          <div class="rule"><b>무드는 2~3개</b><span>핵심 정서가 수식어에 묻히지 않게 합니다.</span></div>
+          <div class="rule"><b>공백 포함 940자 이하</b><span>중요 지시가 긴 문장에 희석되는 것을 줄입니다.</span></div>
+          <div class="rule"><b>같은 조건으로 2~3회</b><span>한 번의 결과보다 반복 경향으로 판단합니다.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">검증 수준</p>
+          <div><h2>확인된 효과와<br>아직 분리되지 않은 효과를 구분한다.</h2></div>
+        </div>
+        <div class="evidence">
+          <article class="confirmed"><h3>실청으로 확인된 부분</h3><p>L 군중과 D 보컬 겹침 중심의 Exclude 재설계, 그리고 <code>centered dry lead vocal</code>과 <code>instruments spread wide</code>의 조합은 보컬을 더 깨끗하게 분리하는 데 분명한 개선이 있었습니다.</p></article>
+          <article class="unconfirmed"><h3>아직 개별 A/B가 필요한 부분</h3><p>7칸 순서, 940자 기준, Development 흐름 문장이 각각 어느 정도 기여했는지는 통제된 실험으로 분리되지 않았습니다. 따라서 방법론은 유지하되 결과가 나쁘면 같은 가사로 구버전과 대조합니다.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap"><p><b>AI-SINGER LAB</b> · Suno Prompt Design System</p><p>원하는 소리는 설계하고, 딸려오는 소리는 통제합니다.</p></div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copy);
+        try {
+          await navigator.clipboard.writeText(target.textContent.trim());
+          const original = button.textContent;
+          button.textContent = '복사됨';
+          setTimeout(() => { button.textContent = original; }, 1400);
+        } catch {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
