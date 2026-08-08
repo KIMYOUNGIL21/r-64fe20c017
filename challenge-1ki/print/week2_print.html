@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>AI 왕초보 챌린지 1기 — 2주차 (인쇄용)</title>
+<style>
+  :root{
+    --ground:#0a0c10;
+    --raised:#12151c;
+    --raised-2:#171b24;
+    --line: rgba(255,255,255,0.09);
+    --line-strong: rgba(255,255,255,0.18);
+    --ink:#edeff2;
+    --ink-mid:#a7aebc;
+    --ink-dim:#767e8d;
+
+    --lamp:#f0a431;
+    --lamp-soft: rgba(240,164,49,0.11);
+    --lamp-line: rgba(240,164,49,0.32);
+    --lamp-ink:#0a0c10;
+
+    --signal:#7c9ce6;
+    --signal-soft: rgba(124,156,230,0.11);
+    --signal-line: rgba(124,156,230,0.32);
+
+    --ok:#5bc38e;
+    --ok-soft: rgba(91,195,142,0.10);
+    --ok-line: rgba(91,195,142,0.30);
+
+    --alarm:#e0574f;
+    --alarm-soft: rgba(224,87,79,0.10);
+
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    --serif: "Gowun Batang", "Nanum Myeongjo", "Batang", serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, D2Coding, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(58rem 34rem at 86% -10%, var(--lamp-soft), transparent 60%),
+      radial-gradient(48rem 32rem at -10% 22%, var(--signal-soft), transparent 60%),
+      var(--ground);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16.5px;
+    line-height:1.72;
+    word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:var(--mono); font-variant-numeric:tabular-nums;}
+  .wrap{max-width:800px;margin:0 auto;padding:56px 22px 100px;}
+
+  /* ═══ 헤더 ═══ */
+  .eyebrow{
+    display:flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:700;letter-spacing:0.09em;
+    color:var(--lamp);text-transform:uppercase;margin-bottom:16px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(28px,4.7vw,39px);
+    font-weight:700;letter-spacing:-0.012em;line-height:1.33;
+    margin:0 0 16px;text-wrap:balance;
+  }
+  .lede{font-size:16.3px;color:var(--ink-mid);max-width:58ch;margin:0;}
+  .lede b{color:var(--ink);font-weight:700;}
+
+  /* ═══ 탭 ═══ */
+  .tabbar{
+    position:sticky;top:0;z-index:20;
+    margin:32px -22px 0;padding:10px 22px;
+    background:rgba(10,12,16,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    display:flex;gap:6px;overflow-x:auto;
+  }
+  .tabbar::-webkit-scrollbar{height:0;}
+  .tab{
+    flex:0 0 auto;
+    appearance:none;background:transparent;border:1px solid transparent;
+    color:var(--ink-dim);font-family:var(--sans);font-size:14px;font-weight:600;
+    padding:8px 15px;border-radius:9px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;
+    transition:color .15s ease, background .15s ease;
+  }
+  .tab:hover:not([disabled]){color:var(--ink-mid);background:var(--raised);}
+  .tab[aria-selected="true"]{
+    color:var(--lamp);background:var(--lamp-soft);border-color:var(--lamp-line);
+  }
+  .tab[disabled]{cursor:not-allowed;opacity:.45;}
+  .tab:focus-visible{outline:2px solid var(--lamp);outline-offset:2px;}
+  .tab .tnum{font-family:var(--mono);font-size:11.5px;}
+  .tab .lock{font-size:11px;}
+
+  .panel[hidden]{display:none;}
+  .locked-msg{
+    margin-top:22px;padding:9px 14px;border-radius:9px;
+    background:var(--raised);border:1px dashed var(--line-strong);
+    font-size:13.4px;color:var(--ink-dim);text-align:center;
+  }
+
+  /* ═══ 주차 머리 ═══ */
+  .whead{margin-top:34px;padding-bottom:22px;border-bottom:1px solid var(--line);}
+  .wtag{
+    display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:700;
+    color:var(--lamp-ink);background:var(--lamp);padding:3px 10px;border-radius:5px;
+    margin-bottom:12px;
+  }
+  .wtitle{font-family:var(--serif);font-size:clamp(23px,4vw,30px);font-weight:700;margin:0 0 10px;line-height:1.35;}
+  .wgoal{font-size:15.4px;color:var(--ink-mid);max-width:56ch;}
+  .wgoal b{color:var(--ink);}
+  .meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:6px 13px;border-radius:20px;
+    background:var(--raised);border:1px solid var(--line);
+    font-size:13px;color:var(--ink-mid);
+  }
+  .chip .mono{color:var(--ink);}
+
+  /* ═══ 알림 박스 ═══ */
+  .callout{margin:26px 0 0;padding:18px 20px;border-radius:0 12px 12px 0;font-size:14.8px;}
+  .callout .ct{font-weight:700;margin-bottom:6px;}
+  .callout b{color:var(--ink);}
+  .callout.warn{background:var(--alarm-soft);border:1px solid rgba(224,87,79,0.26);border-left:3px solid var(--alarm);}
+  .callout.warn .ct{color:var(--alarm);}
+  .callout.prep{background:var(--signal-soft);border:1px solid var(--signal-line);border-left:3px solid var(--signal);}
+  .callout.prep .ct{color:var(--signal);}
+  .callout ul{margin:8px 0 0;padding-left:19px;}
+  .callout ul li{margin-bottom:5px;}
+  .callout ul li:last-child{margin-bottom:0;}
+
+  /* ═══ 결과물 ═══ */
+  .outcome{margin:30px 0 0;padding:24px;background:var(--raised);border:1px solid var(--line);border-radius:14px;}
+  .outcome h2{
+    font-size:12.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+    color:var(--ink-dim);margin:0 0 16px;
+  }
+  .outcome ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .outcome li{display:flex;gap:11px;align-items:flex-start;font-size:15.2px;}
+  .outcome li .ico{flex:0 0 auto;margin-top:1px;font-size:16px;}
+  .outcome li b{color:var(--ink);}
+  .outcome li span.sub{display:block;color:var(--ink-dim);font-size:13.4px;margin-top:1px;}
+
+  /* ═══ 트랙 소개 ═══ */
+  .tracks-intro{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px;}
+  @media (max-width:640px){ .tracks-intro{grid-template-columns:1fr;} }
+  .tcard{padding:18px 20px;border-radius:13px;background:var(--raised);border:1px solid var(--line);}
+  .tcard.a{border-left:3px solid var(--lamp);}
+  .tcard.b{border-left:3px solid var(--signal);}
+  .tcard .tlab{font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:7px;}
+  .tcard.a .tlab{color:var(--lamp);}
+  .tcard.b .tlab{color:var(--signal);}
+  .tcard .tname{font-family:var(--serif);font-size:18px;font-weight:700;margin-bottom:6px;}
+  .tcard .tdesc{font-size:14px;color:var(--ink-mid);}
+  .tcard .tdesc b{color:var(--ink);}
+
+  .baseline{
+    margin-top:12px;padding:16px 20px;border-radius:13px;
+    border:1px dashed var(--line-strong);font-size:14.2px;color:var(--ink-mid);
+  }
+  .baseline b{color:var(--ink);}
+
+  /* ═══ 타임라인 ═══ */
+  section.days{margin-top:44px;}
+  .day{position:relative;padding:34px 0 34px 30px;border-left:2px solid var(--line-strong);}
+  .day:last-of-type{border-left-color:transparent;}
+  .day::before{
+    content:"";position:absolute;left:-7px;top:40px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--ground);border:2px solid var(--lamp);
+  }
+  .day.weekend::before{border-color:var(--ink-dim);}
+
+  .day-head{display:flex;align-items:center;gap:11px;flex-wrap:wrap;}
+  .day-num{
+    font-family:var(--mono);font-size:12.5px;font-weight:700;
+    color:var(--lamp-ink);background:var(--lamp);
+    padding:3px 10px;border-radius:5px;letter-spacing:0.02em;
+  }
+  .day.weekend .day-num{background:var(--ink-dim);color:var(--ground);}
+  .day-date{font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);}
+  .day-load{
+    margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--ink-dim);
+    border:1px solid var(--line);padding:2px 9px;border-radius:12px;
+  }
+  .day-title{font-family:var(--serif);font-size:21px;font-weight:700;margin-top:9px;}
+  .day-why{font-size:14px;color:var(--ink-dim);margin-top:4px;}
+  .day-why em{color:var(--ink-mid);font-style:normal;}
+
+  .blocks{display:flex;flex-direction:column;gap:11px;margin-top:18px;}
+  .blk{border-radius:12px;padding:15px 17px;background:var(--raised);border:1px solid var(--line);}
+  .blk.a{border-left:3px solid var(--lamp);}
+  .blk.b{border-left:3px solid var(--signal);}
+  .blk.x{border-left:3px solid var(--ok);}
+  .blk-head{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap;}
+  .blk-lab{font-size:11.5px;font-weight:700;letter-spacing:0.04em;}
+  .blk.a .blk-lab{color:var(--lamp);}
+  .blk.b .blk-lab{color:var(--signal);}
+  .blk.x .blk-lab{color:var(--ok);}
+  .blk-time{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink-dim);}
+  .blk-body{font-size:14.7px;}
+  .blk-body p{margin:0 0 8px;}
+  .blk-body p:last-child{margin:0;}
+  .blk-body ol, .blk-body ul.plain{margin:0 0 8px;padding-left:19px;}
+  .blk-body ol li, .blk-body ul.plain li{margin-bottom:5px;}
+  .blk-body ol li:last-child, .blk-body ul.plain li:last-child{margin-bottom:0;}
+  .blk-body em{color:var(--ink-mid);font-style:normal;}
+
+  .kw{
+    display:inline-block;font-size:11.5px;font-family:var(--mono);
+    background:var(--raised-2);color:var(--ink-mid);
+    padding:1.5px 7px;border-radius:4px;margin:5px 4px 0 0;border:1px solid var(--line);
+  }
+
+  .done{
+    margin-top:10px;padding:9px 12px;
+    background:var(--ok-soft);border:1px solid var(--ok-line);
+    border-radius:8px;font-size:13.6px;
+  }
+  .done b{color:var(--ok);font-weight:700;}
+
+  .inline-note{
+    margin:10px 0;padding:11px 14px;
+    background:var(--lamp-soft);border:1px solid var(--lamp-line);
+    border-radius:9px;font-size:13.8px;
+  }
+  .inline-note b{color:var(--lamp);}
+
+  .habit-strip{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+  .habit{
+    font-size:12.8px;color:var(--ink-dim);
+    display:inline-flex;align-items:center;gap:6px;
+    border:1px dashed var(--line-strong);padding:5px 11px;border-radius:18px;
+  }
+  .habit b{color:var(--ink-mid);font-weight:600;}
+  .habit em{font-style:normal;}
+
+  /* ═══ 프롬프트 메뉴 ═══ */
+  .menu{margin:12px 0 4px;display:flex;flex-direction:column;gap:8px;}
+  details.pick{background:var(--raised-2);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  details.pick[open]{border-color:var(--lamp-line);}
+  details.pick summary{
+    cursor:pointer;list-style:none;padding:12px 15px;
+    display:flex;align-items:center;gap:10px;font-size:14.6px;
+  }
+  details.pick summary::-webkit-details-marker{display:none;}
+  details.pick summary:focus-visible{outline:2px solid var(--lamp);outline-offset:-2px;}
+  details.pick summary::before{content:"▸";color:var(--lamp);font-size:12px;flex:0 0 auto;transition:transform .18s ease;}
+  details.pick[open] summary::before{transform:rotate(90deg);}
+  .pick-name{font-weight:700;}
+  .pick-what{color:var(--ink-dim);font-size:13.4px;}
+  .lvl{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-dim);letter-spacing:0.1em;flex:0 0 auto;}
+  .pick-inner{padding:0 15px 15px;}
+  .plabel{font-size:11.5px;font-weight:700;letter-spacing:0.05em;color:var(--ok);margin:4px 0 7px;}
+  pre.prompt{
+    margin:0;padding:14px 15px;
+    background:var(--ground);border:1px solid var(--line-strong);border-radius:9px;
+    font-family:var(--mono);font-size:12.9px;line-height:1.72;color:var(--ink);
+    white-space:pre-wrap;word-break:break-word;overflow-x:auto;
+  }
+
+  .dl{
+    display:inline-flex;align-items:center;gap:10px;margin:13px 0 2px;
+    padding:12px 18px;border-radius:10px;text-decoration:none;
+    background:var(--ok-soft);border:1px solid var(--ok-line);
+    color:var(--ok);font-weight:700;font-size:14.8px;
+  }
+  .dl:hover{filter:brightness(1.14);}
+  .dl .sub{color:var(--ink-dim);font-weight:400;font-size:12.6px;font-family:var(--mono);}
+  .dl-inline{
+    display:inline-block;margin-left:4px;padding:2px 9px;border-radius:7px;
+    background:var(--ok-soft);border:1px solid var(--ok-line);
+    color:var(--ok);text-decoration:none;font-size:13.2px;font-weight:600;white-space:nowrap;
+  }
+  .dl-inline:hover{filter:brightness(1.14);}
+
+  .retry{margin-top:12px;padding:13px 15px;border:1px dashed var(--line-strong);border-radius:10px;font-size:14px;}
+  .retry b{color:var(--ink);}
+  .rq{
+    display:block;font-family:var(--mono);font-size:12.8px;color:var(--ink-mid);
+    margin-top:6px;padding-left:12px;border-left:2px solid var(--line-strong);
+  }
+
+  .day.weekend .blk{background:transparent;border-style:dashed;}
+
+  /* ═══ 아웃라인(2~4주차) ═══ */
+  .draft-flag{
+    margin-top:26px;padding:14px 18px;border-radius:11px;
+    background:var(--raised-2);border:1px dashed var(--line-strong);
+    font-size:14px;color:var(--ink-mid);
+  }
+  .draft-flag b{color:var(--ink);}
+
+  .olist{margin-top:30px;display:flex;flex-direction:column;gap:10px;}
+  .oday{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:15px 17px;border-radius:12px;
+    background:var(--raised);border:1px solid var(--line);border-left:3px solid var(--lamp);
+  }
+  .oday .odnum{
+    flex:0 0 auto;font-family:var(--mono);font-size:11.5px;font-weight:700;
+    color:var(--lamp);padding-top:2px;min-width:42px;
+  }
+  .oday .odbody{flex:1;min-width:0;}
+  .oday .odtitle{font-weight:700;font-size:15.4px;margin-bottom:3px;}
+  .oday .oddesc{font-size:14px;color:var(--ink-mid);}
+  .oday.auto{border-left-color:var(--signal);}
+  .oday.auto .odnum{color:var(--signal);}
+
+  .osec{
+    font-size:12.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+    color:var(--ink-dim);margin:34px 0 14px;
+  }
+
+  .usebox{
+    margin-top:14px;padding:16px 19px;border-radius:12px;
+    background:var(--raised);border:1px solid var(--line);
+  }
+  .usebox .ul{font-size:12px;font-weight:700;letter-spacing:0.05em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:10px;}
+
+  /* ═══ 마무리 ═══ */
+  .note{margin-top:44px;padding:22px 24px;border:1px solid var(--line);border-radius:14px;background:var(--raised);}
+  .note h3{font-family:var(--serif);font-size:18px;margin:0 0 12px;font-weight:700;}
+  .note ul{margin:0;padding-left:19px;font-size:14.6px;color:var(--ink-mid);}
+  .note ul li{margin-bottom:7px;}
+  .note ul li:last-child{margin-bottom:0;}
+  .note ul li b{color:var(--ink);}
+
+  footer{
+    margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:12.8px;color:var(--ink-dim);text-align:center;
+  }
+
+  @media (prefers-reduced-motion:no-preference){ .day, .oday{animation:rise .4s ease both;} }
+  @keyframes rise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+</style>
+<style>
+/* ═══ 인쇄용 밝은 테마 재정의 ═══ */
+:root{
+  --ground:#ffffff;
+  --raised:#f4f5f7;
+  --raised-2:#ebedf1;
+  --line: rgba(0,0,0,0.15);
+  --line-strong: rgba(0,0,0,0.30);
+  --ink:#111417;
+  --ink-mid:#3a4048;
+  --ink-dim:#585f6a;
+  --lamp:#a86600;
+  --lamp-soft: rgba(168,102,0,0.08);
+  --lamp-line: rgba(168,102,0,0.38);
+  --lamp-ink:#ffffff;
+  --signal:#33569f;
+  --signal-soft: rgba(51,86,159,0.07);
+  --signal-line: rgba(51,86,159,0.38);
+  --ok:#1c6e46;
+  --ok-soft: rgba(28,110,70,0.07);
+  --ok-line: rgba(28,110,70,0.32);
+  --alarm:#a8362e;
+  --alarm-soft: rgba(168,54,46,0.06);
+}
+*{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{background:#ffffff; font-size:15.5px;}
+.callout.warn{border-color:rgba(168,54,46,0.30);}
+pre.prompt{background:#f4f5f7;}
+.tabbar,.locked-msg{display:none;}
+.day,.oday{animation:none !important; opacity:1 !important; transform:none !important;}
+.dl:hover,.dl-inline:hover{filter:none;}
+
+@page{ size:A4; margin:13mm 12mm; }
+@media print{
+  .blk,.callout,.outcome,.tcard,.done,.inline-note,details.pick,.note,.baseline,.usebox,.retry,.oday{break-inside:avoid;}
+  .whead,.day-head,.osec{break-after:avoid;}
+  a{color:inherit;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">AI 왕초보 챌린지 1기 · 커리큘럼 미리보기</div>
+    <h1>4주 뒤, AI로 뭐든 만들어보는<br>사람이 되어 있습니다</h1>
+    <p class="lede">
+      코드는 한 줄도 직접 안 씁니다. <b>시킬 말을 그대로 드리고</b>, 여러분은 붙여넣기만 합니다.
+      매주 <b>손에 남는 결과물</b>을 하나씩 만들어 나갑니다 —
+      내가 쓰는 도구 → 내 글 채널 → 내 영상 → 내 수익 링크.
+    </p>
+  </header>
+
+  <div class="panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0">
+
+    <div class="whead">
+      <span class="wtag">2주차</span>
+      <h2 class="wtitle">내 이야기가 글이 되어 인터넷에 쌓인다</h2>
+      <p class="wgoal">
+        1주차엔 <b>도구</b>를 만들었습니다. 이번 주엔 <b>내 채널</b>을 엽니다.
+        노션에 쌓인 내 기록을 AI가 읽게 만들고, 그걸 재료로 블로그 글을 뽑아 발행합니다.
+        그리고 <b>폰에서 명령을 보내면 답하는 봇</b>으로 자동화를 한 칸 올립니다.
+      </p>
+      <div class="meta-row">
+        <span class="chip">📅 <span class="mono">08-10(월) ~ 08-16(일)</span></span>
+        <span class="chip">⏱ 평일 하루 <span class="mono">2~3시간</span></span>
+        <span class="chip">🔑 1주차 결과물을 <span class="mono">그대로 재사용</span></span>
+      </div>
+    </div>
+
+    <div class="callout prep">
+      <div class="ct">🧰 이번 주 준비물</div>
+      <ul>
+        <li><b>네이버 아이디</b> — 블로그용. 이미 있으면 그걸로, 새로 파고 싶으면 월요일 전에</li>
+        <li><b>지난주 결과물 그대로</b> — 깃허브 계정 · 텔레그램 봇 · 노션 일지. 새로 만들 건 없습니다</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <div class="ct">⚠️ 이번 주의 산은 목요일입니다</div>
+      목요일에 <b>부르면 답하는 봇</b>을 만듭니다 — 처음 보는 영어 사이트에 들어가는 날이라, 월~수요일 것을 밀리지 않고 와야 목요일에 힘을 쓸 수 있습니다.
+      막혀도 괜찮습니다. 1주차 수요일처럼, <b>막힌 화면을 통째로 보여주면 뚫립니다.</b>
+    </div>
+
+    <div class="outcome">
+      <h2>일요일 밤, 당신 손에 이렇게 남습니다</h2>
+      <ul>
+        <li><span class="ico">✍️</span><b>내 블로그에 공개된 글 2~3편</b><span class="sub">AI 초안을 내 말투로 고쳐 쓴 것. 복붙 그대로는 안 됩니다</span></li>
+        <li><span class="ico">🔗</span><b>내 노션을 읽는 AI</b><span class="sub">"지난주 일지 읽고 글감 뽑아줘"가 되는 상태</span></li>
+        <li><span class="ico">📱</span><b>폰에서 부르면 답하는 봇</b><span class="sub">/글감 이라고 치면 그 자리에서 답이 옵니다</span></li>
+        <li><span class="ico">📚</span><b>매일 아침 배달되는 글감</b><span class="sub">"쓸 게 없어서 못 쓴다"가 사라집니다</span></li>
+      </ul>
+    </div>
+
+    <div class="tracks-intro">
+      <div class="tcard a">
+        <div class="tlab">트랙 A · 매일</div>
+        <div class="tname">글 채널 열고 쌓기</div>
+        <div class="tdesc">블로그를 열고, 지난주 겪은 이야기로 글을 씁니다. <b>소재는 이미 있습니다</b> — 노션에 쌓아둔 일주일치 일지가 그것입니다.</div>
+      </div>
+      <div class="tcard b">
+        <div class="tlab">트랙 B · 자동화 한 칸 위로</div>
+        <div class="tname">말하는 봇 → 듣는 봇</div>
+        <div class="tdesc">지난주 봇은 정해진 시각에 <em>말만</em> 했습니다. 이번 주엔 <b>내 말을 듣고 답하는 봇</b>과 <b>매일 아침 글감을 물어오는 배달</b>을 만듭니다.</div>
+      </div>
+    </div>
+    <div class="baseline">
+      🧵 <b>쓰레드</b> 매일 발행 + 답글 10개, 📓 <b>노션</b> 3줄 일지는 계속됩니다.
+      특히 이번 주부터 노션 일지가 <b>블로그 글의 재료</b>가 됩니다 — 기록이 곧 소재입니다.
+    </div>
+
+    <section class="days">
+
+      <!-- ── W2 DAY 1 ── -->
+      <div class="day">
+        <div class="day-head">
+          <span class="day-num">DAY 1</span>
+          <span class="day-date mono">08-10 월</span>
+          <span class="day-load mono">약 2시간</span>
+        </div>
+        <div class="day-title">내 기록을 AI에게 먹이기</div>
+        <div class="day-why">일주일 동안 쓴 노션 일지, 그냥 일기가 아니었습니다. <em>오늘부터 AI의 재료가 됩니다.</em></div>
+
+        <div class="blocks">
+          <div class="blk a">
+            <div class="blk-head"><span class="blk-lab">🅰 글 채널</span><span class="blk-time">70분</span></div>
+            <div class="blk-body">
+              <p><b>노션을 AI에 연결</b>합니다. 오늘은 VS Code가 아니라 <b>AI 웹사이트</b>(claude.ai 또는 챗GPT)에서 합니다 — 설정에서 노션을 연결하는 <b>버튼 클릭 몇 번</b>이 전부입니다.</p>
+              <ol>
+                <li>AI 웹사이트에 로그인 → 프로필에서 <b>설정</b> 열기 → <b>커넥터(연결)</b> 메뉴 찾기 <em>(메뉴 이름이 가끔 바뀝니다 — "커넥터"나 "연결"이라는 말을 찾으세요)</em></li>
+                <li>목록에서 <b>Notion</b>을 찾아 <b>연결</b> 누르기 → 노션 로그인 창이 뜨면 <b>허용</b></li>
+                <li>어느 페이지를 보여줄지 묻는 창이 뜨면 <b>작업일지 페이지</b>를 선택</li>
+              </ol>
+              <p>연결됐으면 바로 부려봅니다:</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">내 노션에 지난주 작업일지가 있어. 그걸 읽고
+
+① 내가 지난주에 뭘 만들었는지 세 줄로 정리해줘
+② 이 경험으로 쓸 수 있는 블로그 글감 10개를 뽑아줘
+
+글감 제목은 "나 같은 왕초보가 검색할 법한 말"로 지어줘.
+(예: 50대도 되나요, 코딩 하나도 몰라도 되나요 같은)
+다 되면 글감 10개를 내 노션에 새 페이지로 저장해줘.</pre>
+              <p style="margin-top:10px;"><em>내가 흘려 쓴 기록에서 글감 10개가 나오는 순간 — 기록하는 이유를 몸으로 알게 됩니다.</em></p>
+              <p><em>⚠️ 연결 기능은 계정 종류에 따라 되는 범위가 다를 수 있습니다. <b>연결 메뉴가 안 보이거나 막히면 우회로</b> — 노션 일지를 전체 선택해 복사한 다음, 대화창에 붙여넣고 위와 똑같이 시키면 됩니다. 오늘의 목표는 연결 자체가 아니라 <b>글감 10개</b>입니다. AI가 노션에 직접 저장을 못 해주면, <b>글감 10개를 복사해 내 손으로 붙여넣어도 오늘은 성공</b>입니다.</em></p>
+              <span class="kw">노션 연결</span><span class="kw">일지 → 글감</span><span class="kw">클릭만, 코드 없음</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 내 노션에 글감 10개 페이지가 생겼다 <em>(직접 붙여넣었어도 성공)</em></div>
+          </div>
+
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">🅱 채널 준비</span><span class="blk-time">30분</span></div>
+            <div class="blk-body">
+              <p><b>네이버 블로그를 엽니다.</b> 오늘은 개설만 — 글은 내일부터.</p>
+              <ol>
+                <li>네이버 로그인 → 블로그 만들기</li>
+                <li>블로그 이름·별명 정하기 <em>(AI에게 "이런 주제로 블로그 이름 10개 지어줘" 시켜도 됩니다)</em></li>
+                <li>카테고리 1개만 만들기 — 많이 만들지 마세요. 하나면 충분합니다</li>
+                <li>프로필 사진: 1주차 목요일에 만든 AI 이미지 재사용 <em>(그날 안 만들었으면 오늘 한 장 새로 뽑으면 됩니다 — 5분)</em></li>
+              </ol>
+              <div class="plabel">이름이 안 떠오르면 붙여넣을 말</div>
+<pre class="prompt">[내 주제]를 다루는 네이버 블로그를 새로 열 거야.
+블로그 이름 후보 10개를 지어줘.
+
+- 어렵거나 멋 부린 말 말고, 기억하기 쉬운 우리말로
+- 이름만 봐도 무슨 블로그인지 짐작되게
+- 이미 유명한 곳과 겹칠 것 같은 이름은 빼줘
+10개 중 네가 1등으로 미는 것과 이유도 알려줘.</pre>
+              <p style="margin-top:8px;"><em>[내 주제]에 넣을 게 아직 없으면 <b>"AI 왕초보 도전기"</b>라고 넣으세요 — 지난 일주일이 통째로 소재입니다. 앞으로 [내 주제] 칸은 전부 이걸로 갑니다. 나중에 바꿔도 됩니다.</em></p>
+              <span class="kw">블로그 개설</span><span class="kw">이름 짓기</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 내 블로그 주소가 생겼다</div>
+          </div>
+
+          <div class="blk x">
+            <div class="blk-head"><span class="blk-lab">➕ AI 다루는 기술</span><span class="blk-time">20분</span></div>
+            <div class="blk-body">
+              <p><b>AI에게 나를 인터뷰시키기.</b> "글 써줘"라고 하면 남의 글이 나옵니다. 내 이야기를 꺼내는 법은 따로 있습니다.</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">네가 기자라고 생각하고 나를 인터뷰해줘.
+주제는 "코딩 왕초보가 AI로 일주일 만에 겪은 일".
+질문은 한 번에 하나씩만 해줘.
+내 대답이 짧으면 더 파고들어 물어봐줘.</pre>
+              <p style="margin-top:10px;"><em>10분 대답하고 나면 내 입에서 나온 문장들이 쌓입니다. 이게 내일 글의 진짜 재료입니다 — AI가 지어낸 게 아니라.</em></p>
+              <p><b>끝나면 인터뷰 대답 전체를 복사해 노션 일지에 붙여 두세요.</b> AI는 어제 대화를 기억하지 못합니다 — 내일 첫 글을 쓸 때 이걸 그대로 다시 붙여넣어 재료로 씁니다.</p>
+              <span class="kw">인터뷰 기법</span><span class="kw">내 문장 만들기</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-strip">
+          <span class="habit">🧵 <b>쓰레드</b> 발행 + 답글 10개</span>
+          <span class="habit">📓 <b>노션</b> 오늘 3줄</span>
+        </div>
+      </div>
+
+      <!-- ── W2 DAY 2 ── -->
+      <div class="day">
+        <div class="day-head">
+          <span class="day-num">DAY 2</span>
+          <span class="day-date mono">08-11 화</span>
+          <span class="day-load mono">약 2시간 30분</span>
+        </div>
+        <div class="day-title">첫 글 발행</div>
+        <div class="day-why">잘 쓰려고 하지 마세요. <em>솔직하게 쓰면 잘 쓴 글이 됩니다</em> — 왕초보의 삽질이 왕초보에게는 최고의 정보입니다.</div>
+
+        <div class="blocks">
+          <div class="blk a">
+            <div class="blk-head"><span class="blk-lab">🅰 글 채널</span><span class="blk-time">90분</span></div>
+            <div class="blk-body">
+              <p>지난주에 만든 도구 이야기로 <b>첫 글</b>을 씁니다. AI가 초안을 쓰고, <b>내 경험 자리는 반드시 내 손으로</b> 채웁니다.</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">지난주에 내가 만든 [도구 이름] 이야기로
+네이버 블로그 글 초안을 써줘.
+
+- 제목은 검색하는 사람이 칠 법한 말로
+  (예: 코딩 몰라도 계산기 만들 수 있나요)
+- 첫 세 줄에 결론부터 — 만들었고, 됐고, 이렇게 하면 된다
+- 문단은 2~3줄씩 짧게, 폰에서 읽기 좋게
+- 아래에 붙여넣는 어제 인터뷰 대답을 재료로 써줘
+
+⚠️ 중요: 내가 겪지 않은 일은 절대 지어내지 마.
+비어있는 부분은 (여기에 내 경험) 이라고 표시만 해줘.
+
+[어제 인터뷰 대답 — 노션에 붙여둔 것을
+여기에 통째로 붙여넣으세요]</pre>
+              <p style="margin-top:10px;"><b>(여기에 내 경험)</b> 칸을 내 손으로 채우고 → 소리내어 한 번 읽고 → 발행합니다. <em>복붙 그대로 올리면 안 되는 이유: 검색엔진이 AI 양산 글을 걸러내고, 무엇보다 읽는 사람이 압니다.</em></p>
+              <div class="retry">
+                <b>초안이 마음에 안 들면 고쳐 시킵니다</b> — 1주차에 도구를 고치던 것과 똑같습니다.
+                <span class="rq">"말투가 너무 교과서 같아. 옆집 사람한테 말하듯 풀어줘"</span>
+                <span class="rq">"문단이 길어. 폰 기준 2~3줄씩 끊어줘"</span>
+                <span class="rq">"도입이 심심해. 내가 실패했던 장면부터 시작해줘"</span>
+              </div>
+              <span class="kw">첫 글 발행</span><span class="kw">한 문단은 내 손</span><span class="kw">지어내기 금지</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 내 블로그에 첫 글이 <b>전체공개</b>로 올라가 있다</div>
+          </div>
+
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">🅱 자동화</span><span class="blk-time">30분</span></div>
+            <div class="blk-body">
+              <p>발행한 글 주소를 <b>지난주 도구함 대문에 추가</b>하고 다시 올립니다. "만든 것"에 이어 "쓴 것"도 내 대문에 모입니다.</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">내 도구함 대문(index.html)에 "내 블로그" 카드를
+하나 추가해줘. 주소는 이거야: [내 블로그 주소]
+
+바뀐 파일은 1주차처럼 깃허브 웹 화면에서 내가
+직접 올릴 거야. 어떤 파일을 올리면 되는지 알려줘.</pre>
+              <p><em>지난주 수요일에 배운 "고치고 → 다시 올리고 → 반영 확인" 그 바퀴, 오늘 두 번째로 돕니다. 두 번째는 10분이면 됩니다.</em></p>
+              <span class="kw">도구함 갱신</span><span class="kw">재배포 복습</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 도구함에서 내 글로 바로 갈 수 있다</div>
+          </div>
+
+          <div class="blk x">
+            <div class="blk-head"><span class="blk-lab">➕ AI 다루는 기술</span><span class="blk-time">20분</span></div>
+            <div class="blk-body">
+              <p><b>제목이 반입니다.</b> 발행 전에 제목 후보를 뽑아 비교합니다.</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">이 글의 제목 후보 10개를 뽑아줘.
+조건: ① 검색하는 사람이 실제로 칠 법한 말
+② 숫자나 구체적인 결과가 들어가면 좋음
+③ 낚시 금지 — 글에 없는 내용 약속하지 마
+10개를 뽑고, 네가 1등이라고 생각하는 걸 이유와 함께 골라줘.</pre>
+              <span class="kw">제목 10개 뽑기</span><span class="kw">낚시 금지</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-strip">
+          <span class="habit">🧵 <b>쓰레드</b> 발행 <em>— 오늘 첫 글 발행 소식으로</em></span>
+          <span class="habit">📓 <b>노션</b> 오늘 3줄</span>
+        </div>
+      </div>
+
+      <!-- ── W2 DAY 3 ── -->
+      <div class="day">
+        <div class="day-head">
+          <span class="day-num">DAY 3</span>
+          <span class="day-date mono">08-12 수</span>
+          <span class="day-load mono">약 2시간 20분</span>
+        </div>
+        <div class="day-title">읽히는 글로 다듬기</div>
+        <div class="day-why">어제는 <em>쓰는 법</em>을 배웠고, 오늘은 <em>읽히는 법</em>을 배웁니다. 둘은 다른 기술입니다.</div>
+
+        <div class="blocks">
+          <div class="blk a">
+            <div class="blk-head"><span class="blk-lab">🅰 글 채널</span><span class="blk-time">80분</span></div>
+            <div class="blk-body">
+              <p>① 내 주제에서 <b>잘 나가는 글 3개를 뜯어봅니다.</b> 찾는 법: 네이버 검색창에 [내 주제] 관련 말을 치고 <b>블로그 탭 위쪽 글 3개.</b> 체크리스트 4개만: 제목에 검색어가 있나 / 첫 세 줄에 결론이 있나 / 문단이 폰 기준 2~3줄인가 / 사진이 몇 장인가.</p>
+              <p>② 그 눈으로 <b>어제 내 글을 채점시킵니다:</b></p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">아래에 붙여넣는 글을, 처음 보는 50대 왕초보
+독자라고 생각하고 읽어봐.
+① 무슨 말인지 모를 부분 — 그 문장을 그대로 인용해줘
+② 지루해서 닫고 싶어지는 지점
+③ 10점 만점에 몇 점인지, 이유와 함께
+솔직하게. 칭찬은 필요 없어.
+
+[어제 발행한 내 글 전체를 복사해 여기에 붙여넣으세요]</pre>
+              <p style="margin-top:10px;">③ 지적 중 <b>두 개만</b> 고치고, 글감 10개 중 하나로 <b>두 번째 글</b>을 발행합니다. 어제보다 빨라진 자신을 발견하게 됩니다.</p>
+              <span class="kw">잘된 글 해부</span><span class="kw">AI 채점</span><span class="kw">두 번째 글</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 두 번째 글이 올라갔고, 첫 글보다 나아진 점을 한 가지 말할 수 있다</div>
+          </div>
+
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">🅱 자동화</span><span class="blk-time">30분</span></div>
+            <div class="blk-body">
+              <p>내일 만들 "듣는 봇"의 재료를 준비합니다. VS Code에서 AI에게:</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">내 주제([내 주제])의 오늘 새 소식 5개를 모아
+제목과 링크를 정리해 내 텔레그램으로 보내줘.
+
+- 소식은 구글 뉴스 검색 RSS 주소에서만 가져와.
+  다른 사이트를 직접 긁지 마 — 금요일에 이걸
+  자동 실행으로 올릴 건데, 사이트를 긁는 방식은
+  거기서 차단당해
+- 지난주에 만든 봇 토큰이랑 챗 ID를 그대로 쓰면 돼
+- 파일로 저장해주고 실행하는 것까지 해줘</pre>
+              <p style="margin-top:10px;"><em>오늘은 내 컴퓨터에서 1회 실행. 금요일에 이걸 아침마다 자동으로 오게 만듭니다.</em></p>
+              <span class="kw">글감 수집기</span><span class="kw">1회 실행</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 글감 5개가 텔레그램에 도착했다</div>
+          </div>
+
+          <div class="blk x">
+            <div class="blk-head"><span class="blk-lab">➕ AI 다루는 기술</span><span class="blk-time">15분</span></div>
+            <div class="blk-body">
+              <p><b>캡처 넣는 법 + 가리는 법.</b> 글에 화면 캡처가 들어가면 신뢰가 확 오릅니다. 단, <b>올리기 전에 가릴 것</b>: 봇 토큰·이메일·이름 같은 개인정보. 캡처 단축키(<span class="mono">Win+Shift+S</span>)와 그림판으로 가리는 법까지.</p>
+              <p><em>토큰이 찍힌 캡처를 그대로 올리면 남이 내 봇을 조종할 수 있습니다. 진짜 사고 나는 지점이라 오늘 짚습니다.</em></p>
+              <span class="kw">캡처</span><span class="kw">개인정보 가리기</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-strip">
+          <span class="habit">🧵 <b>쓰레드</b> 발행 + 답글 10개</span>
+          <span class="habit">📓 <b>노션</b> 오늘 3줄</span>
+        </div>
+      </div>
+
+      <!-- ── W2 DAY 4 ── -->
+      <div class="day">
+        <div class="day-head">
+          <span class="day-num">DAY 4</span>
+          <span class="day-date mono">08-13 목</span>
+          <span class="day-load mono">약 2시간 30분</span>
+        </div>
+        <div class="day-title">폰에서 부르면 답하는 봇</div>
+        <div class="day-why">이번 주의 <em>가장 큰 산</em>입니다. 지난주 수요일처럼 — 글은 쉬어가고 <em>여기에 힘을 몰아줍니다.</em></div>
+
+        <div class="blocks">
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">🅱 자동화 · 오늘의 핵심</span><span class="blk-time">90분</span></div>
+            <div class="blk-body">
+              <p>지금까지 봇은 <b>정해진 시각에만</b> 말했습니다. 오늘부터 <b>내가 부르면 그 자리에서 답합니다.</b> 이걸 하려면 봇이 인터넷에 상주해야 하는데 — <b>클라우드플레어 워커</b>라는 무료 서비스가 그 자리를 내줍니다.</p>
+              <p><em>어제 수집기를 그대로 옮기는 건 아닙니다 — 워커는 다른 동네라서, <b>같은 일을 하는 코드를 새로</b> 받습니다. 새로 짜는 건 AI 몫이니 걱정 마세요.</em></p>
+              <div class="inline-note">
+                <b>📍 시작 전에 두 가지.</b> ① 먼저 아래 <b>"붙여넣을 말"로 코드부터 받아두고</b> 1번을 시작하세요 — 3번 단계에서 그 코드를 붙여넣습니다.
+                ② 1주차 주말 보너스로 <b>"물어보면 답하는 봇"</b>을 만들었다면 오늘부터 꺼두세요. 한 봇은 한 가지 방식으로만 들을 수 있어서, 켜둔 채 오늘 것을 연결하면 <b>둘 다 조용히 먹통이 됩니다.</b> 오늘 만드는 것이 그 역할을 이어받습니다.
+              </div>
+              <ol>
+                <li>클라우드플레어 가입 <em>(무료, 카드 등록 없음)</em></li>
+                <li>Workers 메뉴 → Create(만들기) → 이름 짓고 <b>Deploy</b>(올리기 버튼) <em>(전부 영어 화면이지만 오늘 누를 버튼은 이게 다입니다)</em></li>
+                <li>AI가 준 코드를 붙여넣고 다시 Deploy</li>
+                <li>Settings에서 <b>Secret</b>이라는 말이 붙은 메뉴를 찾아 봇 토큰·챗 ID 넣기 <em>(지난주 금고와 같은 개념. 메뉴 이름이 가끔 바뀝니다 — "Secret"을 찾으세요)</em></li>
+                <li>AI가 준 <b>연결 주소</b>를 브라우저 주소창에 붙여넣고 엔터 → 화면에 <span class="mono">"ok":true</span> 가 뜨면 연결 완료</li>
+              </ol>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">텔레그램에서 /글감 이라고 보내면, 어제 수집기와
+같은 일(내 주제 새 글 5개 정리)을 그 자리에서
+해주는 클라우드플레어 워커 코드를 짜줘.
+
+- 소식은 어제 수집기처럼 구글 뉴스 검색 RSS에서만
+- 봇 토큰은 시크릿으로 불러 쓰게
+- 내 챗 ID가 아닌 사람에겐 아무 대답도 하지 않게
+- 텔레그램과 연결하는 주소(웹훅)도 만들어줘
+- 텔레그램이 보낸 요청이 맞는지 확인하는
+  비밀값(웹훅 시크릿)도 걸어줘
+
+나는 왕초보야. 코드를 어디에 붙여넣는지,
+어떤 순서로 누르는지 하나씩 알려줘.</pre>
+              <div class="inline-note">
+                <b>⚠️ 오늘도 한 번은 막힙니다. 정상입니다.</b>
+                주로 시크릿 이름 오타거나, 연결 주소를 빼먹은 경우입니다.
+                지난주에 배운 대로 — <b>화면을 통째로 AI에게 보여주세요.</b>
+              </div>
+              <span class="kw">클라우드플레어 워커</span><span class="kw">웹훅 연결</span><span class="kw">/글감 명령</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 폰에서 <span class="mono">/글감</span> 치면 잠시 후 답이 온다</div>
+          </div>
+
+          <div class="blk a">
+            <div class="blk-head"><span class="blk-lab">🅰 글 채널 · 가볍게</span><span class="blk-time">30분</span></div>
+            <div class="blk-body">
+              <p><b>답글 도는 날.</b> 내 글에 온 반응 확인하고, 내 주제의 <b>이웃 글 10개에 진심 담긴 댓글</b>을 답니다. 쓰레드에서 하던 것과 같은 원리 — <em>블로그도 먼저 다가가는 사람에게 이웃이 생깁니다.</em></p>
+              <span class="kw">이웃 만들기</span><span class="kw">댓글 10개</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 이웃 글 10곳에 내 댓글이 달려 있다</div>
+          </div>
+
+          <div class="blk x">
+            <div class="blk-head"><span class="blk-lab">➕ AI 다루는 기술</span><span class="blk-time">15분</span></div>
+            <div class="blk-body">
+              <p><b>명령어 기획.</b> /글감 말고 내 폰에 뭐가 더 있으면 좋을까 3개만 적어둡니다 — /시황 /할일 /요약 뭐든. <em>주말 보너스에서 하나 만들어봅니다.</em></p>
+              <span class="kw">명령어 아이디어 3개</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-strip">
+          <span class="habit">🧵 <b>쓰레드</b> 발행 + 답글 10개</span>
+          <span class="habit">📓 <b>노션</b> 오늘 3줄 <em>— 막힌 지점 기록</em></span>
+        </div>
+      </div>
+
+      <!-- ── W2 DAY 5 ── -->
+      <div class="day">
+        <div class="day-head">
+          <span class="day-num">DAY 5</span>
+          <span class="day-date mono">08-14 금</span>
+          <span class="day-load mono">약 2시간</span>
+        </div>
+        <div class="day-title">매일 아침 글감 배달</div>
+        <div class="day-why">수요일에 만든 수집기 + 지난주에 배운 시간표. <em>새로 배우는 게 아니라, 아는 것 두 개를 잇는 날입니다.</em></div>
+
+        <div class="blocks">
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">🅱 자동화</span><span class="blk-time">60분</span></div>
+            <div class="blk-body">
+              <p>수요일의 글감 수집기를 <b>지난주 그 비공개 저장소</b>에 올리고, 시간표에 한 줄 추가합니다 — 매일 아침 8시 30분 무렵, 시황과 글감이 나란히 도착하게.</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">수요일에 만든 글감 수집기를 매일 아침 자동으로
+돌게 만들자.
+
+- 지난주 시황 로봇이 사는 비공개 저장소에 올려줘
+- 열쇠(토큰)는 파일에 넣지 말고, 이미 있는
+  금고(Secrets)를 그대로 쓰게 해줘
+- 매일 아침 8시 30분에 실행되게 시간표에 추가해줘
+- 다 되면 수동 실행으로 한 번 확인하는 법을 알려줘</pre>
+              <div class="inline-note">
+                <b>🛠 AI가 저장소에 올리다 로그인(인증)을 요구받으면</b> — 억지로 뚫지 말고, AI에게 "올릴 파일만 정리해줘"라고 한 뒤 <b>1주차처럼 깃허브 웹 화면에서 직접 업로드</b>하면 됩니다. 결과는 같습니다.
+              </div>
+              <p><em>한 창고(저장소)에 로봇 여러 개를 살게 할 수 있습니다. 금고(Secrets)도 이미 있으니 그대로 씁니다. 지난주에 90분 걸리던 게 오늘은 30분이면 됩니다 — 이게 실력이 는 겁니다.</em></p>
+              <span class="kw">깃허브 액션 2호</span><span class="kw">금고 재사용</span><span class="kw">아침 8시 배달</span>
+            </div>
+            <div class="done"><b>✔ 오늘 성공 판정</b> — 수동 실행 초록 체크 ✔ + 내일 아침 8시 30분 예약 완료</div>
+          </div>
+
+          <div class="blk a">
+            <div class="blk-head"><span class="blk-lab">🅰 글 채널</span><span class="blk-time">40분</span></div>
+            <div class="blk-body">
+              <p><b>세 번째 글</b>에 도전하거나(글감은 이미 배달되고 있습니다), 이번 주 두 글을 다듬습니다. 이번 주 목표는 2편 — <em>3편째부터는 보너스입니다.</em></p>
+              <p><b>그리고 내 글에 달린 댓글에 전부 답합니다.</b> 어제 내가 단 댓글 10개의 답도 오늘쯤 돌아옵니다 — 이 왕복이 이웃을 만듭니다.</p>
+              <span class="kw">세 번째 글(선택)</span><span class="kw">댓글 전부 회신</span>
+            </div>
+          </div>
+
+          <div class="blk x">
+            <div class="blk-head"><span class="blk-lab">➕ AI 다루는 기술</span><span class="blk-time">20분</span></div>
+            <div class="blk-body">
+              <p><b>주간 회고를 AI와.</b> 노션에서:</p>
+              <div class="plabel">붙여넣을 말</div>
+<pre class="prompt">내 노션 일지에서 이번 주 기록을 읽고
+① 잘한 것 3개 ② 다음 주에 고칠 것 2개
+③ 이번 주 가장 크게 는 것 1개
+로 정리해서 주간 회고 페이지를 만들어줘.</pre>
+              <span class="kw">회고 자동 정리</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-strip">
+          <span class="habit">🧵 <b>쓰레드</b> 2주차 완주 인증 글</span>
+          <span class="habit">📓 <b>노션</b> 주간 회고</span>
+        </div>
+      </div>
+
+      <!-- ── W2 주말 ── -->
+      <div class="day weekend">
+        <div class="day-head">
+          <span class="day-num">주말</span>
+          <span class="day-date mono">08-15 토 ~ 08-16 일</span>
+          <span class="day-load mono">밀린 것 우선</span>
+        </div>
+        <div class="day-title">따라잡기 &amp; 더 해보기</div>
+        <div class="day-why">특히 <b>목요일 듣는 봇</b>이 밀렸으면 그것부터. <em>뒤 주차의 필수 전제는 아니니 조급할 건 없습니다 — 다만 한 번 뚫어두면 앞으로 뭐든 얹을 수 있는 그릇입니다.</em></div>
+
+        <div class="blocks">
+          <div class="blk x">
+            <div class="blk-head"><span class="blk-lab">1순위 · 따라잡기</span></div>
+            <div class="blk-body">
+              <p>블로그 글 2편 + 아침 글감 배달, 이 둘이 이번 주의 뼈대입니다. ✔ 안 찍힌 것부터 마무리하세요. <em>주말 질문 시간을 따로 잡아둡니다.</em></p>
+            </div>
+          </div>
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">보너스 ①</span><span class="blk-time">40분</span></div>
+            <div class="blk-body">
+              <p><b>망친 파일 되돌리기.</b> 깃허브에 올린 파일은 <b>모든 과거 버전이 남아있습니다.</b> 일부러 파일을 망쳐보고, 어제 버전으로 되돌려봅니다 — 이걸 알면 겁이 없어집니다.</p>
+              <span class="kw">과거 버전 복원</span>
+            </div>
+          </div>
+          <div class="blk b">
+            <div class="blk-head"><span class="blk-lab">보너스 ②</span><span class="blk-time">40분</span></div>
+            <div class="blk-body">
+              <p><b>명령어 하나 더.</b> 목요일에 적어둔 아이디어 중 하나를 봇에 추가합니다 — /시황이든 /요약이든.</p>
+              <span class="kw">봇 확장</span>
+            </div>
+          </div>
+          <div class="blk a">
+            <div class="blk-head"><span class="blk-lab">보너스 ③</span><span class="blk-time">30분</span></div>
+            <div class="blk-body">
+              <p><b>다른 컴퓨터에서 이어가기.</b> 노트북이 따로 있다면, 깃허브에서 내 작업을 내려받아 이어서 하고 다시 올려봅니다. <em>창고의 진짜 쓸모는 여기 있습니다.</em></p>
+              <span class="kw">내려받기·올리기</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="usebox">
+      <div class="ul">이번 주에 새로 배우는 것</div>
+      <span class="kw">노션 연결</span><span class="kw">인터뷰 기법</span><span class="kw">블로그 개설·발행</span><span class="kw">제목·도입부</span><span class="kw">AI 채점</span><span class="kw">개인정보 가리기</span><span class="kw">클라우드플레어 워커</span><span class="kw">양방향 봇</span><span class="kw">액션 2호</span><span class="kw">과거 버전 복원</span>
+    </div>
+  </div>
+
+  <footer>예습용 미리보기 · 2주차 인쇄본입니다. 세부 일정과 과제는 진행 상황에 따라 조정될 수 있습니다.</footer>
+</div>
+</body>
+</html>
