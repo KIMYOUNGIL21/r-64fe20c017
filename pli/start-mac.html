@@ -33,6 +33,10 @@ button { width:100%; padding:12px; border:1px solid var(--amber-deep); border-to
 button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
 kbd { display:inline-block; padding:2px 7px; border:1px solid var(--line); border-bottom-width:2px; border-radius:6px; background:#050a14; color:var(--text); font-family:'SF Mono',Menlo,monospace; font-size:14px; }
 
+.guide-shot { margin:18px 0 0; }
+.guide-shot img { display:block; width:100%; border:1px solid var(--line); border-radius:12px; }
+.guide-shot figcaption { margin-top:8px; color:#8fa2c3; font-size:14px; text-align:center; }
+
 /* 진행 막대 */
 .tracker { position:sticky; top:0; z-index:20; padding:12px 0 13px; border-bottom:1px solid var(--line); background:rgba(10,16,32,.97); backdrop-filter:blur(10px); }
 .tracker .bar { height:8px; border-radius:99px; background:#1b2740; overflow:hidden; }
@@ -280,48 +284,52 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <div class="copybox"><pre id="apiName">YouTube Data API v3</pre><button onclick="copyText('apiName',this)">검색어 복사하기</button></div>
   <div class="ok"><b>✅ 버튼이 [사용] → [관리] 로 바뀌면 성공.</b></div>
 
-  <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 3 — 앱 이름 적기 (브랜딩)</h4>
-  <div class="note"><b>메뉴를 뒤지지 마세요. 맨 위 검색창이 훨씬 빠릅니다.</b><br>
-  화면 <b>맨 위 가운데</b>에 <b>"리소스, 문서, 제품 등 검색"</b> 이라고 적힌 긴 칸이 있습니다. 거기에 붙여넣으면 바로 갑니다.</div>
-  <div class="copybox"><pre id="searchOAuth">OAuth 동의 화면</pre><button onclick="copyText('searchOAuth',this)">검색어 복사하기</button></div>
+  <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 3 — 동의 화면 만들기</h4>
+  <div class="note"><b>왼쪽 메뉴부터 엽니다.</b> 화면 <b>맨 왼쪽 위의 줄 세 개(≡)</b>를 누르고 <b>API 및 서비스</b>를 누르세요.
+  그러면 아래 사진처럼 메뉴가 펼쳐집니다. <b>여기서 화면 3·4·5·6을 전부 합니다.</b></div>
+  <figure class="guide-shot"><img src="안내이미지/구글-API및서비스-메뉴.png" alt="API 및 서비스 메뉴. 사용 설정된 API 및 서비스, 라이브러리, 사용자 인증 정보, OAuth 동의 화면, 페이지 사용 동의가 보입니다."><figcaption>이 다섯 줄이 보이면 제대로 온 겁니다. 지금은 <b>OAuth 동의 화면</b>을 누르세요.</figcaption></figure>
   <ul>
-    <li>위 검색어를 <b>맨 위 검색창</b>에 붙여넣고, 나온 결과를 누르세요.<br>
-    <span style="color:#8fa2c3">계정에 따라 <b>Google Auth 플랫폼</b>이라는 이름으로 보일 수도 있습니다. 둘 중 나오는 쪽을 누르시면 됩니다.</span></li>
-    <li>검색으로 안 되면 — <b>맨 왼쪽 위 줄 세 개(≡)</b> → <b>API 및 서비스</b> → 그 아래에서 <b>OAuth 동의 화면</b>(또는 <b>Google Auth 플랫폼</b>)을 찾으세요.</li>
-    <li>들어가면 <b>브랜딩</b>이라는 칸이 있습니다. 없으면 지금 화면이 이미 그 화면입니다.</li>
-    <li><b>앱 이름</b>에 <b>플리공장</b>, <b>사용자 지원 이메일</b>에 <b>내 이메일</b>을 고르고 저장하세요.</li>
-    <li>연락처 이메일을 또 물으면 같은 이메일을 넣고, 약관 동의에 체크하고 계속 진행합니다.</li>
+    <li><b>OAuth 동의 화면</b>을 누르세요.</li>
+    <li>사용자 유형을 묻습니다. <b>외부</b> (영어면 <b>External</b>)를 고르고 <b>[만들기]</b>.</li>
+    <li><b>앱 이름</b>에 <b>플리공장</b>, <b>사용자 지원 이메일</b>에 <b>내 이메일</b>을 고르세요.</li>
+    <li>맨 아래 <b>개발자 연락처 정보</b>에도 <b>같은 이메일</b>을 넣고 <b>[저장 후 계속]</b>.</li>
+    <li>다음은 <b>범위</b> 화면입니다. <b>아무것도 건드리지 말고</b> 그대로 <b>[저장 후 계속]</b>.</li>
   </ul>
-  <div class="ok"><b>✅ 저장되고 다음 화면으로 넘어가면 성공.</b> 나머지 칸은 비워 두셔도 됩니다.</div>
+  <div class="ok"><b>✅ "테스트 사용자" 화면이 나오면 성공.</b> 그게 다음 화면입니다.</div>
+  <div class="note"><b>화면이 이 설명과 많이 다르면</b> — 구글이 최근 바꾼 새 화면일 수 있습니다.
+  그때는 왼쪽에 <b>브랜딩</b>·<b>대상</b>·<b>클라이언트</b>라는 이름이 보입니다.
+  <b>브랜딩</b>에 앱 이름과 이메일을 넣고, <b>대상</b>에서 외부를 고르시면 됩니다. 하는 일은 똑같습니다.</div>
 
-  <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 4 — 내가 쓸 사람이라고 등록 (대상)</h4>
+  <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 4 — 내 이메일을 테스트 사용자로 등록</h4>
   <ul>
-    <li>방금 그 화면 안에서 <b>대상</b> (영어면 <b>Audience</b>)을 누르세요. 왼쪽이나 위쪽 탭에 있습니다.<br>
-    <span style="color:#8fa2c3">안 보이면 맨 위 검색창에 <b>OAuth 동의 화면</b>을 다시 붙여넣어 들어간 뒤 찾으세요. 예전 화면이면 <b>테스트 사용자</b>라는 칸이 같은 페이지 안에 바로 있습니다.</span></li>
-    <li>사용자 유형을 묻는다면 <b>외부</b> (영어면 <b>External</b>)를 고르세요.</li>
-    <li>화면을 내리면 <b>테스트 사용자</b> 칸이 있습니다. <b>[사용자 추가]</b>를 누르고 <b>내 이메일 주소</b>를 넣고 저장하세요.</li>
+    <li>앞 화면에 이어 <b>테스트 사용자</b> 화면이 나옵니다.</li>
+    <li><b>[+ ADD USERS]</b> 또는 <b>[사용자 추가]</b>를 누르세요.</li>
+    <li><b>내 이메일 주소</b>를 적고 <b>[추가]</b> → <b>[저장 후 계속]</b>.</li>
+    <li>마지막 <b>요약</b> 화면이 나오면 맨 아래로 내려 <b>[대시보드로 돌아가기]</b>를 누르세요.</li>
   </ul>
-  <div class="warn"><b>이 화면을 건너뛰면 나중에 반드시 막힙니다.</b> 여기에 내 이메일을 넣지 않으면 마지막에 "이 앱은 확인되지 않았습니다"에서 더 진행이 안 됩니다. <b>꼭 넣어 주세요.</b></div>
+  <div class="warn"><b>이 화면을 건너뛰면 나중에 반드시 막힙니다.</b>
+  여기에 내 이메일을 넣지 않으면 마지막 연결 단계에서 <b>"이 앱은 확인되지 않았습니다"</b>에서 더 진행이 안 됩니다.
+  이미 지나쳤다면 <b>OAuth 동의 화면</b>에 다시 들어가 <b>테스트 사용자</b> 칸을 찾아 넣으시면 됩니다.</div>
   <div class="ok"><b>✅ 테스트 사용자 목록에 내 이메일이 보이면 성공.</b></div>
 
   <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 5 — 열쇠 만들기 (가장 중요)</h4>
-  <div class="copybox"><pre id="searchCred">사용자 인증 정보</pre><button onclick="copyText('searchCred',this)">검색어 복사하기</button></div>
   <ul>
-    <li>위 검색어를 <b>맨 위 검색창</b>에 붙여넣고 나온 결과를 누르세요. (계정에 따라 <b>클라이언트</b>라는 이름으로 보일 수도 있습니다.)<br>
-    <span style="color:#8fa2c3">검색으로 안 되면 — <b>≡</b> → <b>API 및 서비스</b> → <b>사용자 인증 정보</b>.</span></li>
-    <li><b>[클라이언트 만들기]</b> 또는 <b>[+ 사용자 인증 정보 만들기] → [OAuth 클라이언트 ID]</b> 를 누르세요.</li>
-    <li><b>애플리케이션 유형</b>에서 <b>데스크톱 앱</b>을 고르세요. <span style="color:#8fa2c3">(웹 애플리케이션 아닙니다. <b>데스크톱 앱</b>입니다.)</span></li>
-    <li>이름은 아무거나 두고 <b>[만들기]</b>.</li>
+    <li>왼쪽 메뉴에서 이번엔 <b>사용자 인증 정보</b>를 누르세요. <span style="color:#8fa2c3">(위 사진의 열쇠 모양 줄입니다. 새 화면이면 <b>클라이언트</b>라고 되어 있습니다.)</span></li>
+    <li>위쪽 <b>[+ 사용자 인증 정보 만들기]</b> → <b>[OAuth 클라이언트 ID]</b>를 누르세요.</li>
+    <li><b>애플리케이션 유형</b>에서 <b>데스크톱 앱</b>을 고르세요.<br>
+    <span style="color:#8fa2c3">(<b>웹 애플리케이션</b>이 아닙니다. 꼭 <b>데스크톱 앱</b>입니다.)</span></li>
+    <li>이름은 그대로 두고 <b>[만들기]</b>.</li>
     <li>창이 뜨면 <b>[JSON 다운로드]</b>를 누르세요. <b>이게 열쇠 파일입니다.</b></li>
   </ul>
-  <div class="note"><b>다운로드 창을 그냥 닫아 버렸어도 괜찮습니다.</b> 목록에 방금 만든 것이 보일 겁니다. 그 줄 오른쪽의 <b>아래 화살표(↓) 모양</b>을 누르면 다시 받을 수 있습니다.</div>
+  <div class="note"><b>다운로드 창을 그냥 닫아 버렸어도 괜찮습니다.</b> 목록에 방금 만든 것이 보일 겁니다.
+  그 줄 오른쪽의 <b>아래 화살표(↓) 모양</b>을 누르면 다시 받을 수 있습니다.</div>
   <div class="ok"><b>✅ 다운로드 폴더에 <span style="word-break:break-all">client_secret_…json</span> 이라는 긴 이름의 파일이 생기면 성공.</b><br>
   <b>이름을 바꾸거나 옮기지 마세요.</b> 그대로 두시면 됩니다.</div>
 
   <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 6 — API 키 하나 더 (채널 분석에 씁니다)</h4>
   <ul>
-    <li><b>화면 5와 같은 곳</b>입니다. 그 화면에 그대로 계시면 됩니다. (나왔으면 검색창에 <b>사용자 인증 정보</b>를 다시 붙여넣으세요.)</li>
-    <li><b>[+ 사용자 인증 정보 만들기]</b> → <b>[API 키]</b>를 누르세요.</li>
+    <li><b>화면 5와 같은 페이지</b>입니다. 그대로 계시면 됩니다.</li>
+    <li>다시 <b>[+ 사용자 인증 정보 만들기]</b> → 이번엔 <b>[API 키]</b>를 누르세요.</li>
     <li>바로 만들어집니다. 나온 <b>긴 글자를 복사</b>해 두세요.</li>
   </ul>
   <div class="ok"><b>✅ 복사했으면 성공.</b> 다음 단계에서 이 글자를 파일로 저장합니다.</div>
