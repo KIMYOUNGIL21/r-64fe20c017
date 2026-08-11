@@ -49,6 +49,12 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
 .provider-buttons button.active { background:var(--amber); color:#201507; }
 .provider-status { margin-top:12px; color:var(--green); font-size:15px; font-weight:800; }
 .provider-section,.claude-only,.codex-only { display:none; }
+#pickFirst { display:block; }
+body[data-provider] #pickFirst { display:none; }
+#pickFirst .pickbox { margin-top:16px; padding:20px 18px; border:1px solid var(--amber-deep); border-radius:13px; background:var(--amber-soft); text-align:center; }
+#pickFirst .pickbox p { color:var(--text); font-weight:700; margin-bottom:14px; }
+#pickFirst .pickbtns { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+#pickFirst .pickbtns button { width:auto; border:1px solid var(--amber-deep); border-radius:12px; background:var(--card); color:var(--text); }
 body[data-provider="claude"] .provider-section.claude-only, body[data-provider="claude"] .claude-only { display:block; }
 body[data-provider="codex"] .provider-section.codex-only, body[data-provider="codex"] .codex-only { display:block; }
 body[data-provider="claude"] li.claude-only, body[data-provider="codex"] li.codex-only { display:list-item; }
@@ -145,6 +151,23 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   맨 위 <b>최고의 매치</b> 자리에 나온 <b>Windows PowerShell</b> 하나만 누르세요.</div>
   <div class="note"><b>"관리자로 실행"은 누르지 않으셔도 됩니다.</b> 그냥 이름을 바로 누르거나 오른쪽의 <b>[열기]</b>를 누르면 됩니다.</div>
   <label class="chk"><input type="checkbox" data-k="ps"><span>파워셸 창을 열었어요</span></label>
+</div></section>
+
+<section class="step" id="pickFirst"><div class="wrap">
+  <span class="num">3</span>
+  <h2>여기서부터는 내가 쓸 AI에 따라 달라집니다</h2>
+  <p>3단계는 <b>클로드를 쓰는 분</b>과 <b>코덱스를 쓰는 분</b>의 설치 방법이 다릅니다.
+  아래에서 하나를 고르시면 <b>그 방법만</b> 여기에 나타납니다. 나머지는 안 보이니 헷갈릴 일이 없습니다.</p>
+  <div class="pickbox">
+    <p>평소 쓰시는 것을 눌러 주세요</p>
+    <div class="pickbtns">
+      <button type="button" onclick="chooseProvider('claude')">클로드 사용자</button>
+      <button type="button" onclick="chooseProvider('codex')">코덱스 사용자</button>
+    </div>
+  </div>
+  <div class="note"><b>둘 중 뭘 쓰는지 모르시겠다면</b> — 이 챌린지 신청하실 때 <b>결제하신 쪽</b>입니다.
+  클로드(Claude)를 결제하셨으면 왼쪽, ChatGPT를 결제하고 코덱스를 쓰신다면 오른쪽입니다.</div>
+  <div class="note"><b>잘못 골라도 괜찮습니다.</b> 위로 올라가 다시 누르면 바로 바뀝니다.</div>
 </div></section>
 
 <section class="step provider-section claude-only"><div class="wrap">
@@ -447,7 +470,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 
 <footer><div class="wrap">유튜브 플리 자동화 챌린지 · 그밤PD · 시작 전 준비 (1/2).<br>이 설명서는 Windows 10 또는 11 기준입니다.</div></footer>
 <script>
-function chooseProvider(provider) {
+function chooseProvider(provider, 자동복원) {
   document.body.dataset.provider = provider;
   localStorage.setItem('pli-provider', provider);
   var claude = document.getElementById('claudeTab');
@@ -458,9 +481,14 @@ function chooseProvider(provider) {
   claude.setAttribute('aria-selected', String(isClaude));
   codex.setAttribute('aria-selected', String(!isClaude));
   document.getElementById('providerStatus').textContent = isClaude ? '클로드 안내만 열렸습니다. 아래부터 천천히 따라와 주세요.' : '코덱스 안내만 열렸습니다. 아래부터 천천히 따라와 주세요.';
+  // 사람이 직접 고른 경우에만, 방금 나타난 3단계로 내려가 준다
+  if (!자동복원) {
+    var 방금 = document.querySelector('.provider-section.' + provider + '-only');
+    if (방금) { 방금.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
 }
 var savedProvider = localStorage.getItem('pli-provider');
-if (savedProvider === 'claude' || savedProvider === 'codex') { chooseProvider(savedProvider); }
+if (savedProvider === 'claude' || savedProvider === 'codex') { chooseProvider(savedProvider, true); }
 
 function copyText(id, button) {
   var value = document.getElementById(id).innerText;
