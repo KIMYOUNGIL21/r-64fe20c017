@@ -207,6 +207,27 @@ else
   fi
 fi
 
+# ── 7-b) 구글 열쇠 (안내서 8단계에서 받아 둔 것) ────────
+step '7-b  구글 열쇠 넣기'
+if [ -f "$FACTORY/구글인증.json" ]; then
+  ok '구글 열쇠 - 이미 들어 있음'
+  record "구글 열쇠" "있음"
+else
+  # 구글 콘솔에서 받으면 client_secret_*.json 이라는 이름으로 다운로드된다
+  KEYFILE="$(ls -t "$HOME/Downloads"/client_secret*.json "$HOME/Desktop"/client_secret*.json 2>/dev/null | head -n 1)"
+  if [ -n "$KEYFILE" ]; then
+    cp "$KEYFILE" "$FACTORY/구글인증.json" 2>/dev/null
+    if [ -f "$FACTORY/구글인증.json" ]; then
+      ok "구글 열쇠 넣기 완료 ($(basename "$KEYFILE"))"
+      record "구글 열쇠" "방금 넣음"
+    else warn '옮기는 데 실패했습니다'; record "구글 열쇠" "확인 필요"; fi
+  else
+    ok '구글 열쇠 - 아직 안 만드셨네요 (안내서 8단계에서 만듭니다)'
+    printf '     만든 뒤 이 설치 한 줄을 한 번 더 실행하면 자동으로 들어갑니다.\n'
+    record "구글 열쇠" "나중에"
+  fi
+fi
+
 # ── 8) 수노용 Playwright ───────────────────────────────
 step '8/8  수노용 브라우저 도구 준비'
 if ! has npx; then

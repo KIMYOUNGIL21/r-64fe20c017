@@ -218,6 +218,29 @@ if (Test-Path "$공장\공장.py") {
   $결과['셋팅코드'] = '나중에'
 }
 
+# ── 6-b) 구글 열쇠 (안내서 8단계에서 받아 둔 것) ────────
+Step '6-b  구글 열쇠 넣기'
+if (Test-Path "$공장\구글인증.json") {
+  Ok '구글 열쇠 - 이미 들어 있음'
+  $결과['구글 열쇠'] = '있음'
+} else {
+  # 구글 콘솔에서 받으면 client_secret_*.json 이라는 이름으로 다운로드된다
+  $열쇠 = $받은폴더 | ForEach-Object {
+    Get-ChildItem $_ -Filter 'client_secret*.json' -ErrorAction SilentlyContinue
+  } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+  if ($열쇠) {
+    Copy-Item $열쇠.FullName -Destination "$공장\구글인증.json" -Force -ErrorAction SilentlyContinue
+    if (Test-Path "$공장\구글인증.json") {
+      Ok ('구글 열쇠 넣기 완료 (' + $열쇠.Name + ')')
+      $결과['구글 열쇠'] = '방금 넣음'
+    } else { Warn '옮기는 데 실패했습니다'; $결과['구글 열쇠'] = '확인 필요' }
+  } else {
+    Ok '구글 열쇠 - 아직 안 만드셨네요 (안내서 8단계에서 만듭니다)'
+    Say '     만든 뒤 이 설치 한 줄을 한 번 더 실행하면 자동으로 들어갑니다.'
+    $결과['구글 열쇠'] = '나중에'
+  }
+}
+
 # ── 7) 수노용 Playwright 미리 받기 ─────────────────────
 Step '7/8  수노용 브라우저 도구 준비'
 RefreshPath
