@@ -336,10 +336,14 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <div class="ok"><b>✅ 버튼이 [사용] → [관리] 로 바뀌면 성공.</b></div>
 
   <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 3 — 앱 이름 적기 (브랜딩)</h4>
+  <div class="note"><b>메뉴를 뒤지지 마세요. 맨 위 검색창이 훨씬 빠릅니다.</b><br>
+  화면 <b>맨 위 가운데</b>에 <b>"리소스, 문서, 제품 등 검색"</b> 이라고 적힌 긴 칸이 있습니다. 거기에 붙여넣으면 바로 갑니다.</div>
+  <div class="copybox"><pre id="searchOAuth">OAuth 동의 화면</pre><button onclick="copyText('searchOAuth',this)">검색어 복사하기</button></div>
   <ul>
-    <li>왼쪽 메뉴에서 <b>Google Auth Platform</b> (예전 이름: <b>OAuth 동의 화면</b>)을 찾아 누르세요.<br>
-    <span style="color:#8fa2c3">왼쪽 메뉴가 안 보이면 <b>맨 왼쪽 위 줄 세 개(≡)</b>를 누르면 나옵니다.</span></li>
-    <li>그 아래 <b>브랜딩</b>을 누르세요.</li>
+    <li>위 검색어를 <b>맨 위 검색창</b>에 붙여넣고, 나온 결과를 누르세요.<br>
+    <span style="color:#8fa2c3">계정에 따라 <b>Google Auth 플랫폼</b>이라는 이름으로 보일 수도 있습니다. 둘 중 나오는 쪽을 누르시면 됩니다.</span></li>
+    <li>검색으로 안 되면 — <b>맨 왼쪽 위 줄 세 개(≡)</b> → <b>API 및 서비스</b> → 그 아래에서 <b>OAuth 동의 화면</b>(또는 <b>Google Auth 플랫폼</b>)을 찾으세요.</li>
+    <li>들어가면 <b>브랜딩</b>이라는 칸이 있습니다. 없으면 지금 화면이 이미 그 화면입니다.</li>
     <li><b>앱 이름</b>에 <b>플리공장</b>, <b>사용자 지원 이메일</b>에 <b>내 이메일</b>을 고르고 저장하세요.</li>
     <li>연락처 이메일을 또 물으면 같은 이메일을 넣고, 약관 동의에 체크하고 계속 진행합니다.</li>
   </ul>
@@ -347,7 +351,8 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 
   <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 4 — 내가 쓸 사람이라고 등록 (대상)</h4>
   <ul>
-    <li>같은 <b>Google Auth Platform</b> 아래 <b>대상</b> (영어면 <b>Audience</b>)을 누르세요.</li>
+    <li>방금 그 화면 안에서 <b>대상</b> (영어면 <b>Audience</b>)을 누르세요. 왼쪽이나 위쪽 탭에 있습니다.<br>
+    <span style="color:#8fa2c3">안 보이면 맨 위 검색창에 <b>OAuth 동의 화면</b>을 다시 붙여넣어 들어간 뒤 찾으세요. 예전 화면이면 <b>테스트 사용자</b>라는 칸이 같은 페이지 안에 바로 있습니다.</span></li>
     <li>사용자 유형을 묻는다면 <b>외부</b> (영어면 <b>External</b>)를 고르세요.</li>
     <li>화면을 내리면 <b>테스트 사용자</b> 칸이 있습니다. <b>[사용자 추가]</b>를 누르고 <b>내 이메일 주소</b>를 넣고 저장하세요.</li>
   </ul>
@@ -355,8 +360,10 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <div class="ok"><b>✅ 테스트 사용자 목록에 내 이메일이 보이면 성공.</b></div>
 
   <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 5 — 열쇠 만들기 (가장 중요)</h4>
+  <div class="copybox"><pre id="searchCred">사용자 인증 정보</pre><button onclick="copyText('searchCred',this)">검색어 복사하기</button></div>
   <ul>
-    <li>같은 <b>Google Auth Platform</b> 아래 <b>클라이언트</b> (영어면 <b>Clients</b>, 예전 이름은 <b>사용자 인증 정보</b>)를 누르세요.</li>
+    <li>위 검색어를 <b>맨 위 검색창</b>에 붙여넣고 나온 결과를 누르세요. (계정에 따라 <b>클라이언트</b>라는 이름으로 보일 수도 있습니다.)<br>
+    <span style="color:#8fa2c3">검색으로 안 되면 — <b>≡</b> → <b>API 및 서비스</b> → <b>사용자 인증 정보</b>.</span></li>
     <li><b>[클라이언트 만들기]</b> 또는 <b>[+ 사용자 인증 정보 만들기] → [OAuth 클라이언트 ID]</b> 를 누르세요.</li>
     <li><b>애플리케이션 유형</b>에서 <b>데스크톱 앱</b>을 고르세요. <span style="color:#8fa2c3">(웹 애플리케이션 아닙니다. <b>데스크톱 앱</b>입니다.)</span></li>
     <li>이름은 아무거나 두고 <b>[만들기]</b>.</li>
@@ -368,7 +375,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 
   <h4 style="margin-top:22px;color:var(--amber);font-size:17px">화면 6 — API 키 하나 더 (채널 분석에 씁니다)</h4>
   <ul>
-    <li>왼쪽 메뉴에서 <b>API 및 서비스</b> → <b>사용자 인증 정보</b>로 가세요.</li>
+    <li><b>화면 5와 같은 곳</b>입니다. 그 화면에 그대로 계시면 됩니다. (나왔으면 검색창에 <b>사용자 인증 정보</b>를 다시 붙여넣으세요.)</li>
     <li><b>[+ 사용자 인증 정보 만들기]</b> → <b>[API 키]</b>를 누르세요.</li>
     <li>바로 만들어집니다. 나온 <b>긴 글자를 복사</b>해 두세요.</li>
   </ul>
