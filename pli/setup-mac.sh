@@ -155,6 +155,12 @@ else
   rm -rf "$TMPDIR_PLI"
 fi
 
+# 이미 깔려 있던 앱에도 격리 표시가 남아 있을 수 있다.
+# 블록 안에 두면 재실행이 아무것도 못 고친다 — 그래서 밖에서 매번 떼어낸다.
+if [ -d "/Applications/Orca.app" ]; then
+  xattr -dr com.apple.quarantine "/Applications/Orca.app" 2>/dev/null
+fi
+
 # ── 6) 유튜브 업로드용 파이썬 패키지 ───────────────────
 step '6/8  유튜브 업로드용 파이썬 패키지'
 if ! has python3; then
