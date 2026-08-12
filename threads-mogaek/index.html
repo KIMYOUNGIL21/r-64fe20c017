@@ -7,137 +7,87 @@
 <title>쓰레드 모객 실측 보고</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  :root{
-    --bg:#f6f5f2; --card:#ffffff; --ink:#1c1b19; --sub:#6b6862;
-    --line:#e6e3dc; --accent:#1a56db; --accent-bg:#eaf1fd;
-    --warn:#b42318; --warn-bg:#fdecea; --ok:#067647; --ok-bg:#e7f6ef;
-    --mogaek:#7c2d92; --mogaek-bg:#f6ecfa; --yeol:#92600a; --yeol-bg:#fcf3e3;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:'Pretendard',-apple-system,sans-serif; background:var(--bg); color:var(--ink);
-       line-height:1.65; font-size:16px; -webkit-text-size-adjust:100%;}
-  .wrap{max-width:680px; margin:0 auto; padding:20px 16px 80px;}
+  :root{--bg:#f6f5f2;--card:#fff;--ink:#1c1b19;--sub:#6b6862;--line:#e6e3dc;--accent:#1a56db;--accent-bg:#eaf1fd;
+    --warn:#b42318;--warn-bg:#fdecea;--ok:#067647;--ok-bg:#e7f6ef;--mogaek:#7c2d92;--mogaek-bg:#f6ecfa;--yeol:#92600a;--yeol-bg:#fcf3e3;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:680px;margin:0 auto;padding:20px 16px 80px;}
   header{padding:28px 4px 20px;}
-  .date{font-size:13px; color:var(--sub); letter-spacing:.02em;}
-  h1{font-size:25px; font-weight:800; line-height:1.3; margin-top:6px;}
-  .lede{margin-top:12px; font-size:15px; color:var(--sub);}
-  h2{font-size:19px; font-weight:800; margin:40px 4px 14px; display:flex; align-items:center; gap:8px;}
-  h2 .n{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px;
-        border-radius:8px; background:var(--ink); color:#fff; font-size:13px; flex:none;}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 16px; margin-bottom:12px;}
-  .card h3{font-size:16px; font-weight:800; margin-bottom:6px;}
+  .date{font-size:13px;color:var(--sub);}
+  h1{font-size:25px;font-weight:800;line-height:1.3;margin-top:6px;}
+  .lede{margin-top:12px;font-size:15px;color:var(--sub);}
+  .badge{display:inline-block;background:var(--ok-bg);color:var(--ok);font-weight:800;border-radius:99px;padding:4px 14px;font-size:14px;margin-top:12px;}
+  h2{font-size:19px;font-weight:800;margin:40px 4px 14px;display:flex;align-items:center;gap:8px;}
+  h2 .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:var(--ink);color:#fff;font-size:13px;flex:none;}
+  h3.wk{font-size:16px;font-weight:800;margin:26px 4px 10px;padding-top:10px;border-top:2px solid var(--line);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;margin-bottom:12px;}
   .card p{font-size:14.5px;}
-  .muted{color:var(--sub);}
-  .hl{background:linear-gradient(transparent 62%, #ffe9a8 62%); font-weight:700;}
-  .pill{display:inline-block; font-size:12px; font-weight:700; padding:2px 9px; border-radius:99px; vertical-align:2px;}
-  .p-warn{background:var(--warn-bg); color:var(--warn);}
-  .p-ok{background:var(--ok-bg); color:var(--ok);}
-  .p-new{background:var(--accent-bg); color:var(--accent);}
-  .p-mog{background:var(--mogaek-bg); color:var(--mogaek);}
-  .p-yeol{background:var(--yeol-bg); color:var(--yeol);}
-  .tablebox{overflow-x:auto; border:1px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px;}
-  table{border-collapse:collapse; width:100%; min-width:540px; font-size:13.5px;}
-  th,td{padding:10px 12px; text-align:left; vertical-align:top; border-top:1px solid var(--line);}
-  thead th{border-top:none; background:#faf9f6; font-size:12.5px; color:var(--sub); white-space:nowrap;}
-  td b{font-weight:800;}
-  .post{background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:14px; overflow:hidden;}
+  .muted{color:var(--sub);font-weight:400;font-size:13px;}
+  .hl{background:linear-gradient(transparent 62%, #ffe9a8 62%);font-weight:700;}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;}
+  .p-mog{background:var(--mogaek-bg);color:var(--mogaek);}
+  .p-yeol{background:var(--yeol-bg);color:var(--yeol);}
+  .post{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;}
   .post.mog{border-color:#dcc3e8;}
-  .post .head{display:flex; align-items:center; gap:8px; padding:13px 16px 0; flex-wrap:wrap;}
-  .post .head .day{font-weight:800; font-size:15px;}
-  .post .head .id{font-size:12px; color:var(--sub);}
-  .post .head .angle{font-size:12px; color:var(--sub); width:100%; margin-top:2px;}
-  .post pre{white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:14.5px;
-            background:#faf9f6; border:1px solid var(--line); border-radius:10px;
-            padding:14px; margin:12px 16px 10px; line-height:1.7;}
-  .post .todo{font-size:13px; color:var(--warn); background:var(--warn-bg); border-radius:10px;
-              padding:10px 12px; margin:0 16px 10px;}
-  .copybtn{display:block; width:calc(100% - 32px); margin:6px 16px 16px; padding:12px;
-           background:var(--ink); color:#fff; border:none; border-radius:10px;
-           font-family:inherit; font-size:15px; font-weight:700; cursor:pointer;}
+  .post .head{display:flex;align-items:center;gap:8px;padding:13px 16px 0;flex-wrap:wrap;}
+  .post .head .day{font-weight:800;font-size:15px;}
+  .post .head .id{font-size:12px;color:var(--sub);}
+  .post .head .angle{font-size:12px;color:var(--sub);width:100%;margin-top:2px;}
+  .post pre, .bank pre{white-space:pre-wrap;word-break:break-word;font-family:inherit;font-size:14.5px;background:#faf9f6;border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 16px 10px;line-height:1.7;}
+  .post .todo{font-size:13px;color:var(--warn);background:var(--warn-bg);border-radius:10px;padding:10px 12px;margin:0 16px 10px;}
+  .copybtn{display:block;width:calc(100% - 32px);margin:6px 16px 16px;padding:12px;background:var(--ink);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;}
   .copybtn.done{background:var(--ok);}
-  .flow{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px;}
-  .flow .step{display:flex; gap:12px; padding:8px 0;}
-  .flow .step .no{flex:none; width:26px; height:26px; border-radius:50%; background:var(--accent-bg);
-                  color:var(--accent); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; margin-top:2px;}
-  .flow .step div p{font-size:14.5px;}
-  .flow .step div .ex{font-size:13.5px; color:var(--sub);}
   ul.checks{list-style:none;}
-  ul.checks li{background:var(--card); border:1px solid var(--line); border-radius:12px;
-               padding:13px 14px 13px 42px; margin-bottom:8px; font-size:14.5px; position:relative;}
-  ul.checks li::before{content:"☐"; position:absolute; left:15px; top:12px; font-size:17px; color:var(--accent);}
-  footer{margin-top:48px; font-size:12px; color:var(--sub); line-height:1.8; padding:0 4px;}
-  code{font-family:inherit; background:#efede8; border-radius:5px; padding:1px 6px; font-size:0.92em;}
+  ul.checks li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px 13px 42px;margin-bottom:8px;font-size:14.5px;position:relative;}
+  ul.checks li::before{content:"☐";position:absolute;left:15px;top:12px;font-size:17px;color:var(--accent);}
+  ul.checks li.done::before{content:"✅";font-size:14px;}
+  details.bank{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;padding:0;}
+  details.bank summary{padding:13px 14px;font-size:14px;font-weight:700;cursor:pointer;}
+  details.bank.used summary{color:var(--sub);font-weight:400;}
+  details.bank pre{margin:0 14px 14px;}
+  .tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:12px;}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px;}
+  th,td{padding:10px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line);}
+  thead th{border-top:none;background:#faf9f6;font-size:12.5px;color:var(--sub);white-space:nowrap;}
+  footer{margin-top:48px;font-size:12px;color:var(--sub);line-height:1.8;padding:0 4px;}
+  code{font-family:inherit;background:#efede8;border-radius:5px;padding:1px 6px;font-size:.92em;}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header>
-  <div class="date">2026-08-12 · 그밤PD 전용 (링크 아는 사람만 볼 수 있어요)</div>
-  <h1>쓰레드 → 오픈카톡방<br>모객 실측 보고</h1>
-  <p class="lede">남들이 쓰레드에서 오카방으로 사람을 모으는 글 <b>73개를 새로 수집·분석</b>해서 모객 공식을 고쳤고, 그 공식으로 <b>2주치 글 14개(모객 4 + 예열 10)</b>를 발행 순서까지 짜놨습니다. 5번 캘린더대로 하루 1개씩 올리면 됩니다.</p>
+  <div class="date">2026-08-13 · 그밤PD 전용 (링크 아는 사람만)</div>
+  <h1>쓰레드 → 오픈카톡방<br>4주 발행 계획</h1>
+  <div class="badge">✓ 독립 QA 95/100 통과 (70 → 91 → 95, 3회 채점)</div>
+  <p class="lede">남의 모객 글 73개 실측 분석 → 공식 갱신 → 글 <b>35개</b>(모객 11 + 예열 24) 완성. 실측(구독 358 · 자작곡 영상 35개 · 방 800명) 기반으로 숫자 전량 검증됐고, "전자책 준다" 배포 글 7개로 무료 자산 9개를 전부 커버합니다. 아래 순서대로 하루 1~2개 올리면 4주 운영이 돌아갑니다.</p>
 </header>
 
-<h2><span class="n">1</span>3줄 요약</h2>
-<div class="card">
-  <p>① <span class="hl">"댓글 달면 DM으로 보낼게"는 이제 금지</span> — 실제로 그렇게 하다가 <b>계정 제재를 당한 운영자의 공개 고백</b>이 잡혔습니다.</p>
-  <p style="margin-top:8px">② 대신 <span class="hl">내 글에 내가 첫 댓글로 링크를 달고 고정</span>하는 방식이 답 — 이 방식 하나로 댓글 5,800개를 뽑은 1등 사례가 근거입니다.</p>
-  <p style="margin-top:8px">③ <span class="hl">글의 얼굴은 무료판, 방은 댓글에 동봉</span> — "무료 자료 줄게"가 "방에 들어와"보다 반응이 4~7배 좋습니다(실측).</p>
-</div>
+<h2><span class="n">1</span>발행 전 사장님 준비 (한 번만)</h2>
+<p class="muted" style="margin:0 4px 10px">배포 글의 고정 댓글이 전부 "방 공지에 올려뒀어"를 전제합니다 — 파일을 안 올리고 발행하면 거짓말이 됩니다.</p>
+<ul class="checks">
+  <li class="done">QA100선 — 방 공지에 게시됨 (8/4 확인 · 발행 직전 재확인만) → 027</li>
+  <li>「음치인데 노래를 만들었습니다」 무료판 PDF 공지 업로드 → 028<br><code>ai-singer\전자책초안\음치인데_노래를만들었습니다_무료판_v1.0.pdf</code></li>
+  <li>「AI한테 말시키는 법」 무료판 PDF 공지 업로드 → 029<br><code>ai-singer\전자책초안\AI한테_말시키는법_무료판_v1.0.pdf</code></li>
+  <li>「썸네일 수백 장의 기록」 무료판 PDF 공지 업로드 → 030<br><code>ai-singer\전자책초안\썸네일_수백장의기록_무료판_v1.0.pdf</code></li>
+  <li>「AI실전자료실 전권 합본」(162쪽) PDF 공지 업로드 → 031<br><code>전자책자료실\notion-archive-merged\out\AI실전자료실_전권합본_...pdf</code></li>
+  <li><b>「AI유튜브 시작지도」 무료판 PDF 공지 업로드 → 020·011·032 (가장 급함 — 주1에 020 있음)</b><br><code>ai-singer\전자책초안\런칭상품\AI유튜브_시작지도_무료판_v1.1.pdf</code></li>
+  <li>클로드 시작 안내서 링크를 공지에 게시 → 033<br><code>https://kimyoungil21.github.io/r-64fe20c017/claude-start/</code></li>
+  <li>새 문지방 단어 7개 승인: <b>질문 · 음치 · 지시문 · 썸네일 · 합본 · 시작지도 · 안내서</b> (거절할 단어 있으면 말씀 — 그 글만 단어 교체)</li>
+  <li>두 번째 히트곡 곡명 확정: '퇴사하던 날' vs '재가 되어도' (024에 곡명 복원용)</li>
+  <li>발행 직전 숫자 확인: 방 <b>800명</b> · 수익 <b>0원</b> · 월 유지비 <b>4~5만 원</b>(041 전)</li>
+</ul>
 
-<h2><span class="n">2</span>왜 예열이 10개나 되나 (중요)</h2>
-<div class="card">
-  <p><b>모객:예열 = 4:10은 실측이 정한 비율입니다.</b> 모객 글만 쏘는 계정은 광고 계정으로 판정돼 도달 자체가 죽고, 댓글 수천 개가 터진 모객 글은 전부 <b>평소 글로 신뢰가 쌓인 계정</b>에서 나왔습니다. 예열은 버리는 글이 아니라 <span class="hl">모객 글이 터지게 만드는 탄약</span>입니다. 예열을 줄이면 모객이 안 터집니다.</p>
-</div>
-
-<h2><span class="n">3</span>핵심 발견 4가지</h2>
-<div class="card">
-  <h3>🚨 DM 일괄 발송은 계정을 막는다 <span class="pill p-warn">위험 회피</span></h3>
-  <p>댓글 1,200개를 받고 약속대로 DM을 돌리던 운영자가 <b>사흘 만에 제재</b>당했습니다. 게다가 <b>나를 팔로우 안 한 사람에겐 DM이 아예 안 갑니다</b> — 댓글 986개 중 실제 전달은 675명뿐이었던 사례도 있습니다. 우리 옛 방식이 정확히 이 지뢰였고, 실제 발행 전에 잡았습니다.</p>
-</div>
-<div class="card">
-  <h3>⭐ 새 공식 K9 — 작성자 고정 댓글 <span class="pill p-new">신규 등재</span></h3>
-  <p>본문엔 링크 0개, 댓글로 한 단어만 받고, <b>발행 직후 내가 내 글에 첫 댓글로 링크를 달아 고정</b>합니다. 1등 사례(조회 17만 · 댓글 5,800)가 이 방식 하나로 전원을 회수했습니다 — DM 0건, 배포 노동 0, 제재 위험 0.</p>
-</div>
-<div class="card">
-  <h3>📈 무료 자료가 방 초대보다 4~7배 잘 걸린다</h3>
-  <p>조회수 대비 댓글 비율: 전자책 나눔 <b>3.4~4.6%</b> vs 방 모객 <b>0.6~1.6%</b>. 우리 순서(무료판 먼저 → 방은 동봉)가 옳았다는 게 숫자로 확인됐습니다.</p>
-</div>
-<div class="card">
-  <h3>⚔️ "AI 입문서 무료"엔 거인이 있다 — 각도를 틀었다</h3>
-  <p>같은 소재로 댓글 5,800짜리 글이 이미 나왔습니다. 정면 대결 대신 <b>"AI로 음악 채널을 진짜 굴린 기록"</b>(35곡 · 구독 200 미만) 1인칭 각도로 씁니다. 참고로 "AI + 챌린지 모집" 조합은 최저 반응(댓글 1개)이라 금지했습니다.</p>
-</div>
-
-<h2><span class="n">4</span>공식 판정표 (옆으로 밀어서 보세요)</h2>
-<div class="tablebox">
-<table>
-<thead><tr><th>공식</th><th>내용</th><th>이번 판정</th><th>근거</th></tr></thead>
-<tbody>
-<tr><td><b>K1</b> ★</td><td>한 단어 문지방 ("댓글에 OO만")</td><td><span class="pill p-ok">최강 재확인</span></td><td>2차 상위 3개 전부 이 공식 (최고 R5,800)</td></tr>
-<tr><td><b>K2</b> ★</td><td>본문 링크 0개</td><td><span class="pill p-ok">유지·보강</span></td><td>링크 글은 퍼가기만 되고 댓글이 죽음</td></tr>
-<tr><td>K3</td><td>인원 실황 + 문턱 낮춤</td><td><span class="pill p-ok">유지</span></td><td>중간급 재현 (60명 실황 글 등)</td></tr>
-<tr><td>K4</td><td>자격 심사 문지방</td><td><span class="pill p-ok">유지·보강</span></td><td>심사를 댓글창에서 실연하는 신형 발견</td></tr>
-<tr><td><b>K5</b></td><td>DM 전환</td><td><span class="pill p-warn">수정·강등</span></td><td>일괄 DM 배포는 제재 실측 → 금지. 표현만 축소 유지</td></tr>
-<tr><td>K6</td><td>수요 조사</td><td><span class="pill p-warn">강→중 하향</span></td><td>2차에서 1차만큼 안 나옴</td></tr>
-<tr><td>K7 ★</td><td>순수성 선언 ("난 강사 아니야")</td><td><span class="pill p-ok">유지·보강</span></td><td>변형 4종 재현 — 우리 최대 무기</td></tr>
-<tr><td>K8</td><td>방장 하소연</td><td><span class="pill p-yeol">실험 유지</span></td><td>표본 3개인데 방향 갈림</td></tr>
-<tr><td><b>K9</b> 🆕</td><td>작성자 고정 댓글 링크</td><td><span class="pill p-new">정식 등재</span></td><td>R5,800 사례의 회수 방식. 배포 기본값</td></tr>
-<tr><td>K10 🆕</td><td>번호 투표 문지방 (1·2·3)</td><td><span class="pill p-yeol">실험 등재</span></td><td>숫자 한 글자로 R99. 9일차에서 첫 실험</td></tr>
-</tbody>
-</table>
-</div>
-
-<h2><span class="n">5</span>2주 발행 캘린더 — 이 순서대로 하루 1개</h2>
-<p class="muted" style="margin:0 4px 14px; font-size:14px;">전부 초안이라 올릴지는 사장님 결정입니다. 보라 테두리가 모객(총 4개) — 모객 사이엔 예열이 2개씩 끼어 있어 광고 계정 판정을 피합니다. <b>복사 버튼</b> 누르면 본문이 그대로 복사돼요.</p>
-
-<div class="post">
-  <div class="head"><span class="day">1일차</span><span class="pill p-yeol">예열</span><span class="id">#015</span><span class="angle">4분 50초짜리 곡 전량 폐기한 이야기</span></div>
-  <pre id="t015">발매 35곡 낸 사람으로서 소신발언 하나 할게.
+<h2><span class="n">2</span>4주 발행 캘린더 — 이 순서 그대로</h2>
+<p class="muted" style="margin:0 4px 6px">보라 테두리 = 모객(11개, 연속 배치 없음 · 주당 최대 3개). 복사 버튼으로 본문을 그대로 붙여넣으면 됩니다. 하루 1개만 올리면 주차가 뒤로 밀릴 뿐 순서는 그대로 유효합니다.</p>
+<h3 class="wk">주1 <span class="muted">— 글 9개 · 모객 3</span></h3><div class="post">
+  <div class="head"><span class="day">1번</span><span class="pill p-yeol">예열</span><span class="id">#015</span><span class="angle">H3 직함 단언</span></div>
+  <pre id="t015">유튜브에 자작곡 영상 35개 올린 사람으로서 소신발언 하나 할게.
 좋은데 긴 곡은, 그냥 긴 곡이야.
 
 초기에 가사를 아주 풍부하게 썼어.
 문장이 예뻐서 한 줄도 못 버리겠더라.
-그대로 수노에 넣었더니 4분 50초가 나왔어.
+그대로 수노(AI 작곡 툴)에 넣었더니 4분 50초가 나왔어.
 
 유튜브 발라드 적정 러닝타임은 3분 10초~3분 30초야.
 한참 넘겼지. 그 곡 전량 폐기했어.
@@ -151,60 +101,41 @@
 같은 말을 세 번 하는 이유가 있어. 한 번은 무시하더라.
 
 저장해뒀다가 곡 뽑기 전에 다시 봐.</pre>
+  
   <button class="copybtn" data-t="t015">본문 복사</button>
-</div>
+</div><div class="post mog">
+  <div class="head"><span class="day">2번</span><span class="pill p-mog">모객</span><span class="id">#027 · 문지방 "질문"</span><span class="angle">골격 A(T7 목차 혼합)</span></div>
+  <pre id="t027">물어보기 민망해서 검색도 못 해본 AI 질문,
+100개로 모아놨어. 다 줄게.
 
-<div class="post">
-  <div class="head"><span class="day">2일차</span><span class="pill p-yeol">예열</span><span class="id">#017</span><span class="angle">수익 0원인데 계속하는 이유</span></div>
-  <pre id="t017">35곡을 올리는 동안 내가 번 조회수익은 0원이야.
-나는 악보도 못 읽는 40대 회사원이고.
+목차 몇 개만 보여줄게.
+&quot;AI가 제 비밀번호를 기억해주면 편하지 않나요?&quot;
+&quot;주민번호를 입력해도 되나요?&quot;
+&quot;회사 문서를 올려도 되나요?&quot;
 
-유튜브 수익 조건이 구독자 1,000명인데
-나는 아직 200도 안 되거든. 그러니 당연히 0원이지.
+다들 이런 게 궁금한데 물어볼 데가 없어.
+아는 사람한테 물으면
+이것도 모르냐 소리 들을까 봐.
+그 마음이 뭔지 알아서 모은 거야.
 
-그럼 왜 계속하냐고?
+재밌는 건 100번째 질문이야.
+기술 얘기가 아니더라.
+&quot;결국 AI를 잘 쓰는 사람은 어떤 사람인가요?&quot;
 
-35곡이 전부 내 저작권이야.
-채널 셋이 돌아가는데, mp3만 넣으면
-영상 만들고 발행 예약까지 자동으로 가.
-이건 구독자가 0명이어도 안 없어지는 자산이거든.
-
-숫자가 안 붙는 구간을 오기로 버티는 중이야.
-솔직히 조급할 때도 있어.
-
-이 계정엔 그 구간을 그대로 적어두려고 해.
-잘되면 잘된 대로, 안 되면 안 된 대로. 같이 볼 사람은 팔로우해둬.</pre>
-  <button class="copybtn" data-t="t017">본문 복사</button>
-</div>
-
-<div class="post mog">
-  <div class="head"><span class="day">3일차</span><span class="pill p-mog">모객</span><span class="id">#020</span><span class="angle">무료판 「시작지도」 배포 — 새 공식 1호, 문지방 "지도"</span></div>
-  <pre id="t020">35곡 만들면서 정리한 「AI유튜브 시작지도」, 그냥 풀게.
-
-나는 AI 발라드 채널을 진짜로 굴리는 중이야.
-구독자는 아직 200이 안 돼.
-잘된 얘기보다 넘어진 얘기가 많아.
-시작 전에 알았으면 좋았을 것만 담았거든.
-다시 읽는데 좀 민망하더라. 전부 내 삽질이라서.
-
-강의로 팔까 생각도 했어.
-근데 나 강사 아니잖아. 채널 굴리는 사람이지.
-그냥 준다.
-
-받을 사람은 댓글에 "지도"라고만 남겨줘.
-받는 법은 내가 첫 댓글에 고정해둘게.</pre>
-  <div class="todo">⚠️ 올린 직후 <b>7번의 「고정 댓글 문안」을 첫 댓글로 달고 고정</b>하세요. 이 댓글이 회수 경로 전부입니다.</div>
-  <button class="copybtn" data-t="t020">본문 복사</button>
-</div>
-
-<div class="post">
-  <div class="head"><span class="day">4일차</span><span class="pill p-yeol">예열</span><span class="id">#016</span><span class="angle">나레이션 인트로 폐기 사건</span></div>
-  <pre id="t016">내가 제일 공들인 부분이,
+10개 주제, 100문항. 전부 무료야.
+받을 사람은 댓글에 &quot;질문&quot;이라고만 남겨줘.
+받는 법은 첫 댓글에 고정해둘게.</pre>
+  <div class="todo">⚠️ 발행 전: QA100선이 방 공지에 아직 있는지 재확인 (8/4 게시 확인됨)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t027">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">3번</span><span class="pill p-yeol">예열</span><span class="id">#016</span><span class="angle">H2 비밀 사건 서사</span></div>
+  <pre id="t016">내 채널 &#x27;그 밤 라디오&#x27;에서
+내가 제일 공들인 부분이,
 사람들이 제일 먼저 끄는 부분이었어.
 
-내 채널 이름이 '그 밤 라디오'거든.
-그래서 곡 앞에 감성 나레이션 인트로를 깔았어.
-라디오니까 멘트가 있어야 어울린다고 믿었지.
+이름이 라디오니까
+곡 앞에 감성 나레이션 인트로를 깔았어.
+멘트가 있어야 어울린다고 믿었지.
 
 콘셉트로는 완벽했어.
 근데 데이터가 반대였어. 초반 이탈이 붙더라.
@@ -217,15 +148,14 @@
 
 너도 아까워서 아직 못 버린 연출 있어?
 뭔지 댓글에 적어줘. 내가 이미 밟아본 거면 말해줄게.</pre>
+  
   <button class="copybtn" data-t="t016">본문 복사</button>
-</div>
-
-<div class="post">
-  <div class="head"><span class="day">5일차</span><span class="pill p-yeol">예열</span><span class="id">#018</span><span class="angle">멈추는 지점 3가지 — 번호 참여 유도</span></div>
+</div><div class="post">
+  <div class="head"><span class="day">4번</span><span class="pill p-yeol">예열</span><span class="id">#018</span><span class="angle">H9 유형 참여</span></div>
   <pre id="t018">AI로 음악 채널 하려다 멈추는 지점은 딱 셋이더라.
 
 1. 곡에서 멈춤
-수노 열었다가 뭘 써야 할지 몰라서 그냥 닫는 사람.
+수노(AI 작곡 툴) 열었다가 뭘 써야 할지 몰라서 그냥 닫는 사람.
 
 2. 영상에서 멈춤
 곡은 나왔는데 유튜브에 뭘 올릴지 몰라서 폴더에 재우는 사람.
@@ -237,41 +167,57 @@
 곡은 쌓이는데 아무것도 안 나가니까 허탈하더라.
 
 그래서 mp3만 넣으면 발행까지 자동으로 도는 공장을 만들었어.
-35곡이 거기서 나왔어.
+지금 쌓인 자작곡 영상이 35개야.
 
 너는 몇 번에서 멈춰 있어?
 번호만 댓글에 적어줘. 그 칸 뚫는 법 알려줄게.</pre>
+  
   <button class="copybtn" data-t="t018">본문 복사</button>
-</div>
+</div><div class="post mog">
+  <div class="head"><span class="day">5번</span><span class="pill p-mog">모객</span><span class="id">#020 · 문지방 "지도"</span><span class="angle">골격 A(선언→실물 증거→주저</span></div>
+  <pre id="t020">자작곡 영상 35개 만들면서 정리한 「AI유튜브 시작지도」, 그냥 풀게.
 
-<div class="post mog">
-  <div class="head"><span class="day">6일차</span><span class="pill p-mog">모객</span><span class="id">#011</span><span class="angle">채널 갈아엎던 날 — 방 초대, 문지방 "삽질" (새 규칙으로 수선됨)</span></div>
-  <pre id="t011">방 링크를 여기 본문에 안 붙이는 이유가 있어.
+나는 AI 발라드 채널을 진짜로 굴리는 중이야.
+구독자는 아직 400이 안 돼.
+잘된 얘기보다 넘어진 얘기가 많아.
+시작 전에 알았으면 좋았을 것만 담았거든.
+다시 읽는데 좀 민망하더라. 전부 내 삽질이라서.
 
-2026년 6월 12일, 채널을 통째로 갈아엎었어.
-AI 커버곡으로 쌓아둔 걸 그날 전부 접었어.
-근데 그때 물어볼 사람이 한 명도 없더라.
-허탈했어. 잘한 짓인지도 모른 채로 지웠거든.
+강의로 팔까 생각도 했어.
+근데 나 강사 아니잖아. 채널 굴리는 사람이지.
+그냥 준다.
 
-지금은 자작곡으로 35곡째야. 구독자는 아직 200이 안 돼.
-그래도 그날 옆에 한 명만 있었으면 싶더라.
+받을 사람은 댓글에 &quot;지도&quot;라고만 남겨줘.
+받는 법은 내가 첫 댓글에 고정해둘게.</pre>
+  <div class="todo">⚠️ 발행 전: 「시작지도」 PDF를 방 공지에 업로드 (체크리스트 6번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t020">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">6번</span><span class="pill p-yeol">예열</span><span class="id">#021</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t021">스크립트 54개를 은퇴시키고 나서야
+버튼 하나가 남았어.
 
-그래서 방을 하나 열어뒀어. 지금 800명이 있어.
-눈팅만 해도 되는 방인데,
-링크만 툭 던져놓으면
-들어와서 눈치만 보다 나가는 방이 돼.
-나는 그때의 나 같은 사람이랑 한 번은 말을 섞고 싶어.
+mp3만 넣으면 영상 만들고
+유튜브 예약까지 자동으로 가는 공장.
+이거 자랑할 때마다 사실 좀 찔렸어.
+한 번에 그렇게 된 게 아니거든.
 
-댓글에 "삽질"이라고 남겨줘.
-그 한 마디가 첫인사인 셈 치자.
-방이랑 무료판 받는 곳은 첫 댓글에 고정해둘게.</pre>
-  <div class="todo">⚠️ 올린 직후 고정 댓글 필수. 글 속 <b>"800명"이 발행 시점에도 맞는지</b> 한 번 확인하고 올리세요 (8/4 확인 수치 기준으로 교정된 글입니다).</div>
-  <button class="copybtn" data-t="t011">본문 복사</button>
-</div>
+곡 낼 때마다 비슷한 스크립트가 하나씩 늘었어.
+어느 날 세어 보니 안 쓰는 게 54개더라.
 
-<div class="post">
-  <div class="head"><span class="day">7일차</span><span class="pill p-yeol">예열</span><span class="id">#019</span><span class="angle">수노 제외 목록 통째 공개</span></div>
-  <pre id="t019">수노 제외 스타일 목록, 통째로 풀게.
+그날 다 은퇴시키고 공장 하나로 합쳤어.
+후련하기보다 안도가 되더라.
+이제 고장 나도 볼 데가 한 군데니까.
+
+자동화는 쌓는 것보다 버리는 쪽에 가깝더라.
+
+너무 멀게 들리면 이것만 기억해.
+처음부터 공장 지으려고 하지 마.
+한 곡을 손으로 끝까지 보내보고, 그 다음에 지어.</pre>
+  
+  <button class="copybtn" data-t="t021">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">7번</span><span class="pill p-yeol">예열</span><span class="id">#019</span><span class="angle">H10 나눔 선언 변형</span></div>
+  <pre id="t019">수노(AI 작곡 툴) 제외 스타일 목록, 통째로 풀게.
 내 곡에서 AI 티를 빼준 그 목록이야.
 
 먼저 고백 하나.
@@ -296,55 +242,27 @@ trot, spoken word intro
 공연장 소리가 꺼지고 녹음실 소리가 남았어.
 
 저장해뒀다가 다음 곡 뽑을 때 그대로 붙여 봐.</pre>
+  
   <button class="copybtn" data-t="t019">본문 복사</button>
-</div>
-
-<div class="post">
-  <div class="head"><span class="day">8일차</span><span class="pill p-yeol">예열</span><span class="id">#021</span><span class="angle">스크립트 54개 은퇴시킨 이야기</span></div>
-  <pre id="t021">스크립트 54개를 은퇴시키고 나서야
-버튼 하나가 남았어.
-
-mp3만 넣으면 영상 만들고
-유튜브 예약까지 자동으로 가는 공장.
-이거 자랑할 때마다 사실 좀 찔렸어.
-한 번에 그렇게 된 게 아니거든.
-
-곡 낼 때마다 비슷한 스크립트가 하나씩 늘었어.
-어느 날 세어 보니 안 쓰는 게 54개더라.
-
-그날 다 은퇴시키고 공장 하나로 합쳤어.
-후련하기보다 안도가 되더라.
-이제 고장 나도 볼 데가 한 군데니까.
-
-자동화는 쌓는 것보다 버리는 쪽에 가깝더라.
-
-너무 멀게 들리면 이것만 기억해.
-처음부터 공장 지으려고 하지 마.
-한 곡을 손으로 끝까지 보내보고, 그 다음에 지어.</pre>
-  <button class="copybtn" data-t="t021">본문 복사</button>
-</div>
-
-<div class="post mog">
-  <div class="head"><span class="day">9일차</span><span class="pill p-mog">모객</span><span class="id">#023</span><span class="angle">번호 투표 실험 (K10 1호) — 문지방 1·2·3</span></div>
+</div><div class="post mog">
+  <div class="head"><span class="day">8번</span><span class="pill p-mog">모객</span><span class="id">#023 · 문지방 "번호(1·2·3)"</span><span class="angle">K10 번호 투표 문지방(실험 등급) + K2 링크 0 + K9 고정 댓글 회수</span></div>
   <pre id="t023">다음에 통째로 풀 노하우, 네가 골라줘.
 
-35곡 굴리면서 쌓인 것 중에 셋을 추렸어.
+자작곡 영상 35개를 굴리면서 쌓인 것 중에 셋을 추렸어.
 
 1. 썸네일 — 클릭되는 발라드 썸네일의 원칙
-2. 가사 — 수노에 넣기 전에 가사 다듬는 순서
+2. 가사 — 수노(AI 작곡 툴)에 넣기 전에 가사 다듬는 순서
 3. 발행 — 업로드·예약까지 자동으로 미는 공장 얘기
 
 혼자 정하다가 문득 궁금해졌어.
 다들 어디서 막히고 있는지.
 
-제일 많이 나온 번호부터 통째로 풀게.
+제일 많이 나온 걸 통째로 풀게.
 댓글에 번호 하나만. 1, 2, 3.</pre>
-  <div class="todo">⚠️ 올린 직후 고정 댓글 필수. 그리고 <b>1등 번호의 노하우는 다음에 꼭 풀어야</b> 합니다 — 안 풀면 거짓말이 돼요. (세 주제 모두 재료가 이미 있어서 어느 번호가 이겨도 괜찮습니다.)</div>
+  <div class="todo">⚠️ 발행 후: 최다 득표 주제를 다음 사이클에 반드시 풀 것 (약속)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
   <button class="copybtn" data-t="t023">본문 복사</button>
-</div>
-
-<div class="post">
-  <div class="head"><span class="day">10일차</span><span class="pill p-yeol">예열</span><span class="id">#022</span><span class="angle">시청자 99%가 4050 남성이었던 날</span></div>
+</div><div class="post">
+  <div class="head"><span class="day">9번</span><span class="pill p-yeol">예열</span><span class="id">#022</span><span class="angle">H4 기대 뒤집기</span></div>
   <pre id="t022">내 발라드 듣는 사람, 99%가 4050 남자야.
 
 유튜브 통계를 열었다가 봤어.
@@ -362,21 +280,47 @@ mp3만 넣으면 영상 만들고
 그러니 시작 전에 타깃 고민 너무 오래 하지 마.
 몇 곡 올리고 통계를 봐.
 타깃은 정하는 게 아니라 발견하는 거였어.</pre>
+  
   <button class="copybtn" data-t="t022">본문 복사</button>
-</div>
+</div><h3 class="wk">주2 <span class="muted">— 글 9개 · 모객 2</span></h3><div class="post">
+  <div class="head"><span class="day">10번</span><span class="pill p-yeol">예열</span><span class="id">#034</span><span class="angle">H2 사건 서사</span></div>
+  <pre id="t034">무료로 주는 책인데,
+지적을 99건 받고 통째로 버렸어.
 
-<div class="post">
-  <div class="head"><span class="day">11일차</span><span class="pill p-yeol">예열</span><span class="id">#024</span><span class="angle">히트 공식 2차 검증 — '퇴사하던 날'</span></div>
+AI 유튜브 시작하는 사람 주려고
+무료판 3권을 만들었거든.
+1차 원고를 검수한테 넘겼더니
+지적이 99건. 치명이 28건.
+
+제일 아픈 세 개가 이거야.
+- 유료로 팔 내용이 무료판에 새어 들어감
+- 숫자를 지어냄
+- 채널 없는 사람은 못 알아듣게 씀
+
+민망하더라. 나름 열심히 썼거든.
+근데 셋 다 맞는 말이라
+전량 폐기하고 처음부터 다시 썼어.
+
+공짜라고 대충 만들면
+받는 사람 시간이 공짜가 되는 거더라.
+
+그렇게 다시 쓴 책들, 조만간 여기서 풀게.
+팔로우해두면 안 놓쳐.</pre>
+  
+  <button class="copybtn" data-t="t034">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">11번</span><span class="pill p-yeol">예열</span><span class="id">#024</span><span class="angle">H3 단언</span></div>
   <pre id="t024">한 번 잘되면 운이야. 두 번 잘되면 공식이고.
+CTR 5.7% — 내 채널에서 제일 잘된 영상 얘기야.
 
-내 채널에서 제일 잘된 영상을 뜯어본 적이 있어.
-앞 30초에 감정 훅 한 조각이 스치듯 지나가는 구조.
+그 영상을 뜯어본 적이 있어.
+앞 30초에 감정 훅 한 조각이
+스치듯 지나가는 구조더라.
 
 솔직히 그게 공식인지 확신이 없었어.
 한 번뿐이었으니까.
 
 그런데 두 번째로 잘되는 곡이 나왔어.
-'퇴사하던 날'.
 뜯어보니 같은 구조더라.
 그날은 좀 짜릿했어.
 
@@ -385,35 +329,82 @@ mp3만 넣으면 영상 만들고
 
 네 채널에도 제일 잘된 게 하나는 있을 거야.
 그게 네 공식 1번이야. 거기서부터 뜯어 봐.</pre>
+  <div class="todo">⚠️ 참고: 두 번째 히트곡 곡명 상충으로 곡명 없이 재작성됨 — 곡명 확정되면 복원 가능</div>
   <button class="copybtn" data-t="t024">본문 복사</button>
-</div>
+</div><div class="post">
+  <div class="head"><span class="day">12번</span><span class="pill p-yeol">예열</span><span class="id">#017</span><span class="angle">H1 숫자 실험 선언</span></div>
+  <pre id="t017">자작곡 영상 35개를 올리는 동안 번 조회수익은 0원이야.
+나는 악보도 못 읽는 40대 회사원이고.
 
-<div class="post mog">
-  <div class="head"><span class="day">12일차</span><span class="pill p-mog">모객</span><span class="id">#012</span><span class="angle">작은 계정만 받는 방 — 문지방 "공장" (새 규칙으로 수선됨)</span></div>
-  <pre id="t012">구독자 200 못 넘겨본 사람만 왔으면 좋겠어.
-나도 아직 못 넘겼어. 35곡 내고도.
+유튜브 수익 조건이 구독자 1,000명인데
+나는 이제 겨우 350을 넘었거든.
+아직 반도 못 갔지. 그러니 당연히 0원이야.
 
-이미 잘되는 사람은 여기서 가져갈 게 없어.
-나는 자랑할 것도 없고, 강의 팔 생각도 없거든.
+그럼 왜 계속하냐고?
 
-근데 아무도 안 알아주는데
-다음 곡을 또 올리는 사람이면 얘기가 통해.
-나는 지금 딱 그 구간을 오기로 버티는 중이야.
+그 영상 35개는 전부 내 소유야.
+누가 내리라고 못 하는 거지.
+채널 셋이 돌아가는데, mp3만 넣으면
+영상 만들고 발행 예약까지 자동으로 가.
+이건 구독자가 0명이어도 안 없어지는 자산이거든.
 
-mp3 하나 넣으면 발행까지 자동으로 도는
-공장을 만들어서 채널 셋을 굴리고 있어.
-방엔 지금 800명이 있어. 눈팅만 해도 되고.
+숫자가 안 붙는 구간을 오기로 버티는 중이야.
+솔직히 조급할 때도 있어.
 
-댓글에 "공장"이라고 남겨줘.
-방이랑 무료판, 첫 댓글에 고정해둘게.</pre>
-  <div class="todo">⚠️ 올린 직후 고정 댓글 필수. 글 속 <b>"800명"이 발행 시점에도 맞는지</b> 확인하고 올리세요.</div>
-  <button class="copybtn" data-t="t012">본문 복사</button>
-</div>
+이 계정엔 그 구간을 그대로 적어두려고 해.
+잘되면 잘된 대로, 안 되면 안 된 대로. 같이 볼 사람은 팔로우해둬.</pre>
+  <div class="todo">⚠️ 발행 전: 유튜브 수익 0원(YPP 이전)이 지금도 맞는지 재확인</div>
+  <button class="copybtn" data-t="t017">본문 복사</button>
+</div><div class="post mog">
+  <div class="head"><span class="day">13번</span><span class="pill p-mog">모객</span><span class="id">#011 · 문지방 "삽질"</span><span class="angle">K7 서사(커버 폐기) + 얼굴=무료 미끼(시작지도 20쪽) + K3 증거 줄(800명) + K1 &#x27;삽질&#x27; + K9 고정 댓글 회수</span></div>
+  <pre id="t011">채널을 통째로 갈아엎던 날, 물어볼 사람이 한 명도 없었어.
+그때 나한테 주고 싶던 걸 20쪽으로 만들었어. 「AI유튜브 시작지도」.
 
-<div class="post">
-  <div class="head"><span class="day">13일차</span><span class="pill p-yeol">예열</span><span class="id">#025</span><span class="angle">발행 늘렸더니 성적이 내려간 이야기</span></div>
+AI 커버곡으로 쌓아둔 채널을
+하루아침에 지운 적이 있거든.
+잘한 짓인지도 모른 채로 지웠어. 허탈하더라.
+
+그 뒤로 자작곡 영상 35개를 쌓았고
+구독자도 이제 350을 넘었어.
+그날 밟은 지뢰를 시작 전에 피해 가는 순서로
+적어둔 게 그 지도야.
+
+나 같은 사람들 모인 방도 있어. 지금 800명.
+눈팅만 해도 되는 방이야.
+
+지도 받을 사람은 댓글에 &quot;삽질&quot;이라고만 남겨줘.
+받는 곳이랑 방은 첫 댓글에 걸어둘게.</pre>
+  <div class="todo">⚠️ 발행 전: 「시작지도」 공지 업로드 필요 (체크리스트 6번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t011">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">14번</span><span class="pill p-yeol">예열</span><span class="id">#035</span><span class="angle">H2 사건 서사</span></div>
+  <pre id="t035">책에 &quot;보류했다&quot;고 쓴 두 번째 채널이,
+그 문장이 나갈 때 이미 돌아가고 있었어.
+
+내 채널 운영 기록을 묶은 책 얘기야.
+초판 끝에 다채널 확장은
+보류함에 넣었다고 적었거든.
+근데 원고가 현실을 못 따라간 거야.
+
+숨기려던 게 아니라 어긋난 건데,
+독자가 검색 한 번이면 알아챌 어긋남이더라.
+뜨끔했어.
+
+그래서 개정판 새 파트의 첫 장 제목이
+&#x27;먼저 정정합니다&#x27;야.
+성과 자랑이 아니라 정정으로 열었어.
+
+들킬 일은 내가 먼저 말한다.
+넘어진 것까지 적는 게 기록의 값이더라.
+
+저장해뒀다가, 예전에 한 말이
+지금이랑 어긋난 걸 발견한 날 다시 봐.</pre>
+  
+  <button class="copybtn" data-t="t035">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">15번</span><span class="pill p-yeol">예열</span><span class="id">#025</span><span class="angle">H4 기대 뒤집기</span></div>
   <pre id="t025">발행을 늘렸더니 채널 성적이 내려갔어.
-35곡 내면서 겪은 일 중에 제일 어이없던 거.
+자작곡 영상 35개 내면서 겪은 일 중에 제일 어이없던 거.
 
 부지런히 올리면 그만큼 클 줄 알았지.
 반대로 가더라.
@@ -429,11 +420,38 @@ mp3 하나 넣으면 발행까지 자동으로 도는
 
 요즘 열심히 올리는데 성적이 내려간다면
 개수 말고 간격부터 의심해 봐.</pre>
+  
   <button class="copybtn" data-t="t025">본문 복사</button>
-</div>
+</div><div class="post mog">
+  <div class="head"><span class="day">16번</span><span class="pill p-mog">모객</span><span class="id">#028 · 문지방 "음치"</span><span class="angle">골격 A(T7 목차 혼합)</span></div>
+  <pre id="t028">음치가 노래로 채널 만든 기록을 책으로 묶어놨어.
+「음치인데 노래를 만들었습니다」, 19쪽. 무료야.
 
-<div class="post">
-  <div class="head"><span class="day">14일차</span><span class="pill p-yeol">예열</span><span class="id">#026</span><span class="angle">채널 셋을 혼자 굴리는 이야기</span></div>
+나 노래방에서 마이크 잘 안 잡아.
+악보도 못 읽고.
+그런 사람이 자작곡 영상 35개를 쌓기까지
+밟은 지뢰만 골라 담았어.
+
+차례가 이래.
+- 커버 노선이 하루아침에 사망한 날
+- 내 가사 첫 소절이 남의 노래였던 밤
+- 4분 50초짜리 좋은 곡
+- &quot;AI 티 나면 불이익 아닌가요&quot;
+
+제일 아픈 건 두 번째야.
+자작인 줄 알았던 첫 소절이
+원곡이랑 그대로 겹쳐 있었거든.
+그날 생각하면 아직도 소름 돋아.
+
+잘 부르는 사람 말고,
+겁나서 못 시작한 사람 보라고 쓴 거야.
+
+필요하면 댓글에 &quot;음치&quot;라고만 남겨줘.
+받는 곳은 첫 댓글에 걸어놓을게.</pre>
+  <div class="todo">⚠️ 발행 전: 「음치인데」 PDF를 방 공지에 업로드 (체크리스트 2번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t028">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">17번</span><span class="pill p-yeol">예열</span><span class="id">#026</span><span class="angle">H1 스펙 선언</span></div>
   <pre id="t026">채널 셋을 혼자 굴려.
 나는 낮엔 회사 다니는 40대 회사원이야.
 
@@ -455,21 +473,493 @@ mp3를 넣으면 영상 만들고
 
 셋이 어떻게 돌아가는지는 여기 계속 적을게.
 같이 볼 사람은 팔로우해둬.</pre>
+  
   <button class="copybtn" data-t="t026">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">18번</span><span class="pill p-yeol">예열</span><span class="id">#036</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t036">무료판이랑 유료판, 25자 이상 겹치면 불합격이야.
+내 책 발행 전에 돌리는 기계 검사 얘기야.
+
+무료로 푸는 책이랑 파는 책을
+같은 사람이 쓰면 반드시 겹쳐.
+말버릇이란 게 있으니까.
+
+문제는 그 겹침이 쌓이면
+돈 낸 사람이 이미 본 걸 또 사는 꼴이 된다는 거야.
+그건 실수가 아니라 사기지.
+
+그래서 발행 전에 두 원고를 기계로 맞대.
+25자 이상 연속으로 같은 문장이 있으면 걸러내.
+마지막 검사는 0건으로 통과했어.
+그 숫자를 보고서야 마음이 놓이더라.
+
+내 양심을 믿는 게 아니야.
+양심을 검사할 도구를 두는 거야.
+
+무료로 뭘 풀 생각이 있으면
+저장해뒀다가 그대로 따라 해.</pre>
+  
+  <button class="copybtn" data-t="t036">본문 복사</button>
+</div><h3 class="wk">주3 <span class="muted">— 글 8개 · 모객 3</span></h3><div class="post mog">
+  <div class="head"><span class="day">19번</span><span class="pill p-mog">모객</span><span class="id">#029 · 문지방 "지시문"</span><span class="angle">골격 B(명분→진단→체크 3줄→받는 법→P.S. 단점 선공개)</span></div>
+  <pre id="t029">AI한테 일 시켰다가 &quot;이게 아닌데&quot; 소리만 나온 적 있지.
+나도 자작곡 영상 35개를 뽑는 내내 그랬어.
+
+처음엔 그게 AI 문제인 줄 알았는데,
+알고 보니 문제는 AI가 아니라 내 말이더라.
+인정하는 데 좀 걸렸어.
+
+그래서 잘 시키는 사람의 습관만
+15쪽으로 정리해뒀어. 무료판이야.
+이 중 하나라도 찔리면 가져가.
+
+□ 시키기 전에 맥락부터 주고 있나
+□ &quot;알아서 잘&quot; 대신 예시를 붙이고 있나
+□ 하지 말 것까지 정해주고 있나
+
+가사 뽑으려고 만든 습관인데
+보고서를 시켜도 뼈대가 똑같더라.
+책 4장 제목이 그대로 그거야.
+&#x27;뼈대는 똑같습니다&#x27;.
+
+유튜브 할 생각 없어도 돼.
+AI한테 뭐라 말해야 하나 막막한 사람용이야.
+
+댓글에 &quot;지시문&quot; 한 단어면 돼.
+받는 곳은 첫 댓글에 올려둘게.
+
+P.S. 15쪽밖에 안 돼. 대신 오늘 밤에 다 읽고 내일 아침부터 쓰는 분량이야.</pre>
+  <div class="todo">⚠️ 발행 전: 「AI한테 말시키는 법」 PDF 공지 업로드 (체크리스트 3번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t029">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">20번</span><span class="pill p-yeol">예열</span><span class="id">#037</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t037">한 곡으로 영상 네 개를 만들어.
+롱폼 하나에 쇼츠 셋. 이게 내 기본 공식이야.
+
+쇼츠 셋은 같은 곡에서 잘라.
+1. 1절 후렴
+2. 2절 후렴
+3. 클라이맥스
+각 20초씩.
+
+처음엔 곡 하나에 영상 하나였어.
+곡 뽑는 속도가 발행 속도를 못 따라가서
+맨날 쫓기는 기분이었지.
+
+쪼개기 시작하고 그게 사라졌어.
+곡 하나가 영상 네 개 몫을 하니까.
+
+주의할 건 하나야.
+같은 곡을 쪼개는 거랑
+다른 곡을 몰아 올리는 건 달라.
+후자는 내 영상끼리 시청자를 나눠 먹더라.
+
+발행이 버거우면 더 만들 생각부터 하지 말고
+만든 걸 더 쪼개 봐.
+
+저장해뒀다가 편성표 짤 때 다시 봐.</pre>
+  
+  <button class="copybtn" data-t="t037">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">21번</span><span class="pill p-yeol">예열</span><span class="id">#038</span><span class="angle">H2 사건 서사</span></div>
+  <pre id="t038">발행 끝난 9곡을 기계로 다시 재봤어.
+곡마다 자막 11~21줄이 어긋나 있더라.
+
+최악은 2.49초.
+목소리보다 가사가 한참 먼저 떠 있던 거야.
+눈으로 몇 번을 검수한 곡들인데 몰랐어.
+허탈하더라.
+
+이미 나간 영상은 되돌릴 수 없어.
+대신 그날 관문을 하나 세웠어.
+영상으로 만들기 전에 기계로 먼저 재고,
+기준 넘게 어긋난 줄만 사람이 고친다.
+지금은 이 관문을 통과해야 발행이 돼.
+
+만들기 전에 잡으면 공짜인 일이,
+만든 뒤에 알면 못 고치는 일이 되더라.
+
+귀랑 눈을 믿지 말라는 게 아니야.
+귀랑 눈이 놓치는 걸 재주는 도구를
+하나 두라는 거야.
+
+저장해뒀다가 발행 전 체크리스트에 넣어둬.</pre>
+  
+  <button class="copybtn" data-t="t038">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">22번</span><span class="pill p-yeol">예열</span><span class="id">#039</span><span class="angle">H4 기대 뒤집기</span></div>
+  <pre id="t039">수노(AI 작곡 툴)는 한 번에 두 버전을 줘.
+어느 쪽을 낼지, 나는 그래프로 한 번 더 골라.
+
+귀로만 고르던 때는
+그날 기분이 심사위원이었어.
+같은 곡이 어제는 좋고 오늘은 별로였지.
+
+지금은 두 버전의 음량 곡선을 뽑아서 봐.
+보는 건 두 가지야.
+- 제일 큰 소리가 어디쯤 오는지
+- 마지막 후렴이 앞보다 올라가는지
+
+숨죽이다가 마지막에 터지는 설계라면
+피크가 뒤에 있는 쪽이
+설계대로 나온 버전이거든.
+
+귀로 듣고, 그래프로 확인하고.
+둘이 같은 답을 내면 그때 발행해.
+
+취향은 흔들려도 곡선은 안 흔들리더라.
+
+저장해뒀다가 두 버전 중에 못 고르는 날 다시 봐.</pre>
+  
+  <button class="copybtn" data-t="t039">본문 복사</button>
+</div><div class="post mog">
+  <div class="head"><span class="day">23번</span><span class="pill p-mog">모객</span><span class="id">#030 · 문지방 "썸네일"</span><span class="angle">골격 B(명분→진단→체크 3줄→받는 법→P.S. 단점 선공개)</span></div>
+  <pre id="t030">내 채널 썸네일은 전부 AI로 만드는데,
+여기까지 오면서 버린 그림이 수백 장이야.
+
+돌아보면 그림 탓이 아니라 내 말 탓이었어.
+&quot;슬픈 느낌으로&quot; 같은 형용사로 시키면
+슬픈 그림이 아니라 이상한 그림이 나오거든.
+그걸 모르고 계속 다시 시켰지. 허탈하더라.
+
+버리면서 배운 것만 17쪽으로 묶었어. 무료판이야.
+하나라도 찔리면 가져가.
+
+□ 프롬프트에 형용사부터 쓰고 있다
+□ 글자까지 AI한테 시키고 있다
+□ 잘 나온 한 장이 왜 잘 나왔는지 모른다
+
+책에서 제일 많이 쓰게 될 문장은 이거야.
+형용사를 지우고, 조명·시선·자세를 쓴다.
+
+유튜브 안 해도 블로그, 쇼핑몰 이미지에 그대로 통해.
+
+필요한 사람은 댓글에 &quot;썸네일&quot;.
+받는 데는 첫 댓글을 보면 돼.
+
+P.S. 17쪽밖에 안 돼. 이론서가 아니라 버린 수백 장의 요약본이라 그래.</pre>
+  <div class="todo">⚠️ 발행 전: 「썸네일 수백 장의 기록」 PDF 공지 업로드 (체크리스트 4번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t030">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">24번</span><span class="pill p-yeol">예열</span><span class="id">#040</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t040">글이 재미없는 이유를 기계로 쟀어.
+따옴표가 1,000자에 0.1개더라.
+
+내 전자책 원고 얘기야.
+&quot;딱딱하다&quot;는 말을 들었는데
+어디가 딱딱한지는 아무도 못 짚었어.
+
+그래서 발행한 책들을 숫자로 재봤어.
+잘 읽힌다는 원고는
+1,000자에 따옴표가 6.7~10.8개.
+딱딱하다는 원고는 0.1개.
+백 배 차이야. 소름 돋더라.
+
+따옴표가 없다는 건
+글에 사람이 말하는 장면이
+하나도 없다는 뜻이거든.
+설명만 있고 목소리가 없는 거지.
+
+그 뒤로 장마다 셋 중 하나를 꼭 넣어.
+비유 하나, 실패 장면 하나, 대사 하나.
+
+글이 재미없다는 말을 들으면
+문장력 말고 따옴표부터 세 봐.
+저장해뒀다가 네 글에도 대 봐.</pre>
+  
+  <button class="copybtn" data-t="t040">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">25번</span><span class="pill p-yeol">예열</span><span class="id">#041</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t041">AI 음악 채널 한 달 유지비, 다 합치면 4~5만 원이야.
+실제 결제하는 것 기준으로 항목별로 말할게.
+
+나가는 건 네 가지야.
+1. 곡 만드는 구독 — 수노(AI 작곡 툴) 유료
+2. AI 어시스턴트
+3. 이미지 만드는 것
+4. 음원 유통
+
+전에 &quot;커피 몇 잔 값&quot;이라고 뭉뚱그린 적 있는데,
+시작을 재는 사람한텐
+항목으로 적어주는 게 맞겠더라.
+
+근데 진짜 비용은 따로 있어.
+돈이 아니라, 영상이 구워지는 동안의 대기시간이야.
+컴퓨터가 일하는 동안 나는 기다려.
+청구서에 안 찍혀서 다들 계산에서 빼먹지.
+
+돈 걱정에 시작을 미루는 중이면
+저장해뒀다가 계산기 두드릴 때 다시 봐.</pre>
+  <div class="todo">⚠️ 발행 전: 월 유지비 4~5만 원 결제 내역 재확인</div>
+  <button class="copybtn" data-t="t041">본문 복사</button>
+</div><div class="post mog">
+  <div class="head"><span class="day">26번</span><span class="pill p-mog">모객</span><span class="id">#012 · 문지방 "공장"</span><span class="angle">K4 자격 심사 역방향(작은 계정만 받는다) + K3 원형(방 800명 공개 + 문턱 낮춤) + K1 한 단어 + K9 고정 댓글 회수</span></div>
+  <pre id="t012">구독자 1,000을 못 넘겨본 사람만 왔으면 좋겠어.
+나도 아직 400이 안 돼. 자작곡 영상 35개를 올리고도.
+
+이미 잘되는 사람은 나한테 가져갈 게 없어.
+나는 자랑할 것도 없고, 강의 팔 생각도 없거든.
+
+근데 아무도 안 알아주는데
+다음 곡을 또 올리는 사람이면 얘기가 통해.
+나는 지금 딱 그 구간을 오기로 버티는 중이야.
+
+mp3 하나 넣으면 발행까지 자동으로 도는
+공장을 만들어서 채널 셋을 굴리고 있어.
+방엔 지금 800명이 있어. 눈팅만 해도 되고.
+
+댓글에 &quot;공장&quot;이라고 남겨줘.
+방이랑 무료판 「AI유튜브 시작지도」, 첫 댓글에 고정해둘게.</pre>
+  <div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t012">본문 복사</button>
+</div><h3 class="wk">주4 <span class="muted">— 글 9개 · 모객 3</span></h3><div class="post">
+  <div class="head"><span class="day">27번</span><span class="pill p-yeol">예열</span><span class="id">#042</span><span class="angle">H7 욕망 큐레이션</span></div>
+  <pre id="t042">나는 단어마다 무슨 소리가 나는지 적어둔 사전이 있어.
+지금 139개야.
+
+수노(AI 작곡 툴)에 프롬프트를 쓰다 보면
+분명 좋은 말인데
+이상한 소리를 부르는 단어가 있거든.
+
+예를 들어 crowd.
+곡을 웅장하게 하려고 넣으면
+관객 소리가 깔려 나와.
+내 발라드는 녹음실 소리여야 하는데.
+
+그래서 그런 단어를 만날 때마다
+무슨 소리를 부르는지,
+대신 뭘 쓸지 적어뒀어.
+그게 쌓여서 139개야.
+
+한 줄로 하면,
+공연장을 끄고 녹음실을 켜는 사전이야.
+
+프롬프트가 문장력 싸움인 줄 알았는데
+해보니까 사전 싸움이더라.
+
+AI가 이상한 결과를 주면
+문장을 다시 쓰지 말고,
+어느 단어가 그걸 불렀는지부터 의심해 봐.
+저장해뒀다가 프롬프트 고치기 전에 다시 봐.</pre>
+  
+  <button class="copybtn" data-t="t042">본문 복사</button>
+</div><div class="post mog">
+  <div class="head"><span class="day">28번</span><span class="pill p-mog">모객</span><span class="id">#031 · 문지방 "합본"</span><span class="angle">골격 A(T7 목차 혼합)</span></div>
+  <pre id="t031">162쪽짜리 합본 파일이 있는데, 아직 아무한테도 안 줬어.
+
+노션에 하나씩 올렸던 AI 실전 글을
+한 권으로 묶은 거야.
+초급 13편, 중급 10편. 합쳐서 23편.
+
+낱개로는 공개돼 있던 글인데
+묶은 파일은 내 폴더에서 자고 있었어.
+생각해보니 그게 제일 아깝더라.
+
+안에 뭐가 있냐면, 예를 들어
+&#x27;내 채널은 지금 어디가 막혔나 — 30분 병목 진단표&#x27;.
+영상 서너 개에 조회 100도 안 나오는
+채널용 경로가 따로 있어.
+데이터가 없으면 없는 대로 진단하는 표야.
+
+&#x27;AI 답변을 믿기 전 60초 검증법&#x27;처럼
+유튜브 안 하는 사람용 편도 섞여 있고.
+
+폴더에서 깨울 사람은 댓글에 &quot;합본&quot;.
+받는 길은 첫 댓글에 열어둘게.</pre>
+  <div class="todo">⚠️ 발행 전: 「자료실 전권 합본」 PDF 공지 업로드 (체크리스트 5번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t031">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">29번</span><span class="pill p-yeol">예열</span><span class="id">#043</span><span class="angle">H4 기대 뒤집기</span></div>
+  <pre id="t043">내 곡이 몇 곡인지, 나도 틀리게 알고 있었어.
+책 원고에 &quot;35곡&quot;이라고 썼다가 걸렸거든.
+
+AI가 숫자를 지어낼까 봐
+검수 관문까지 만들어놨는데,
+정작 지어낸 숫자는 내 손에서 나왔어.
+세보지도 않고 기억으로 적은 거야.
+검수가 세보니 그때 실제는 47곡.
+민망하더라.
+
+그 뒤로 규칙을 바꿨어.
+숫자는 기억으로 쓰지 않는다.
+세본 숫자만, 세는 기준이랑 같이 쓴다.
+
+지금 유튜브에 자작곡 영상 35개가 있다는 것도
+목록을 기계로 뽑아서 센 숫자야.
+곡으로 세면 달라지니까, 기준까지 적어두는 거고.
+
+AI 거짓말을 걱정하는 사람 많잖아.
+근데 첫 거짓말은 대개 내 기억에서 나오더라.
+
+숫자 다루는 일 하면 저장해뒀다가,
+기억으로 숫자 적으려는 순간 다시 봐.</pre>
+  
+  <button class="copybtn" data-t="t043">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">30번</span><span class="pill p-yeol">예열</span><span class="id">#045</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t045">처음 내 타깃은 60~80대였어.
+지금 이 채널은 4050 남자들이 들어.
+
+발라드 채널을 시작하면서
+부모님 세대가 들을 노래를 만든다고 믿었거든.
+가사 단어도, 곡 온도도 전부 그 눈높이로 맞췄어.
+
+그러다 유튜브 통계를 열었는데
+시청자 구성이 4050 남성 99%더라.
+
+한참 멍했어.
+극장을 잘못 알고 무대에 서 있던 거야.
+
+그날로 갈아엎었어.
+노년층용 단어를 지우고
+4050이 쓰는 말로 가사를 다시 썼어.
+썸네일도, 제목 온도도 같이 옮겼고.
+
+계획이 틀린 게 문제가 아니더라.
+통계를 안 여는 게 문제지.
+
+네 시청자가 누군지, 오늘 한번 열어봐.
+예상이랑 다를 수 있어. 나는 완전히 달랐어.</pre>
+  
+  <button class="copybtn" data-t="t045">본문 복사</button>
+</div><div class="post mog">
+  <div class="head"><span class="day">31번</span><span class="pill p-mog">모객</span><span class="id">#032 · 문지방 "시작지도"</span><span class="angle">골격 A</span></div>
+  <pre id="t032">구독 400도 안 되는 사람이 쓴 지도, 필요한 사람 있을까.
+
+「AI유튜브 시작지도」, 20쪽.
+내가 만든 무료판인데
+이걸 내밀 자격이 되나 한참 망설였어.
+잘된 채널의 성공담이 아니거든.
+
+대신 이 책 첫 장이 내 채널 성적표야.
+좋은 숫자가 아니라 진짜 숫자.
+지도는 길 잃어본 사람이 그리는 거더라.
+
+안에서 하나만 미리 말하면,
+시작부터 발행까지를 9단계 루프 하나로 그려놨어.
+지금 내가 몇 번째 칸에 서 있는지부터 보여.
+맨 뒤엔 7일 스타트 플랜도 붙어 있고.
+
+필요 없으면 안 받아도 돼.
+필요한 사람한테만 닿으면 됐어.
+
+댓글에 &quot;시작지도&quot;라고 남겨주면 돼.
+받는 곳은 첫 댓글에 적어둘게.</pre>
+  <div class="todo">⚠️ 발행 전: 시작지도 공지 업로드(6번) + 020 발행 5~7일 뒤에</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t032">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">32번</span><span class="pill p-yeol">예열</span><span class="id">#044</span><span class="angle">H4 기대 뒤집기</span></div>
+  <pre id="t044">기계 검수가 내 원고에 낙제를 줬어.
+이유는 &quot;필수 안내 문구 0건&quot;.
+
+근데 틀린 건 원고가 아니라 검사기였어.
+
+책 발행 전에 기계 관문을 몇 개 돌리거든.
+그중 하나가 저 판정을 내렸는데,
+원고를 열어보니 그 내용은 있었어.
+다른 문장으로 적혀 있었을 뿐이야.
+검사기가 특정 표현 하나만 찾고 있던 거지.
+검사기를 고치고 다시 돌려서 통과했어.
+
+기계를 여럿 부리면서 정한 규칙이 하나 있어.
+낙제가 나오면
+원고보다 검사기를 먼저 의심한다.
+
+자동화는 부지런한 직원이지 판사가 아니더라.
+판결은 아직 내 일이야.
+
+검사하는 도구를 쓰고 있으면 저장해뒀다가,
+낙제 뜨는 날 다시 봐.</pre>
+  
+  <button class="copybtn" data-t="t044">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">33번</span><span class="pill p-yeol">예열</span><span class="id">#046</span><span class="angle">H5 숫자 대비</span></div>
+  <pre id="t046">누적 조회가 10만을 넘었어.
+그걸로 번 조회수익은 0원이고.
+
+영상을 130개 넘게 올린 내 채널의
+숫자 두 개야.
+
+10만이면 뭔가 된 것 같지.
+근데 유튜브는 구독 1,000명 문턱을 넘기 전엔
+조회수익이라는 게 아예 안 열려.
+나는 아직 그 문 앞이야.
+
+두 숫자를 나란히 적으니 솔직히 허무하더라.
+
+근데 그 10만 조회가 공짜는 아니었어.
+어떤 곡이 클릭되고 어떤 곡이 지나쳐지는지
+10만 번의 선택이 통계로 남았거든.
+다음 곡 고를 땐 그 통계부터 봐.
+
+수익 전 구간은 벌이가 아니라 측정이더라.
+0원인 동안에도 쌓이는 건 있어.
+
+너도 숫자가 안 붙는 구간을 지나는 중이면
+지금 뭐가 쌓이고 있는지 하나만 적어줘.
+나만 이런 게 아닌지 궁금해서.</pre>
+  <div class="todo">⚠️ 발행 전: 수익 0원 재확인 (017과 동일 가드)</div>
+  <button class="copybtn" data-t="t046">본문 복사</button>
+</div><div class="post">
+  <div class="head"><span class="day">34번</span><span class="pill p-yeol">예열</span><span class="id">#047</span><span class="angle">H4 기대 뒤집기</span></div>
+  <pre id="t047">발라드 채널 하나를 돌리다가 트로트 채널을 하나 더 열었어.
+공장을 통째로 복사했으니 반은 먹고 들어간다고 생각했지.
+
+곡만 넣으면 영상까지 나오는
+자동화 공정이 있거든.
+옮겨 심는 것 자체는 금방이었어.
+
+근데 돌려보니
+발라드에서 맞던 공식이
+트로트에선 하나씩 뒤집히더라.
+
+첫 채널에서 검증한 곡 구조 공식에
+장르 예외가 붙고,
+곡 길이 감각은 아예 정반대였어.
+
+지름길인 줄 알았는데
+지도가 안 맞는 새 동네였던 거지.
+
+공장은 복사가 되는데
+데이터는 복사가 안 되더라.
+채널을 늘려도 일은 그만큼 안 늘어.
+근데 정답은 채널 수만큼 필요해.
+
+두 번째 채널 생각 있으면
+뭘 복사할지보다 뭘 새로 잴지부터 적어봐.</pre>
+  
+  <button class="copybtn" data-t="t047">본문 복사</button>
+</div><div class="post mog">
+  <div class="head"><span class="day">35번</span><span class="pill p-mog">모객</span><span class="id">#033 · 문지방 "안내서"</span><span class="angle">골격 A</span></div>
+  <pre id="t033">클로드 설치에서 막힌 사람용 안내서 페이지를 만들어놨어.
+&quot;검은 버튼을 누릅니다&quot; 수준으로 적었어.
+
+AI 얘길 들으면 해보고 싶은데
+까는 데서 막히면 그대로 접게 되거든.
+어려워서가 아니라 안내가 불친절해서야.
+
+이 안내서 차례가 이래.
+&quot;인터넷 창을 엽니다&quot;
+&quot;주소 칸에 이 주소를 칩니다&quot;
+&quot;파란 경고창이 뜨면 — 무시하고 진행&quot;
+
+그 파란 경고창이 고비야.
+윈도우가 조심하라고 띄우는 화면인데,
+거기서 멈춰서 돌아가는 게 제일 아깝잖아.
+그 화면까지 그대로 실어놨어.
+
+전자책은 아니고 웹페이지야.
+설치 끝나고 첫 말 걸어보는 것까지 이어져.
+
+구경할 사람은 댓글에 &quot;안내서&quot;.
+가는 길은 첫 댓글에 붙여둘게.</pre>
+  <div class="todo">⚠️ 발행 전: 클로드 안내서 링크를 방 공지에 게시 (체크리스트 7번)</div><div class="todo">⚠️ 모객 글 공통: 올린 직후 고정 댓글(6번 문안)을 첫 댓글로 달고 고정</div>
+  <button class="copybtn" data-t="t033">본문 복사</button>
 </div>
 
-<h2><span class="n">6</span>모객 글 표준 골격 (1등 글 해부)</h2>
-<div class="flow">
-  <div class="step"><div class="no">1</div><div><p><b>선언</b> — 결론부터 한 줄</p><p class="ex">"전자책 하나 그냥 풀게."</p></div></div>
-  <div class="step"><div class="no">2</div><div><p><b>실물 증거</b> — 숫자 1개 필수, 자랑·목차 금지</p><p class="ex">"205페이지 다 썼어. 스샷 하나하나 다 넣었고."</p></div></div>
-  <div class="step"><div class="no">3</div><div><p><b>주저 → 전환</b> — 가치를 세우고 문턱을 없앰. 우리 K7이 여기 들어감</p><p class="ex">"돈 받을까 하다가 그냥 준다." → 우리 식: "나 강사 아니잖아. 그냥 준다."</p></div></div>
-  <div class="step"><div class="no">4</div><div><p><b>문지방</b> — 한 단어, 설명 없음</p><p class="ex">"댓글에 '클로드'."</p></div></div>
-  <div class="step"><div class="no">＋</div><div><p><b>발행 직후: 첫 댓글에 링크 달고 고정 (K9)</b></p><p class="ex">이 댓글이 없으면 사람을 회수할 길이 없습니다</p></div></div>
-</div>
-
-<h2><span class="n">7</span>고정 댓글 문안 (모객 글 4개 전부, 올린 직후 첫 댓글로)</h2>
+<h2><span class="n">3</span>고정 댓글 문안 (모객 글 올린 직후 첫 댓글로 → 고정)</h2>
 <div class="post">
-  <div class="head"><span class="angle">자료를 방 안에 두고 링크는 방 하나만 주는 구조(자료만 받고 방은 안 들어가는 누수 차단). ⚠️ 먼저 확인: 「시작지도」가 방 공지에 실제로 올라가 있어야 합니다 — 없으면 공지에 올리고 나서 발행하거나, 문안에 노션 링크를 한 줄 추가하세요.</span></div>
+  <div class="head"><span class="angle">기본형 — 배포 글(028~033)은 「시작지도」 자리에 그 글의 자산명만 바꿔 쓰세요. 자산이 공지에 없으면 올린 뒤 발행.</span></div>
   <pre id="tpin">무료판 「AI유튜브 시작지도」는 방 공지에 올려뒀어.
 들어와서 받아가면 돼. 지금 800명이고,
 눈팅만 해도 되고 질문 안 해도 돼 →
@@ -477,19 +967,127 @@ https://open.kakao.com/o/glxOtmDi</pre>
   <button class="copybtn" data-t="tpin">문안 복사</button>
 </div>
 
-<h2><span class="n">8</span>사장님 하실 일</h2>
-<ul class="checks">
-  <li>5번 캘린더 순서대로 하루 1개 발행 (올릴지 말지는 글마다 사장님 결정)</li>
-  <li><b>모객 글 4개(3·6·9·12일차)는 올린 직후 고정 댓글 달기</b> — 7번 문안 복사해서 첫 댓글로 달고 「고정」</li>
-  <li>발행 전 숫자 확인: 발매 <b>35곡</b> · 구독자 <b>200 미만</b> · <b>방 인원 800명</b>(8/4 확인 수치 — 지금도 맞는지)</li>
-  <li><b>「시작지도」를 방 공지에 올리기</b> — 고정 댓글이 "방 공지에 있다"고 안내하므로, 공지에 없으면 먼저 올려야 합니다 (8/4 기준 공지엔 QA100선만 확인됨)</li>
-  <li>먼저 DM을 보내온 사람에게만 답장 (내가 먼저 DM 보내는 건 금지 — 제재 사유)</li>
-  <li>모객 글 반응(댓글 수·조회수)은 발행 후 2~3일 안에 알려주시면 공식에 반영합니다</li>
-</ul>
+<h2><span class="n">4</span>소재 은행 (23장 — 다음 사이클 재료)</h2>
+<p class="muted" style="margin:0 4px 10px">누르면 펼쳐집니다. 회색(✅)은 이미 글이 된 카드. 남은 카드로 "이거로 글 뽑아줘" 하시면 됩니다.</p>
+<details class="bank used"><summary>카드 1 — 무료 책인데 지적 99건 받고 통째로 버렸다 ✅ 사용됨 → 034 (2026-08-13)</summary><pre>- **소재**: 무료 배포판 3권의 1차 원고가 검수(김부장 47세 왕초보 + 팩트감사 2렌즈)에서 99건(치명 28건) 지적받고 전량 폐기, 재작성됐다. 폐기 사유 3가지 = ①유료판 내용 무료 유출 ②지어낸 숫자 ③채널 없는 독자 소외.
+- **근거**: `ai-singer\전자책초안\버전기록.md` 「3권 공통 제작 기록」. 숫자 전부 문서에 있음(99·28·3권).
+- **종류**: 예열 · H2 사건 서사 · T1 (감정 텍스처: 민망→오기)
+- **첫 줄 후보**: ① &quot;무료로 주는 책인데, 지적을 99건 받고 통째로 버렸어.&quot; ② &quot;공짜 책 원고를 두 번 썼어. 첫 판은 전량 폐기.&quot;
+- **주의**: 폐기 사유 ①(유료판 유출)을 말할 때 유료판 내용 자체를 풀지 말 것. 006·020(무료판 배포)과 소재 인접 — 저긴 &quot;준다&quot;가 본체, 여긴 &quot;만들다 넘어진 공정&quot;이 본체라 각도 다름.</pre></details><details class="bank used"><summary>카드 2 — 지어낸 숫자는 AI가 아니라 내가 만들었다 ✅ 사용됨 → 043 (2026-08-13)</summary><pre>- **소재**: 1차 원고 폐기 3대 사유 중 하나가 &quot;지어낸 숫자&quot; — 내 곡 수를 &quot;35곡&quot;이라 썼는데 실제는 47곡(당시 실측). AI 환각을 걱정했는데 숫자를 지어낸 건 사람(나)이었다는 반전.
+- **근거**: 버전기록 「3권 공통 제작 기록」 폐기 사유 ② (&quot;35곡&quot;→실제 그밤 47곡). 재작성 때 `확정숫자.md`(검증된 숫자만) 투입한 것도 문서에 있음.
+- **종류**: 예열 · H4 기대 뒤집기 · T4 (진실성 각도)
+- **첫 줄 후보**: ① &quot;내 곡이 몇 곡인지, 나도 틀리게 알고 있었어.&quot; ② &quot;지어낸 숫자는 AI가 아니라 내가 만들더라.&quot;
+- **주의**: 🚨 이 카드는 공통 주의의 곡 수 충돌과 정면으로 얽힌다 — **현재 곡 수를 확정한 뒤에만** 발행(글 안에 &quot;그래서 지금은 N곡&quot; 한 줄이 필요해짐). `확정숫자.md`는 현재 실종 상태(D:\work\CLAUDE.md) — 그 얘기까지 쓰진 말 것. → **2026-08-12 곡 수 확정됨**: &quot;유튜브 단독 자작곡 영상 35개&quot;(공통 주의 표). 단 이 카드의 &quot;실제 47곡&quot; 서사는 버전기록 원문 인용이라 그대로 두되, 현재 수치 언급은 &quot;자작곡 영상 35개&quot; 표현으로.</pre></details><details class="bank used"><summary>카드 3 — 내가 나를 베꼈는지 기계로 검사한다 ✅ 사용됨 → 036 (2026-08-13)</summary><pre>- **소재**: 무료판 발행 전 `check_overlap.py`로 유료판/무료판과 25자 이상 연속 일치를 기계 대조 — 0건 통과(자기소개 등 사실 서술 5건 제외). 무료와 유료가 겹치면 유료 산 사람에게 사기가 되니까.
+- **근거**: 버전기록 「3권 공통 제작 기록」 + 2권 발행전검수(같은 관문, 1권·무료판 대조 0건).
+- **종류**: 예열 · H5 숫자 대비 · T2 (공정 공개)
+- **첫 줄 후보**: ① &quot;무료판이랑 유료판, 25자 이상 겹치면 불합격이야.&quot; ② &quot;내가 나를 베꼈는지 기계로 검사해.&quot;
+- **주의**: 도구 이름(check_overlap.py)까지 밝힐지는 선택. &quot;유료 산 사람에 대한 예의&quot; 각도가 판매 언급으로 번지지 않게 — 가격·링크 금지.</pre></details><details class="bank"><summary>카드 4 — 너무 좋은 숫자라서 책에서 뺐다 (구독 802명)</summary><pre>- **소재**: 중년가요방 구독 802명(7/19 API 실측)을 책에 안 썼다. 영상 11개·누적조회 1만에 전환율 7.7%는 비정상이라 원인 확인 전까지 미검증 보류 — 좋은 숫자일수록 의심한다.
+- **근거**: 버전기록 v1.5 하단 &quot;⚠️ 미검증 보류: 중년가요방 구독 802명… 전환율 7.7%로 비정상 → 원인 확인 전까지 책에 쓰지 않는다.&quot;
+- **종류**: 예열 · H4 기대 뒤집기 · T4 (진실성 각도 — 카드 2와 짝이지만 방향 반대: 2=틀린 숫자, 4=맞는데 못 믿는 숫자)
+- **첫 줄 후보**: ① &quot;구독 802명짜리 숫자를 책에서 뺐어.&quot; ② &quot;숫자가 너무 좋으면 일단 의심부터 해.&quot;
+- **주의**: 발행 시점에 원인이 규명됐는지 확인 — 규명돼서 책에 실렸다면 이 글은 과거형으로 고쳐 써야 한다. 카드 2와 같은 주에 배치 금지(진실성 소재 연타는 설교 냄새).</pre></details><details class="bank used"><summary>카드 5 — 개정판 첫 장을 정정으로 열었다 ✅ 사용됨 → 035 (2026-08-13)</summary><pre>- **소재**: 유료판 초판 17장은 &quot;다채널 확장을 보류함에 넣었다&quot;로 끝나는데, 실제론 트로트 채널이 초판(7/9) 전인 6/13부터 돌아가고 있었다. 독자가 검색하면 드러날 사실이라 개정판 18장을 저자 정정으로 열었다 — &quot;먼저 고백하면 세계관&quot;(3장 원칙)을 책 자신에게 적용.
+- **근거**: 버전기록 v1.6 「PART 7 신설」 (18장 초판 정정 · 트로트 6/13 가동 · 2집 6/29~7/8 발행 중).
+- **종류**: 예열 · H2 사건 서사 · T1
+- **첫 줄 후보**: ① &quot;개정판 첫 장을, 초판 정정으로 열었어.&quot; ② &quot;독자가 검색하면 들킬 일은 내가 먼저 말하기로 했어.&quot;
+- **주의**: &quot;거짓말했다&quot;로 쓰지 말 것 — 초판 시점 표현이 사실과 어긋난 것이지 의도적 은폐가 아님. 책 제목·가격 언급 없이 사건만.</pre></details><details class="bank used"><summary>카드 6 — 공장은 복사되는데 데이터는 복사가 안 되더라 ✅ 사용됨 → 047 (2026-08-13)</summary><pre>- **소재**: 발라드 채널의 자동화 공장을 트로트 채널에 이식 — 로직은 이식되지만 데이터는 이식되지 않는다(유료판 19장 제목). 장르가 규칙을 뒤집은 지점들: 훅퍼스트 예외, 곡 길이 정반대, 검수 오탐(유료판 20장).
+- **근거**: 버전기록 v1.6 PART 7 (19장·20장 요지). D:\work\CLAUDE.md 철칙의 역이식 실측(그밤 매처를 트로트에 옮겼다 파탄·롤백)도 같은 사건 계열.
+- **종류**: 예열 · H4 기대 뒤집기 · T4
+- **첫 줄 후보**: ① &quot;두 번째 채널은 공장을 복사해서 열었어. 데이터는 복사가 안 되더라.&quot; ② &quot;발라드에서 통한 공식을 트로트에 그대로 썼다가 뒤집혔어.&quot;
+- **주의**: 026(채널 셋 — &quot;일이 세 배가 안 된다&quot;)과 인접 — 026은 확장 예찬, 이 카드는 **이식의 배신**이라 각도 반대. 026 발행 1주 이상 뒤에. 구체 수치(129초 이탈 등)는 내부 QA 기록이라 검증 부담 — 사건만 쓰고 숫자는 빼는 게 안전.</pre></details><details class="bank"><summary>카드 7 — 내 자작곡 첫 소절이 원곡과 똑같았다</summary><pre>- **소재**: 자작곡의 가사 첫 소절이 참조한 원곡과 그대로 겹친 사건. 기억으로 &quot;자작&quot;이라 판정했다가 웹 실측 대조에서 적발됐다 — 베낀 건 AI가 아니라 내 기억이었다.
+- **근거**: 음치 무료판 기둥 ②(버전기록: &quot;가사 첫 소절이 원곡과 겹친 사건&quot;) + D:\work\CLAUDE.md 철칙(2026-07-12 비처럼음악처럼 — 기억 대조로 놓침, QA가 웹 대조로 적발).
+- **종류**: 예열 · H2 사건 서사 · T1 (감정 텍스처: 소름)
+- **첫 줄 후보**: ① &quot;내 자작곡 첫 소절이, 원곡이랑 똑같았어.&quot; ② &quot;베낀 건 AI가 아니라 내 기억이었어.&quot;
+- **주의**: 원곡명·내 곡명은 밝히지 말 것(저작권 논점 재점화 + 발행 강행 이력 있음). 001·003·007(커버·저작권 계열)과 인접 — 저긴 &quot;커버는 남의 곡&quot;, 여긴 &quot;자작인 줄 알았는데 겹침&quot;이라 각도 다름을 본문에서 분명히. ⚠️ **028(음치 무료판 배포, 2026-08-12)이 본문에서 이 지뢰를 목차 인용으로 씀** — 이 카드는 028 발행 1주 이상 뒤에, &quot;책 목차 한 줄&quot;이 아니라 &quot;사건 전체 서사&quot;로 각도를 벌려서.</pre></details><details class="bank used"><summary>카드 8 — 처음 타깃은 60~80대였다 (022의 B안) ✅ 사용됨 → 045 (2026-08-13)</summary><pre>- **소재**: 원래 타깃을 60~80대로 잡았다가 통계(4050 남성 99%)를 보고 갈아엎었다. 022는 &quot;다른 그림을 그리고 있었다&quot;로 뭉뚱그렸는데, 원 타깃이 60~80대였다는 사실이 문서로 확인됨 — 구체판 B안이 가능해졌다.
+- **근거**: 음치 무료판 기둥 ③(버전기록: &quot;타깃을 60~80대에서 4050으로 갈아엎기&quot;) + 모객카드 실패담 재고(4050 남성 99%).
+- **종류**: 예열 · H5 숫자 대비 · T4
+- **첫 줄 후보**: ① &quot;처음 타깃은 60~80대였어. 통계를 여니 4050이 99%더라.&quot; ② &quot;노년층 노래를 만들고 있었는데, 듣는 건 아저씨들이었어.&quot;
+- **주의**: **022(같은 소재의 A안, draft)가 아직 미발행** — 022 발행 5~7일 뒤에만 투입(rules.md B안 규칙). 둘을 같은 주에 쓰면 자기복제.</pre></details><details class="bank used"><summary>카드 9 — 한 달 유지비 4~5만 원, 항목별로 ✅ 사용됨 → 041 (2026-08-13)</summary><pre>- **소재**: 유료판 머리말 「시작 전에 알아야 할 돈」 박스 — Suno 유료 + AI 어시스턴트 + 이미지 + 음원 유통, 합계 월 4~5만 원 선. 무료 오픈소스 범위와 렌더 대기시간(숨은 비용)까지.
+- **근거**: 버전기록 v1.3 (운영비 박스 신설 — 항목·합계가 문서에 있음).
+- **종류**: 예열 · H5 숫자 대비 · T2 (저장 가치)
+- **첫 줄 후보**: ① &quot;한 달 유지비, 다 합치면 4~5만 원이야.&quot; ② &quot;AI 음악 채널의 숨은 비용은 돈이 아니라 렌더 대기시간이더라.&quot;
+- **주의**: 🔶 002(&quot;커피 몇 잔 값&quot;)·008(같은 소재 B안)과 **소재 인접 강함** — 각도를 &quot;뭉툭한 값 대신 항목별 실제 결제 기준 + 숨은 비용(대기시간)&quot;으로 틀어야 함. 002·008 발행 후 3주 이상 지났는지 확인하고, 금액이 지금도 4~5만 원대인지 결제 내역으로 재확인.</pre></details><details class="bank"><summary>카드 10 — 구독은 롱폼에서 왔다, 쇼츠의 3배</summary><pre>- **소재**: 구독 전환은 롱폼이 쇼츠의 약 3배(자체 실측). 쇼츠는 도달, 롱폼은 구독 — 역할이 다르다.
+- **근거**: 버전기록 v1.2 (16-1 실측 보강: &quot;구독 전환은 롱폼이 쇼츠의 약 3배&quot;).
+- **종류**: 예열 · H5 숫자 대비 · T4
+- **첫 줄 후보**: ① &quot;구독은 쇼츠가 아니라 롱폼에서 오더라. 세 배 차이야.&quot; ② &quot;쇼츠 조회수에 속을 뻔했어.&quot;
+- **주의**: &quot;3배&quot;는 자체 실측이라 인용 가능하나 측정 시점이 7월 초 — 이후 수치가 뒤집혔는지 스튜디오에서 한 번 보고 쓸 것. 013·024(히트 분석 계열)와 같은 주 배치 피함(데이터 글 연타).</pre></details><details class="bank used"><summary>카드 11 — 한 곡으로 영상 네 개를 만든다 ✅ 사용됨 → 037 (2026-08-13)</summary><pre>- **소재**: 곡당 롱폼 1 + 쇼츠 3(같은 곡의 1절 후렴·2절 후렴·클라이맥스, 각 20초) = 1곡 4영상. 곡을 더 만드는 게 아니라 한 곡을 더 쪼개는 운영.
+- **근거**: 버전기록 v1.1 (쇼츠 운영 현행화: 곡당 1개→3컷, &quot;1곡=2영상&quot;→&quot;1곡=4영상&quot;) + 메모리(쇼츠 곡당 3개 원칙).
+- **종류**: 예열 · H5 숫자 대비 · T2
+- **첫 줄 후보**: ① &quot;한 곡으로 영상 네 개를 만들어.&quot; ② &quot;곡이 모자란 게 아니라 쪼개는 법을 몰랐던 거더라.&quot;
+- **주의**: 025(자기잠식 — 발행 늘렸다 성적 하락)와 표면상 모순처럼 읽힐 수 있음 — &quot;같은 곡을 쪼개는 것&quot;과 &quot;다른 곡을 붙여 올리는 것&quot;의 차이를 한 줄로 정리해두면 오히려 짝글이 됨. 025와 연속 배치하지 말 것.</pre></details><details class="bank used"><summary>카드 12 — 발행한 9곡을 기계로 재봤더니 자막이 다 어긋나 있었다 ✅ 사용됨 → 038 (2026-08-13)</summary><pre>- **소재**: 발행 완료된 앨범 9곡을 사후 실측하니 곡당 11~21줄의 자막 타이밍이 기준(0.35초)을 넘게 어긋났고 최악은 2.49초. 눈 검수로는 몰랐다. 이미 나간 곡은 재렌더하지 않기로 하고, 대신 앞으로 나갈 곡을 렌더 전에 기계로 막는 관문을 만들었다.
+- **근거**: D:\work\CLAUDE.md 발매 워크플로 3항 (트로트 1집 9곡 사후 실측 · 곡당 11~21줄 · 최악 2.49s · onset_check 신설 · &quot;렌더 전에 잡았으면 공짜였다&quot;).
+- **종류**: 예열 · H2 사건 서사 · T1 (감정 텍스처: 허탈→안도)
+- **첫 줄 후보**: ① &quot;발행한 9곡을 기계로 재봤더니, 곡마다 자막 11~21줄이 어긋나 있었어.&quot; ② &quot;최악은 2.49초. 눈으로는 끝까지 몰랐어.&quot;
+- **주의**: 016(나레이션 인트로 — &quot;콘셉트가 데이터와 싸우면 데이터가 이긴다&quot;)과 주제 결이 같음(감 vs 기계) — 016 발행과 간격 둘 것. &quot;재렌더 안 함&quot; 결정까지 쓰면 무책임하게 읽힐 수 있으니 &quot;앞으로 나갈 곡에서 막는다&quot;에 무게.</pre></details><details class="bank used"><summary>카드 13 — 두 버전 중 고르기, 귀 말고 그래프로 ✅ 사용됨 → 039 (2026-08-13)</summary><pre>- **소재**: 수노는 한 번에 2버전을 준다. A/B 판정을 귀 대신 에너지 곡선 실측(음량 곡선 10구간 + 피크 시점 + 마지막 후렴 상승 폭)으로 한다 — 설계 의도(숨죽인 벌스→파이널 폭발)에 맞는 쪽을 데이터로 고른다.
+- **근거**: D:\work\CLAUDE.md 「수노 음원 생성」 3항 (ffmpeg rms→dB · 10구간 · 피크 후반 + 파이널 리프트 기준 · 6분 초과 시 구조 파탄 의심).
+- **종류**: 예열 · H4 기대 뒤집기 · T2
+- **첫 줄 후보**: ① &quot;AI가 준 두 버전, 나는 귀 말고 그래프로 골라.&quot; ② &quot;곡 고르는 기준은 취향이 아니라 피크 위치야.&quot;
+- **주의**: &quot;귀를 아예 안 쓴다&quot;로 과장하지 말 것(그래프는 판정 보조). 014(수노 삽질 체크 4개 — 많이 뽑고 고른다)와 인접 — 014는 &quot;뽑는 쪽&quot;, 이 카드는 &quot;고르는 쪽&quot; 공정이라 각도 다름을 유지.</pre></details><details class="bank used"><summary>카드 14 — 기계 검수가 낙제를 줬는데, 틀린 건 검사기였다 ✅ 사용됨 → 044 (2026-08-13)</summary><pre>- **소재**: 2권 발행 전 검수에서 검사기가 &quot;고지 0건 낙제&quot;를 줬는데, 원고는 그 내용을 다른 문장으로 이미 적고 있었다 — 검사기 패턴이 문자열 하나만 찾고 있었던 것. 패턴을 고쳐 재실행. 교훈: 낙제가 나오면 원고보다 검사기를 먼저 의심한다.
+- **근거**: 버전기록 2권 v1.1 발행전검수 항목 (검사기 오탐 · &quot;A/B&quot; 문자열 패턴 · 재실행). 같은 교훈의 반복 사례가 문체검사기 캘리브레이션(D:\work\CLAUDE.md)에도 있음.
+- **종류**: 예열 · H4 기대 뒤집기 · T4
+- **첫 줄 후보**: ① &quot;기계 검수가 낙제를 줬는데, 틀린 건 원고가 아니라 검사기였어.&quot; ② &quot;자동화를 믿는 것과 맹신하는 건 다르더라.&quot;
+- **주의**: 카드 12·13(기계를 믿어라)과 방향이 반대라 같은 주에 섞으면 메시지가 충돌 — 격주로 분리. 책 제목·판매 정보 언급 없이 &quot;검수 공정&quot; 사건으로만.</pre></details><details class="bank used"><summary>카드 15 — &quot;재미없다&quot;의 정체를 기계로 쟀더니, 인용부호 0.1개였다 ✅ 사용됨 → 040 (2026-08-13)</summary><pre>- **소재**: 발행한 책들을 기계로 재보니 &quot;딱딱하다&quot;는 원고의 1,000자당 인용부호가 0.1개 — 잘 읽힌다는 원고(6.7~10.8개)와 약 100배 차이. 재미없는 글엔 사람이 말하는 장면이 없다는 뜻. 그래서 장마다 대사·장면을 강제하는 검사기를 만들었다.
+- **근거**: D:\work\CLAUDE.md 「전자책 집필 규격」 (발행 책 6권 실측 · 인용부호 0.1 vs 6.7~10.8 · 문체검사.py).
+- **종류**: 예열 · H5 숫자 대비 · T4 (글쓰기 소재 — 음악 밖이라 도달 폭이 넓음)
+- **첫 줄 후보**: ① &quot;글이 재미없는 이유를 기계로 쟀어. 인용부호가 0.1개더라.&quot; ② &quot;딱딱한 글엔 사람 말소리가 없어.&quot;
+- **주의**: 음악·채널 소재가 아니라 페르소나 이탈로 읽히지 않게 &quot;내 전자책 고치다 알게 된 것&quot; 프레임 유지. 수치는 자체 실측이라 인용 가능.</pre></details><details class="bank used"><summary>카드 16 — 누적 조회 10만, 통장 0원 (017의 B안) ✅ 사용됨 → 046 (2026-08-13)</summary><pre>- **소재**: 7/19 실측 — 그밤 채널 누적 조회 106,495회 · 공개 영상 132개 · 조회수익 0원(YPP 이전). 017은 &quot;35곡·0원&quot; 프레임, 이 카드는 &quot;10만 조회의 실체&quot; 프레임.
+- **근거**: 버전기록 v1.5 (2026-07-19 유튜브 API 실측: 구독 312 · 누적조회 106,495 · 공개영상 132) + 유료판 정직 공개 박스(YPP 이전·0원).
+- **종류**: 예열 · H5 숫자 대비 · T6 (빌드 인 퍼블릭)
+- **첫 줄 후보**: ① &quot;누적 조회가 10만이 넘는데, 통장엔 0원이야.&quot; ② &quot;영상 132개 올리고 번 조회수익, 0원.&quot;
+- **주의**: **017(같은 결론의 A안, draft)이 아직 미발행** — 017 발행 5~7일 뒤 B안으로만. 🚨 발행 직전 YPP 여부 재확인(수익 1원이라도 발생했으면 폐기 — 017 note와 동일 가드). 누적조회·영상 수도 재실측해 최신값으로.</pre></details><details class="bank used"><summary>카드 17 — 단어마다 무슨 소리가 나는지 적어둔 사전이 있다 (019 인접) ✅ 사용됨 → 042 (2026-08-13)</summary><pre>- **소재**: 수노 프롬프트를 문장 감각이 아니라 트리거 사전(어떤 단어가 어떤 소리를 부르는지 축적한 DB 139개)으로 쓴다. 019(빼는 단어)의 반대쪽 — 넣는 단어의 사전.
+- **근거**: `작사공용\수노_프롬프트_방법론.md` (트리거 DB 139개 · &quot;공연장 끄고 녹음실 켜기&quot;). 발행 전 원문에서 예시 트리거 2~3개만 골라 확인.
+- **종류**: 예열 · H7 욕망 큐레이션 · T3
+- **첫 줄 후보**: ① &quot;나는 단어마다 무슨 소리가 나오는지 적어둔 사전이 있어. 139개.&quot; ② &quot;프롬프트는 문장력이 아니라 사전 싸움이더라.&quot;
+- **주의**: 🚨 **트리거 DB를 표·목록으로 통째 공개 금지**(메모리: &quot;트리거DB 표로 옮기지 말 것&quot; — 유료 자산). 개념 + 예시 2~3개까지만. 019(제외 목록 통째 공개, draft)와 인접 — 019 발행 후 1주 이상 뒤, &quot;그때 뺐다면 이번엔 넣는 쪽&quot; 연결로.</pre></details><details class="bank"><summary>카드 18 — &quot;슬픈 느낌으로&quot;는 AI한테 안 통한다</summary><pre>- **소재**: 썸네일 수백 장을 만들며 확인한 것 — 감정 형용사는 안 먹힌다. 조명·시선·자세로 지시해야 그림이 잡힌다. 말로 안 되면 참조 이미지로 조준한다.
+- **근거**: 썸네일 무료판 기둥 2개(버전기록: &quot;감정 형용사는 안 먹힌다(조명·시선·자세로)&quot; / &quot;말 대신 참조 이미지로&quot;) + 메모리(미드저니 프롬프트 생성기 v2 원칙 동일).
+- **종류**: 예열 · H4 기대 뒤집기 · T2 (저장 가치)
+- **첫 줄 후보**: ① &quot;&#x27;슬픈 느낌으로&#x27;라고 쓰면 AI는 못 알아들어.&quot; ② &quot;썸네일 수백 장 버리고 알았어. 형용사 말고 조명·시선·자세야.&quot;
+- **주의**: &quot;수백 장&quot;은 무료판 제목(「썸네일 수백장의기록」)에 근거하나 정확 매수는 문서에 없음 — 구체 숫자를 새로 만들지 말 것. 🔶 **023(K10 투표)의 1번 항목이 썸네일** — 투표에서 1번이 이기면 이 카드가 이행 글이 된다(그 경우 첫 줄을 &quot;투표 1번이 이겼네&quot; 회수형으로).
+
+---</pre></details><details class="bank used"><summary>카드 19 — 자기의심 배포: &quot;이런 지도, 필요한 사람 있을까&quot; (020의 B안) ✅ 사용됨 → 032 (2026-08-12)</summary><pre>- **소재**: 무료판 「AI유튜브 시작지도」 배포를 자기의심 톤으로 — 잘난 선언(020) 대신 &quot;구독 몇백도 안 되는 사람이 쓴 지도가 필요할까&quot; 하고 내미는 각도. 실측: caas_lounge가 자기의심 고백(&quot;나 잘하고 있는거 맞아..?&quot;)으로 R86.
+- **근거**: 모객카드 훅 재고(&quot;구독 200도 안 되는 사람이 쓴 지도&quot; — 다음 사이클 모객 B안 후보로 등재돼 있음) + 2차분석 K7 변형(자기의심 성립).
+- **종류**: 모객 · K7 자기의심 + K1 한 단어 + K2 + K9 · 골격 A
+- **첫 줄 후보**: ① &quot;구독 400도 안 되는 사람이 쓴 지도, 필요한 사람 있을까.&quot; (2026-08-12 실측 358로 확정 — ⚠️ &quot;300도 안 되는&quot;은 이제 거짓) ② &quot;이 지도, 내놓기 좀 민망한데 그래도 풀게.&quot;
+- **주의**: **020(같은 미끼의 A안, draft) 발행 5~7일 뒤에만.** 문지방 단어는 020의 &quot;지도&quot;와 달라야 함 — &quot;시작지도&quot; 권장. 자기의심이 자기비하로 넘어가면 안 됨(rules.md: 작은 숫자는 연료지 사과가 아님). 발행 직후 회수 문안 ① 고정 댓글.</pre></details><details class="bank used"><summary>카드 20 — 미끼 교체: 「음치인데 노래를 만들었습니다」 배포 ✅ 사용됨 → 028 (2026-08-12)</summary><pre>- **소재**: 시작지도만 미끼가 아니다 — 무료판이 3권 더 있다(말시키는법 15쪽 · 음치 19쪽 · 썸네일 17쪽, &quot;깊이가 다른 그물 3개&quot;). 그중 「음치인데」(겁으로 막힌 사람용, 실패 사건 3개가 기둥)를 새 모객 글의 얼굴로. 같은 미끼라도 글은 새로 쓴다(시효 실측)의 정공법 = 미끼 자체를 바꾸는 것.
+- **근거**: 버전기록 「무료 배포판 3권」 (3권 실물·쪽수·타깃 전부 문서화, 2026-07-17 완성).
+- **종류**: 모객 · K7 + K1 한 단어 + K9 · 골격 A (선언→쪽수 증거→주저·전환→한 단어)
+- **첫 줄 후보**: ① &quot;「음치인데 노래를 만들었습니다」, 19쪽. 그냥 풀게.&quot; ② &quot;음치가 노래로 채널 만든 기록, 책으로 묶어놨어.&quot;
+- **주의**: 🚨 **이 3권이 방 공지(또는 노션 배포 자료실)에 실제 게시돼 있는지 사장님 확인 필수** — 없으면 회수 경로가 없다. 문지방 단어 후보 &quot;음치&quot;(한 단어·이미 아는 말 — 격자 목록에 없는 신규라 사장님 승인 후 사용). 005(음치 상담 예열)와 인접 — 005는 질문 상담, 이건 배포라 각도 다름. 남은 2권(말시키는법·썸네일)도 같은 골격으로 카드 재활용 가능.</pre></details><details class="bank"><summary>카드 21 — 방 800명 실황: &quot;혼자 삽질하던 사람들이 800명이 됐어&quot;</summary><pre>- **소재**: 방 인원 800명 자체를 사건으로 쓰는 K3 정면 글. 단 실측상 &quot;방 초대&quot;를 글의 얼굴로 세우면 전환율이 낮으니(0.6~1.6% vs 자료 3.4~4.6%), 얼굴은 무료판으로 두고 800명은 증거 줄에 배치.
+- **근거**: 방 800명(2026-08-04 사장님 확인 — 모객카드 공통 사실 1) + 2차분석 3장(조회 전환율) + K3 실측(sunshine_00617 &quot;374명&quot; R187 — 우리 숫자가 더 큼).
+- **종류**: 모객 · K3 원형 + K7 + K1 + K9
+- **첫 줄 후보**: ① &quot;나 같은 사람 모인 방이 800명이 됐어. 눈팅만 해도 되는 방인데.&quot; ② &quot;800명 모였는데 강의 파는 사람이 없어.&quot;
+- **주의**: 발행 직전 방 인원 재확인(800에서 움직였으면 실수치로). 011·012(draft, 800명 언급 포함)와 K3 사용이 겹침 — **011·012가 먼저 나간 주에는 이 카드 금지**(같은 K공식 연속·방 숫자 반복 노출). 문지방 단어는 미사용분에서(예: &quot;눈팅&quot; — 신규 후보, 사장님 승인 후).</pre></details><details class="bank"><summary>카드 22 — K10 후속: 투표 결과 재공지 (023 발행 후 조건부)</summary><pre>- **소재**: 023(번호 투표)이 나가고 득표가 모이면, 결과를 공개하고 최다 득표 주제를 푸는 후속 글. 실측: alltastore가 투표 결과 재공지만으로 R78 — 투표는 글 두 개짜리 소재다.
+- **근거**: 2차분석 K10 (alltastore 재공지 R78 · &quot;투표가 후속 글 소재까지 만든다&quot;) + 023 note의 이행 약속(안 풀면 거짓말).
+- **종류**: 모객(후속) · K10 회수 + K9 / 이행 본문은 예열(H10 나눔)로 이어짐
+- **첫 줄 후보**: ① &quot;투표 결과 나왔어. N번이 제일 많더라.&quot; ② &quot;약속대로 푼다. 제일 많이 나온 게 이거였어.&quot;
+- **주의**: **023 발행 + 실제 득표 후에만.** 득표 수·1위 번호는 실제 댓글창 집계 그대로(지어내기 금지 — 표가 3개면 3개라고 쓴다, 작은 숫자는 연료). 이행 글 재료는 전부 실물 확보돼 있음(1=썸네일→카드 18, 2=가사 압축→유료판 4-3, 3=공장→유료판 10장).</pre></details><details class="bank"><summary>카드 23 — K6 수선판: 첫 곡 같이 만들기 수요조사 (010 인접)</summary><pre>- **소재**: &quot;악보 못 읽는 사람들끼리 첫 곡 만들기&quot; 수요조사(K6). 010이 같은 소재로 delivered 상태지만 방 0명 시절 문구(&quot;아직 나밖에 없어&quot;)+DM 약속이라 그대로 올리면 거짓이 된다 — 800명·K9 기준으로 새로 쓰는 수선판.
+- **근거**: 010 본문·note + 모객카드 누적 로그 경고(009·010은 0명 시절 문구 — 수선 없이 발행 금지) + K6 실측(2차 등급 하향 &#x27;중&#x27; — 기대치 낮춰 잡을 것).
+- **종류**: 모객 · K6 + K3 원형 + K1(&quot;첫곡&quot;) + K9
+- **첫 줄 후보**: ① &quot;악보 못 읽는 사람들끼리 첫 곡 만들어보는 거, 하면 올 사람 있어?&quot; (010 첫 줄 재사용 가능 — 미발행 확인 시) ② &quot;방에서 날 잡고 첫 곡을 처음부터 끝까지 같이 만들어볼까 해.&quot;
+- **주의**: 🚨 **010이 실제 쓰레드에 올라갔는지 먼저 확인** — 올라갔으면 첫 줄·구성을 바꿔야 함(같은 글 재탕 금지). K6 철칙: 댓글이 붙으면 **방에서 실제로 연다** — 열 생각 없으면 이 카드 자체를 쓰지 않는다. 문지방 &quot;첫곡&quot;은 010과 동일 — 010 미발행이면 문제없음.
+
+---</pre></details>
+
+<h2><span class="n">5</span>이번 분석의 핵심 (요약)</h2>
+<div class="card">
+  <p>① <span class="hl">"댓글 달면 DM으로 보낼게" 금지</span> — 그 방식으로 계정 제재당한 실측 사례. 링크는 <b>내 글 첫 댓글에 고정</b>(K9 신공식, 1등 사례 R5,800의 방식).</p>
+  <p style="margin-top:8px">② <span class="hl">무료 자료가 방 초대보다 4~7배 잘 걸린다</span> — 글의 얼굴은 항상 무료판, 방은 고정 댓글에 동봉.</p>
+  <p style="margin-top:8px">③ <span class="hl">숫자는 전량 실측</span> — 구독 358 · 자작곡 영상 35개(산정 기준 명시) · 방 800명 · 누적 조회 10만+. 지어낸 숫자 0건(QA 검증).</p>
+  <p style="margin-top:8px">④ 모객:예열 = 31% — 배포 글을 막 날려도 계정이 죽지 않게 예열 24개가 사이를 받칩니다.</p>
+</div>
+
+<h2><span class="n">6</span>QA 채점 이력</h2>
+<div class="tablebox"><table>
+<thead><tr><th>회차</th><th>점수</th><th>주요 지적 → 조치</th></tr></thead>
+<tbody>
+<tr><td>1차</td><td>70</td><td>예열 부족·배포 글 자기복제·회수 경로 미구축 → 예열 11개 신규, 골격 분화, 발행준비 문서 신설</td></tr>
+<tr><td>2차</td><td>91</td><td>주4 모객 비율 50%·첫 줄 숫자 3건 → 예열 3개 보강, 수선</td></tr>
+<tr><td><b>3차</b></td><td><b>95 ✓</b></td><td>발행 개시 가능 판정 (잔여: 위 1번 체크리스트 = 사장님 액션)</td></tr>
+</tbody>
+</table></div>
 
 <footer>
-  근거 자료 (컴퓨터 안): 2차 실측 73개 = <code>ebook-feed\research\카톡방유입_2차실측_2026-08-12.md</code> · 분석 = <code>카톡방유입_2차분석_2026-08-12.md</code> · 공식 원본 = <code>threads-autopost\모객카드.md</code> (v2) · 글 대기열 = <code>threads-autopost\queue.json</code><br>
-  수집은 읽기 전용으로 진행 (좋아요·댓글·팔로우·DM 0건) · 이 페이지는 검색에 안 잡히게 설정돼 있습니다.
+  근거 (컴퓨터 안): 실측 원본 <code>ebook-feed\research\카톡방유입_2차실측·2차분석_2026-08-12.md</code> · 공식 <code>threads-autopost\모객카드.md</code> v3 · 운영 한 장 <code>threads-autopost\발행준비.md</code> · 채점 <code>threads-autopost\research\QA성적표_2026-08-12.md</code> · 글 대기열 <code>queue.json</code> (draft 35 · 발행 기록 무손실)<br>
+  이 페이지는 검색에 안 잡히며, 큐에서 스크립트로 생성됩니다(본문 불일치 원천 차단).
 </footer>
 
 </div>
