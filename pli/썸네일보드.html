@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>썸네일 비교판 — 플리 챌린지 2일차</title>
+<style>
+@font-face { font-family:Pretendard; font-display:swap; src:url('https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations'); }
+:root{ --bg:#0a1020; --card:#131f3a; --card2:#0e1626; --line:#263858;
+  --text:#edf2fb; --muted:#b6c1d4; --dim:#8394ad; --amber:#f5b352; --amber-deep:#d99632;
+  --rose:#f08a7d; --rose-soft:rgba(240,138,125,.12); --green:#8de0ac; --green-soft:rgba(141,224,172,.12); }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Pretendard,-apple-system,system-ui,'Malgun Gothic',sans-serif;font-size:16.5px;line-height:1.75;word-break:keep-all}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{padding:46px 0 26px}
+.badge{display:inline-block;margin-bottom:14px;padding:5px 14px;border:1px solid var(--amber-deep);border-radius:999px;color:var(--amber);font-size:13px;font-weight:800}
+h1{font-size:clamp(25px,5.5vw,34px);line-height:1.32;letter-spacing:-.02em}
+header p{margin-top:13px;color:var(--muted);max-width:64ch}
+h2{margin:42px 0 8px;font-size:21px;letter-spacing:-.01em}
+h2 .n{display:inline-block;margin-right:8px;padding:2px 10px;border-radius:6px;background:var(--amber);color:#201507;font-size:14px;font-weight:900}
+p.lead{color:var(--muted);margin-bottom:6px}
+.note,.warn,.ok{margin-top:15px;padding:15px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card2);font-size:15.5px;color:var(--muted)}
+.note b{color:var(--amber)} .warn{border-color:var(--rose);background:var(--rose-soft)} .warn b{color:var(--rose)}
+.ok{border-color:#4d9767;background:var(--green-soft)} .ok b{color:var(--green)}
+figure{margin:18px 0 0;border:1px solid var(--line);border-radius:13px;background:var(--card);overflow:hidden}
+figure img{display:block;width:100%;height:auto}
+figcaption{padding:11px 15px;border-top:1px solid var(--line);background:var(--card2);color:var(--muted);font-size:14.5px}
+figcaption b{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:18px}
+.grid figcaption{font-size:14px}
+ol,ul{margin:10px 0 0 22px;display:grid;gap:9px;color:var(--muted)}
+li b{color:var(--text)}
+footer{margin-top:56px;padding:26px 0 70px;border-top:1px solid var(--line);color:#6f7f99;font-size:14px}
+a{color:var(--amber)}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <span class="badge">유튜브 플리 자동화 챌린지 · 2일차 재료</span>
+  <h1>남들 사이에 내 걸 끼워 놓고 보는 판</h1>
+  <p>혼자 놓고 보면 다 예뻐 보입니다. 유튜브는 내 영상을 <b>남의 영상 사이에 끼워서</b> 보여줍니다.
+  그래서 판단도 남들 사이에서 해야 합니다. 여기 그 판을 깔아 뒀습니다.</p>
+  <p style="margin-top:10px">창작곡 플레이리스트 대형 채널 <b>10곳</b>의 인기 영상 <b>100장</b>과,
+  국내 3장르 <b>100장</b>입니다. 제가 2026년 8월 7일에 직접 모았습니다.</p>
+</div></header>
+
+<div class="wrap">
+
+  <h2><span class="n">쓰는 법</span>끼워넣기</h2>
+  <p class="lead">2일차 진단의 ★표입니다. 3분이면 됩니다.</p>
+  <ol>
+    <li>아래에서 <b>내 컨셉과 가장 가까운 판</b>을 하나 고릅니다</li>
+    <li>그 그림을 <b>크게 띄웁니다.</b> 그림을 눌러 확대하시면 됩니다</li>
+    <li>그 옆에 <b>내 썸네일</b>을 나란히 띄웁니다. 창을 둘로 나눠 놓으면 편합니다</li>
+    <li><b>3초만 보고 눈을 감았다 뜹니다.</b> 내 것이 먼저 보이면 합격입니다</li>
+    <li>어디 있는지 <b>찾아야 하면 불합격</b>입니다. 다시 만드세요</li>
+  </ol>
+  <div class="ok"><b>합격·불합격 화면을 사진으로 남겨 두세요.</b> 6일차에 다시 씁니다.
+  그때 내 썸네일들을 한 줄로 세워 보는데, 오늘 사진이 있으면 얼마나 달라졌는지가 눈에 보입니다.</div>
+  <div class="warn"><b>따라 그리면 안 되는 것이 있습니다.</b>
+  특정 채널의 <b>캐릭터·로고·그 채널만의 고유한 구도</b>는 그대로 만들지 마세요.
+  가져오는 건 <b>구도·조명·색·감정</b>까지입니다. 그리고 <b>곡은 반드시 내가 만든 AI 생성곡</b>입니다.</div>
+
+  <h2><span class="n">1</span>전체 100장 — 여기부터 보세요</h2>
+  <p class="lead">대형 채널 10곳의 인기 영상을 한 판에 모은 것입니다. 눈이 어디에 먼저 가는지 보세요.</p>
+  <figure>
+    <a href="썸네일보드/00_all_100.jpg" target="_blank"><img src="썸네일보드/00_all_100.jpg" alt="창작곡 플레이리스트 대형 채널 10곳의 인기 영상 썸네일 100장 모음"></a>
+    <figcaption><b>창작곡 플리 대형 채널 10곳 · 인기 영상 100장</b> — 눌러서 크게 보세요</figcaption>
+  </figure>
+  <div class="note"><b>여기서 반복되는 것이 보이실 겁니다.</b>
+  주인공이 하나고, 시간대가 분명하고, 따뜻한 빛과 차가운 빛이 같이 있습니다.
+  글자가 아예 없는 것도 많습니다. <b>그림만으로 무슨 영상인지 알게 만드는 것</b>이 이 판의 공통점입니다.</div>
+
+  <h2><span class="n">2</span>국내 3장르 100장</h2>
+  <p class="lead">국내에서 돌고 있는 판입니다. 한국어 글자가 어떻게 들어가는지 보시면 6일차에 도움이 됩니다.</p>
+  <figure>
+    <a href="썸네일보드/additional_100.jpg" target="_blank"><img src="썸네일보드/additional_100.jpg" alt="국내 3장르 플레이리스트 썸네일 100장 모음"></a>
+    <figcaption><b>국내 3장르 · 100장</b> — 눌러서 크게 보세요</figcaption>
+  </figure>
+
+  <h2><span class="n">3</span>채널 하나씩 — 내 컨셉과 가까운 판을 고르세요</h2>
+  <p class="lead">한 채널의 인기 영상 10장씩입니다. <b>한 채널 안에서 얼마나 통일돼 있는지</b>가 보입니다.
+  이게 6일차에 배우는 「한 채널로 보이게 만들기」의 실물입니다.</p>
+  <div class="grid">
+    <figure><a href="썸네일보드/01_lofigirl.jpg" target="_blank"><img src="썸네일보드/01_lofigirl.jpg" alt="Lofi Girl 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Lofi Girl</b> · 공부·집중<br><span style="color:var(--dim)">한 캐릭터를 반복하는 서사형 일러스트</span></figcaption></figure>
+    <figure><a href="썸네일보드/02_cafemusicbgmchannel.jpg" target="_blank"><img src="썸네일보드/02_cafemusicbgmchannel.jpg" alt="Cafe Music BGM channel 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Cafe Music BGM channel</b> · 카페·재즈<br><span style="color:var(--dim)">방과 카페 세계를 시간대별 조명으로</span></figcaption></figure>
+    <figure><a href="썸네일보드/03_soothingrelaxation.jpg" target="_blank"><img src="썸네일보드/03_soothingrelaxation.jpg" alt="Soothing Relaxation 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Soothing Relaxation</b> · 힐링·수면<br><span style="color:var(--dim)">자연 치유형. 풍경이 주인공</span></figcaption></figure>
+    <figure><a href="썸네일보드/04_yellowbrickcinema.jpg" target="_blank"><img src="썸네일보드/04_yellowbrickcinema.jpg" alt="Yellow Brick Cinema 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Yellow Brick Cinema</b> · 수면·명상<br><span style="color:var(--dim)">기능을 글자로 크게 말하는 형</span></figcaption></figure>
+    <figure><a href="썸네일보드/05_bgmchannel.jpg" target="_blank"><img src="썸네일보드/05_bgmchannel.jpg" alt="BGM channel 인기 영상 썸네일 10장"></a>
+      <figcaption><b>BGM channel</b> · 작업용<br><span style="color:var(--dim)">차분한 색으로 통일</span></figcaption></figure>
+    <figure><a href="썸네일보드/06_chillhopmusic.jpg" target="_blank"><img src="썸네일보드/06_chillhopmusic.jpg" alt="Chillhop Music 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Chillhop Music</b> · 로파이<br><span style="color:var(--dim)">일러스트 세계관을 계절로 변주</span></figcaption></figure>
+    <figure><a href="썸네일보드/07_timjanis.jpg" target="_blank"><img src="썸네일보드/07_timjanis.jpg" alt="Tim Janis 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Tim Janis</b> · 연주곡<br><span style="color:var(--dim)">사진형. 풍경 하나에 큰 글자</span></figcaption></figure>
+    <figure><a href="썸네일보드/08_ocbrelax.jpg" target="_blank"><img src="썸네일보드/08_ocbrelax.jpg" alt="Ocb Relax 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Ocb Relax</b> · 휴식<br><span style="color:var(--dim)">따뜻한 실내 장면 반복</span></figcaption></figure>
+    <figure><a href="썸네일보드/09_relaxcafemusic.jpg" target="_blank"><img src="썸네일보드/09_relaxcafemusic.jpg" alt="Relax Cafe Music 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Relax Cafe Music</b> · 카페<br><span style="color:var(--dim)">오브젝트 사진형. 물건만 바꾸는 방식</span></figcaption></figure>
+    <figure><a href="썸네일보드/10_homeworkradio.jpg" target="_blank"><img src="썸네일보드/10_homeworkradio.jpg" alt="Homework Radio 인기 영상 썸네일 10장"></a>
+      <figcaption><b>Homework Radio</b> · 공부방<br><span style="color:var(--dim)">한 방을 시간대만 바꿔 반복</span></figcaption></figure>
+  </div>
+
+  <h2><span class="n">4</span>내 것을 어떻게 줄여 보나</h2>
+  <p class="lead">폰 목록에서 보이는 크기로 줄여 보는 것이 2일차의 두 번째 확인법입니다.</p>
+  <ul>
+    <li><b>윈도우</b> — 내 썸네일 파일을 <b>그림판</b>으로 엽니다.
+    위쪽 <b>[크기 조정]</b>을 누르고 <b>[픽셀]</b>을 고른 뒤, 가로에 <b>170</b>을 넣습니다.
+    「가로 세로 비율 유지」에 체크가 되어 있으면 세로는 알아서 맞춰집니다</li>
+    <li><b>맥</b> — 파일을 두 번 눌러 <b>미리보기</b>로 열고, 위 메뉴에서 <b>[도구] → [크기 조정]</b>,
+    폭에 <b>170</b>을 넣습니다</li>
+    <li>줄인 그림을 보고 <b>1초 안에 주인공이 뭔지 알아보면 합격</b>입니다</li>
+  </ul>
+  <div class="note"><b>더 쉬운 방법도 있습니다.</b> 내 유튜브 스튜디오에서 <b>「콘텐츠」</b> 목록을 여세요.
+  거기 뜨는 작은 그림이 <b>마침 폰에서 보이는 크기와 비슷합니다.</b>
+  줄이는 게 번거로우시면 그 화면으로 보셔도 됩니다.</div>
+
+</div>
+
+<footer><div class="wrap">
+  유튜브 플리 자동화 챌린지 · 그밤PD<br>
+  표본 = 창작곡 운영이 확인된 대형 채널 10곳의 인기순 영상 100장(2026-08-07 수집) + 국내 3장르 100장.
+  쇼츠·라이브 다시보기·단일곡·상업곡 커버는 제외했습니다.<br>
+  <span style="color:#5b6a83">이 판은 비교용입니다. 남의 그림을 내려받아 쓰는 용도가 아닙니다.</span>
+</div></footer>
+
+</body>
+</html>

@@ -53,6 +53,10 @@ button:focus-visible { outline:2px solid var(--amber); outline-offset:2px; }
 .provider-buttons button.active { background:var(--amber); color:#201507; }
 .provider-status { margin-top:12px; color:var(--green); font-size:15px; font-weight:800; }
 .provider-section,.claude-only,.codex-only { display:none; }
+#pickAgain { display:block; margin-top:16px; padding:20px 18px; border:1px solid var(--amber-deep); border-radius:13px; background:rgba(245,179,82,.12); }
+body[data-provider] #pickAgain { display:none; }
+#pickAgain .pickbtns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+#pickAgain .pickbtns button { padding:13px 22px; border:1px solid var(--amber-deep); border-radius:11px; background:#f5b352; color:#201507; font:inherit; font-weight:900; font-size:16px; cursor:pointer; }
 body[data-provider="claude"] .provider-section.claude-only, body[data-provider="claude"] .claude-only { display:block; }
 body[data-provider="codex"] .provider-section.codex-only, body[data-provider="codex"] .codex-only { display:block; }
 body[data-provider="claude"] li.claude-only, body[data-provider="codex"] li.codex-only { display:list-item; }
@@ -92,7 +96,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 </div></header>
 
 <div class="tracker"><div class="wrap">
-  <div class="txt"><span><b id="doneCount">0</b> / <span id="totalCount">4</span> 단계 완료</span><span class="rest" id="restLabel">아래 단계를 하나씩 끝내고 체크해 주세요</span></div>
+  <div class="txt"><span>할 일 <b id="doneCount">0</b> / <span id="totalCount">5</span> 끝냈어요</span><span class="rest" id="restLabel">아래 단계를 하나씩 끝내고 체크해 주세요</span></div>
   <div class="bar"><div class="fill" id="fill"></div></div>
 </div></div>
 
@@ -117,12 +121,17 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   □ <b>유튜브 채널</b>이 있고 <b>전화번호 인증</b>이 되어 있습니다.<br>
   □ 구글에서 받은 <b>열쇠 파일(JSON)</b>을 넣었고, <b>API키.txt</b>도 저장해 뒀습니다.<br>
   □ <b>수노</b> 가입을 마쳤습니다.</div>
-  <div class="warn"><b>하나라도 아직이라면</b> 오늘 것을 먼저 하지 마시고, <b>시작 전 안내서</b>부터 끝내 주세요. 그게 훨씬 빠릅니다.<br>
+  <div class="note"><b>구글 열쇠(시작 전 안내서 8번)만 아직이신 분은 오늘 그대로 오세요.</b>
+  거기서 막히셨다면 잘못하신 게 아닙니다. 제일 어려운 자리입니다.<br>
+  아래 <b>1·2·3번을 먼저</b> 하시고, <b>4번 유튜브 연결</b>에서 AI에게 이렇게 말씀하시면 거기서부터 같이 갑니다.<br>
+  <span style="font-family:Consolas,monospace;font-size:14px">구글 열쇠부터 같이 만들어줘</span></div>
+  <div class="warn"><b>다만 설치·로그인·Orca가 아직이라면</b> 그것부터 끝내 주세요. 그게 없으면 오늘 것이 아예 시작되지 않습니다.<br>
   → <a href="https://kimyoungil21.github.io/r-64fe20c017/pli/start.html">시작 전 안내서 열기</a></div>
   <h3>오늘 하는 일 다섯 가지</h3>
   <ol>
     <li><b>받으신 파일(셋팅코드)</b>을 공장에 넣습니다. (약 5~10분)</li>
     <li>공장이 잘 준비됐는지 <b>AI에게 확인</b>시킵니다. (약 1~3분)</li>
+    <li><b>내 채널 이름과 컨셉</b>을 공장에 알려줍니다. (약 2분)</li>
     <li><b>유튜브 연결</b>을 마무리합니다. <b>[허용] 한 번</b>이면 끝납니다. (약 2~3분)</li>
     <li>샘플곡으로 <b>첫 영상을 만들어 비공개로 올려</b>봅니다. (약 10~25분)</li>
   </ol>
@@ -132,6 +141,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
     <li>시작 전에 채널을 만들어 둔 <b>구글 계정</b>(이메일·비밀번호).</li>
   </ul>
   <div class="note"><b>각 단계 아래에 체크 칸이 있습니다.</b> 끝낼 때마다 눌러 주세요. 맨 위 막대가 차오르고, 컴퓨터를 껐다 켜도 <b>체크한 것은 그대로 남습니다.</b> 전부 채우면 마지막에 참가방에 올릴 문구가 나옵니다.</div>
+  <div class="warn"><b>맨 위에서 AI를 아직 안 고르셨다면 지금 골라 주세요.</b> 고르기 전에는 복사할 상자와 단계 일부가 화면에 안 나타납니다. 번호가 건너뛰어 보이면 그것 때문입니다.</div>
   <div class="note"><b>용어는 외우지 않으셔도 됩니다.</b> 이 안내서에 보이는 버튼만 차례대로 눌러 주세요.</div>
 </div></section>
 
@@ -140,12 +150,20 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <h2>받으신 파일을 공장에 넣을게요</h2>
   <p><b>압축을 직접 푸실 필요가 없습니다.</b> 파일을 다운로드만 해두고, 지난번에 쓰셨던 <b>설치 한 줄을 한 번 더 실행</b>하면 컴퓨터가 알아서 공장 안에 넣어 줍니다.</p>
   <ol>
-    <li>메일이나 링크에서 <b>셋팅코드 zip 파일</b>을 다운로드해 주세요. <b>다운로드 폴더나 바탕화면에 그대로 두시면 됩니다.</b></li>
+    <li>메일이나 링크에서 <b>셋팅코드 zip 파일</b>을 다운로드해 주세요.<br><b>zip</b>은 여러 파일을 하나로 묶어 놓은 파일입니다. <b>다운로드 폴더나 바탕화면에 그대로 두시면 됩니다.</b><br><span style="color:#8394ad;font-size:14.5px">다운로드 폴더는 받은 파일이 저절로 들어가는 곳입니다. 파일 탐색기(노란 폴더 모양)를 열면 왼쪽에 「다운로드」가 있습니다.</span></li>
     <li><b>압축을 풀지 마세요. 파일 이름도 바꾸지 마세요.</b> 이름에 <b>셋팅코드</b>라는 글자가 들어 있어야 컴퓨터가 찾아냅니다.</li>
     <li>Orca가 열려 있으면 <b>지금은 닫아 주세요.</b> 파일을 넣은 뒤에 다시 엽니다.</li>
     <li>키보드 왼쪽 아래 <b>윈도우 모양 키</b>를 누르고 <b>powershell</b>을 영어로 입력한 뒤, <b>Windows PowerShell</b>을 눌러 주세요.</li>
     <li>아래 상자를 복사해 파워셸 창 안을 한 번 누르고 <b>마우스 오른쪽 버튼</b>으로 붙여넣은 다음 <b>Enter</b>를 눌러 주세요.</li>
   </ol>
+  <div id="pickAgain">
+    <p><b>먼저 위에서 내가 쓰는 AI를 눌러 주세요.</b> 누르기 전에는 아래 복사 상자가 나타나지 않습니다.<br>
+    지난번 설치할 때 고르신 것과 같은 쪽입니다.</p>
+    <div class="pickbtns">
+      <button type="button" onclick="chooseProvider('claude')">클로드 사용자</button>
+      <button type="button" onclick="chooseProvider('codex')">코덱스 사용자</button>
+    </div>
+  </div>
   <div class="choice claude-only">
     <h3>클로드 사용자</h3>
     <div class="copybox"><pre id="setupClaude">$env:PLI_AI='claude'; irm https://raw.githubusercontent.com/KIMYOUNGIL21/r-64fe20c017/main/pli/setup.ps1 | iex</pre><button onclick="copyText('setupClaude',this)">설치 한 줄 복사하기</button></div>
@@ -155,6 +173,8 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
     <div class="copybox"><pre id="setupCodex">$env:PLI_AI='codex'; irm https://raw.githubusercontent.com/KIMYOUNGIL21/r-64fe20c017/main/pli/setup.ps1 | iex</pre><button onclick="copyText('setupCodex',this)">설치 한 줄 복사하기</button></div>
   </div>
   <div class="note"><b>지난번과 똑같은 한 줄입니다.</b> 이미 깔린 것은 전부 건너뛰기 때문에 이번에는 훨씬 빨리 끝납니다. <b>여러 번 실행해도 안전합니다.</b></div>
+  <div class="note"><b>끝나고 검은 창이 하나 더 열려도 놀라지 마세요.</b> 이 한 줄은 실행할 때마다 로그인 창을 한 번씩 엽니다.
+  이미 로그인돼 있으면 <b>그 창은 그냥 닫으시면 됩니다.</b> 결과 표는 원래 있던 파워셸 창에 그대로 남아 있습니다.</div>
   <div class="ok"><b>이렇게 나오면 성공입니다.</b><br>
   마지막 표의 <b>셋팅코드</b> 줄에 <b>방금 넣음</b> 또는 <b>있음</b>이라고 적혀 있으면 됩니다.</div>
   <div class="warn"><b>셋팅코드 줄에 "나중에"라고 나오면</b> 컴퓨터가 zip 파일을 못 찾은 것입니다. ① 파일을 정말 다운로드했는지 ② 파일 이름에 <b>셋팅코드</b>가 들어 있는지 ③ 다운로드 폴더나 바탕화면에 있는지를 확인하고, 설치 한 줄을 <b>한 번 더</b> 실행해 주세요.</div>
@@ -195,9 +215,11 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <span class="num">3</span>
   <h2>내 채널 이름과 컨셉을 알려줄게요</h2>
   <p>공장은 <b>영상 제목과 설명을 이 설정에서 가져다 씁니다.</b> 지금은 아직 예시 값이 들어 있어서, 먼저 내 것으로 바꿔야 합니다. 2분이면 됩니다.</p>
-  <div class="warn"><b>이걸 건너뛰면 오늘 올릴 영상 제목이 이렇게 나갑니다.</b><br>
-  <span style="font-family:Consolas,monospace;font-size:14px">[내 채널 이름으로 바꾸세요] 비 오는 밤 감성 발라드 …</span><br>
-  게다가 그 화면이 <b>오늘 참가방에 올릴 인증 사진</b>이 됩니다. 꼭 먼저 해주세요.</div>
+  <div class="warn"><b>이걸 건너뛰면 남의 컨셉으로 올라갑니다.</b> 제목 후보가 이렇게 나옵니다.<br>
+  <span style="font-family:Consolas,monospace;font-size:14px">1. 비 오는 밤 감성 발라드 플레이리스트 | …<br>
+  2. [내 채널 이름으로 바꾸세요] 비 오는 밤 감성 발라드 — …</span><br>
+  「비 오는 밤 감성 발라드」는 제가 예시로 넣어 둔 값입니다. 그리고 그 화면이
+  <b>오늘 참가방에 올릴 인증 사진</b>이 됩니다. 꼭 먼저 해주세요.</div>
   <ol>
     <li>아래 글을 복사해 <b>괄호 안을 내 것으로 바꿔</b> 주세요.</li>
     <li>Orca의 AI 입력창에 붙여넣고 Enter를 누르면, AI가 바꾼 내용을 표로 보여줍니다.</li>
@@ -258,7 +280,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
     <h2>수고하셨습니다 🎉</h2>
     <p style="color:var(--text)">공장도 켜졌고, 유튜브도 연결됐고, 첫 영상까지 올라갔습니다.<br><b>다음부터는 "만들어서 업로드해" 한 마디면 됩니다.</b></p>
   </div>
-  <div class="ok" style="margin-top:18px"><b>아래 네 가지가 되어 있으면 완벽합니다.</b><br>
+  <div class="ok" style="margin-top:18px"><b>아래 다섯 가지가 되어 있으면 완벽합니다.</b><br>
   □ 설치 결과 표의 <b>셋팅코드</b> 줄에 <b>방금 넣음</b> 또는 <b>있음</b>이 보입니다.<br>
   □ AI 화면에 <b>✅ 공장 준비 완료</b>가 보입니다.<br>
   □ <b>채널명과 컨셉</b>이 내 것으로 바뀌었습니다.<br>
