@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>쓰레드 모객 실측 보고</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --bg:#f6f5f2; --card:#ffffff; --ink:#1c1b19; --sub:#6b6862;
+    --line:#e6e3dc; --accent:#1a56db; --accent-bg:#eaf1fd;
+    --warn:#b42318; --warn-bg:#fdecea; --ok:#067647; --ok-bg:#e7f6ef;
+    --mogaek:#7c2d92; --mogaek-bg:#f6ecfa; --yeol:#92600a; --yeol-bg:#fcf3e3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Pretendard',-apple-system,sans-serif; background:var(--bg); color:var(--ink);
+       line-height:1.65; font-size:16px; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:680px; margin:0 auto; padding:20px 16px 80px;}
+  header{padding:28px 4px 20px;}
+  .date{font-size:13px; color:var(--sub); letter-spacing:.02em;}
+  h1{font-size:25px; font-weight:800; line-height:1.3; margin-top:6px;}
+  .lede{margin-top:12px; font-size:15px; color:var(--sub);}
+  h2{font-size:19px; font-weight:800; margin:40px 4px 14px; display:flex; align-items:center; gap:8px;}
+  h2 .n{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px;
+        border-radius:8px; background:var(--ink); color:#fff; font-size:13px; flex:none;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 16px; margin-bottom:12px;}
+  .card h3{font-size:16px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14.5px;}
+  .muted{color:var(--sub);}
+  .big{font-size:22px; font-weight:800;}
+  .hl{background:linear-gradient(transparent 62%, #ffe9a8 62%); font-weight:700;}
+  .pill{display:inline-block; font-size:12px; font-weight:700; padding:2px 9px; border-radius:99px; vertical-align:2px;}
+  .p-warn{background:var(--warn-bg); color:var(--warn);}
+  .p-ok{background:var(--ok-bg); color:var(--ok);}
+  .p-new{background:var(--accent-bg); color:var(--accent);}
+  .p-mog{background:var(--mogaek-bg); color:var(--mogaek);}
+  .p-yeol{background:var(--yeol-bg); color:var(--yeol);}
+  .tablebox{overflow-x:auto; border:1px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px;}
+  table{border-collapse:collapse; width:100%; min-width:540px; font-size:13.5px;}
+  th,td{padding:10px 12px; text-align:left; vertical-align:top; border-top:1px solid var(--line);}
+  thead th{border-top:none; background:#faf9f6; font-size:12.5px; color:var(--sub); white-space:nowrap;}
+  td b{font-weight:800;}
+  .post{background:var(--card); border:1px solid var(--line); border-radius:14px; margin-bottom:14px; overflow:hidden;}
+  .post .head{display:flex; align-items:center; gap:8px; padding:13px 16px 0; flex-wrap:wrap;}
+  .post .head .id{font-weight:800; font-size:15px;}
+  .post .head .angle{font-size:12px; color:var(--sub); width:100%; margin-top:2px;}
+  .post pre{white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:14.5px;
+            background:#faf9f6; border:1px solid var(--line); border-radius:10px;
+            padding:14px; margin:12px 16px 10px; line-height:1.7;}
+  .post .todo{font-size:13px; color:var(--warn); background:var(--warn-bg); border-radius:10px;
+              padding:10px 12px; margin:0 16px 10px;}
+  .post .memo{font-size:13px; color:var(--sub); padding:0 16px 6px;}
+  .copybtn{display:block; width:calc(100% - 32px); margin:6px 16px 16px; padding:12px;
+           background:var(--ink); color:#fff; border:none; border-radius:10px;
+           font-family:inherit; font-size:15px; font-weight:700; cursor:pointer;}
+  .copybtn.done{background:var(--ok);}
+  .flow{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px;}
+  .flow .step{display:flex; gap:12px; padding:8px 0;}
+  .flow .step .no{flex:none; width:26px; height:26px; border-radius:50%; background:var(--accent-bg);
+                  color:var(--accent); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; margin-top:2px;}
+  .flow .step div p{font-size:14.5px;}
+  .flow .step div .ex{font-size:13.5px; color:var(--sub);}
+  ul.checks{list-style:none;}
+  ul.checks li{background:var(--card); border:1px solid var(--line); border-radius:12px;
+               padding:13px 14px 13px 42px; margin-bottom:8px; font-size:14.5px; position:relative;}
+  ul.checks li::before{content:"☐"; position:absolute; left:15px; top:12px; font-size:17px; color:var(--accent);}
+  footer{margin-top:48px; font-size:12px; color:var(--sub); line-height:1.8; padding:0 4px;}
+  code{font-family:inherit; background:#efede8; border-radius:5px; padding:1px 6px; font-size:0.92em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="date">2026-08-12 · 그밤PD 전용 (링크 아는 사람만 볼 수 있어요)</div>
+  <h1>쓰레드 → 오픈카톡방<br>모객 실측 보고</h1>
+  <p class="lede">남들이 쓰레드에서 오카방으로 사람을 모으는 글 <b>73개를 새로 수집·분석</b>해서, 우리 모객 공식을 고치고, 바로 올릴 수 있는 <b>글 7개</b>까지 만들어 놨습니다.</p>
+</header>
+
+<h2><span class="n">1</span>3줄 요약</h2>
+<div class="card">
+  <p>① <span class="hl">"댓글 달면 DM으로 보낼게"는 이제 금지</span> — 실제로 그렇게 하다가 <b>계정 제재를 당한 운영자의 공개 고백</b>이 잡혔습니다.</p>
+  <p style="margin-top:8px">② 대신 <span class="hl">내 글에 내가 첫 댓글로 링크를 달고 고정</span>하는 방식이 답 — 이 방식 하나로 댓글 5,800개를 뽑은 1등 사례가 근거입니다.</p>
+  <p style="margin-top:8px">③ <span class="hl">글의 얼굴은 무료판, 방은 댓글에 동봉</span> — "무료 자료 줄게"가 "방에 들어와"보다 반응이 4~7배 좋습니다(실측).</p>
+</div>
+
+<h2><span class="n">2</span>핵심 발견 4가지</h2>
+<div class="card">
+  <h3>🚨 DM 일괄 발송은 계정을 막는다 <span class="pill p-warn">위험 회피</span></h3>
+  <p>댓글 1,200개를 받고 약속대로 DM을 돌리던 운영자가 <b>사흘 만에 제재</b>당했습니다("단기간에 많은 계정에 먼저 연락을 드리며 제재를 받았습니다"). 게다가 <b>나를 팔로우 안 한 사람에겐 DM이 아예 안 갑니다</b> — 댓글 986개 중 실제 전달은 675명뿐이었던 사례도 있습니다. 우리 옛 방식이 정확히 이 지뢰였고, 실제 발행 전에 잡았습니다.</p>
+</div>
+<div class="card">
+  <h3>⭐ 새 공식 K9 — 작성자 고정 댓글 <span class="pill p-new">신규 등재</span></h3>
+  <p>본문엔 링크 0개, 댓글로 한 단어만 받고, <b>발행 직후 내가 내 글에 첫 댓글로 링크를 달아 고정</b>합니다. 1등 사례(조회 17만 · 댓글 5,800)가 이 방식 하나로 전원을 회수했습니다 — DM 0건, 배포 노동 0, 제재 위험 0.</p>
+</div>
+<div class="card">
+  <h3>📈 무료 자료가 방 초대보다 4~7배 잘 걸린다</h3>
+  <p>조회수 대비 댓글 비율: 전자책 나눔 <b>3.4~4.6%</b> vs 방 모객 <b>0.6~1.6%</b>. 우리 순서(무료판 먼저 → 방은 동봉)가 옳았다는 게 숫자로 확인됐습니다.</p>
+</div>
+<div class="card">
+  <h3>⚔️ "AI 입문서 무료"엔 거인이 있다 — 각도를 틀었다</h3>
+  <p>같은 소재로 댓글 5,800짜리 글이 이미 나왔습니다. 정면 대결 대신 <b>"AI로 음악 채널을 진짜 굴린 기록"</b>(35곡 · 구독 200 미만) 1인칭 각도로 씁니다. 참고로 "AI + 챌린지 모집" 조합은 최저 반응(댓글 1개)이라 금지했습니다.</p>
+</div>
+
+<h2><span class="n">3</span>공식 판정표 (옆으로 밀어서 보세요)</h2>
+<div class="tablebox">
+<table>
+<thead><tr><th>공식</th><th>내용</th><th>이번 판정</th><th>근거</th></tr></thead>
+<tbody>
+<tr><td><b>K1</b> ★</td><td>한 단어 문지방 ("댓글에 OO만")</td><td><span class="pill p-ok">최강 재확인</span></td><td>2차 상위 3개 전부 이 공식 (최고 R5,800)</td></tr>
+<tr><td><b>K2</b> ★</td><td>본문 링크 0개</td><td><span class="pill p-ok">유지·보강</span></td><td>링크 글은 퍼가기만 되고 댓글이 죽음</td></tr>
+<tr><td>K3</td><td>인원 실황 + 문턱 낮춤</td><td><span class="pill p-ok">유지</span></td><td>중간급 재현 (60명 실황 글 등)</td></tr>
+<tr><td>K4</td><td>자격 심사 문지방</td><td><span class="pill p-ok">유지·보강</span></td><td>심사를 댓글창에서 실연하는 신형 발견</td></tr>
+<tr><td><b>K5</b></td><td>DM 전환</td><td><span class="pill p-warn">수정·강등</span></td><td>일괄 DM 배포는 제재 실측 → 금지. 표현만 축소 유지</td></tr>
+<tr><td>K6</td><td>수요 조사</td><td><span class="pill p-warn">강→중 하향</span></td><td>2차에서 1차만큼 안 나옴</td></tr>
+<tr><td>K7 ★</td><td>순수성 선언 ("난 강사 아니야")</td><td><span class="pill p-ok">유지·보강</span></td><td>변형 4종 재현 — 우리 최대 무기</td></tr>
+<tr><td>K8</td><td>방장 하소연</td><td><span class="pill p-yeol">실험 유지</span></td><td>표본 3개인데 방향 갈림</td></tr>
+<tr><td><b>K9</b> 🆕</td><td>작성자 고정 댓글 링크</td><td><span class="pill p-new">정식 등재</span></td><td>R5,800 사례의 회수 방식. 배포 기본값</td></tr>
+<tr><td>K10 🆕</td><td>번호 투표 문지방 (1·2·3)</td><td><span class="pill p-yeol">실험 등재</span></td><td>숫자 한 글자로 R99. 023에서 첫 실험</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2><span class="n">4</span>모객 글 표준 골격 (1등 글 해부)</h2>
+<div class="flow">
+  <div class="step"><div class="no">1</div><div><p><b>선언</b> — 결론부터 한 줄</p><p class="ex">"전자책 하나 그냥 풀게."</p></div></div>
+  <div class="step"><div class="no">2</div><div><p><b>실물 증거</b> — 숫자 1개 필수, 자랑·목차 금지</p><p class="ex">"205페이지 다 썼어. 스샷 하나하나 다 넣었고."</p></div></div>
+  <div class="step"><div class="no">3</div><div><p><b>주저 → 전환</b> — 가치를 세우고 문턱을 없앰. 우리 K7이 여기 들어감</p><p class="ex">"돈 받을까 하다가 그냥 준다." → 우리 식: "나 강사 아니잖아. 그냥 준다."</p></div></div>
+  <div class="step"><div class="no">4</div><div><p><b>문지방</b> — 한 단어, 설명 없음</p><p class="ex">"댓글에 '클로드'."</p></div></div>
+  <div class="step"><div class="no">＋</div><div><p><b>발행 직후: 첫 댓글에 링크 달고 고정 (K9)</b></p><p class="ex">이 댓글이 없으면 사람을 회수할 길이 없습니다</p></div></div>
+</div>
+
+<h2><span class="n">5</span>바로 쓸 글 7개 (전부 초안 — 올릴지는 사장님 결정)</h2>
+<p class="muted" style="margin:0 4px 14px; font-size:14px;">순서대로 올리면 됩니다. 보라색이 모객, 노란색이 예열. <b>복사 버튼</b> 누르면 본문이 그대로 복사돼요.</p>
+
+<div class="post">
+  <div class="head"><span class="id">019</span><span class="pill p-yeol">예열</span><span class="angle">수노 제외 목록 통째 공개</span></div>
+  <pre id="t019">수노 제외 스타일 목록, 통째로 풀게.
+내 곡에서 AI 티를 빼준 그 목록이야.
+
+먼저 고백 하나.
+옛날 내 제외 목록은 헛다리였어.
+rap, metal, trap.
+발라드에 나올 리 없는 것만 막고 있었지.
+허탈하더라. 정작 매번 딸려 오던 건
+합창이랑 박수 소리였는데.
+
+지금 목록의 뼈대는 세 줄이야.
+
+1. 군중 차단
+crowd vocals, audience cheering, arena reverb, live concert ambience
+
+2. 보컬 겹침 차단
+vocal doubling, layered vocals, backing vocals, choir
+
+3. 미끄러짐 차단
+trot, spoken word intro
+
+이거 넣고 나서야
+공연장 소리가 꺼지고 녹음실 소리가 남았어.
+
+저장해뒀다가 다음 곡 뽑을 때 그대로 붙여 봐.</pre>
+  <button class="copybtn" data-t="t019">본문 복사</button>
+</div>
+
+<div class="post">
+  <div class="head"><span class="id">020</span><span class="pill p-mog">모객</span><span class="angle">무료판 「시작지도」 배포 — 새 공식 1호</span></div>
+  <pre id="t020">35곡 만들면서 정리한 「AI유튜브 시작지도」, 그냥 풀게.
+
+나는 AI 발라드 채널을 진짜로 굴리는 중이야.
+구독자는 아직 200이 안 돼.
+잘된 얘기보다 넘어진 얘기가 많아.
+시작 전에 알았으면 좋았을 것만 담았거든.
+다시 읽는데 좀 민망하더라. 전부 내 삽질이라서.
+
+강의로 팔까 생각도 했어.
+근데 나 강사 아니잖아. 채널 굴리는 사람이지.
+그냥 준다.
+
+받을 사람은 댓글에 "지도"라고만 남겨줘.
+받는 법은 내가 첫 댓글에 고정해둘게.</pre>
+  <div class="todo">⚠️ 올린 직후 <b>아래 6번의 「고정 댓글 문안」을 첫 댓글로 달고 고정</b>하세요. 이 댓글이 회수 경로 전부입니다.</div>
+  <button class="copybtn" data-t="t020">본문 복사</button>
+</div>
+
+<div class="post">
+  <div class="head"><span class="id">021</span><span class="pill p-yeol">예열</span><span class="angle">스크립트 54개 은퇴시킨 이야기</span></div>
+  <pre id="t021">스크립트 54개를 은퇴시키고 나서야
+버튼 하나가 남았어.
+
+mp3만 넣으면 영상 만들고
+유튜브 예약까지 자동으로 가는 공장.
+이거 자랑할 때마다 사실 좀 찔렸어.
+한 번에 그렇게 된 게 아니거든.
+
+곡 낼 때마다 비슷한 스크립트가 하나씩 늘었어.
+어느 날 세어 보니 안 쓰는 게 54개더라.
+
+그날 다 은퇴시키고 공장 하나로 합쳤어.
+후련하기보다 안도가 되더라.
+이제 고장 나도 볼 데가 한 군데니까.
+
+자동화는 쌓는 것보다 버리는 쪽에 가깝더라.
+
+너무 멀게 들리면 이것만 기억해.
+처음부터 공장 지으려고 하지 마.
+한 곡을 손으로 끝까지 보내보고, 그 다음에 지어.</pre>
+  <button class="copybtn" data-t="t021">본문 복사</button>
+</div>
+
+<div class="post">
+  <div class="head"><span class="id">022</span><span class="pill p-yeol">예열</span><span class="angle">시청자 99%가 4050 남성이었던 날</span></div>
+  <pre id="t022">내 발라드 듣는 사람, 99%가 4050 남자야.
+
+유튜브 통계를 열었다가 봤어.
+시청자 구성, 4050 남성 99%.
+소름 돋더라. 나는 다른 그림을 그리고 있었거든.
+
+그날로 타깃을 4050 남성으로 다시 고정했어.
+가사 단어도, 썸네일도, 제목 온도도
+전부 그 눈높이로 다시 맞췄지.
+
+내가 만들고 싶은 노래랑
+들어주는 사람이 원하는 노래는 다르더라.
+채널은 후자로 커.
+
+그러니 시작 전에 타깃 고민 너무 오래 하지 마.
+몇 곡 올리고 통계를 봐.
+타깃은 정하는 게 아니라 발견하는 거였어.</pre>
+  <button class="copybtn" data-t="t022">본문 복사</button>
+</div>
+
+<div class="post">
+  <div class="head"><span class="id">023</span><span class="pill p-mog">모객</span><span class="angle">번호 투표 실험 (K10 1호)</span></div>
+  <pre id="t023">다음에 통째로 풀 노하우, 네가 골라줘.
+
+35곡 굴리면서 쌓인 것 중에 셋을 추렸어.
+
+1. 썸네일 — 클릭되는 발라드 썸네일의 원칙
+2. 가사 — 수노에 넣기 전에 가사 다듬는 순서
+3. 발행 — 업로드·예약까지 자동으로 미는 공장 얘기
+
+혼자 정하다가 문득 궁금해졌어.
+다들 어디서 막히고 있는지.
+
+제일 많이 나온 번호부터 통째로 풀게.
+댓글에 번호 하나만. 1, 2, 3.</pre>
+  <div class="todo">⚠️ 이 글도 올린 직후 <b>고정 댓글</b> 필수. 그리고 <b>1등 번호의 노하우는 다음에 꼭 풀어야</b> 합니다 — 안 풀면 거짓말이 돼요. (세 주제 모두 재료가 이미 있어서 어느 번호가 이겨도 괜찮습니다.)</div>
+  <button class="copybtn" data-t="t023">본문 복사</button>
+</div>
+
+<div class="post">
+  <div class="head"><span class="id">024</span><span class="pill p-yeol">예열</span><span class="angle">히트 공식 2차 검증 — '퇴사하던 날'</span></div>
+  <pre id="t024">한 번 잘되면 운이야. 두 번 잘되면 공식이고.
+
+내 채널에서 제일 잘된 영상을 뜯어본 적이 있어.
+앞 30초에 감정 훅 한 조각이 스치듯 지나가는 구조.
+
+솔직히 그게 공식인지 확신이 없었어.
+한 번뿐이었으니까.
+
+그런데 두 번째로 잘되는 곡이 나왔어.
+'퇴사하던 날'.
+뜯어보니 같은 구조더라.
+그날은 좀 짜릿했어.
+
+우연이 두 번 겹치면 그건 공식이지.
+이제 새 곡은 감이 아니라 거기서 시작해.
+
+네 채널에도 제일 잘된 게 하나는 있을 거야.
+그게 네 공식 1번이야. 거기서부터 뜯어 봐.</pre>
+  <button class="copybtn" data-t="t024">본문 복사</button>
+</div>
+
+<div class="post">
+  <div class="head"><span class="id">025</span><span class="pill p-yeol">예열</span><span class="angle">발행 늘렸더니 성적이 내려간 이야기</span></div>
+  <pre id="t025">발행을 늘렸더니 채널 성적이 내려갔어.
+35곡 내면서 겪은 일 중에 제일 어이없던 거.
+
+부지런히 올리면 그만큼 클 줄 알았지.
+반대로 가더라.
+
+들여다보니까
+새 영상이 내 옛 영상 볼 사람을 나눠 먹고 있었어.
+같은 시청자를 두고 내 곡끼리 싸운 거야.
+부지런했는데 벌 받는 기분, 그거 꽤 허탈해.
+
+그 뒤로 무작정 늘리는 건 접었어.
+많이 올리는 게 아니라
+안 겹치게 올리는 게 운영이더라.
+
+요즘 열심히 올리는데 성적이 내려간다면
+개수 말고 간격부터 의심해 봐.</pre>
+  <button class="copybtn" data-t="t025">본문 복사</button>
+</div>
+
+<h2><span class="n">6</span>고정 댓글 문안 (모객 글 올린 직후 첫 댓글로)</h2>
+<div class="post">
+  <div class="head"><span class="angle">무료판 링크가 위, 방 링크가 아래 — 이 순서가 실측 근거입니다. 노션 링크 자리는 「📢 오카방 배포 자료실」 링크로 바꿔 넣으세요.</span></div>
+  <pre id="tpin">무료판 「AI유튜브 시작지도」 여기서 받아가면 돼 →
+(노션 무료 자료 링크)
+
+나처럼 혼자 AI로 음악 채널 굴리는 사람들 방도 열어놨어.
+눈팅만 해도 되고, 질문 안 해도 돼 →
+https://open.kakao.com/o/glxOtmDi</pre>
+  <button class="copybtn" data-t="tpin">문안 복사</button>
+</div>
+
+<h2><span class="n">7</span>사장님 하실 일</h2>
+<ul class="checks">
+  <li>위 7개 글을 읽고 올릴 글 결정 (019부터 순서대로 권장, 하루 1~2개)</li>
+  <li><b>모객 글(020·023)은 올린 직후 고정 댓글 달기</b> — 6번 문안 복사해서 첫 댓글로 달고 「고정」</li>
+  <li>발행 전 숫자 확인: 발매 <b>35곡</b> · 구독자 <b>200 미만</b>이 지금도 맞는지</li>
+  <li>먼저 DM을 보내온 사람에게만 답장 (내가 먼저 DM 보내는 건 금지 — 제재 사유)</li>
+  <li><b>판단 1건</b>: 예전 초안 011·012가 옛 방식("DM으로 보낼게")이라 새 규칙 위반 — 고칠지 폐기할지 알려주시면 처리합니다</li>
+</ul>
+
+<footer>
+  근거 자료 (컴퓨터 안): 2차 실측 73개 = <code>ebook-feed\research\카톡방유입_2차실측_2026-08-12.md</code> · 분석 = <code>카톡방유입_2차분석_2026-08-12.md</code> · 공식 원본 = <code>threads-autopost\모객카드.md</code> (v2) · 글 대기열 = <code>threads-autopost\queue.json</code><br>
+  수집은 읽기 전용으로 진행 (좋아요·댓글·팔로우·DM 0건) · 이 페이지는 검색에 안 잡히게 설정돼 있습니다.
+</footer>
+
+</div>
+<script>
+document.querySelectorAll('.copybtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var txt = document.getElementById(b.dataset.t).innerText;
+    navigator.clipboard.writeText(txt).then(function(){
+      b.textContent = '✓ 복사됐어요'; b.classList.add('done');
+      setTimeout(function(){ b.textContent = b.dataset.t==='tpin' ? '문안 복사' : '본문 복사'; b.classList.remove('done'); }, 1600);
+    });
+  });
+});
+</script>
+</body>
+</html>
