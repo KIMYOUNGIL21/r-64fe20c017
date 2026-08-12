@@ -317,5 +317,5 @@ if ($AI -eq 'codex' -and (Has 'codex')) {
 Write-Host ''
 Say '여기까지 되었으면 설명서 다음 단계로 가세요.'
 Say ('Orca 를 열고 폴더는 ' + $공장 + ' 를 고르면 됩니다.')
-Read-Host '엔터를 누르면 이 창이 닫힙니다'
+Read-Host '다 보셨으면 엔터를 눌러 주세요 (창은 그대로 두셔도 됩니다)'
 }
