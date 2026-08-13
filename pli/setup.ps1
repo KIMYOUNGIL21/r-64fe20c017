@@ -7,7 +7,7 @@
 #
 #  하는 일: 필요한 것을 "처음에 전부" 설치한다.
 #    Git · Python · ffmpeg · Node.js · Chrome · (클로드코드 또는 Codex) · Orca
-#    + 유튜브 업로드용 파이썬 패키지 2개
+#    + 채널 분석용 파이썬 패키지
 #    + C:\플리공장 폴더와 재료/완성/기록 만들기
 #    + 다운로드 폴더의 셋팅코드 zip 풀어 넣기
 #    + 수노용 Playwright 미리 받아 두기
@@ -25,6 +25,18 @@ $AI = if ($env:PLI_AI -eq 'codex') { 'codex' } else { 'claude' }
 $AI이름 = if ($AI -eq 'codex') { 'Codex' } else { '클로드코드' }
 
 $공장 = 'C:\플리공장'
+$패키지이름 = '플리공장_셋팅코드.zip'
+$패키지SHA256 = '25A20F338E47249137EDB459C1755AFD822256CE31FAA73545E7B22878840009'
+$코드파일 = @(
+  '.gitignore', 'AGENTS.md', 'CLAUDE.md', '곡형식_8가지.md', '공장.py',
+  '분석기.py', '샘플재료_이용안내.md', '시작하세요.md', '업로더.py', '작사스킬.md'
+)
+$필수재료 = @(
+  '재료/배경 - 오늘이 제일 좋은 날.jpg',
+  '재료/썸네일 - 오늘이 제일 좋은 날.jpg',
+  '재료/오늘이 제일 좋은 날.mp3',
+  '재료/오늘이 제일 좋은 날.txt'
+)
 $결과 = [ordered]@{}
 
 function Say($t)  { Write-Host $t -ForegroundColor Cyan }
@@ -32,6 +44,143 @@ function Ok($t)   { Write-Host ("  [OK] "  + $t) -ForegroundColor Green }
 function Warn($t) { Write-Host ("  [!] "   + $t) -ForegroundColor Yellow }
 function Step($t) { Write-Host ''; Write-Host ("▶ " + $t) -ForegroundColor White }
 function Has($n)  { return ($null -ne (Get-Command $n -ErrorAction SilentlyContinue)) }
+
+function Find-Python {
+  $후보 = @(
+    [pscustomobject]@{ Exe = 'py';      Args = @('-3.12') },
+    [pscustomobject]@{ Exe = 'py';      Args = @('-3') },
+    [pscustomobject]@{ Exe = 'python';  Args = @() },
+    [pscustomobject]@{ Exe = 'python3'; Args = @() }
+  )
+  foreach ($c in $후보) {
+    $명령 = Get-Command $c.Exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+    if (-not $명령 -or $명령.Source -match '[\\/]WindowsApps[\\/]') { continue }
+    & $명령.Source @($c.Args) -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 10) else 1)' 2>$null | Out-Null
+    if ($LASTEXITCODE -eq 0) {
+      return [pscustomobject]@{ Exe = $명령.Source; Args = @($c.Args) }
+    }
+  }
+  return $null
+}
+
+function Test-OrcaSignature($경로) {
+  try {
+    $서명 = Get-AuthenticodeSignature -LiteralPath $경로
+    $정보 = (Get-Item -LiteralPath $경로).VersionInfo
+    return (
+      $서명.Status -eq 'Valid' -and
+      $null -ne $서명.SignerCertificate -and
+      $서명.SignerCertificate.Subject -like 'CN=SignPath Foundation,*' -and
+      $정보.ProductName -eq 'Orca' -and
+      $정보.CompanyName -eq 'stablyai'
+    )
+  } catch {
+    return $false
+  }
+}
+
+function Test-PackageStructure($경로) {
+  if ([IO.Path]::GetFileName($경로) -cne $패키지이름) {
+    Warn ('파일 이름이 정확하지 않습니다. 필요한 이름: ' + $패키지이름)
+    return $false
+  }
+  try {
+    $실제SHA256 = (Get-FileHash -LiteralPath $경로 -Algorithm SHA256 -ErrorAction Stop).Hash
+    if ($실제SHA256 -cne $패키지SHA256) {
+      Warn 'ZIP의 SHA-256이 공식 배포본과 다릅니다. 이 파일은 풀지 않습니다.'
+      return $false
+    }
+  } catch {
+    Warn ('ZIP의 SHA-256을 확인하지 못했습니다: ' + $_.Exception.Message)
+    return $false
+  }
+
+  $압축 = $null
+  try {
+    Add-Type -AssemblyName System.IO.Compression.FileSystem -ErrorAction Stop
+    $압축 = [IO.Compression.ZipFile]::OpenRead($경로)
+    $필수 = @($코드파일) + @('설정.json') + @($필수재료)
+    $허용루트 = @($코드파일) + @('설정.json')
+    $허용재료확장자 = @('.mp3', '.wav', '.m4a', '.flac', '.jpg', '.jpeg', '.png', '.webp', '.txt')
+    $본이름 = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $정확한이름 = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $실패 = $false
+    [long]$전체크기 = 0
+
+    if ($압축.Entries.Count -gt 200) { $실패 = $true }
+    foreach ($항목 in $압축.Entries) {
+      $이름 = $항목.FullName
+      $null = $정확한이름.Add($이름)
+      $전체크기 += $항목.Length
+      if (
+        [string]::IsNullOrWhiteSpace($이름) -or
+        $이름.Contains('\') -or
+        $이름.Contains(':') -or
+        $이름 -match '[\x00-\x1F]' -or
+        $이름.StartsWith('/') -or
+        (($이름 -split '/') -contains '..') -or
+        -not $본이름.Add($이름) -or
+        (($항목.ExternalAttributes -shr 16) -band 0xF000) -eq 0xA000 -or
+        $항목.Length -gt 536870912
+      ) { $실패 = $true; continue }
+
+      if ($이름.EndsWith('/')) {
+        if ($이름 -ne '재료/') { $실패 = $true }
+      } elseif ($허용루트 -ccontains $이름) {
+        # 허용된 공장 코드·문서다.
+      } elseif ($이름 -match '^재료/[^/]+$') {
+        if ($허용재료확장자 -notcontains [IO.Path]::GetExtension($이름).ToLowerInvariant()) { $실패 = $true }
+      } else {
+        $실패 = $true
+      }
+    }
+
+    if ($전체크기 -gt 1073741824) { $실패 = $true }
+    foreach ($필수항목 in $필수) {
+      if (-not $정확한이름.Contains($필수항목)) { $실패 = $true }
+    }
+    if ($실패) {
+      Warn 'ZIP 구조 검사를 통과하지 못했습니다. 이 파일은 풀지 않습니다.'
+      return $false
+    }
+    return $true
+  } catch {
+    Warn ('ZIP을 읽지 못했습니다: ' + $_.Exception.Message)
+    return $false
+  } finally {
+    if ($null -ne $압축) { $압축.Dispose() }
+  }
+}
+
+function Protect-FactoryAcl {
+  try {
+    $내SID = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+    & icacls.exe $공장 '/inheritance:r' '/grant:r' "*$($내SID):(OI)(CI)F" '*S-1-5-18:(OI)(CI)F' '/T' '/C' | Out-Null
+    $첫결과 = $LASTEXITCODE
+    & icacls.exe $공장 '/remove:g' '*S-1-1-0' '*S-1-5-11' '*S-1-5-32-545' '/T' '/C' | Out-Null
+    return ($첫결과 -eq 0 -and $LASTEXITCODE -eq 0)
+  } catch {
+    return $false
+  }
+}
+
+function Test-AnalysisApiKey {
+  $설정경로 = Join-Path $공장 '설정.json'
+  if (Test-Path -LiteralPath $설정경로) {
+    try {
+      $설정값 = Get-Content -LiteralPath $설정경로 -Raw -Encoding UTF8 | ConvertFrom-Json
+      if ([string]$설정값.유튜브API키 -match '^AIza[0-9A-Za-z_-]{20,}$') { return $true }
+    } catch {}
+  }
+  foreach ($키파일 in Get-ChildItem -LiteralPath $공장 -File -ErrorAction SilentlyContinue | Where-Object {
+    $_.Extension -in @('.txt', '.rtf', '.text') -and ($_.Name -match '키|key')
+  }) {
+    try {
+      if ((Get-Content -LiteralPath $키파일.FullName -Raw -ErrorAction Stop) -match 'AIza[0-9A-Za-z_-]{20,}') { return $true }
+    } catch {}
+  }
+  return $false
+}
 
 function RefreshPath {
   $m = [Environment]::GetEnvironmentVariable('Path','Machine')
@@ -77,10 +226,22 @@ Ok 'winget 확인'
 # ── 1) 기본 도구 한꺼번에 ──────────────────────────────
 Step '1/8  기본 도구 설치 (Git · Python · ffmpeg · Node.js · Chrome)'
 Need 'Git.Git'             'Git'      'git'
-Need 'Python.Python.3.12'  'Python'   'python'
 Need 'Gyan.FFmpeg'         'ffmpeg'   'ffmpeg'
 Need 'OpenJS.NodeJS.LTS'   'Node.js'  'npm'
 Need 'Google.Chrome'       'Chrome'   'chrome'
+
+# Microsoft Store 실행 별칭은 명령이 있어 보여도 실제 Python이 아니다.
+$파이썬 = Find-Python
+if (-not $파이썬) {
+  Say '  Python 설치 중... 창을 닫지 마세요.'
+  winget install -e --id 'Python.Python.3.12' --accept-package-agreements --accept-source-agreements --silent | Out-Null
+  RefreshPath
+  $파이썬 = Find-Python
+  if ($파이썬) { Ok 'Python 설치 완료'; $결과['Python'] = '방금 설치' }
+  else { Warn 'Python을 실제로 실행하지 못했습니다 (창을 닫고 한 번 더 실행해 주세요)'; $결과['Python'] = '확인 필요' }
+} else {
+  Ok 'Python - 실제 실행 확인'; $결과['Python'] = '있음'
+}
 
 # Chrome 은 PATH 에 안 잡히는 경우가 많아 설치 경로로 한 번 더 확인
 if ($결과['Chrome'] -ne '있음' -and $결과['Chrome'] -ne '방금 설치') {
@@ -124,36 +285,47 @@ if ($AI -eq 'codex') {
 # ── 3) Orca ────────────────────────────────────────────
 Step '3/8  Orca 설치'
 $orcaExe = Join-Path $env:LOCALAPPDATA 'Programs\orca\Orca.exe'
-if (Test-Path $orcaExe) { Ok 'Orca - 이미 있음'; $결과['Orca'] = '있음' }
+if ((Test-Path $orcaExe) -and (Test-OrcaSignature $orcaExe)) {
+  Ok 'Orca - 설치 및 서명 확인'; $결과['Orca'] = '있음'
+} elseif (Test-Path $orcaExe) {
+  Warn '기존 Orca의 게시자 서명을 확인하지 못했습니다. 실행하지 말고 공식 설치본으로 다시 설치해 주세요.'
+  $결과['Orca'] = '서명 확인 필요'
+}
 else {
   Say '  Orca 설치 파일 내려받는 중...'
-  $tmp = Join-Path $env:TEMP 'orca-windows-setup.exe'
+  $tmp = Join-Path $env:TEMP ('orca-windows-setup-' + [guid]::NewGuid().ToString('N') + '.exe')
   try {
     Invoke-WebRequest 'https://github.com/stablyai/orca/releases/latest/download/orca-windows-setup.exe' -OutFile $tmp -UseBasicParsing
+    if (-not (Test-OrcaSignature $tmp)) {
+      throw 'Orca 설치 파일의 Authenticode 서명 또는 게시자(stablyai/SignPath)를 확인하지 못했습니다.'
+    }
+    Ok 'Orca 설치 파일 서명 확인'
     Warn 'Orca 설치 창이 열립니다 — [다음] · [설치] · [마침] 을 눌러 주세요. 끝나면 여기가 이어집니다.'
     Start-Process $tmp -Wait
-    if (Test-Path $orcaExe) { Ok 'Orca 설치 완료'; $결과['Orca'] = '방금 설치' }
+    if ((Test-Path $orcaExe) -and (Test-OrcaSignature $orcaExe)) { Ok 'Orca 설치 완료'; $결과['Orca'] = '방금 설치' }
     else { Warn 'Orca 설치를 확인하지 못했습니다'; $결과['Orca'] = '확인 필요' }
   } catch {
-    Warn ('자동 다운로드 실패: ' + $_.Exception.Message)
-    Warn '브라우저가 열리면 Windows용 설치 파일을 직접 받아 실행해 주세요.'
-    Start-Process 'https://onorca.dev/download'
-    $결과['Orca'] = '직접 설치'
+    Warn ('Orca 설치 중단: ' + $_.Exception.Message)
+    Warn '공식 다운로드 페이지에서 Windows용 설치 파일을 받은 뒤 게시자 서명을 확인해 주세요.'
+    $결과['Orca'] = '확인 필요'
+  } finally {
+    Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
   }
 }
 
-# ── 4) 유튜브 업로드용 파이썬 패키지 ───────────────────
-Step '4/8  유튜브 업로드용 파이썬 패키지'
+# ── 4) 채널 분석용 파이썬 패키지 ──────────────────────
+Step '4/8  채널 분석용 파이썬 패키지'
 RefreshPath
-$파이썬 = if (Has 'python') { 'python' } elseif (Has 'py') { 'py' } else { $null }
+$파이썬 = Find-Python
 if (-not $파이썬) {
   Warn 'Python 이 아직 인식되지 않습니다. 창을 닫고 한 번 더 실행해 주세요.'
   $결과['파이썬 패키지'] = '재실행 필요'
 } else {
-  & $파이썬 -m pip install --quiet --upgrade pip 2>&1 | Out-Null
-  & $파이썬 -m pip install --quiet google-api-python-client google-auth-oauthlib 2>&1 | Out-Null
-  & $파이썬 -c "import googleapiclient, google_auth_oauthlib" 2>&1 | Out-Null
-  if ($LASTEXITCODE -eq 0) { Ok '유튜브 업로드용 패키지 준비 완료'; $결과['파이썬 패키지'] = '준비됨' }
+  $pyExe = $파이썬.Exe
+  $pyArgs = @($파이썬.Args)
+  & $pyExe @pyArgs -m pip install --quiet --upgrade google-api-python-client 2>&1 | Out-Null
+  & $pyExe @pyArgs -c 'import googleapiclient' 2>&1 | Out-Null
+  if ($LASTEXITCODE -eq 0) { Ok '채널 분석용 패키지 준비 완료'; $결과['파이썬 패키지'] = '준비됨' }
   else { Warn '패키지 설치를 확인하지 못했습니다 (나중에 AI가 다시 시도합니다)'; $결과['파이썬 패키지'] = '확인 필요' }
 }
 
@@ -164,6 +336,13 @@ foreach ($p in @($공장, "$공장\재료", "$공장\완성", "$공장\기록"))
 }
 Ok ($공장 + ' 준비 완료 (재료 · 완성 · 기록)')
 $결과['공장 폴더'] = '준비됨'
+if (Protect-FactoryAcl) {
+  Ok '공장 폴더 권한 - 현재 Windows 사용자만 접근'
+  $결과['폴더 보안'] = '준비됨'
+} else {
+  Warn '공장 폴더의 사용자 전용 권한을 설정하지 못했습니다.'
+  $결과['폴더 보안'] = '확인 필요'
+}
 
 # ── 6) 셋팅코드 zip 풀기 ───────────────────────────────
 Step '6/8  셋팅코드 넣기'
@@ -176,69 +355,69 @@ $받은폴더 = @(
   "$env:USERPROFILE\OneDrive\Downloads",
   "$env:USERPROFILE\OneDrive\Desktop"
 ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -Unique
-$zip = $받은폴더 | ForEach-Object { Get-ChildItem $_ -Filter '*셋팅코드*.zip' -ErrorAction SilentlyContinue } |
-       Sort-Object LastWriteTime -Descending | Select-Object -First 1
+$zip = $받은폴더 | ForEach-Object {
+  $후보경로 = Join-Path $_ $패키지이름
+  if (Test-Path -LiteralPath $후보경로) { Get-Item -LiteralPath $후보경로 }
+} | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
-# 압축을 직접 푼 사람도 있다 — 풀린 폴더가 있으면 그것도 받아 준다
-$풀린것 = $null
-if (-not $zip -and -not (Test-Path "$공장\공장.py")) {
-  $풀린것 = $받은폴더 | ForEach-Object {
-    Get-ChildItem $_ -Recurse -Depth 2 -Filter '공장.py' -ErrorAction SilentlyContinue
-  } | Select-Object -First 1
-}
+if ($zip) {
+  if (-not (Test-PackageStructure $zip.FullName)) {
+    $결과['셋팅코드'] = 'ZIP 확인 필요'
+  } else {
+    $임시폴더 = Join-Path ([IO.Path]::GetTempPath()) ('pli-package-' + [guid]::NewGuid().ToString('N'))
+    try {
+      New-Item -ItemType Directory -Path $임시폴더 -Force | Out-Null
+      Expand-Archive -LiteralPath $zip.FullName -DestinationPath $임시폴더 -Force -ErrorAction Stop
 
-if (Test-Path "$공장\공장.py") {
-  Ok '셋팅코드 - 이미 들어 있음'
-  $결과['셋팅코드'] = '있음'
-} elseif ($풀린것) {
-  Say '  이미 풀려 있는 셋팅코드를 찾았습니다'
-  Copy-Item (Join-Path $풀린것.DirectoryName '*') -Destination $공장 -Recurse -Force -ErrorAction SilentlyContinue
-  if (Test-Path "$공장\공장.py") { Ok '셋팅코드 넣기 완료'; $결과['셋팅코드'] = '방금 넣음' }
-  else { Warn '옮기는 데 실패했습니다'; $결과['셋팅코드'] = '확인 필요' }
-} elseif ($zip) {
-  try {
-    Expand-Archive -Path $zip.FullName -DestinationPath $공장 -Force
-    # zip 안에 폴더가 한 겹 더 있으면 끌어올린다
-    if (-not (Test-Path "$공장\공장.py")) {
-      $안쪽 = Get-ChildItem $공장 -Directory | Where-Object { Test-Path (Join-Path $_.FullName '공장.py') } | Select-Object -First 1
-      if ($안쪽) {
-        Get-ChildItem $안쪽.FullName -Force | Move-Item -Destination $공장 -Force
-        Remove-Item $안쪽.FullName -Recurse -Force -ErrorAction SilentlyContinue
+      # 프로그램·안내 문서는 갱신하되 참가자의 설정과 작업물은 덮어쓰지 않는다.
+      foreach ($이름 in $코드파일) {
+        $상대경로 = $이름.Replace('/', [IO.Path]::DirectorySeparatorChar)
+        Copy-Item -LiteralPath (Join-Path $임시폴더 $상대경로) -Destination (Join-Path $공장 $상대경로) -Force -ErrorAction Stop
+      }
+      if (-not (Test-Path -LiteralPath (Join-Path $공장 '설정.json'))) {
+        Copy-Item -LiteralPath (Join-Path $임시폴더 '설정.json') -Destination (Join-Path $공장 '설정.json') -ErrorAction Stop
+      }
+      foreach ($샘플 in Get-ChildItem -LiteralPath (Join-Path $임시폴더 '재료') -File -ErrorAction Stop) {
+        $대상 = Join-Path (Join-Path $공장 '재료') $샘플.Name
+        if (-not (Test-Path -LiteralPath $대상)) {
+          Copy-Item -LiteralPath $샘플.FullName -Destination $대상 -ErrorAction Stop
+        }
+      }
+      Ok ('셋팅코드 설치·업데이트 완료 (' + $zip.Name + ')')
+      $결과['셋팅코드'] = '방금 업데이트'
+    } catch {
+      Warn ('셋팅코드 업데이트 실패: ' + $_.Exception.Message)
+      $결과['셋팅코드'] = '확인 필요'
+    } finally {
+      if (Test-Path -LiteralPath $임시폴더) {
+        $임시루트 = [IO.Path]::GetFullPath([IO.Path]::GetTempPath())
+        $정리대상 = [IO.Path]::GetFullPath($임시폴더)
+        if ($정리대상.StartsWith($임시루트, [StringComparison]::OrdinalIgnoreCase) -and
+            ([IO.Path]::GetFileName($정리대상) -like 'pli-package-*')) {
+          Remove-Item -LiteralPath $정리대상 -Recurse -Force -ErrorAction SilentlyContinue
+        } else {
+          Warn '패키지 임시 폴더 경로가 안전 범위를 벗어나 자동 정리를 건너뜁니다.'
+        }
       }
     }
-    if (Test-Path "$공장\공장.py") { Ok ('셋팅코드 넣기 완료 (' + $zip.Name + ')'); $결과['셋팅코드'] = '방금 넣음' }
-    else { Warn '압축은 풀렸는데 공장.py 를 찾지 못했습니다'; $결과['셋팅코드'] = '확인 필요' }
-  } catch {
-    Warn ('압축 풀기 실패: ' + $_.Exception.Message)
-    $결과['셋팅코드'] = '확인 필요'
   }
+} elseif (Test-Path -LiteralPath (Join-Path $공장 '공장.py')) {
+  Ok ('셋팅코드 - 설치되어 있음 (새 ' + $패키지이름 + ' 없음)')
+  $결과['셋팅코드'] = '있음'
 } else {
   Ok '셋팅코드 - 오늘은 필요 없습니다 (챌린지 시작할 때 씁니다)'
-  Say '     나중에 메일로 받은 zip 을 다운로드한 뒤 이 설치 한 줄을 한 번 더 실행하면 자동으로 들어갑니다.'
+  Say ('     나중에 받은 ' + $패키지이름 + ' 을 다운로드한 뒤 이 설치 한 줄을 한 번 더 실행하세요.')
   $결과['셋팅코드'] = '나중에'
 }
 
-# ── 6-b) 구글 열쇠 (안내서 8단계에서 받아 둔 것) ────────
-Step '6-b  구글 열쇠 넣기'
-if (Test-Path "$공장\구글인증.json") {
-  Ok '구글 열쇠 - 이미 들어 있음'
-  $결과['구글 열쇠'] = '있음'
+# ── 6-b) 채널 분석 API 키 상태 ─────────────────────────
+Step '6-b  채널 분석 API 키 준비 상태'
+if (Test-AnalysisApiKey) {
+  Ok '채널 분석 API 키 - 준비됨'
+  $결과['분석 API 키'] = '준비됨'
 } else {
-  # 구글 콘솔에서 받으면 client_secret_*.json 이라는 이름으로 다운로드된다
-  $열쇠 = $받은폴더 | ForEach-Object {
-    Get-ChildItem $_ -Filter 'client_secret*.json' -ErrorAction SilentlyContinue
-  } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-  if ($열쇠) {
-    Copy-Item $열쇠.FullName -Destination "$공장\구글인증.json" -Force -ErrorAction SilentlyContinue
-    if (Test-Path "$공장\구글인증.json") {
-      Ok ('구글 열쇠 넣기 완료 (' + $열쇠.Name + ')')
-      $결과['구글 열쇠'] = '방금 넣음'
-    } else { Warn '옮기는 데 실패했습니다'; $결과['구글 열쇠'] = '확인 필요' }
-  } else {
-    Ok '구글 열쇠 - 아직 안 만드셨네요 (안내서 8단계에서 만듭니다)'
-    Say '     만든 뒤 이 설치 한 줄을 한 번 더 실행하면 자동으로 들어갑니다.'
-    $결과['구글 열쇠'] = '나중에'
-  }
+  Ok '채널 분석 API 키 - 나중에 준비해도 됩니다'
+  $결과['분석 API 키'] = '나중에'
 }
 
 # ── 7) 수노용 Playwright 미리 받기 ─────────────────────
