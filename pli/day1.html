@@ -177,7 +177,9 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
     <div class="copybox"><pre id="setupCodex">$env:PLI_AI='codex'; irm https://raw.githubusercontent.com/KIMYOUNGIL21/r-64fe20c017/main/pli/setup.ps1 | iex</pre><button onclick="copyText('setupCodex',this)">설치 한 줄 복사하기</button></div>
   </div>
   <div class="note"><b>지난번과 똑같은 한 줄입니다.</b> 이미 깔린 것은 전부 건너뛰기 때문에 이번에는 훨씬 빨리 끝납니다. <b>여러 번 실행해도 안전합니다.</b></div>
-  <div class="note"><b>끝나고 검은 창이 하나 더 열려도 놀라지 마세요.</b> 이 한 줄은 실행할 때마다 로그인 창을 한 번씩 엽니다.
+  <div class="note">저는 이 창이 갑자기 튀어나와서 <b>“뭐가 또 열렸어”</b> 하고 원래 창까지 같이 닫아 버렸습니다.
+  그리고 처음부터 다시 돌렸습니다.<br>
+  <b>끝나고 검은 창이 하나 더 열려도 놀라지 마세요.</b> 이 한 줄은 실행할 때마다 로그인 창을 한 번씩 엽니다.
   이미 로그인돼 있으면 <b>그 창은 그냥 닫으시면 됩니다.</b> 결과 표는 원래 있던 파워셸 창에 그대로 남아 있습니다.</div>
   <div class="ok"><b>이렇게 나오면 성공입니다.</b><br>
   마지막 표의 <b>셋팅코드</b> 줄에 <b>방금 넣음</b> 또는 <b>있음</b>이라고 적혀 있으면 됩니다.</div>
@@ -214,7 +216,9 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   시작 전 8번을 아직 못 하신 것뿐입니다. <b>오늘은 그대로 통과입니다.</b>
   AI에게 이렇게 한 줄만 더 보내 주세요.
   <div class="copybox"><pre id="keyLaterPrompt">API 키만 빼고 다 됐으면 그렇게 적고 ✅ 공장 준비 완료라고 써줘</pre><button onclick="copyText('keyLaterPrompt',this)">이 글 복사하기</button></div>
-  그 화면을 사진으로 남기고 아래 체크 칸을 눌러 주세요. <b>키는 4단계에서 같이 만듭니다.</b></div>
+  그 화면을 사진으로 남기고 아래 체크 칸을 눌러 주세요.
+  <b>API 키는 4단계에서 열쇠 파일과 함께 만듭니다.</b> 그때 AI에게 「구글 열쇠부터 같이 만들어줘」라고 하시면
+  <b>열쇠 파일과 API 키를 한 번에</b> 만들어 줍니다.</div>
   <div class="note"><b>표의 「유튜브API키」 줄이 비어 있는데 AI가 안 채웠을 때만</b> 아래 한 줄을 그대로 붙여넣어 주세요. 시작 전에 저장해 둔 <b>API키.txt</b>를 AI가 읽어서 <b>설정.json</b>에 넣어 줍니다.</div>
   <div class="copybox"><pre id="apiKeyPrompt">플리공장 폴더의 API키.txt를 읽어서 설정.json에 넣어줘</pre><button onclick="copyText('apiKeyPrompt',this)">API 키 넣어달라고 하기</button></div>
   <div class="note"><b>AI가 새 터미널을 열라고 하면</b> 그대로 해주세요. 아래쪽 검은 창을 닫고 <b>새 터미널</b>을 다시 눌러 같은 AI를 고르면 됩니다. 나중에 수노를 열 때 필요한 준비입니다.</div>
@@ -248,7 +252,10 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 <section class="step"><div class="wrap">
   <span class="num">4</span>
   <h2>유튜브 연결을 마무리할게요</h2>
-  <p><b>열쇠는 시작 전에 이미 만들어 두셨습니다. 오늘은 [허용] 한 번만 누르면 됩니다.</b> 구글 사이트에 다시 들어가실 일은 없습니다. <b>2~3분</b>이면 끝납니다.</p>
+  <p><b>시작 전 8번에서 열쇠를 만들어 두신 분</b> — 오늘은 <b>[허용] 한 번</b>만 누르면 됩니다.
+  구글 사이트에 다시 들어가실 일은 없습니다. <b>2~3분</b>이면 끝납니다.</p>
+  <div class="note"><b>열쇠가 아직인 분</b> — 여기서 같이 만듭니다. 구글 화면 여섯 번을 지나가고 <b>15~25분</b> 걸립니다.
+  아래 상자 대신 AI에게 <b>「구글 열쇠부터 같이 만들어줘」</b>라고 말씀해 주세요. 끝나면 아래 2번부터 이어서 하시면 됩니다.</div>
   <ol>
     <li>Orca의 AI 입력창에 아래 글을 붙여넣고 <b>Enter</b>를 눌러 주세요.</li>
     <li>브라우저가 저절로 열립니다. <b>내 채널이 있는 구글 계정</b>을 눌러 주세요.</li>
@@ -328,7 +335,8 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   제목과 설명은 3일차에 손봅니다. 그때 이미 공개돼 있어도 얼마든지 고칠 수 있습니다.<br>
   <b>완주는 세 가지가 다 되어야 합니다.</b> ① 재료를 넣고 <b>명령 한두 번으로 영상이 만들어질 것</b>
   ② 내 채널에 그렇게 만든 <b>영상이 3개</b> 있을 것(공개든 예약이든 상관없습니다)
-  ③ <b>7일 동안 날마다 참가방에 인증을 올릴 것</b> — 사진 한 장이면 됩니다.
+  ③ <b>7일 동안 날마다 참가방에 인증을 올릴 것</b> — 날마다 뭘 올리는지는 그날 미션에 적혀 있습니다.
+  보통 한두 장이고, <b>오늘은 세 장</b>입니다.
   <b>③을 빠뜨리면 앞의 둘을 다 해도 완주가 아닙니다.</b><br>
   오늘 예약을 걸어 두면 그 <b>3개 중 첫 번째</b>가 첫날에 채워집니다.</p>
   <ol>
@@ -386,7 +394,9 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <h3>다음은 무엇인가요?</h3>
   <p><b>이제 설치할 것도, 가입할 것도 남지 않았습니다.</b> 다음부터는 <b>재료 폴더</b>(<b>C:\플리공장\재료</b> — 노란 폴더 모양을 열고 「로컬 디스크 (C:)」 → 「플리공장」 → 「재료」)에 <b>내 곡과 내 이미지</b>를 넣고
   AI에게 <b>"만들어서 업로드해"</b>라고 한 마디만 하면 됩니다. 곡을 직접 만들고 싶을 때는 <b>"OO 같은 노래 만들어서 업로드해"</b>라고 말하면 작사부터 같이 해줍니다.</p>
-  <p style="margin-top:10px"><b>오늘은 여기까지입니다.</b> 나머지는 챌린지 미션에서 하나씩 안내드립니다.</p>
+  <p style="margin-top:10px"><b>오늘은 여기까지입니다.</b> 나머지는 챌린지 미션에서 하나씩 안내드립니다.<br>
+  <b>내일부터 뭘 하는지 미리 보고 싶으시면</b> →
+  <a href="https://kimyoungil21.github.io/r-64fe20c017/pli/커리큘럼.html">7일 커리큘럼 열기</a></p>
 </div></section>
 
 <section class="step"><div class="wrap">
