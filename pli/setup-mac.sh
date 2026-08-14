@@ -23,6 +23,7 @@ umask 077
 
 AI="${PLI_AI:-codex}"
 if [ "$AI" = "codex" ]; then AI_NAME="Codex"; else AI_NAME="클로드코드"; fi
+NONINTERACTIVE="${PLI_NONINTERACTIVE:-0}"
 
 FACTORY="$HOME/플리공장"
 ZIP_NAME="플리공장_셋팅코드.zip"
@@ -464,7 +465,7 @@ PROBLEMS=0
 while IFS='|' read -r NAME STATE; do
   [ -z "$NAME" ] && continue
   case "$STATE" in
-    있음|"방금 설치"|준비됨|"방금 넣음"|나중에) printf '  \033[32m[OK]\033[0m %s — %s\n' "$NAME" "$STATE" ;;
+    있음|"방금 설치"|준비됨|"방금 넣음"|"방금 업데이트"|나중에) printf '  \033[32m[OK]\033[0m %s — %s\n' "$NAME" "$STATE" ;;
     *) printf '  \033[33m[확인]\033[0m %s — %s\n' "$NAME" "$STATE"; PROBLEMS=$((PROBLEMS+1)) ;;
   esac
 done <<< "$RESULT"
@@ -480,7 +481,10 @@ fi
 # ── 로그인 ─────────────────────────────────────────────
 printf '\n'
 say '─────────────────────────────────────'
-if [ "$AI" = "codex" ] && has codex; then
+if [ "$NONINTERACTIVE" = "1" ]; then
+  say 'AI 실행 모드: Day 0 로그인 상태를 사용하므로 로그인 확인을 건너뜁니다.'
+  say '새 AGENTS.md와 CLAUDE.md를 다시 읽고 자가진단을 계속하세요.'
+elif [ "$AI" = "codex" ] && has codex; then
   say '마지막 순서: ChatGPT(Codex) 로그인'
   say '브라우저가 열리면 평소 쓰는 계정으로 로그인하세요.'
   codex login

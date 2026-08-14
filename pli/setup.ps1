@@ -23,6 +23,7 @@ $ProgressPreference    = 'SilentlyContinue'   # winget/다운로드 진행바가
 # ── 고른 AI (환경변수로 넘어온다. 없으면 클로드) ──
 $AI = if ($env:PLI_AI -eq 'codex') { 'codex' } else { 'claude' }
 $AI이름 = if ($AI -eq 'codex') { 'Codex' } else { '클로드코드' }
+$AI실행모드 = $env:PLI_NONINTERACTIVE -eq '1'
 
 $공장 = 'C:\플리공장'
 $패키지이름 = '플리공장_셋팅코드.zip'
@@ -480,21 +481,28 @@ if ($문제.Count -eq 0) {
 # ── 로그인 ─────────────────────────────────────────────
 Write-Host ''
 Say '─────────────────────────────────────'
-if ($AI -eq 'codex' -and (Has 'codex')) {
-  Say '마지막 순서: ChatGPT(Codex) 로그인'
-  Say '검은 새 창이 열립니다. 안내에 따라 브라우저에서 로그인하세요.'
-  Start-Process cmd -ArgumentList '/k','codex login'
-} elseif ($AI -eq 'claude' -and (Has 'claude')) {
-  Say '마지막 순서: 클로드 로그인'
-  Say '검은 새 창이 열립니다. 안내에 따라 브라우저에서 로그인하세요.'
-  Start-Process cmd -ArgumentList '/k','claude'
+if ($AI실행모드) {
+  Say 'AI 실행 모드: Day 0 로그인 상태를 사용하므로 로그인 확인을 건너뜁니다.'
+  Say '새 AGENTS.md와 CLAUDE.md를 다시 읽고 자가진단을 계속하세요.'
 } else {
-  Warn ($AI이름 + ' 이 인식되지 않아 로그인 단계를 건너뜁니다.')
-  Warn '이 창을 닫고 설치 한 줄을 한 번 더 실행해 주세요.'
+  if ($AI -eq 'codex' -and (Has 'codex')) {
+    Say '마지막 순서: ChatGPT(Codex) 로그인'
+    Say '검은 새 창이 열립니다. 안내에 따라 브라우저에서 로그인하세요.'
+    Start-Process cmd -ArgumentList '/k','codex login'
+  } elseif ($AI -eq 'claude' -and (Has 'claude')) {
+    Say '마지막 순서: 클로드 로그인'
+    Say '검은 새 창이 열립니다. 안내에 따라 브라우저에서 로그인하세요.'
+    Start-Process cmd -ArgumentList '/k','claude'
+  } else {
+    Warn ($AI이름 + ' 이 인식되지 않아 로그인 단계를 건너뜁니다.')
+    Warn '이 창을 닫고 설치 한 줄을 한 번 더 실행해 주세요.'
+  }
 }
 
 Write-Host ''
 Say '여기까지 되었으면 설명서 다음 단계로 가세요.'
 Say ('Orca 를 열고 폴더는 ' + $공장 + ' 를 고르면 됩니다.')
-Read-Host '다 보셨으면 엔터를 눌러 주세요 (이 창은 저절로 닫히지 않습니다)'
+if (-not $AI실행모드) {
+  Read-Host '다 보셨으면 엔터를 눌러 주세요 (이 창은 저절로 닫히지 않습니다)'
+}
 }
