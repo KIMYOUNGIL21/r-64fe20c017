@@ -184,7 +184,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <p>아래 버튼을 누른 뒤, 파워셸 창 안을 한 번 누르고 <b>마우스 오른쪽 버튼</b>을 눌러 주세요. 글이 붙으면 <b>Enter</b>를 한 번 누르면 됩니다.</p>
   <div class="note"><b>아래 글은 읽지 않으셔도 됩니다.</b> 영어와 기호가 잔뜩 섞여 있는데 신경 쓰지 마세요.
   <b>복사 버튼만 누르시면</b> 됩니다. 사람이 아니라 컴퓨터가 읽을 글입니다.</div>
-  <div class="copybox"><pre id="claudeSetup">$env:PLI_AI='claude'; irm https://raw.githubusercontent.com/KIMYOUNGIL21/r-64fe20c017/main/pli/setup.ps1 | iex</pre><button onclick="copyText('claudeSetup',this)">클로드 설치 한 줄 복사하기</button></div>
+  <div class="copybox"><pre id="claudeSetup">[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;$env:PLI_AI='claude';irm https://kimyoungil21.github.io/r-64fe20c017/pli/go.ps1|iex</pre><button onclick="copyText('claudeSetup',this)">클로드 설치 한 줄 복사하기</button></div>
   <ol>
     <li><b>이 앱이 디바이스를 변경하도록 허용하시겠습니까</b>라고 물으면 <b>[예]</b>를 눌러 주세요. 정상 과정입니다.</li>
     <li>글자가 빠르게 지나가도 괜찮습니다. <b>20분 정도는 창을 닫지 말고 기다려 주세요.</b><br>
@@ -227,7 +227,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <p>아래 버튼을 누른 뒤, 파워셸 창 안을 한 번 누르고 <b>마우스 오른쪽 버튼</b>을 눌러 주세요. 글이 붙으면 <b>Enter</b>를 한 번 누르면 됩니다.</p>
   <div class="note"><b>아래 글은 읽지 않으셔도 됩니다.</b> 영어와 기호가 잔뜩 섞여 있는데 신경 쓰지 마세요.
   <b>복사 버튼만 누르시면</b> 됩니다. 사람이 아니라 컴퓨터가 읽을 글입니다.</div>
-  <div class="copybox"><pre id="codexSetup">$env:PLI_AI='codex'; irm https://raw.githubusercontent.com/KIMYOUNGIL21/r-64fe20c017/main/pli/setup.ps1 | iex</pre><button onclick="copyText('codexSetup',this)">코덱스 설치 한 줄 복사하기</button></div>
+  <div class="copybox"><pre id="codexSetup">[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;$env:PLI_AI='codex';irm https://kimyoungil21.github.io/r-64fe20c017/pli/go.ps1|iex</pre><button onclick="copyText('codexSetup',this)">코덱스 설치 한 줄 복사하기</button></div>
   <ol>
     <li><b>이 앱이 디바이스를 변경하도록 허용하시겠습니까</b>라고 물으면 <b>[예]</b>를 눌러 주세요. 정상 과정입니다.</li>
     <li>글자가 빠르게 지나가도 괜찮습니다. <b>20분 정도는 창을 닫지 말고 기다려 주세요.</b><br>
