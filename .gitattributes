@@ -1,3 +1,8 @@
 # 맥/리눅스에서 도는 스크립트는 반드시 LF 로 저장한다.
 # CRLF 가 섞이면 맥에서 "bad interpreter: /bin/bash^M" 으로 죽는다.
 *.sh text eol=lf
+
+# PowerShell 설치 스크립트는 go.ps1 이 SHA-256 으로 검증한다.
+# 줄바꿈이 바뀌면 바이트가 달라져 "Setup hash mismatch" 로 설치가 통째로 막힌다.
+# 웹에서 irm | iex 로 실행하므로 LF 로 고정해도 동작에 문제 없다.
+*.ps1 text eol=lf
