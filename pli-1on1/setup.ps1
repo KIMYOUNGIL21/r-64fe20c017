@@ -27,13 +27,18 @@ $AI실행모드 = $env:PLI_NONINTERACTIVE -eq '1'
 
 $공장 = 'C:\플리공장'
 $패키지이름 = '플리공장_셋팅코드_1대1.zip'
-$패키지SHA256 = 'CABB091EBF9B48A0665FEE8FE0AC315AE4F350257682E753F8E8293FDB113830'
+$패키지SHA256 = '09147BF35874D12AB7AC796E430B3A02CDCCDB99E7CBEA30D832EE3C885E0F71'
 $코드파일 = @(
-  '.gitignore', 'AGENTS.md', 'package.json', 'package-lock.json', 'run.py',
-  '공장.py', '로그인.js', '분석기.py', '시작하세요.md', '올리기.js'
+  '.gitignore', 'AGENTS.md', 'CLAUDE.md', 'package.json', 'package-lock.json',
+  'run.py', '곡형식_8가지.md', '공장.py', '로그인.js', '분석기.py',
+  '샘플재료_이용안내.md', '시작하세요.md', '올리기.js', '작사스킬.md'
 )
-# 1:1 판에는 연습용 샘플곡이 들어 있지 않다. 주인의 곡으로 바로 시작한다.
-$필수재료 = @('재료/여기에 넣으세요.txt')
+$필수재료 = @(
+  '재료/배경 - 오늘이 제일 좋은 날.jpg',
+  '재료/썸네일 - 오늘이 제일 좋은 날.jpg',
+  '재료/오늘이 제일 좋은 날.mp3',
+  '재료/오늘이 제일 좋은 날.txt'
+)
 $결과 = [ordered]@{}
 
 function Say($t)  { Write-Host $t -ForegroundColor Cyan }

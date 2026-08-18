@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $url = 'https://kimyoungil21.github.io/r-64fe20c017/pli-1on1/setup.ps1'
-$expected = '0C23B6472962ABB477479B8DC6C2D253AE3F49F38DAE566C6B51F1CA9AE1607F'
+$expected = '435AFE9C4CF07496A3676097010FC79CC9B08E0FE412562594E510C2B1610DC0'
 
 $client = New-Object Net.WebClient
 try {
