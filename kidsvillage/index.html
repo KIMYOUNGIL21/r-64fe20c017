@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="description" content="키즈빌리지 아동복 사입 대행을 자동화하는 설계 — 열 단계별 자동화 등급, 다섯 원칙, 착수 순서와 확인 사항.">
+<meta property="og:title" content="키즈빌리지 사입 자동화 설계도">
+<meta property="og:description" content="키즈빌리지 아동복 사입 대행을 자동화하는 설계 — 열 단계별 자동화 등급, 다섯 원칙, 착수 순서와 확인 사항.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧵</text></svg>">
+<title>키즈빌리지 사입 자동화 설계도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#F6F8F6;
+  --card:#FFFFFF;
+  --ink:#15181A;
+  --ink-2:#5B625E;
+  --ink-3:#8A918C;
+  --rule:#D9DFD9;
+  --rule-soft:#E8EDE8;
+  --red:#C2372B;
+  --red-soft:#FBEEEC;
+  --teal:#1C6E6B;
+  --teal-soft:#E7F1F0;
+  --amber:#8A6212;
+  --amber-soft:#FAF2E0;
+  --grid:rgba(21,24,26,.045);
+
+  --sans:'Pretendard Variable',Pretendard,'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#111413;
+    --card:#181C1B;
+    --ink:#E8EDE9;
+    --ink-2:#A2AAA5;
+    --ink-3:#767E79;
+    --rule:#2A302E;
+    --rule-soft:#232827;
+    --red:#E8756A;
+    --red-soft:#2B1B19;
+    --teal:#67B8B2;
+    --teal-soft:#162523;
+    --amber:#D6A94E;
+    --amber-soft:#2A2317;
+    --grid:rgba(232,237,233,.05);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111413;
+  --card:#181C1B;
+  --ink:#E8EDE9;
+  --ink-2:#A2AAA5;
+  --ink-3:#767E79;
+  --rule:#2A302E;
+  --rule-soft:#232827;
+  --red:#E8756A;
+  --red-soft:#2B1B19;
+  --teal:#67B8B2;
+  --teal-soft:#162523;
+  --amber:#D6A94E;
+  --amber-soft:#2A2317;
+  --grid:rgba(232,237,233,.05);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to right,var(--grid) 0 1px,transparent 1px 88px),
+    repeating-linear-gradient(to bottom,var(--grid) 0 1px,transparent 1px 88px);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{max-width:1080px;margin:0 auto;padding:0 28px 96px}
+
+/* ─── masthead ─── */
+.masthead{padding:56px 0 0}
+.stamp{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red);border:1px solid var(--red);
+  padding:5px 11px;border-radius:2px;
+}
+.stamp b{width:5px;height:5px;background:var(--red);border-radius:50%;display:block}
+h1{
+  font-size:clamp(34px,5.4vw,54px);line-height:1.14;font-weight:700;
+  letter-spacing:-.022em;margin:22px 0 0;text-wrap:balance;
+}
+.deck{
+  font-size:clamp(16px,2vw,19px);color:var(--ink-2);font-weight:400;
+  max-width:60ch;margin:16px 0 0;line-height:1.65;
+}
+.meta{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+  gap:0;margin:38px 0 0;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule);
+}
+.meta div{padding:14px 16px 14px 0;border-right:1px solid var(--rule-soft)}
+.meta div:last-child{border-right:0}
+.meta dt{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 4px;
+}
+.meta dd{margin:0;font-size:14.5px;font-weight:500;font-variant-numeric:tabular-nums}
+
+/* ─── sections w/ label rail ─── */
+section{
+  display:grid;grid-template-columns:132px minmax(0,1fr);
+  gap:0 34px;padding:52px 0 0;
+}
+.rail{position:relative}
+.rail .no{
+  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;
+  color:var(--red);display:block;
+}
+.rail h2{
+  font-size:15.5px;font-weight:600;letter-spacing:-.005em;margin:6px 0 0;
+  line-height:1.4;color:var(--ink);
+}
+.rail .hint{
+  font-size:12.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.55;
+}
+.body>*:first-child{margin-top:0}
+.body p{margin:0 0 15px;max-width:66ch}
+.body p:last-child{margin-bottom:0}
+strong{font-weight:600}
+mark{background:var(--teal-soft);color:var(--ink);padding:1px 4px;border-radius:2px}
+.sep{border:0;border-top:1px solid var(--rule);margin:56px 0 0}
+
+/* ─── lead statement ─── */
+.lead{
+  font-size:clamp(19px,2.5vw,23px);line-height:1.55;font-weight:500;
+  letter-spacing:-.012em;border-left:2.5px solid var(--red);
+  padding:2px 0 2px 22px;margin:0;max-width:56ch;
+}
+
+/* ─── spec table ─── */
+.tbl-wrap{overflow-x:auto;margin:0 0 6px}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:14.5px}
+caption{
+  text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);padding:0 0 10px;
+}
+th{
+  text-align:left;font-weight:600;font-size:11.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);
+  padding:0 14px 9px 0;border-bottom:1.5px solid var(--ink);
+}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+tbody tr:last-child td{border-bottom:1px solid var(--rule)}
+td.n{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);width:30px;padding-right:8px;font-variant-numeric:tabular-nums}
+td.step{font-weight:500;white-space:nowrap}
+td.note{color:var(--ink-2);font-size:13.5px;line-height:1.6}
+
+/* ─── grade chips ─── */
+.chip{
+  display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:.05em;padding:3px 8px;border-radius:2px;white-space:nowrap;
+}
+.chip.auto{background:var(--teal-soft);color:var(--teal);box-shadow:inset 0 0 0 1px currentColor}
+.chip.semi{background:var(--amber-soft);color:var(--amber);box-shadow:inset 0 0 0 1px currentColor}
+.chip.human{background:var(--red-soft);color:var(--red);box-shadow:inset 0 0 0 1px currentColor}
+.star{color:var(--teal);font-family:var(--mono);font-size:12px}
+
+/* ─── pipeline diagram ─── */
+.ledger{
+  border:1.5px solid var(--ink);border-radius:3px;background:var(--card);
+  padding:18px 20px;margin:0 0 8px;
+}
+.ledger h3{
+  margin:0;font-size:14px;font-weight:600;letter-spacing:.02em;
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.ledger h3 span{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.tabs{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 0}
+.tab{
+  font-family:var(--mono);font-size:11.5px;padding:4px 10px;border:1px solid var(--rule);
+  border-radius:2px;color:var(--ink-2);background:var(--paper);
+}
+.feeds{
+  text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  letter-spacing:.1em;padding:10px 0 4px;
+}
+.plants{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:12px;margin:8px 0 0}
+.plant{
+  border:1px solid var(--rule);border-radius:3px;background:var(--card);
+  padding:14px 15px;position:relative;
+}
+.plant .pn{
+  font-family:var(--mono);font-size:11px;font-weight:600;color:var(--red);
+  letter-spacing:.08em;
+}
+.plant h4{margin:5px 0 6px;font-size:14.5px;font-weight:600;letter-spacing:-.005em}
+.plant p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6;max-width:none}
+.plant .tagline{
+  display:inline-block;margin:10px 0 0;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.06em;color:var(--ink-3);
+}
+
+/* ─── principles ─── */
+.rules{display:grid;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.rules li{
+  display:grid;grid-template-columns:38px minmax(0,1fr);gap:0 16px;
+  padding:20px 0;border-bottom:1px solid var(--rule-soft);
+}
+.rules .rn{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-3);padding-top:3px}
+.rules h4{margin:0 0 7px;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.45}
+.rules h4 .ban{color:var(--red);font-family:var(--mono);font-size:13px;margin-right:5px}
+.rules p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.68;max-width:64ch}
+.rules p + p{margin-top:9px}
+.rules .key{
+  display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--red);border:1px solid var(--red);
+  padding:2px 7px;border-radius:2px;margin-left:8px;vertical-align:2px;font-weight:600;
+}
+
+/* ─── phases ─── */
+.phases{display:grid;gap:9px}
+.phase{
+  display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:0 18px;align-items:start;
+  border:1px solid var(--rule);border-radius:3px;background:var(--card);padding:15px 17px;
+}
+.phase.now{border-color:var(--teal);border-width:1.5px;background:var(--teal-soft)}
+.phase .ph{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.08em;padding-top:3px}
+.phase.now .ph{color:var(--teal)}
+.phase h4{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:-.008em}
+.phase p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.6;max-width:56ch}
+.phase .risk{font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap;padding-top:4px;text-align:right}
+
+/* ─── questions ─── */
+.qs{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:q}
+.qs li{
+  display:grid;grid-template-columns:26px minmax(0,1fr);gap:0 14px;
+  padding:16px 18px;border:1px solid var(--rule);border-radius:3px;background:var(--card);
+}
+.qs li.block{border-left:2.5px solid var(--red)}
+.qs .qn{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--red);padding-top:2px}
+.qs h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-.008em;line-height:1.45}
+.qs p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.65;max-width:62ch}
+.opts{display:grid;gap:6px;margin:11px 0 0}
+.opt{
+  font-size:13px;color:var(--ink-2);padding:8px 11px;background:var(--paper);
+  border:1px solid var(--rule-soft);border-radius:2px;line-height:1.55;
+}
+.opt b{font-family:var(--mono);font-size:12px;color:var(--ink);margin-right:6px;font-weight:600}
+.minor{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--rule)}
+.minor li{
+  display:grid;grid-template-columns:26px minmax(0,1fr);gap:0 14px;
+  padding:11px 0;border-bottom:1px solid var(--rule-soft);font-size:14px;color:var(--ink-2);
+}
+.minor .qn{font-family:var(--mono);font-size:12px;color:var(--ink-3);font-weight:500}
+
+/* ─── closing ─── */
+.closing{
+  margin:60px 0 0;border-top:1.5px solid var(--ink);padding:30px 0 0;
+}
+.closing p{
+  font-size:clamp(18px,2.4vw,22px);line-height:1.6;font-weight:500;
+  letter-spacing:-.014em;max-width:52ch;margin:0;
+}
+.colophon{
+  margin:34px 0 0;font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  letter-spacing:.05em;line-height:1.8;
+}
+
+/* ─── ask block (top) ─── */
+.ask{
+  margin:34px 0 0;border:1.5px solid var(--red);border-radius:3px;
+  background:var(--red-soft);padding:20px 22px;
+}
+.ask .ask-h{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red);margin:0 0 12px;
+}
+.ask ol{margin:0;padding:0;list-style:none;display:grid;gap:9px;counter-reset:a}
+.ask li{
+  display:grid;grid-template-columns:22px minmax(0,1fr);gap:0 12px;
+  font-size:15px;line-height:1.55;font-weight:500;letter-spacing:-.005em;
+}
+.ask li::before{
+  counter-increment:a;content:counter(a);
+  font-family:var(--mono);font-size:12px;font-weight:600;color:var(--red);
+  padding-top:3px;
+}
+.ask .ask-f{
+  margin:15px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.6;
+  padding-top:13px;border-top:1px solid var(--rule);
+}
+.ask a{color:var(--red);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
+.ask a:hover,.ask a:focus-visible{color:var(--ink)}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+[id]{scroll-margin-top:24px}
+
+@media (max-width:760px){
+  body{background-image:none}
+  .sheet{padding:0 20px 72px}
+  section{grid-template-columns:1fr;gap:0;padding:44px 0 0}
+  .rail{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 18px;
+        padding:0 0 12px;border-bottom:1px solid var(--rule)}
+  .rail h2{margin:0}
+  .rail .hint{width:100%;margin:2px 0 0}
+  .phase{grid-template-columns:46px minmax(0,1fr)}
+  .phase .risk{grid-column:2;text-align:left;padding-top:8px}
+}
+@media (prefers-reduced-motion:no-preference){
+  a,.plant{transition:border-color .18s ease,color .18s ease}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="masthead">
+  <div class="stamp"><b></b>설계 확정 대기 · 코드 미착수</div>
+  <h1>키즈빌리지 사입 자동화 설계도</h1>
+  <p class="deck">브랜드를 골라 카톡방에 올리고, 주문을 모아 고객 주소로 직배송 발주하기까지 —
+     열 단계 중 어디를 기계에 맡기고 어디에 사람을 남길지 정한 문서입니다.</p>
+
+  <dl class="meta">
+    <div><dt>고객</dt><dd>아동복 판매자</dd></div>
+    <div><dt>도매처</dt><dd>키즈빌리지</dd></div>
+    <div><dt>플랫폼 실측</dt><dd>영카트5 · 회원전용</dd></div>
+    <div><dt>측정일</dt><dd>2026-08-19</dd></div>
+    <div><dt>문서</dt><dd>v0.1</dd></div>
+  </dl>
+
+  <div class="ask">
+    <p class="ask-h">먼저 답을 주셔야 하는 세 가지</p>
+    <ol>
+      <li>"웹기술서에 있는 사이즈"가 <strong>정확히 화면의 어느 부분</strong>입니까?</li>
+      <li>주문을 <strong>폼(입력 화면)으로 받아도</strong> 괜찮겠습니까?</li>
+      <li>키즈빌리지에서 <strong>고객 주소로 바로 직배송</strong>이 됩니까?</li>
+    </ol>
+    <p class="ask-f">이 세 가지가 정해지면 바로 만들기 시작합니다.
+       각각 왜 묻는지와 선택지는 <a href="#확인">§6 확인이 필요합니다</a>에 적어 두었습니다.
+       나머지 일곱 가지는 알면 좋은 정도라 나중에 답하셔도 됩니다.</p>
+  </div>
+</header>
+
+<section>
+  <div class="rail">
+    <span class="no">§1</span>
+    <h2>사업 한 줄</h2>
+    <p class="hint">무엇을 자동화하는 사업인지</p>
+  </div>
+  <div class="body">
+    <p class="lead">키즈빌리지에서 브랜드를 하나 골라, 그 브랜드 상품들을 오픈카톡방에 소개하고,
+       주문을 모아, 고객 주소로 직배송 발주하는 <strong>사입 대행 공동구매.</strong></p>
+    <p style="margin-top:22px">돈이 되는 지점은 도매가와 판매가의 차이입니다. 반면 <strong>시간을 먹는 지점은 두 군데</strong>뿐입니다 —
+       상품을 카톡에 올릴 형태로 다듬는 일, 그리고 주문을 모아 다시 발주하는 일. 이 설계는 그 두 군데만 겨냥합니다.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="rail">
+    <span class="no">§2</span>
+    <h2>열 단계 자동화 등급</h2>
+    <p class="hint">각 칸을 기계에 얼마나 맡길 수 있는가</p>
+  </div>
+  <div class="body">
+    <div class="tbl-wrap">
+      <table>
+        <caption>측정 근거 — 사장님 계정으로 사이트 구조를 직접 확인</caption>
+        <thead>
+          <tr><th></th><th>단계</th><th>등급</th><th>근거</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="n">01</td><td class="step">브랜드·상품 고르기</td><td><span class="chip semi">반자동</span></td>
+              <td class="note">신상·랭킹을 긁어 후보표로 깔아드립니다. 최종 선택은 안목의 영역</td></tr>
+          <tr><td class="n">02</td><td class="step">상품 이미지 확보</td><td><span class="chip auto">완전자동</span> <span class="star">★</span></td>
+              <td class="note">이미지 경로가 규칙적입니다. 상품당 20장을 통째로 받습니다</td></tr>
+          <tr><td class="n">03</td><td class="step">사이즈 정리</td><td><span class="chip auto">완전자동</span> / <span class="chip semi">반자동</span></td>
+              <td class="note">호수 목록이면 텍스트라 즉시. 이미지 속 실측표면 AI가 읽어야 합니다 — <strong>§5 확인 필요</strong></td></tr>
+          <tr><td class="n">04</td><td class="step">판매가 정하기</td><td><span class="chip auto">완전자동</span> <span class="star">★</span></td>
+              <td class="note">사이트가 공급가와 소비자가(공급가 ×1.6)를 함께 줍니다. 마진 규칙만 얹으면 끝</td></tr>
+          <tr><td class="n">05</td><td class="step">공지문 쓰기</td><td><span class="chip auto">완전자동</span> <span class="star">★</span></td>
+              <td class="note">상품명·색상·사이즈·가격이 전부 텍스트입니다. 서식에 부어 넣으면 됩니다</td></tr>
+          <tr><td class="n">06</td><td class="step">오픈카톡방에 올리기</td><td><span class="chip human">사람이</span></td>
+              <td class="note">자동화하지 않습니다 — 계정을 잃으면 사업이 멈춥니다. <strong>§4 원칙 3</strong></td></tr>
+          <tr><td class="n">07</td><td class="step">CS채널로 주문 받기</td><td><span class="chip auto">완전자동</span></td>
+              <td class="note">단, <strong>받는 방식을 바꿔야</strong> 합니다. 설계의 핵심 — <strong>§4 원칙 2</strong></td></tr>
+          <tr><td class="n">08</td><td class="step">무통장 입금 확인</td><td><span class="chip semi">반자동</span></td>
+              <td class="note">입금자명·금액 자동 대조, 어긋난 건만 사람에게 넘깁니다</td></tr>
+          <tr><td class="n">09</td><td class="step">키즈빌리지 발주</td><td><span class="chip semi">반자동</span></td>
+              <td class="note">장바구니·배송지까지 자동, <strong>결제 버튼은 사람</strong> — <strong>§4 원칙 4</strong></td></tr>
+          <tr><td class="n">10</td><td class="step">송장 안내</td><td><span class="chip semi">반자동</span></td>
+              <td class="note">안내문 자동 생성, 발송은 사람</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:24px"><strong>가장 큰 이득은 02·03·04·05를 한 덩어리로 묶는 것입니다.</strong>
+       상품 하나를 카톡에 올릴 상태로 만드는 손일이 통째로 사라집니다.
+       그리고 여기는 <mark>위험이 0</mark>입니다 — 읽기만 하고 도매처에 아무것도 쓰지 않기 때문입니다.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="rail">
+    <span class="no">§3</span>
+    <h2>구성</h2>
+    <p class="hint">장부 하나와 공장 다섯</p>
+  </div>
+  <div class="body">
+    <div class="ledger">
+      <h3>장부 <span>구글시트 1개 · 단일 진실</span></h3>
+      <div class="tabs">
+        <span class="tab">상품마스터</span>
+        <span class="tab">주문접수</span>
+        <span class="tab">입금확인</span>
+        <span class="tab">발주내역</span>
+      </div>
+      <p style="margin:14px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.65">
+        시트로 두는 이유는 사장님이 폰으로 아무 때나 열어볼 수 있고, 기계가 틀렸을 때 손으로 고칠 수 있기 때문입니다.
+        프로그램 안에만 있는 데이터는 사장님이 못 봅니다.</p>
+    </div>
+
+    <div class="feeds">↑ 다섯 공장이 모두 이 장부만 보고 일합니다 ↑</div>
+
+    <div class="plants">
+      <div class="plant">
+        <span class="pn">공장 1</span>
+        <h4>수집기</h4>
+        <p>브랜드 하나를 지정하면 상품마다 이미지·정보·공지문 초안을 폴더로 만듭니다.</p>
+        <span class="tagline">읽기만 함 · 위험 0</span>
+      </div>
+      <div class="plant">
+        <span class="pn">공장 2</span>
+        <h4>공지 키트</h4>
+        <p>상품 여러 개를 공지 한 건으로 묶습니다. 폴더를 열어 끌어다 놓고 글은 복사해 붙이면 끝.</p>
+        <span class="tagline">복붙 가능 상태까지</span>
+      </div>
+      <div class="plant">
+        <span class="pn">공장 3</span>
+        <h4>주문 접수</h4>
+        <p>CS채널에서 링크 하나를 안내하고, 고객이 상품·색상·사이즈를 <strong>고르게</strong> 합니다.</p>
+        <span class="tagline">설계의 핵심</span>
+      </div>
+      <div class="plant">
+        <span class="pn">공장 4</span>
+        <h4>입금 대사</h4>
+        <p>입금자명과 금액을 주문과 맞춰 봅니다. 어긋난 건은 판정하지 않고 표시만 합니다.</p>
+        <span class="tagline">판정은 사람</span>
+      </div>
+      <div class="plant">
+        <span class="pn">공장 5</span>
+        <h4>발주 어시스트</h4>
+        <p>입금 확인된 주문을 장바구니에 담고 배송지를 채운 뒤 <strong>멈춥니다.</strong></p>
+        <span class="tagline">결제 버튼은 사람</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="rail">
+    <span class="no">§4</span>
+    <h2>설계 원칙 다섯</h2>
+    <p class="hint">왜 이렇게 정했는가</p>
+  </div>
+  <div class="body">
+    <ol class="rules">
+      <li>
+        <span class="rn">01</span>
+        <div>
+          <h4>장부는 하나다</h4>
+          <p>상품·주문·입금·발주가 각자 다른 곳에 있으면 "이 주문 입금됐나?"를 사람이 대조하게 됩니다. 시트 하나에 다 모읍니다.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rn">02</span>
+        <div>
+          <h4>주문은 대화가 아니라 폼으로 받는다 <span class="key">가장 중요</span></h4>
+          <p>카톡 대화문을 기계가 해석하게 만드는 설계는 거의 반드시 실패합니다.
+             <strong>"5호요" · "다섯살이요" · "젤 큰거" · "아까 그거 하나 더"</strong> 가 전부 들어옵니다.</p>
+          <p>정확도를 90%까지 올려도 열 건에 한 건은 틀리는데, <strong>틀리면 남의 집에 엉뚱한 옷이 가고 사장님이 돈으로 물어야 합니다.</strong>
+             고르게 만들면 잘못된 주문이 애초에 생기지 않습니다. 자동화의 성패가 여기서 갈립니다.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rn">03</span>
+        <div>
+          <h4><span class="ban">⛔</span>카톡 발신은 자동화하지 않는다</h4>
+          <p>오픈채팅방은 공식적으로 자동 발신하는 방법이 없습니다. 우회 수단은 계정 정지 위험이 있고,
+             <strong>사장님 카톡 계정은 고객 명단 그 자체</strong>입니다. 잃으면 사업이 멈춥니다.
+             "복사해서 붙이면 되는 상태"까지가 최선이자 안전선입니다.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rn">04</span>
+        <div>
+          <h4><span class="ban">⛔</span>결제 버튼은 사람이 누른다</h4>
+          <p>여기서 기계가 틀리면 실제로 돈이 나가고 실제로 물건이 남의 집으로 갑니다. 되돌리려면 반품 절차를 밟아야 합니다.</p>
+          <p>이건 자동화를 덜 하는 게 아니라, <strong>틀렸을 때의 비용이 큰 칸에만 사람을 남기는 것</strong>입니다.
+             손일의 대부분(상품 담기·옵션 고르기·주소 입력)은 이미 기계가 끝낸 상태입니다.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rn">05</span>
+        <div>
+          <h4>고객 개인정보는 밖으로 나가지 않는다</h4>
+          <p>이름·연락처·주소가 흐르는 사업입니다. 저장소는 비공개, 개인정보가 든 파일은 깃에 올리지 않고,
+             다른 고객 프로젝트와 계정·폴더를 섞지 않습니다.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="rail">
+    <span class="no">§5</span>
+    <h2>만드는 순서</h2>
+    <p class="hint">단계마다 그 자체로 쓸모가 있어야 한다</p>
+  </div>
+  <div class="body">
+    <div class="phases">
+      <div class="phase">
+        <span class="ph">P0</span>
+        <div><h4>인테이크</h4><p>아래 §6의 확인 3건을 받습니다. 헛다리를 막는 단계입니다.</p></div>
+        <span class="risk">위험 없음</span>
+      </div>
+      <div class="phase now">
+        <span class="ph">P1</span>
+        <div><h4>수집기 <span style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.08em">◀ 여기부터</span></h4>
+          <p>브랜드 → 상품 카드 + 이미지 + 공지문. 카톡 올릴 준비가 통째로 사라집니다.</p></div>
+        <span class="risk">위험 0 · 읽기만</span>
+      </div>
+      <div class="phase">
+        <span class="ph">P2</span>
+        <div><h4>공지 키트 묶기</h4><p>공지 한 건이 폴더 하나로 나옵니다.</p></div>
+        <span class="risk">위험 없음</span>
+      </div>
+      <div class="phase">
+        <span class="ph">P3</span>
+        <div><h4>주문 폼 + 장부 시트</h4><p>주문이 자동으로 표에 쌓입니다.</p></div>
+        <span class="risk">고객 경험 변화</span>
+      </div>
+      <div class="phase">
+        <span class="ph">P4</span>
+        <div><h4>입금 대사</h4><p>입금 확인이 '대조'에서 '확인'으로 바뀝니다.</p></div>
+        <span class="risk">낮음</span>
+      </div>
+      <div class="phase">
+        <span class="ph">P5</span>
+        <div><h4>발주 어시스트</h4><p>발주 손일이 사라집니다. 결제 버튼만 남습니다.</p></div>
+        <span class="risk">높음 · 맨 마지막</span>
+      </div>
+    </div>
+    <p style="margin-top:22px"><strong>1단계부터 하는 이유:</strong> 이득이 가장 크고, 위험이 0이며,
+       사장님이 결과물을 바로 눈으로 확인할 수 있습니다. 실물을 한 번 보고 나면 3단계 이후 판단도 훨씬 쉬워집니다.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section id="확인">
+  <div class="rail">
+    <span class="no">§6</span>
+    <h2>확인이 필요합니다</h2>
+    <p class="hint">답이 있어야 다음으로 넘어갑니다</p>
+  </div>
+  <div class="body">
+    <ol class="qs">
+      <li class="block">
+        <span class="qn">01</span>
+        <div>
+          <h4>"웹기술서에 있는 사이즈"가 정확히 무엇입니까?</h4>
+          <p>상품 하나를 짚어 화면의 어느 부분인지 알려주시면 1분에 끝납니다.
+             실측해 본 표본 상품에는 <strong>총장·가슴단면 같은 실측 치수표가 없었습니다.</strong>
+             페이지의 '브랜드별 사이즈표' 링크도 열어보니 실제로는 「취급 브랜드표」 게시판이었습니다.</p>
+          <div class="opts">
+            <div class="opt"><b>㉮</b>상품 정보표의 <strong>호수 목록</strong>(5 / 7 / 9 … 21) → 텍스트라 즉시 자동화</div>
+            <div class="opt"><b>㉯</b>상세 이미지 속 <strong>실측 치수표</strong> → AI 비전으로 읽어야 하고 브랜드마다 검증 필요</div>
+          </div>
+        </div>
+      </li>
+      <li class="block">
+        <span class="qn">02</span>
+        <div>
+          <h4>주문을 폼으로 받아도 됩니까?</h4>
+          <p>§4 원칙 2의 결정입니다. 고객 경험을 바꾸는 일이라 사장님 판단이 필요합니다 —
+             카톡에서 그냥 말하던 걸 링크 눌러 채우게 하면 주문이 줄 수도 있습니다.</p>
+          <div class="opts">
+            <div class="opt"><b>㉮</b>폼으로 전환 — 자동화 효과 최대, 고객이 링크를 눌러야 함</div>
+            <div class="opt"><b>㉯</b>지금처럼 대화로 받고 사장님이 표에 옮겨 적기 — 경험 그대로, 손일 남음</div>
+            <div class="opt"><b>㉰</b>대화로 받되 AI가 초안을 표에 넣고 사장님이 확인 — 중간, 확인 부담 남음</div>
+          </div>
+        </div>
+      </li>
+      <li class="block">
+        <span class="qn">03</span>
+        <div>
+          <h4>고객 주소로 직배송이 됩니까?</h4>
+          <p><strong>사업 전체의 전제입니다.</strong> 키즈빌리지 주문 시 배송지를 고객 주소로 넣는 방식인지,
+             사장님이 받아서 다시 보내는지에 따라 설계가 크게 달라집니다.</p>
+        </div>
+      </li>
+    </ol>
+
+    <ul class="minor">
+      <li><span class="qn">04</span><span>한 번 공지에 상품 몇 개 정도, 주기는 어느 정도입니까?</span></li>
+      <li><span class="qn">05</span><span>오픈카톡방 인원과 한 번에 들어오는 주문 건수는 대략 어느 정도입니까?</span></li>
+      <li><span class="qn">06</span><span>판매가는 어떻게 정하십니까? (사이트 소비자가 그대로 / 별도 배수 / 상품마다 다름)</span></li>
+      <li><span class="qn">07</span><span>배송비는 고객에게 얼마를 받고, 도매처에는 얼마를 내십니까?</span></li>
+      <li><span class="qn">08</span><span>지금 쓰시는 도구가 있습니까? (엑셀 · 구글시트 · 네이버폼 등)</span></li>
+      <li><span class="qn">09</span><span>도매처 이미지를 그대로 써도 된다고 안내받으신 적이 있습니까?</span></li>
+      <li><span class="qn">10</span><span>사장님 컴퓨터 환경은 어떻게 되십니까? (윈도우 여부, 늘 켜 두는 PC가 있는지)</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="rail">
+    <span class="no">§7</span>
+    <h2>미리 적어 둔 위험</h2>
+    <p class="hint">터지기 전에 알고 있어야 하는 것</p>
+  </div>
+  <div class="body">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>위험</th><th>왜 위험한가</th><th>대비</th></tr></thead>
+        <tbody>
+          <tr><td class="step">품절</td><td class="note">공지 후 발주 전에 품절되면 입금은 받았는데 물건이 없습니다</td><td class="note">발주 직전 재고 재확인 · 품절 안내문 미리 준비</td></tr>
+          <tr><td class="step">이미지 워터마크</td><td class="note">상세 이미지에 다른 이름의 워터마크가 박혀 있습니다. 그대로 올리면 같이 나갑니다</td><td class="note">도매처 허용 여부 확인 → 지워야 하면 가공 단계 추가</td></tr>
+          <tr><td class="step">키즈페이 잔액</td><td class="note">예치금이 떨어지면 <strong>발주가 조용히 막힙니다</strong></td><td class="note">발주 전 잔액 확인을 점검 항목에 넣음</td></tr>
+          <tr><td class="step">오발주</td><td class="note">잘못 주문하면 돈과 물건이 함께 나갑니다</td><td class="note">원칙 4 — 결제 버튼은 사람</td></tr>
+          <tr><td class="step">개인정보</td><td class="note">이름·연락처·주소를 다룹니다</td><td class="note">원칙 5 — 비공개 저장소, 깃 제외</td></tr>
+          <tr><td class="step">사이트 개편</td><td class="note">키즈빌리지가 화면을 바꾸면 수집기가 멈춥니다</td><td class="note">실측 문서를 근거로 두고, 멈추면 다시 측정</td></tr>
+          <tr><td class="step">과도한 접속</td><td class="note">짧은 시간에 많이 긁으면 계정에 부담이 갑니다</td><td class="note">천천히 읽음 · 사장님 계정, 사장님 사입 목적 범위 안에서만</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="closing">
+  <p>읽는 일은 전부 기계가 하고, 쓰는 일 중 <strong>틀리면 비용이 큰 두 개</strong> —
+     카톡 발신과 결제 버튼 — 만 사람이 남깁니다. 그 사이를 잇는 것은 구글시트 한 장입니다.</p>
+  <p class="colophon">
+    설계 v0.1 · 2026-08-19<br>
+    사이트 구조는 사장님 계정으로 직접 측정한 값입니다. 기억이나 추측으로 적은 항목은 없습니다.<br>
+    아직 아무것도 만들지 않았습니다 — §6 확인 3건을 받고 착수합니다.
+  </p>
+</div>
+
+</div>
+</body>
+</html>
