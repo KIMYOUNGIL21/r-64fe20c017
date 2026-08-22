@@ -1,0 +1,753 @@
+<meta charset="utf-8">
+<title>AI왕초보 2기 — 선생님용 교안</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --ground:#0a0c10;
+    --raised:#12151c;
+    --raised-2:#171b24;
+    --line: rgba(255,255,255,0.09);
+    --line-strong: rgba(255,255,255,0.18);
+    --ink:#edeff2;
+    --ink-mid:#a7aebc;
+    --ink-dim:#767e8d;
+
+    --lamp:#f0a431;
+    --lamp-soft: rgba(240,164,49,0.11);
+    --lamp-line: rgba(240,164,49,0.32);
+
+    --signal:#7c9ce6;
+    --signal-soft: rgba(124,156,230,0.11);
+    --signal-line: rgba(124,156,230,0.32);
+
+    --ok:#5bc38e;
+    --ok-soft: rgba(91,195,142,0.10);
+    --ok-line: rgba(91,195,142,0.30);
+
+    --alarm:#e0574f;
+    --alarm-soft: rgba(224,87,79,0.10);
+    --alarm-line: rgba(224,87,79,0.32);
+
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    --serif: "Gowun Batang", "Nanum Myeongjo", "Batang", serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, D2Coding, monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(58rem 34rem at 86% -10%, var(--lamp-soft), transparent 60%),
+      radial-gradient(48rem 32rem at -10% 22%, var(--signal-soft), transparent 60%),
+      var(--ground);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px; line-height:1.72;
+    word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:34px 17px 100px;}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+
+  .eyebrow{display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:800;
+    letter-spacing:.10em;color:var(--lamp);text-transform:uppercase;margin-bottom:12px;}
+  h1{font-family:var(--serif);font-size:clamp(25px,5.6vw,35px);line-height:1.3;margin:0 0 12px;}
+  .lede{color:var(--ink-mid);font-size:15.5px;margin:0 0 8px;}
+
+  h2{font-family:var(--serif);font-size:clamp(20px,4.4vw,26px);margin:0 0 6px;line-height:1.35;}
+  h3{font-size:15.5px;margin:22px 0 8px;color:var(--lamp);letter-spacing:.01em;}
+
+  .card{background:var(--raised);border:1px solid var(--line);border-radius:14px;
+    padding:19px 17px;margin:15px 0;}
+  .card.warn{border-color:var(--alarm-line);background:linear-gradient(180deg,var(--alarm-soft),var(--raised));}
+  .card.ok{border-color:var(--ok-line);background:linear-gradient(180deg,var(--ok-soft),var(--raised));}
+  .card.note{border-color:var(--signal-line);background:linear-gradient(180deg,var(--signal-soft),var(--raised));}
+  .card.lamp{border-color:var(--lamp-line);background:linear-gradient(180deg,var(--lamp-soft),var(--raised));}
+
+  /* 날짜 네비 */
+  nav.days{position:sticky;top:0;z-index:20;margin:0 -17px 18px;padding:9px 17px;
+    background:rgba(10,12,16,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  nav.days a{flex:none;display:block;padding:7px 12px;border-radius:9px;text-decoration:none;
+    background:var(--raised-2);border:1px solid var(--line);color:var(--ink-mid);
+    font-size:13px;font-weight:800;white-space:nowrap;}
+  nav.days a.hot{color:#1a1206;background:var(--lamp);border-color:var(--lamp);}
+
+  section.day{scroll-margin-top:62px;margin:30px 0 0;padding-top:22px;border-top:1px solid var(--line);}
+  .dayhead{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:3px;}
+  .daynum{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--lamp);
+    border:1px solid var(--lamp-line);border-radius:6px;padding:2px 8px;background:var(--lamp-soft);}
+  .feat{font-size:12.5px;color:var(--signal);font-weight:700;}
+
+  .oneline{font-family:var(--serif);font-size:17.5px;color:var(--ink);
+    border-left:3px solid var(--lamp);padding:6px 0 6px 13px;margin:13px 0 4px;}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px;}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{color:var(--ink-dim);font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;}
+  td:first-child{white-space:nowrap;color:var(--ink-mid);}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+  ul,ol{margin:9px 0;padding-left:20px;}
+  li{margin:5px 0;}
+  b,strong{color:#fff;font-weight:800;}
+  code{font-family:var(--mono);font-size:13.5px;background:var(--raised-2);
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--lamp);}
+  pre{background:#05070a;border:1px solid var(--line-strong);border-radius:10px;
+    padding:13px;overflow-x:auto;margin:10px 0;}
+  pre code{background:none;border:0;padding:0;color:#cfe3ff;font-size:13px;line-height:1.6;}
+
+  details{background:var(--raised-2);border:1px solid var(--line);border-radius:11px;
+    padding:0 15px;margin:11px 0;}
+  details[open]{padding-bottom:13px;}
+  summary{cursor:pointer;padding:13px 0;font-weight:800;font-size:14.5px;list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:"▸ ";color:var(--lamp);}
+  details[open] summary::before{content:"▾ ";}
+
+  .say{background:#05070a;border:1px solid var(--lamp-line);border-radius:10px;
+    padding:13px 14px;margin:10px 0;color:#ffe9c9;font-size:15px;line-height:1.65;}
+  .say::before{content:"🗣 이렇게 말합니다";display:block;font-size:11px;font-weight:800;
+    letter-spacing:.08em;color:var(--lamp);margin-bottom:6px;}
+
+  .chk{list-style:none;padding-left:0;}
+  .chk li{padding-left:26px;position:relative;}
+  .chk li::before{content:"☐";position:absolute;left:4px;color:var(--lamp);font-size:15px;}
+
+  hr{border:0;border-top:1px solid var(--line);margin:26px 0;}
+  .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--ink-dim);font-size:12.5px;}
+  .pill{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 8px;border-radius:20px;
+    background:var(--raised-2);border:1px solid var(--line);color:var(--ink-mid);margin-right:5px;}
+  .pill.a{color:var(--alarm);border-color:var(--alarm-line);background:var(--alarm-soft);}
+  .pill.g{color:var(--ok);border-color:var(--ok-line);background:var(--ok-soft);}
+</style>
+
+<div class="wrap">
+
+<div class="eyebrow">▲ 선생님용 · 참가자에게 주지 않음</div>
+<h1>AI왕초보 챌린지 2기 — 교안</h1>
+<p class="lede">
+  <b>8월 24일(월) ~ 30일(일) · 7일 · 참가자 2명 · 사실상 1:1</b><br>
+  하루 4블록 + 습관 3개 · 약 3~3.5시간
+</p>
+
+<div class="card lamp">
+  <b>이 교안의 사용법</b> — 폰으로 열어두고 가르칩니다. 위 날짜 막대로 오늘 날짜만 누르세요.<br>
+  <span style="color:var(--ink-mid)">각 날은 ①오늘의 한 문장 ②시간표 ③내가 먼저 할 것 ④시연 순서 ⑤막히는 곳 ⑥인증 순서로 되어 있습니다.</span>
+</div>
+
+<nav class="days">
+  <a href="#d0">D0 준비</a>
+  <a href="#d1">1일</a>
+  <a href="#d2">2일</a>
+  <a href="#d3">3일</a>
+  <a href="#d4">4일</a>
+  <a href="#d5" class="hot">5일 ⚠</a>
+  <a href="#d6" class="hot">6일 ⚠</a>
+  <a href="#d7">7일</a>
+  <a href="#emg">응급</a>
+</nav>
+
+<h2>이번 기수의 성격</h2>
+
+<div class="card">
+  <b>2명이라 이 기수는 「매출」이 아니라 「재료」를 만듭니다.</b>
+  지금 이 사업의 병목은 <b>후기가 0장</b>이라는 것입니다. 1기 후기는 8/29~30에나 나옵니다.
+  2기를 돌리면 <b>8/30에 2기 후기</b>가 생기고, <b>3기는 후기 두 세트를 들고 팝니다.</b>
+  <br><br>
+  그래서 <b>인원이 적다고 밀도를 낮추지 않습니다.</b> 오히려 반대입니다 — 후기의 질이 다음 기수를 결정합니다.
+</div>
+
+<h3>2명이라 달라지는 것</h3>
+<div class="tw"><table>
+<tr><th>10명 전제였던 것</th><th>2명이면</th></tr>
+<tr><td>메뉴에서 택1</td><td><b>Day 0 때 미리 물어 정해 둡니다.</b> 첫날 고르는 시간이 사라집니다</td></tr>
+<tr><td>방에 공지 → 각자 진행</td><td><b>방은 공지판으로만.</b> 실제 진행은 개별 1:1. 2명뿐인 방은 조용해서 오히려 부담입니다</td></tr>
+<tr><td>막힌 사람 찾아 케어</td><td><b>막히기 전에 붙습니다.</b> 하루 한 번 먼저 말을 겁니다</td></tr>
+<tr><td>화면공유 불가</td><td><b>가능해집니다. 이게 최대 무기입니다.</b> 글로 30분이 같이 보면 5분</td></tr>
+</table></div>
+
+<div class="card ok">
+<b>🔴 2명이라 할 수 있는데 놓치기 쉬운 6가지</b>
+<ol>
+<li><b>화면공유는 녹화합니다.</b> 재료를 만드는 기수인데 가장 큰 재료를 안 줍고 있습니다. 그게 곧
+<b>3기 판매 영상 + 참가자 복습 자료 + 안내서 대체물</b>입니다. Day 0에 "복습용으로 녹화합니다, 얼굴은 안 나옵니다" 한마디만 받으세요.</li>
+<li><b>운전대는 참가자가 잡습니다.</b> 5분 만에 대신 해 주면 <b>참가자는 아무것도 안 배웁니다.</b>
+원격 조작을 하지 말고 <b>말로만</b> 안내하세요. "제가 할까요?"가 나와도 <b>"직접 눌러보세요."</b>
+<b>단 6일차 블록 1만 예외</b> — 여기서 30분 넘기면 그날이 날아갑니다.</li>
+<li><b>Before를 받아 둡니다.</b> Day 0 인증 때 한 줄만 더 —
+<b>"지금 AI로 할 수 있는 게 뭐라고 생각하세요?"</b> 이게 7일차 후기와 나란히 놓이면
+<b>지어낸 숫자 없이 만들 수 있는 유일한 증거</b>가 됩니다.</li>
+<li><b>내가 매일 진짜 댓글을 답니다.</b> 2명이면 서로 답글을 달아도 반응이 안 늡니다.
+Day 3~7 다섯 번이면 열 개입니다. <b>첫 반응이 있는 사람과 없는 사람은 완주율이 다릅니다.</b></li>
+<li><b>1:1 시각을 박습니다.</b> 예: 매일 21:00 / 21:20에 각 15분.
+<b>"약속된 시간이 있다"가 77,000원을 정당화하는 가장 값싼 장치</b>입니다. 지금은 "언제 답 올지 모름"입니다.</li>
+<li><b>Day 0에 SNS 의향을 묻습니다.</b> "쓰레드·인스타를 할 생각이 있으신가요?"
+아니면 <b>3·4일차 산출물 이름만 갈아끼웁니다</b>(아래 참조). 커리큘럼은 안 바꿉니다.</li>
+</ol>
+</div>
+
+<details><summary>SNS를 안 할 사람이면 — 3·4일차 이름만 갈아끼우기</summary>
+<div class="tw"><table>
+<tr><th>이런 사람</th><th>글 30개 →</th><th>카드 10장 →</th></tr>
+<tr><td>가게를 함</td><td>손님에게 보낼 <b>안내문·문자 30개</b></td><td>가게에 붙일 <b>안내 카드 10장</b></td></tr>
+<tr><td>손주·자식</td><td>아이에게 남길 <b>기록 글 30개</b></td><td>단톡방에 보낼 <b>사진 카드 10장</b></td></tr>
+<tr><td>모임 총무</td><td><b>모임 공지·회비 안내 30개</b></td><td><b>행사 안내 카드 10장</b></td></tr>
+<tr><td>SNS 할 의향 O</td><td>그대로</td><td>그대로</td></tr>
+</table></div>
+⚠️ 갈아끼우기로 정했으면 <b>3·4일차 아침 공지의 「쓰레드」·「인스타」라는 낱말도 함께</b> 바꾸세요.
+공지는 그대로 두고 말로만 바꾸면 참가자가 헷갈립니다.
+</details>
+
+<div class="card warn">
+  <b>⚠️ 절대 하지 않는 것</b>
+  <ul>
+    <li><b>완주 보상·환불을 입에 올리지 않습니다.</b> 둘 다 없습니다. 없는 걸 기대하게 만들면 그게 클레임입니다.</li>
+    <li><b>1기 후기·완주율을 인용하지 않습니다.</b> 기록이 없습니다.</li>
+    <li><b>숫자를 부풀리지 않습니다.</b> 「보통 이쯤에서 다들 막혀요」 같은 말도 측정한 적 없으면 안 씁니다.</li>
+    <li><b>자동 발행은 가르치지 않습니다.</b> 판매페이지에 고지되어 있습니다. 물어보면 「심화에서」로 답합니다.</li>
+  </ul>
+</div>
+
+<h2>매일 공통 진행 틀</h2>
+<div class="tw"><table>
+<tr><th>때</th><th>할 일</th></tr>
+<tr><td><b>아침</b></td><td>방에 <b>그날 미션 공지 붙여넣기</b> (<code>미션7일치.md</code>의 [붙여넣기] 블록 그대로)</td></tr>
+<tr><td><b>낮</b></td><td>각자 진행. <b>한 번은 먼저</b> 말을 겁니다 — "어디까지 오셨어요?"</td></tr>
+<tr><td><b>막히면</b></td><td><b>5분 넘으면 화면공유.</b> 글로 주고받지 않습니다</td></tr>
+<tr><td><b>저녁</b></td><td>인증 사진 받기 → <b>한 줄이라도 반응</b>을 답니다</td></tr>
+<tr><td><b>밤</b></td><td>못 낸 사람에게 개별 확인. <b>다음 날 아침으로 넘기지 않습니다</b></td></tr>
+</table></div>
+
+<div class="card note">
+  <b>습관 3개는 매일 같이 확인합니다</b><br>
+  🧵 그날 결과물을 <b>쓰레드에 1개</b> · 💬 <b>바깥 계정</b> 글에 답글 5개(3일차부터) · 📓 배운 것 <b>3줄 기록</b>
+  <br><br>
+  ⚠️ <b>「남의 글」은 참가자끼리가 아닙니다.</b> 안 짚으면 자연히 서로에게만 답니다. 그러면 반응이 안 늘어납니다.
+  <br>
+  📓 3줄 기록은 <b>7일차 재료</b>입니다. 몰아 쓰면 디테일이 죽습니다 — 매일 확인하세요.
+</div>
+
+<!-- ============ D0 ============ -->
+<section class="day" id="d0">
+<div class="dayhead"><span class="daynum">DAY 0</span><h2>개강 전에 끝냅니다</h2></div>
+<p class="oneline">7일은 전부 「만드는 날」로 씁니다. 설치는 여기서 끝냅니다.</p>
+
+<h3>참가자가 할 것</h3>
+<ol>
+<li>클로드 앱 설치 · <b>(윈도우만) 깃 설치</b></li>
+<li>로그인 → <b>인사 한 번</b> (← 인증 사진 1장)</li>
+<li><b>Pro 결제</b> — «월간»으로</li>
+<li>바탕화면에 <code>ai-challenge</code> 폴더 → <b>Code 탭으로 열기</b> (← 인증 사진 2장)</li>
+<li>인스타 → 쓰레드 → 텔레그램 가입</li>
+</ol>
+
+<div class="card ok">
+  <b>🔴 2명이니 여기서 하나 더 합니다 — 「뭘 만들지」를 미리 정합니다</b><br>
+  인증 사진 받을 때 이렇게 물어보세요.
+  <div class="say">
+    "하시는 일이랑 가족 얘기 조금만 들려주세요. 1·2일차에 만들 걸 제가 미리 골라 두려고요.
+    첫날 고르느라 시간 쓰지 마시라고요."
+  </div>
+  듣고 나서 <b>1일차 페이지(10개 중)와 2일차 도우미(8개 중)를 하나씩 지정</b>해 둡니다.
+  <b>이게 이번 기수에서 제일 값싸고 효과 큰 준비입니다.</b>
+</div>
+
+<details><summary>1일차 페이지 메뉴 10개</summary>
+①우리 아이 성장 기록 ②부모님 약 시간표 ③우리 가게 메뉴판 ④모임 회비 정산표 ⑤가족 기념일 디데이
+⑥여행 계획표 ⑦경조사 기록 ⑧냉장고 재고표 ⑨내 기록장(산·낚시·책) ⑩반려동물 건강수첩
+</details>
+<details><summary>2일차 도우미 메뉴 8개</summary>
+①우리 가게 ②아이 공부 ③부모님 돌봄 ④살림 ⑤글쓰기 ⑥여행 ⑦모임 총무 ⑧취미
+<br><br><b>글쓰기 도우미를 고른 사람은 3일차가 훨씬 부드럽게 이어집니다.</b> 애매해하면 이쪽으로 미세요.
+</details>
+
+<div class="card warn">
+<b>개강 전 내가 확인할 것</b>
+<ul class="chk">
+<li><b>한글 명령어가 되는가</b> — 폴더에 <code>.claude/commands/오늘글.md</code> 만들고 <code>/오늘글</code>이 자동완성에 뜨는지. <span class="pill a">제일 급함</span> 안 되면 6일차 다섯 개를 <b>전부 영문으로</b> 갈아야 하고 당일엔 못 합니다</li>
+<li><b>텔레그램 주소 두 줄</b>이 내 봇에서 실제로 도는지 (5일차 산)</li>
+<li>아티팩트 <b>게시·공개범위</b> 경로 (1일차)</li>
+<li>프로젝트 <b>지식·지침</b> 경로 (2일차)</li>
+<li>커넥터 <b>쓰기 권한</b> (5일차 — 1기가 여기서 안내서를 접었습니다)</li>
+</ul>
+<b>2명이라 나머지는 화면공유로 방어됩니다. 첫 줄만은 반드시 미리 하세요.</b>
+</div>
+</section>
+
+<!-- ============ D1 ============ -->
+<section class="day" id="d1">
+<div class="dayhead"><span class="daynum">DAY 1</span><h2>아티팩트 ✨</h2></div>
+<div class="feat">여는 기능 — 아티팩트 · 게시(공유 링크)</div>
+<p class="oneline">말했더니 옆에 진짜 물건이 떴다. 그리고 남에게 보낼 주소가 생겼다.</p>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>1</td><td>미리 정해둔 페이지 만들기 (프롬프트 붙여넣기)</td><td>30</td></tr>
+<tr><td>2</td><td><b>「고쳐줘」 3번</b> + ⭐빨간 글씨 붙여넣기 심기</td><td>45</td></tr>
+<tr><td>3</td><td><b>내 진짜 내용</b> 채워 넣기 — ⏰<b>"오늘은 세 칸만"</b></td><td>50</td></tr>
+<tr><td>4</td><td>게시 → 링크 → 폰으로 열기 → <b>실제로 보내기</b></td><td>40</td></tr>
+</table></div>
+
+<h3>시연 순서 (화면공유 10분)</h3>
+<ol>
+<li>말 한 줄 → 옆에 물건이 뜨는 것 <b>먼저 보여줍니다.</b> 설명은 그 다음입니다</li>
+<li><b>일부러 "글씨 크게 해줘"</b> 한 번 — 눈앞에서 바뀌는 걸 봅니다</li>
+<li>게시 → 링크 → <b>내 폰으로 열어 보입니다</b></li>
+</ol>
+
+<div class="card lamp">
+<b>오늘의 핵심 근육 — 「빨간 글씨 통째로 붙여넣기」</b><br>
+7일 내내 쓰는 기술입니다. <b>블록 2에서 반드시 한 번은 성공시킵니다.</b>
+에러가 안 나면 <b>일부러</b> 이상한 요구를 시켜 한 번 내 보세요.
+<div class="say">
+  "여기서 빨간 글씨가 나오면요, 읽지 마시고 그냥 통째로 복사해서 그대로 붙여넣으세요.
+  그게 이번 주 내내 쓸 제일 중요한 기술입니다."
+</div>
+</div>
+
+<details><summary>막히는 곳 · 즉답</summary>
+<ul>
+<li><b>"뭘 만들지 모르겠어요"</b> → Day 0에서 이미 정해뒀습니다. 그대로 진행합니다</li>
+<li><b>결과가 밋밋하다</b> → 「고쳐줘」를 대신 시연합니다. 첫날 결과물이 초라하면 이탈합니다</li>
+<li><b>링크가 안 열린다</b> → 공개 범위 설정. <b>여기 리허설이 안 됐으면 화면공유로 같이 봅니다</b></li>
+</ul>
+</details>
+
+<div class="card warn">
+<b>🔴 첫날 링크까지 못 간 사람은 그날 저녁에 반드시 개별 케어.</b> 첫날 좌절이 이탈 1순위입니다.
+<br><br>
+<b>🔴 공개 범위 — 이건 반드시 말로 짚습니다.</b>
+메뉴 ①아이 성장기록 ②약 시간표 ⑩반려동물 수첩에는 <b>아이 이름·생일·약·병원 기록</b>이 들어갑니다.
+그리고 블록 3에서 <b>진짜 내용</b>을 넣게 하고 블록 4에서 <b>게시</b>시킵니다.
+<div class="say">
+  "게시한 주소는 <b>링크를 아는 사람이면 누구나</b> 열 수 있습니다.
+  그래서 아이 얼굴 사진, 전체 이름, 집 주소, 전화번호, 약 이름은 넣지 마세요.
+  <b>이름은 ○○이, 사진은 나중에</b>로 두시면 됩니다. 오늘은 <b>틀을 만드는 날</b>이에요."
+</div>
+<b>⏰ 블록 3이 시간을 제일 잘 먹습니다.</b> 60세 타자 속도로 회비 내역을 다 입력하면 오늘이 갑니다.
+<b>"오늘은 세 칸만, 나머지는 예시로 두세요"</b>를 먼저 말해 주세요.
+</div>
+
+<p><span class="pill g">✔ 인증</span> 내 폰에서 링크를 열면 <b>내 진짜 내용</b>이 뜨고, 그걸 누군가에게 보냈다</p>
+</section>
+
+<!-- ============ D2 ============ -->
+<section class="day" id="d2">
+<div class="dayhead"><span class="daynum">DAY 2</span><h2>프로젝트 🗂️</h2></div>
+<div class="feat">여는 기능 — 프로젝트 · 지식(자료 올리기) · 지침</div>
+<p class="oneline">매번 처음부터 설명하지 않아도 되는 AI가 생겼다.</p>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>1</td><td>프로젝트 만들고 <b>내 자료 넣기</b></td><td>40</td></tr>
+<tr><td>2</td><td>규칙 알려주기 → ⭐<b>밖에서 한 번, 안에서 한 번</b></td><td>35</td></tr>
+<tr><td>3</td><td>도우미로 <b>실물 3장</b> 뽑기</td><td>50</td></tr>
+<tr><td>4</td><td><b>하나를 실제로 쓴다</b> + 안 맞는 데 3번 고치기</td><td>40</td></tr>
+</table></div>
+
+<div class="card lamp">
+<b>오늘의 「아하」는 블록 2에 있습니다. 이걸 놓치면 이 날이 통째로 밋밋해집니다.</b><br>
+<b>똑같은 질문</b>을 도우미 <b>밖에서</b> 한 번, <b>안에서</b> 한 번 시킵니다. 답이 완전히 다릅니다.
+<div class="say">
+  "지금 두 번 똑같이 물어봤는데 답이 왜 다를까요.
+  밖에서는 저를 모르는 AI고, 안에서는 제 사정을 아는 AI라서 그렇습니다.
+  이게 오늘 만든 겁니다."
+</div>
+<b>이 대비를 반드시 화면공유로 같이 봅니다.</b> 혼자 하면 그냥 지나갑니다.
+</div>
+
+<details><summary>막히는 곳 · 즉답</summary>
+<ul>
+<li><b>"뭘 골라야 할지"</b> → Day 0에서 정해뒀습니다. 그래도 흔들리면 <b>내가 지정</b>합니다. 고민은 나중에</li>
+<li>🔴 <b>「AI는 자신 있게 틀린다」를 오늘 짚습니다.</b> 메뉴에 <b>약 시간표·반려동물 수첩</b>이 있는데
+왕초보는 AI가 틀린다는 걸 모릅니다. 이건 알참 문제가 아니라 <b>안전 문제</b>입니다 →
+<i>"날짜·금액·약 이름·전화번호처럼 틀리면 큰일 나는 건 꼭 눈으로 확인하세요. '이거 맞아?' 하고 되물으면 고쳐 줍니다."</i></li>
+<li><b>넣을 자료가 없다</b> → 말로 부르게 하고 받아쓰기 합니다. 완벽한 자료를 기다리지 않습니다</li>
+<li><b>개인정보를 어디까지?</b> → <b>가족 이름·연락처는 OK. 남의 주민번호·계좌는 금지.</b> 여기서 한 번 짚습니다</li>
+</ul>
+</details>
+
+<p><span class="pill g">✔ 인증</span> 내 도우미가 있고, 그게 만들어준 것 중 하나를 <b>오늘 실제로 썼다</b></p>
+</section>
+
+<!-- ============ D3 ============ -->
+<section class="day" id="d3">
+<div class="dayhead"><span class="daynum">DAY 3</span><h2>내 말투 저장 ✍️</h2></div>
+<div class="feat">여는 기능 — 프로젝트 지식을 「내 스타일 저장소」로 · 긴 작업 나눠 시키기</div>
+<p class="oneline">한 달치가 하루에 손에 들어왔다. 그것도 내 말투로.</p>
+
+<div class="card warn">
+<b>이 날의 실패 방식은 하나로 정해져 있습니다 — 30개가 다 비슷하게 나옵니다.</b><br>
+블록 순서가 전부 그걸 막는 장치입니다. <b>순서를 바꾸지 마세요.</b>
+특히 <b>바로 "글 30개 써줘"를 시키면 반드시 실패합니다.</b>
+</div>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>1</td><td><b>내 말투 뽑아 저장</b> — 이미 쓴 글·카톡·댓글 5개를 통째로</td><td>40</td></tr>
+<tr><td>2</td><td><b>글감 30개 먼저</b> — 주제 축 3~5개 × 각 6개</td><td>35</td></tr>
+<tr><td>3</td><td>본문 30개 생성</td><td>45</td></tr>
+<tr><td>4</td><td>🔴 <b>나 vs AI 대결</b> + 제목 후보 + 1개 발행</td><td>60</td></tr>
+</table></div>
+
+<div class="card warn">
+<b>🔴 원래 이 날이 제일 김빠지는 날이었습니다. 블록 4를 바꿔서 뒤집었습니다.</b><br>
+블록 1~3이 전부 붙여넣기라 <b>참가자 손이 하는 일이 «Ctrl»+«V» 세 번</b>이었고,
+30개 중 27개는 읽지도 말라 했고, 올린 1개는 반응이 0입니다.
+저녁에 남는 생각이 <i>"많긴 한데 이거 내가 만든 건가"</i>였습니다. <b>여기가 이탈 지점이었습니다.</b>
+</div>
+
+<div class="card lamp">
+<b>블록 4 — 5분 타이머를 재고 직접 쓰게 합니다</b>
+<ol>
+<li>AI가 쓴 글은 <b>덮어 둡니다</b></li>
+<li><b>타이머 5분.</b> 같은 글감으로 직접 손으로. <b>다섯 줄이면 충분</b>, 맞춤법 틀려도 됩니다</li>
+<li>둘을 나란히 주고 <b>"2번에만 있고 1번에는 없는 것 5개"</b>를 찾게 합니다</li>
+<li>그 5개를 <b>말투 규칙서에 덧붙이고</b>, 글 3개를 다시 뽑습니다 — 아까와 다릅니다</li>
+</ol>
+<div class="say">
+  "지금 나온 다섯 개가 <b>AI한테는 없고 선생님한테만 있는 것</b>입니다.
+  이게 앞으로 글 쓰실 때 무기예요."
+</div>
+<b>이 한 블록이 셋을 동시에 해결합니다</b> — ①하루에 하나는 <b>본인이 만든 것</b>이 생기고
+②「AI 글에 내 얘기 한 줄」이 <b>왜 필요한지 스스로 발견</b>하고
+③말투 규칙서가 <b>참가자가 고친 물건</b>이 되어 6일차 규칙 파일에 실립니다.
+</div>
+
+<div class="card note">
+<b>가격을 정당화하는 날입니다.</b> <b>글 30개를 한 화면에 펼쳐서 같이 세어 보세요.</b> 숫자가 눈에 보여야 실감이 납니다.<br>
+⏰ <b>오늘이 사용량 한도에 제일 잘 걸립니다.</b> 블록 1~2 오전, 3~4 저녁으로 쪼개게 하세요.<br>
+💬 <b>"오늘 올린 글에 반응 없는 게 정상"</b>이라고 미리 말해 주세요. 안 그러면 첫 실망이 여기서 옵니다.
+</div>
+
+<details><summary>막히는 곳 · 즉답</summary>
+<ul>
+<li><b>"내가 쓴 글이 없어요"</b> → <b>3분 말하게 하고 받아쓰기</b>합니다. 이 우회로를 미리 준비해 두세요</li>
+<li><b>30개를 다 고치려 든다</b> → <span class="pill a">시간 터짐 1순위</span> <b>"3개만"</b>을 강하게 말합니다</li>
+<li><b>AI 티가 난다</b> → <b>한 줄은 반드시 본인 얘기</b>로 바꾸게 합니다(1기 검증 규칙). 복붙 그대로 금지</li>
+</ul>
+</details>
+
+<p><span class="pill g">✔ 인증</span> 글 30개 + 주제 축 3개 이상 + 제목 거친 <b>1개 발행</b><br>
+🆕 <b>오늘부터 「답글 5개」 습관 시작</b> — 바깥 계정입니다</p>
+</section>
+
+<!-- ============ D4 ============ -->
+<section class="day" id="d4">
+<div class="dayhead"><span class="daynum">DAY 4</span><h2>아티팩트 심화 🎨</h2></div>
+<div class="feat">여는 기능 — 아티팩트로 디자인 · 틀 하나로 찍어내기</div>
+<p class="oneline">1일차에 쓴 그 기능이 오늘은 공장이 됐다.</p>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>1</td><td><b>카드 틀 1장</b> — ⚠️<b>글자 수 상한을 여기서</b> 정합니다</td><td>45</td></tr>
+<tr><td>2</td><td>1세트(5장) — 3일차 글 하나를 갈아끼움</td><td>35</td></tr>
+<tr><td>3</td><td><b>2세트째 — 다른 글로, 틀은 그대로</b></td><td>25</td></tr>
+<tr><td>4</td><td>🔴 <b>그림 저장 → 폰으로 옮기기 → 인스타</b></td><td>60~90</td></tr>
+</table></div>
+
+<div class="card warn">
+<b>🔴 여기가 오늘 무너지던 자리입니다.</b><br>
+원래 대본은 <b>"이미지 파일로 저장해 주세요" 한 줄</b>이 전부였습니다. 그걸로는 안 됩니다 —
+<b>대화창의 클로드는 참가자 컴퓨터에 파일을 저장하지 못합니다.</b>
+게다가 <b>PC에서 폰으로 옮기는 단계가 통째로 없었습니다.</b> 왕초보는 인스타를 폰으로 씁니다.
+<br><br>
+<b>순서를 이렇게 잡으세요.</b>
+<ol>
+<li>카드 아래에 <b>「이 장 저장」 단추를 붙여 달라</b>고 시킵니다</li>
+<li>안 되면 <b>화면 잘라내기</b> — 윈도우 «Win»+«Shift»+«S», 맥 «Cmd»+«Shift»+«4». 5장을 한 장씩</li>
+<li><b>카톡 「나에게 보내기」</b>로 PC→폰 전송 (제일 쉬운 길입니다)</li>
+<li>폰 카톡에서 길게 눌러 저장 → 인스타에 순서대로</li>
+</ol>
+<b>2명이니 여기는 그냥 화면공유로 같이 하세요.</b> 저장·전송이 처음이라 시간이 제일 잘 터집니다.<br>
+⏰ <b>모자라면 2세트를 1세트로 줄이고 업로드를 지킵니다.</b>
+</div>
+
+<div class="card lamp">
+<b>블록 3이 이 날의 전부입니다.</b> 1세트만 만들면 「예쁜 카드 만들었다」로 끝납니다.
+<b>2세트째를 만들어 봐야 「틀 하나면 계속 찍어낸다」가 몸에 남습니다.</b>
+<div class="say">
+  "지금 두 번째는 몇 분 걸렸죠? 처음보다 훨씬 빨랐을 겁니다.
+  이제 이 틀이 있으니까 앞으로는 계속 이 속도입니다."
+</div>
+</div>
+
+<details><summary>막히는 곳 · 즉답</summary>
+<ul>
+<li><b>한글 깨짐 · 글자 넘침</b> → <b>블록 1의 글자 수 상한이 예방책</b>입니다. 순서를 바꾸지 마세요</li>
+<li><b>이미지로 저장이 안 된다</b> → 화면 캡처로 대체해도 됩니다. 진행을 막지 않습니다</li>
+<li><b>인스타 올리기를 부담스러워한다</b> → <b>비공개 계정도 괜찮다</b>고 미리 말해둡니다</li>
+</ul>
+</details>
+
+<p><span class="pill g">✔ 인증</span> 카드 <b>10장(2세트)</b>이 있고, 인스타에 1세트가 올라가 있다</p>
+</section>
+
+<!-- ============ D5 ============ -->
+<section class="day" id="d5">
+<div class="dayhead"><span class="daynum">DAY 5</span><h2>커넥터 🔔</h2><span class="pill a">위험 구간</span></div>
+<div class="feat">여는 기능 — 커넥터(노션·드라이브 연결)</div>
+<p class="oneline">지금까지 화면 안에서만 놀았는데, 오늘 밖으로 나갔다.</p>
+
+<div class="card warn">
+<b>🔴 오늘은 「자동 알림」을 하지 않습니다. 못 합니다.</b><br>
+대화창의 클로드는 <b>바깥으로 메시지를 못 보냅니다.</b> 그건 Code 탭 기능이고 그건 내일입니다.
+<b>오늘은 봇을 「깨워두는」 날입니다.</b> 자동 알림은 <b>내일 <code>/보고</code></b>가 완성합니다.
+<br><br>
+<span style="color:var(--ink-mid)">※ 설계 초안에는 오늘 자동 알림까지 시키게 되어 있었습니다. 그대로 갔으면 전원이 오늘 저녁에 멈췄습니다.</span>
+</div>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>1</td><td>커넥터 연결 (노션 또는 드라이브)</td><td>30</td></tr>
+<tr><td>2</td><td>글 30개를 창고로 — 올린 것/안 올린 것 구분</td><td>40</td></tr>
+<tr><td>3</td><td>텔레그램 봇 만들기 (BotFather)</td><td>30</td></tr>
+<tr><td>4</td><td><b>봇이 내 폰에 말 걸게 하기</b> — 주소 두 줄</td><td>50</td></tr>
+</table></div>
+
+<h3>블록 4 — 이번 주 코드 없이 하는 일 중 제일 험합니다</h3>
+<div class="card">
+<b>순서를 틀리면 안 됩니다.</b>
+<ol>
+<li><b>텔레그램에서 내 봇에게 아무 말이나 먼저 보냅니다.</b> ← 이걸 안 하면 다음이 안 됩니다</li>
+<li>주소창에 <b>내 번호 찾기</b>:
+<pre><code>https://api.telegram.org/bot열쇠/getUpdates</code></pre>
+영어가 잔뜩 나옵니다. <b>읽지 말고 통째로 복사해서 클로드에게</b> "여기서 chat id 숫자만 찾아줘"</li>
+<li>주소창에 <b>봇이 나에게 말 걸기</b>:
+<pre><code>https://api.telegram.org/bot열쇠/sendMessage?chat_id=숫자&amp;text=안녕하세요</code></pre>
+폰이 울립니다.</li>
+</ol>
+<b>🔴 2명이니 여기는 그냥 화면공유로 같이 하세요.</b> 글로 설명하면 30분, 같이 보면 5분입니다.
+</div>
+
+<div class="card warn">
+<b>⚠️ 토큰(열쇠) 사고를 여기서 막습니다</b><br>
+주소창에 <b>열쇠가 통째로 들어갑니다.</b> 주소창까지 나온 화면을 찍어 올리면 <b>그게 유출입니다.</b>
+<div class="say">
+  "이 긴 열쇠는 비밀번호라고 생각하세요. 인증 사진은 <b>텔레그램 앱 화면만</b> 찍어 주세요.
+  주소창은 안 나오게요."
+</div>
+</div>
+
+<details><summary>막히는 곳 · 즉답</summary>
+<ul>
+<li><b>노션 계정이 없다</b> → 구글 드라이브로. 둘 다 없으면 <b>작업방 안 정리로 대체</b>합니다. 진행이 막히지 않는 게 우선</li>
+<li><b>getUpdates가 텅 비어 있다</b> → <b>봇에게 먼저 말을 안 걸었습니다.</b> 1번으로 돌아갑니다</li>
+<li><b>커넥터 쓰기 권한이 없다</b> → 계정 종류 문제. 창고 정리를 프로젝트 안으로 대체하고 넘어갑니다</li>
+</ul>
+</details>
+
+<p><span class="pill g">✔ 인증</span> <b>내가 만든 봇이 내 폰으로 보낸 메시지</b> 사진 + 창고에 글 30개</p>
+</section>
+
+<!-- ============ D6 ============ -->
+<section class="day" id="d6">
+<div class="dayhead"><span class="daynum">DAY 6</span><h2>Code 탭 ⌨️</h2><span class="pill a">이 주의 산</span></div>
+<div class="feat">여는 기능 — Code 탭 · CLAUDE.md · 내 명령어</div>
+<p class="oneline">한 단어를 쳤더니 어제까지 오래 걸리던 일이 끝났다.</p>
+
+<div class="card note">
+<b>6일 훈련 뒤 처음 대화창을 벗어납니다.</b> 첫날부터 파일을 만났으면 이탈했을 사람들입니다.
+<b>이 순서가 커리큘럼의 핵심</b>이라 바꾸지 않습니다.
+<br><br>
+<b>명령어의 실물은 파일 하나입니다</b> — 내 폴더 안 <code>.claude/commands/이름.md</code>가 곧 <code>/이름</code>이 됩니다.
+붙여넣고 저장하면 끝이고, 앱에서 <code>/</code>를 치면 목록에 뜹니다.
+</div>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>0</td><td>🔴 <b>짐 옮기기</b> — 대화창의 내 정보를 복사해 둡니다</td><td>5</td></tr>
+<tr><td>1</td><td>Code 탭에서 폴더 열기 + <code>CLAUDE.md</code> <span class="pill a">유일한 산</span></td><td>50</td></tr>
+<tr><td>2</td><td>명령어 3개 — <code>/오늘글</code> <code>/제목</code> <code>/카드</code></td><td>45</td></tr>
+<tr><td>3</td><td>2개 더 — <code>/보고</code> <code>/도우미</code>. ⭐<b>어제 봇이 여기 붙습니다</b></td><td>40</td></tr>
+<tr><td>4</td><td>한 번에 다 돌려보기 + 목록 정리(내일 씁니다)</td><td>35</td></tr>
+</table></div>
+
+<div class="card warn">
+<b>🔴 블록 0을 빠뜨리면 <code>/도우미</code>와 <code>/오늘글</code>이 헛돕니다.</b><br>
+<b>2일차 도우미의 자료는 웹 앱의 「프로젝트」 안에 있고, 6일차 명령어는 내 컴퓨터 폴더에서 돕니다.
+이 둘은 서로를 못 봅니다.</b> Code 탭에서 <code>/도우미</code>를 쳐도 클로드는 우리 가게 메뉴도, 아이 학년도 모릅니다.
+<b>참가자가 이걸 발견하는 순간이 7일 중 유일하게 "속았다"가 나오는 지점</b>입니다.
+<br><br>
+코드 화면을 열기 <b>전에</b> 글자로 된 것 세 개를 복사해 메모장에 붙여 두게 하세요 —
+①3일차 말투 규칙서 ②2일차 도우미 규칙 ③2일차 자료 중 짧은 것.
+<div class="say">
+  "오늘 하는 일의 핵심이 이겁니다. <b>대화창에 있던 제 정보를 제 컴퓨터로 이사시키는 것.</b>
+  안 옮기면 여기 클로드는 선생님을 몰라요. 다른 창에서 있었던 일이니까요."
+</div>
+👉 <b>이 5분이 이 과정 전체에서 교육 효과가 제일 큽니다</b> —
+「AI는 내가 준 것만 안다」를 몸으로 아는 유일한 지점입니다.
+</div>
+
+<div class="card lamp">
+<b>블록 1을 이렇게 설명하면 바로 이해합니다.</b>
+<div class="say">
+  "2일차에 도우미한테 규칙 알려드렸죠? 그게 파일로 내려온 겁니다.
+  같은 건데 이번엔 제 컴퓨터에 있는 거예요."
+</div>
+<b>「뭘 만들까」로 아무도 멈추지 않습니다</b> — 다섯 개가 이미 정해져 있고,
+5일 동안 <b>전원이 실제로 반복한 것들</b>이라 "왜 필요한지"를 설명할 필요조차 없습니다.
+</div>
+
+<div class="card warn">
+<b>⚠️ 한글 명령어가 안 잡히면</b> 다섯 개를 전부 영문으로:
+<code>/today</code> <code>/title</code> <code>/card</code> <code>/report</code> <code>/helper</code>
+<br><b>이건 개강 전에 확인했어야 합니다.</b> 당일에 바꿀 수 있는 일이 아닙니다.
+<br><br>
+<b>⚠️ 열쇠가 이제 내 컴퓨터 파일에 들어갑니다.</b> "이 폴더는 남에게 통째로 주지 마세요"를 한 번 말합니다.
+</div>
+
+<details><summary>막히는 곳 · 즉답</summary>
+<ul>
+<li><b>Code 탭이 안 열린다 / 폴더가 안 열린다</b> → <b>(윈도우) 깃이 안 깔린 것</b>입니다. Day 0로 돌아갑니다</li>
+<li><b>"요금제를 올리라"</b> → 결제가 안 된 것. <b>Free를 눌렀을 가능성</b>이 큽니다</li>
+<li><b>빨간 글씨</b> → 6일 동안 익힌 그것. <b>통째로 붙여넣기.</b> 오늘이 그 기술의 시험대입니다</li>
+<li><b>명령어를 더 만들고 싶어 한다</b> → <b>오늘은 5개까지.</b> 더는 심화에서</li>
+</ul>
+</details>
+
+<p><span class="pill g">✔ 인증</span> 한 단어 쳤더니 결과가 나온 화면 + <code>/보고</code> 치니 폰이 울림</p>
+</section>
+
+<!-- ============ D7 ============ -->
+<section class="day" id="d7">
+<div class="dayhead"><span class="daynum">DAY 7</span><h2>포트폴리오 🏆</h2></div>
+<div class="feat">새로 배우는 기능 없음 — 전부 묶는 날</div>
+<p class="oneline">링크 하나를 보냈더니 7일 동안 만든 걸 전부 보여줄 수 있었다.</p>
+
+<div class="card note">
+<b>오늘 하는 일은 딱 하나 — 자랑하는 날입니다.</b>
+새로 만드는 게 없습니다. <b>1일차에 받은 그 링크에 6일치를 채워 넣으면 끝</b>입니다.
+1일차와 7일차가 같은 주소라는 걸 꼭 짚어 주세요. <b>일주일이 한 바퀴 돌았다는 감각</b>이 여기서 옵니다.
+</div>
+
+<div class="tw"><table>
+<tr><th>블록</th><th>할 일</th><th>분</th></tr>
+<tr><td>1</td><td>1일차 페이지 열어 <b>칸 5개</b> 만들기</td><td>35</td></tr>
+<tr><td>2</td><td>6일치 채우기 — 도우미·글·카드뉴스·봇·명령어</td><td>50</td></tr>
+<tr><td>3</td><td>🎓 <b>마지막 시험 — 프롬프트 없이 혼자 하나</b></td><td>40</td></tr>
+<tr><td>4</td><td>한 달 계획표 + 폰 확인 → 보내기 + <b>후기 받기</b></td><td>50</td></tr>
+</table></div>
+
+<div class="card warn">
+<b>🔴 원래 7일차는 「정리하는 날」이라 마지막 인상이 골짜기였습니다.</b>
+후기가 목적인 기수인데 <b>미지근하게 끝나면 후기도 미지근하게 나옵니다.</b> 그래서 시험을 넣었습니다.
+<br><br>
+<b>그리고 더 큰 문제 — 7일 내내 참가자가 프롬프트를 직접 써 본 적이 한 번도 없습니다.</b>
+설계상 의도한 것이지만(왕초보에겐 옳은 판단), <b>마지막까지 한 번도 안 시키면 8일째 아침에 아무것도 못 합니다.</b>
+</div>
+
+<div class="card lamp">
+<b>블록 3 — 오늘은 프롬프트를 안 줍니다</b>
+<div class="say">
+  "7일 동안 제가 드린 문장 붙여넣기만 하셨죠. <b>오늘 하나만 직접 시켜 보세요.</b>
+  메뉴에 없던 걸로요. 일주일 동안 '이런 것도 되려나' 싶으셨던 거 아무거나.<br><br>
+  세 가지만 지키면 됩니다. <b>뭘 만들지 · 누가 볼 건지 · 어떻게 생겼으면 좋겠는지.</b>
+  나오면 '고쳐 주세요' 세 번. 1일차에 하신 그거 그대로예요."
+</div>
+<b>이게 이 챌린지의 진짜 졸업장입니다. 링크보다 이게 남습니다.</b>
+</div>
+
+<div class="card note">
+<b>⚠️ 마지막에 이 안내를 꼭 붙입니다 — 「앞으로 나는 어디서 작업하나」</b><br>
+1~5일은 대화창, 6일은 코드 화면. <b>참가자는 다음 날 아침에 어느 쪽을 열지 모릅니다.</b>
+<div class="say">
+  "평소엔 <b>대화창</b>을 여세요. 2일차 도우미가 거기 있습니다.
+  글·카드·보고 뽑을 때만 <b>코드 화면</b> 열고 한 단어 치시고요.
+  헷갈리시면 <b>대화창부터</b> 여시면 됩니다."
+</div>
+</div>
+
+<div class="card lamp">
+<b>블록 4의 한 달 계획표가 「7일 뒤에도 굴러가게」 만드는 자리입니다.</b>
+남은 글 재고를 날짜에 배치하고, 떨어지면 칠 명령어(<code>/오늘글</code>)를 적어 둡니다.
+매일 쌓은 <b>3줄 기록</b>이 재료입니다.
+<div class="say">
+  "이 표가 있으면 제가 없어도 한 달은 굴러갑니다. 떨어지면 어제 만든 명령어 치시면 되고요."
+</div>
+</div>
+
+<div class="card warn">
+<b>⚠️ 마지막 날 좌절로 끝나면 안 됩니다.</b>
+<ul>
+<li><b>"올릴 게 없어요"</b> → <b>못 채운 칸은 비워두고 채운 것만 올립니다.</b> 7일 내내 완벽했던 사람은 없습니다</li>
+<li><b>폰에서 안 열린다</b> → 블록 4를 <b>여유 있게</b> 잡습니다</li>
+</ul>
+</div>
+
+<div class="card ok">
+<b>🔴 오늘 후기를 받습니다 — 이번 기수의 진짜 산출물입니다</b><br>
+2명뿐이라 <b>통계가 아니라 개별 이야기</b>가 나와야 합니다. 이렇게 물어보세요.
+<div class="say">
+  "시작하기 전이랑 지금이랑 뭐가 제일 달라지셨어요?<br>
+  7일 중에 제일 좋았던 날이 언제였는지도 한 줄만 남겨 주시면 좋겠습니다."
+</div>
+<b>포트폴리오 링크 + 후기 한 줄이 3기를 파는 재료가 됩니다.</b> 오늘 안 받으면 다시 못 받습니다.
+</div>
+
+<p><span class="pill g">✔ 인증</span> 링크 하나를 보냈더니 상대가 7일치를 전부 볼 수 있다</p>
+</section>
+
+<!-- ============ 응급 ============ -->
+<section class="day" id="emg">
+<div class="dayhead"><span class="daynum">응급</span><h2>이럴 때는 이렇게</h2></div>
+
+<h3>어디서든 통하는 3개</h3>
+<div class="tw"><table>
+<tr><th>상황</th><th>대응</th></tr>
+<tr><td><b>빨간 글씨</b></td><td>통째로 복사 → 붙여넣기. <b>내가 읽어주지 않습니다.</b> 본인이 하게 시킵니다</td></tr>
+<tr><td><b>5분 이상 막힘</b></td><td><b>바로 화면공유.</b> 글로 주고받지 않습니다. 2명인 이유가 이겁니다</td></tr>
+<tr><td><b>결과가 밋밋</b></td><td>「고쳐줘」를 대신 한 번 시연. 참가자가 요구 수준을 몰라서입니다</td></tr>
+</table></div>
+
+<h3>시간이 터질 때</h3>
+<p><b>블록은 밀도이고, 완주는 결과물로 판정합니다.</b> 시간이 모자라면 <b>블록을 줄이고 결과물을 지킵니다.</b></p>
+<div class="tw"><table>
+<tr><th>날</th><th>먼저 버릴 것</th><th>지킬 것</th></tr>
+<tr><td>1일</td><td>「고쳐줘」 3번 → 1번</td><td><b>링크 받아서 보내기</b></td></tr>
+<tr><td>2일</td><td>실물 3장 → 1장</td><td><b>밖에서/안에서 대비 실험</b></td></tr>
+<tr><td>3일</td><td>다듬기 3개 → 1개</td><td><b>글 30개 + 1개 발행</b></td></tr>
+<tr><td>4일</td><td>2세트 → 1세트<span style="color:var(--ink-dim)"> (아깝지만)</span></td><td><b>인스타 업로드</b></td></tr>
+<tr><td>5일</td><td>창고 정리 간소화</td><td><b>봇이 폰에 말 걸기</b></td></tr>
+<tr><td>6일</td><td>명령어 5개 → 3개</td><td><b>Code 탭이 열리고 하나라도 돌기</b></td></tr>
+<tr><td>7일</td><td>한 달 계획표 축약</td><td><b>링크 보내기 + 후기 받기</b></td></tr>
+</table></div>
+
+<h3>말할 때 주의</h3>
+<ul>
+<li><b>"쉬워요" "금방 돼요" "클릭 몇 번이면 됩니다" 금지.</b> 막힌 사람을 두 번 때립니다. 못 했을 때 자책하게 만드는 말입니다 → <b>"여기 원래 좀 걸려요"</b></li>
+<li><b>"보통 다들 여기서…" 금지.</b> 측정한 적 없습니다 → <b>"이럴 수 있어요"</b></li>
+<li><b>모르면 모른다고 합니다.</b> 지어내면 왕초보는 그대로 따라 하다 더 크게 막힙니다</li>
+</ul>
+
+<h3>공지에 내 얘기를 한 줄씩 넣습니다</h3>
+<p>7일치 공지가 전부 <b>"~하십니다 / ~합니다"</b> 지시문입니다.
+<b>77,000원짜리 1:1 상품인데 공지에 파는 사람이 안 보입니다.</b>
+아침 공지 앞이나 뒤에 <b>1인칭 한 줄</b>만 붙이세요.</p>
+<div class="say">
+  (4일차) 저도 처음 카드 만들 때 글자가 틀 밖으로 삐져나가서 열 번쯤 다시 시켰습니다.
+  <b>글자 수 상한을 먼저 정하는 게 그때 찾은 답입니다.</b><br><br>
+  (6일차) 오늘이 제일 낯선 날입니다. <b>저는 이 화면 처음 열었을 때 5분쯤 아무것도 못 하고 쳐다만 봤어요.</b>
+  막히시면 바로 부르세요.
+</div>
+<p>⚠️ <b>지어낸 이야기는 넣지 마세요.</b> 실제로 겪은 것만 씁니다.</p>
+
+<div class="card ok">
+<b>이 상품이 파는 건 커리큘럼이 아니라 「제가 옆에서 직접 챙긴다」입니다.</b>
+2명이라 그걸 진짜로 할 수 있습니다. <b>먼저 말 걸고, 5분이면 화면을 같이 보세요.</b>
+그게 8/30에 나올 후기의 내용이 됩니다.
+</div>
+</section>
+
+<div class="foot">
+  AI왕초보 챌린지 2기 · 선생님용 교안 · 2026-08-22<br>
+  단일 진실 = <span class="mono">gbampd-challenge\2기\커리큘럼_7일.md</span> ·
+  배포 대본 = <span class="mono">미션7일치.md</span> · 참가자 준비 = <span class="mono">Day0_안내서.md</span><br>
+  <b>이 페이지는 참가자에게 주지 않습니다.</b>
+</div>
+
+</div>
