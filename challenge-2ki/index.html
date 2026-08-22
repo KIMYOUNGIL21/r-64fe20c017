@@ -1,0 +1,695 @@
+<meta charset="utf-8">
+<title>AI왕초보 챌린지 2기 — 7일 진행표</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --ground:#0a0c10; --raised:#12151c; --raised-2:#171b24;
+    --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.18);
+    --ink:#edeff2; --ink-mid:#a7aebc; --ink-dim:#767e8d;
+    --lamp:#f0a431; --lamp-soft:rgba(240,164,49,.11); --lamp-line:rgba(240,164,49,.32);
+    --signal:#7c9ce6; --signal-soft:rgba(124,156,230,.11); --signal-line:rgba(124,156,230,.32);
+    --ok:#5bc38e; --ok-soft:rgba(91,195,142,.10); --ok-line:rgba(91,195,142,.30);
+    --alarm:#e0574f; --alarm-soft:rgba(224,87,79,.10); --alarm-line:rgba(224,87,79,.32);
+    --sans:"Pretendard Variable",Pretendard,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    --serif:"Gowun Batang","Nanum Myeongjo","Batang",serif;
+    --mono:ui-monospace,"Cascadia Mono",Consolas,D2Coding,monospace;
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{
+    background:radial-gradient(58rem 34rem at 86% -10%,var(--lamp-soft),transparent 60%),
+      radial-gradient(48rem 32rem at -10% 22%,var(--signal-soft),transparent 60%),var(--ground);
+    background-attachment:fixed; color:var(--ink); font-family:var(--sans);
+    font-size:17px; line-height:1.78; word-break:keep-all; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:30px 17px 110px;}
+  .eyebrow{display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:800;
+    letter-spacing:.10em;color:var(--lamp);text-transform:uppercase;margin-bottom:12px;}
+  h1{font-family:var(--serif);font-size:clamp(25px,5.6vw,34px);line-height:1.32;margin:0 0 12px;}
+  .lede{color:var(--ink-mid);font-size:15.5px;margin:0 0 6px;}
+  h2{font-family:var(--serif);font-size:clamp(21px,4.6vw,27px);margin:0 0 4px;line-height:1.35;}
+  h3{font-size:16px;margin:24px 0 8px;color:var(--lamp);}
+
+  .card{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:19px 17px;margin:15px 0;}
+  .card.warn{border-color:var(--alarm-line);background:linear-gradient(180deg,var(--alarm-soft),var(--raised));}
+  .card.ok{border-color:var(--ok-line);background:linear-gradient(180deg,var(--ok-soft),var(--raised));}
+  .card.note{border-color:var(--signal-line);background:linear-gradient(180deg,var(--signal-soft),var(--raised));}
+  .card.lamp{border-color:var(--lamp-line);background:linear-gradient(180deg,var(--lamp-soft),var(--raised));}
+
+  nav.days{position:sticky;top:0;z-index:30;margin:0 -17px 18px;padding:9px 17px;
+    background:rgba(10,12,16,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  nav.days a{flex:none;padding:8px 13px;border-radius:9px;text-decoration:none;background:var(--raised-2);
+    border:1px solid var(--line);color:var(--ink-mid);font-size:13.5px;font-weight:800;white-space:nowrap;}
+  nav.days a.hot{color:#1a1206;background:var(--lamp);border-color:var(--lamp);}
+  nav.days a.off{opacity:.38;}
+
+  section.day{scroll-margin-top:64px;margin:32px 0 0;padding-top:24px;border-top:1px solid var(--line);}
+  .dayhead{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:2px;}
+  .daynum{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--lamp);
+    border:1px solid var(--lamp-line);border-radius:6px;padding:2px 9px;background:var(--lamp-soft);}
+  .oneline{font-family:var(--serif);font-size:18px;border-left:3px solid var(--lamp);
+    padding:6px 0 6px 13px;margin:13px 0 6px;}
+
+  ol.todo{counter-reset:t;list-style:none;padding-left:0;margin:14px 0;}
+  ol.todo li{counter-increment:t;position:relative;padding:11px 0 11px 42px;border-bottom:1px solid var(--line);}
+  ol.todo li:last-child{border-bottom:0;}
+  ol.todo li::before{content:counter(t);position:absolute;left:0;top:11px;width:27px;height:27px;
+    border-radius:50%;background:var(--lamp-soft);border:1px solid var(--lamp-line);color:var(--lamp);
+    font-family:var(--mono);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+
+  .pbox{margin:13px 0;border:1px solid var(--line-strong);border-radius:11px;overflow:hidden;background:#05070a;}
+  .pbox .ph{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:9px 12px;background:var(--raised-2);border-bottom:1px solid var(--line);}
+  .pbox .pt{font-size:13px;font-weight:800;color:var(--lamp);}
+  .pbox button{border:1px solid var(--lamp-line);background:var(--lamp-soft);color:var(--lamp);
+    font-family:var(--sans);font-size:12.5px;font-weight:800;padding:6px 13px;border-radius:8px;cursor:pointer;}
+  .pbox button:active{background:var(--lamp);color:#1a1206;}
+  .pbox pre{margin:0;padding:13px;overflow-x:auto;}
+  .pbox pre code{font-family:var(--mono);font-size:13.5px;line-height:1.62;color:#cfe3ff;white-space:pre-wrap;word-break:break-all;}
+
+  .done{background:linear-gradient(180deg,var(--ok-soft),var(--raised));border:1px solid var(--ok-line);
+    border-radius:12px;padding:15px 16px;margin:16px 0;}
+  .done b{color:var(--ok);}
+  .stuck{background:var(--raised-2);border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin:13px 0;}
+  .stuck ul{margin:8px 0 0;padding-left:19px;} .stuck li{margin:7px 0;}
+
+  .lock{filter:blur(5px);pointer-events:none;user-select:none;opacity:.5;}
+  .lockmsg{background:var(--raised-2);border:1px dashed var(--line-strong);border-radius:12px;
+    padding:22px 16px;margin:14px 0;text-align:center;color:var(--ink-dim);font-size:15px;}
+  .lockmsg b{color:var(--lamp);}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{color:var(--ink-dim);font-size:12px;font-weight:800;letter-spacing:.04em;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  ul,ol{margin:9px 0;padding-left:20px;} li{margin:5px 0;}
+  b,strong{color:#fff;font-weight:800;}
+  code{font-family:var(--mono);font-size:14px;background:var(--raised-2);border:1px solid var(--line);
+    border-radius:5px;padding:1px 5px;color:var(--lamp);}
+  a{color:var(--signal);}
+  .roomlink{display:block;text-align:center;font-size:18px;font-weight:800;padding:15px;
+    background:var(--lamp);color:#1a1206;border-radius:12px;text-decoration:none;margin:14px 0;}
+  .foot{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-dim);font-size:13px;}
+  .pill{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:20px;
+    background:var(--raised-2);border:1px solid var(--line);color:var(--ink-mid);margin-right:5px;}
+</style>
+
+<div class="wrap">
+
+<div class="eyebrow">▲ 그밤PD · AI왕초보 챌린지 2기</div>
+<h1>7일 진행표</h1>
+<p class="lede"><b>8월 24일(월) ~ 30일(일)</b> · 하루 약 3시간<br>
+이 페이지 하나만 보시면 됩니다. <b>오늘 날짜만 열립니다.</b></p>
+
+<div class="card lamp">
+<b>막히시면 이렇게 하세요 — 제일 중요합니다</b><br>
+<b>막힌 그 화면을 폰 카메라로 찍어 방에 올려 주세요.</b> 제가 보고 바로 알려 드리겠습니다.<br>
+<b>5분 넘게 같은 자리에 계시면 그때는 사진부터</b> 올려 주세요. 혼자 끙끙대지 않으셔도 됩니다.
+<br><br>
+컴퓨터로 화면을 저장하는 방법은 <b>몰라도 됩니다.</b> 폰으로 그냥 찍으시면 됩니다.
+글자가 작게 나와도 괜찮습니다. 제가 확대해서 봅니다.
+</div>
+
+<a class="roomlink" href="#" id="room">👉 참가자 방 들어가기</a>
+
+<div class="card note">
+<b>매일 이 세 가지도 같이 합니다</b>
+<ul>
+<li>🧵 그날 만든 걸 <b>쓰레드에 1개</b> 올리기</li>
+<li>💬 <b>모르는 분들 글에 답글 5개</b> (3일차부터) — 서로한테 말고요</li>
+<li>📓 <b>오늘 배운 것 3줄</b> 적어두기 — 7일차에 씁니다</li>
+</ul>
+</div>
+
+<div class="card warn">
+<b>⏰ 한 번에 몰아서 하지 마세요</b><br>
+유료 클로드도 <b>몇 시간 단위로 쓸 수 있는 양이 정해져 있습니다.</b>
+몰아 하시면 도중에 <b>「잠시 뒤에 다시 해 주세요」</b>가 뜹니다.
+<b>오전에 두 덩어리, 저녁에 두 덩어리</b>로 나누시면 안 생깁니다.
+떴더라도 <b>고장이 아닙니다.</b> 밥 먹고 오시면 됩니다.
+<br><br>
+<b>⚠️ AI는 아주 자신 있게 틀립니다.</b> 날짜·금액·약 이름·전화번호처럼 <b>틀리면 큰일 나는 것</b>은
+꼭 눈으로 확인하세요. <b>"이거 맞아?"</b>라고 되물으면 고쳐 줍니다.
+</div>
+
+<nav class="days" id="nav">
+  <a href="#d0" data-d="0">준비</a>
+  <a href="#d1" data-d="1">1일</a>
+  <a href="#d2" data-d="2">2일</a>
+  <a href="#d3" data-d="3">3일</a>
+  <a href="#d4" data-d="4">4일</a>
+  <a href="#d5" data-d="5">5일</a>
+  <a href="#d6" data-d="6">6일</a>
+  <a href="#d7" data-d="7">7일</a>
+</nav>
+
+<!-- ===== D0 ===== -->
+<section class="day" id="d0" data-day="0">
+<div class="dayhead"><span class="daynum">준비</span><h2>시작 전에 끝내 두세요</h2></div>
+<p class="oneline">7일은 전부 「만드는 날」로 씁니다. 설치는 여기서 끝냅니다.</p>
+<div class="body">
+
+<p><b>맥은 20분, 윈도우는 30분쯤</b> 걸립니다. 나눠서 하셔도 됩니다.
+<b>8월 23일(일) 자정까지만</b> 끝내 주시면 됩니다.</p>
+
+<ol class="todo">
+<li><b>클로드 앱 설치</b> — 인터넷 주소창에 <code>claude.ai/download</code>.
+화면에서 <b>「Download for Windows」</b>(맥은 <b>「Download for macOS」</b>)라고 적힌 단추를 누릅니다.
+<br><span style="color:var(--ink-mid)">주소가 <code>claude.com</code>으로 바뀌어도 정상입니다. 옆에 있는 다른 단추는 누르지 마세요.</span></li>
+
+<li><b>(윈도우만) 부품 하나 더</b> — 주소창에 <code>git-scm.com/install/windows</code> →
+파란 글씨 <b>「Click here to download」</b> → 받은 파일 실행 →
+<b>«Next»만 계속</b> 누르고 마지막에 <b>«Install»</b> → <b>«Finish»</b>.
+<br><span style="color:var(--ink-mid)">영어가 잔뜩 나오는데 <b>하나도 안 읽으셔도 됩니다.</b> 처음 나온 그대로가 제일 좋은 설정입니다.
+검은 창이 떠도 정상이니 «X»로 닫으세요. 다 하면 <b>클로드 앱을 껐다 켜 주세요.</b></span></li>
+
+<li><b>로그인하고 인사 한 번</b> — 「Google로 계속하기」가 제일 빠릅니다.
+그다음 입력칸에 <code>안녕하세요</code>라고 쳐 보세요.
+<br><b>답이 오면 성공입니다. 이 화면을 찍어 두세요 (인증 사진 1장)</b>
+<br><span style="color:var(--alarm)">📝 로그인에 쓰신 <b>이메일 주소를 적어 두세요.</b> 다음 결제를 <b>같은 주소로</b> 하셔야 합니다.</span></li>
+
+<li><b>유료 구독(Pro) 결제</b> — 주소창에 <code>claude.ai/upgrade</code>
+<br>① 위쪽 <b>«개인»</b>(Individual) ② <b>«월간»</b>(Monthly) ③ <b>«Pro»</b>라고 적힌 칸의 단추
+<br><span style="color:var(--alarm)"><b>«월간»을 꼭 확인하세요.</b> 연간은 1년치를 한 번에 냅니다.
+그리고 <b>«Pro»는 이름으로 찾으세요</b> — 자리가 왼쪽이 아닐 수 있고, 맨 왼쪽 «Free»($0)를 누르면 결제가 안 됩니다.</span>
+<br><span style="color:var(--ink-mid)">카드 뒷면 세 자리(CVC)까지 넣습니다. "해외 결제" 문자가 와도 정상입니다.
+끝나면 <b>영수증 메일</b>이 옵니다.</span></li>
+
+<li><b>작업 폴더 만들어 열기</b> — 바탕화면에 <code>ai-challenge</code> 폴더를 만듭니다.
+앱 <b>맨 위 가운데</b>에 <code>Chat</code> · <code>Cowork</code> · <code>Code</code> 세 글자가 있습니다.
+<b>맨 오른쪽 «Code»</b> → <b>«Local»</b> → <b>«Select folder»</b> → 그 폴더를 고르고
+오른쪽 아래 <b>«폴더 선택»</b>을 누릅니다.
+<br>아래 칸에 한 줄 치고 «엔터»:
+<br><b>답이 오면 오늘 끝입니다. 이 화면도 찍어 주세요 (인증 사진 2장)</b></li>
+
+<li><b>앱 세 개 깔기</b> — <b>①인스타그램 → ②쓰레드 → ③텔레그램</b> 순서로.
+쓰레드는 <b>인스타 계정으로 로그인</b>하면 됩니다.
+<br><span style="color:var(--ink-mid)"><b>앱은 셋, 아이디는 둘</b>입니다. 인스타는 비공개로 두셔도 됩니다.</span></li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">5번에서 칠 한 줄</span><button>복사</button></div>
+<pre><code>지금 이 폴더가 잘 열렸는지 보고 짧게 인사해 주세요</code></pre></div>
+
+<div class="done"><b>✔ 다 되면</b> — 인증 사진 <b>두 장</b>을 방에 올려 주세요.
+① 클로드가 인사에 답한 화면 ② Code 탭이 내 폴더를 연 화면</div>
+
+<div class="stuck"><b>🔧 이럴 때는</b>
+<ul>
+<li><b>"Code를 눌렀더니 요금제를 올리라고 나와요."</b> → 결제가 아직입니다. 특히 <b>«Free» 칸을 누르셨을 때</b> 그렇습니다</li>
+<li><b>"(윈도우) 폴더를 골랐는데 아무 일도 안 일어나요."</b> → <b>2번을 안 하신 겁니다.</b> 하고 나서 앱을 껐다 켜세요</li>
+<li><b>"Code 글자가 안 보여요."</b> → 앱 창을 좌우로 넓게 늘려 보세요</li>
+<li><b>빨간 글씨가 뜨면</b> → 통째로 복사해서 입력칸에 붙여넣고 «엔터». <b>이게 7일 내내 쓰는 기술입니다</b></li>
+</ul></div>
+</div>
+</section>
+
+<!-- ===== D1 ===== -->
+<section class="day" id="d1" data-day="1">
+<div class="dayhead"><span class="daynum">1일차</span><h2>인터넷에 내 자리가 생깁니다</h2></div>
+<p class="oneline">말했더니 옆에 진짜 물건이 뜹니다. 그리고 남에게 보낼 주소가 나옵니다.</p>
+<div class="body">
+
+<p><b>뭘 만들지 고민하지 않으셔도 됩니다.</b> 아래에서 하나만 고르세요.</p>
+<div class="card">
+① 우리 아이 성장 기록 ② 부모님 약 시간표 ③ 우리 가게 메뉴판<br>
+④ 모임 회비 정산표 ⑤ 가족 기념일 디데이 ⑥ 여행 계획표<br>
+⑦ 경조사 기록 ⑧ 냉장고 재고표 ⑨ 내 기록장(산·책) ⑩ 반려동물 건강수첩
+</div>
+
+<ol class="todo">
+<li>위에서 하나 고르고, 아래 문장을 붙여넣어 만듭니다</li>
+<li><b>"고쳐 주세요"를 세 번</b> 해 봅니다 — 색 / 글씨 크기 / 순서</li>
+<li>예시로 채워진 자리에 <b>내 진짜 내용</b>을 넣습니다.
+<b>오늘은 세 칸만</b> 채우세요. 나머지는 예시로 두셔도 됩니다</li>
+<li><b>게시해서 주소를 받고, 내 폰으로 열어 봅니다.</b>
+그 링크를 <b>진짜 보내야 할 사람</b>에게 보내세요 — 가족 단톡방·모임방</li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">① 만들기</span><button>복사</button></div>
+<pre><code>제가 실제로 쓸 페이지를 하나 만들어 주세요.
+
+만들 것: (위에서 고른 것을 적으세요)
+보는 사람: (가족 / 손님 / 모임 사람들 중에서)
+
+- 휴대폰에서 보기 좋게 만들어 주세요
+- 글씨는 크게, 색은 편안하게
+- 내용은 일단 예시로 채워 주세요. 제가 나중에 바꾸겠습니다</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">② 고쳐 달라고 하기 (셋 다 해보세요)</span><button>복사</button></div>
+<pre><code>글씨를 더 크게 해 주세요.
+색을 더 밝게 바꿔 주세요.
+맨 위에 있는 것을 맨 아래로 옮겨 주세요.</code></pre></div>
+
+<div class="card warn">
+<b>⚠️ 게시한 주소는 링크를 아는 사람이면 누구나 열 수 있습니다.</b><br>
+그래서 <b>아이 얼굴 사진 · 전체 이름 · 집 주소 · 전화번호 · 약 이름</b>은 넣지 마세요.
+넣고 싶으시면 <b>이름은 "○○이", 사진은 나중에</b>로 두시면 됩니다.
+<b>오늘은 틀을 만드는 날</b>이지 다 채우는 날이 아닙니다.
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 내 폰에서 링크를 열면 <b>내 진짜 내용</b>이 뜨고, 그걸 누군가에게 보냈습니다.
+<br><span class="pill">인증</span> 폰으로 그 주소를 연 화면 1장</div>
+
+<div class="stuck"><b>🔧 이럴 때는</b>
+<ul>
+<li><b>"만들어진 게 밋밋해요."</b> → 「고쳐 주세요」를 더 하세요. <b>이게 오늘의 진짜 수업입니다</b></li>
+<li><b>"빨간 글씨가 떠요."</b> → 통째로 복사해서 붙여넣고 «엔터». 클로드가 알아서 고칩니다</li>
+<li><b>"링크가 안 열려요."</b> → 화면 찍어 방에 올려 주세요</li>
+</ul></div>
+</div>
+</section>
+
+<!-- ===== D2 ===== -->
+<section class="day" id="d2" data-day="2">
+<div class="dayhead"><span class="daynum">2일차</span><h2>나를 아는 AI를 만듭니다</h2></div>
+<p class="oneline">매번 처음부터 설명하지 않아도 되는 AI가 생깁니다.</p>
+<div class="body">
+
+<div class="card">
+<b>도우미 하나를 고르세요</b><br>
+① 우리 가게 ② 아이 공부 ③ 부모님 돌봄 ④ 살림<br>
+⑤ 글쓰기 ⑥ 여행 ⑦ 모임 총무 ⑧ 취미(등산·낚시·요리·독서)
+</div>
+
+<ol class="todo">
+<li><b>「프로젝트」를 하나 만들고</b>, 고른 도우미에 필요한 <b>내 자료를 넣습니다</b></li>
+<li><b>도우미에게 규칙을 알려줍니다.</b> 그리고 ⭐<b>같은 질문을 두 번</b> 해 보세요 —
+<b>도우미 밖에서 한 번, 안에서 한 번.</b> 답이 얼마나 다른지 보세요</li>
+<li>도우미로 <b>실제로 쓸 것 3장</b>을 뽑습니다</li>
+<li><b>그중 하나를 오늘 실제로 씁니다.</b> 진짜 보내거나, 붙이거나, 주세요.
+안 맞는 데가 있으면 <b>3번 고치기</b></li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">① 자료 넣고 규칙 주기</span><button>복사</button></div>
+<pre><code>제 (고른 도우미 이름) 도우미가 되어 주세요.
+
+제 사정은 이렇습니다.
+(여기에 내 자료를 적거나 붙여넣으세요)
+
+앞으로 저에게 뭘 만들어 주실 때 이 내용을 항상 기억해 주세요.
+모르는 건 지어내지 마시고 저에게 물어봐 주세요.</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">② 두 번 물어보기 (밖에서 한 번, 안에서 한 번)</span><button>복사</button></div>
+<pre><code>제가 오늘 쓸 안내문을 하나 만들어 주세요.</code></pre></div>
+
+<div class="card lamp">
+<b>⭐ 오늘의 핵심이 여기입니다.</b> 두 답이 왜 다를까요?<br>
+<b>밖에서는 저를 모르는 AI</b>고, <b>안에서는 제 사정을 아는 AI</b>라서 그렇습니다.
+<b>이게 오늘 만드신 겁니다.</b> 앞으로 매번 처음부터 설명 안 하셔도 됩니다.
+</div>
+
+<div class="card warn">
+<b>⚠️ 넣어도 되는 것 / 안 되는 것</b><br>
+가족 이름·연락처는 <b>넣으셔도 됩니다.</b> 남의 <b>주민번호·계좌번호는 넣지 마세요.</b>
+<br><br>
+<b>그리고 AI는 자신 있게 틀립니다.</b> 약 이름·날짜·금액은 <b>꼭 눈으로 확인</b>하세요.
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 내 도우미가 있고, 그게 만들어준 것 중 <b>하나를 오늘 실제로 썼습니다.</b>
+<br><span class="pill">인증</span> 도우미가 만든 것을 실제로 쓴 화면</div>
+</div>
+</section>
+
+<!-- ===== D3 ===== -->
+<section class="day" id="d3" data-day="3">
+<div class="dayhead"><span class="daynum">3일차</span><h2>한 달을 벌어 둡니다</h2></div>
+<p class="oneline">매일 "오늘 뭐 쓰지"에서 멈추지 않도록, 오늘 30개를 쌓아 둡니다.</p>
+<div class="body">
+
+<p>다 쓰려고 하지 마세요. <b>쌓아 두는 날</b>입니다.</p>
+
+<ol class="todo">
+<li><b>내 말투를 AI에게 가르칩니다</b> — 예전에 쓴 글·카톡·댓글 <b>5개를 통째로</b> 붙여넣습니다
+<br><span style="color:var(--ink-mid)">쓴 글이 없으시면 하고 싶은 말을 <b>3분 말하고 받아쓰기</b> 하셔서 넣으세요</span></li>
+<li><b>글감 30개를 먼저</b> 뽑습니다 (주제를 3~5가지로 갈라서)</li>
+<li>글감을 <b>글 30개</b>로 살 붙입니다</li>
+<li>🔴 <b>내가 직접 써 보고 AI 글과 견줍니다.</b> 오늘의 진짜 수업은 여기입니다</li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">① 말투 배우기</span><button>복사</button></div>
+<pre><code>아래는 제가 예전에 쓴 글들입니다.
+제 말투 규칙서를 만들어 주세요.
+자주 쓰는 말끝, 문장 길이, 제가 안 쓰는 말을 정리해 주세요.
+
+(글 5개를 여기에 붙여넣으세요)</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">② 글감 30개 먼저</span><button>복사</button></div>
+<pre><code>제 말투 규칙을 지키면서, 올릴 글감 30개를 뽑아 주세요.
+주제를 4가지로 나누고, 주제마다 글감을 7~8개씩 주세요.
+제목만 짧게, 목록으로 주세요.</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">③ 글 30개</span><button>복사</button></div>
+<pre><code>위 글감으로 글을 하나씩 써 주세요. 한 편에 5~8줄이면 됩니다.
+제 말투 규칙을 지켜 주시고, 파일로 저장해 주세요.</code></pre></div>
+
+<div class="card lamp">
+<b>④ 내가 이기는지 봅니다</b><br>
+여기까지 하신 일이 <b>붙여넣기 세 번</b>뿐이죠. 이제 <b>직접</b> 해 보십니다.
+<ol>
+<li>글감 하나를 고르고, <b>AI가 쓴 글은 잠깐 덮어 둡니다</b></li>
+<li><b>타이머 5분.</b> 그 글감으로 <b>직접 손으로</b> 써 보세요. <b>다섯 줄이면 충분</b>합니다. 맞춤법 틀려도 됩니다</li>
+<li>둘을 나란히 붙여넣고 아래를 물어봅니다</li>
+<li>나온 규칙서로 <b>글 3개를 다시</b> 뽑습니다 — 아까 것과 다를 겁니다</li>
+<li>그중 하나에 <b>내 얘기 한 줄</b>을 넣어 올립니다</li>
+</ol>
+</div>
+
+<div class="pbox"><div class="ph"><span class="pt">④ 나 vs AI</span><button>복사</button></div>
+<pre><code>같은 주제로 쓴 글 두 개입니다. 1번은 AI가, 2번은 제가 썼습니다.
+2번에만 있고 1번에는 없는 것을 다섯 개 찾아 주세요.
+그리고 그 다섯 개를 제 말투 규칙서에 덧붙여 주세요.
+
+[1번]
+(AI 글 붙여넣기)
+
+[2번]
+(직접 쓴 글 붙여넣기)</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">⑤ 제목 후보</span><button>복사</button></div>
+<pre><code>이 글의 제목 후보를 10개 주세요. 낚시성 말고, 제가 실제로 쓸 만한 걸로요.</code></pre></div>
+
+<div class="card note">
+⏰ <b>오늘은 나눠서 하세요.</b> 글 30개 만들기가 이번 주에서 제일 무겁습니다.
+<b>①②는 오전에, ③④는 저녁에.</b><br>
+💬 <b>오늘 올린 글에 반응이 없는 게 정상입니다.</b> 이제 시작이니까요. 반응은 내일부터 답글에서 옵니다.
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 글 30개 + 주제가 3가지 이상으로 갈렸고 + <b>「AI에 없고 나에게 있던 것 5가지」</b> + 1개 올림
+<br><span class="pill">인증</span> 글 30개 화면 + 그 5가지 목록
+<br>🆕 <b>오늘부터 답글 5개 습관 시작</b> — 모르는 분들 글에요</div>
+</div>
+</section>
+
+<!-- ===== D4 ===== -->
+<section class="day" id="d4" data-day="4">
+<div class="dayhead"><span class="daynum">4일차</span><h2>카드뉴스 10장을 찍어냅니다</h2></div>
+<p class="oneline">그림 그리는 AI는 안 씁니다. 틀 하나를 만들어 내용만 갈아끼웁니다.</p>
+<div class="body">
+
+<ol class="todo">
+<li><b>카드 틀 한 장</b>을 만듭니다 — 이때 <b>한 장에 들어갈 글자 수 상한</b>을 꼭 정하세요.
+이게 오늘의 안전장치입니다</li>
+<li>어제 쓴 글 하나를 <b>카드 5장</b>으로 만듭니다</li>
+<li><b>다른 글로 5장 더</b> — 틀은 그대로, 내용만 갈아끼웁니다.
+<b>이때 "틀 하나면 계속 찍어낼 수 있구나"를 느끼십니다</b></li>
+<li><b>그림으로 저장 → 폰으로 옮기기 → 인스타에 한 세트</b></li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">① 틀 만들기</span><button>복사</button></div>
+<pre><code>카드뉴스 틀을 만들어 주세요.
+- 정사각형, 휴대폰에서 잘 보이게
+- 맨 위에 제목, 가운데에 내용, 맨 아래에 제 이름
+- 글씨는 크게. 한 장에 두 줄을 넘지 않게 해 주세요
+- 색은 (원하는 색)으로</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">② 카드 5장</span><button>복사</button></div>
+<pre><code>아래 글을 방금 만든 틀에 넣어 5장짜리 카드뉴스로 만들어 주세요.
+1장은 제목, 2~4장은 내용, 5장은 마무리로요.
+글자가 틀 밖으로 넘치지 않게 줄여 주세요.
+
+(어제 쓴 글 하나를 붙여넣으세요)</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">③ 저장 단추 붙이기</span><button>복사</button></div>
+<pre><code>이 카드를 한 장씩 그림 파일로 내려받을 수 있게,
+카드 아래에 「이 장 저장」 단추를 붙여 주세요.</code></pre></div>
+
+<div class="card warn">
+<b>단추가 안 보이거나 안 눌리면 이 방법이 더 확실합니다</b><br>
+카드가 <b>화면에 꽉 차게</b> 키운 뒤 —<br>
+<b>윈도우</b>: «윈도우 키» + «Shift» + «S» → 카드 네 귀퉁이를 드래그<br>
+<b>맥</b>: «커맨드» + «Shift» + «4» → 드래그<br>
+잘린 그림이 「사진」 폴더에 저장됩니다. <b>5장을 한 장씩</b> 저장하세요.
+</div>
+
+<div class="card note">
+<b>④ 폰으로 옮기기 — 카톡 「나에게 보내기」</b><br>
+컴퓨터에서 만든 그림을 폰으로 옮겨야 인스타에 올릴 수 있습니다.
+<ol>
+<li><b>컴퓨터 카톡</b>을 열고 맨 위 <b>내 이름(나와의 채팅)</b>을 누릅니다</li>
+<li>저장한 그림 <b>5장을 끌어다 놓고</b> 보냅니다</li>
+<li><b>폰 카톡</b>에서 사진을 <b>길게 눌러 저장</b>합니다</li>
+<li><b>인스타 앱</b>에서 5장을 <b>순서대로</b> 올립니다</li>
+</ol>
+<b>오늘 여기가 시간이 제일 잘 걸립니다.</b> 처음이라 그렇습니다. 막히시면 5분 넘기지 말고 부르세요.
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 카드 <b>10장(2세트)</b>이 있고, 인스타에 1세트가 올라갔습니다.
+<br><span class="pill">인증</span> 카드 10장 화면 + 인스타에 올라간 화면</div>
+
+<div class="stuck"><b>🔧 이럴 때는</b>
+<ul>
+<li><b>"한글이 깨지거나 글자가 넘쳐요."</b> → 1번에서 정한 <b>글자 수 상한</b>을 더 줄여 달라고 하세요</li>
+<li><b>"인스타에 올리기가 부담스러워요."</b> → <b>비공개 계정</b>으로 하셔도 됩니다</li>
+<li><b>"2세트째 꼭 해야 하나요?"</b> → <b>네. 그게 오늘의 진짜 수업입니다</b></li>
+</ul></div>
+</div>
+</section>
+
+<!-- ===== D5 ===== -->
+<section class="day" id="d5" data-day="5">
+<div class="dayhead"><span class="daynum">5일차</span><h2>AI가 대화창 밖으로 나옵니다</h2></div>
+<p class="oneline">지금까지 화면 안에서만 끝났습니다. 오늘은 내 창고에 쌓고, 내 폰을 울립니다.</p>
+<div class="body">
+
+<ol class="todo">
+<li><b>노션(또는 구글 드라이브)을 연결</b>합니다</li>
+<li>어제까지 만든 <b>글 30개를 거기에 정리</b>해 넣습니다 (올린 것 / 안 올린 것 구분해서)</li>
+<li><b>텔레그램 봇을 만듭니다</b> — 텔레그램에서 <code>BotFather</code>를 찾아 대화를 시작하고
+<code>/newbot</code>이라고 보내면 이름을 물어봅니다. 5분이면 됩니다</li>
+<li><b>그 봇이 내 폰으로 말을 걸게</b> 합니다 — 주소창에 주소 두 줄</li>
+</ol>
+
+<div class="card warn">
+<b>⚠️ 봇을 만들면 긴 열쇠(토큰)가 하나 나옵니다.</b>
+<b>이건 비밀번호입니다. 절대 사진 찍어 올리지 마세요.</b>
+남이 보면 제 봇을 마음대로 쓸 수 있습니다.
+<br><br>
+주소창에 열쇠가 통째로 들어가므로, <b>인증 사진은 텔레그램 앱 화면만</b> 찍어 주세요.
+</div>
+
+<div class="pbox"><div class="ph"><span class="pt">① 창고 정리</span><button>복사</button></div>
+<pre><code>제 노션에 「글 창고」를 만들고, 지금까지 만든 글 30개를 넣어 주세요.
+올린 글과 아직 안 올린 글을 구분할 수 있게 해 주세요.</code></pre></div>
+
+<div class="card lamp">
+<b>④ 봇 깨우기 — 순서를 지켜 주세요</b>
+<ol>
+<li><b>텔레그램에서 내 봇에게 아무 말이나 먼저 보냅니다.</b> ← 이걸 안 하면 다음이 안 됩니다</li>
+<li>주소창에 <b>내 번호 찾기</b> 주소를 칩니다 (아래 ②). <code>열쇠</code> 자리에 받은 열쇠를 붙여넣으세요
+<br>영어가 잔뜩 나옵니다. <b>읽지 마세요.</b> 통째로 복사해서 클로드에게 물어보시면 됩니다 (아래 ③)</li>
+<li>받은 숫자를 넣고 <b>메시지 보내기</b> 주소를 칩니다 (아래 ④). <b>폰이 울립니다</b></li>
+</ol>
+</div>
+
+<div class="pbox"><div class="ph"><span class="pt">② 내 번호 찾기 (주소창에)</span><button>복사</button></div>
+<pre><code>https://api.telegram.org/bot열쇠/getUpdates</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">③ 나온 영어를 클로드에게</span><button>복사</button></div>
+<pre><code>아래에서 제 chat id 숫자만 찾아 주세요.
+
+(화면에 나온 것을 통째로 붙여넣으세요)</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">④ 봇이 나에게 말 걸기 (주소창에)</span><button>복사</button></div>
+<pre><code>https://api.telegram.org/bot열쇠/sendMessage?chat_id=숫자&amp;text=안녕하세요</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">⑤ 내일 쓸 규칙 적어두기</span><button>복사</button></div>
+<pre><code>앞으로 제가 시킨 일이 끝나면 텔레그램으로 알려 주세요.
+무엇을 했는지 세 줄로 요약해서 보내 주시면 됩니다.</code></pre></div>
+
+<div class="card note">
+👉 <b>"일 끝나면 알아서 알려 주는 것"은 내일 만듭니다.</b> 오늘은 봇을 깨워두는 날입니다.
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 내가 만든 봇이 내 폰으로 메시지를 보냈고, 창고에 글 30개가 쌓였습니다.
+<br><span class="pill">인증</span> 봇이 보낸 텔레그램 화면 (주소창은 안 나오게)</div>
+
+<div class="stuck"><b>🔧 이럴 때는</b>
+<ul>
+<li><b>"②를 쳤는데 내용이 텅 비어 있어요."</b> → <b>봇에게 먼저 말을 안 거셨습니다.</b> 1번으로 돌아가세요</li>
+<li><b>"노션 계정이 없어요."</b> → 구글 드라이브로 하셔도 되고, 둘 다 없으시면 <b>작업방 안에 정리</b>하셔도 됩니다</li>
+<li><b>주소가 길어서 치기 힘드시면</b> → 위 <b>복사</b> 단추를 누르고 주소창에 붙여넣으세요</li>
+</ul></div>
+</div>
+</section>
+
+<!-- ===== D6 ===== -->
+<section class="day" id="d6" data-day="6">
+<div class="dayhead"><span class="daynum">6일차</span><h2>한 단어로 시킵니다</h2></div>
+<p class="oneline">5일 동안 매번 길게 설명하셨죠. 오늘 그걸 한 단어로 줄입니다.</p>
+<div class="body">
+
+<div class="card">
+<b>뭘 만들지 고민 안 하셔도 됩니다. 다섯 개 다 같이 만듭니다.</b>
+<div class="tw"><table>
+<tr><th>명령어</th><th>치면 벌어지는 일</th></tr>
+<tr><td><code>/오늘글</code></td><td>오늘 올릴 글 3개가 내 말투로 나옵니다</td></tr>
+<tr><td><code>/제목</code></td><td>제목 후보 10개가 나옵니다</td></tr>
+<tr><td><code>/카드</code></td><td>글 하나가 카드뉴스 5장이 됩니다</td></tr>
+<tr><td><code>/보고</code></td><td><b>어제 만든 봇이</b> 일 끝나면 폰으로 알려 줍니다</td></tr>
+<tr><td><code>/도우미</code></td><td>2일차 도우미가 오늘 것을 뽑아 줍니다</td></tr>
+</table></div>
+</div>
+
+<div class="card lamp">
+<b>⓪ 먼저 — 짐 옮기기 (5분)</b><br>
+코드 화면을 열기 <b>전에</b> 할 일이 하나 있습니다.
+<b>지금까지 만든 것 중 「글자로 된 것」 세 개를 복사해 두세요.</b>
+<ol>
+<li><b>3일차 말투 규칙서</b></li>
+<li><b>2일차 도우미에게 준 규칙</b></li>
+<li><b>2일차에 넣은 자료 중 짧은 것</b> (메뉴·가족 정보 등)</li>
+</ol>
+대화창에서 드래그해서 <b>«Ctrl»+«C»</b> 한 뒤 <b>메모장에 붙여</b> 두시면 됩니다.
+<br><br>
+<b>오늘 하는 일의 핵심이 이겁니다 — 대화창에 있던 내 정보를 내 컴퓨터로 이사시키는 것.</b>
+안 옮기면 코드 화면의 클로드는 <b>제 말투도, 제 도우미도 모릅니다.</b> 다른 창에서 있었던 일이니까요.
+</div>
+
+<ol class="todo">
+<li><b>짐을 옮기고</b>, 코드 화면을 열어 <b>내 규칙 파일</b>을 만듭니다</li>
+<li>명령어 <b>3개</b>를 만듭니다 — <code>/오늘글</code> <code>/제목</code> <code>/카드</code></li>
+<li><b>2개 더</b> — <code>/보고</code> <code>/도우미</code></li>
+<li><b>다섯 개를 하나씩 쳐 보고</b>, 목록을 정리해 둡니다 (내일 씁니다)</li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">① 내 규칙 파일</span><button>복사</button></div>
+<pre><code>이 폴더에 저를 위한 규칙 파일을 만들어 주세요. 아래 세 덩어리를 그대로 담아 주세요.
+
+[제 말투 규칙]
+(3일차 말투 규칙서를 붙여넣습니다)
+
+[제 도우미가 아는 것]
+(2일차 자료와 규칙을 붙여넣습니다)
+
+[제가 자주 시키는 일 다섯 가지]
+오늘글 / 제목 / 카드 / 보고 / 도우미</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">② 명령어 만들기</span><button>복사</button></div>
+<pre><code>제가 자주 쓰는 다음 일을 명령어로 만들어 주세요.
+「오늘글」이라고 치면 오늘 올릴 글 3개를 제 말투로 뽑아 주세요.
+같은 방식으로 「제목」 「카드」 「도우미」도 만들어 주세요.</code></pre></div>
+
+<div class="pbox"><div class="ph"><span class="pt">③ 봇 붙이기</span><button>복사</button></div>
+<pre><code>어제 만든 텔레그램 봇으로 알림을 보내는 「보고」 명령어를 만들어 주세요.
+열쇠와 제 번호는 폴더 안 파일에 따로 두고, 명령어가 그걸 읽어 쓰게 해 주세요.
+일이 끝나면 무엇을 했는지 세 줄로 요약해서 제 폰으로 보내 주시면 됩니다.</code></pre></div>
+
+<div class="card warn">
+<b>오늘이 이번 주에서 제일 낯선 날입니다.</b> 막히면 <b>빨간 글씨를 통째로 복사해서 붙여넣으세요.</b>
+5일 동안 하신 그것 그대로입니다. 그래도 안 되면 <b>바로 부르세요. 같이 봅니다.</b>
+<br><br>
+⚠️ <b>열쇠가 이제 내 컴퓨터 파일에 들어갑니다.</b> 이 폴더는 <b>남에게 통째로 주지 마세요.</b>
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 한 단어를 쳤더니 어제까지 오래 걸리던 일이 끝났습니다.
+명령어가 <b>5개</b> 있고, <code>/보고</code>를 치니 <b>폰이 울립니다.</b>
+<br><span class="pill">인증</span> 한 단어 쳤더니 결과가 나온 화면</div>
+</div>
+</section>
+
+<!-- ===== D7 ===== -->
+<section class="day" id="d7" data-day="7">
+<div class="dayhead"><span class="daynum">7일차</span><h2>링크 하나로 묶어 자랑합니다</h2></div>
+<p class="oneline">1일차에 받은 그 주소에 6일치를 전부 모아 넣습니다. 한 바퀴 돌아 같은 자리입니다.</p>
+<div class="body">
+
+<ol class="todo">
+<li>1일차 페이지를 열고 <b>「내가 만든 것」 칸을 다섯 개</b> 만듭니다</li>
+<li>그 칸에 6일치를 넣습니다 — 도우미 · 잘된 글 · 카드뉴스 · 봇 · 명령어 목록</li>
+<li>🎓 <b>마지막 시험 — 오늘은 제가 문장을 안 드립니다</b></li>
+<li><b>다음 한 달 계획표</b>를 만들고, <b>폰으로 열어 확인해 사람들에게 보냅니다</b></li>
+</ol>
+
+<div class="pbox"><div class="ph"><span class="pt">① 포트폴리오로 만들기</span><button>복사</button></div>
+<pre><code>1일차에 만든 제 페이지에 「내가 만든 것」 칸을 다섯 개 추가해 주세요.
+1) 내 AI 도우미  2) 내가 쓴 글  3) 카드뉴스  4) 내 알림 봇  5) 내 명령어
+각 칸에 사진이나 설명을 넣을 수 있게 해 주세요.</code></pre></div>
+
+<div class="card lamp">
+<b>🎓 마지막 시험 — 프롬프트 없이 혼자 하나 만들기</b><br>
+7일 동안 제가 드린 문장을 붙여넣기만 하셨죠. <b>오늘 하나만 직접 시켜 보십시오.</b><br>
+<b>메뉴에 없던 것</b>으로요 — 지난 일주일 동안 <i>"아, 이런 것도 되려나"</i> 싶었던 것 아무거나.
+<br><br>
+잘 시키는 법은 이미 다 배우셨습니다. <b>세 가지만 지키면 됩니다.</b><br>
+① <b>뭘 만들지</b> 말하기 ② <b>누가 볼 건지</b> 말하기 ③ <b>어떻게 생겼으면 좋겠는지</b> 말하기<br>
+그리고 나오면 <b>"고쳐 주세요"를 세 번.</b> 1일차에 하신 그것 그대로입니다.
+<br><br>
+<b>이게 이 챌린지의 진짜 졸업장입니다. 링크보다 이게 남습니다.</b>
+</div>
+
+<div class="pbox"><div class="ph"><span class="pt">③ 한 달 계획표</span><button>복사</button></div>
+<pre><code>남은 글을 앞으로 한 달 동안 언제 올릴지 표로 만들어 주세요.
+글이 떨어지면 어떤 명령어를 치면 되는지도 적어 주세요.</code></pre></div>
+
+<div class="card note">
+<b>앞으로는 이렇게 쓰시면 됩니다</b><br>
+평소에는 <b>대화창</b>을 여세요. 2일차에 만든 도우미가 거기 있습니다.<br>
+<b>글·카드·보고</b>를 뽑을 때만 <b>코드 화면</b>을 열고 <code>/오늘글</code>처럼 한 단어를 치세요.<br>
+헷갈리시면 <b>대화창부터</b> 여시면 됩니다. 거기서 안 되는 게 있으면 그때 코드 화면으로 가시면 돼요.
+</div>
+
+<div class="done"><b>✔ 오늘 성공</b> — 링크 하나를 보냈더니 상대가 7일 동안 만든 걸 전부 볼 수 있습니다.
+그리고 <b>아무도 안 가르쳐 준 것을 혼자 하나 만들었습니다.</b>
+<br><span class="pill">인증</span> 완성된 내 링크 + 혼자 만든 화면 1장</div>
+
+<div class="card ok">
+못 채운 칸이 있어도 괜찮습니다. <b>비워 두고 채운 것만 올리세요.</b>
+<b>7일 내내 완벽했던 분은 아무도 없습니다.</b><br><br>
+<b>일주일 고생 많으셨습니다.</b> 시작 전이랑 지금이랑 뭐가 제일 달라지셨는지,
+<b>한 줄만</b> 남겨 주시면 정말 감사하겠습니다. 🙂
+</div>
+</div>
+</section>
+
+<div class="foot">
+  AI왕초보 챌린지 2기 · 8월 24일(월) ~ 30일(일)<br>
+  막히시면 <b>언제든</b> 방에 사진 올려 주세요. 그게 제일 빠릅니다.
+</div>
+
+</div>
+
+<script>
+// ── 오늘까지만 열기 ────────────────────────────────
+// 0 = 준비(Day 0)만 · 1 = 1일차까지 · … · 7 = 전부
+// 매일 아침 이 숫자를 1씩 올려 주세요.
+var UNLOCKED_DAY = 0;
+
+// 참가자 방 링크를 여기에 넣어 주세요 (따옴표 안).
+var ROOM_URL = "";
+
+(function(){
+  var room = document.getElementById("room");
+  if (ROOM_URL) { room.href = ROOM_URL; }
+  else { room.textContent = "참가자 방 링크 준비 중"; room.style.opacity = ".55"; room.removeAttribute("href"); }
+
+  document.querySelectorAll("section.day").forEach(function(s){
+    var d = parseInt(s.dataset.day, 10);
+    if (d > UNLOCKED_DAY) {
+      var body = s.querySelector(".body");
+      body.classList.add("lock");
+      var m = document.createElement("div");
+      m.className = "lockmsg";
+      m.innerHTML = "<b>" + d + "일차는 아직 잠겨 있습니다</b><br>그날 아침에 열립니다. 오늘 것만 하시면 됩니다.";
+      body.parentNode.insertBefore(m, body);
+    }
+  });
+
+  document.querySelectorAll("#nav a").forEach(function(a){
+    var d = parseInt(a.dataset.d, 10);
+    if (d > UNLOCKED_DAY) a.classList.add("off");
+    if (d === UNLOCKED_DAY) a.classList.add("hot");
+  });
+
+  document.querySelectorAll(".pbox button").forEach(function(b){
+    b.addEventListener("click", function(){
+      var t = b.closest(".pbox").querySelector("code").innerText;
+      navigator.clipboard.writeText(t).then(function(){
+        var o = b.textContent; b.textContent = "복사됨 ✓";
+        setTimeout(function(){ b.textContent = o; }, 1400);
+      }).catch(function(){ b.textContent = "길게 눌러 복사"; });
+    });
+  });
+})();
+</script>
