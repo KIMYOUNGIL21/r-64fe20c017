@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가이드 페이지 템플릿 — 공용 스킨 견본</title>
+<meta name="description" content="guide.css 공용 스킨의 모든 컴포넌트를 한 번씩 보여 주는 견본 페이지입니다.">
+<!-- ⚠️ 이 파일을 lyrics-pages/<슬러그>/index.html 로 복사하면 아래 경로를 ../assets/guide.css 로 바꾸세요. -->
+<link rel="stylesheet" href="guide.css">
+<!-- 주제에 맞게 팔레트만 갈아끼우고 싶으면 아래 블록의 주석을 풀고 색을 바꾸세요.
+<style>
+  :root { --accent:#f1c84b; --accent-2:#b74634; --link:#174f3b; --paper:#f6f4ee; }
+</style>
+-->
+</head>
+<body>
+<main>
+
+  <!-- ============ 히어로 ============ -->
+  <header class="hero">
+    <nav class="topbar" aria-label="상단 메뉴">
+      <a class="brand" href="#top" aria-label="처음으로">GUIDE SKIN</a>
+      <span class="guide-badge">여기에 배지 문구</span>
+    </nav>
+    <div class="hero-grid" id="top">
+      <div>
+        <p class="eyebrow">여기에 한 줄 도입부</p>
+        <h1>여기에 제목을<br><em>두 줄로</em></h1>
+        <p class="hero-copy">여기에 이 페이지가 누구를 위한 것이고 무엇을 알려 주는지 두세 문장으로 적습니다. 처음 보는 사람이 "아 나 이거 읽으면 되겠다"고 판단할 수 있게 씁니다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#s1">첫 번째 버튼</a>
+          <a class="button secondary" href="#s5">두 번째 버튼</a>
+        </div>
+      </div>
+      <!-- 오른쪽 카드. 안 쓰면 통째로 지워도 됩니다(1050px 아래에서는 자동으로 숨겨짐). -->
+      <div class="hero-card" aria-label="핵심 문구">
+        <!-- 아래 hero-card-disc 는 [선택 모듈] LP판 장식입니다. 음악 주제가 아니면 지우세요. -->
+        <div class="hero-card-disc"><span>PLAY</span></div>
+        <div class="hero-card-row"><span>01</span><strong>준비하고</strong></div>
+        <div class="hero-card-row"><span>02</span><strong>실행하고</strong></div>
+        <div class="hero-card-row"><span>03</span><strong>알리기</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 본문: 왼쪽 목차 + 오른쪽 내용 ============ -->
+  <div class="page-shell">
+
+    <aside class="side-nav" aria-label="목차">
+      <p>목차</p>
+      <ol>
+        <li><a href="#s1"><span>01</span>한눈에 보기</a></li>
+        <li><a href="#s2"><span>02</span>개념 설명</a></li>
+        <li><a href="#s3"><span>03</span>비교하기</a></li>
+        <li><a href="#s4"><span>04</span>준비물</a></li>
+        <li><a href="#s5"><span>05</span>실행 순서</a></li>
+        <li><a href="#s6"><span>06</span>자주 하는 실수</a></li>
+        <li><a href="#s7"><span>07</span>끝난 뒤 할 일</a></li>
+        <li><a href="#s8"><span>08</span>흐름과 숫자</a></li>
+        <li><a href="#s9"><span>09</span>두 갈래 구분</a></li>
+        <li><a href="#s10"><span>10</span>고치기·되돌리기</a></li>
+        <li><a href="#s11"><span>11</span>체크리스트</a></li>
+        <li><a href="#s12"><span>12</span>자주 묻는 질문</a></li>
+      </ol>
+    </aside>
+
+    <article class="content">
+
+      <!-- ---- 01 요약: summary-grid / quick-answer / choice-box ---- -->
+      <section class="section" id="s1">
+        <div class="section-heading">
+          <span class="chapter">먼저 이것부터</span>
+          <h2>한눈에 보는 핵심 요약</h2>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card accent">
+            <span class="summary-label">무엇을 하는 것?</span>
+            <strong>한 줄 정의</strong>
+            <p>여기에 두 문장 정도로 풀어 씁니다. 카드는 네 장이 기본이지만 두 장, 여섯 장도 괜찮습니다.</p>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">기본 비용</span>
+            <strong>숫자 한 개</strong>
+            <p>숫자를 쓸 때는 언제 기준인지 함께 적습니다. 기준일이 없으면 숫자는 쓰지 않습니다.</p>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">준비물</span>
+            <strong>A + B + C</strong>
+            <p>준비물은 세 덩어리 이하로 묶어야 기억에 남습니다.</p>
+          </div>
+          <div class="summary-card accent-2">
+            <span class="summary-label">추천 일정</span>
+            <strong>4주 전</strong>
+            <p>강조색 카드는 한 장 또는 두 장까지만 씁니다. 다 강조하면 아무것도 강조되지 않습니다.</p>
+          </div>
+        </div>
+
+        <div class="quick-answer">
+          <span>딱 한 문장으로</span>
+          <p><strong>이 페이지 전체를 한 문장으로 줄이면 이렇게 된다, 를 여기에 적습니다.</strong></p>
+        </div>
+
+        <div class="choice-box">
+          <div>
+            <span class="mini-title">이런 상황이라면</span>
+            <h3>이 선택지가 편해요.</h3>
+          </div>
+          <p>왜 그 선택이 편한지 설명합니다. 조건이 갈리는 지점, 그리고 결정 전에 직접 확인해야 할 것을 함께 적습니다.</p>
+          <div class="choice-actions">
+            <a class="button info" href="#" target="_blank" rel="noreferrer">눈에 띄는 링크 버튼 ↗</a>
+            <a class="source-link" href="#" target="_blank" rel="noreferrer">공식 안내 보기<span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="disclosure">작은 글씨 고지문이 필요하면 여기에 적습니다. (제휴 링크 표기, 면책 문구 등)</p>
+        </div>
+
+        <p class="updated">마지막 내용 확인일 0000년 0월 0일. 내용은 바뀔 수 있습니다.</p>
+      </section>
+
+      <!-- ---- 02 개념: flow / two-col + info-card / plain-note ---- -->
+      <section class="section" id="s2">
+        <div class="section-heading">
+          <span class="chapter">01</span>
+          <h2>이게 무슨 일인가요?</h2>
+          <p>섹션 제목 아래 한두 문장으로 이 섹션에서 무엇을 알게 되는지 미리 알려 줍니다.</p>
+        </div>
+
+        <div class="flow" aria-label="진행 과정">
+          <div><span>1</span><strong>나</strong><small>재료를 준비</small></div><b aria-hidden="true">→</b>
+          <div><span>2</span><strong>중간 단계</strong><small>검수하고 전달</small></div><b aria-hidden="true">→</b>
+          <div><span>3</span><strong>플랫폼</strong><small>공개하고 보고</small></div><b aria-hidden="true">→</b>
+          <div><span>4</span><strong>사용자</strong><small>찾고 쓰고 공유</small></div>
+        </div>
+
+        <div class="two-col">
+          <div class="info-card">
+            <h3>좋은 점</h3>
+            <ul>
+              <li>한 번에 여러 곳으로 갑니다.</li>
+              <li>결과를 한곳에서 봅니다.</li>
+              <li>식별 코드가 자동으로 생깁니다.</li>
+            </ul>
+          </div>
+          <div class="info-card warning">
+            <h3>하지 않는 일</h3>
+            <ul>
+              <li>대신 홍보해 주지 않습니다.</li>
+              <li>권리 문제를 해결해 주지 않습니다.</li>
+              <li>결과를 보장하지 않습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="plain-note">오해하기 쉬운 지점을 한 문단으로 못 박습니다. 파란 세로줄이 붙은 이 박스는 섹션마다 최대 한 번만 씁니다.</p>
+        <a class="source-link" href="#" target="_blank" rel="noreferrer">공식 안내 보기<span aria-hidden="true">↗</span></a>
+        <a class="source-link" href="#" target="_blank" rel="noreferrer">두 번째 출처<span aria-hidden="true">↗</span></a>
+      </section>
+
+      <!-- ---- 03 비교: comparison / compare-row / decision-strip ---- -->
+      <section class="section" id="s3">
+        <div class="section-heading">
+          <span class="chapter">02</span>
+          <h2>비슷한 것들과 비교하면</h2>
+          <p>무엇이 무조건 최고라기보다, 조건에 따라 답이 달라진다는 식으로 씁니다.</p>
+        </div>
+
+        <div class="comparison">
+          <a class="compare-row" href="#" target="_blank" rel="noreferrer">
+            <strong>후보 A</strong>
+            <span class="meta">연간 구독</span>
+            <span><b>이런 사람에게 맞아요</b>한 줄 설명을 붙입니다. 행 전체가 링크라서 클릭하면 공식 페이지로 갑니다.</span>
+            <i aria-hidden="true">↗</i>
+          </a>
+          <a class="compare-row" href="#" target="_blank" rel="noreferrer">
+            <strong>후보 B</strong>
+            <span class="meta">건당 결제</span>
+            <span><b>다른 조건의 사람에게</b>행은 몇 개든 늘릴 수 있습니다.</span>
+            <i aria-hidden="true">↗</i>
+          </a>
+          <a class="compare-row" href="#" target="_blank" rel="noreferrer">
+            <strong>후보 C</strong>
+            <span class="meta">무료 + 유료 옵션</span>
+            <span><b>세 번째 경우</b>좁은 화면에서는 자동으로 세로로 쌓입니다.</span>
+            <i aria-hidden="true">↗</i>
+          </a>
+        </div>
+
+        <div class="decision-strip">
+          <strong>빠르게 고르는 법</strong>
+          <p><b>이런 경우라면</b> 이쪽을 먼저 보고, <b>저런 경우라면</b> 저쪽도 비교해 보세요. 마지막엔 직접 확인해야 할 항목 하나를 알려 줍니다.</p>
+        </div>
+      </section>
+
+      <!-- ---- 04 준비물: prep-grid / callout ---- -->
+      <section class="section" id="s4">
+        <div class="section-heading">
+          <span class="chapter">03</span>
+          <h2>시작 전에 이것부터 준비하세요</h2>
+          <p>본 작업을 열기 전에 메모장 하나에 정리해 둘 것들입니다.</p>
+        </div>
+
+        <div class="prep-grid">
+          <div class="prep-card"><span>WAV</span><h3>첫 번째 준비물</h3><p>동그란 배지 안에는 3~4글자만 넣습니다. 파일 형식, 숫자, 기호 모두 됩니다.</p></div>
+          <div class="prep-card"><span>JPG</span><h3>두 번째 준비물</h3><p>규격이 있으면 정확한 숫자로 적습니다.</p></div>
+          <div class="prep-card"><span>ABC</span><h3>세 번째 준비물</h3><p>이름·표기처럼 나중에 바꾸기 어려운 것을 여기서 확정하게 만듭니다.</p></div>
+          <div class="prep-card"><span>©</span><h3>네 번째 준비물</h3><p>권리·허가처럼 놓치면 되돌리기 어려운 항목입니다.</p></div>
+        </div>
+
+        <div class="callout">
+          <span aria-hidden="true">!</span>
+          <div>
+            <h3>이건 하면 안 됩니다.</h3>
+            <p>거절·실패의 원인이 되는 것을 한 덩어리로 모아 경고합니다. 섹션마다 하나면 충분합니다.</p>
+          </div>
+        </div>
+        <a class="source-link" href="#" target="_blank" rel="noreferrer">규격 확인하기<span aria-hidden="true">↗</span></a>
+      </section>
+
+      <!-- ---- 05 순서: steps / timeline ---- -->
+      <section class="section" id="s5">
+        <div class="section-heading">
+          <span class="chapter">04</span>
+          <h2>실제 순서는 이렇습니다</h2>
+          <p>화면 문구가 조금 바뀌어도 순서는 거의 같다는 식으로 안심시켜 줍니다.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <span class="step-number">01</span>
+            <div><h3>첫 번째로 이걸 합니다.</h3><div class="step-copy"><p>한 단계는 한 문단으로 끝냅니다. 길어지면 단계를 쪼갭니다.</p></div></div>
+          </div>
+          <div class="step">
+            <span class="step-number">02</span>
+            <div><h3>두 번째 화면에서 고릅니다.</h3><div class="step-copy"><p>선택지가 여러 개면 무엇을 기준으로 고르는지 알려 줍니다.</p></div></div>
+          </div>
+          <div class="step">
+            <span class="step-number">03</span>
+            <div><h3>세 번째로 정보를 입력합니다.</h3><div class="step-copy"><p>여기서 자주 틀리는 항목이 있으면 짚어 줍니다.</p></div></div>
+          </div>
+          <div class="step">
+            <span class="step-number">04</span>
+            <div><h3>마지막으로 검토하고 제출합니다.</h3><div class="step-copy"><p>제출 전에 소리 내어 확인할 항목을 나열합니다.</p></div></div>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <strong>그 다음에는</strong>
+          <span><b>제출</b> 접수 처리</span>
+          <span><b>며칠 안</b> 검토</span>
+          <span><b>공개일</b> 확인</span>
+          <span><b>몇 달 뒤</b> 결과 반영</span>
+        </div>
+      </section>
+
+      <!-- ---- 06 실수: note-grid ---- -->
+      <section class="section" id="s6">
+        <div class="section-heading">
+          <span class="chapter">05</span>
+          <h2>여기서 많이 틀립니다</h2>
+          <p>하는 것보다 고치는 게 오래 걸린다는 점을 강조합니다.</p>
+        </div>
+        <div class="note-grid">
+          <div><span>01</span><h3>첫 번째 실수</h3><p>왜 문제가 되는지 한 문장, 어떻게 피하는지 한 문장.</p></div>
+          <div class="tinted"><span>02</span><h3>두 번째 실수</h3><p>class="tinted"를 붙이면 바탕색이 살짝 어두워집니다.</p></div>
+          <div><span>03</span><h3>세 번째 실수</h3><p>카드는 3의 배수로 맞추면 보기 좋습니다.</p></div>
+          <div><span>04</span><h3>네 번째 실수</h3><p>넓은 화면 3열 → 태블릿 2열 → 모바일 1열로 자동 변합니다.</p></div>
+          <div class="tinted"><span>05</span><h3>다섯 번째 실수</h3><p>강조할 항목에만 tinted 를 씁니다.</p></div>
+          <div><span>06</span><h3>여섯 번째 실수</h3><p>여섯 개가 넘으면 섹션을 나누는 편이 낫습니다.</p></div>
+        </div>
+      </section>
+
+      <!-- ---- 07 이후: stage-list ---- -->
+      <section class="section" id="s7">
+        <div class="section-heading">
+          <span class="chapter">06</span>
+          <h2>끝났다고 끝이 아닙니다</h2>
+          <p>시점별로 할 일을 왼쪽에 시점, 가운데에 할 일로 나열합니다.</p>
+        </div>
+        <div class="stage-list">
+          <div><span>시작 전</span><h3>첫 번째로 할 일</h3><p>왼쪽 라벨에는 "발매 전", "첫 주", "매달"처럼 시점을 넣습니다.</p></div>
+          <div><span>직후</span><h3>두 번째로 할 일</h3><p>가운데 제목은 동사로 끝내면 행동으로 이어집니다.</p></div>
+          <div><span>첫 주</span><h3>세 번째로 할 일</h3><p>오른쪽 설명은 두 문장을 넘기지 않습니다.</p></div>
+          <div><span>계속</span><h3>계속 해야 할 일</h3><p>마지막 항목은 습관으로 남길 것을 적습니다.</p></div>
+        </div>
+      </section>
+
+      <!-- ---- 08 흐름·숫자: flow.compact / two-col / plain-note ---- -->
+      <section class="section" id="s8">
+        <div class="section-heading">
+          <span class="chapter">07</span>
+          <h2>흐름과 숫자는 이렇게 봅니다</h2>
+          <p>돈·시간처럼 지연이 있는 흐름은 compact 흐름표로 보여 줍니다.</p>
+        </div>
+        <div class="flow compact">
+          <div><span>STEP 1</span><strong>여기서 발생</strong></div><b aria-hidden="true">→</b>
+          <div><span>STEP 2</span><strong>몇 달 뒤 보고</strong></div><b aria-hidden="true">→</b>
+          <div><span>STEP 3</span><strong>잔고에 반영</strong></div><b aria-hidden="true">→</b>
+          <div><span>STEP 4</span><strong>내 계좌로 출금</strong></div>
+        </div>
+        <div class="two-col">
+          <div class="info-card">
+            <h3>알아둘 숫자</h3>
+            <ul>
+              <li>숫자는 반드시 출처가 있는 것만 적습니다.</li>
+              <li>기준일을 함께 적습니다.</li>
+              <li>바뀔 수 있다는 사실을 덧붙입니다.</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>흔한 오해 하나</h3>
+            <p>"~라고 하니까 ~겠지"라는 오해를 정확한 표현으로 바로잡습니다.</p>
+          </div>
+        </div>
+        <div class="plain-note"><strong>이건 미루지 마세요.</strong> 뒤로 미루면 손해가 커지는 항목을 굵게 시작해서 알려 줍니다.</div>
+      </section>
+
+      <!-- ---- 09 두 갈래: split-2 / rule-columns ---- -->
+      <section class="section" id="s9">
+        <div class="section-heading">
+          <span class="chapter">08</span>
+          <h2>이것과 저것은 다릅니다</h2>
+          <p>헷갈리는 두 개념을 좌우로 갈라 놓습니다.</p>
+        </div>
+        <div class="split-2">
+          <div><span class="big-word">이쪽</span><h3>여기가 해 주는 일</h3><p>왼쪽 칸은 강조색 바탕입니다. 큰 글자는 두 글자에서 네 글자가 가장 보기 좋습니다.</p></div>
+          <div><span class="big-word">저쪽</span><h3>따로 챙겨야 할 일</h3><p>오른쪽 칸은 흰 바탕입니다.</p></div>
+        </div>
+        <div class="rule-columns">
+          <div><b>경우 1</b><p>각 칸은 한 문장이면 충분합니다.</p></div>
+          <div><b>경우 2</b><p>칸 수는 자유입니다. 화면이 좁아지면 알아서 줄바꿈합니다.</p></div>
+          <div><b>경우 3</b><p>테두리는 자동으로 맞습니다.</p></div>
+          <div><b>경우 4</b><p>모바일에서는 세로로 쌓입니다.</p></div>
+        </div>
+      </section>
+
+      <!-- ---- 10 관리: link-cards ---- -->
+      <section class="section" id="s10">
+        <div class="section-heading">
+          <span class="chapter">09</span>
+          <h2>고치기·되돌리기도 알아두세요</h2>
+        </div>
+        <div class="link-cards">
+          <div><span>수정</span><h3>고치는 방법</h3><p>바로 반영되지 않는다는 점, 얼마나 걸리는지를 함께 적습니다.</p><a class="source-link" href="#" target="_blank" rel="noreferrer">공식 안내 보기<span aria-hidden="true">↗</span></a></div>
+          <div><span>삭제</span><h3>되돌리는 방법</h3><p>카드 아래 출처 링크는 자동으로 맨 아래에 붙습니다.</p><a class="source-link" href="#" target="_blank" rel="noreferrer">공식 안내 보기<span aria-hidden="true">↗</span></a></div>
+          <div><span>중단</span><h3>그만둘 때 생기는 일</h3><p>가장 오해가 많은 항목을 넣습니다.</p><a class="source-link" href="#" target="_blank" rel="noreferrer">공식 안내 보기<span aria-hidden="true">↗</span></a></div>
+          <div><span>이동</span><h3>다른 곳으로 옮기기</h3><p>순서가 중요한 작업은 순서대로 적습니다.</p></div>
+        </div>
+      </section>
+
+      <!-- ---- 11 체크리스트: check-columns ---- -->
+      <section class="section" id="s11">
+        <div class="section-heading">
+          <span class="chapter">10</span>
+          <h2>제출 직전, 이것만 확인하세요</h2>
+          <p>체크박스는 저장되지 않습니다. 화면을 보면서 눈으로 확인하는 용도입니다.</p>
+        </div>
+        <div class="check-columns">
+          <div>
+            <h3>파일</h3>
+            <label><input type="checkbox"> 최종본이 맞나요?</label>
+            <label><input type="checkbox"> 형식이 맞나요?</label>
+            <label><input type="checkbox"> 크기가 맞나요?</label>
+            <label><input type="checkbox"> 권리를 가지고 있나요?</label>
+          </div>
+          <div>
+            <h3>정보</h3>
+            <label><input type="checkbox"> 이름 표기가 예전과 같나요?</label>
+            <label><input type="checkbox"> 제목이 정확한가요?</label>
+            <label><input type="checkbox"> 참여자를 다 넣었나요?</label>
+            <label><input type="checkbox"> 표시 항목을 확인했나요?</label>
+          </div>
+          <div>
+            <h3>권리와 일정</h3>
+            <label><input type="checkbox"> 허가를 확인했나요?</label>
+            <label><input type="checkbox"> 지분을 합의했나요?</label>
+            <label><input type="checkbox"> 일정이 충분한가요?</label>
+            <label><input type="checkbox"> 비용 주기를 읽었나요?</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- 12 FAQ: faq-list ---- -->
+      <section class="section no-rule" id="s12">
+        <div class="section-heading">
+          <span class="chapter">11</span>
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>첫 번째 질문을 그대로 씁니다.<span aria-hidden="true">＋</span></summary>
+            <p>답은 "네/아니오"로 시작하고 조건을 덧붙입니다. 열면 오른쪽 ＋ 가 ×로 돌아갑니다.</p>
+          </details>
+          <details>
+            <summary>두 번째 질문은 이렇게 씁니다.<span aria-hidden="true">＋</span></summary>
+            <p>실제로 사람들이 검색창에 치는 말투 그대로 질문을 씁니다.</p>
+          </details>
+          <details>
+            <summary>세 번째 질문입니다.<span aria-hidden="true">＋</span></summary>
+            <p>질문은 6~10개가 적당합니다.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ---- 마무리 CTA ---- -->
+      <section class="final-cta">
+        <p>준비가 다 됐다면</p>
+        <h2>마지막 한마디를<br>두 줄로 적습니다.</h2>
+        <p>본문에서 한 말을 요약하지 말고, 지금 당장 할 첫 행동 하나를 지목합니다.</p>
+        <div>
+          <a class="button dark" href="#" target="_blank" rel="noreferrer">주 행동 버튼 ↗</a>
+          <a class="button ghost" href="#s11">체크리스트 다시 보기</a>
+        </div>
+        <small class="fineprint">작은 고지문이 필요하면 여기에 적습니다.</small>
+      </section>
+
+      <footer>
+        <p>이 페이지는 공식 사이트가 아닌 안내용 페이지입니다. 실제 결정 전에는 공식 화면의 최신 정보를 반드시 확인하세요.</p>
+        <div>
+          <a class="source-link" href="#" target="_blank" rel="noreferrer">공식 고객센터<span aria-hidden="true">↗</span></a>
+          <a href="#top">맨 위로 ↑</a>
+        </div>
+      </footer>
+
+    </article>
+  </div>
+</main>
+
+<!-- 목차 현재 위치 표시. 외부 라이브러리 없이 이 20줄이면 충분합니다. -->
+<script>
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.side-nav a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) map[el.id] = a;
+  });
+  var seen = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
+    var current = null;
+    Object.keys(map).forEach(function (id) { if (seen[id] && !current) current = id; });
+    links.forEach(function (a) { a.classList.remove('is-active'); });
+    if (current) {
+      var a = map[current];
+      a.classList.add('is-active');
+      var nav = document.querySelector('.side-nav');
+      if (nav && nav.scrollWidth > nav.clientWidth) {
+        nav.scrollTo({ left: a.parentNode.offsetLeft - 16, behavior: 'smooth' });
+      }
+    }
+  }, { rootMargin: '-10% 0px -70% 0px' });
+  Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>

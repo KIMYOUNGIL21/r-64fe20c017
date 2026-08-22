@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 왕초보 Q&amp;A 100선 — 물어보기 민망했던 질문 100개 | 그밤PD</title>
+<meta name="description" content="가입부터 질문, 파일, 보안, 저작권, 수익까지. AI를 처음 쓰는 사람이 실제로 자주 묻는 100가지 질문과 답을 10개 주제로 정리한 무료 자료입니다.">
+<meta name="author" content="그밤PD">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://kimyoungil21.github.io/r-64fe20c017/ai-qa100/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI 왕초보 Q&amp;A 100선 — 물어보기 민망했던 질문 100개">
+<meta property="og:description" content="AI를 처음 쓰는 사람이 실제로 자주 묻는 100가지 질문과 답. 10개 주제 × 10문항, 무료로 공개합니다.">
+<meta property="og:url" content="https://kimyoungil21.github.io/r-64fe20c017/ai-qa100/">
+<meta property="og:site_name" content="그밤PD">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/guide.css">
+<style>
+  /* ── 주제 팔레트: 앰버 + 하늘 + 잉크블루 ───────────────────────────
+     형제 페이지 「플레이리스트 시작 지도」(라벤더)와 바탕색이 거의 같아
+     스크롤 중 구별이 안 됐다(2026-08 검수 지적). 따뜻한 앰버 계열로 옮기고
+     히어로도 웜다크로 함께 옮긴다. accent 위에는 검은 글자가 올라가므로
+     accent/accent-2 는 둘 다 밝은 톤으로 유지한다. */
+  :root{
+    --ink:#1c1710; --paper:#faf5ec; --surface:#fffdf8;
+    --accent:#ffd08a;    /* 앰버 — 「물어봐도 되는 곳」의 따뜻함 */
+    --accent-2:#a6d4ff;  /* 하늘 — 보조 */
+    --link:#1c46b8;      /* 잉크블루 */
+    --muted:#6b6153; --line:#e2d9c8;
+    --ink-soft:#3d352a; --muted-2:#786d5f;
+    --soft:#f2e9d8; --line-soft:#eee6d6; --warn-soft:#fdeacb;
+    --on-accent:#1c1710; --on-accent-dim:#6b4f28;
+    --nav-fg:#574f43; --nav-num:#786d5f;
+    --hero-bg:#1a1610; --hero-bg-2:#241d13; --hero-card-bg:#2c2418;
+    --hero-fg:#fdf8ef; --hero-dim:#d8cebc; --hero-dim-2:#998e7b;
+    --hero-line:#3a3123; --hero-line-2:#4d4231; --hero-line-3:#645640;
+  }
+  /* 이 페이지 전용: 질문이 100개라 아코디언 요약줄에 번호 뱃지를 붙인다.
+     번호는 <b>, 질문은 <i>. guide.css 의 `.faq-list summary span`(＋ 표시, 열리면 45도 회전)이
+     번호까지 같이 잡지 않도록 일부러 span 을 쓰지 않았다. */
+  .qa-list summary{ align-items:flex-start; gap:0; }
+  .qa-list summary b.qa-num{
+    flex:0 0 auto; min-width:54px; padding-top:2px;
+    color:var(--link); font-size:13px; font-weight:950; letter-spacing:.02em;
+  }
+  .qa-list summary i.qa-q{ flex:1 1 auto; font-style:normal; }
+  .qa-list summary > span{ flex:0 0 auto; margin-left:16px; }
+  .qa-list details p{ padding-left:54px; }
+  .qa-count{ color:var(--muted); font-size:13px; font-weight:800; margin:0 0 14px; }
+  @media (max-width:760px){
+    .qa-list summary b.qa-num{ min-width:46px; font-size:12px; }
+    .qa-list details p{ padding-left:46px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header class="hero">
+    <nav class="topbar" aria-label="상단 메뉴">
+      <a class="brand" href="#top" aria-label="처음으로">그밤PD 무료자료</a>
+      <span class="guide-badge">2026 EDITION</span>
+    </nav>
+    <div class="hero-grid" id="top">
+      <div>
+        <p class="eyebrow">물어보기 민망했던 질문 100개</p>
+        <h1>AI 왕초보<br><em>Q&amp;A 100선</em></h1>
+        <p class="hero-copy">가입부터 질문, 파일, 보안, 콘텐츠와 수익까지. 처음 쓰는 사람이 실제로 자주 묻는 100가지 질문과 답입니다. 처음부터 읽지 않아도 됩니다. 지금 가장 궁금한 장부터 펼치세요.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#s0">읽는 법부터 보기</a>
+          <a class="button secondary" href="#s01">01장부터 읽기</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="구성">
+        <div class="hero-card-row"><span>주제</span><strong>10</strong></div>
+        <div class="hero-card-row"><span>질문과 답</span><strong>100</strong></div>
+        <div class="hero-card-row"><span>전문 공개</span><strong>무료</strong></div>
+        <div class="hero-card-row"><span>검수 기준일</span><strong>2026.07.30</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+
+    <aside class="side-nav" aria-label="목차">
+      <p>목차</p>
+      <ol>
+        <li><a href="#s0"><span>00</span>읽는 법</a></li>
+        <li><a href="#s01"><span>01</span>시작하기 전에</a></li>
+        <li><a href="#s02"><span>02</span>질문은 이렇게 시작합니다</a></li>
+        <li><a href="#s03"><span>03</span>나온 답을 내 것으로 만드는 법</a></li>
+        <li><a href="#s04"><span>04</span>틀린 답을 걸러내는 법</a></li>
+        <li><a href="#s05"><span>05</span>파일·사진·음성을 다룰 때</a></li>
+        <li><a href="#s06"><span>06</span>무료·유료·계정</a></li>
+        <li><a href="#s07"><span>07</span>개인정보와 보안</a></li>
+        <li><a href="#s08"><span>08</span>저작권과 책임</a></li>
+        <li><a href="#s09"><span>09</span>일과 콘텐츠에 쓰는 법</a></li>
+        <li><a href="#s10"><span>10</span>막혔을 때와 오래 쓰는 습관</a></li>
+      </ol>
+    </aside>
+
+    <article class="content">
+
+      <section class="section" id="s0">
+        <div class="section-heading">
+          <span class="chapter">먼저 이것부터</span>
+          <h2>이 자료를 이렇게 읽으면 좋습니다</h2>
+          <p>가입부터 질문, 파일, 보안, 콘텐츠와 수익까지. 처음 쓰는 사람이 실제로 자주 묻는 100가지 질문과 답입니다.</p>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card accent">
+            <span class="summary-label">읽는 법 01</span>
+            <strong>처음부터 읽지 않아도 됩니다</strong>
+            <p>지금 가장 궁금한 장부터 펼치세요. 질문 하나만 해결해도 충분합니다.</p>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">읽는 법 02</span>
+            <strong>답을 바로 복사하지 마세요</strong>
+            <p>내 상황과 맞는지 확인하고, 필요한 조건을 더해 다시 질문해보세요.</p>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">읽는 법 03</span>
+            <strong>중요한 사실은 확인합니다</strong>
+            <p>돈, 건강, 법률, 최신 정보는 AI 답변이 아니라 원문과 공식 안내를 기준으로 봅니다.</p>
+          </div>
+          <div class="summary-card accent-2">
+            <span class="summary-label">읽는 법 04</span>
+            <strong>한 번만 실제로 해봅니다</strong>
+            <p>읽고 끝내지 말고, 오늘 할 일 하나에 AI를 작게 써보세요.</p>
+          </div>
+        </div>
+
+        <div class="quick-answer">
+          <span>가장 중요한 한 가지</span>
+          <p><strong>AI는 완성품을 받는 곳이 아니라, 생각을 꺼내고 일을 반복하기 쉽게 만드는 도구입니다.</strong></p>
+        </div>
+
+        <p class="plain-note">AI가 알아서 돈을 벌어준다고 말하지 않습니다. 내 상황에 맞는 일을 찾고, 반복 가능한 방식으로 만드는 법을 함께 연구합니다.</p>
+
+        <p class="updated">검수 기준일 2026년 7월 30일. 가격·기능·정책처럼 바뀔 수 있는 정보는 각 서비스의 현재 화면과 공식 안내를 우선합니다.</p>
+      </section>
+
+      <section class="section" id="s01">
+        <div class="section-heading">
+          <span class="chapter">01 · Q01–Q10</span>
+          <h2>시작하기 전에</h2>
+          <p>완벽히 이해하려 하지 말고, 오늘 해볼 한 가지만 고르시면 됩니다.</p>
+        </div>
+
+        <p class="plain-note"><b>열 개를 다 열지 마세요.</b> 지금 마음에 걸리는 것 하나만 눌러서 읽고, 오늘 그것만 해보시면 됩니다.</p>
+
+        <p class="qa-count">질문 Q01–Q10 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q01</b><i class="qa-q">AI가 대체 뭐예요?</i><span aria-hidden="true">＋</span></summary>
+            <p>AI는 사람이 하던 일의 일부를 컴퓨터가 도와주게 하는 기술입니다. 여기서 말하는 AI는 질문을 받으면 글을 쓰고, 사진을 읽고, 표를 정리해주는 도구를 뜻합니다. 어렵게 생각하지 마세요. 계산기보다 대화가 되는 도구라고 생각하면 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q02</b><i class="qa-q">챗GPT와 AI는 같은 말인가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>같은 말은 아닙니다. AI가 큰 범주라면 챗GPT는 그 안에 들어 있는 서비스 하나입니다. 휴대폰이라고 다 같은 회사 제품이 아닌 것처럼, AI도 챗GPT·클로드·제미나이처럼 여러 서비스가 있습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q03</b><i class="qa-q">컴퓨터를 잘 못해도 쓸 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>쓸 수 있습니다. AI는 명령어를 외워야 하는 프로그램이 아니라, 평소 말하듯 부탁하는 도구에 가깝습니다. 처음에는 ‘이 문자 좀 부드럽게 고쳐줘’처럼 내가 결과를 바로 알아볼 수 있는 작은 일부터 해보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q04</b><i class="qa-q">영어로 물어봐야 더 잘하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>아니요. 생활, 글쓰기, 요약, 아이디어 정리 같은 일은 한국어로 물어도 충분합니다. 다만 해외 사이트를 찾거나 영어 자료를 다룰 때는 원문 영어를 함께 주면 오해가 줄어듭니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q05</b><i class="qa-q">AI로 무엇부터 해보면 좋을까요?</i><span aria-hidden="true">＋</span></summary>
+            <p>오늘 해야 할 일 중에서 귀찮지만 결과를 바로 확인할 수 있는 일을 하나 고르세요. 문자 다듬기, 긴 글 세 줄 요약, 회의 메모 정리, 식단 후보 만들기가 좋습니다. 처음부터 돈 버는 방법이나 완벽한 블로그 글을 통째로 맡기면 기대와 결과의 차이가 커지기 쉽습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q06</b><i class="qa-q">검색과 AI 질문은 뭐가 다른가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>검색은 읽어볼 페이지를 보여주고, AI는 그 내용을 바탕으로 답을 만들어줍니다. 그래서 AI가 편하지만, 없는 내용을 그럴듯하게 섞을 수도 있습니다. 날짜, 가격, 법률처럼 틀리면 곤란한 정보는 검색 결과의 원문까지 열어봐야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q07</b><i class="qa-q">앱을 꼭 설치해야 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>꼭 그렇지는 않습니다. 컴퓨터에서는 공식 웹사이트만 열어도 쓸 수 있고, 휴대폰에서 자주 쓰거나 음성으로 말하고 싶다면 공식 앱이 편합니다. 앱을 받기 전에는 이름이 비슷한 광고성 앱이 아닌지 개발사 이름을 확인하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q08</b><i class="qa-q">회원가입 없이도 쓸 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>잠깐 써볼 수 있게 해주는 서비스도 있지만, 대화를 저장하고 이어서 쓰려면 보통 로그인이 필요합니다. 가입 자체보다 중요한 것은 공식 주소인지 확인하는 일입니다. 검색 결과 맨 위에 있다고 무조건 공식 사이트는 아닙니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q09</b><i class="qa-q">AI는 제가 한 말을 정말 이해하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>사람처럼 내 속마음까지 이해하는 것은 아닙니다. 내가 쓴 말의 흐름을 보고 그럴듯한 다음 답을 만들어냅니다. 그래서 ‘알아서 해줘’보다 누구에게 쓰는지, 무엇은 빼야 하는지까지 말해줘야 결과가 좋아집니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q10</b><i class="qa-q">나이가 많아도 배울 수 있을까요?</i><span aria-hidden="true">＋</span></summary>
+            <p>물론입니다. AI는 젊은 사람만의 기술이 아니라, 질문하고 고쳐달라고 말할 수 있는 사람이 쓰는 도구입니다. 잘 모르겠으면 ‘나는 처음이라 어려운 말 빼고 한 단계씩 알려줘’라고 먼저 말하면 됩니다.</p>
+          </details>
+        </div>
+
+        <div class="prep-grid">
+          <div class="prep-card"><span>문자</span><h3>문자 다듬기</h3><p>‘이 문자 좀 부드럽게 고쳐줘’처럼 결과를 바로 알아볼 수 있는 작은 일부터.</p></div>
+          <div class="prep-card"><span>요약</span><h3>긴 글 세 줄 요약</h3><p>읽기 부담스러운 글을 짧게 줄여 보는 일.</p></div>
+          <div class="prep-card"><span>메모</span><h3>회의 메모 정리</h3><p>흩어진 메모를 알아볼 수 있는 모양으로 묶는 일.</p></div>
+          <div class="prep-card"><span>식단</span><h3>식단 후보 만들기</h3><p>매번 고민하던 것을 후보로 받아 고르는 일.</p></div>
+        </div>
+        <div class="decision-strip">
+          <strong>고르는 기준</strong>
+          <p>오늘 해야 할 일 중에서 <b>귀찮지만 결과를 바로 확인할 수 있는 일</b>을 하나 고르세요. 처음부터 돈 버는 방법이나 완벽한 블로그 글을 통째로 맡기면 기대와 결과의 차이가 커지기 쉽습니다. <b>(Q05)</b></p>
+        </div>
+      </section>
+
+      <section class="section" id="s02">
+        <div class="section-heading">
+          <span class="chapter">02 · Q11–Q20</span>
+          <h2>질문은 이렇게 시작합니다</h2>
+          <p>질문하는 법이 어려운 사람을 위한 장입니다. 좋은 질문은 어려운 기술이 아니라 구체적인 부탁입니다.</p>
+        </div>
+
+        <p class="plain-note"><b>읽기만 해서는 늘지 않는 장입니다.</b> 한 문항을 읽으셨으면 그 자리에서 AI 대화창을 열고, 안에 있는 예시 문장을 그대로 한 번 따라 쳐보세요.</p>
+
+        <p class="qa-count">질문 Q11–Q20 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q11</b><i class="qa-q">프롬프트가 뭔가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>프롬프트는 AI에게 건네는 질문이나 부탁입니다. 거창한 주문이 아닙니다. ‘이번 주 회의 메모를 팀장님께 보고할 말투로 세 줄로 정리해줘’처럼 평소 하던 부탁을 조금 구체적으로 적은 것이 프롬프트입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q12</b><i class="qa-q">질문을 길게 써야 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>길다고 좋은 질문은 아닙니다. 무엇을 하고 싶은지, 누가 볼 글인지, 꼭 지킬 조건이 무엇인지, 결과를 어떤 모양으로 받을지만 말하면 됩니다. 길게 설명하다가 핵심이 묻히는 것보다 짧고 분명한 편이 낫습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q13</b><i class="qa-q">좋은 질문 공식이 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>‘상황 → 원하는 일 → 읽을 사람 → 결과 모양’ 순서로 말해보세요. 예를 들어 ‘처음 AI를 배우는 50대에게 보낼 강의 안내문을 친절한 존댓말 다섯 줄로 써줘’라고 하면 됩니다. 이 정도면 AI가 무엇을 해야 하는지 충분히 알아듣습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q14</b><i class="qa-q">뭘 물어봐야 할지도 모르겠어요.</i><span aria-hidden="true">＋</span></summary>
+            <p>그것도 AI에게 말하면 됩니다. 내가 무엇을 원하는지 알아내도록 질문을 해달라고 부탁하세요. 예를 들어 ‘내가 AI로 줄이고 싶은 일을 찾게 질문을 다섯 개만, 한 번에 하나씩 해줘’라고 시작하면 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q15</b><i class="qa-q">한 번에 여러 일을 시켜도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>할 수는 있지만, 처음에는 한 단계씩 하는 편이 덜 헷갈립니다. 먼저 목차를 받고, 괜찮으면 초안을 받고, 마지막에 말투를 고치는 식입니다. 한 번에 ‘기획·작성·검수·디자인’까지 시키면 어디서 틀렸는지 찾기 어려워집니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q16</b><i class="qa-q">‘전문가처럼 답해줘’라고 해야 잘하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>전문가라는 이름만 붙인다고 답이 정확해지는 것은 아닙니다. 어떤 기준으로 답할지를 알려주는 편이 더 효과적입니다. ‘마케팅 전문가처럼’보다 ‘과장 표현은 빼고, 처음 사는 사람이 걱정할 점부터 답해줘’가 훨씬 구체적입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q17</b><i class="qa-q">예시를 주면 정말 도움이 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>아주 도움이 됩니다. 내가 좋아하는 문장 하나와 싫어하는 문장 하나만 보여줘도 AI는 말투와 길이를 훨씬 잘 맞춥니다. 단, 남의 글을 통째로 베끼게 하기보다 ‘이 글이 왜 편한지’ 분석하게 하는 방식이 좋습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q18</b><i class="qa-q">존댓말이나 말투도 정할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>정할 수 있습니다. ‘친절한 존댓말’이라고만 쓰기보다 ‘문장은 짧게, 느낌표는 쓰지 말고, 선생님처럼 설명해줘’처럼 눈에 보이는 기준을 주세요. 말투가 마음에 안 들면 한 번 더 고쳐달라고 하면 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q19</b><i class="qa-q">답변 길이는 어떻게 정하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>‘짧게’라고만 하면 사람마다 생각하는 길이가 달라집니다. ‘카카오톡 한 화면 안에’, ‘세 문단’, ‘표는 세 열 이하’처럼 쓰일 자리를 말해주면 됩니다. 특히 휴대폰에서 볼 글은 짧게 나누어 달라고 하는 편이 좋습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q20</b><i class="qa-q">매번 처음부터 설명해야 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>같은 대화방에서는 앞에서 한 말을 어느 정도 이어갑니다. 하지만 대화가 길어지면 중요한 조건을 놓칠 수 있습니다. 중간중간 ‘지금까지 확정한 것은 이것 세 가지야’라고 다시 적어주면 훨씬 안정적입니다.</p>
+          </details>
+        </div>
+
+        <div class="flow compact" aria-label="좋은 질문 순서">
+          <div><span>1</span><strong>상황</strong></div><b aria-hidden="true">→</b>
+          <div><span>2</span><strong>원하는 일</strong></div><b aria-hidden="true">→</b>
+          <div><span>3</span><strong>읽을 사람</strong></div><b aria-hidden="true">→</b>
+          <div><span>4</span><strong>결과 모양</strong></div>
+        </div>
+        <div class="decision-strip">
+          <strong>이렇게 말하면 됩니다</strong>
+          <p>‘처음 AI를 배우는 50대에게 보낼 강의 안내문을 친절한 존댓말 다섯 줄로 써줘’라고 하면 됩니다. 이 정도면 AI가 무엇을 해야 하는지 충분히 알아듣습니다. <b>(Q13)</b></p>
+        </div>
+      </section>
+
+      <section class="section" id="s03">
+        <div class="section-heading">
+          <span class="chapter">03 · Q21–Q30</span>
+          <h2>나온 답을 내 것으로 만드는 법</h2>
+          <p>첫 답은 완성본이 아니라, 내 말로 고칠 재료입니다.</p>
+        </div>
+
+        <p class="plain-note"><b>이 장은 답을 받은 다음의 이야기입니다.</b> 지금 손에 든 답이 하나도 없다면, 02장에서 질문을 한 번 해보고 오시는 편이 빠릅니다.</p>
+
+        <p class="qa-count">질문 Q21–Q30 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q21</b><i class="qa-q">답이 마음에 안 들면 어떻게 하죠?</i><span aria-hidden="true">＋</span></summary>
+            <p>‘별로야’라고만 하지 말고 한 가지 이유를 말해보세요. 너무 길다, 말이 딱딱하다, 내 경험이 빠졌다처럼요. AI는 기분 나빠하지 않으니, 사람이 편집자에게 말하듯 구체적으로 고쳐달라고 하면 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q22</b><i class="qa-q">다시 생성 버튼만 누르면 좋아지나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>새 답을 받을 수는 있지만, 내가 원하는 방향으로 좋아진다는 보장은 없습니다. 바꾸고 싶은 기준을 한 줄 붙인 뒤 다시 요청하세요. 예를 들어 ‘내용은 유지하고 첫 문장만 더 솔직하게 바꿔줘’가 훨씬 잘 먹힙니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q23</b><i class="qa-q">AI가 쓴 티를 줄일 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>먼저 그럴듯한 칭찬, 비슷한 말의 반복, 누구에게나 할 수 있는 조언을 빼세요. 그다음 내가 실제로 겪은 일이나 확인한 숫자, 망설였던 이유를 넣으면 글이 내 것이 됩니다. AI에게 ‘내가 말하지 않은 경험은 만들지 말라’고 분명히 말하는 것도 중요합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q24</b><i class="qa-q">문장을 더 쉽게 바꿀 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능합니다. 누가 읽을 글인지 먼저 알려주세요. ‘중학생도 이해하게’, ‘부모님께 설명하듯’, ‘전문용어는 괄호로 풀어서’처럼 말하면 됩니다. 어려운 말을 쉬운 말로 바꾸는 일은 AI가 특히 잘 도와주는 분야입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q25</b><i class="qa-q">제 말투를 따라 쓰게 할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>내가 직접 쓴 글 세 개 정도를 보여주고, 먼저 공통점을 찾아달라고 하세요. 그 분석이 맞는지 확인한 뒤 새 글을 부탁하면 됩니다. 아무 글이나 많이 주는 것보다 ‘나는 짧게 말하고, 과장하지 않고, 마지막에 행동 하나를 제안한다’처럼 기준을 정하는 편이 좋습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q26</b><i class="qa-q">내용은 그대로 두고 말투만 바꿀 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능합니다. 대신 바꾸면 안 되는 것을 먼저 잠가야 합니다. ‘숫자, 날짜, 사람 이름은 바꾸지 말고 말투만 부드러운 존댓말로 바꿔줘’라고 요청하세요. 결과를 받은 뒤에는 숫자와 이름이 바뀌지 않았는지 꼭 비교해보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q27</b><i class="qa-q">답이 너무 길게 나올 때는요?</i><span aria-hidden="true">＋</span></summary>
+            <p>분량을 정확히 정해보세요. ‘첫 줄에 결론, 이유는 세 개, 전체 300자 안’처럼요. 무조건 짧게 하라고 하면 중요한 내용까지 잘릴 수 있으니, 무엇을 남길지도 같이 정해주는 편이 좋습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q28</b><i class="qa-q">계속 같은 말을 반복해요.</i><span aria-hidden="true">＋</span></summary>
+            <p>AI는 친절하려다 같은 뜻을 여러 번 말하기도 합니다. ‘새로운 정보가 없는 문장은 지우고, 같은 말은 하나로 합쳐줘’라고 요청하세요. 다듬은 뒤에는 첫 문장과 마지막 문장이 같은 말을 하고 있지 않은지도 확인하면 좋습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q29</b><i class="qa-q">표로 정리해달라고 해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>물론입니다. 다만 ‘표로 해줘’보다 비교 기준을 같이 주면 훨씬 쓸모 있습니다. 예를 들어 ‘비용·장점· 주의점 세 열로 비교해줘’라고 하세요. 휴대폰에서 볼 표는 열이 너무 많으면 오히려 읽기 힘듭니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q30</b><i class="qa-q">최종 검수도 AI에게 맡겨도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>틀린 부분 후보를 찾는 데는 도움이 됩니다. 하지만 최종 책임까지 넘기면 안 됩니다. 새 대화방에 초안과 검수 기준을 따로 넣고 ‘문장을 고치지 말고, 틀린 사실과 빠진 내용만 표시해줘’라고 시킨 뒤 사람이 마지막으로 읽으세요.</p>
+          </details>
+        </div>
+
+        <div class="split-2">
+          <div>
+            <span class="big-word">뺀다</span>
+            <h3>AI가 쓴 티가 나는 부분</h3>
+            <p>그럴듯한 칭찬, 비슷한 말의 반복, 누구에게나 할 수 있는 조언을 빼세요. <b>(Q23)</b></p>
+          </div>
+          <div>
+            <span class="big-word">넣는다</span>
+            <h3>글이 내 것이 되는 부분</h3>
+            <p>내가 실제로 겪은 일이나 확인한 숫자, 망설였던 이유를 넣으면 글이 내 것이 됩니다. <b>(Q23)</b></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="s04">
+        <div class="section-heading">
+          <span class="chapter">04 · Q31–Q40</span>
+          <h2>틀린 답을 걸러내는 법</h2>
+          <p>그럴듯한 답보다 확인한 사실이 더 중요합니다.</p>
+        </div>
+
+        <p class="plain-note"><b>이 장은 다른 장과 성격이 다릅니다.</b> 답을 얻는 법이 아니라, 받은 답을 의심하는 법입니다.</p>
+
+        <p class="qa-count">질문 Q31–Q40 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q31</b><i class="qa-q">AI 답변은 다 맞나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>아닙니다. 아주 자신 있게 틀린 말을 할 때도 있습니다. 특히 날짜, 가격, 법률, 건강, 통계, 인용문은 AI 답을 초안으로만 보고 원문을 확인하세요. 답이 매끄럽다고 사실까지 맞는 것은 아닙니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q32</b><i class="qa-q">AI가 일부러 거짓말을 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>일부러 속이려는 의도는 없습니다. 다만 모르는 부분을 비워두지 못하고 그럴듯한 말로 채우다가 틀립니다. 없는 사실을 진짜처럼 말하는 현상을 ‘환각’ 또는 ‘할루시네이션’이라고 부릅니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q33</b><i class="qa-q">출처를 달라고 하면 믿어도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>출처 제목과 인터넷 주소도 만들어낼 수 있습니다. 링크가 실제로 열리는지, 그 원문에 정말 같은 내용이 있는지, 작성 날짜가 맞는지까지 확인해야 합니다. 출처가 많다고 자동으로 믿을 만한 답은 아닙니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q34</b><i class="qa-q">오늘 뉴스나 최신 정보도 알고 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>AI가 인터넷을 검색하도록 설정됐는지에 따라 다릅니다. ‘오늘’이라고만 하지 말고 기준 날짜를 적고, 확인한 원문 링크도 달라고 하세요. 최신 정보는 답변을 읽는 것보다 출처를 직접 여는 일이 더 중요합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q35</b><i class="qa-q">계산도 틀릴 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>그럴 수 있습니다. 특히 여러 단계가 들어간 할인율, 세금, 비율 계산은 다시 확인하세요. AI에게 계산식을 표로 보여달라고 하고, 중요한 금액은 계산기나 엑셀로 한 번 더 검산하는 습관이 안전합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q36</b><i class="qa-q">법률 문제도 물어봐도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>어려운 법률 용어를 풀어 듣거나, 전문가에게 물어볼 질문을 정리하는 데는 쓸 수 있습니다. 하지만 계약서에 사인하거나 신고·소송을 결정하는 일은 AI 답만으로 판단하면 안 됩니다. 지역과 시점에 따라 법이 달라질 수 있기 때문입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q37</b><i class="qa-q">아픈 증상도 물어봐도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>병원에 가기 전 증상을 정리하고, 의사에게 물어볼 질문을 만드는 용도로만 쓰세요. 응급 여부, 진단, 약을 먹을지 말지는 의료진이 판단해야 합니다. AI가 안심시키더라도 심한 증상은 미루지 말고 의료기관에 문의하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q38</b><i class="qa-q">모르면 모른다고 답하게 할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>그렇게 요청하면 추측을 줄이는 데는 도움이 됩니다. ‘확실한 사실과 추측을 나눠 쓰고, 모르면 확인 필요라고 표시해줘’라고 해보세요. 그래도 완벽하지 않으니 중요한 내용은 따로 검증해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q39</b><i class="qa-q">여러 AI에 물으면 더 정확한가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>서로 다른 답을 비교하면 빠진 관점을 찾는 데는 도움이 됩니다. 하지만 여러 AI가 같은 오류를 낼 수도 있습니다. 의견을 모으는 데 쓰고, 사실을 확정할 때는 공식 문서나 원문으로 돌아가세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q40</b><i class="qa-q">빠르게 검증하는 방법이 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>답변 전체를 다 의심할 필요는 없습니다. 숫자, 날짜, 사람·회사 이름, ‘반드시’ 같은 강한 말부터 표시하세요. 이 네 가지를 공식 홈페이지나 원문에서 확인하면 큰 오류를 빠르게 걸러낼 수 있습니다. 확인한 출처는 다음에 다시 볼 수 있게 함께 저장해두세요.</p>
+          </details>
+        </div>
+
+        <div class="decision-strip">
+          <strong>빠르게 검증하는 법</strong>
+          <p>답변 전체를 다 의심할 필요는 없습니다. <b>숫자, 날짜, 사람·회사 이름, ‘반드시’ 같은 강한 말</b>부터 표시하세요. 이 네 가지를 공식 홈페이지나 원문에서 확인하면 큰 오류를 빠르게 걸러낼 수 있습니다. <b>(Q40)</b></p>
+        </div>
+      </section>
+
+      <section class="section" id="s05">
+        <div class="section-heading">
+          <span class="chapter">05 · Q41–Q50</span>
+          <h2>파일·사진·음성을 다룰 때</h2>
+          <p>파일과 사진은 편리하지만, 중요한 숫자는 원본으로 확인합니다.</p>
+        </div>
+
+        <p class="plain-note"><b>올려보고 싶은 파일 하나를 떠올려 보세요.</b> 그 파일에 해당하는 문항부터 펼치시면 됩니다. 문서면 Q41, 사진이면 Q44부터입니다.</p>
+
+        <p class="qa-count">질문 Q41–Q50 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q41</b><i class="qa-q">PDF를 올려서 요약할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>파일 올리기를 지원하는 AI라면 가능합니다. 처음부터 요약을 시키지 말고, 문서 제목과 목차, 페이지 수를 먼저 말하게 해 파일을 제대로 읽었는지 확인하세요. 종이를 사진처럼 찍어 만든 파일(스캔본)은 글자가 잘못 읽힐 수 있으니, 중요한 표와 숫자는 원본과 대조해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q42</b><i class="qa-q">한글(HWP) 파일도 읽나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>서비스마다 다릅니다. 한글(HWP)은 한글과컴퓨터의 문서 형식이라 못 읽는 AI가 많습니다. 바로 열리지 않으면 [파일] → [다른 이름으로 저장]에서 PDF나 워드 문서(DOCX)로 바꿔 올리세요. 변환 뒤에는 표, 머리말, 글자가 깨지지 않았는지 내가 먼저 한 번 열어봐야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q43</b><i class="qa-q">엑셀 파일도 분석할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능한 AI가 많습니다. 다만 분석 전에 ‘열 이름, 전체 행 수, 빈칸이 많은 열’을 먼저 설명하게 하세요. AI가 표 구조를 제대로 읽었는지 확인한 뒤에야 매출 분석이나 그래프 요청을 하는 것이 안전합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q44</b><i class="qa-q">사진 속 글자도 읽을 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>읽을 수 있지만 사진이 흐리거나 기울어졌으면 틀릴 수 있습니다. 손글씨와 작은 글씨는 특히 조심하세요. 계약서, 영수증, 약 봉투처럼 숫자 하나가 중요한 사진은 원본을 보며 다시 확인해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q45</b><i class="qa-q">사진을 올리면 무엇을 할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>사진 설명, 글자 추출, 표 정리, 두 물건 비교, 디자인 의견 받기 등을 할 수 있습니다. 다만 얼굴, 주소, 차량번호, 아이 이름표처럼 남에게 보이면 곤란한 정보는 가리고 올리세요. 사진을 올리는 순간 누가 볼 수 있는지부터 생각하는 습관이 필요합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q46</b><i class="qa-q">AI로 그림도 만들 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>이미지 생성을 지원하는 서비스라면 가능합니다. ‘예쁜 그림’보다 어디에 쓸 그림인지, 가로인지 세로인지, 어떤 분위기인지, 넣으면 안 되는 것이 무엇인지 말해야 결과가 좋아집니다. 처음에는 블로그 대표 이미지처럼 실패해도 부담이 작은 용도부터 써보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q47</b><i class="qa-q">제가 만든 사진을 수정하게 할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능한 서비스가 많습니다. 배경을 바꾸거나, 불필요한 물건을 지우거나, 색감을 정리하는 식입니다. 대신 ‘사람 얼굴은 건드리지 말고 배경만 바꿔줘’처럼 바꾸지 말아야 할 부분을 분명히 말해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q48</b><i class="qa-q">목소리로 대화할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>음성 기능을 지원하는 앱에서는 가능합니다. 운전 중이나 설거지할 때는 편하지만, 주변 사람이 들을 수 있는 곳에서는 개인정보나 회사 이야기를 말하지 않는 편이 좋습니다. 처음에는 ‘오늘 할 일을 세 개로 정리해줘’처럼 짧게 써보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q49</b><i class="qa-q">유튜브 주소만 주면 영상을 다 보나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>주소를 줬다고 영상 전체를 봤다고 생각하면 안 됩니다. AI가 링크를 열 수 있는지, 자막을 읽었는지부터 확인하세요. 중요한 영상은 자막이나 원고를 함께 주고, 어느 부분을 봐야 하는지도 시간으로 지정하는 편이 정확합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q50</b><i class="qa-q">파일이 너무 크다고 나와요.</i><span aria-hidden="true">＋</span></summary>
+            <p>필요한 페이지만 따로 저장하거나, 사진 해상도(사진의 크기와 촘촘함입니다. 높을수록 파일이 큽니다)를 낮추고, 파일을 나눠 올리세요. 여러 파일을 올릴 때는 ‘1/3, 2/3, 3/3’처럼 순서를 적어두면 AI가 덜 헷갈립니다. 큰 파일 하나를 억지로 올리며 시간을 쓰기보다 필요한 부분만 주는 편이 빠릅니다.</p>
+          </details>
+        </div>
+
+        <div class="two-col">
+          <div class="info-card">
+            <h3>사진을 올려서 할 수 있는 일</h3>
+            <ul>
+              <li>사진 설명</li>
+              <li>글자 추출</li>
+              <li>표 정리</li>
+              <li>두 물건 비교</li>
+              <li>디자인 의견 받기</li>
+            </ul>
+          </div>
+          <div class="info-card warning">
+            <h3>가리고 올려야 하는 것</h3>
+            <ul>
+              <li>얼굴</li>
+              <li>주소</li>
+              <li>차량번호</li>
+              <li>아이 이름표</li>
+            </ul>
+            <p style="margin-top:16px">사진을 올리는 순간 누가 볼 수 있는지부터 생각하는 습관이 필요합니다. <b>(Q45)</b></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="s06">
+        <div class="section-heading">
+          <span class="chapter">06 · Q51–Q60</span>
+          <h2>무료·유료·계정</h2>
+          <p>결제는 필요가 생긴 뒤에 해도 늦지 않습니다.</p>
+        </div>
+
+        <p class="plain-note"><b>여기 적힌 요금이나 한도를 외우지 마세요.</b> 자주 바뀝니다. 결제하시기 전에 그 서비스의 공식 요금 페이지를 직접 한 번 열어보시면 됩니다.</p>
+
+        <p class="qa-count">질문 Q51–Q60 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q51</b><i class="qa-q">무료로도 충분한가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>처음에는 무료로 충분합니다. 짧은 글, 요약, 아이디어 정리부터 해보세요. 사용 제한이나 꼭 필요한 기능 때문에 같은 자리에서 자꾸 막힐 때 유료를 검토해도 늦지 않습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q52</b><i class="qa-q">유료로 바꾸면 답이 무조건 좋아지나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>아닙니다. 보통 더 많은 사용량과 편리한 기능을 주지만, 틀린 답이 사라지는 것은 아닙니다. 유료는 정답을 사는 것이 아니라 시간을 덜 쓰고 기능을 더 쓰는 선택이라고 생각하면 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q53</b><i class="qa-q">어떤 요금제가 맞는지 모르겠어요.</i><span aria-hidden="true">＋</span></summary>
+            <p>무료로 일주일만 써보며 막힌 순간을 적어보세요. 횟수가 부족했는지, 파일 분석이 필요했는지, 그림 기능이 아쉬웠는지, 실제로 시간을 얼마나 아꼈는지 보면 결제 이유가 보입니다. 남들이 좋다고 해서 여러 개를 동시에 결제할 필요는 없습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q54</b><i class="qa-q">질문 횟수 제한은 몇 번인가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>정해진 숫자는 플랜, 모델, 기능, 접속 상황에 따라 바뀔 수 있습니다. 그래서 인터넷 글에 적힌 한도 숫자를 외우는 것은 의미가 없습니다. 내가 쓰는 화면에 표시되는 현재 제한과 공식 요금 페이지를 확인하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q55</b><i class="qa-q">결제했다가 바로 해지할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>대부분 구독 관리 화면에서 해지할 수 있습니다. 이 화면은 서비스마다 이름이 다릅니다. 화면 오른쪽 위 내 이름(또는 동그란 사진)을 누르면 나오는 메뉴에서 「설정」이나 「내 플랜」을 찾아보세요. 다만 웹에서 결제했는지 앱스토어에서 결제했는지에 따라 해지하는 곳 자체가 다릅니다. 또 해지와 환불은 다른 일입니다. 다음 결제일, 해지 후 사용 가능 기간, 환불 규정을 결제 전에 한 번 읽어보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q56</b><i class="qa-q">가족이나 직원과 계정을 같이 써도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>개인 계정을 같이 쓰면 서로의 대화와 파일을 볼 수 있습니다. 비밀번호를 나눠 쓰는 일도 보안상 좋지 않습니다. 번거롭더라도 각자 계정을 만들고, 함께 써야 한다면 팀용 기능이나 조직용 상품을 알아보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q57</b><i class="qa-q">챗GPT 구독료와 API 사용료는 같은 건가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>보통은 다릅니다. 챗GPT 화면에서 쓰는 구독과, 개발자가 프로그램에 붙여 쓰는 API(프로그램끼리 주고받게 연결하는 통로입니다)는 별도로 결제되는 경우가 많습니다. ‘유료 결제했는데 왜 또 돈이 나가죠?’라는 일이 생기지 않도록 결제 화면을 따로 확인하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q58</b><i class="qa-q">여러 AI를 전부 결제해야 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>그럴 필요 없습니다. 같은 실제 일을 무료 버전으로 각각 해보고, 내게 가장 시간을 아껴주는 도구 하나만 먼저 고르세요. 도구를 많이 모으는 것보다 한 가지를 내 일에 맞게 익히는 편이 훨씬 남습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q59</b><i class="qa-q">공식 사이트인지 어떻게 알아보나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>인터넷 주소와 앱을 만든 회사 이름을 직접 확인하세요. 검색 결과 첫 줄의 광고나, ‘평생 할인’을 앞세우는 페이지가 공식 사이트는 아닐 수 있습니다. 결제 전에 주소를 한 번 복사해 검색하고, 공식 고객지원 페이지가 있는지도 확인하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q60</b><i class="qa-q">로그인이 자꾸 풀려요.</i><span aria-hidden="true">＋</span></summary>
+            <p>브라우저가 쿠키(로그인한 상태를 기억해두는 작은 기록입니다)를 지우고 있거나, 앱이 오래됐거나, 다른 계정으로 접속했을 수 있습니다. 비밀번호를 여러 번 바꾸기 전에 앱 업데이트, 브라우저 설정, 로그인한 이메일 주소를 차례로 확인하세요. 인증 코드는 누구에게도 보내면 안 됩니다.</p>
+          </details>
+        </div>
+
+        <div class="rule-columns">
+          <div><b>먼저</b><p>처음에는 무료로 충분합니다. 짧은 글, 요약, 아이디어 정리부터 해보세요. <b>(Q51)</b></p></div>
+          <div><b>일주일</b><p>무료로 일주일만 써보며 막힌 순간을 적어보세요. 실제로 시간을 얼마나 아꼈는지 보면 결제 이유가 보입니다. <b>(Q53)</b></p></div>
+          <div><b>그다음</b><p>도구를 많이 모으는 것보다 한 가지를 내 일에 맞게 익히는 편이 훨씬 남습니다. <b>(Q58)</b></p></div>
+        </div>
+      </section>
+
+      <section class="section" id="s07">
+        <div class="section-heading">
+          <span class="chapter">07 · Q61–Q70</span>
+          <h2>개인정보와 보안</h2>
+          <p>공개 게시판에 쓰기 곤란한 정보는 넣지 않습니다.</p>
+        </div>
+
+        <p class="plain-note"><b>이 장만큼은 순서대로 읽으시길 권합니다.</b> 한 문항이 다음 문항의 근거가 됩니다.</p>
+
+        <p class="qa-count">질문 Q61–Q70 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q61</b><i class="qa-q">제가 쓴 대화가 AI 학습에 쓰이나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>서비스와 계정 설정에 따라 다릅니다. 설정 이름은 서비스마다 다릅니다. 화면 오른쪽 위 내 이름(또는 동그란 사진)을 누르면 나오는 메뉴에서 「설정」을 찾으시고, 그 안에 「데이터 제어」(내 대화를 어디까지 쓰게 할지 정하는 곳입니다)나 「개인정보」가 있는지 보세요. 거기서 대화가 학습에 쓰이는지와 이를 끌 수 있는지를 확인하실 수 있습니다. 다만 설정 하나만 믿고 민감한 정보를 넣기보다, 애초에 넣지 않는 것이 가장 안전합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q62</b><i class="qa-q">주민번호를 입력해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>안 됩니다. 주민번호, 비밀번호, 인증번호, 카드번호, 계좌 비밀번호는 AI 대화창에 넣지 마세요. AI가 아니라 어떤 인터넷 서비스에든 올리면 안 되는 정보라고 생각하면 판단이 쉽습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q63</b><i class="qa-q">회사 문서를 올려도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>회사에서 허용한 자료인지 먼저 확인하세요. 고객정보, 영업비밀, 공개 전 자료는 승인 없이 올리면 안 됩니다. 꼭 필요하다면 이름과 회사명을 가리고, 회사가 허용한 도구 안에서만 작업하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q64</b><i class="qa-q">고객 명단을 분석시켜도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>이름, 전화번호, 주소, 구매 기록은 개인정보입니다. 그대로 올리지 마세요. 꼭 분석해야 한다면 고객 번호처럼 누구인지 알 수 없게 바꾼 값(익명화된 값이라고 합니다)만 남기고, 어떤 데이터까지 외부 도구에 넣어도 되는지 회사 규정을 먼저 확인해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q65</b><i class="qa-q">대화를 삭제하면 완전히 없어지나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>내 화면에서 사라졌다고 곧바로 모든 곳에서 없어졌다고 단정할 수는 없습니다. 실제 보관 기간과 삭제 방식은 서비스마다 다릅니다. 삭제가 필요한 대화라면 해당 서비스의 개인정보 안내와 삭제 정책을 확인하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q66</b><i class="qa-q">임시 채팅은 무엇인가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>대화 목록이나 개인 맞춤 기능에 남기지 않도록 만든 대화 방식입니다. 서비스 화면에서는 「임시 채팅」이나 「일시적 채팅」이라는 이름의 스위치로 켤 수 있습니다. 하지만 운영과 안전을 위해 일정 기간 보관될 수 있습니다. 임시라는 말만 믿고 주민번호나 회사 비밀을 넣어도 되는 공간으로 생각하면 안 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q67</b><i class="qa-q">AI가 제 비밀번호를 기억해주면 편하지 않나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>비밀번호 보관 용도로 쓰면 안 됩니다. 이미 적었다면 그 비밀번호는 바꾸는 편이 안전합니다. 비밀번호는 검증된 비밀번호 관리 프로그램에 맡기고, AI에는 ‘비밀번호를 안전하게 만드는 방법’만 물어보세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q68</b><i class="qa-q">아이 사진을 올려도 될까요?</i><span aria-hidden="true">＋</span></summary>
+            <p>꼭 필요한지부터 생각해보세요. 올려야 한다면 얼굴, 이름표, 학교, 집 위치가 드러나는 부분을 가리고, 보호자 동의와 서비스 규정을 확인하세요. 아이의 사진은 나중에 지우고 싶어도 이미 다른 곳에 퍼졌는지 알기 어렵다는 점을 기억해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q69</b><i class="qa-q">AI가 만든 링크를 눌러도 안전한가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>AI가 준 링크도 틀리거나 위험할 수 있습니다. 주소 철자가 이상하지 않은지, 다운로드를 강요하지 않는지, 로그인 정보를 요구하지 않는지 확인하세요. 특히 은행, 정부, 결제 관련 링크는 검색으로 공식 사이트를 다시 찾아 들어가는 편이 안전합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q70</b><i class="qa-q">가장 쉬운 보안 원칙 하나만 알려주세요.</i><span aria-hidden="true">＋</span></summary>
+            <p>‘인터넷 공개 게시판에 올리기 곤란한 정보는 AI에도 넣지 않는다.’ 이것 하나만 기억하세요. 연습할 때는 사람 이름, 금액, 회사명을 가짜 값으로 바꿔도 충분히 연습할 수 있습니다.</p>
+          </details>
+        </div>
+
+        <div class="callout">
+          <span aria-hidden="true">!</span>
+          <div>
+            <h3>이건 대화창에 넣지 마세요.</h3>
+            <p>주민번호, 비밀번호, 인증번호, 카드번호, 계좌 비밀번호는 AI 대화창에 넣지 마세요. <b>(Q62)</b> 판단이 헷갈릴 때는 이것 하나만 기억하면 됩니다. ‘인터넷 공개 게시판에 올리기 곤란한 정보는 AI에도 넣지 않는다.’ <b>(Q70)</b></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="s08">
+        <div class="section-heading">
+          <span class="chapter">08 · Q71–Q80</span>
+          <h2>저작권과 책임</h2>
+          <p>만들 수 있는 것과 안전하게 써도 되는 것은 다릅니다.</p>
+        </div>
+
+        <p class="plain-note"><b>이 장은 법률 자문이 아닙니다.</b> 읽다가 내 일에 걸리는 대목이 나오면 그 문항 번호를 적어두셨다가, 나중에 전문가에게 그대로 물어보세요.</p>
+
+        <p class="qa-count">질문 Q71–Q80 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q71</b><i class="qa-q">AI가 쓴 글은 제 것이 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>‘서비스에서 써도 된다’는 말과 ‘법으로 저작권을 인정받는다’는 말은 다릅니다. 서비스 약관과 나라별 기준을 확인하고, 상업용이라면 내가 고르고 고친 흔적을 충분히 남기세요. AI 초안을 그대로 내 이름으로 내기보다 내 판단과 편집을 더하는 편이 안전합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q72</b><i class="qa-q">AI가 쓴 글을 그대로 판매해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>판매할 수 있다고 바로 좋은 상품이 되는 것은 아닙니다. 틀린 사실, 다른 글과 닮은 표현, 상표와 개인정보를 검수하고 내 경험과 판단을 넣어야 구매자에게 책임질 수 있습니다. 특히 건강·돈·법률처럼 독자가 실제 행동을 할 글은 더 조심해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q73</b><i class="qa-q">AI 이미지도 상업적으로 써도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>먼저 이미지 생성 서비스의 약관이 상업적 사용을 허용하는지 확인하세요. 허용된다고 해도 유명 캐릭터, 상표, 실제 사람, 특정 작품과 너무 닮은 이미지는 별도 문제가 될 수 있습니다. ‘만들 수 있다’와 ‘안전하게 팔 수 있다’는 다른 이야기입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q74</b><i class="qa-q">유명 작가 이름을 넣어 그림을 만들어도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>도구의 규정과 권리 문제를 함께 확인해야 합니다. 작가 이름을 그대로 따라 하게 하기보다, 원하는 색감· 재료·시대·구도를 말로 풀어 쓰는 편이 안전합니다. 결과도 특정 사람의 그림처럼 보이기보다 내 브랜드에 맞는 방향으로 잡기 쉽습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q75</b><i class="qa-q">다른 사람 글을 넣고 비슷하게 써달라고 해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>그 글을 참고할 권한이 있는지 먼저 생각해야 합니다. 표현을 따라 쓰게 하기보다 ‘이 글의 구조와 독자가 편하게 읽는 이유를 분석해줘’라고 요청하세요. 남의 긴 원문을 무단으로 올리면 저작권뿐 아니라 회사 기밀 문제도 생길 수 있습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q76</b><i class="qa-q">AI를 썼다고 밝혀야 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>학교, 회사, 판매 플랫폼, 계약마다 규정이 다릅니다. AI 사용 여부가 평가나 구매 판단에 영향을 줄 수 있다면 밝히는 편이 안전합니다. 중요한 것은 ‘AI가 다 했다’가 아니라 내가 어디까지 판단하고 고쳤는지 설명할 수 있는가입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q77</b><i class="qa-q">AI로 과제해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>먼저 학교와 선생님의 규정을 확인하세요. 답을 대신 제출하게 하기보다, 개념 설명을 듣고 연습문제를 만들고 내 글의 부족한 점을 찾는 데 쓰는 편이 좋습니다. AI가 만든 답을 내가 이해하지 못하면 질문을 받았을 때 바로 드러납니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q78</b><i class="qa-q">실제 사람 얼굴로 이미지를 만들어도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>본인 동의 없이 실제 사람 얼굴을 쓰면 초상권, 사칭, 명예훼손 문제가 생길 수 있습니다. 특히 광고, 정치, 성적인 내용에는 실제 사람 얼굴을 만들거나 퍼뜨리지 마세요. 재미로 만든 이미지라도 상대에게는 전혀 재미없는 일이 될 수 있습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q79</b><i class="qa-q">AI로 만든 음악은 저작권 걱정이 없나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>그렇지 않습니다. 만든 도구의 약관, 기존 노래와의 닮은 정도, 사용한 가사와 음원 조각, 유통사의 규정을 함께 봐야 합니다. 발매하거나 판매할 생각이라면 만든 과정과 최종 수정 기록을 남기고, 너무 익숙한 멜로디는 다시 검토하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q80</b><i class="qa-q">안전하게 쓰려면 무엇을 기록해야 하나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>사용한 도구와 날짜, 요금제, 참고한 자료, 중요한 지시문, 내가 고친 내용을 남기세요. 나중에 ‘어떻게 만들었는가’를 설명해야 할 때 가장 든든한 자료가 됩니다. 기록은 귀찮은 일이 아니라 내 작업을 지키는 보험에 가깝습니다.</p>
+          </details>
+        </div>
+
+        <div class="check-columns">
+          <div>
+            <h3>남겨둘 기록 (Q80)</h3>
+            <label><input type="checkbox"><span>사용한 도구와 날짜</span></label>
+            <label><input type="checkbox"><span>요금제</span></label>
+            <label><input type="checkbox"><span>참고한 자료</span></label>
+            <label><input type="checkbox"><span>중요한 지시문</span></label>
+            <label><input type="checkbox"><span>내가 고친 내용</span></label>
+          </div>
+          <div>
+            <h3>내보내기 전에 확인</h3>
+            <label><input type="checkbox"><span>서비스 약관이 상업적 사용을 허용하나요? <b>(Q73)</b></span></label>
+            <label><input type="checkbox"><span>틀린 사실을 검수했나요? <b>(Q72)</b></span></label>
+            <label><input type="checkbox"><span>다른 글과 닮은 표현이 있나요? <b>(Q72)</b></span></label>
+            <label><input type="checkbox"><span>상표와 개인정보를 확인했나요? <b>(Q72)</b></span></label>
+            <label><input type="checkbox"><span>AI 사용을 밝혀야 하는 곳인가요? <b>(Q76)</b></span></label>
+          </div>
+        </div>
+        <p class="updated">체크박스는 저장되지 않습니다. 화면을 보며 눈으로 확인하는 용도입니다.</p>
+      </section>
+
+      <section class="section" id="s09">
+        <div class="section-heading">
+          <span class="chapter">09 · Q81–Q90</span>
+          <h2>일과 콘텐츠에 쓰는 법</h2>
+          <p>AI는 일을 대신하는 사람이 아니라, 반복을 돕는 도구입니다.</p>
+        </div>
+
+        <p class="plain-note"><b>오늘 하실 일을 하나 정하고 시작하세요.</b> 그 일과 가장 가까운 문항 하나만 펼치시면, 이 장은 그것으로 충분합니다.</p>
+
+        <p class="qa-count">질문 Q81–Q90 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q81</b><i class="qa-q">회사 일에는 무엇부터 써보면 좋을까요?</i><span aria-hidden="true">＋</span></summary>
+            <p>틀려도 피해가 작고 내가 결과를 바로 확인할 수 있는 일부터 맡기세요. 회의 메모 정리, 이메일 초안, 체크리스트, 제목 후보가 좋습니다. 처음부터 고객에게 나갈 최종 계약서나 숫자가 중요한 보고서를 전부 맡기면 위험합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q82</b><i class="qa-q">이메일을 대신 써달라고 해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능합니다. 받는 사람과의 관계, 메일 목적, 꼭 들어가야 할 내용, 피하고 싶은 표현을 알려주세요. 보내기 전에는 이름, 날짜, 첨부파일, 금액처럼 틀리면 곤란한 부분을 사람이 직접 확인해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q83</b><i class="qa-q">회의록도 정리할 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>녹취나 메모를 주고 ‘결정된 일, 담당자, 마감일, 아직 정하지 못한 일’로 나눠달라고 하세요. 회의록은 보기 좋게 만드는 것보다 약속을 틀리지 않게 남기는 일이 중요합니다. 참석자 이름과 마감일은 원본 메모와 한 번 더 대조하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q84</b><i class="qa-q">블로그 글을 통째로 써달라고 해도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>초안은 만들 수 있습니다. 하지만 그대로 올리면 어디서 본 듯한 글이 되기 쉽습니다. 내가 확인한 정보, 직접 찍은 사진, 실제 숫자, 내 판단을 더해야 독자가 읽을 이유가 생깁니다. 없는 경험이나 후기를 만들어 넣어서는 안 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q85</b><i class="qa-q">유튜브 대본도 만들 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능합니다. 누가 볼 영상인지, 몇 분짜리인지, 첫 문장에서 무엇을 약속할지, 끝나고 시청자가 무엇을 하길 바라는지 알려주세요. 대본은 화면에서 읽는 글과 다르니, 만든 뒤에는 꼭 소리 내 읽으며 어색한 문장을 고치세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q86</b><i class="qa-q">상품 설명도 써주나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>제품의 사실, 구매자가 망설이는 이유, 배송과 반품 조건, 절대 하면 안 되는 표현을 주면 초안을 만들 수 있습니다. 없는 후기나 과장된 효과를 만들게 하면 나중에 더 큰 문제가 됩니다. AI는 설득을 도울 수 있어도 책임까지 대신 지지는 않습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q87</b><i class="qa-q">아이디어가 하나도 없을 때는요?</i><span aria-hidden="true">＋</span></summary>
+            <p>무작정 아이디어 100개를 달라고 하지 마세요. 먼저 내 고객이 언제, 어디서, 무엇 때문에 막히는지 나누게 하세요. 그 상황마다 나오는 질문이 실제 콘텐츠 소재입니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q88</b><i class="qa-q">번역도 맡겨도 되나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>일상적인 안내문과 이메일 번역에는 유용합니다. 하지만 계약서, 의학 자료, 법률 문서는 전문 검수가 필요합니다. 번역을 부탁할 때는 누가 읽는지와 어느 나라에서 쓸 문장인지 알려주고, 고유명사와 숫자는 원문과 비교하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q89</b><i class="qa-q">반복 업무를 자동으로 돌릴 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>가능하지만 자동화부터 시작하면 자주 꼬입니다. 먼저 사람이 하는 순서를 체크리스트로 만들고, 입력과 결과가 늘 비슷한 단계부터 하나씩 바꾸세요. 마지막 승인과 외부 발송은 사람에게 남겨두는 편이 안전합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q90</b><i class="qa-q">AI로 정말 돈을 벌 수 있나요?</i><span aria-hidden="true">＋</span></summary>
+            <p>벌 수 있습니다. 다만 AI가 벌어주는 것이 아니라 내가 만든 것이 법니다. 길은 크게 넷입니다. 유튜브 영상에 붙는 광고 수익, 블로그에 붙는 광고 수익(구글 애드센스라고 부릅니다), 물건을 소개하고 받는 소개 수수료(쿠팡파트너스가 대표적입니다), 그리고 전자책이나 강의를 직접 파는 것.</p>
+            <p>넷 다 공통점이 하나 있습니다. 콘텐츠가 쌓여야 시작된다는 것. AI는 그 쌓는 속도를 빠르게 해주는 도구입니다. 이 자료는 여기까지만 말합니다.</p>
+          </details>
+        </div>
+
+        <div class="stage-list">
+          <div><span>맨 처음</span><h3>틀려도 피해가 작은 일부터</h3><p>회의 메모 정리, 이메일 초안, 체크리스트, 제목 후보가 좋습니다. <b>(Q81)</b></p></div>
+          <div><span>그다음</span><h3>사람이 하는 순서를 적어둡니다</h3><p>먼저 사람이 하는 순서를 체크리스트로 만드세요. <b>(Q89)</b></p></div>
+          <div><span>바꿀 때</span><h3>비슷한 단계부터 하나씩</h3><p>입력과 결과가 늘 비슷한 단계부터 하나씩 바꾸세요. <b>(Q89)</b></p></div>
+          <div><span>끝까지</span><h3>마지막 승인은 사람이</h3><p>마지막 승인과 외부 발송은 사람에게 남겨두는 편이 안전합니다. <b>(Q89)</b></p></div>
+        </div>
+      </section>
+
+      <section class="section" id="s10">
+        <div class="section-heading">
+          <span class="chapter">10 · Q91–Q100</span>
+          <h2>막혔을 때와 오래 쓰는 습관</h2>
+          <p>한 번 잘 쓰는 것보다, 확인하며 오래 쓰는 습관이 중요합니다.</p>
+        </div>
+
+        <p class="plain-note"><b>막혔을 때 다시 열어보는 장입니다.</b> 지금 전부 읽지 않으셔도 됩니다. 이 페이지 주소를 즐겨찾기에 넣어두시면 됩니다.</p>
+
+        <p class="qa-count">질문 Q91–Q100 · 10문항</p>
+        <div class="faq-list qa-list">
+          <details>
+            <summary><b class="qa-num">Q91</b><i class="qa-q">답변이 쓰다가 갑자기 멈췄어요.</i><span aria-hidden="true">＋</span></summary>
+            <p>인터넷 연결, 사용량 제한, 너무 긴 답변, 일시 오류가 원인일 수 있습니다. 새로 전부 쓰게 하기보다 ‘마지막 완성 문장 다음부터 이어서 써줘. 앞부분은 반복하지 마’라고 해보세요. 그래도 안 되면 요청을 둘로 나누는 편이 빠릅니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q92</b><i class="qa-q">같은 질문인데 답이 매번 달라요.</i><span aria-hidden="true">＋</span></summary>
+            <p>AI는 답을 저장해 꺼내는 것이 아니라 그때그때 새로 만듭니다. 그래서 같은 질문에도 답이 달라질 수 있습니다. 꼭 지킬 사실과 결과 모양을 적고, 확정한 최종본은 별도 문서에 저장하세요.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q93</b><i class="qa-q">앞에서 말한 걸 자꾸 잊어버려요.</i><span aria-hidden="true">＋</span></summary>
+            <p>대화가 너무 길어졌거나 새 대화방을 열었을 수 있습니다. 지금까지 정한 목표, 결정사항, 금지사항을 열 줄 안으로 요약해 다시 주세요. 중요한 프로젝트라면 매번 새 대화 첫머리에 붙일 ‘인수인계 메모’를 하나 만들어두면 좋습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q94</b><i class="qa-q">파일을 못 읽었다고 해요.</i><span aria-hidden="true">＋</span></summary>
+            <p>지원하지 않는 형식이거나, 파일이 너무 크거나, 암호가 걸렸거나, 스캔 품질이 낮을 수 있습니다. 먼저 한 페이지만 잘라 올려보세요. 그래도 안 되면 내용을 복사해 붙이거나, PDF나 워드 문서(DOCX)처럼 더 흔한 형식으로 바꿔보면 됩니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q95</b><i class="qa-q">한글이 깨져 보여요.</i><span aria-hidden="true">＋</span></summary>
+            <p>한글이 깨지면 대개 파일을 저장한 방식 때문입니다. 메모장에서 파일을 여신 뒤 [파일] → [다른 이름으로 저장]을 누르면 창 아래쪽에 「인코딩」 칸이 있습니다. 거기서 UTF-8(한글이 안 깨지게 저장하는 방식입니다)을 고르고 저장하시면 됩니다. 워드나 한글 문서라면 PDF나 워드 문서(DOCX)로 다시 저장해보세요. 중요한 문서는 바꾼 뒤 첫 페이지와 표가 있는 페이지를 직접 열어 확인해야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q96</b><i class="qa-q">AI가 제 말을 자꾸 무시해요.</i><span aria-hidden="true">＋</span></summary>
+            <p>부탁이 너무 많거나 서로 부딪힐 수 있습니다. 이번 답에서 꼭 지킬 조건 세 개만 맨 위에 두고, 나머지는 다음 차례로 미루세요. ‘① 다섯 줄 이내 ② 존댓말 ③ 숫자는 바꾸지 않기’처럼 쓰면 AI도 우선순위를 알기 쉽습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q97</b><i class="qa-q">대화가 너무 많아 정리가 안 돼요.</i><span aria-hidden="true">＋</span></summary>
+            <p>주제마다 대화방을 나누고 제목에 날짜와 목적을 넣으세요. 일이 끝날 때는 결정한 내용, 다음 할 일, 다시 쓸 질문을 한 장으로 요약해 보관하면 됩니다. 대화를 잘 쌓는 것보다 필요한 내용을 다시 찾을 수 있게 만드는 것이 중요합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q98</b><i class="qa-q">좋다는 프롬프트를 많이 모으면 실력이 늘까요?</i><span aria-hidden="true">＋</span></summary>
+            <p>저장만 해서는 잘 늘지 않습니다. 내 실제 일을 같은 질문으로 세 번 해보고, 어떤 정보를 더했을 때 결과가 달라졌는지 적는 편이 훨씬 빠릅니다. 남의 만능 프롬프트보다 내 업무 하나를 잘 해결하는 질문이 더 가치 있습니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q99</b><i class="qa-q">AI에 너무 의존하는 것 같아요.</i><span aria-hidden="true">＋</span></summary>
+            <p>먼저 내 생각을 세 줄만 적고 AI를 쓰는 규칙을 만들어보세요. 중요한 관계, 돈, 건강 결정은 사람과 상의하고 AI 답은 참고자료로만 두세요. AI 없이도 내가 왜 이 선택을 했는지 설명할 수 있어야 합니다.</p>
+          </details>
+          <details>
+            <summary><b class="qa-num">Q100</b><i class="qa-q">결국 AI를 잘 쓰는 사람은 어떤 사람인가요?</i><span aria-hidden="true">＋</span></summary>
+            <p>멋진 프롬프트를 많이 외운 사람이 아닙니다. 나온 답을 확인하고, 자기 일에 맞게 고치고, 왜 틀렸는지 기록하는 사람입니다. 작은 일 하나를 꾸준히 맡겨본 사람이 결국 가장 오래, 가장 안전하게 잘 씁니다.</p>
+          </details>
+        </div>
+
+        <div class="note-grid">
+          <div><span>Q91</span><h3>답이 끊겼을 때</h3><p>‘마지막 완성 문장 다음부터 이어서 써줘. 앞부분은 반복하지 마’라고 해보세요.</p></div>
+          <div class="tinted"><span>Q93</span><h3>앞말을 잊었을 때</h3><p>목표, 결정사항, 금지사항을 열 줄 안으로 요약해 다시 주세요.</p></div>
+          <div><span>Q97</span><h3>대화가 쌓였을 때</h3><p>주제마다 대화방을 나누고 제목에 날짜와 목적을 넣으세요.</p></div>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <p>마지막으로</p>
+        <h2>가장 좋은 시작은<br><em>작은 질문 하나</em>입니다.</h2>
+        <p>오늘 해야 할 일 하나를 골라, 평소 말하듯 AI에게 부탁해보세요. 결과를 확인하고 한 번 고치면, 이미 시작한 것입니다. 혼자 하다 막히면 같이 보는 방도 있습니다.</p>
+        <div>
+          <a class="button dark" href="https://open.kakao.com/o/glxOtmDi" target="_blank" rel="noreferrer">AI 왕초보 시작하기 오픈채팅방 ↗</a>
+          <a class="button ghost" href="#s0">읽는 법 다시 보기</a>
+        </div>
+        <small class="fineprint">「AI 왕초보 시작하기(무료 전자책 제공)」 — 무료 오픈채팅방입니다. 들어와서 읽기만 해도 됩니다.</small>
+      </section>
+
+      <footer>
+        <p>이 페이지는 「AI 왕초보 Q&amp;A 100선」(10개 주제 × 10문항)의 전문입니다. 검수 기준일은 2026년 7월 30일이며, 가격·기능·정책처럼 바뀔 수 있는 정보는 각 서비스의 현재 화면과 공식 안내를 우선합니다. 돈·건강·법률처럼 틀리면 곤란한 내용은 반드시 원문으로 확인하세요.</p>
+        <div>
+          <a class="source-link" href="https://thenightpd.com" target="_blank" rel="noreferrer">그밤PD<span aria-hidden="true">↗</span></a>
+          <a href="#top">맨 위로 ↑</a>
+        </div>
+      </footer>
+
+    </article>
+  </div>
+</main>
+
+<script>
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.side-nav a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) map[el.id] = a;
+  });
+  var seen = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
+    var current = null;
+    Object.keys(map).forEach(function (id) { if (seen[id] && !current) current = id; });
+    links.forEach(function (a) { a.classList.remove('is-active'); });
+    if (current) {
+      var a = map[current];
+      a.classList.add('is-active');
+      var nav = document.querySelector('.side-nav');
+      if (nav && nav.scrollWidth > nav.clientWidth) {
+        nav.scrollTo({ left: a.parentNode.offsetLeft - 16, behavior: 'smooth' });
+      }
+    }
+  }, { rootMargin: '-10% 0px -70% 0px' });
+  Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+})();
+</script>
+</body>
+</html>
