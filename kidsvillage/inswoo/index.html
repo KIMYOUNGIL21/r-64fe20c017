@@ -1,0 +1,909 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"></head><body><title>카탈로그 자동화 인수인계서</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f2eeea;
+    --surface: #fffaf6;
+    --surface-raised: #fffefd;
+    --surface-soft: #e9e2dc;
+    --text: #2d2927;
+    --muted: #6e6661;
+    --line: #d8cec6;
+    --accent: #7a294d;
+    --accent-strong: #5d1f3b;
+    --accent-soft: #f2dce6;
+    --accent-contrast: #fff9fc;
+    --terminal: #171416;
+    --terminal-text: #f8edf2;
+    --terminal-muted: #cbb9c2;
+    --shadow: rgba(66, 45, 53, 0.10);
+    --shadow-strong: rgba(66, 45, 53, 0.16);
+    --focus: #a84370;
+    --print-bg: #ffffff;
+    --print-text: #111111;
+    --content-width: 65ch;
+    --radius-large: 26px;
+    --radius-medium: 16px;
+    --radius-small: 10px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #171513;
+      --surface: #211e1c;
+      --surface-raised: #282320;
+      --surface-soft: #302a26;
+      --text: #f0eae5;
+      --muted: #bdb1a8;
+      --line: #473e38;
+      --accent: #e0a2bd;
+      --accent-strong: #f0bed2;
+      --accent-soft: #422538;
+      --accent-contrast: #23131b;
+      --terminal: #0d0b0c;
+      --terminal-text: #f6e8ef;
+      --terminal-muted: #c6b0ba;
+      --shadow: rgba(0, 0, 0, 0.24);
+      --shadow-strong: rgba(0, 0, 0, 0.36);
+      --focus: #f0bed2;
+      --print-bg: #ffffff;
+      --print-text: #111111;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #171513;
+    --surface: #211e1c;
+    --surface-raised: #282320;
+    --surface-soft: #302a26;
+    --text: #f0eae5;
+    --muted: #bdb1a8;
+    --line: #473e38;
+    --accent: #e0a2bd;
+    --accent-strong: #f0bed2;
+    --accent-soft: #422538;
+    --accent-contrast: #23131b;
+    --terminal: #0d0b0c;
+    --terminal-text: #f6e8ef;
+    --terminal-muted: #c6b0ba;
+    --shadow: rgba(0, 0, 0, 0.24);
+    --shadow-strong: rgba(0, 0, 0, 0.36);
+    --focus: #f0bed2;
+    --print-bg: #ffffff;
+    --print-text: #111111;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-size: 17px;
+    line-height: 1.78;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: var(--accent-strong);
+    text-underline-offset: 0.18em;
+  }
+
+  a:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  strong {
+    color: var(--accent-strong);
+    font-weight: 700;
+  }
+
+  code {
+    padding: 0.12em 0.34em;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface-soft);
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    word-break: break-all;
+  }
+
+  .page-shell {
+    width: min(calc(100% - 32px), 980px);
+    margin: 0 auto;
+    padding: 28px 0 96px;
+  }
+
+  .hero,
+  .chapter {
+    width: min(100%, var(--content-width));
+    margin-inline: auto;
+  }
+
+  .hero {
+    position: relative;
+    padding: clamp(30px, 7vw, 64px) clamp(22px, 6vw, 58px);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-large);
+    background: var(--surface-raised);
+    box-shadow: 0 18px 50px var(--shadow);
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 8px;
+    background: var(--accent);
+  }
+
+  .eyebrow {
+    margin: 0 0 18px;
+    color: var(--accent-strong);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Gowun Batang", serif;
+    color: var(--text);
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 15ch;
+    margin: 0;
+    font-size: clamp(2.2rem, 7vw, 4.4rem);
+    letter-spacing: -0.055em;
+  }
+
+  .hero-meta {
+    margin: 28px 0 0;
+    color: var(--muted);
+    font-size: 0.91rem;
+    line-height: 1.65;
+  }
+
+  .hero-meta span {
+    display: block;
+  }
+
+  .hero-summary {
+    margin: 26px 0 0;
+    padding: 18px 20px;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius-small) var(--radius-small) 0;
+    background: var(--accent-soft);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .toc {
+    width: min(100%, var(--content-width));
+    margin: 28px auto 0;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-medium);
+    background: var(--surface);
+  }
+
+  .toc h2 {
+    margin: 0 0 18px;
+    font-size: 1.25rem;
+  }
+
+  .toc ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc -1;
+  }
+
+  .toc li {
+    counter-increment: toc;
+  }
+
+  .toc a {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 7px 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    flex: 0 0 auto;
+    color: var(--accent);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .toc a:hover {
+    color: var(--accent-strong);
+  }
+
+  .chapter {
+    scroll-margin-top: 24px;
+    padding: 70px 0 8px;
+  }
+
+  .chapter > h2 {
+    margin: 0 0 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--accent);
+    font-size: clamp(1.75rem, 5vw, 2.45rem);
+    letter-spacing: -0.035em;
+  }
+
+  .chapter h3 {
+    margin: 42px 0 14px;
+    font-size: clamp(1.3rem, 4vw, 1.65rem);
+  }
+
+  .chapter h4 {
+    margin: 30px 0 10px;
+    font-size: 1.12rem;
+  }
+
+  .chapter p,
+  .chapter ul,
+  .chapter ol {
+    margin-top: 0;
+    margin-bottom: 22px;
+  }
+
+  .chapter ul,
+  .chapter ol {
+    padding-left: 1.45em;
+  }
+
+  .chapter li + li {
+    margin-top: 8px;
+  }
+
+  blockquote {
+    margin: 24px 0;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--accent);
+    border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+    background: var(--surface);
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+
+  blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .table-scroll {
+    width: 100%;
+    margin: 22px 0 30px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-medium);
+    background: var(--surface);
+    box-shadow: 0 6px 20px var(--shadow);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    font-size: 0.94rem;
+    line-height: 1.58;
+  }
+
+  th,
+  td {
+    padding: 15px 17px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-weight: 700;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .diagram,
+  .terminal {
+    max-width: 100%;
+    overflow-x: auto;
+    border-radius: var(--radius-medium);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .diagram {
+    margin: 24px 0;
+    padding: 22px;
+    border: 1px solid var(--line);
+    background: var(--surface-soft);
+    color: var(--text);
+  }
+
+  .terminal {
+    position: relative;
+    margin: 24px 0 32px;
+    padding: 50px 22px 22px;
+    border: 1px solid var(--line);
+    background: var(--terminal);
+    color: var(--terminal-text);
+    box-shadow: 0 14px 36px var(--shadow-strong);
+  }
+
+  .terminal::before {
+    content: "실행 화면";
+    position: absolute;
+    top: 16px;
+    left: 22px;
+    color: var(--terminal-muted);
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .daily-intro {
+    margin-bottom: 32px;
+    font-size: 1.08rem;
+  }
+
+  .daily-step {
+    position: relative;
+    margin: 24px 0;
+    padding: clamp(22px, 5vw, 36px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-large);
+    background: var(--surface-raised);
+    box-shadow: 0 10px 30px var(--shadow);
+  }
+
+  .daily-step h3 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin: 0 0 22px;
+  }
+
+  .step-number {
+    display: inline-grid;
+    min-width: 2.2em;
+    min-height: 2.2em;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-size: clamp(1.35rem, 5vw, 2.15rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .step-title {
+    display: block;
+  }
+
+  .plain-card {
+    margin: 24px 0;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-medium);
+    background: var(--surface);
+  }
+
+  .plain-card > :last-child {
+    margin-bottom: 0;
+  }
+
+  .warning-title {
+    color: var(--accent-strong);
+    font-weight: 700;
+  }
+
+  .status-note {
+    margin-top: 32px;
+    padding: 22px 24px;
+    border-radius: var(--radius-medium);
+    background: var(--accent-soft);
+  }
+
+  .back-to-top {
+    position: fixed;
+    right: max(18px, calc((100vw - 980px) / 2));
+    bottom: 18px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface-raised);
+    color: var(--accent-strong);
+    box-shadow: 0 8px 26px var(--shadow-strong);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .page-shell {
+      width: min(calc(100% - 20px), 980px);
+      padding-top: 10px;
+    }
+
+    .hero {
+      border-radius: 20px;
+    }
+
+    .toc {
+      padding: 22px;
+    }
+
+    .toc ol {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+
+    .chapter {
+      padding-top: 56px;
+    }
+
+    .daily-step {
+      border-radius: 20px;
+    }
+
+    .daily-step h3 {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .step-number {
+      width: max-content;
+      padding-inline: 0.38em;
+    }
+
+    .back-to-top {
+      right: 12px;
+      bottom: 12px;
+    }
+  }
+
+  @media print {
+    body {
+      background: var(--print-bg);
+      color: var(--print-text);
+      font-size: 10.5pt;
+    }
+
+    .page-shell {
+      width: 100%;
+      padding: 0;
+    }
+
+    .hero,
+    .chapter,
+    .toc {
+      width: 100%;
+      max-width: none;
+    }
+
+    .hero,
+    .chapter,
+    .toc,
+    .daily-step,
+    .plain-card,
+    blockquote,
+    .table-scroll {
+      box-shadow: none;
+    }
+
+    .chapter,
+    .daily-step,
+    .plain-card,
+    blockquote,
+    .table-scroll,
+    .diagram,
+    .terminal {
+      break-inside: avoid;
+    }
+
+    .table-scroll,
+    .diagram,
+    .terminal {
+      overflow: visible;
+    }
+
+    .back-to-top {
+      display: none;
+    }
+
+    a {
+      color: var(--print-text);
+      text-decoration: none;
+    }
+  }
+</style>
+
+<div class="page-shell" id="top">
+  <header class="hero">
+    <p class="eyebrow">판매자님용 · 작성 2026-08-25</p>
+    <h1>카탈로그 자동화 인수인계서 — 판매자님용</h1>
+    <p class="hero-meta">
+      <span>작성 2026-08-25 · 만든 사람: 그밤PD(사장님) + AI 도구(클로드, 코덱스)</span>
+      <span>읽는 사람: 판매자님. 컴퓨터를 잘 몰라도, AI를 한 번도 안 써봤어도 따라갈 수 있게 썼습니다.</span>
+      <span>사장님도 같은 문서를 봅니다.</span>
+    </p>
+    <p class="hero-summary">매일 아침 64번 클릭해서 사진 받고, 골라서, 128개 올리던 일을 클릭 한 번 + 더블클릭 한 번으로 바꾸고, 사진이 사라지지 않는 비밀번호 카탈로그 페이지에 자동으로 올라가게 합니다.</p>
+  </header>
+
+  <nav class="toc" aria-label="목차">
+    <h2>목차</h2>
+    <ol>
+      <li><a href="#chapter-0">이 문서를 한 줄로</a></li>
+      <li><a href="#chapter-1">용어 — 이것만 알면 됩니다</a></li>
+      <li><a href="#chapter-2">전체 그림</a></li>
+      <li><a href="#chapter-3">처음 한 번만 하는 준비</a></li>
+      <li><a href="#chapter-4">매일 하는 일</a></li>
+      <li><a href="#chapter-5">고객은 뭘 보나</a></li>
+      <li><a href="#chapter-6">뭔가 잘못됐을 때</a></li>
+      <li><a href="#chapter-7">꼭 지켜야 할 것</a></li>
+      <li><a href="#chapter-8">AI 도구 첫걸음</a></li>
+      <li><a href="#chapter-9">지금 어디까지 됐나</a></li>
+      <li><a href="#chapter-10">연락과 파일</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section class="chapter" id="chapter-0">
+      <h2>0. 이 문서를 한 줄로</h2>
+
+      <blockquote>
+        <p>매일 아침 <strong>64번 클릭해서 사진 받고, 골라서, 128개 올리던 일</strong>을<br>
+        <strong>클릭 한 번 + 더블클릭 한 번</strong>으로 바꾸고, 사진이 사라지지 않는 <strong>비밀번호 카탈로그 페이지</strong>에 자동으로 올라가게 합니다.<br>
+        주문 받고, 입금 확인하고, 키즈빌리지에 발주하는 일은 <strong>지금 그대로</strong>입니다. 바뀌지 않습니다.</p>
+      </blockquote>
+
+      <h3>판매자님이 말씀하신 불편 4가지와, 이게 어떻게 되는지</h3>
+
+      <div class="table-scroll" role="region" aria-label="불편했던 점과 바뀐 뒤 비교" tabindex="0">
+        <table>
+          <thead><tr><th>불편했던 것</th><th>바뀐 뒤</th></tr></thead>
+          <tbody>
+            <tr><td>상품마다 사진 다운받고 9~12장 고르기</td><td>컴퓨터가 다 받습니다. 고를 필요도 없습니다 — 페이지가 20장을 다 보여줍니다</td></tr>
+            <tr><td>카톡 사진이 2~3주 지나면 만료</td><td>페이지의 사진은 사라지지 않습니다. 고객이 한 달 뒤에 봐도 그대로</td></tr>
+            <tr><td>경쟁자가 몰래 들어와 사진·양식을 빼감</td><td>페이지에 <strong>비밀번호</strong>가 걸립니다. 방 밖 사람과 검색엔진은 못 봅니다 (방 안에 있는 사람은 못 막습니다 — 솔직히 말씀드립니다)</td></tr>
+            <tr><td>100개 넘게 올라가서 며칠 뒤엔 스크롤로 못 찾음</td><td>페이지에 <strong>검색·정렬</strong>이 있습니다. "레깅스" 치면 바로 나옵니다</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="chapter" id="chapter-1">
+      <h2>1. 용어 — 이것만 알면 됩니다</h2>
+
+      <div class="table-scroll" role="region" aria-label="용어 설명" tabindex="0">
+        <table>
+          <thead><tr><th>말</th><th>뜻</th></tr></thead>
+          <tbody>
+            <tr><td><strong>카탈로그 페이지</strong></td><td>인터넷 주소 하나로 열리는 상품 목록 화면. 사진·이름·가격·색상·사이즈가 있고, 검색이 됩니다. 고객이 폰으로 봅니다</td></tr>
+            <tr><td><strong>엑셀</strong></td><td>키즈빌리지가 공식으로 주는 상품 목록 파일. 상품명·가격·색상·사이즈·사진 주소가 다 들어 있습니다. 이 파일 하나가 시작점입니다</td></tr>
+            <tr><td><strong>더블클릭 파일</strong></td><td>바탕화면 폴더에 있는 아이콘. 두 번 클릭하면 나머지를 컴퓨터가 알아서 합니다</td></tr>
+            <tr><td><strong>상품마스터</strong></td><td>컴퓨터가 만들어 주는 엑셀 표. 여기서 가격을 고치거나 품절 표시를 합니다. 판매자님이 손대는 유일한 표</td></tr>
+            <tr><td><strong>알림 키트</strong></td><td>카톡방에 올릴 재료. 대표 사진들 + 복사해서 붙일 공지 글</td></tr>
+            <tr><td><strong>클라우드플레어</strong></td><td>페이지를 인터넷에 띄워 주는 회사. 무료. 계정 하나 만들고 나면 다시 볼 일 없습니다</td></tr>
+            <tr><td><strong>AI (클로드·코덱스)</strong></td><td>이 도구들을 만든 프로그램. 판매자님이 매일 쓰는 건 아닙니다. 8장에서 설명합니다</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="chapter" id="chapter-2">
+      <h2>2. 전체 그림</h2>
+
+      <pre class="diagram">키즈빌리지 ──엑셀 1클릭──▶ [더블클릭 한 번] ──▶ 카탈로그 페이지 (자동 갱신, 비밀번호)
+                              │
+                              └──▶ 알림 키트 (대표컷 + 공지글) ──판매자님이 붙여넣기──▶ 오픈카톡방
+                                                                                   │
+                                          고객: 링크 → 비밀번호 → 상품 보기 → "주문 문구 복사" → CS채널
+                                                                                   │
+                                          판매자님: 지금처럼 확인 · 입금 · 키즈빌리지 발주 (변화 없음)</pre>
+
+      <p><strong>컴퓨터가 하는 일</strong>: 엑셀 읽기, 사진 받기, 가격 계산, 페이지 만들기, 인터넷에 올리기.<br>
+      <strong>판매자님이 하는 일</strong>: 브랜드 고르기, 엑셀 받기(클릭 1), 더블클릭(1), 카톡에 붙여넣기, 그리고 지금 하시던 주문·발주.</p>
+    </section>
+
+    <section class="chapter" id="chapter-3">
+      <h2>3. 처음 한 번만 하는 준비 (사장님과 함께, 약 1시간)</h2>
+
+      <p>이건 <strong>딱 한 번</strong>입니다. 사장님이 옆에서(또는 원격으로) 같이 합니다. 혼자 하실 필요 없습니다.</p>
+
+      <h3>3-1. 준비물</h3>
+      <ul>
+        <li>판매자님 노트북 (윈도우)</li>
+        <li>키즈빌리지 로그인 되는 상태</li>
+        <li>이메일 주소 하나 (클라우드플레어 계정용)</li>
+        <li>카탈로그 비밀번호로 쓸 단어 하나 (예: 방 이름 + 숫자)</li>
+      </ul>
+
+      <h3>3-2. 순서</h3>
+      <ol>
+        <li><strong>폴더 받기</strong> — 사장님이 <code>카탈로그</code> 폴더를 바탕화면에 넣어 드립니다. 안에 더블클릭 파일 3개가 있습니다: <code>설치하기</code>, <code>로그인하기</code>, <code>카탈로그 만들기</code>.</li>
+        <li><strong><code>설치하기</code> 더블클릭</strong> — 검은 창이 뜨고 글자가 올라갑니다. 5~10분. "설치 완료" 나오면 끝. (필요한 프로그램을 컴퓨터가 알아서 받습니다)</li>
+        <li><strong>클라우드플레어 계정 만들기</strong> — 사장님이 화면을 같이 보며 안내. 이메일 + 비밀번호 정하고 이메일 인증. 이 계정은 판매자님 것입니다. 비밀번호는 판매자님만 압니다.</li>
+        <li><strong><code>로그인하기</code> 더블클릭</strong> — 인터넷 창이 열리며 "허용하시겠습니까?" → <strong>허용</strong>. 이걸로 컴퓨터가 페이지를 올릴 권한을 얻습니다.</li>
+        <li><strong><code>설정.txt</code> 열어서 두 줄 채우기</strong> — 카탈로그 비밀번호, 페이지 이름(예: <code>sodam</code>). 저장.</li>
+        <li><strong>첫 배포</strong> — <code>카탈로그 만들기</code> 한 번 돌려 봅니다(4장 순서대로). 끝나면 주소가 나옵니다. 예: <code>https://sodam.pages.dev</code></li>
+        <li><strong>카톡방 공지 고정</strong> — "카탈로그 주소: … / 비밀번호: …" 를 방 공지에 고정합니다.</li>
+      </ol>
+
+      <blockquote><p>⚠️ 3번·4번은 <strong>계정 만들기·로그인</strong>이라 사장님도, AI도 대신 못 합니다. 판매자님 손으로 하셔야 합니다. 그래서 같이 하는 날을 잡습니다.</p></blockquote>
+    </section>
+
+    <section class="chapter" id="chapter-4">
+      <h2>4. 매일 하는 일 (평일 아침, 15분 · 그중 손은 3분)</h2>
+
+      <p class="daily-intro">아오스타 26가을 신상 66종을 오늘 처음 올린다고 치고, 처음부터 끝까지 갑니다.</p>
+
+      <article class="daily-step">
+        <h3><span class="step-number">4-1.</span> <span class="step-title">키즈빌리지에서 브랜드 고르기 — 지금과 같습니다</span></h3>
+        <p>사이트 보면서 "오늘은 아오스타" 정합니다. 여기는 판매자님 안목이라 컴퓨터가 안 합니다.</p>
+      </article>
+
+      <article class="daily-step">
+        <h3><span class="step-number">4-2.</span> <span class="step-title">엑셀 한 번 받기 — 클릭 1번</span></h3>
+        <p>키즈빌리지 로그인 상태에서:</p>
+        <ol>
+          <li>주소창에 <code>kidsvillage.co.kr/shop/download_xls.php</code> 입력 → <strong>상품목록 다운로드</strong> 화면 (즐겨찾기에 넣어 두세요)</li>
+          <li>화면 오른쪽 <strong>"STEP 01. 브랜드별 상품 다운로드"</strong></li>
+          <li>초성 탭에서 <strong>"아"</strong> → <strong>아오스타(835)</strong> 클릭 (숫자는 그 브랜드의 전체 상품 수)</li>
+          <li>아래 <strong>"다운로드 — 네이버 스토어팜용"</strong> 클릭</li>
+          <li>파일이 <code>다운로드</code> 폴더에 떨어집니다. 이름은 <code>네이버_상품현황_브랜드_아오스타…xlsx</code></li>
+        </ol>
+        <blockquote>
+          <p>이 클릭 한 번이, 예전에 64번 클릭해서 압축파일 받던 일을 통째로 대신합니다.<br>
+          이 엑셀 안에 사진 주소까지 들어 있어서 컴퓨터가 알아서 받습니다.</p>
+        </blockquote>
+      </article>
+
+      <article class="daily-step">
+        <h3><span class="step-number">4-3.</span> <span class="step-title"><code>카탈로그 만들기</code> 더블클릭 — 1번</span></h3>
+        <p>바탕화면 <code>카탈로그</code> 폴더 → <code>카탈로그 만들기</code> 더블클릭. 검은 창이 뜹니다.</p>
+        <p>컴퓨터가 두 가지만 묻습니다:</p>
+
+        <div class="table-scroll" role="region" aria-label="컴퓨터가 묻는 것과 답" tabindex="0">
+          <table>
+            <thead><tr><th>묻는 것</th><th>답</th></tr></thead>
+            <tbody>
+              <tr><td>"이 엑셀 맞나요? <code>네이버_상품현황_브랜드_아오스타…</code>"</td><td>방금 받은 파일이면 <strong>엔터</strong></td></tr>
+              <tr><td>"언제 이후 등록된 상품만 올릴까요? [기본: 30일 전]"</td><td>신상만 올리려면 날짜 입력. 예: <code>2026-08-01</code> → 8월 등록 66종만. 그냥 엔터면 최근 30일</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>그다음은 자동입니다. 창에 진행이 흘러갑니다:</p>
+
+        <pre class="terminal">엑셀 835행 → 대상 66종
+[1/66] 에브리레깅스 — 이미지 20장
+[2/66] 엔젤프릴티 — 이미지 20장
+…  (약 10분. 커피 한 잔)
+✅ 상품마스터 66종 · 이미지 1,306장
+✅ 페이지 올라감: https://sodam.pages.dev/아오스타
+✅ 알림 키트: 알림키트\2026-08-25_아오스타\  (폴더가 자동으로 열립니다)</pre>
+
+        <p>가격은 이 규칙으로 자동 계산됩니다 (판매자님이 알려주신 규칙 그대로):</p>
+
+        <div class="table-scroll" role="region" aria-label="가격 자동 계산 규칙" tabindex="0">
+          <table>
+            <thead><tr><th>도매가(공급가)</th><th>붙이는 마진</th><th>예</th></tr></thead>
+            <tbody>
+              <tr><td>2만원 미만</td><td>+2,500</td><td>7,000 → 9,500</td></tr>
+              <tr><td>2만원 이상</td><td>+3,000</td><td>20,000 → 23,000</td></tr>
+              <tr><td>3.5만원 이상</td><td>+3,500</td><td>35,000 → 38,500</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="daily-step">
+        <h3><span class="step-number">4-4.</span> <span class="step-title">(필요할 때만) 가격 고치기 · 품절 표시</span></h3>
+        <p>"너무 싸거나 비싼 건 수기로" 하시던 것 — <code>상품마스터.xlsx</code>에서 합니다.</p>
+        <ol>
+          <li><code>카탈로그</code> 폴더 → <code>수집</code> → <code>아오스타</code> → <strong><code>상품마스터.xlsx</code></strong> 열기</li>
+          <li>고칠 상품 줄에서 <strong><code>판매가_수정</code></strong> 칸에 원하는 가격 입력 (비워 두면 규칙 가격)</li>
+          <li>품절이면 <strong><code>상태</code></strong> 칸을 <code>품절</code>로. 아예 안 보이게 하려면 <code>숨김</code></li>
+          <li>저장 → <code>카탈로그 만들기</code> 다시 더블클릭 → 이번엔 30초 (사진은 이미 있어서 다시 안 받음)</li>
+        </ol>
+      </article>
+
+      <article class="daily-step">
+        <h3><span class="step-number">4-5.</span> <span class="step-title">카톡방에 올리기 — 판매자님 손으로</span></h3>
+        <p>자동으로 열린 <code>알림키트</code> 폴더에:</p>
+        <ul>
+          <li><code>대표컷</code> 폴더: 상품마다 첫 사진 66장</li>
+          <li><code>공지문.txt</code>: 복사해서 붙일 글</li>
+        </ul>
+        <ol>
+          <li><code>공지문.txt</code> 열어 전체 복사</li>
+          <li>오픈카톡방에 붙여넣기</li>
+          <li><code>대표컷</code>에서 마음에 드는 사진 몇 장 첨부 (예전처럼 128개가 아니라 <strong>몇 장</strong>)</li>
+          <li>전송</li>
+        </ol>
+        <blockquote><p>카톡 전송은 <strong>일부러</strong> 자동으로 안 합니다. 자동 발송은 카카오 규정 위반으로 계정이 정지될 수 있고, 판매자님 카톡 계정은 고객 명단 그 자체라 잃으면 안 됩니다.</p></blockquote>
+      </article>
+
+      <article class="daily-step">
+        <h3><span class="step-number">4-6.</span> <span class="step-title">주문·입금·발주 — 지금 그대로</span></h3>
+        <p>CS채널로 주문 받고, 통장 확인하고, 키즈빌리지에 고객 주소 넣어 위탁배송 발주. <strong>여기는 아무것도 안 바뀝니다.</strong></p>
+      </article>
+    </section>
+
+    <section class="chapter" id="chapter-5">
+      <h2>5. 고객은 뭘 보나</h2>
+
+      <ol>
+        <li>카톡 공지의 링크 누름</li>
+        <li>비밀번호 한 번 입력 (폰이 기억해서 다음부턴 안 물음)</li>
+        <li>상품 목록 — 검색창에 "티" 치면 티만, "낮은 가격순" 정렬도 됨. NEW 표시, 품절 표시</li>
+        <li>상품 누르면 사진 20장 + 가격·색상·사이즈·배송비 3,500원</li>
+        <li><strong>"주문 문구 복사"</strong> 버튼 → <code>[주문] 에브리레깅스 / 색상: ( ) / 사이즈: ( ) / 수량: 1 — 9,500원</code> 이 복사됨</li>
+        <li>CS채널에 붙여넣고 괄호만 채워 보냄</li>
+      </ol>
+
+      <p>고객이 상품명·가격을 손으로 안 치니 오타·착각이 줄어듭니다.</p>
+
+      <p>지금 미리보기(사진 3장짜리 축소판): 사장님이 보내 드린 링크. 실제 페이지는 사진 20장 전부 실립니다.</p>
+    </section>
+
+    <section class="chapter" id="chapter-6">
+      <h2>6. 뭔가 잘못됐을 때</h2>
+
+      <p><strong>원칙: 컴퓨터가 틀린 값을 내느니 멈추게 만들었습니다.</strong> 빨간 글씨로 멈추면 그날은 예전 방식으로 장사하시고, 사장님께 캡처를 보내 주세요. 장사가 서지 않게 만든 구조입니다.</p>
+
+      <div class="table-scroll" role="region" aria-label="문제가 생겼을 때 해결 방법" tabindex="0">
+        <table>
+          <thead><tr><th>화면에 이런 게 나오면</th><th>뜻</th><th>하실 일</th></tr></thead>
+          <tbody>
+            <tr><td><code>⛔ 엑셀 형식이 바뀌었다</code></td><td>키즈빌리지가 엑셀 모양을 바꿈</td><td>사장님께 캡처. 오늘은 예전 방식</td></tr>
+            <tr><td><code>⛔ 이미지가 안 열린다</code></td><td>사진 주소가 만료됐거나 정책 변경</td><td>엑셀을 <strong>다시 받아서</strong> 한 번 더. 그래도 안 되면 사장님께</td></tr>
+            <tr><td>"브랜드를 선택해주세요" (키즈빌리지 화면)</td><td>브랜드 안 누르고 다운로드 누름</td><td>브랜드 먼저 클릭</td></tr>
+            <tr><td>대상 0종</td><td>날짜를 너무 최근으로 넣음</td><td>날짜를 앞당겨 다시</td></tr>
+            <tr><td>페이지가 예전 상품 그대로</td><td>배포가 안 됨(인터넷 끊김 등)</td><td>인터넷 확인 후 다시 더블클릭</td></tr>
+            <tr><td>고객이 "비밀번호 틀렸대요"</td><td>공지의 비밀번호와 <code>설정.txt</code>가 다름</td><td>둘을 맞춤</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="warning-title">절대 하지 마실 것</p>
+      <ul>
+        <li>다른 사람이 만든 <code>.bat</code>나 프로그램을 받아서 <code>카탈로그</code> 폴더에 넣기</li>
+        <li><code>설정.txt</code>의 비밀번호를 카톡방 밖 사람에게 주기</li>
+        <li>상품마스터에 고객 이름·주소 적기 (이 표는 상품 전용입니다. 고객 정보는 지금처럼 따로)</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="chapter-7">
+      <h2>7. 꼭 지켜야 할 것 (약관에서 나온 것)</h2>
+
+      <p>사장님이 키즈빌리지 이용약관을 직접 읽고 뽑은 것입니다.</p>
+
+      <ol>
+        <li><strong>이미지는 판매 용도로만.</strong> 키즈빌리지 사진은 도매처 것입니다. 카탈로그는 "방 회원에게 보여주는 정리본"이라 비밀번호를 겁니다. 공개 SNS에 올리지 않습니다.</li>
+        <li><strong>최저가 1.6배 정책</strong> — 판매자님이 이미 정확히 알고 계신 그 정책입니다. 페이지에 가격이 적히므로, 방 밖으로 새지 않게 비밀번호를 유지합니다.</li>
+        <li><strong>키즈빌리지에 부담 주지 않기</strong> — 컴퓨터는 하루 한 브랜드, 사진 사이사이 쉬면서 받습니다. 여러 브랜드를 한꺼번에 돌리지 마세요.</li>
+        <li><strong>카톡 자동 발송 금지</strong> — 위 4-5.</li>
+        <li><strong>고객 정보는 페이지에 없음</strong> — 페이지엔 상품만. 주문·주소는 지금처럼 판매자님만.</li>
+      </ol>
+    </section>
+
+    <section class="chapter" id="chapter-8">
+      <h2>8. AI 도구 첫걸음 — 클로드와 코덱스</h2>
+
+      <p>판매자님이 매일 AI를 쓰실 일은 없습니다. 하지만 "이게 뭘로 만들어졌고, 나중에 고치고 싶을 때 누구한테 뭐라고 말하나"는 알고 계셔야 합니다.</p>
+
+      <h3>뭐가 뭔가</h3>
+      <ul>
+        <li><strong>클로드(Claude)</strong> — 이 프로젝트의 설계·조사·문서·수집 프로그램을 만든 AI. 사장님이 대화하듯 지시해서 씁니다.</li>
+        <li><strong>코덱스(Codex)</strong> — 코드와 화면을 만드는 데 쓰는 또 다른 AI. 이 인수인계서 화면도 코덱스가 만들었습니다.</li>
+        <li>둘 다 "사람이 말로 시키면 컴퓨터 작업을 대신하는 프로그램"입니다. 차이는 회사가 다르다는 것뿐이고, 이 프로젝트에선 둘 다 같은 규칙 파일(<code>HANDOFF.md</code>)을 읽고 일합니다.</li>
+      </ul>
+
+      <h3>판매자님이 직접 시켜보고 싶을 때 — 말하는 법</h3>
+      <p>AI는 <strong>구체적으로, 하나씩</strong> 말하면 잘 알아듣습니다. 예:</p>
+      <ul>
+        <li>✅ "카탈로그 페이지에서 품절 상품을 맨 아래로 내려줘"</li>
+        <li>✅ "공지문에 배송비 문구를 맨 위로 옮겨줘"</li>
+        <li>✅ "이 화면 캡처 보고 왜 멈췄는지 설명해줘" (캡처 붙이기)</li>
+        <li>❌ "알아서 좋게 해줘" — 뭘 원하는지 AI도 모릅니다</li>
+      </ul>
+
+      <h3>AI에게 절대 주지 말 것</h3>
+      <ul>
+        <li>키즈빌리지 비밀번호, 통장 번호, 고객 이름·주소·전화번호</li>
+        <li>"결제해줘", "발주해줘" — 돈이 나가는 일은 사람이 누릅니다. 이 프로젝트의 규칙이기도 합니다</li>
+      </ul>
+
+      <h3>처음엔 이렇게</h3>
+      <p>직접 하시기보다 <strong>사장님께 말로 요청</strong>하시는 게 빠릅니다. 사장님이 AI에게 시켜서 고치고, 판매자님 폴더를 갱신해 드립니다. AI를 직접 쓰고 싶어지면 그때 사장님이 설치를 도와드립니다.</p>
+    </section>
+
+    <section class="chapter" id="chapter-9">
+      <h2>9. 지금 어디까지 됐나 (2026-08-25)</h2>
+
+      <div class="table-scroll" role="region" aria-label="완료된 일과 아직 남은 일" tabindex="0">
+        <table>
+          <thead><tr><th>됨</th><th>아직</th></tr></thead>
+          <tbody>
+            <tr><td>설계, 키즈빌리지 조사·약관 확인</td><td>알림 키트(대표컷+공지문) 만들기</td></tr>
+            <tr><td>엑셀 → 상품마스터 + 사진 받기 (아오스타 66종·1,306장으로 검증)</td><td>비밀번호 + 인터넷에 올리기</td></tr>
+            <tr><td>카탈로그 페이지 만들기 (미리보기 링크 전달됨)</td><td>윈도우용 더블클릭 파일 3개</td></tr>
+            <tr><td>이 인수인계서</td><td>판매자님 노트북 셋팅 (같이 하는 날)</td></tr>
+            <tr><td></td><td>한 브랜드로 일주일 시험 → 주문 수 비교</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="status-note"><strong>다음 단계</strong>: 사장님이 남은 것을 만든 뒤, 판매자님 노트북에서 3장 준비를 같이 하는 날을 잡습니다. 그날 아오스타 66종을 실제로 올려 봅니다.</p>
+    </section>
+
+    <section class="chapter" id="chapter-10">
+      <h2>10. 연락과 파일</h2>
+
+      <ul>
+        <li>문제·요청: 사장님께 카톡 (캡처와 함께)</li>
+        <li>판매자님 컴퓨터의 폴더: 바탕화면 <code>카탈로그</code>
+          <ul>
+            <li><code>설치하기</code> · <code>로그인하기</code> · <code>카탈로그 만들기</code> · <code>설정.txt</code></li>
+            <li><code>수집\&lt;브랜드&gt;\상품마스터.xlsx</code> — 가격·품절 고치는 곳</li>
+            <li><code>알림키트\&lt;날짜&gt;_&lt;브랜드&gt;\</code> — 카톡에 올릴 재료</li>
+          </ul>
+        </li>
+        <li>이 문서의 최신본은 사장님이 보내 드리는 링크에 있습니다.</li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<a class="back-to-top" href="#top" aria-label="문서 맨 위로 이동">맨 위로</a>
+</body></html>
