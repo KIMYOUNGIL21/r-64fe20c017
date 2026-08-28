@@ -1,1608 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>플리챌린지 3기 | 7일 실전 커리큘럼</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="유튜브 플레이리스트 자동화 챌린지 3기 7일 실행서">
+<title>플리챌린지 3기 · 7일 실행서</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-@font-face { font-family:Pretendard; font-display:swap; src:url('https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations'); }
-:root{
-  --bg:#0a1020; --card:#131f3a; --card2:#0e1626; --line:#263858;
-  --text:#edf2fb; --muted:#b6c1d4; --dim:#8394ad;
-  --amber:#f5b352; --amber-deep:#d99632; --amber-soft:rgba(245,179,82,.12);
-  --rose:#f08a7d; --rose-soft:rgba(240,138,125,.12);
-  --cyan:#6fc8e0; --cyan-soft:rgba(111,200,224,.12);
-  --green:#8de0ac; --green-soft:rgba(141,224,172,.12);
-  --violet:#b7a4ee; --violet-soft:rgba(183,164,238,.12);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:Pretendard,-apple-system,system-ui,'Malgun Gothic',sans-serif;font-size:16.5px;line-height:1.75;word-break:keep-all}
-a{overflow-wrap:anywhere}
-.skip-link{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 14px;border-radius:8px;background:var(--amber);color:#201507;font-weight:900}
-.skip-link:focus{top:12px}
-.wrap{max-width:900px;margin:0 auto;padding:0 18px}
-header{padding:52px 0 30px}
-.badge{display:inline-block;margin-bottom:16px;padding:5px 14px;border:1px solid var(--amber-deep);border-radius:999px;color:var(--amber);font-size:13px;font-weight:800}
-h1{font-size:clamp(27px,6vw,38px);line-height:1.3;letter-spacing:-.02em}
-header p{margin-top:14px;color:var(--muted);max-width:66ch}
-.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
-.hero-item{padding:13px 15px;border:1px solid var(--line);border-radius:11px;background:var(--card2)}
-.hero-item span{display:block;color:var(--dim);font-size:12px;font-weight:800;letter-spacing:.04em}
-.hero-item b{display:block;margin-top:3px;color:var(--text);font-size:15px}
-
-.tabs{position:sticky;top:0;z-index:30;padding:12px 0;border-bottom:1px solid var(--line);background:rgba(10,16,32,.97);backdrop-filter:blur(10px)}
-.tabrow{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px}
-.tabrow button{flex:none;padding:9px 15px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--muted);font:inherit;font-size:14.5px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.15s}
-.tabrow button:hover{border-color:var(--amber-deep);color:var(--text)}
-.tabrow button.on{background:var(--amber);border-color:var(--amber);color:#201507}
-.tabrow button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-
-.panel{display:none;padding:34px 0 60px;scroll-margin-top:70px}
-.panel.on{display:block}
-
-.dayhead{padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:26px}
-.daytag{font-size:13px;font-weight:900;letter-spacing:.1em;color:var(--amber)}
-.dayhead h2{margin:6px 0 12px;font-size:clamp(23px,5vw,31px);line-height:1.3;letter-spacing:-.02em}
-.q{padding:16px 18px;border:1px solid var(--rose);border-radius:12px;background:var(--rose-soft);font-size:16.5px}
-.q b{color:var(--rose)}
-
-.story{margin-top:16px;padding:16px 18px;border:1px solid var(--line);border-left:3px solid var(--amber-deep);border-radius:12px;background:var(--card2);color:var(--muted)}
-.story p+p{margin-top:11px}
-.story b{color:var(--text)}
-
-.diag{margin:26px 0;border:1px solid var(--line);border-radius:13px;background:var(--card);overflow:hidden}
-.diag > .t{display:flex;align-items:center;gap:9px;padding:13px 18px;border-bottom:1px solid var(--line);background:var(--card2)}
-.diag > .t .n{font-size:11px;font-weight:900;letter-spacing:.08em;padding:3px 9px;border-radius:5px;background:var(--rose-soft);color:var(--rose);white-space:nowrap}
-.diag > .t h3{font-size:16.5px;letter-spacing:-.01em}
-.diag .body{padding:16px 18px}
-.diag p,.diag li{color:var(--muted);font-size:15.6px}
-.diag ul,.diag ol{margin:9px 0 0 20px;display:grid;gap:8px}
-.diag b{color:var(--text)}
-
-.fix{margin:24px 0;border:1px solid var(--violet);border-radius:13px;background:var(--card);overflow:hidden}
-.fix > .t{display:flex;align-items:center;gap:9px;padding:13px 18px;border-bottom:1px solid var(--line);background:var(--violet-soft)}
-.fix > .t .n{font-size:11px;font-weight:900;letter-spacing:.08em;padding:3px 9px;border-radius:5px;background:var(--violet-soft);color:var(--violet);white-space:nowrap}
-.fix > .t h3{font-size:16.5px;color:var(--violet)}
-.fix .body{padding:16px 18px}
-.fix p,.fix li{color:var(--muted);font-size:15.6px}
-.fix ol,.fix ul{margin:9px 0 0 20px;display:grid;gap:8px}
-.fix b{color:var(--text)}
-
-.auto{margin:22px 0;border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:12px;background:var(--card);padding:16px 18px}
-.auto h3{display:flex;align-items:center;gap:9px;font-size:16.5px;margin-bottom:9px}
-.auto .n{font-size:11px;font-weight:900;letter-spacing:.06em;padding:2px 8px;border-radius:5px;background:var(--cyan-soft);color:var(--cyan);white-space:nowrap}
-.auto p,.auto li{color:var(--muted);font-size:15.5px}
-.auto ul,.auto ol{margin:9px 0 0 20px;display:grid;gap:7px}
-.auto b{color:var(--text)}
-
-.spotlight{margin:24px 0;border:2px solid var(--amber);border-left:8px solid var(--amber);border-radius:12px;background:linear-gradient(135deg,var(--amber-soft),var(--card));padding:18px 20px;box-shadow:0 0 22px -6px rgba(245,179,82,.45)}
-.spotlight h3{display:flex;align-items:center;gap:9px;font-size:18px;margin-bottom:6px;color:var(--amber)}
-.spotlight h3 .star{font-size:20px}
-.spotlight .n{font-size:11px;font-weight:900;letter-spacing:.06em;padding:2px 8px;border-radius:5px;background:var(--amber);color:#201507;white-space:nowrap}
-.spotlight p,.spotlight li{color:var(--muted);font-size:15.5px}
-.spotlight ul,.spotlight ol{margin:9px 0 0 20px;display:grid;gap:7px}
-.spotlight b{color:var(--text)}
-
-h4{margin:24px 0 10px;font-size:17px;color:var(--amber)}
-pre{overflow-x:auto;margin-top:11px;padding:14px 15px;border:1px solid var(--line);border-radius:11px;background:#050a14;color:#cfe3ff;font-family:Consolas,monospace;font-size:13.5px;line-height:1.62;white-space:pre-wrap;word-break:break-word}
-pre.en{word-break:break-all}
-.note,.warn,.ok{margin-top:15px;padding:15px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card2);font-size:15.5px;color:var(--muted)}
-.note b{color:var(--amber)}
-.warn{border-color:var(--rose);background:var(--rose-soft)}
-.warn b{color:var(--rose)}
-.ok{border-color:#4d9767;background:var(--green-soft)}
-.ok b{color:var(--green)}
-
-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14.6px}
-th,td{padding:9px 11px;border:1px solid var(--line);text-align:left;vertical-align:top;color:var(--muted)}
-th{background:var(--card);color:var(--text);font-weight:800;font-size:13.5px}
-td b{color:var(--text)}
-.tblwrap{overflow-x:auto}
-.num{font-variant-numeric:tabular-nums}
-.grp td{background:var(--card2);color:var(--amber);font-weight:800;font-size:13.5px;letter-spacing:.02em}
-
-.chain{display:grid;gap:0;margin-top:18px}
-.layer{display:grid;grid-template-columns:136px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:start}
-.layer:last-child{border-bottom:none}
-.layer .lv{font-weight:900;font-size:15px;color:var(--rose)}
-.layer .lv small{display:block;color:var(--dim);font-weight:700;font-size:12px;letter-spacing:.04em;margin-top:2px}
-.layer .why{color:var(--muted);font-size:15px}
-.layer .why b{color:var(--text)}
-.arrow{color:var(--dim);font-size:13px;padding:2px 0 2px 150px}
-
-.certbox{margin-top:18px;padding:17px 19px;border:1px solid var(--line);border-left:3px solid var(--amber-deep);border-radius:12px;background:var(--card2)}
-.certbox h4{margin:0 0 6px;color:var(--amber)}
-.certbox p{margin:0;color:var(--muted);font-size:15px}
-.copybtn{margin-top:11px;padding:10px 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font:inherit;font-weight:800;font-size:14.5px;cursor:pointer}
-.copybtn:hover{border-color:var(--amber);color:var(--amber)}
-.deliver{margin-top:24px;padding:17px 19px;border:1px solid #4d9767;border-radius:12px;background:var(--green-soft)}
-.deliver h4{margin:0 0 8px;color:var(--green)}
-.deliver ul{margin:0 0 0 20px;display:grid;gap:6px}
-.deliver li{color:var(--muted)}
-.deliver b{color:var(--text)}
-
-.view-switch{display:flex;align-items:center;gap:12px;margin-top:22px;padding:13px 15px;border:1px solid var(--amber-deep);border-radius:12px;background:var(--amber-soft)}
-.view-switch button{flex:none;padding:9px 14px;border:0;border-radius:9px;background:var(--amber);color:#201507;font:inherit;font-size:14.5px;font-weight:900;cursor:pointer}
-.view-switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.view-switch span{color:var(--muted);font-size:14px}
-.easy-card{margin:18px 0 24px;padding:20px;border:1px solid var(--amber-deep);border-radius:14px;background:linear-gradient(135deg,var(--amber-soft),var(--card2))}
-.easy-card h3{margin-bottom:12px;font-size:20px;color:var(--amber)}
-.easy-card h4{margin:18px 0 8px;font-size:16px;color:var(--green)}
-.easy-card p,.easy-card li{color:var(--muted)}
-.easy-card ol,.easy-card ul{margin-left:22px;display:grid;gap:9px}
-.easy-card b{color:var(--text)}
-.easy-card .easy-finish{margin-top:16px;padding:13px 15px;border:1px solid #4d9767;border-radius:10px;background:var(--green-soft)}
-.easy-card .easy-warn{margin-top:13px;padding:13px 15px;border:1px solid var(--rose);border-radius:10px;background:var(--rose-soft)}
-.easy-mode section[id^="d"] > .wrap > :not(.dayhead):not(.easy-card),
-.easy-mode #ov > .wrap > :not(.dayhead):not(.easy-card){display:none}
-.easy-mode .advanced-tab{display:none}
-.detail-mode .easy-card{display:none}
-
-.opsmemo{margin-top:22px;padding:15px 17px;border:1px dashed var(--line);border-radius:12px;background:var(--card2);font-size:14.8px;color:var(--dim)}
-.opsmemo b{color:var(--muted)}
-.opsmemo .t{display:block;margin-bottom:6px;font-size:12px;font-weight:900;letter-spacing:.09em;color:var(--dim)}
-
-footer{padding:34px 0 70px;border-top:1px solid var(--line);color:#6f7f99;font-size:14px}
-@media(max-width:620px){
-  .hero-grid{grid-template-columns:1fr}
-  .layer{grid-template-columns:1fr;gap:4px}
-  .arrow{padding-left:0}
-  .hero-item span,.diag>.t .n,.fix>.t .n,.auto .n,.layer .lv small,.grp td,th,.daytag,.arrow,span[style*="font-size:12px"]{font-size:14px!important}
-  .tab-help{font-size:14px}
-  .view-switch{align-items:flex-start;flex-direction:column}
-  pre{font-size:15px}
-}
+:root{--black:#0f0f0f;--white:#fff;--soft:#f5f5f5;--line:#e4e4e4;--dim:#5b5b5b;--lime:#d8f26e;--lilac:#dcc8f5;--cream:#f6efe3;--mint:#cdeedd;--pink:#f8d8e8;--coral:#ffa98f;--navy:#252a5c;--sans:"Pretendard Variable",Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;--mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth}body{margin:0;background:var(--white);color:var(--black);font-family:var(--sans);font-size:18px;line-height:1.65;letter-spacing:-.012em;word-break:keep-all}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-underline-offset:3px}.skip{position:absolute;left:-9999px;top:8px;background:#fff;padding:10px;z-index:99}.skip:focus{left:8px}
+.topbar{position:sticky;top:0;z-index:20;height:60px;display:flex;align-items:center;gap:14px;padding:0 max(20px,calc((100vw - 1120px)/2));background:#fff;border-bottom:1px solid var(--line)}.brand{font-size:19px;text-decoration:none}.brand b{font-weight:800}.by{margin-left:8px;padding:3px 9px;border:1px solid var(--line);border-radius:99px;font:10px var(--mono);letter-spacing:.08em}.top-note{margin-left:auto;padding:7px 14px;border:1px solid var(--line);border-radius:99px;font:11px var(--mono);letter-spacing:.08em}
+.ribbon{height:36px;display:flex;align-items:center;justify-content:center;gap:13px;overflow:hidden;background:var(--black);color:#fff;font:11px var(--mono);letter-spacing:.09em;white-space:nowrap}.ribbon i{opacity:.45;font-style:normal}
+.hero{max-width:1120px;margin:0 auto;padding:48px 24px 26px}.hero-box{padding:42px 44px;border-radius:24px;background:var(--lilac)}.eyebrow{margin:0 0 9px;font:12px var(--mono);letter-spacing:.1em}.hero h1{margin:0;font-size:clamp(34px,5vw,58px);font-weight:430;line-height:1.08;letter-spacing:-.035em}.hero p{max-width:760px;margin:20px 0 0;font-size:20px}.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}.stat{padding:17px 18px;border:1px solid rgba(0,0,0,.14);border-radius:14px;background:rgba(255,255,255,.48)}.stat span{display:block;font-size:13px}.stat b{font-size:18px}
+.tabs-shell{position:sticky;top:60px;z-index:15;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}.tabs{max-width:1120px;margin:0 auto;display:flex;gap:8px;padding:12px 24px;overflow-x:auto;scrollbar-width:thin}.tab{flex:none;min-width:84px;padding:10px 15px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--black);font-weight:750;text-align:left}.tab small{display:block;font:10px var(--mono);color:var(--dim)}.tab.on{background:var(--black);border-color:var(--black);color:#fff}.tab.on small{color:#ccc}
+main{max-width:1120px;margin:0 auto;padding:42px 24px 100px}.panel{max-width:820px;margin:0 auto}.day-hero{margin-bottom:38px;padding:32px 34px;border-radius:24px;background:var(--lime)}#d2 .day-hero{background:var(--lilac)}#d3 .day-hero{background:var(--cream)}#d4 .day-hero{background:var(--mint)}#d5 .day-hero{background:var(--pink)}#d6 .day-hero{background:var(--coral)}#d7 .day-hero{background:var(--navy);color:#fff}#help .day-hero{background:var(--cream)}.day-hero .date{margin:0 0 8px;font:12px var(--mono);letter-spacing:.1em}.day-hero h2{margin:0;font-size:clamp(30px,5vw,44px);font-weight:470;line-height:1.15}.day-hero p{margin:14px 0 0;font-size:20px}.day-hero .goal{margin-top:20px;padding:15px 17px;border-radius:12px;background:rgba(255,255,255,.58);color:var(--black)}
+h3{margin:46px 0 16px;font-size:27px;line-height:1.3}h4{margin:0 0 8px;font-size:20px}.lead{font-size:20px}.muted{color:var(--dim)}
+.steps{display:grid;gap:14px;margin:20px 0 32px;padding:0;list-style:none;counter-reset:step}.steps[start="2"]{counter-reset:step 1}.step{counter-increment:step;display:grid;grid-template-columns:46px 1fr;gap:16px;padding:20px;border:1px solid var(--line);border-radius:16px}.step:before{content:counter(step);width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--black);color:#fff;font-weight:800}.step p{margin:6px 0 0}.step ul{margin:8px 0 0;padding-left:20px}
+.check{padding:20px 22px;border-radius:16px;background:var(--mint)}.check b,.warn b,.stop b{font-weight:800}.warn{margin:22px 0;padding:19px 21px;border-radius:16px;background:var(--cream)}.stop{margin:22px 0;padding:19px 21px;border-radius:16px;background:var(--pink)}
+.prompt{position:relative;margin:14px 0 26px;padding:50px 20px 20px;border-radius:14px;background:var(--soft);overflow:hidden}.prompt:before{content:"ORCA에 그대로 붙여넣기";position:absolute;left:20px;top:16px;font:11px var(--mono);letter-spacing:.08em}pre{margin:0;white-space:pre-wrap;word-break:break-word;font:14px/1.65 var(--mono)}.copy{position:absolute;right:12px;top:10px;padding:7px 14px;border:0;border-radius:99px;background:var(--black);color:#fff;font-size:13px;font-weight:700}.copy:focus-visible,.tab:focus-visible,.make-prompt:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.screen-map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.screen-map div{position:relative;padding:18px;border:1px solid var(--line);border-radius:14px;text-align:center;font-weight:700;background:#fff}.screen-map div:not(:last-child):after{content:"→";position:absolute;right:-15px;top:50%;z-index:2;transform:translateY(-50%);width:20px;height:20px;background:#fff}.screen-map small{display:block;margin-top:4px;color:var(--dim);font-weight:450}
+.planner{padding:24px;border-radius:20px;background:var(--lilac)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;margin-bottom:5px;font-size:14px;font-weight:750}.field select,.field input{width:100%;min-height:48px;padding:10px 12px;border:1px solid rgba(0,0,0,.2);border-radius:10px;background:#fff;color:#111}.field.full{grid-column:1/-1}.make-prompt{width:100%;margin-top:16px;padding:13px 18px;border:0;border-radius:99px;background:var(--black);color:#fff;font-weight:800}.planner .prompt{background:rgba(255,255,255,.72)}
+.choice-table{width:100%;border-collapse:collapse;margin:20px 0;border:1px solid var(--line);font-size:16px}.choice-table th,.choice-table td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.choice-table th{width:24%;background:var(--soft)}.meter{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:18px 0}.meter div{padding:18px;border-radius:14px;background:var(--soft);text-align:center}.meter strong{display:block;font-size:28px}.meter .now{background:var(--lime)}
+.thumb-board{margin:22px 0}.thumb-board img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}.thumb-board figcaption{margin-top:8px;color:var(--dim);font-size:14px}.cert{position:relative;margin-top:40px;padding:22px;border:2px solid var(--black);border-radius:16px}.cert h3{margin:0 0 8px;font-size:21px}.cert .copy{top:15px}.cert pre{padding-top:8px}.policy{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--dim)}.flow{display:grid;gap:10px}.flow div{padding:16px 18px;border-radius:12px;background:var(--soft)}.flow b{display:inline-block;min-width:95px}.qa{display:grid;gap:10px}.qa div{padding:16px 18px;border-left:7px solid var(--coral);background:var(--soft)}.toast{position:fixed;left:50%;bottom:25px;z-index:50;transform:translate(-50%,15px);padding:10px 20px;border-radius:99px;background:var(--black);color:#fff;opacity:0;pointer-events:none;transition:.18s}.toast.show{opacity:1;transform:translate(-50%,0)}footer{padding:55px 24px;border-top:1px solid var(--line);text-align:center}.footer-mark{font-size:34px;font-weight:800;margin:0}.footer-sub{font:11px var(--mono);letter-spacing:.08em;color:var(--dim)}
+@media(max-width:720px){body{font-size:17px}.topbar{height:56px;padding:0 16px}.by,.top-note{display:none}.tabs-shell{top:56px}.tabs{padding:10px 16px}.hero{padding:24px 0 12px}.hero-box,.day-hero{border-radius:0;padding:30px 20px}.hero-stats,.screen-map,.meter{grid-template-columns:1fr}.screen-map div:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px;transform:translateX(-50%)}main{padding:28px 16px 70px}.step{grid-template-columns:40px 1fr;padding:17px 15px;gap:12px}.step:before{width:36px;height:36px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.planner{margin-left:-16px;margin-right:-16px;border-radius:0;padding:22px 16px}.choice-table{font-size:14px}.choice-table th,.choice-table td{padding:10px}.cert .copy{position:static;margin:5px 0 12px}.cert pre{padding:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
 </style>
 </head>
-<body class="easy-mode">
-<a class="skip-link" href="#main-content">본문으로 바로가기</a>
-
-<header><div class="wrap">
-  <span class="badge">유튜브 플리 자동화 챌린지 · 3기 · 7일 커리큘럼</span>
-  <h1>7일 동안 하나씩 따라 하면<br>내 플리 영상 3개가 완성돼요</h1>
-  <p>미리 공부하지 않아도 괜찮아요. <b>그날 적힌 순서대로 따라 하고 인증 사진만 제출</b>하면 돼요.
-  자세한 이유나 추가 설명이 필요할 때만 아래 버튼을 눌러 보세요.</p>
-  <div class="hero-grid">
-    <div class="hero-item"><span>교육 기간</span><b>8월 31일(월) ~ 9월 6일(일)</b></div>
-    <div class="hero-item"><span>하루 학습 시간</span><b>약 2시간</b></div>
-    <div class="hero-item"><span>완주 결과</span><b>내 곡 영상 3개 + 영상 만드는 공장</b></div>
-  </div>
-  <div class="view-switch">
-    <button id="view-toggle" type="button" aria-pressed="false">자세한 설명도 보기</button>
-    <span id="view-help">처음에는 꼭 해야 할 내용만 보여 드려요.</span>
-  </div>
-</div></header>
-
-<div class="tabs"><div class="wrap"><div class="tabrow" role="tablist" aria-label="교육 일차 선택">
-  <button id="tab-ov" role="tab" aria-selected="true" aria-controls="ov" tabindex="0" class="on" data-t="ov">교육 개요</button>
-  <button id="tab-d1" role="tab" aria-selected="false" aria-controls="d1" tabindex="-1" data-t="d1">1일차</button>
-  <button id="tab-d2" role="tab" aria-selected="false" aria-controls="d2" tabindex="-1" data-t="d2">2일차</button>
-  <button id="tab-d3" role="tab" aria-selected="false" aria-controls="d3" tabindex="-1" data-t="d3">3일차</button>
-  <button id="tab-d4" role="tab" aria-selected="false" aria-controls="d4" tabindex="-1" data-t="d4">4일차</button>
-  <button id="tab-d5" role="tab" aria-selected="false" aria-controls="d5" tabindex="-1" data-t="d5">5일차</button>
-  <button id="tab-d6" role="tab" aria-selected="false" aria-controls="d6" tabindex="-1" data-t="d6">6일차</button>
-  <button id="tab-d7" role="tab" aria-selected="false" aria-controls="d7" tabindex="-1" data-t="d7">7일차</button>
-  <button id="tab-fac" class="advanced-tab" role="tab" aria-selected="false" aria-controls="fac" tabindex="-1" data-t="fac">도움말 · 막힐 때</button>
-  <button id="tab-ref" class="advanced-tab" role="tab" aria-selected="false" aria-controls="ref" tabindex="-1" data-t="ref">선택 · 곡 만들기</button>
-</div><p class="tab-help" style="margin-top:6px;color:var(--dim);font-size:13px">메뉴 오른쪽이 보이지 않으면 손가락으로 왼쪽으로 밀어 다음 날짜를 확인하세요.</p></div></div>
-
-<!-- ══════════ 전체 흐름 ══════════ -->
-<main id="main-content" tabindex="-1">
-<section class="panel on" id="ov" role="tabpanel" aria-labelledby="tab-ov"><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">OVERVIEW</span>
-    <h2>7일 동안 하는 일</h2>
-    <div class="q"><b>먼저 이것만 기억하세요.</b> 매일 그날 탭을 열고 위에서 아래로 따라온 뒤, 인증 사진을 제출해 주세요.</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>7일 일정 한눈에 보기</h3>
-    <ol>
-      <li><b>1일차.</b> 샘플을 <b>비공개</b>로 올려 자동화를 확인하고 <b>내 곡 영상 1호</b>를 예약해 볼까요?</li>
-      <li><b>2일차.</b> 곡 만들기에 집중해 <b>내 곡 영상 2호</b>를 예약해요.</li>
-      <li><b>3일차.</b> <b>내 곡 영상 3호</b>를 예약하고, 시간이 남으면 곡을 더 만들어 봐요.</li>
-      <li><b>4일차.</b> 썸네일을 바꾸고 채널 이름과 주제를 정해요.</li>
-      <li><b>5일차.</b> 제목·설명을 고치고, 만들어 둔 곡의 첫 30초를 확인해요.</li>
-      <li><b>6일차.</b> 채널 화면과 소리 크기를 정리한 뒤 영상 만드는 공장을 개조해요.</li>
-      <li><b>7일차.</b> 영상 3개와 영상 만드는 공장을 확인하고 완주 기록을 남겨요.</li>
-    </ol>
-    <div class="easy-finish"><b>완주 조건.</b> 재료를 넣고 짧게 명령하면 영상이 만들어지고, 내 곡 영상 3개가 공개 또는 예약 상태면 돼요.</div>
-    <div class="easy-warn"><b>꼭 지켜 주세요.</b> 1일차 샘플은 연습용이니 비공개로만 두세요. 1~3일차에는 내가 만들었고 사용할 권리가 있는 곡만 올려 주세요.</div>
-  </div>
-
-  <div class="story">
-    <p>한 채널에서 썸네일을 3주 동안 20장 넘게 바꿨지만 결과는 달라지지 않았어요.</p>
-    <p>알고 보니 노출수는 30회뿐이었어요. 이 정도로는 썸네일 성과를 판단하기 어려워요.
-    클릭보다 먼저 볼 것은 <b>영상 노출이 생기고 있는가</b>예요.</p>
-    <p>그래서 이번 과정도 <b>노출 → 클릭 → 초반 유지 → 연속 청취 → 재방문</b> 순서로 살펴봐요.</p>
-  </div>
-
-  <h4>성과를 확인하는 5단계</h4>
-  <div class="chain">
-    <div class="layer"><div class="lv">1. 노출<small>영상이 보이는가</small></div>
-      <div class="why">주제와 대상 시청자가 분명한지, 제목·설명에 검색어가 있는지, 발행 일정이 일정한지 확인해요.<br>
-      <b>실습일 · 콘셉트 4일차, 검색어 5일차, 발행 계획 6일차</b></div></div>
-    <div class="arrow">↓ 노출된 다음</div>
-    <div class="layer"><div class="lv">2. 클릭<small>보고 누르는가</small></div>
-      <div class="why">썸네일이 작은 화면에서도 읽히는지, 제목 앞부분만으로 영상의 용도가 전달되는지 확인해요.<br>
-      <b>실습일 · 썸네일 4일차, 제목 5일차</b></div></div>
-    <div class="arrow">↓ 클릭한 다음</div>
-    <div class="layer"><div class="lv">3. 초반 유지<small>30초를 듣는가</small></div>
-      <div class="why"><b>보컬이나 핵심 분위기</b>가 시작되는지, 첫 곡과 썸네일의 분위기가 같은지 확인해요.<br>
-      <b>실습일 · 첫 곡과 첫 30초 5일차</b></div></div>
-    <div class="arrow">↓ 초반을 지난 다음</div>
-    <div class="layer"><div class="lv">4. 연속 청취<small>계속 재생하는가</small></div>
-      <div class="why">곡의 분위기와 음량이 갑자기 바뀌지 않는지, 곡 순서와 전환이 자연스러운지 확인해요.<br>
-      <b>실습일 · 곡 배치 5일차, 음량 6일차</b></div></div>
-    <div class="arrow">↓ 끝까지 들은 다음</div>
-    <div class="layer"><div class="lv">5. 재방문<small>다시 찾는가</small></div>
-      <div class="why">썸네일과 채널 정보가 한 시리즈처럼 보이는지, 다음 영상의 발행 약속이 분명한지 확인해요.<br>
-      <b>실습일 · 시리즈와 채널 정리 6일차</b></div></div>
-  </div>
-  <div class="note"><b>앞 단계의 표본이 부족하면 다음 지표의 해석을 보류해요.</b>
-  예를 들어 노출 30회 중 클릭 3회는 계산상 10%지만, 표본이 작아 썸네일 성과를 확정할 근거로 쓰기 어려워요.</div>
-
-  <h4>첫 7일은 행동 기준, 데이터가 쌓인 뒤에는 수치 기준</h4>
-  <p style="color:var(--muted)">새 채널의 첫 주는 판단에 필요한 데이터가 충분하지 않을 수 있어요.
-  첫 7일에는 눈과 귀로 확인할 수 있는 행동 기준을 적용하고, 7일차에는 이후 YouTube Studio에서 확인할 지표를 연결해요.</p>
-  <div class="tblwrap"><table>
-    <tr><th>진단 영역</th><th>첫 7일에 확인할 행동 기준</th><th>데이터가 쌓인 뒤 확인할 지표</th></tr>
-    <tr><td><b>썸네일</b></td><td>남의 썸네일 <b>열 장</b> 옆에 내 것을 놓고 3초 보기 · 폰 크기로 줄여 1초 보기</td><td>노출 클릭률<br><span style="font-size:12px;color:var(--dim)">보여준 100번 중 몇 번이나 눌렸는지를 %로 적은 숫자</span></td></tr>
-    <tr><td><b>제목</b></td><td>따라갈 기준으로 삼은 채널의 제목 열 개와 나란히 읽기 · <b>앞 15자</b>만 남겨도 뜻이 통하나</td><td>노출 클릭률</td></tr>
-    <tr><td><b>첫 곡</b></td><td>따라갈 기준으로 삼는 영상의 첫 30초와 <b>번갈아 듣기</b> · 첫 후렴 도착 시간 재기</td><td>시청자 유지율 그래프<br><span style="font-size:12px;color:var(--dim)">시청자가 어느 시점에서 나갔는지 보여주는 그래프</span></td></tr>
-    <tr><td><b>곡 배치</b></td><td>에너지 수준을 1~5로 기록 · 곡 순서를 바꾸어 연속 청취 비교</td><td>시청자 유지율이 크게 떨어지는 시점</td></tr>
-    <tr><td><b>시리즈</b></td><td>내 썸네일 세 장을 나란히 놓고 같은 채널로 보이는지 확인</td><td>구독 전환 · 재방문 시청자<br><span style="font-size:12px;color:var(--dim)">이전에 본 채널을 다시 찾아온 사람</span></td></tr>
-  </table></div>
-
-  <h4>매일 반복하는 3단계 실습</h4>
-  <div class="tblwrap"><table>
-    <tr><th>단계</th><th>참가자가 하는 일</th><th>완료 확인</th></tr>
-    <tr><td><b>① 진단</b></td><td>오늘의 성과 영역을 정해진 기준으로 확인해요</td><td>문제 후보를 한 문장으로 설명해요</td></tr>
-    <tr><td><b>② 수정</b></td><td><b>전날 결과나 발행 전 초안에서 하나를 바꿔요</b></td><td>바꾸기 전과 후의 화면을 확인하고 기록해요</td></tr>
-    <tr><td><b>③ 제작</b></td><td>오늘의 곡·영상·채널 설정을 완성해요</td><td>그날 지정된 화면을 인증해요</td></tr>
-  </table></div>
-  <div class="ok"><b>수정 단계가 이번 과정의 핵심이에요.</b> 설명만 읽고 끝내지 않고,
-  4일차부터 썸네일·제목·첫 곡·음량·채널 구성을 차례로 직접 바꿔 봐요.</div>
-
-  <h4>시작 전 준비 · Day 0</h4>
-  <p style="color:var(--muted)">Day 0에는 공장 파일 설치나 영상 업로드를 진행하지 않아요. 메일의 「시작 전 안내서」에 따라
-  컴퓨터·계정·YouTube 채널을 준비하고 공개 채널 통계를 읽는 번호표인 <b>분석용 API 키</b>를 저장한 뒤, 체크리스트의 지정 화면 <b>2장</b>을 제출해요.
-  플리공장 파일 설치·샘플 영상 생성·YouTube Studio 비공개 업로드는 1일차 안내서에서 함께 진행해요.</p>
-
-  <h4>7일 일정 한눈에 보기</h4>
-  <div class="tblwrap"><table>
-    <tr><th style="width:44px">일차</th><th>① 진단</th><th>② 실제 수정</th><th>③ 제작·설정</th></tr>
-    <tr><td><b>1</b><br><span style="font-size:12px">8/31 월</span></td>
-      <td>자동화가 정상 작동하는가</td><td>첫날은 수정 없음</td>
-      <td>샘플 <b>비공개 업로드</b> 확인 · 본인 곡 <b>1호 예약</b></td></tr>
-    <tr><td><b>2</b><br><span style="font-size:12px">9/1 화</span></td>
-      <td>본인 곡 생성·예약이 반복되는가</td><td>둘째 날은 수정 없음</td>
-      <td>권리를 확인한 본인 곡 <b>2호 예약</b></td></tr>
-    <tr><td><b>3</b><br><span style="font-size:12px">9/2 수</span></td>
-      <td>완주 기준 3곡이 확보됐는가</td><td>셋째 날은 수정 없음</td>
-      <td>권리를 확인한 본인 곡 <b>3호 예약</b> · 여유가 되면 계속 생성</td></tr>
-    <tr><td><b>4</b><br><span style="font-size:12px">9/3 목</span></td>
-      <td><b>썸네일이 작은 화면에서 구별되는가</b></td><td>1일차 비공개 샘플의 <b>썸네일 교체</b></td>
-      <td>벤치마킹 채널 분석 · <b>콘셉트와 채널명 확정</b></td></tr>
-    <tr><td><b>5</b><br><span style="font-size:12px">9/4 금</span></td>
-      <td><b>제목 앞부분과 첫 30초가 자연스러운가</b></td><td>비공개 샘플의 <b>제목·설명·태그 교체</b></td>
-      <td>만들어 둔 본인 곡의 <b>첫 30초 진단</b></td></tr>
-    <tr><td><b>6</b><br><span style="font-size:12px">9/5 토</span></td>
-      <td><b>곡의 음량과 영상들이 한 시리즈로 안정적인가</b></td><td><b>곡 음량 맞추기</b> · 썸네일 전체 통일 · 채널 정리</td>
-      <td>자동화 코드에 <b>썸네일 글자 넣기</b> 등 공장 개조</td></tr>
-    <tr><td><b>7</b><br><span style="font-size:12px">9/6 일</span></td>
-      <td><b>문제와 수정 대상을 혼자 정할 수 있는가</b></td><td>진단 영역 하나를 골라 <b>독립적으로 개선</b></td>
-      <td>완주 확인 · 다음 4주 루틴</td></tr>
-  </table></div>
-  <div class="note"><b>공개 또는 예약하는 완주 영상은 Day 1~3에 만들어요.</b>
-  Day 1은 이용 권리를 확인한 본인 곡 1호, Day 2는 2호, Day 3은 3호예요. Day 1 비공개 샘플은 연습용이며 완주 영상에 포함하지 않아요.</div>
-  <div class="ok"><b>완주 기준은 3개예요.</b>
-    <ol style="margin:9px 0 0 20px;display:grid;gap:6px">
-      <li>재료를 넣고 명령 1~2번으로 영상이 만들어져요.</li>
-      <li>이용 권리를 확인한 본인 곡 영상이 채널에 공개 또는 예약 상태로 3개 이상 있어요. 1일차 샘플은 포함하지 않아요.</li>
-      <li>위 상태를 <b>9월 6일(일) 자정까지</b> 달성해요.</li>
-    </ol>
-    <p style="margin-top:10px"><b>환불 약속은 별도 조건이에요.</b> 7일 과제를 매일 당일 인증한 참가자에게만 적용돼요.</p>
-  </div>
-  <div class="note">영상 3개를 만든 뒤에는 개수를 늘리는 대신 <b>이미 올린 영상의 품질을 개선</b>해요.
-  추가 곡 제작은 선택이며 완주 기준에는 포함되지 않아요.</div>
-
-  <h4>제공 자료</h4>
-  <ul style="margin-left:20px;display:grid;gap:8px;color:var(--muted)">
-    <li><b style="color:var(--text)">썸네일 비교판</b> · 창작곡 플리 대형 채널 10곳의 인기 영상 100장과 국내 3장르 100장,
-    총 200장을 비교할 수 있어요. 4일차에 내 썸네일의 구별 가능성을 확인해요.<br>
-    <a href="https://kimyoungil21.github.io/r-64fe20c017/pli/썸네일보드.html" target="_blank"
-    style="color:var(--amber)">kimyoungil21.github.io/r-64fe20c017/pli/썸네일보드.html</a>
-    · 설치와 로그인이 필요하지 않아요.</li>
-    <li><b style="color:var(--text)">시장지도</b> · 플리 채널 336개와 영상 7,913개를 분석한 자료예요.
-    4일차에 시장 위치와 벤치마킹 채널을 선택해요.<br>
-    <a href="https://kimyoungil21.github.io/r-64fe20c017/pli-map/" target="_blank"
-    style="color:var(--amber)">kimyoungil21.github.io/r-64fe20c017/pli-map/</a></li>
-    <li><b style="color:var(--text)">곡 형식 8가지</b> · 형식별 첫 후렴 도착 시간을 5일차의 첫 30초 판단 기준으로 사용해요.
-    이 페이지의 「곡 제작 기준표」 탭에서 확인할 수 있어요.</li>
-  </ul>
-
-  <div class="warn"><b>시작 전 운영 조건 4가지</b>
-    <ul style="margin:9px 0 0 20px;display:grid;gap:7px">
-      <li><b>수노(Suno)는 AI 음악 생성 서비스예요.</b> 생성 한도와 상업적 이용 범위는 요금제와 최신 약관에 따라 달라져요.
-      수익화를 계획한다면 곡을 만들기 전에 현재 계정의 이용 조건을 확인해 주세요.</li>
-      <li><b>유튜브의 공식 일일 업로드 제한은 채널 상태에 따라 달라져요.</b>
-      이 과정에서는 운영 안정성을 위해 하루 최대 2개만 업로드하고, 추가 영상은 날짜를 나누어 예약해 주세요.</li>
-      <li><b>AI 이미지 도구는 한국어 글자를 틀리게 만들 수 있어요.</b>
-      배경 이미지만 만들고, 한글 제목은 6일차에 별도 도구로 정확하게 넣어 주세요.</li>
-      <li><b>음원은 본인이 생성하고 이용 권한을 확인한 곡만 사용해요.</b>
-      벤치마킹 채널에서는 구도·색·발행 방식·제목 구조를 분석하되 고유 캐릭터, 로고, 음원은 복제하지 않아요.</li>
-    </ul>
-  </div>
-</div></section>
-
-<!-- ══════════ 영향 요인 30가지 ══════════ -->
-<section class="panel" id="fac" role="tabpanel" aria-labelledby="tab-fac" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">FACTOR MAP</span>
-    <h2>플리 채널 성과에 영향을 주는 30가지 요인</h2>
-    <div class="q"><b>이 표는 6개 영역으로 나눈 진단 목록이에요.</b>
-    성과 영역 5개를 순서대로 살펴보고, 정책·저작권 위험은 따로 확인해요.</div>
-  </div>
-
-  <div class="story">
-    <p><b>사용 방법.</b> 30개를 모두 외울 필요는 없어요. 현재 문제와 가장 가까운 영역을 찾아
-    그 안의 요인을 하나씩 확인해 보세요.</p>
-    <p>각 요인은 <b>확정된 원인</b>이 아니라 확인해 볼 <b>후보</b>예요. 한 번에 하나만 바꾸고 기록해 두면
-    무엇이 영향을 주었는지 비교할 수 있어요.</p>
-  </div>
-
-  <div class="tblwrap"><table>
-    <tr><th style="width:38px">#</th><th>점검 요인</th><th>문제가 있을 때 나타날 수 있는 신호</th><th style="width:64px">실습일</th></tr>
-
-    <tr class="grp"><td colspan="4">A. 노출 · 영상이 목표 시청자에게 보이는가</td></tr>
-    <tr><td>1</td><td><b>콘셉트와 대상 시청자가 분명한가</b></td><td>영상마다 주제와 분위기가 달라 채널의 대상을 한 문장으로 설명하기 어려워요</td><td>1·4일차</td></tr>
-    <tr><td>2</td><td><b>발행 일정이 일관적인가</b></td><td>새 영상이 올라오는 요일과 시각을 시청자가 예상하기 어려워요</td><td>6일차</td></tr>
-    <tr><td>3</td><td><b>제목·설명에 핵심 검색어가 있는가</b></td><td>제목과 설명만 읽어서는 영상의 상황·장르·용도가 분명하지 않아요</td><td>5일차</td></tr>
-    <tr><td>4</td><td><b>관련 영상을 재생목록으로 묶었는가</b></td><td>한 영상을 본 뒤 같은 시리즈의 다음 영상으로 이동할 경로가 없어요</td><td>6일차</td></tr>
-    <tr><td>5</td><td><b>영상 언어를 설정했는가</b></td><td>업로드 세부정보에서 영상의 기본 언어가 비어 있어요</td><td>6일차</td></tr>
-
-    <tr class="grp"><td colspan="4">B. 클릭 · 노출된 영상을 선택하는가</td></tr>
-    <tr><td>6</td><td><b>썸네일의 중심 대상이 분명한가</b></td><td>무엇을 먼저 봐야 하는지 알기 어렵고 시선이 분산돼요</td><td>4일차</td></tr>
-    <tr><td>7</td><td><b>작은 화면에서도 읽히는가</b></td><td>컴퓨터에서는 보이지만 휴대전화 크기에서는 글자와 대상이 뭉개져요</td><td>4일차</td></tr>
-    <tr><td>8</td><td><b>비슷한 영상 사이에서 구별되는가</b></td><td>검색 결과나 추천 목록에 놓으면 내 썸네일을 바로 찾기 어려워요</td><td>4일차</td></tr>
-    <tr><td>9</td><td><b>제목 앞부분에 핵심 정보가 있는가</b></td><td>휴대전화에서 제목이 잘렸을 때 영상의 용도와 분위기가 남지 않아요</td><td>5일차</td></tr>
-    <tr><td>10</td><td><b>영상 길이가 사용 목적과 맞는가</b></td><td>공부·업무·수면 등 목표 상황에 비해 영상 길이가 너무 짧거나 길어요</td><td>6일차</td></tr>
-    <tr><td>11</td><td><b>발행 시각이 시청 습관과 맞는가</b></td><td>목표 시청자가 주로 이용하는 시간과 발행 시각이 맞지 않아요</td><td>6일차</td></tr>
-
-    <tr class="grp"><td colspan="4">C. 초반 유지 · 클릭한 뒤 첫 30초를 듣는가</td></tr>
-    <tr><td>12</td><td><b>첫 곡에서 채널 분위기가 바로 들리는가</b></td><td>채널의 핵심 분위기가 첫 곡에서 바로 전달되지 않아요</td><td>5일차</td></tr>
-    <tr><td>13</td><td><b>인트로 뒤에 보컬이나 핵심 분위기가 시작되는가</b></td><td>첫 30초 안에 보컬이나 핵심 분위기가 시작되지 않아요</td><td>5일차</td></tr>
-    <tr><td>14</td><td><b>첫 부분 음량이 뒤 곡과 비슷한가</b></td><td>첫 부분의 음량이 뒤 곡보다 너무 크거나 작아요</td><td>5일차</td></tr>
-    <tr><td>15</td><td><b>썸네일과 첫 곡의 분위기가 일치하는가</b></td><td>썸네일이 약속한 상황·감정과 첫 곡의 분위기가 달라요</td><td>5일차</td></tr>
-
-    <tr class="grp"><td colspan="4">D. 연속 청취 · 중간에 끄지 않고 계속 재생하는가</td></tr>
-    <tr><td>16</td><td><b>곡의 에너지 흐름이 일정한가</b></td><td>조용한 곡과 강한 곡이 반복되어 듣는 흐름이 자주 끊겨요</td><td>5일차</td></tr>
-    <tr><td>17</td><td><b>곡 사이 전환이 자연스러운가</b></td><td>앞 곡의 끝과 다음 곡의 시작이 갑자기 이어져요</td><td>6일차</td></tr>
-    <tr><td>18</td><td><b>곡별 평균 음량이 비슷한가</b></td><td>곡이 바뀔 때마다 시청자가 기기 음량을 조절해야 해요</td><td>6일차</td></tr>
-    <tr><td>19</td><td><b>타임스탬프를 제공했는가</b><br><span style="font-size:12px;color:var(--dim)">설명란의 「0:00 곡 제목」 형식</span></td><td>시청자가 원하는 곡의 시작 지점으로 바로 이동하기 어려워요</td><td>5일차</td></tr>
-    <tr><td>20</td><td><b>화면 구성이 재생 상태를 전달하는가</b></td><td>정지 이미지 한 장만 보여 재생 중인지 알아보기 어려워요</td><td>6일차</td></tr>
-
-    <tr class="grp"><td colspan="4">E. 재방문 · 구독하거나 다음 영상을 다시 찾는가</td></tr>
-    <tr><td>21</td><td><b>썸네일 시리즈가 통일되어 있는가</b></td><td>영상 목록에서 같은 채널의 시리즈라는 인상을 받기 어려워요</td><td>6일차</td></tr>
-    <tr><td>22</td><td><b>채널아트와 소개문이 콘셉트를 설명하는가</b><br><span style="font-size:12px;color:var(--dim)">채널아트는 채널 맨 위의 큰 가로 이미지예요</span></td><td>채널 첫 화면에서 누구를 위한 어떤 음악 채널인지 바로 알기 어려워요</td><td>6일차</td></tr>
-    <tr><td>23</td><td><b>다음 발행 약속이 있는가</b></td><td>시청자가 언제 새 영상을 확인하면 되는지 알 수 없어요</td><td>6일차</td></tr>
-    <tr><td>24</td><td><b>고정 댓글로 다음 영상을 연결했는가</b></td><td>현재 영상에서 다음 영상이나 재생목록으로 이동할 경로가 없어요</td><td>6일차</td></tr>
-    <tr><td>25</td><td><b>시리즈 안에서도 각 영상의 차이가 있는가</b></td><td>영상끼리 내용 차이가 작아 다음 영상을 선택할 이유가 약해요</td><td>7일차</td></tr>
-
-    <tr class="grp"><td colspan="4">F. 운영 리스크 · 수익화·계정·저작권에 영향을 주는가</td></tr>
-    <tr><td>26</td><td><b>대량생산·반복 콘텐츠</b></td><td>영상이 템플릿만 바뀐 반복물로 보이면 YouTube 파트너 프로그램 수익화 심사에 불리할 수 있어요</td><td>7일차</td></tr>
-    <tr><td>27</td><td><b>AI 생성 콘텐츠 표시</b></td><td>AI 생성 음악을 업로드하면서 관련 공개 항목을 정확하게 표시하지 않았어요</td><td>1일차</td></tr>
-    <tr><td>28</td><td><b>일일 업로드 한도와 발행 간격</b></td><td>채널별 일일 한도에 도달하거나 영상이 한 시점에 너무 많이 몰려요</td><td>1~3일차</td></tr>
-    <tr><td>29</td><td><b>이미지·폰트 이용 권한</b></td><td>상업적 사용 권한을 확인하지 않은 이미지나 글꼴이 포함되어 있어요</td><td>6일차</td></tr>
-    <tr><td>30</td><td><b>음원 이용 권한</b></td><td>본인이 생성했거나 정식 사용 권한을 확보한 음원인지 증빙하기 어려워요</td><td>전체 흐름</td></tr>
-  </table></div>
-
-  <div class="warn"><b>운영 리스크는 성과 진단과 별도로 확인해요.</b>
-  <p style="margin-top:9px">YouTube는 2025년 7월 15일 수익화 정책에서 「반복되는 콘텐츠」를
-  <b>「진정성 없는 콘텐츠」</b>로 명칭 변경하고, 반복적이거나 대량생산된 콘텐츠가 포함된다는 점을 명확히 했어요.
-  자동화 도구 사용 자체가 금지된 것은 아니며, 영상마다 실질적인 차이와 창작자의 판단이 있어야 해요.</p>
-  <p style="margin-top:9px">따라서 이 과정에서는 콘셉트, 썸네일, 제목, 첫 곡, 곡 순서를 참가자가 직접 결정하고 기록해요.
-  또한 AI 생성 음악은 업로드 화면의 <b>「속성」 → 「AI 사용」에서 「예」</b>를 선택해 공개해요.</p>
-  <p style="margin-top:9px"><a href="https://support.google.com/youtube/answer/1311392" target="_blank" style="color:var(--amber)">YouTube 채널 수익화 정책</a> ·
-  <a href="https://support.google.com/youtube/answer/14328491" target="_blank" style="color:var(--amber)">AI 사용 공개 안내</a></p></div>
-
-  <div class="note"><b>30개를 암기하지 않아요.</b> 성과 문제는 A부터 E까지 순서대로 확인하고,
-  F의 운영 리스크는 발행 전후에 별도 점검해요.</div>
-</div></section>
-
-<!-- ══════════ 1일차 ══════════ -->
-<section class="panel" id="d1" role="tabpanel" aria-labelledby="tab-d1" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">DAY 1</span>
-    <h2>자동화 확인하고 내 곡 영상 1호 예약하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> ① 샘플 영상, 자동 업로드 확인 ② 내가 만든 곡, 자동 업로드하기</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 2개</h3>
-    <ol>
-      <li>샘플 영상이 YouTube Studio에 자동으로 <b>「비공개」</b>로 올라가는 걸 확인해요.</li>
-      <li>내 곡을 수노에서 만들고, 이용 권리를 확인한 뒤 본인 곡 1호로 <b>예약</b>해요.</li>
-    </ol>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 공장·패키지 완료 화면, 샘플이 비공개로 보이는 화면, 본인 곡 1호가 예약됨으로 보이는 화면이에요.</div>
-    <div class="easy-warn"><b>주의.</b> 오늘 쓰는 샘플은 연습용이에요. 공개·예약·수익화하지 마세요.</div>
-  </div>
-
-  <div class="spotlight">
-    <h3><span class="star">⭐</span><span class="n">① 지금 할 일</span> 샘플 영상, 자동으로 유튜브에 올리기</h3>
-    <div class="tblwrap"><table>
-      <tr><th>순서</th><th>할 일</th></tr>
-      <tr><td>1</td><td><b>재료 폴더</b>(「내 PC → 로컬 디스크 (C:) → 플리공장 → 재료」)에 「오늘이 제일 좋은 날」 파일 네 개(노래 mp3, 가사 txt, 배경 그림, 썸네일 그림)가 있는지 봐주세요</td></tr>
-      <tr><td>2</td><td>AI에게 <b>“재료 검사해줘”</b>라고 말해 주세요</td></tr>
-      <tr><td>3</td><td>아래 <b>「샘플 재료로 연습 영상을...」</b> 상자를 붙여넣어 주세요. AI가 영상과 제목·설명 파일을 만들어요</td></tr>
-      <tr><td>4</td><td>제목 후보 3개 중 하나를 골라 <b>“2번으로 해줘”</b>처럼 번호로 답해 주세요</td></tr>
-      <tr><td>5</td><td>이어서 <b>「올려줘」</b>가 실행돼요. 크롬 창이 스스로 움직이는 1~3분 동안 마우스·키보드를 건드리지 마세요</td></tr>
-      <tr><td>6</td><td>Studio 콘텐츠 목록에서 <b>「비공개」</b>로 보이는지 확인해 주세요</td></tr>
-    </table></div>
-    <div class="note">오늘 샘플은 <b>비공개라 제목이 예시 그대로 나와도 상관없어요.</b> 채널명·콘셉트는 내 곡을 올릴 때 정해요.</div>
-    <pre>샘플 재료로 연습 영상을 만들어줘.
-완성되면 올려줘로 자동 업로드까지 이어서 진행해줘.</pre>
-    <div class="note"><b>「올려줘」를 처음 실행하면</b> 크롬 창이 열리고 본인 채널로 로그인을 요청할 수 있어요. 그때만 직접 로그인하면 다음부터는 세션이 남아 다시 묻지 않아요.</div>
-    <div class="note"><b>설명란에는 곡이 시작하는 시각이 저절로 적혀요.</b>
-    <b>0:00 오늘이 제일 좋은 날</b> 같은 줄이에요. 곡이 여러 개면 줄도 늘어나요.
-    보는 사람이 원하는 곡으로 건너뛸 때 쓰는 칸이에요.<br>
-    <b>오늘은 곡이 하나라 줄도 한 줄이고, 영상 아래에 눈금이 안 생겨요. 정상이에요.</b>
-    유튜브는 이 줄이 <b>세 개 이상</b>일 때만 <b>눈금</b>을 만들어 줘요.
-    눈금은 영상 아래 붉은 막대가 곡마다 나뉘어 보이는 것이에요. 다른 곡으로 건너뛸 때 써요.<br>
-    <b>이번 주에 만드는 본인 곡 1~3호 영상은 각각 한 곡이라 눈금을 볼 일이 없어요.</b>
-    다음 주에 세 곡 이상으로 한 편을 만드시면 그때 생겨요.
-    영상마다 설명란의 타임스탬프가 별도로 적용돼요. 5일차에 설명을 수정할 때 해당 영상의 <b>0:00 줄을 유지</b>하면 돼요.</div>
-    <div class="note"><b>여기서부터는 진짜 내 채널에 남는 영상이에요.</b> 먼저 아래 <b>「설정 바꿔줘」</b> 상자를 복사해 <b>Orca</b> AI 입력창에 붙여넣고, 괄호 안을 내 채널명·콘셉트로 바꿔 보내 주세요.</div>
-    <pre>설정 바꿔줘: 채널명은 (내 채널 이름), 콘셉트는 (누가 언제 무엇을 하며 듣는지)</pre>
-    <div class="note"><b>내 곡으로 만들 때는 명령 하나만 바뀌어요.</b> 샘플 확인을 마치면
-    내 재료로 <b>“업로드 패키지 만들어줘”</b>라고 요청한 뒤, 같은 <b>「올려줘」</b>로 예약해 주세요.</div>
-    <p style="margin-top:14px;color:var(--dim);font-size:14.5px">↓ 샘플 자동화를 확인한 뒤 <b style="color:var(--muted)">오늘 바로 이어서</b> 사용해요.</p>
-    <pre>재료 폴더의 재료로 업로드 패키지 만들어줘.
-제목 후보를 먼저 보여주고, 완성된 mp4와 제목·설명 txt 경로를 알려줘.</pre>
-    <div class="note"><b>자동 업로드 직후에는 Studio 콘텐츠 목록에 바로 안 보일 수 있어요.</b> 콘텐츠 목록을 새로고침해 확인해 주세요.</div>
-    <div class="note"><b>붙여넣는 곳은 Orca 안의 AI 입력창이에요.</b> 시작 전 안내서 6단계에서
-    인사말을 본 창이에요. 괄호 안만 내 것으로 바꿔서 넣으세요.</div>
-    <h4>자동 업로드가 안 될 때만 — 직접 올리는 방법</h4>
-    <p>「올려줘」가 이미 비공개로 올려 줬다면 이 부분은 건너뛰어도 돼요. 안 될 때만 아래 순서로 직접 올려 주세요.</p>
-    <ol>
-      <li>스튜디오(<b>studio.youtube.com</b>) → 오른쪽 위 <b>「만들기」 → 「동영상 업로드」</b></li>
-      <li>완성 mp4를 선택하고 제목·설명·썸네일을 확인해 주세요</li>
-      <li>마지막 <b>「공개 상태」</b> 단계에서 <b>「비공개」</b>를 골라 주세요</li>
-      <li><b>「저장」</b>을 누르고 콘텐츠 목록에서 <b>「비공개」</b> 상태인지 확인해 주세요</li>
-    </ol>
-    <div class="warn"><b>공장 폴더의 「샘플재료_이용안내.md」를 먼저 확인해 주세요.</b>
-    샘플은 로컬 렌더와 Studio 비공개 업로드에만 사용하며, 공개·일부 공개·예약·수익화하지 않아요.
-    이후 공개 운영과 완주 영상에는 본인이 생성하고 이용 권한을 확인한 곡만 사용해요.</div>
-  </div>
-
-  <div class="spotlight">
-    <h3><span class="star">⭐</span><span class="n">② 지금 할 일</span> 수노에서 내 곡 만들고 예약하기</h3>
-    <p>장르·분위기 참고 → 임시 콘셉트 → <b>곡 형식 고르기</b> → 후렴 후보 3개 → 가사 →
-    Styles → Exclude 순서로 작성해요. 자동화에 맡기기 전에 가사와 스타일 입력값의 역할을 직접 확인해요.</p>
-    <div class="note"><b>수노 공식 화면 순서.</b> <b>[Create] → [Custom mode]</b>로 들어가 Lyrics와 Styles를 입력하고,
-    <b>[Advanced Options]</b>에서 Exclude 항목을 확인해요. 화면에서 이 이름이 보이지 않으면 화면 사진과 함께 운영진에게 문의해 주세요.</div>
-    <ul>
-      <li>원하는 음악 특성은 Styles에, 랩·과도한 고음처럼 <b>원하지 않는 특성은 Exclude</b>에 적어 주세요</li>
-      <li><b>인트로가 몇 마디인지, 보컬이 그 뒤에 들어온다는 것</b>도 적어 주세요</li>
-      <li>썸네일과 배경 이미지도 오늘 만들어 볼까요? 이름은 <b>1호_썸네일</b>과 <b>1호_배경</b>으로 정해 재료 폴더에 넣어 주세요</li>
-    </ul>
-    <h4>Suno에서 생성하고 mp3를 받는 순서</h4>
-    <ol>
-      <li><b>suno.com/create → [Custom]</b>을 열어 주세요</li>
-      <li><b>[Lyrics]</b>에 가사, <b>[Styles]</b>에 음악 설명을 붙여넣으세요</li>
-      <li><b>[Advanced Options] → [Exclude]</b>에 원하지 않는 특성을 넣고 <b>[Title]</b>에 곡명을 적어 주세요</li>
-      <li><b>[Create]</b>를 누르고 생성된 곡을 재생해 한 곡을 골라 주세요</li>
-      <li>고른 곡 오른쪽 <b>[점 세 개] → [Download] → [Audio]</b>를 눌러 mp3를 받으세요</li>
-      <li><b>기록\권리확인.md</b>에 본인 생성 확인·생성일·생성 당시 Suno 플랜·게시 목적·입력 재료 권리·출처 표기 확인을 적어 주세요. 하나라도 확인할 수 없으면 예약하지 마세요</li>
-    </ol>
-    <div class="note"><b>생성 횟수는 두 번까지로 제한해요.</b> 완벽한 곡보다 입력값과 결과의 관계를 이해하는 것이 오늘의 목표예요. 남은 생성 크레딧과 갱신 시점은 수노 계정 화면에서 직접 확인해요.<br>
-    <b>좋은 곡과 첫 곡으로 적합한 곡은 다를 수 있어요.</b> 후보 전체를 감상하기보다 첫 30초를 같은 조건으로 비교해 채널 대표곡으로 쓸 1호를 선택해요.</div>
-    <pre>(예시) 따뜻한 남성 보컬의 잔잔한 어쿠스틱 발라드를 만들어줘.
-대화하듯 담백한 가사와 짧은 인트로를 사용하고, 내 콘셉트에 맞춰줘.
-가사와 수노 프롬프트가 나오면 수노에서 누를 항목을 순서대로 안내해줘.
-곡을 다운로드해서 재료 폴더에 넣으면 "권리 확인했고 다운받았어"라고 말할게.</pre>
-    <div class="note"><b>특정 가수나 곡을 그대로 따라 해 달라고 요청하지 마세요.</b>
-    장르·악기·속도·보컬 질감·정서를 설명하고, 기존 작품과 비슷하게 들리는 구절이나 멜로디가 있으면 다시 만들어 주세요.</div>
-    <div class="warn"><b>공개·수익화 전에 이용 권한을 확인해 주세요.</b>
-    무료 플랜에서 생성한 곡은 개인·비상업 범위와 Suno 출처 표기 조건을 지켜 주세요. 나중에 유료로 전환해도 과거 무료 곡의 상업적 권리가 자동 소급되지는 않아요.
-    게시 전에는 <a href="https://suno.com/terms" target="_blank" rel="noopener">Suno 이용약관</a>과
-    <a href="https://help.suno.com/en/articles/9601601" target="_blank" rel="noopener">무료 플랜 권리 안내</a>를 다시 확인해요.</div>
-    <div class="note"><b>본인 곡 완주 영상 1호도 오늘 만들어요.</b>
-    샘플 파일 네 개를 재료 폴더 밖의 <b>샘플_비공개실습</b> 폴더로 옮긴 뒤, 본인 곡 mp3·같은 이름의 가사 txt·본인 이미지 두 장만 남겨 주세요.
-    AI에게 <b>“재료 폴더의 재료로 업로드 패키지 만들어줘”</b>라고 요청하고, 이어서 <b>「올려줘」</b>로 자동 업로드·예약해 볼까요? Studio에서 「예약됨」인지 확인해 주세요.</div>
-  </div>
-
-  <div class="deliver"><h4>완료 기준 및 인증</h4><ul>
-    <li>내 채널에 <b>비공개 샘플 영상 1개</b> — 업로드 화면 실습용이며 완주 영상에는 포함하지 않아요</li>
-    <li><b>임시 콘셉트 한 문장</b> — 4일차 분석 후 확정해요</li>
-    <li><b>이용 권리를 확인한 본인 곡 영상 1호가 「예약됨」으로 보이는 Studio 화면</b></li>
-  </ul></div>
-  <div class="note"><b>환불 약속은 완주 기준과 별도예요.</b>
-  Day 1~7의 지정 인증을 매일 당일 자정까지 모두 제출해야 적용돼요. Day 0의 사진 2장은 준비 확인이며 환불용 7일 인증에는 포함되지 않아요.</div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요.</p>
-    <pre id="cert-d1">Day 1 완료 ✅
-- 공장과 샘플 자동 비공개 업로드 확인
-- 샘플 파일을 재료 폴더 밖으로 이동
-- 본인 곡 1호 「예약됨」 확인</pre>
-    <button class="copybtn" onclick="copyCert('cert-d1',this)">인증 문구 복사하기</button>
-  </div>
-
-</div></section>
-
-
-<!-- ══════════ 2일차 ══════════ -->
-<section class="panel" id="d2" role="tabpanel" aria-labelledby="tab-d2" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">DAY 2</span>
-    <h2>본인 곡 영상 2호 예약하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> 두 번째 본인 곡을 만들고 이용 권리를 확인한 뒤, 영상을 예약해요.</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 3개</h3>
-    <ol>
-      <li>장르·속도·악기·보컬 특성을 정해 두 번째 본인 곡을 만들어 주세요.</li>
-      <li>생성일·생성 당시 Suno 플랜·게시 목적과 입력 재료의 권리를 확인해 기록해 주세요.</li>
-      <li>영상 패키지를 만든 뒤 <b>「올려줘」</b>로 자동 예약하고 Studio에서 <b>「예약됨」</b>을 확인해 볼까요?</li>
-    </ol>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 본인 곡 2호가 「예약됨」으로 보이는 Studio 화면이에요.</div>
-    <div class="easy-warn"><b>주의.</b> 오늘은 곡 생성에 집중해요. 콘셉트와 썸네일 진단은 4일차에 진행해요.</div>
-  </div>
-
-  <div class="story">
-    <p>1호와 다른 <b>내 곡</b>과 새 장면의 <b>내 이미지</b>로 영상을 만들어 주세요.
-    음원·배경·썸네일이 실제로 달라야 두 영상이 독립된 결과물이 돼요.</p>
-    <p>업로드한 영상은 제목과 썸네일은 수정할 수 있지만 영상 파일 자체는 교체할 수 없어요.
-    따라서 사용할 곡과 재료를 업로드 전에 확인해 주세요.</p>
-  </div>
-
-  <div class="auto">
-    <h3><span class="n">제작·발행 실습</span> 내 곡으로 두 번째 영상을 예약해 볼까요?</h3>
-    <ol>
-      <li>원하는 장르·속도·악기·보컬 특성을 AI에 알려 가사와 Suno 프롬프트를 만들어 주세요. 특정 가수나 기존 곡은 따라 하지 마세요</li>
-      <li><b>suno.com/create → [Custom]</b>에서 Lyrics·Styles·Exclude·Title을 넣고 생성된 곡을 직접 들어 보세요</li>
-      <li><b>기록\권리확인.md</b>에 본인 생성 확인·생성일·생성 당시 Suno 플랜·게시 목적·입력 재료 권리·출처 표기 확인을 2호 기록으로 추가해 주세요. 하나라도 확인할 수 없으면 예약하지 마세요</li>
-      <li>재료 폴더의 1호 mp3와 가사 파일을 <b>본인곡_보관\1호</b>로 옮기고, 2호 mp3와 같은 이름의 가사 txt를 넣어 주세요. Day 1 샘플 네 개는 <b>샘플_비공개실습</b> 폴더에 그대로 두세요</li>
-      <li>2호에 사용할 본인 배경·썸네일을 준비해 주세요. 재료 폴더에는 2호 mp3·가사·배경·썸네일 네 개만 남겨 주세요</li>
-      <li>명령 한 마디로 영상·제목·설명 패키지를 만들고, 이어서 <b>「올려줘」</b>로 AI가 자동 예약해요</li>
-      <li>세부정보의 <b>「속성」 → 「AI 사용」</b>에서 <b>「예」</b>가 체크됐는지, 공개 상태가 「예약됨」인지 눈으로 확인해 주세요</li>
-    </ol>
-    <pre>(원하는 장르·속도·악기·보컬 특성)의 두 번째 새 노래를 만들어줘.
-특정 가수나 기존 곡은 모사하지 마.
-가사와 Suno 프롬프트 뒤에는 내가 생성일·당시 플랜·이용 조건을 확인할 때까지 멈춰줘.
-내가 "권리 확인했고 다운받았어"라고 말하면 재료 폴더에 Day 1 샘플이나 1호 곡이 남아 있는지 먼저 확인하고,
-두 번째 내 곡과 내 이미지로 MP4와 제목·설명 패키지를 만들어줘.
-완성 파일을 확인한 뒤 올려줘로 자동 예약하고, Studio에서 「예약됨」을 확인할 때까지 안내해줘.</pre>
-    <div class="note"><b>썸네일도 「올려줘」가 재료 폴더에서 찾아 자동으로 넣어 줘요.</b>
-    맞춤 썸네일은 전화번호 인증이 되어 있어야 쓸 수 있어요. 자동 업로드가 실패하면 Studio 업로드 화면의 「미리보기 이미지」에서 직접 넣어 주세요.</div>
-    <div class="ok"><b>오늘 예약한 곡이 완주 영상 2호예요.</b>
-    패키지와 예약을 마치면 2호의 mp3·가사·배경·썸네일을 <b>본인곡_보관\2호</b> 폴더에도 복사해 두세요.
-    Day 1 비공개 샘플은 완주 영상 3개에서 제외해요. 내일 본인 권리 곡 한 편을 더 예약하면 3개가 돼요.</div>
-  </div>
-
-  <div class="deliver"><h4>완료 기준 및 인증</h4><ul>
-    <li><b>본인 곡 2호 생성·권리 확인 기록</b></li>
-    <li><b>본인 곡 2호가 「예약됨」으로 보이는 Studio 화면</b></li>
-  </ul></div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요.</p>
-    <pre id="cert-d2">Day 2 완료 ✅
-- 본인 곡 2호 생성·권리 확인
-- 본인 곡 2호 예약 완료
-- Studio에서 「예약됨」 확인</pre>
-    <button class="copybtn" onclick="copyCert('cert-d2',this)">인증 문구 복사하기</button>
-  </div>
-
-</div></section>
-
-<!-- ══════════ 3일차 ══════════ -->
-<section class="panel" id="d3" role="tabpanel" aria-labelledby="tab-d3" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">DAY 3</span>
-    <h2>본인 곡 영상 3호 예약하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> 본인 곡 세 번째 영상을 예약해 완주 영상 3개를 채워요. 시간이 남으면 곡을 더 만들어 봐요.</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 3개</h3>
-    <ol>
-      <li>한 문장으로 작사 → Suno 생성 → 권리 확인 → 패키지 제작을 시작해 주세요.</li>
-      <li>본인 곡 영상 3호를 <b>「올려줘」</b>로 예약해 볼까요?</li>
-      <li>Studio에서 완주에 인정되는 본인 곡 영상 3개가 공개 또는 예약 상태인지 확인해 주세요.</li>
-    </ol>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 본인 곡 영상 3개 이상이 공개 또는 예약 상태로 보이는 화면이에요.</div>
-    <div class="easy-warn"><b>주의.</b> Day 1 비공개 샘플은 영상 3개에 포함하지 않아요.</div>
-  </div>
-
-  <div class="story">
-    <p>오늘은 곡 생성과 예약에 집중해요. 한 문장으로 작사→Suno→권리 확인→패키지 생성을 실행한 뒤
-    이용 권리를 확인한 본인 곡 3호를 예약해요.</p>
-    <p>9월 3일 Suno 정책 변경 전에 최대한 확보하기 위해, 완주 기준 3곡을 채웠어도 여유가 되면 같은 권리 확인 절차로 곡을 더 생성하고 기록할 수 있어요.</p>
-  </div>
-
-  <div class="auto">
-    <h3><span class="n">필수 제작·발행</span> 한 문장으로 세 번째 패키지를 만들고 예약해 볼까요?</h3>
-    <h4>본인 곡 3호를 준비해 주세요</h4>
-    <ol>
-      <li>1~2일차와 같은 순서로 <b>suno.com/create → [Custom]</b>을 열고 오늘 콘셉트의 가사·Styles·Exclude·Title을 넣은 뒤 <b>[Create]</b>를 눌러 주세요</li>
-      <li>생성된 후보를 듣고, 이용 권리와 품질을 확인한 한 곡을 골라 주세요</li>
-      <li>선택한 곡의 <b>[점 세 개] → [Download] → [Audio]</b>에서 mp3를 받으세요</li>
-      <li><b>기록\권리확인.md</b>에 본인 생성 확인·생성일·생성 당시 Suno 플랜·게시 목적·입력 재료 권리·출처 표기 확인을 3호 기록으로 추가해 주세요. 하나라도 확인할 수 없으면 예약하지 마세요</li>
-      <li>재료 폴더에서 2호 mp3와 가사 파일을 보관 폴더로 옮기고, 3호 mp3·같은 이름의 가사 txt·본인 배경·본인 썸네일만 남겨 주세요. 샘플 파일은 없어야 해요</li>
-      <li>명령 한 마디로 영상·제목·설명 패키지를 만들고, 이어서 <b>「올려줘」</b>로 AI가 자동 예약해요</li>
-    </ol>
-    <pre>(원하는 장르·속도·악기·보컬 특성)의 새 노래를 만들어줘.
-특정 가수나 기존 곡은 모사하지 마.
-가사와 Suno 프롬프트 뒤에는 내가 생성일·당시 플랜·이용 조건을 확인할 때까지 멈춰줘.
-내가 "권리 확인했고 다운받았어"라고 말하면 내 재료로 MP4와 제목·설명 패키지를 만들어줘.
-완성 파일을 확인한 뒤 올려줘로 자동 예약하고, Studio에서 「예약됨」을 확인할 때까지 안내해줘.</pre>
-    <div class="note"><b>이 명령이 정상 실행되면 제작 자동화 기준을 충족해요.</b>
-    본인 곡 1·2·3호가 공개 또는 예약 상태면 완주 기준 ②번의 영상 수가 오늘 채워져요. 남은 나흘은 이미 만든 결과물의 품질과 운영 방식을 정비해요.</div>
-    <div class="note"><b>예약을 마치면 3호의 곡·가사·배경·썸네일을 본인곡_보관\3호에 복사해 주세요.</b>
-    6일차에는 1호·2호·3호 폴더의 이미지 세 벌을 사용해 영상별 제목과 배경을 정확히 짝지어 정비해요.</div>
-    <div class="ok"><b>시간이 남으면 곡을 더 만들어도 좋아요.</b>
-    같은 순서로 권리를 확인하고 곡을 내려받아 기록해 주세요. 게시할 때는 하루 최대 2개만 올려 주세요.</div>
-    <div class="warn"><b>공식 일일 업로드 제한은 채널 상태에 따라 달라요.</b>
-    이 과정에서는 운영 안정성을 위해 하루 최대 2개만 업로드하고, 추가 영상은 날짜를 나누어 예약해 주세요.</div>
-  </div>
-
-  <div class="deliver"><h4>완료 기준 및 인증</h4><ul>
-    <li><b>본인 곡 3호 생성·권리 확인 기록</b></li>
-    <li><b>완주에 인정되는 본인 곡 영상 3개 이상이 공개 또는 예약 상태로 보이는 Studio 화면</b></li>
-  </ul></div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요.</p>
-    <pre id="cert-d3">Day 3 완료 ✅
-- 본인 곡 3호 생성·권리 확인
-- 본인 곡 영상 3개 이상 공개 또는 예약 확인
-- Day 1 비공개 샘플은 제외</pre>
-    <button class="copybtn" onclick="copyCert('cert-d3',this)">인증 문구 복사하기</button>
-  </div>
-
-</div></section>
-
-<!-- ══════════ 4일차 ══════════ -->
-<section class="panel" id="d4" role="tabpanel" aria-labelledby="tab-d4" hidden><div class="wrap">
-    <div class="dayhead">
-    <span class="daytag">DAY 4</span>
-    <h2>썸네일 바꾸고 채널 주제 정하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> 새 썸네일을 1일차 영상에 넣고 채널 이름과 주제를 정해 볼까요?</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 3개</h3>
-    <ol>
-      <li><b>시장지도</b>에서 내 채널과 비슷한 채널 하나를 골라 주세요.</li>
-      <li>내 채널에 쓸 썸네일 한 장을 만들고, 휴대폰처럼 작게 보아도 잘 보이는지 확인해 주세요.</li>
-      <li>1일차 비공개 영상의 썸네일을 새것으로 바꾸고, 채널 이름과 주제 한 줄을 정해 볼까요?</li>
-    </ol>
-    <p style="margin-top:14px">채널 주제 예시. <b>“퇴근길 버스에서 마음을 가라앉힐 때 듣는 재즈”</b>.</p>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 썸네일을 바꾼 화면, 비교 화면, 확정한 채널 이름과 주제 한 줄이에요.</div>
-  </div>
-
-  <div class="story">
-    <p>유튜브에서 썸네일은 다른 영상과 함께 보여요. 그래서 그림 한 장만 보지 말고
-    <b>목록 안에서 내 썸네일을 찾을 수 있는지</b> 확인해요.</p>
-    <p>오늘은 ① 비슷한 영상 사이에서 3초 비교 ② 휴대전화 크기로 축소 ③ 사진에서 중심이 되는 사람이나 물건인 <b>핵심 피사체</b> 식별의 세 기준을 적용해요.
-    검사 결과를 반영해 1일차 영상의 썸네일을 실제로 교체해요.</p>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">진단 기준</span><h3>썸네일에서 확인할 네 가지</h3></div>
-    <div class="body">
-      <div class="tblwrap"><table>
-        <tr><th>원인</th><th>이렇게 보여요</th></tr>
-        <tr><td><b>핵심 대상이 불분명해요</b></td><td>시선이 여러 요소로 분산되어 무엇을 먼저 봐야 하는지 알기 어려워요</td></tr>
-        <tr><td><b>줄이면 정보가 사라져요</b></td><td>휴대전화 크기에서는 글자와 세부 요소가 뭉개져요</td></tr>
-        <tr><td><b>식별 단서가 부족해요</b></td><td>추천 목록에서 내 썸네일을 빠르게 찾기 어려워요</td></tr>
-        <tr><td><b>장르를 알아보기 어려워요</b></td><td>그림만 보면 다른 장르의 영상처럼 보일 수 있어요</td></tr>
-      </table></div>
-      <div class="note"><b>무조건 튀는 그림을 만들 필요는 없어요.</b>
-      같은 장르로 보이면서도 작은 화면에서 중심 물건이나 사람과 색이 또렷하면 돼요.</div>
-
-      <h4>비교용 썸네일 한 장 만들기</h4>
-      <p>첫 그림은 비교해 보기 위한 시작점이에요. 완벽하지 않아도 괜찮아요.</p>
-      <ol>
-        <li>인터넷 창에서 <b>chatgpt.com</b>에 로그인하고 <b>[새 채팅]</b>을 열어 주세요.<br>
-        <span style="color:var(--dim)">계정이 없으면 화면의 가입 안내에 따라 만들어 주세요. 이용 가능 기능과 생성 한도는 계정과 요금제에 따라 달라질 수 있어요.</span></li>
-        <li>아래 상자를 <b>그대로</b> 복사해 붙여넣고, 그 아래 줄에 한국어로
-        <b>“가로로 긴 16대 9 그림으로 만들어줘”</b>라고 적어 보내세요.
-        AI에게 그림을 요청할 때 넣는 주문 글을 <b>프롬프트</b>라고 해요
-        <pre class="en">A single warm desk lamp on a wooden desk at 2 a.m. , the lamp is switched on and glowing , a quiet study room with a rainy window behind , close-up from the side , warm lamp light with cool blue window light , amber and deep navy , calm and lonely , film photograph with soft grain , clean negative space on the left for a title , no text , no logo , 16:9 aspect ratio</pre>
-        이 예시는 <b>「새벽 공부방」 콘셉트</b>로 작성되어 있어요. 내 콘셉트가 다르면
-        <b>앞의 다섯 덩어리만</b> 바꾸시면 돼요 — 무엇을(desk lamp) · 그게 뭘 하고 있고(glowing) ·
-        어디에(study room) · 어떤 빛(warm lamp light) · 무슨 색(amber and deep navy).
-        영어가 막히면 <b>Orca의 AI에게 “이 영어에서 desk lamp를 (내 물건)으로 바꿔줘”라고 시키셔도 돼요.</b><br>
-        <b>뒤의 <code>no text, no logo</code>부터는 손대지 마세요.</b>
-        이걸 빼면 한글처럼 생겼는데 읽을 수 없는 글자가 그림에 박혀 나와요</li>
-        <li>그림이 나오면 <b>그림 위에서 마우스 오른쪽 → 「이미지를 다른 이름으로 저장」</b>을 눌러 주세요.
-        파일 이름은 <b>썸네일1</b>로 하고 바탕화면에 저장하세요</li>
-      </ol>
-      <div class="warn"><b>재료 폴더의 이미지는 1일차 실습용 샘플이에요.</b>
-      오늘은 방금 만든 <b>「썸네일1」</b>을 사용해 주세요.</div>
-      <div class="note"><b>오늘 필요한 그림은 한 장이에요.</b> 더 만들지 말고 아래 세 가지 확인과 실제 교체에 시간을 써 주세요.</div>
-
-      <h4>세 가지 진단</h4>
-      <div class="note"><b>비교할 채널은 아래 「제작·설정 실습」에서 정해요.</b> 먼저 내려가 채널부터 고르고 돌아와도 돼요.
-      이 글에서 <b>「벤치마킹 채널」</b>이라고 하는 게 그 채널이에요. 내가 따라가고 싶은 채널이라는 뜻이에요.</div>
-      <ol>
-        <li><b>목록 비교 · 필수</b><br>
-        벤치마킹 채널의 썸네일 <b>열 장</b>과 <b>내 것을 나란히</b> 봐주세요.
-        3초 안에 내 썸네일의 위치와 핵심 피사체를 찾을 수 있는지 확인해요.
-        단순히 가장 튀는지보다 <b>같은 장르로 보이면서 식별되는지</b>가 기준이에요.<br>
-        <b>나란히 놓는 방법은 다음과 같아요.</b> 썸네일 비교판은 여러 장을 <b>한 장으로 붙여 놓은 그림</b>이라
-        한 칸씩 떼어낼 수 없어요. 대신 이렇게 하세요.
-        <ol style="margin:8px 0 0 18px;display:grid;gap:5px">
-          <li>비교판에서 <b>내 콘셉트와 가까운 채널 판 하나</b>를 눌러 크게 열어 주세요. 가로로 긴 열 장짜리 그림이에요</li>
-          <li>파워포인트나 한글을 새 문서로 열고, 그 그림 위에서 <b>마우스 오른쪽 → 「이미지 복사」</b>를
-          <b>한 번</b> 하고 문서에 붙여넣으세요. 한 번이면 열 장이 모두 들어와요</li>
-          <li>붙인 그림 <b>바로 아래에 내 썸네일</b>을 붙여넣고, 크기를 그림 한 칸과 비슷하게 줄여 주세요</li>
-          <li><b>3초만 보고 눈을 감았다 뜨세요.</b></li>
-        </ol>
-        파워포인트가 없으시면 창을 좌우로 둘로 나눠, 왼쪽에 비교판·오른쪽에 내 썸네일을 띄워도 똑같아요.</li>
-        <li><b>줄여 보기</b><br>
-        내 썸네일을 <b>폰 목록에 뜨는 크기</b>로 줄여 주세요.
-        윈도우는 그림판으로 열어 <b>[크기 조정] → [픽셀]</b>을 고르고 가로에 <b>170</b>을 넣으면 돼요.
-        맥은 미리보기로 열어 <b>[도구] → [크기 조정]</b>에서 폭에 170을 넣어 주세요.<br>
-        더 쉬운 방법도 있어요. 유튜브 스튜디오의 <b>「콘텐츠」 목록</b>에 뜨는 작은 그림이
-        마침 그 크기와 비슷해요.<br>
-        <b>1초 안에 중심 물건이나 사람을 말할 수 있는지</b> 확인해 주세요.</li>
-        <li><b>글자 가리기</b><br>
-        제목 글자를 손으로 가려 보세요. <b>그림만으로 장르나 청취 상황을 짐작할 수 있는지</b> 확인해요.
-        글자를 가렸을 때 장르나 상황을 알 수 없으면 그림을 다시 고쳐 주세요.</li>
-      </ol>
-      <div class="note"><b>비교할 썸네일은 미리 모아 뒀어요.</b> 아래 주소를 브라우저에 그대로 넣어 여세요.<br>
-      <a href="https://kimyoungil21.github.io/r-64fe20c017/pli/썸네일보드.html" target="_blank"
-      style="color:var(--amber)">kimyoungil21.github.io/r-64fe20c017/pli/썸네일보드.html</a><br>
-      창작곡 플리 대형 채널 10곳의 인기 영상 100장과 국내 3장르 100장이 들어 있어요.
-      내 콘셉트와 같은 계열의 <b>채널 판 하나</b>를 골라 그 옆에 내 것을 놓으면 돼요.</div>
-
-      <h4>진단 결과에 따라 바꿀 항목</h4>
-      <p style="margin-top:6px">아래 네 가지 중 하나를 고른 뒤, 중심 물건이나 사람·색 차이·빈자리를 조정해 주세요.</p>
-      <ul>
-        <li><b>그림 유형을 하나만 골라 주세요.</b> 네 가지가 있어요.
-        <ul style="margin:8px 0 0 18px;display:grid;gap:5px">
-          <li><b>①서사형 일러스트</b> — 사람이 뭔가 하고 있는 그림. 창가에 앉은 사람, 책상에 엎드린 사람</li>
-          <li><b>②오브젝트 사진형</b> — 물건 하나를 크게 찍은 사진. 커피잔, 스탠드, 낡은 라디오</li>
-          <li><b>③자연 치유형</b> — 풍경 사진. 비 오는 창, 바다, 안개 낀 숲</li>
-          <li><b>④기능 상징형</b> — 큰 글자와 도형 위주. 「3시간」 「집중」 같은 것</li>
-        </ul>
-        처음이라면 물건만 바꿔 반복하기 쉬운 <b>② 오브젝트 사진형</b>부터 시작해 보세요</li>
-        <li><b>주인공은 하나만.</b> 화면의 20~40%를 차지하게 하세요. 소품은 3개를 넘기지 않아요</li>
-        <li><b>따뜻한 빛 하나, 차가운 빛 하나</b>를 같이 두면 깊이가 생겨요. 특히 밤 장면에서 잘 보여요</li>
-        <li><b>글자 넣을 빈자리</b>를 미리 비워 두세요. 벽이나 테이블, 어두운 배경 쪽이 좋아요.
-        6일차에 이 자리에 한글 제목을 얹어요</li>
-        <li>그림을 만들 때 AI에게 넣는 <b>주문 글</b>을 <b>프롬프트</b>라고 해요.
-        그 프롬프트 <b>맨 끝에 no text, no logo</b>를 꼭 붙이세요. 안 넣으면 깨진 영어 글자가 그림에 박혀 나와요</li>
-      </ul>
-      <pre class="en">[주인공] , [행동 하나] , [환경] , [구도] , [조명] , [색] , [분위기] , [매체와 질감] ,
-clean negative space for title, no text, no logo, 16:9 aspect ratio</pre>
-      <div class="note"><b>챗지피티에 넣으실 거면</b> 위 영어를 붙여넣고 끝에 한국어로
-      <b>“가로로 긴 16대 9 비율로 만들어줘”</b>를 덧붙이세요.
-      미드저니를 쓰신다면 대신 <b>--ar 16:9</b>를 끝에 적으시면 돼요.</div>
-      <div class="warn"><b>유명 채널을 그대로 따라 하지는 마세요.</b> 캐릭터·로고·그 채널만의 고유한 구도는 복제하지 마세요.
-      참고할 수 있는 것은 <b>구도·조명·색·감정</b>까지예요.</div>
-    </div>
-  </div>
-
-  <div class="fix">
-    <div class="t"><span class="n">기존 결과물 개선</span><h3>1일차 영상의 썸네일을 바꿔 볼까요?</h3></div>
-    <div class="body">
-      <p>1일차에 올린 비공개 영상에는 샘플 썸네일이 붙어 있어요. 오늘 만든 그림으로 바꿔 주세요.
-      <b>이미 올린 영상의 썸네일도 바꿀 수 있어요.</b></p>
-      <ol>
-        <li>유튜브 스튜디오를 열어 주세요 (<b>studio.youtube.com</b>)</li>
-        <li>왼쪽에서 <b>「콘텐츠」</b>를 누르세요</li>
-        <li>1일차에 올린 비공개 영상의 <b>제목을 눌러 주세요</b> (연필 모양을 눌러도 돼요)</li>
-        <li>화면을 내리면 <b>「미리보기 이미지」</b>가 나와요. <b>「파일 업로드」</b>를 누르고 오늘 만든 그림을 넣어 주세요</li>
-        <li>오른쪽 위 <b>「저장」</b>을 누르면 끝이에요</li>
-      </ol>
-      <div class="ok"><b>바뀌었는지 확인해 볼까요?</b> 「콘텐츠」 목록으로 돌아가 보세요.
-      목록의 작은 그림이 새것으로 바뀌어 있으면 끝이에요.
-      <b>이 목록 화면은 폰에서 보이는 크기와 비슷해요.</b> 여기서 안 읽히면 폰에서도 안 읽혀요.</div>
-      <div class="warn"><b>오늘은 썸네일만 바꿔 주세요.</b> 제목은 내일 고쳐요.
-      둘을 한꺼번에 바꾸면 무엇 때문에 결과가 달라졌는지 알기 어려워요.</div>
-    </div>
-  </div>
-
-  <div class="auto">
-    <h3><span class="n">제작·설정 실습</span> 참고할 채널을 살펴보고 내 콘셉트를 정해 볼까요?</h3>
-    <p>1일차에 임시로 적은 콘셉트를 오늘 정해요. <b>짐작으로 정하지 않고</b>,
-    잘되는 채널 하나의 <b>숫자를 보고</b> 정하면 돼요.</p>
-    <ul>
-      <li>참고할 노래 채널을 하나 골라 주세요. 없으면 AI에게 후보를 요청해요</li>
-      <li>공장에 들어 있는 <b>분석기</b>가 그 채널의 인기 영상·제목·썸네일·올리는 리듬을 세어 와요</li>
-      <li>그 숫자를 보고 <b>내 콘셉트 한 줄과 채널명</b>을 정해 설정에 넣어 주세요</li>
-    </ul>
-    <pre>내가 벤치마킹할 채널이 있어: (채널 주소 — 그 채널을 열고 주소창의 글자를 통째로 복사해 넣으시면 됩니다)
-1. 이 채널 분석해줘.
-2. 리포트 해석해서 내 공장 추천값 만들어줘 — 콘셉트 한 줄, 채널명 후보 3개,
-   곡 무드, 커버 프롬프트, 발행 리듬.
-3. 내가 고르면 설정.json에 반영하고, 커버 프롬프트는 "기록" 폴더에 "커버프롬프트.txt"로 저장한 다음,
-   최종 설정을 표로 보여줘.</pre>
-    <div class="ok"><b>여기서 내 채널과 비교할 영상을 찾을 수 있어요.</b>
-    분석기 리포트의 <b>「TOP 5 썸네일」</b> 항목에 그 채널 인기 영상의 썸네일 주소가 들어 있어요.
-    주소를 브라우저에 하나씩 열면 돼요.
-    위의 <b>썸네일 비교판 200장</b>과 함께 놓고 봐도 좋아요.</div>
-    <div class="note"><b>벤치마킹 채널을 정하지 못했다면</b> 아래 주소를 브라우저에 그대로 넣어 여세요.
-    설치도 로그인도 필요 없어요.<br>
-    <a href="https://kimyoungil21.github.io/r-64fe20c017/pli-map/" target="_blank"
-    style="color:var(--amber)">kimyoungil21.github.io/r-64fe20c017/pli-map/</a><br>
-    플리 채널 <b>336개</b>와 영상 <b>7,913개</b>를 세어 만든 지도예요.
-    내 콘셉트와 가까운 칸에서 골라 주세요.<br>
-    <b>주의.</b> 목록에는 <b>남의 곡을 트는 채널</b>이 많아요. 지도에는 채널 크기와 형식만 담겨 있어요.
-    <b>자리·리듬·제목 골격</b>만 참고하고, 곡은 <b>내가 만든 AI 생성곡</b>을 사용해 주세요.</div>
-    <div class="warn"><b>분석기가 “API 키가 없다”고 하면</b> 시작 전 안내서 8단계에서 만든
-    그 키가 아직 공장에 안 들어간 거예요. <b>고장이 아니에요.</b>
-    AI에게 <b>“플리공장 폴더의 API키.txt를 읽어서 설정.json에 넣어줘”</b>라고 하시면 돼요.
-    AI가 API 키가 든 txt 파일을 찾아요.<br>
-    <b>Day 0에 API 키 준비를 완료하지 못했다면</b> 오늘은 분석기를 건너뛰고 <b>시장지도만으로</b>
-    채널을 고르시면 돼요.<br>
-    여기서 말하는 「API 키」는 <b>공개 채널 성적을 읽는 번호표</b>예요.
-    내 채널에 접근하거나 영상을 대신 올리는 권한은 없어요. API 키는 운영진에게 별도로 문의해 준비해요.</div>
-    <div class="note"><b>앞선 Day 1~3을 못 끝냈다면</b> 완주에 인정되는 본인 곡 영상 3개 확보 상태도 확인해요.
-    부족한 영상은 3일차의 곡 생성·예약 순서로 채워 주세요.</div>
-  </div>
-
-  <div class="deliver"><h4>완료 기준 및 인증</h4><ul>
-    <li><b>기준 썸네일 1장</b> — 목록 비교를 마친 그림이에요. 따로 폴더에 보관하고 6일차에 다시 사용해요</li>
-    <li><b>1일차 비공개 샘플의 썸네일이 실제로 바뀐 화면</b> — 오늘의 <b>인증 사진</b>이에요. 참가방에 올릴 화면 사진 한 장을 말해요</li>
-    <li><b>목록 비교 화면</b> — 벤치마킹 썸네일과 내 시안을 나란히 놓은 화면</li>
-    <li><b>확정된 콘셉트 한 줄과 채널명</b>, 그리고 AI가 보여준 설정 표</li>
-  </ul></div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요. 하루라도 빠지면 환불 약속 대상에서 제외돼요.</p>
-    <pre id="cert-d4">Day 4 완료 ✅
-- 벤치마킹 채널 비교 · 기준 썸네일 1장 확정
-- Day 1 샘플 영상의 썸네일 교체 완료
-- 채널명·콘셉트 한 줄 확정</pre>
-    <button class="copybtn" onclick="copyCert('cert-d4',this)">인증 문구 복사하기</button>
-  </div>
-
-</div></section>
-
-
-<!-- ══════════ 5일차 ══════════ -->
-<section class="panel" id="d5" role="tabpanel" aria-labelledby="tab-d5" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">DAY 5</span>
-    <h2>제목·설명 정비하고 첫 30초 진단하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> 1일차 비공개 샘플의 제목·설명·태그를 고치고, 만들어 둔 본인 곡의 첫 30초를 확인해 볼까요?</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 3개</h3>
-    <ol>
-      <li>1일차 비공개 샘플의 <b>제목·설명·태그</b>를 내 채널 주제에 맞게 고쳐 주세요.</li>
-      <li>본인 곡의 보컬 시작 시각과 첫 후렴 도착 시각을 확인해 주세요.</li>
-      <li>본인 곡들의 앞 20초를 듣고 에너지 수준을 1~5로 기록해 볼까요?</li>
-    </ol>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 비공개 샘플의 제목·설명·태그가 바뀐 화면이에요.</div>
-    <div class="easy-warn"><b>주의.</b> 샘플은 계속 비공개로 두세요. 4일차에 썸네일을 바꿨으니 오늘은 썸네일을 수정하지 마세요.</div>
-  </div>
-
-  <div class="story">
-    <p>휴대전화에서는 제목 뒤쪽이 잘릴 수 있어요.
-    <b>앞 15자</b>만 보고도 언제 듣는 어떤 음악인지 알 수 있는지 확인해요.</p>
-    <p>제목 정보를 정비한 뒤에는 만들어 둔 본인 곡들의 <b>보컬 시작 시점</b>과 <b>첫 후렴 도착 시점</b>을 따로 기록하고,
-    앞 20초의 에너지 수준을 비교해 다음 곡에 쓸 기준을 남겨요.</p>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">제목 진단 기준</span><h3>제목 앞부분에서 확인할 항목</h3></div>
-    <div class="body">
-      <div class="tblwrap"><table>
-        <tr><th>이런 제목</th><th>왜 안 되나</th></tr>
-        <tr><td>「밤비 / 별의 노래 / 창가에서 …」</td><td>모르는 곡 이름은 영상의 용도를 알려 주지 않아요</td></tr>
-        <tr><td>「잔잔한 피아노 모음」</td><td>언제 트는 건지 알기 어려워요</td></tr>
-        <tr><td>「[내채널명] 2026 신곡 …」</td><td>잘리는 앞자리를 채널명이 차지해요</td></tr>
-        <tr><td>「3시간 연속재생 …」</td><td>길이가 앞에 오면 내용을 말할 자리가 줄어요</td></tr>
-      </table></div>
-      <h4>앞 15자만 남기고 가려 볼까요?</h4>
-      <ol>
-        <li><b>15자 테스트 ★</b><br>내 제목의 <b>앞 15자만</b> 남기고 나머지를 가려 주세요. 장르·상황·청취 목적 중 두 가지 이상이 보이는지 확인해요.</li>
-        <li><b>목록 비교</b><br>벤치마킹 채널의 제목 <b>10개</b> 사이에 내 제목을 넣고, 용도가 3초 안에 구별되는지 확인해 주세요.</li>
-        <li><b>제3자 확인</b><br>제목만 보여주고 “언제, 어떤 상황에서 들을 영상으로 보이나요?”라고 물어보세요. 답이 내 콘셉트와 같은지 적어 주세요.</li>
-      </ol>
-      <ul>
-        <li><b>상황을 맨 앞에.</b> “새벽 2시, 아무도 없는 공부방에서 듣는 피아노”처럼 써주세요</li>
-        <li><b>채널명·길이·곡명은 뒤로.</b> 앞 15자는 내용에 사용해요</li>
-        <li>같은 시리즈는 <b>앞부분을 고정</b>하고 뒤만 바꿔 주세요</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="fix">
-    <div class="t"><span class="n">기존 결과물 개선</span><h3>1일차 비공개 샘플의 제목과 설명을 고쳐 볼까요?</h3></div>
-    <div class="body">
-      <p>4일차에는 썸네일만 바꿨어요. 오늘은 같은 영상의 <b>제목·설명·태그</b>를 고쳐요.</p>
-      <div class="note"><b>1일차 샘플 영상은 계속 비공개로 두세요.</b>
-      오늘은 비공개 영상의 제목·설명을 고치면서 Studio 편집 화면을 익혀요.
-      샘플을 공개·일부 공개·예약하거나 완주 영상에 포함하지 않아요.</div>
-      <ol>
-        <li>Studio → <b>「콘텐츠」</b> → 1일차에 올린 영상의 제목을 눌러 주세요</li>
-        <li><b>제목 칸</b>을 오늘 만든 제목으로 바꾸세요</li>
-        <li><b>설명 칸</b>의 맨 위 두 줄을 고쳐 주세요. 아래쪽 <b>타임스탬프는 지우지 마세요</b></li>
-        <li><b>「모두 표시」</b>의 태그에는 채널명이나 핵심 용어의 흔한 철자 변형이 있을 때만 1~3개를 넣어 주세요</li>
-        <li>오른쪽 위 <b>「저장」</b>을 누르고 콘텐츠 목록에서 바뀐 제목을 확인해 주세요</li>
-      </ol>
-      <div class="warn"><b>오늘은 제목·설명·태그만 바꿔 주세요.</b>
-      바꾼 내용을 기록하고, 4일차에 교체한 썸네일은 그대로 두세요.</div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">첫 30초 진단</span><h3>만들어 둔 본인 곡의 초반을 들어 볼까요?</h3></div>
-    <div class="body">
-      <div class="tblwrap"><table>
-        <tr><th>원인</th><th>어떻게 알아보나</th></tr>
-        <tr><td><b>도입이 예상보다 길어요</b></td><td>벤치마킹 곡보다 보컬 시작이나 첫 후렴 도착이 늦어요</td></tr>
-        <tr><td><b>썸네일과 분위기가 달라요</b></td><td>썸네일이 약속한 시간대·정서와 첫 곡의 분위기가 일치하지 않아요</td></tr>
-        <tr><td><b>첫 곡의 대표성이 낮아요</b></td><td>다른 곡보다 콘셉트가 약하거나 채널의 대표 분위기가 분명하지 않아요</td></tr>
-        <tr><td><b>시작 음량이 갑자기 커져요</b></td><td>0초부터 음량이 크게 올라 듣기 불편해요</td></tr>
-      </table></div>
-      <h4>듣고, 재고, 기록하는 순서</h4>
-      <ol>
-        <li>만들어 둔 본인 곡 후보를 열고 <b>보컬이 시작되는 시각</b>과 <b>첫 후렴이 시작되는 시각</b>을 휴대전화 시계로 재 주세요</li>
-        <li>첫 후렴이 이 과정의 참고 범위인 <b>35~58초</b> 안에 들어오는 후보를 확인해 주세요. 이 값은 YouTube의 공식 성과 기준이 아니에요</li>
-        <li>벤치마킹 영상의 첫 30초와 내 곡의 첫 30초를 두세 번 번갈아 듣고, 도입 길이와 분위기를 적어 주세요</li>
-        <li>본인 곡들을 <b>앞 20초씩</b> 듣고 에너지 수준을 1~5로 적어 볼까요? 1은 매우 차분함, 5는 매우 강함이에요</li>
-      </ol>
-      <div class="note"><b>오늘 곡을 삭제하거나 완주 영상 수를 다시 판정하지 않아요.</b>
-      모든 후보가 60초를 넘는다면 다음 곡을 만들 때 가사는 유지하고 Styles만 수정해 다시 생성해요.</div>
-      <pre>내가 만들어 둔 본인 곡들의 앞부분을 확인할 수 있게
-보컬 시작 시각, 첫 후렴 시작 시각, 앞 20초 에너지 수준 1~5를 기록하는 표를 만들어줘.
-측정은 내가 직접 듣고 알려줄게. 다음 곡에서 바꿀 항목은 하나만 추천해줘.</pre>
-    </div>
-  </div>
-
-  <div class="story">
-    <h4>선택 · 6일차 사전 준비</h4>
-    <p style="margin-top:6px">시간이 남으면 채널 소개문과 채널아트 초안을 준비해요. 오늘 완주에는 포함되지 않아요.</p>
-    <pre>내 채널 콘셉트는 "(내 콘셉트)"야. 채널 기본 정보 세트를 만들어줘:
-채널 소개문 3~4문장(발행 요일 약속 포함),
-채널아트 문구 1줄 + 챗지피티용 채널아트(2560x1440) 프롬프트.
-전부 "기록" 폴더에 "채널세트.txt"로 저장해줘.</pre>
-    <div class="note"><b>나온 채널아트 프롬프트로 그림도 한 장 받아 두세요.</b>
-    챗지피티에 붙여넣으면 돼요. 4일차에 썸네일을 만들었던 자리예요.
-    그림 위에서 <b>마우스 오른쪽 → 「이미지를 다른 이름으로 저장」</b>,
-    이름은 <b>채널아트</b>로 해서 바탕화면에 저장해 주세요. <b>내일 채널 맨 위에 올려요.</b></div>
-    <div class="note"><b>소개문 첫 줄에 콘셉트 한 줄과 발행 요일을 넣으세요.</b>
-    채널에 처음 온 사람이 3초 안에 읽는 자리입니다 (요인 22번).
-    <b>발행 요일 약속</b>은 재방문 계획(요인 23번)과 일관된 발행 일정(요인 2번)에 함께 사용돼요.<br>
-    실제로 지킬 수 있는 발행 주기를 정하고, 채널 소개문과 예약 일정에서 같은 약속을 사용해요.</div>
-  </div>
-
-  <div class="deliver"><h4>완료 기준 및 인증</h4><ul>
-    <li><b>제목 3안과 15자 테스트 결과</b> — 어느 것을 왜 골랐는지 한 줄</li>
-    <li><b>비공개 샘플의 제목·설명·태그가 실제로 바뀐 화면</b></li>
-    <li><b>본인 곡의 보컬 시작·첫 후렴 도착 시각과 앞 20초 에너지 수준 기록</b></li>
-  </ul></div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요.</p>
-    <pre id="cert-d5">Day 5 완료 ✅
-- 제목 3안 중 하나 선택
-- 샘플 영상 제목·설명·태그 수정 완료
-- 본인 곡의 보컬 시작·첫 후렴 도착 시간 확인
-- 앞 20초 에너지 수준 기록</pre>
-    <button class="copybtn" onclick="copyCert('cert-d5',this)">인증 문구 복사하기</button>
-  </div>
-
-</div></section>
-
-<!-- ══════════ 6일차 ══════════ -->
-<section class="panel" id="d6" role="tabpanel" aria-labelledby="tab-d6" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">DAY 6</span>
-    <h2>채널과 음량을 정리하고 공장 개조하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> 곡의 음량을 맞추고 영상 3개를 같은 시리즈로 정리한 뒤, 공장을 개조해 볼까요?</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 3개</h3>
-    <ol>
-      <li>본인 곡의 소리 크기를 비교하고 공장에 <b>곡마다 소리 크기 맞추기</b>를 적용해 주세요.</li>
-      <li>영상 3개의 썸네일을 통일하고 재생목록·영상 언어·채널 정보를 정리해요.</li>
-      <li>공장에 <b>썸네일 글자 넣기</b> 기능을 적용해 볼까요? 시간이 남으면 선택 기능 하나도 추가해요.</li>
-    </ol>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 음량 맞춤 전후 표, 정리 전후 화면, 개조일지예요.</div>
-    <p style="margin-top:13px">고정 댓글과 채널 위쪽 큰 그림은 할 수 있는 사람만 진행해요.</p>
-  </div>
-
-  <div class="story">
-    <p>영상들이 한 시리즈처럼 보이고 다음 영상이 언제 나오는지 알 수 있으면 다시 찾아오기 쉬워요.</p>
-    <p>먼저 곡마다 다른 소리 크기를 맞춰요. 이어서 썸네일의 색·구도·글자 위치를 한 가지 규칙으로 정리하고,
-    재생목록·채널 소개·발행 일정도 연결해요.</p>
-  </div>
-
-  <div class="fix">
-    <div class="t"><span class="n">음량 안정화</span><h3>자동 제작 시스템에서 곡마다 소리 크기를 맞춰 볼까요?</h3></div>
-    <div class="body">
-      <p>수노 곡은 소리 크기가 서로 다를 수 있어요. 본인 곡을 앞 20초씩 듣고 크기를 비교해 보세요.
-      원본 mp3는 그대로 두고 영상 만들 때만 음량을 조정해요.</p>
-      <div class="note"><b>처음 설치한 공장에는 이 기능이 없어요.</b>
-      오늘 AI의 도움을 받아 백업 → 한 가지 수정 → 샘플 시험 → 기록 절차를 경험해요. 참가자가 코드를 직접 작성할 필요는 없어요.</div>
-      <ol>
-        <li>AI에게 아래 지시문을 보내 주세요. <b>공장.py는 영상을 만드는 핵심 프로그램 파일</b>이에요</li>
-        <li>AI가 백업 파일을 만든 뒤 수정하고, 곡마다 바꾸기 전과 후의 측정값을 보여 주는지 확인해 주세요</li>
-        <li>적용 후 <b>이어폰으로</b> 첫 곡과 마지막 곡을 번갈아 들어 보세요. 곡이 바뀔 때 소리 크기가 비슷하면 끝이에요</li>
-      </ol>
-      <pre>플리에 넣는 곡들 소리 크기가 제각각이라 듣다가 볼륨을 만지게 돼.
-먼저 공장.py를 공장.py.day6-backup으로 백업해줘.
-그다음 공장.py를 고쳐서 영상 만들 때 각 곡을 통합 음량 -14 LUFS, 트루피크 -1 dBTP 이하로 맞춰줘.
-이 교육의 확인 허용 오차는 통합 음량 ±1 LU야. 이 값은 교육용 작업 기준이지 유튜브의 공식 합격 기준이라고 쓰지 마.
-원본 mp3는 건드리지 말고, 곡마다 맞추기 전후의 통합 음량과 트루피크를 표로 보여줘.
-뭘 바꿨는지 기록\개조일지.md 에 한 줄 남겨줘.
-샘플 실행이 실패하면 더 수정하지 말고 백업 파일로 공장.py를 복원해줘.</pre>
-      <div class="note"><b>“소리 크기를 맞춘다”는 것은 볼륨을 키운다는 뜻이 아니에요.</b>
-      곡마다 다른 평균 체감 음량을 하나의 기준에 맞추는 거예요. 여기서 쓰는 -14 LUFS·-1 dBTP는 비교 가능한 결과를 만들기 위한 <b>교육용 작업 기준</b>이에요.</div>
-      <div class="warn"><b>원본 mp3는 지우거나 덮어쓰지 마세요.</b>
-      실패하면 더 고치지 말고 <b>공장.py.day6-backup</b>으로 되돌린 뒤 오류 전문을 운영진에게 보내 주세요.</div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">진단 기준</span><h3>영상들이 한 시리즈로 보이지 않는 세 가지 경우</h3></div>
-    <div class="body">
-      <div class="tblwrap"><table>
-        <tr><th>원인</th><th>이런 상태예요</th></tr>
-        <tr><td><b>영상이 따로 놀아요</b></td><td>썸네일을 나란히 놓으면 저마다 다른 사람이 만든 것 같아요</td></tr>
-        <tr><td><b>다음이 안 보여요</b></td><td>채널에 와도 “이 다음엔 뭐가 나오지?”에 답이 없어요</td></tr>
-        <tr><td><b>발행 약속이 없어요</b></td><td>언제 오면 새 게 있는지 모르니 다시 올 이유가 없어요</td></tr>
-      </table></div>
-
-      <h4>썸네일을 한 줄로 세워 보세요</h4>
-      <div class="note"><b>먼저 본인곡_보관의 1호·2호·3호 폴더를 열어 주세요.</b>
-      각 폴더에 그 영상에 쓴 배경과 썸네일이 한 장씩 있어야 해요. 빠진 파일은 해당 영상의 Studio 상세 화면과 완성 폴더를 비교해 채워 주세요.</div>
-      <ol>
-        <li><b>한 줄로 세워 보기 ★</b><br>
-        지금까지 만든 썸네일을 <b>전부</b> 한 줄로 늘어놓아 주세요.
-        <b>4일차에 따로 보관해 둔 「기준 썸네일」도 같이 놓으세요.</b> 그 그림부터 맞추면 돼요. 지금쯤 서너 장일 거예요.
-        4일차에 하신 것과 같은 방법입니다 — <b>파워포인트나 한글</b>을 새 문서로 열고 차례로 붙여넣으세요.
-        <b>그림판은 쓰지 마세요.</b> 두 번째 그림을 붙이면 첫 번째가 지워져요.
-        <b>둘 다 없으시면</b> 썸네일 파일을 한 폴더에 모아 놓고 그 폴더를 열어
-        <b>[보기] → [큰 아이콘]</b>으로 바꾸세요. 화면에 나란히 놓인 그대로 보여요.
-        같은 시리즈로 보이는지 확인하고, 색·구도·글자 위치 중 일관되지 않은 항목을 표시해요.</li>
-      </ol>
-      <p style="margin-top:12px">오늘은 이 하나면 돼요. 나머지 둘은 하는 김에 같이 보세요.
-      내 채널 페이지를 <b>처음 보는 사람처럼 3초만</b> 봐주세요.
-      “무슨 채널이지”에 한 문장으로 답이 나오면 돼요.
-      그리고 제목을 얹은 썸네일을 <b>휴대전화 목록 크기로 줄여</b> 글자가 읽히는지 확인해요.</p>
-
-      <h4>한글 제목을 얹어 볼까요?</h4>
-      <p>AI 이미지 생성 결과에는 한국어 글자가 부정확하게 표현될 수 있어요.
-      그래서 <b>배경 이미지를 먼저 만들고 → 읽을 수 있는 글꼴로 제목을 따로 넣어 주세요</b>.</p>
-      <ul>
-        <li><b>2~6글자</b>만 넣으세요. 긴 문장은 넣지 마세요</li>
-        <li>글자 높이는 이미지 높이의 <b>12~20%</b>. 작으면 폰에서 안 보여요</li>
-        <li>흰 글자는 <b>어두운 단색 면</b> 위에, 검은 글자는 <b>크림색 면</b> 위에</li>
-        <li>얼굴·잔·악기·동물 <b>위에 겹치지 마세요.</b> 4일차에 비워 둔 자리에 넣어 주세요</li>
-        <li>시리즈 내내 <b>같은 위치, 같은 서체</b>를 써주세요. 그래야 한 채널처럼 보여요</li>
-      </ul>
-      <pre>썸네일 배경 이미지에 제목 글자를 얹는 걸 매번 손으로 하기 번거로워.
-관련 파일을 먼저 확장자 .day6-backup으로 백업해줘.
-같은 위치·같은 서체로 글자를 얹어주는 걸 만들어줘.
-글자는 2~6글자, 높이는 이미지 높이의 15% 정도, 위치는 (내가 고른 곳)에 고정.
-한글 폰트가 깨지지 않게 처리해주고, 첫 번째 한 장만 만들어서 결과를 보여줘.
-업로드하지 말고 내가 승인할 때까지 나머지는 만들지 마.
-승인하면 같은 규칙으로 나머지 두 장을 만들고 기록\개조일지.md에 변경 내용을 한 줄 적어줘.
-실패하면 백업 파일로 복원하고 오류 전문을 보여줘.</pre>
-      <div class="ok"><b>필수 개선의 완료 기준.</b> 첫 장을 확인한 뒤 나머지 두 장을 만들고, 같은 위치·서체가 적용된 썸네일 3장과
-      <b>기록\개조일지.md</b>의 한 줄을 직접 확인해요. 이 단계에서는 영상을 새로 업로드하지 않아요.</div>
-      <div class="warn"><b>글꼴에도 이용 조건이 있어요.</b>
-      잘 모르겠다면 Windows의 맑은 고딕, macOS의 Apple SD 산돌고딕 Neo처럼 운영체제에 들어 있는 기본 한글 글꼴을 써 주세요.
-      외부 글꼴은 배포처의 라이선스 원문에서 영상·상업 이용 범위를 확인하고 주소를 기록한 경우에만 사용하세요.</div>
-    </div>
-  </div>
-
-  <div class="fix">
-    <div class="t"><span class="n">채널 정비 실습</span><h3>영상 3개의 썸네일과 채널 기본 정보를 통일해요</h3></div>
-    <div class="body">
-      <p>1~3일차에 예약한 <b>본인 권리 곡 영상 3개</b>를 오늘 정한 기준으로 다시 맞춰 주세요. 비공개 샘플은 손대지 않아요.</p>
-      <ol>
-        <li>먼저 AI에게 <b>영상 제목 ↔ 사용할 배경 파일 이름</b>을 한 줄씩 표로 보여 달라고 하고, 세 쌍이 맞는지 직접 확인해 주세요</li>
-        <li>첫 번째 한 장만 미리 만든 뒤 제목·배경·글자 위치가 맞는지 확인해 주세요</li>
-        <li>그다음 아래를 그대로 시키세요 — <b>“확인한 제목과 배경의 짝을 그대로 사용해서 나머지 썸네일도 만들어줘.
-        글자 위치와 서체는 첫 번째와 똑같이 하고, 다 되면 파일 이름과 저장 위치를 표로 보여줘.”</b></li>
-        <li>스튜디오 → <b>「콘텐츠」</b> → 영상마다 <b>미리보기 이미지</b>를 새것으로 교체 → <b>「저장」</b> 순서로 진행해 주세요</li>
-        <li>전부 바꾼 뒤 <b>「콘텐츠」 목록을 한 화면에 놓고 화면 사진</b>을 찍어 주세요.
-        세 장이 한 채널로 보이면 끝이에요</li>
-      </ol>
-      <h4>같이 정리할 것 넷</h4>
-      <div class="note"><b>아래 항목은 채널의</b> <b>빈 정보를 채우는 작업</b>이에요.
-      한꺼번에 진행해도 괜찮아요.</div>
-      <ul>
-        <li><b>재생목록 만들기</b> (요인 4번) — YouTube Studio 오른쪽 위 <b>[만들기] → [새 재생목록]</b> →
-        제목·설명·공개 범위 설정 → <b>[동영상 추가]</b> → 내 영상 선택 → <b>[만들기]</b> 순서로 진행해 주세요</li>
-        <li><b>고정 댓글</b> (요인 24번) — 이 기능은 채널의 <b>고급 기능</b>이 활성화되어 있어야 해요.
-        공개 영상의 시청 페이지에서 본인 댓글을 작성하고, 댓글 옆 <b>점 세 개 → [고정] → [확인]</b>을 눌러 주세요.
-        사용할 수 없다면 오늘은 건너뛰고, 사용할 수 없었다고 기록해 주세요</li>
-        <li><b>영상 언어를 한국어로</b> (요인 5번) — 스튜디오 <b>「콘텐츠」</b> → 영상 제목 클릭 →
-        아래로 내려 <b>[모두 표시]</b> → <b>「동영상 언어」</b>를 <b>한국어</b>로 고르고 <b>[저장]</b>.
-        영상의 기본 언어를 표시하는 설정이에요. 가사가 한국어인 영상마다 확인해 주세요.<br>
-        <span style="color:var(--dim)">채널 전체 설정도 한 번 봐 두세요.
-        <b>「설정」 → 「채널」 → 「기본 정보」</b>에서 <b>거주 국가</b>를 대한민국으로 두세요.
-        <b>이 칸은 언어가 아니라 나라를 정하는 곳이에요.</b> 언어는 위의 순서대로 <b>영상마다</b> 정해 주세요.</span></li>
-        <li><b>채널 소개문과 발행 약속</b> (요인 22·23번) — 아직 초안을 만들지 않았다면
-        <b>“이 채널은 (대상)이 (상황)에서 듣는 (음악) 채널이에요. 매주 (요일) (시각)에 새 영상을 공개해요.”</b>의 괄호를 채워 주세요.
-        스튜디오 왼쪽 <b>「맞춤설정」 → 「프로필」 → 「설명」</b>에 붙여넣고 <b>「게시」</b>를 누르세요.
-        채널 페이지 소개란에 같은 문장이 보이면 끝이에요</li>
-        <li><b>[선택] 채널아트 올리기</b> (요인 22번) — 5일차 선택 과제에서 <b>「채널아트」</b> 그림을 만든 경우에만 진행해요.
-        만들지 않았어도 오늘 필수 과제와 완주에는 지장이 없어요.
-        스튜디오 왼쪽 <b>「맞춤설정」 → 「프로필」</b> → 배너 이미지의 <b>「변경」 또는 「업로드」</b>를 눌러 주세요</li>
-      </ul>
-      <div class="ok"><b>바꾸기 전과 후를 같은 화면 크기로 비교해 보세요.</b>
-      콘텐츠 목록에서 색·구도·글자 위치가 같은 규칙으로 보이면 끝이에요.</div>
-    </div>
-  </div>
-
-  <div class="auto">
-    <h3><span class="n">자동화 개선 실습</span> 썸네일 텍스트 적용과 선택 기능 하나</h3>
-    <p>앞의 음량 맞추기와 같이 <b>백업 → 한 가지 수정 → 로컬 샘플 제작</b>(YouTube에 올리지 않고 컴퓨터에서만 만드는 시험 영상)<b> → 기록</b> 순서로 진행해요.
-    썸네일 글자 넣기는 꼭 하고, 시간이 남으면 아래에서 하나를 골라 주세요.</p>
-    <ul>
-      <li>곡 사이에 <b>1초 조용한 간격</b> 넣기 — 이어짐이 부드러워져요</li>
-      <li>화면 구석에 <b>내 채널명</b> 작게 넣기</li>
-      <li>완성 파일 이름을 <b>“날짜_콘셉트”</b> 형태로 바꾸기</li>
-      <li>예약 기본 시각을 바꾸기 — 이 값은 <b>설정.json</b>에서 변경해요. 발행 요일 자동 계산은 이번 실습 범위가 아니에요</li>
-      <li>배경 사진에 <b>아주 느린 확대</b> 넣기 — 멈춘 화면처럼 안 보이게 (요인 20번)</li>
-    </ul>
-    <pre>자동 제작 시스템을 개선하고 싶어: "(고른 것 하나)"
-관련 파일을 먼저 확장자 .day6-backup으로 백업해줘.
-예약 기본 시각이면 설정.json을 고치고, 다른 기능이면 관련 파일을 확인한 뒤 필요한 파일만 고쳐줘.
-업로드하지 말고 "만들어줘" 명령으로 로컬 영상까지만 시험해서 전후 차이를 보여줘.
-뭘 바꿨는지 기록\개조일지.md 에 한 줄 남겨줘.</pre>
-    <div class="ok"><b>오늘은 업로드하지 않고 컴퓨터에 영상 파일이 만들어지는지만 확인해요.</b>
-    선택한 기능이 보이면 시험을 끝내세요.
-    실패하면 백업 파일로 되돌리고 오류 전문을 운영진에게 보내 주세요.</div>
-    <div class="warn"><b>오늘 추가 업로드는 필요하지 않아요.</b> 완주 기준 ②번의 영상 3개는 3일차에 채웠어요.
-    추가 발행이 필요하다면 이 과정의 운영 상한인 하루 2개 안에서 날짜를 나누어 예약해요.</div>
-  </div>
-
-  <div class="deliver"><h4>완료 기준 및 인증</h4><ul>
-    <li><b>[필수]</b> 음량 정규화 전후 표와 체감 청취 확인</li>
-    <li><b>[필수·인증]</b> 변경 전후의 콘텐츠 목록 화면 사진 2장</li>
-    <li><b>[필수]</b> 같은 위치·서체 규칙으로 제목이 적용된 썸네일 3장</li>
-    <li><b>[필수]</b> 재생목록 1개 · 영상 언어 확인 · 채널 기본 정보 정리</li>
-    <li><b>[조건부]</b> 고급 기능이 활성화된 경우 고정 댓글 1개</li>
-    <li><b>[필수]</b> 썸네일 글자 적용 기능의 개조일지 한 줄</li>
-    <li><b>[선택]</b> 추가 기능을 적용한 로컬 샘플 영상</li>
-  </ul></div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요. 하루라도 빠지면 환불 약속 대상에서 제외돼요.</p>
-    <pre id="cert-d6">Day 6 완료 ✅
-- 음량 맞춤 전후 확인
-- 썸네일에 글자 넣는 도구 만듦
-- 본인 곡 영상 3개 썸네일 교체 (전후 화면 2장)
-- 재생목록 1개 · 영상 언어 한국어
-- 개조일지 한 줄 기록</pre>
-    <button class="copybtn" onclick="copyCert('cert-d6',this)">인증 문구 복사하기</button>
-  </div>
-
-</div></section>
-<!-- ══════════ 7일차 ══════════ -->
-<section class="panel" id="d7" role="tabpanel" aria-labelledby="tab-d7" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">DAY 7</span>
-    <h2>완주 확인하고 다음 할 일 하나 정하기</h2>
-    <div class="q"><b>오늘 끝낼 일.</b> 영상 3개와 영상 만드는 공장을 확인하고, 다음에 고칠 것 하나를 정해 볼까요?</div>
-  </div>
-
-  <div class="easy-card">
-    <h3>오늘 할 일 3개</h3>
-    <ol>
-      <li>재료를 넣고 짧게 명령했을 때 영상 파일이 만들어지는지 확인해 주세요.</li>
-      <li>YouTube Studio에서 내 곡 영상 3개가 공개 또는 예약 상태인지 확인해 볼까요?</li>
-      <li>내 채널에서 다음에 고칠 것 <b>하나만</b> 고르고 아래 다섯 줄을 적어 주세요.</li>
-    </ol>
-    <pre>날짜.
-고칠 부분.
-왜 고치려고 하나.
-어떻게 바꿨나.
-2주 뒤에 무엇을 확인할까.</pre>
-    <div class="easy-finish"><b>오늘 제출할 것.</b> 영상이 만들어진 화면, 공개 또는 예약 영상 3개가 보이는 화면, 위 다섯 줄이에요.</div>
-    <div class="easy-warn"><b>마감.</b> 완주 조건은 9월 6일 일요일 자정까지 달성해야 해요. 환불 약속은 1~7일차 인증을 모두 당일 제출한 경우에만 따로 적용돼요.</div>
-  </div>
-
-  <div class="story">
-    <p>마지막 날에는 6일 동안 쓴 기준을 <b>주간 점검표 한 장</b>으로 모아요.
-    노출부터 재방문까지 차례로 보고, 바꿀 항목 하나만 골라요.</p>
-    <p>7일 안에 조회수 성과를 보장할 수는 없어요. 표본이 부족한 지표는 결론을 내리지 않고,
-    같은 채널의 이전 영상과 비교할 수 있을 때부터 활용해요.</p>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">점검표</span><h3>주간 점검 · 노출부터 차례로 확인해 볼까요?</h3></div>
-    <div class="body">
-      <div class="tblwrap"><table>
-        <tr><th>진단 단계</th><th>먼저 확인할 지표</th><th>우선 개선할 항목</th></tr>
-        <tr><td><b>1. 노출</b></td><td>노출수 추이</td><td>콘셉트 · 발행 일정 · 제목·설명의 검색어</td></tr>
-        <tr><td><b>2. 클릭</b></td><td>노출 클릭률</td><td>썸네일 목록 비교 · 제목 앞부분</td></tr>
-        <tr><td><b>3. 초반 유지</b></td><td>시청자 유지율 그래프의 <b>첫 30초</b></td><td>첫 곡 · 인트로 · 썸네일과 곡의 분위기 일치</td></tr>
-        <tr><td><b>4. 연속 청취</b></td><td>평균 시청 지속 시간 · 이탈 지점</td><td>곡 순서 · 전환 · 평균 음량</td></tr>
-        <tr><td><b>5. 재방문</b></td><td>재방문 시청자 · 구독 추이</td><td>썸네일 통일 · 발행 약속 · 재생목록</td></tr>
-      </table></div>
-      <div class="warn"><b>한 번에 하나만 바꿔 주세요.</b> 썸네일과 첫 곡을 같이 바꾸면
-      무엇 때문에 결과가 달라졌는지 알기 어려워요. 바꾼 날짜·항목·이유를 기록하고 다음 비교 때 확인하세요.</div>
-
-      <h4>데이터가 쌓인 뒤 확인할 지표</h4>
-      <p>노출수·클릭률·유지율은 <b>YouTube Studio → 콘텐츠 → 확인할 영상 → 분석</b>에서 보세요.
-      재방문 시청자와 구독 추이는 <b>Studio 왼쪽 → 분석 → 시청자층</b>에서 확인해요.
-      새 채널에서 값이 없으면 실패가 아니라 <b>데이터 부족</b>이라고 적어 주세요.</p>
-      <ul>
-        <li><b>노출수와 노출 클릭률</b> — 「도달범위」 탭에 있어요</li>
-        <li><b>평균 조회율</b>(영상 길이 중 몇 %나 봤는지)과
-        <b>평균 시청 지속 시간</b>(몇 분 몇 초를 봤는지) — 「참여도」 탭에 있어요</li>
-        <li><b>시청자 유지율 그래프</b> — 「사람들이 몇 분에서 나갔는지」를 보여주는 그래프예요.
-        영상별 분석의 「참여도」에서 확인해요. 첫 30초의 하락은 첫 곡·도입·기대 일치 여부를
-        <b>재검토할 신호</b>이며 원인을 단독으로 확정하지 않아요</li>
-      </ul>
-      <div class="note"><b>데이터가 적을 때는 클릭률만 보고 결론 내리지 마세요.</b>
-      같은 채널의 이전 영상과 비교해 올라가는지 내려가는지 확인해 주세요.</div>
-      <div class="note"><b>지표가 바로 보이지 않아도 오류가 아닐 수 있어요.</b>
-      시청자 유지율 데이터는 처리에 1~2일 걸릴 수 있어요. 영상이 60초 미만이거나 조회수 100회 미만이면
-      「주요 순간」 같은 자동 강조 구간이 표시되지 않을 수 있으므로, 없는 값을 만들지 말고 <b>데이터 대기</b>로 기록해요.</div>
-      <div class="note"><b>조회수 하나만 보고 원인을 정하지 마세요.</b> 조회수에는 음악·발행 시기·검색 수요가 함께 들어가요.
-      각 단계의 숫자와 바꾼 기록을 함께 봐주세요.</div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">운영 리스크</span><h3>대량생산·반복 콘텐츠와 수익화 정책</h3></div>
-    <div class="body">
-      <p>유튜브는 2025년 7월 15일에 수익화 정책 항목의 이름을 바꿨어요.
-      영어 정책의 「repetitious content」가 <b>「inauthentic content」</b>로 명칭이 바뀌었고,
-      반복적이거나 대량생산된 콘텐츠가 수익화 대상에서 제외될 수 있다는 기존 원칙을 더 분명히 설명했어요.</p>
-      <div class="tblwrap"><table>
-        <tr><th>공식 정책의 핵심</th><th>플리 채널의 점검 예시</th></tr>
-        <tr><td>대량생산되거나 반복적인 콘텐츠는 수익화 대상에서 제외될 수 있어요</td><td>제목만 바꾸고 구성·배경·곡 흐름이 거의 같은 영상을 반복하지 않아요</td></tr>
-        <tr><td>같은 형식의 시리즈도 각 영상의 내용이 실질적으로 달라야 해요</td><td>영상별 콘셉트·곡 순서·설명·시각 구성을 실제로 다르게 설계해요</td></tr>
-        <tr><td>AI 도구 사용 자체가 수익화 금지는 아니에요</td><td>AI 결과를 그대로 게시하지 않고 참가자가 선택·편집·검수한 기록을 남겨요</td></tr>
-      </table></div>
-      <div class="ok"><b>자동화 도구 사용 자체가 금지된 것은 아니에요.</b>
-      중요한 것은 영상마다 실제 차이가 있고 제작자가 직접 판단했는지예요. 이번 과정에서는 다음 내용을 직접 정해요.
-      <ul style="margin:9px 0 0 20px;display:grid;gap:6px">
-        <li>4일차에 시장 자료를 바탕으로 <b>내 콘셉트 한 줄</b>을 직접 정했어요</li>
-        <li>4일차에 <b>썸네일 구성</b>을, 5일차에 <b>제목</b>을 직접 고쳤어요</li>
-        <li>5일차에 <b>첫 30초와 곡의 에너지</b>를 직접 듣고 기록했어요</li>
-        <li>6일차에 <b>곡의 음량과 채널 일관성을 정리하고 공장을 개조했어요</b></li>
-      </ul>
-      <p style="margin-top:10px">이 선택·편집·검수 기록이 각 영상의 제작 의도를 설명하는 근거가 돼요.</p></div>
-      <div class="warn"><b>발행 전 확인할 3가지</b>
-      <ul style="margin:9px 0 0 20px;display:grid;gap:6px">
-        <li>영상마다 콘셉트·곡 흐름·설명·시각 구성을 <b>실질적으로 다르게 설계</b>해요</li>
-        <li>설명란에 곡을 이 순서로 놓은 이유를 <b>본인의 문장</b>으로 적어 주세요</li>
-        <li>AI 생성 음악은 세부정보의 <b>「속성」 → 「AI 사용」에서 「예」</b>를 선택해요</li>
-      </ul></div>
-    </div>
-  </div>
-
-  <div class="fix">
-    <div class="t"><span class="n">독립 개선 실습</span><h3>진단 단계 하나를 선택해 근거와 함께 개선해요</h3></div>
-    <div class="body">
-      <p>오늘은 점검표를 보고 고칠 항목을 직접 하나 골라요.</p>
-      <ol>
-        <li>위 점검표를 1단계부터 보며 <b>고칠 단계 하나</b>를 골라 주세요</li>
-        <li>그 단계의 확인 방법으로 <b>정말 문제인지</b> 다시 확인해요</li>
-        <li><b>하나만</b> 고치고 기록 폴더에 아래 다섯 줄을 적어 주세요</li>
-        <li>마지막으로 AI에게 <b>“위 점검표를 내 채널 이름과 내 콘셉트를 넣어 한 장으로 다시 써서
-        기록 폴더에 주간점검표.txt로 저장해줘”</b>라고 말하세요.
-        <b>다음 주부터 매주 이 파일을 열어 주세요</b></li>
-      </ol>
-      <pre>날짜 :
-개선한 단계 :
-왜 여기라고 봤나 :
-무엇을 어떻게 바꿨나 :
-2주 뒤에 무슨 숫자를 볼 건가 :</pre>
-      <div class="ok"><b>이 다섯 줄은 오늘의 학습 기록이에요.</b>
-      이 기록은 위 완주 기준에 추가되는 과제가 아니며, 다음 주부터 같은 형식으로 변경 근거를 남길 때 사용해요.</div>
-    </div>
-  </div>
-
-  <div class="auto">
-    <h3><span class="n">선택 심화</span> 다음 4주 운영 자료 정리</h3>
-    <div class="note"><b>이 챌린지에서 「원버튼」은</b> 재료를 넣고 명령 1~2번으로 영상·제목·설명 파일이 생성되는 상태를 말해요.
-    업로드·공개 설정·예약은 YouTube Studio에서 사람이 최종 확인해요.</div>
-    <ul>
-      <li>[선택] 곡을 하나 더 만들고, 이번에는 지시문을 보지 않고 본인의 말로 요청해 보세요</li>
-      <li><b>곡 설계표</b>의 축을 <b>내가 새로 하나</b> 만들어 보세요.
-      날씨와 악기, 장소와 계절 같은 것입니다 (요인 25번 — 내 영상끼리 서로 달라야 두 번째를 봅니다)</li>
-      <li><b>썸네일 모음</b>을 파일로 묶어 주세요. 고정 문장, 바꾸는 빈칸, 글자 규칙, 비교 기록 순서로 정리해요</li>
-      <li>다음 달에 쓸 썸네일도 <b>미리</b> 만들어 두세요</li>
-    </ul>
-    <pre>챌린지가 끝났어. 이 공장을 혼자 계속 돌릴 수 있게 정리해줘:
-1. 내 공장 사용법을 초보용으로 정리해서 "기록\공장사용법.txt"로 저장
-   (1단계 제작 패키지·2단계 창작·3단계 올려줘로 자동 예약까지).
-2. 주 2회 발행 기준으로 다음 4주 계획표를 만들어줘.
-3. 앞으로 곡 수를 늘리거나 스타일을 바꾸고 싶을 때 뭐라고 시키면 되는지 예시 지시문 3개.</pre>
-    <pre>지금까지 쓴 썸네일 프롬프트를 하나로 묶어서 "기록\썸네일뱅크.md"로 저장해줘.
-고정 문장 / 바꾸는 빈칸 목록 / 글자 규칙 순서로 정리하고,
-빈칸 조합으로 다음 달에 쓸 프롬프트 12개를 미리 만들어서 같이 넣어줘.</pre>
-      <div class="warn"><b>YouTube Studio에서 매번 최종 상태를 확인해 주세요.</b>
-    「올려줘」가 채운 mp4·제목·설명·썸네일, AI 관련 항목, 예약 날짜와 시각을 게시 전에 눈으로 확인하세요.
-    이 과정에서도 YouTube Data API 자동 업로드는 쓰지 않아요 — 「올려줘」는 크롬으로 Studio를 직접 조작하는 방식이며, 최종 확인은 계속 Studio 화면에서 직접 해요. 안전장치(하루 2개 상한 등)는 계속 유지돼요.</div>
-  </div>
-
-  <div class="deliver"><h4>완주 기준 및 오늘의 학습 기록</h4><ul>
-    <li><b>[완주 기준 ①]</b> 재료를 넣고 명령 1~2번으로 영상이 생성되는 화면</li>
-    <li><b>[완주 기준 ②]</b> 채널에 공개 또는 예약 영상 <b>3개 이상</b>이 보이는 화면</li>
-    <li><b>[완주 기준 ③]</b> 위 두 상태를 <b>9월 6일(일) 자정까지</b> 달성</li>
-    <li><b>[오늘의 학습 기록]</b> <b>개선 기록 다섯 줄</b> · 선택한 진단 단계와 그 근거를 글로 올려 주세요.
-    이 기록은 학습 확인 자료이며 위의 판매 완주 기준을 추가하지 않아요</li>
-    <li><b>[선택]</b> 주간 점검표 · 공장사용법.txt · 썸네일뱅크.md · 다음 4주 계획표 — 완주 기준에는 포함되지 않아요</li>
-  </ul></div>
-
-  <div class="certbox"><h4>참가방에 올릴 인증 문구</h4>
-    <p>아래를 <b>그대로 복사해</b> 위의 인증 사진과 함께 <b>오늘 자정까지</b> 참가방에 올려 주세요. 하루라도 빠지면 환불 약속 대상에서 제외돼요.</p>
-    <pre id="cert-d7">Day 7 완주 ✅
-- 명령 1~2번으로 영상이 만들어지는 것 확인
-- 채널에 공개 또는 예약 영상 3개 이상
-- 개선 기록 다섯 줄 작성</pre>
-    <button class="copybtn" onclick="copyCert('cert-d7',this)">인증 문구 복사하기</button>
-  </div>
-  <div class="note"><b>환불 약속은 완주 기준과 별도예요.</b> 7일 과제를 매일 당일 인증한 참가자에게만 적용돼요.</div>
-
-</div></section>
-
-<!-- ══════════ 곡 제작 기준표 ══════════ -->
-<section class="panel" id="ref" role="tabpanel" aria-labelledby="tab-ref" hidden><div class="wrap">
-  <div class="dayhead">
-    <span class="daytag">REFERENCE</span>
-    <h2>곡 제작 기준표</h2>
-    <div class="q"><b>내부 실측 자료</b> · AI 플레이리스트 270곡 제작 과정에서 관찰한 성공·실패 사례를 정리했어요.</div>
-    <p class="story" style="margin-top:16px">이 탭의 수치는 플랫폼의 공식 합격선이 아니에요.
-    같은 조건에서 가사 누락·발음 오류·형식 불일치를 줄이려고 먼저 써볼 <b>시험값</b>이에요.<br>
-    1~3일차에 필요한 항목만 확인하고, 생성 서비스의 모델이나 화면이 바뀌면 실제 결과를 우선해요.
-    Exclude 목록은 270곡 제작 과정에서 반복 확인된 실패 사례를 기준으로 정리했어요.</p>
-  </div>
-
-  <div class="note"><b>완주 영상 범위.</b> 이용 권리를 확인한 본인 곡으로 만든 공개 또는 예약 영상 3개 이상만 인정해요. Day 1 비공개 샘플은 포함하지 않아요.</div>
-
-  <div class="diag">
-    <div class="t"><span class="n">내부 실측</span><h3>BPM별 권장 가사 분량</h3></div>
-    <div class="body">
-      <p><b>BPM</b>은 1분 동안의 박자 수를 나타내며 숫자가 작을수록 느린 곡이에요.
-      내부 제작 기록에서는 느린 곡에 가사 줄 수가 많을 때 후반 가사가 누락되거나 발음이 뭉개지는 사례가 있었어요.
-      아래 범위에서 시작하고 실제 생성 결과에 따라 줄 수를 조정해요.</p>
-      <div class="tblwrap"><table>
-        <tr><th>BPM</th><th>분당 줄 수</th><th>3분 곡</th><th>4분 곡</th></tr>
-        <tr><td>90 미만</td><td>8.0 ~ 9.3</td><td>24~28줄</td><td>32~37줄</td></tr>
-        <tr><td>90 ~ 105</td><td>9.3 ~ 11.3</td><td>28~34줄</td><td>37~45줄</td></tr>
-        <tr><td>105 이상</td><td>11.3 ~ 12.7</td><td>34~38줄</td><td>45~51줄</td></tr>
-      </table></div>
-      <p style="margin-top:12px"><b>내부 실측 사례</b> · 76 BPM 28줄 통과 · 78 BPM 28줄 통과 · 81 BPM 28줄 <b>실패</b> ·
-      <b>84 BPM 34줄 실패</b>(컴퓨터가 받아 적은 가사에 10줄 남짓만 나왔습니다) · 100~122 BPM 30~38줄 통과.</p>
-      <div class="warn"><b>총량만 보지 말고 섹션 단위로도 보세요.</b> 합계가 예산 안이어도 한 섹션에 행이 몰리면
-      그 부분이 통째로 뭉개질 수 있어요.
-      <ul style="margin:9px 0 0 20px;display:grid;gap:6px">
-        <li><b>한 섹션은 6행을 넘기지 않아요.</b> 9행짜리 절을 76 BPM에 넣었다가 반려된 적이 있어요</li>
-        <li><b>90 BPM 미만에서 후렴은 3행 이하.</b> 4행 후렴이 92 BPM에서 실패했어요</li>
-        <li>줄 수를 채우려고 긴 행을 넣지 마세요. <b>짧은 자기완결 단문</b>이 안전해요</li>
-      </ul></div>
-      <div class="note"><b>반대로 너무 적어도 안 돼요.</b> 밀도를 낮추면 안전할 것 같지만 실측은 반대였어요.
-      후렴 행을 줄였더니 점수가 오히려 떨어졌어요. <b>악기와 가사가 모두 적으면 더 잘 실패했어요.</b></div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">한국어</span><h3>어절 경계에서 다른 단어로 들려요</h3></div>
-    <div class="body">
-      <p>한국어 가사는 <b>말이 이어지는 자리의 발음 변화</b> 때문에 반복해서 실패해요.
-      음성 인식이 다른 표기로 듣는 게 아니라 <b>아예 다른 단어로</b> 듣기 때문에,
-      발음을 고쳐 적어도 구제되지 않아요.
-      <b>내부 제작 기록에서 서로 다른 곡과 악기 구성에서도 같은 행의 오류가 반복됐어요.</b>
-      아래 표에서 쓴 문장과 실제로 들린 결과를 비교해 보세요.</p>
-      <div class="tblwrap"><table>
-        <tr><th>쓴 것</th><th>들린 것</th><th>원인</th></tr>
-        <tr><td>나는 먼 쪽만 오래 본다</td><td>「멈축만」</td><td>먼 쪽만 → [먼쫑만], 비음화</td></tr>
-        <tr><td>가까운 풀은 이름을 못 읽는다</td><td>「푸른 이름」</td><td>풀은 → [푸른], 실재 단어와 충돌</td></tr>
-        <tr><td>아까 본 구름이 또 있다</td><td>누락</td><td>본 구름 → [봉구름], 비음화</td></tr>
-        <tr><td>큰 것은 원래 느리다</td><td>누락</td><td>원래 → [월래], 유음화</td></tr>
-      </table></div>
-      <h4>후렴과 반복 라인에서 피할 것</h4>
-      <ul>
-        <li>받침 <b>ㄴ·ㅁ·ㅇ</b> 뒤에 <b>ㄱ·ㄷ·ㅂ</b>이 오는 자리 (본 구름, 먼 쪽)</li>
-        <li>이어 읽으면 <b>다른 실재 단어가 되는</b> 형태 (풀은→푸른, 밭이→바치)</li>
-        <li>유음화·구개음화가 걸리는 한자어 (원래, 신라, 굳이)</li>
-      </ul>
-      <div class="note"><b>가사·제목·Styles·Exclude 끝에 공백이나 빈 줄을 남기지 마세요.</b>
-      수노 편집기가 끝의 공백을 잘라내서, 붙여 넣은 것과 실제로 전송되는 것이 달라져요.</div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">Styles</span><h3>6요소를 한 문단으로 · 650~900자</h3></div>
-    <div class="body">
-      <div class="tblwrap"><table>
-        <tr><th>#</th><th>넣을 것</th></tr>
-        <tr><td>1</td><td>중심 장르와 핵심 무드</td></tr>
-        <tr><td>2</td><td>정확한 <b>BPM</b>, 박자, 조성 또는 화성 색깔</td></tr>
-        <tr><td>3</td><td><b>인트로의 대표 악기</b>와 전체 편성</td></tr>
-        <tr><td>4</td><td>보컬 <b>성별·음역·톤·발음</b> 전달 방식</td></tr>
-        <tr><td>5</td><td>Verse → Chorus → Bridge → Final Chorus <b>발전 과정</b></td></tr>
-        <tr><td>6</td><td>믹스, 공간감, 마지막 <b>아웃트로</b> 방식</td></tr>
-      </table></div>
-      <h4>뼈대 예시 — 그대로 복사하지 말고 곡에 맞춰 새로 쓰세요</h4>
-      <pre class="en">Bright acoustic soft-pop with a light coastal groove, warm and open. 102 BPM, 4/4, D major with relaxed major-seventh colors. A 4-bar instrumental intro states the main hook on clean acoustic guitar over round electric bass, dry drums and soft shaker. After the instrumental intro, one warm female alto enters close-miked, singing with clear consonants and natural conversational English prosody. Verse 1 establishes the driving scene; the pre-chorus gently lifts; the chorus delivers a short repeatable title hook; verse 2 opens the view toward the coast; the bridge briefly reduces the arrangement; the final chorus returns at full warmth, followed by a complete 8-bar instrumental outro. Intimate lead vocal in the center, with the instruments providing the stereo width.</pre>
-      <h4>작성 기준</h4>
-      <p style="margin-top:6px">아래 항목은 내부 제작 과정에서 반복된 형식 누락과 입력 충돌 사례를 줄이기 위한 기준이에요.</p>
-      <ul>
-        <li><b>이 교육에서는 먼저 650~900자로 시험해요.</b> 결과에서 전개 지시가 빠지면 문장을 줄이고 핵심 요소를 앞쪽에 놓아 주세요</li>
-        <li><b>부정문을 Styles에 넣지 않아요.</b> <code>no choir</code>나 <code>without rap</code> 같은 건 전부 <b>Exclude</b>로</li>
-        <li><b>인트로 마디 수와 “보컬이 인트로 뒤에 들어온다”를 명시하세요.</b>
-        빼면 수노가 첫 마디부터 노래를 시작해 인트로가 사라질 수 있어요</li>
-        <li>보컬은 한 명, 음역을 <b>정확한 한 단어</b>로 (<code>female alto</code>, <code>male baritone</code>)</li>
-        <li>한국어 가사면 <code>natural Korean prosody and clear syllable articulation</code></li>
-        <li><b>곡 길이를 Styles에 억지로 적지 마세요.</b> <code>three-minute</code> 같은 표현은 제외해요. Duration 조절 항목이 보이면 그곳에서 정하고, 보이지 않으면 기본값으로 먼저 생성해요</li>
-        <li><b>압축 위험 표현을 피하세요.</b> <code>enters immediately</code>나 <code>in the first bar</code>를 넣으면 인트로가 사라질 수 있어요</li>
-        <li><b>Exclude에 넣은 특성을 Styles에서 동시에 요구하지 않아요.</b> 서로 충돌하는 지시가 있는지 생성 전에 확인해요</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">Exclude</span><h3>기본 Exclude 블록과 적용 범위</h3></div>
-    <div class="body">
-      <p>보컬 겹침과 갑작스러운 끝맺음을 줄일 때 쓴 기본 목록이에요.
-      필요한 항목만 유지하고, Styles에서 요구한 특성과 충돌하지 않는지 확인해요.</p>
-      <pre class="en">vocal doubling, double-tracked vocal, layered vocals, stacked vocals, backing vocals, harmony vocals, group vocals, gang vocals, choir, crowd vocals, audience cheering, crowd clapping, live concert ambience, arena reverb, stadium chant, sing-along, vocal chop, chopped vocal, vocal sample, field recording, premature ending, early ending, shortened song, incomplete structure, skipped sections, skipped verse, skipped chorus, skipped bridge, skipped final chorus, skipped outro, abrupt cutoff, long fade-out</pre>
-      <p style="margin-top:12px">곡에 안 맞는 장르와 효과음을 뒤에 추가해요. 밝은 어쿠스틱 팝이라면 아래처럼 적어 주세요.</p>
-      <pre class="en">traffic sound effects, ocean sound effects, EDM drop, trap hi-hat rolls, rap verse, distorted guitar wall</pre>
-      <div class="warn"><b>커버 이미지에 자동차나 바다가 보여도 실제 효과음을 넣으라는 뜻이 아니에요.</b>
-      그런 장면은 리듬과 악기 질감으로 표현하고, 실제 효과음은 Exclude 해요.</div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">곡 형식</span><h3>8가지 — 첫 후렴 도착 시간이 30초 진단의 기준이에요</h3></div>
-    <div class="body">
-      <div class="note"><b>표에 나오는 영어는 노래의 부분 이름이에요.</b>
-      <b>verse</b>=절(1절·2절) · <b>chorus</b>=후렴 · <b>pre-chorus</b>=후렴 직전에 차오르는 구간 ·
-      <b>bridge</b>=끝나기 전에 분위기가 한 번 바뀌는 구간 · <b>refrain</b>=짧게 되풀이되는 한 줄 ·
-      <b>intro</b>=반주로 시작하는 앞부분 · <b>outro</b>=반주로 끝나는 뒷부분 ·
-      <b>groove</b>=몸이 까딱거리게 되는 리듬.</div>
-      <p>한 회차에 형식을 돌려 쓰면 앨범이 단조로워지지 않아요.
-      <b>형식마다 첫 후렴이 도착해야 하는 시간이 다르고, 곡 길이를 그 활주로에 맞춰야 해요.</b>
-      짧은 곡에 긴 형식을 넣으면 수노가 일부 구간을 건너뛸 수 있어요.</p>
-      <div class="tblwrap"><table>
-        <tr><th>형식</th><th>첫 후렴 도착</th><th>인트로 / 아웃트로</th><th>성격</th></tr>
-        <tr><td><b>훅 선공개형</b><br><span style="font-size:12px">early-hook</span></td><td><b>35~50초</b></td><td>4마디 / 8마디</td><td>되풀이되는 한 줄을 먼저 들려주고 절로 넘어가요</td></tr>
-        <tr><td><b>정통 상승형</b><br><span style="font-size:12px">classic-lift</span></td><td>45~60초</td><td>8마디 / 8마디</td><td>가장 흔한 구조. 절에서 후렴 직전으로 오르는 게 선명해요</td></tr>
-        <tr><td><b>천천히 달아오르는 형</b><br><span style="font-size:12px">slow-burn</span></td><td>55~72초</td><td>8·12마디 / 8마디</td><td>장면을 그리는 절 둘 뒤에 1분 전후로 첫 후렴이 와요</td></tr>
-        <tr><td><b>후렴 뒤 악기 훅형</b><br><span style="font-size:12px">post-chorus-groove</span></td><td><b>42~58초</b></td><td>4마디 / 12마디</td><td>후렴 뒤에 노래 없이 리듬만 도는 구간이 기억에 남아요</td></tr>
-        <tr><td><b>짧은 후렴 반복형</b><br><span style="font-size:12px">refrain-narrative</span></td><td>해당 없음</td><td>4마디 / 12마디</td><td>되풀이되는 한 줄을 장면 사이에 계속 끼워 넣어요</td></tr>
-        <tr><td><b>브리지 정점형</b><br><span style="font-size:12px">bridge-peak</span></td><td>42~60초</td><td>4마디 / 8마디</td><td>끝나기 전 구간에서 감정이 가장 강해져요</td></tr>
-        <tr><td><b>절·악기훅 교대형</b><br><span style="font-size:12px">verse-hook-loop</span></td><td>55~70초</td><td>8마디 / 12마디</td><td>무보컬 구간이 길어 가사가 적은 곡에 적합해요</td></tr>
-        <tr><td><b>장면 선제시형</b><br><span style="font-size:12px">scene-setter</span></td><td>60~78초</td><td>16마디 / 4마디</td><td>노래 없는 장면을 먼저 들려주고 뒤에 보컬이 나와요</td></tr>
-      </table></div>
-      <div class="ok"><b>첫 곡 후보를 고를 때 훅 선공개형과 후렴 뒤 악기 훅형부터 비교해 보세요.</b>
-      내부 제작에서는 이 두 형식의 첫 후렴이 비교적 빨리 왔어요. YouTube의 공식 기준은 아니며 5일차에 후보를 좁힐 때만 사용해요.</div>
-      <div class="note">같은 형식을 반복하려면 <b>BPM·보컬·악기·줄 수를 모두 다르게</b> 하세요.
-      한 세트 안에서는 곡 길이와 구성이 기계적으로 반복되지 않도록 실제 청취 결과를 확인해요.</div>
-    </div>
-  </div>
-
-  <div class="diag">
-    <div class="t"><span class="n">생성 후</span><h3>만든 다음에 꼭 하는 확인</h3></div>
-    <div class="body">
-      <ol>
-        <li><b>두 개를 다 들어 보세요.</b> 수노는 한 번에 두 곡을 만들어요.
-        한쪽만 좋고 다른 쪽이 무너진 경우가 흔해요</li>
-        <li><b>가사가 들리는지 확인하세요.</b> 안 들리는 줄이나 다른 말로 들리는 줄이 있으면 그 곡은 쓰지 마세요</li>
-      </ol>
-      <div class="note"><b>선택 심화.</b> 귀로 들어 명확하지 않은 줄이 있으면 다시 만들어 주세요.
-      공장에도 음성 인식 도구는 안 들어 있어요.<br>
-      아래는 <b>컴퓨터가 익숙해지신 다음에</b> 보세요. 노래를 듣고 가사를 글자로 받아 적어 주는
-      프로그램(whisper 계열)을 깔면, 내가 쓴 가사와 얼마나 같은지를 <b>0에서 1 사이 숫자</b>로 볼 수 있어요.
-      이 숫자를 <b>일치율</b>이라고 할게요. <b>0.80 미만이면 다시 만들어 주세요.</b>
-      한국어는 <code>medium</code> 이상으로 돌리세요. 같은 음원에서 <code>small</code>은 0.60,
-      <code>medium</code>은 0.94였어요. 어느 것을 쓸지는 프로그램을 설치할 때 AI에게 물어보세요.</div>
-
-      <h4>계속 실패할 때 — 여기서 시간을 버리지 마세요</h4>
-      <div class="warn"><b>아래 세 가지는 이미 아닌 것으로 확인됐어요.</b>
-      <ul style="margin:9px 0 0 20px;display:grid;gap:6px">
-        <li><b>악기나 편성 탓이 아니에요.</b> 리드 악기를 바꾸고 편성을 나눠 봐도 같은 행이 같은 방식으로 실패했어요</li>
-        <li><b>낮은 BPM 자체가 원인이 아니에요.</b> 같은 조건이 다른 회차에서는 만점으로 통과했어요</li>
-        <li><b>가사가 많아서가 아니에요.</b> 줄이면 오히려 나빠졌어요</li>
-      </ul></div>
-      <p style="margin-top:12px"><b>다음 순서로 진단해요.</b>
-      <b>후렴만 들리고 절이 통째로 안 들리면, 후렴이 아니라 절을 고쳐 주세요.</b>
-      <span style="color:var(--dim)">숫자로 보시려면 — 일치율에 줄 수를 곱해 딱 떨어지는지 보세요.
-      26행짜리 곡이 0.5385면 14 나누기 26이고, 그 곡의 반복행이 정확히 14행이었어요.</span></p>
-      <div class="ok"><b>두 차례 재생성 후에도 문제가 지속되면 일정 관리를 위해 다른 후보로 전환해요.</b>
-      필요한 수량보다 후보를 하나 더 계획하면 특정 곡의 실패 때문에 전체 발행 일정이 밀리는 것을 줄일 수 있어요.</div>
-    </div>
-  </div>
-</div></section>
+<body>
+<a class="skip" href="#main">본문으로 바로가기</a>
+<header class="topbar"><a class="brand" href="#ov">플리챌린지 <b>3기</b><span class="by">BY 그밤PD</span></a><span class="top-note">한 번에 한 단계씩</span></header>
+<div class="ribbon" aria-hidden="true"><span>7-DAY PLAYLIST CHALLENGE</span><i>·</i><span>8/31 → 9/6</span><i>·</i><span>3일에 한 편 공개</span></div>
+<section class="hero"><div class="hero-box"><p class="eyebrow">PLAYLIST FACTORY · BEGINNER COURSE</p><h1>노래는 먼저 많이 만들고,<br>영상은 차례로 완성해요</h1><p>9월 3일까지는 노래 생산에 집중합니다. 그다음부터 렌더링과 썸네일을 다듬고, 완성한 영상은 3일에 한 편씩 예약합니다.</p><div class="hero-stats"><div class="stat"><span>9월 3일까지</span><b>노래 500곡 생성</b></div><div class="stat"><span>목표 재고</span><b>사용 가능 약 400곡</b></div><div class="stat"><span>공개 속도</span><b>3일에 플레이리스트 1편</b></div></div></div></section>
+<nav class="tabs-shell" aria-label="날짜 선택"><div class="tabs" role="tablist">
+<button class="tab on" role="tab" aria-selected="true" data-tab="ov">전체 흐름<small>먼저 보기</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d1">Day 1<small>8/31 월</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d2">Day 2<small>9/1 화</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d3">Day 3<small>9/2 수</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d4">Day 4<small>9/3 목</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d5">Day 5<small>9/4 금</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d6">Day 6<small>9/5 토</small></button><button class="tab" role="tab" aria-selected="false" data-tab="d7">Day 7<small>9/6 일</small></button><button class="tab" role="tab" aria-selected="false" data-tab="help">막혔을 때<small>바로 해결</small></button>
+</div></nav>
+<main id="main">
+<section class="panel" id="ov" role="tabpanel">
+<div class="day-hero"><p class="date">OVERVIEW</p><h2>7일 동안 이렇게 움직여요</h2><p>앞부분은 생산, 뒷부분은 가공입니다.</p><div class="goal"><b>가장 중요한 원칙</b><br>9월 3일 전에는 영상 꾸미기보다 노래를 많이 확보합니다.</div></div>
+<div class="flow"><div><b>Day 1</b>자동화가 실제로 움직이는지 확인</div><div><b>Day 2</b>내가 원하는 노래 10곡으로 첫 플레이리스트 완성</div><div><b>Day 3~4</b>영상은 만들지 않고 노래만 누적 500곡 생산</div><div><b>Day 5</b>곡을 10~20곡씩 묶고 렌더링 시작</div><div><b>Day 6</b>렌더링을 계속 돌리며 썸네일 개발</div><div><b>Day 7</b>제목·설명·예약 일정을 정리</div></div>
+<h3>처음 보는 말은 이것만 알아두세요</h3><table class="choice-table"><tr><th>Orca</th><td>AI와 대화하면서 내 컴퓨터의 파일을 직접 작업하는 작업장입니다.</td></tr><tr><th>재료 폴더</th><td>지금 만들 영상 한 편에 들어갈 노래와 이미지를 잠시 넣는 곳입니다.</td></tr><tr><th>곡창고</th><td>많이 만든 노래를 안전하게 모아 두는 폴더입니다. AI가 만들어 줍니다.</td></tr><tr><th>렌더링</th><td>노래와 이미지를 하나의 동영상 파일로 합치는 작업입니다.</td></tr><tr><th>업로드와 공개</th><td>업로드는 YouTube Studio에 파일을 넣는 것, 공개는 시청자가 볼 수 있게 여는 것입니다. 이번에는 3일에 한 편씩 공개합니다.</td></tr></table>
+<div class="check"><b>비밀번호는 어디에도 붙여넣지 마세요.</b><br>로그인·인증번호·결제·캡차는 열린 크롬 창에서 본인이 직접 처리합니다.</div>
+</section>
+
+<section class="panel" id="d1" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 1 · 8/31 MON</p><h2>자동화가 움직이는지 눈으로 확인하기</h2><p>오늘은 잘 만드는 날이 아니라, 공장이 실제로 작동하는지 확인하는 날입니다.</p><div class="goal"><b>오늘 성공 화면</b><br>YouTube Studio에서 샘플 영상이 <b>「비공개」</b>로 보이면 끝입니다.</div></div>
+<h3>1. 유튜브 로그인부터 해두세요</h3><ol class="steps"><li class="step"><div><h4>Orca의 AI 입력창에 바로 아래 문장을 붙여넣으세요</h4></div></li></ol><div class="prompt"><button class="copy" data-copy>복사</button><pre>유튜브 로그인해줘.</pre></div>
+<ol class="steps" start="2"><li class="step"><div><h4>AI가 크롬을 열면 유튜브 계정으로 로그인하세요</h4><p>비밀번호와 인증번호는 크롬 창에만 입력합니다.</p></div></li><li class="step"><div><h4>Orca에 「✅ 로그인 확인!」이 나오면 성공입니다</h4><p>크롬 창이 닫혀도 정상입니다.</p></div></li></ol>
+<h3>2. 샘플 자동화를 실행하세요</h3><ol class="steps"><li class="step"><div><h4>바로 아래 문장을 Orca에 붙여넣으세요</h4></div></li></ol><div class="prompt"><button class="copy" data-copy>복사</button><pre>샘플 재료로 연습 영상을 만들어줘.
+완성되면 유튜브에 비공개로 올리고, 비공개인지 확인해줘.</pre></div>
+<ol class="steps" start="2"><li class="step"><div><h4>AI가 제목 번호를 물으면 마음에 드는 번호를 고르세요</h4><p>모르겠으면 <b>「1번으로 해줘」</b>라고 답하면 됩니다.</p></div></li><li class="step"><div><h4>크롬이 혼자 움직일 때 기다리세요</h4><p>마우스와 키보드를 건드리지 않습니다. 1~10분 걸릴 수 있습니다.</p></div></li><li class="step"><div><h4>YouTube Studio의 「콘텐츠」를 확인하세요</h4></div></li></ol>
+<div class="screen-map"><div>YouTube Studio<small>studio.youtube.com</small></div><div>콘텐츠<small>왼쪽 메뉴</small></div><div>비공개<small>샘플 영상 상태</small></div></div><div class="stop"><b>샘플은 공개하지 마세요.</b><br>연습용 재료라서 「비공개」 상태를 그대로 둡니다.</div>
+<div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 1 완료 ✅
+- 샘플 영상 자동 생성 확인
+- YouTube Studio 「비공개」 확인</pre></div>
+</section>
+
+<section class="panel" id="d2" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 2 · 9/1 TUE</p><h2>내 노래 10곡으로 첫 플레이리스트 올리기</h2><p>음악 용어를 몰라도 됩니다. 아래 주문서에서 원하는 느낌만 고르세요.</p><div class="goal"><b>오늘 성공 화면</b><br>내 노래 10곡이 들어간 플레이리스트 영상이 YouTube Studio에서 <b>「예약됨」</b>으로 보이면 끝입니다.</div></div>
+<div class="warn"><b>시작 전에 확인</b><br>크롬에서 <b>Suno(수노)</b>에 로그인해 두세요. 수익화를 생각한다면 유료 구독이 활성화된 기간에 만든 곡을 사용하고, 현재 이용 조건도 확인하세요.</div>
+<h3>1. 나의 노래 주문서</h3><p class="lead">잘 모르겠으면 기본값 그대로 사용해도 됩니다. 마지막 칸에는 평소 말로 원하는 느낌을 적어도 됩니다.</p>
+<div class="planner"><div class="form-grid">
+<div class="field"><label for="situation">언제 듣는 노래인가요?</label><select id="situation"><option>비 오는 밤 혼자 쉴 때</option><option>새벽에 집중해서 일할 때</option><option>햇살 좋은 카페에서</option><option>저녁 드라이브할 때</option><option>잠들기 전에</option></select></div>
+<div class="field"><label for="mood">전체 기분은?</label><select id="mood"><option>따뜻하고 잔잔한</option><option>쓸쓸하지만 위로되는</option><option>밝고 기분 좋아지는</option><option>몽환적이고 신비로운</option><option>힘 있고 시원한</option></select></div>
+<div class="field"><label for="genre">가까운 음악 종류는?</label><select id="genre"><option>발라드</option><option>어쿠스틱 팝</option><option>로파이</option><option>시티팝</option><option>재즈</option><option>록발라드</option></select></div>
+<div class="field"><label for="vocal">목소리는?</label><select id="vocal"><option>부드러운 남성 보컬</option><option>부드러운 여성 보컬</option><option>남녀 보컬을 섞어서</option><option>목소리 없는 연주곡</option></select></div>
+<div class="field"><label for="tempo">속도는?</label><select id="tempo"><option>천천히</option><option>너무 느리지 않게</option><option>중간 속도로</option><option>경쾌하게</option></select></div>
+<div class="field"><label for="language">가사 언어는?</label><select id="language"><option>한국어</option><option>영어</option><option>한국어와 영어를 조금 섞어서</option><option>가사 없이</option></select></div>
+<div class="field full"><label for="wish">꼭 원하는 느낌이 있나요? (선택)</label><input id="wish" placeholder="예: 첫 부분이 너무 길지 않았으면 좋겠어"></div></div>
+<button class="make-prompt" id="makePrompt" type="button">내 주문 문장 만들기</button><div class="prompt" id="madePrompt"><button class="copy" data-copy>복사</button><pre id="songPrompt">위에서 원하는 느낌을 고른 뒤 「내 주문 문장 만들기」를 눌러 주세요.</pre></div></div>
+<h3>2. 만들어진 주문 문장을 Orca에 붙여넣으세요</h3><ol class="steps"><li class="step"><div><h4>AI 질문에는 번호로 답해도 됩니다</h4><p>AI가 한 번에 질문 하나만 합니다. 예: <b>「2번이 좋아」</b></p></div></li><li class="step"><div><h4>AI가 먼저 10곡의 방향을 보여주면 확인하세요</h4><p>마음에 들면 <b>「이대로 만들어줘」</b>, 다르면 평소 말로 고쳐 달라고 합니다.</p></div></li><li class="step"><div><h4>Suno에서 곡을 만드는 동안 기다리세요</h4><p>로그인·결제·캡차가 나오면 본인이 처리합니다. 그 외에는 마우스와 키보드를 건드리지 않습니다.</p></div></li><li class="step"><div><h4>mp3 파일이 정확히 10개인지 AI가 확인하게 두세요</h4><p>A/B 두 곡이 나오면 오늘은 AI가 둘 다 받아도 됩니다. 최종 파일 수가 10개면 됩니다.</p></div></li><li class="step"><div><h4>AI가 영상 제작과 유튜브 예약을 마칠 때까지 기다리세요</h4><p>배경이나 첫 공개 날짜를 물으면 원하는 답을 고릅니다. 모르겠으면 <b>「가장 쉬운 방법으로 해줘」</b>라고 합니다.</p></div></li><li class="step"><div><h4>YouTube Studio에서 「예약됨」을 확인하세요</h4></div></li></ol>
+<div class="check"><b>오늘 만든 10곡은 따로 보관됩니다.</b><br>AI가 곡창고에 <b>「사용완료_플리01」</b>로 옮겼는지 확인합니다. 그래야 다음 영상에 같은 곡이 다시 들어가지 않습니다.</div>
+<div class="prompt"><button class="copy" data-copy>복사</button><pre>지금까지 만든 결과를 확인해줘.
+1. 다운로드한 mp3가 정확히 10개인지
+2. 첫 플레이리스트 영상이 완성됐는지
+3. 사용한 10곡을 곡창고의 사용완료_플리01 폴더로 옮겼는지
+4. YouTube Studio에서 예약됨인지
+하나씩 확인하고 결과만 쉬운 말로 알려줘.</pre></div>
+<div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 2 완료 ✅
+- 내가 원하는 노래 10곡 생성
+- 첫 플레이리스트 자동 제작
+- YouTube Studio 「예약됨」 확인</pre></div>
+</section>
+
+<section class="panel" id="d3" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 3 · 9/2 WED</p><h2>영상은 멈추고 노래만 누적 250곡 만들기</h2><p>오늘부터는 생산 모드입니다. 렌더링·썸네일·업로드는 하지 않습니다.</p><div class="goal"><b>오늘 성공 숫자</b><br>샘플을 제외한 내 mp3 파일이 <b>누적 250개</b>면 끝입니다.</div></div>
+<div class="meter"><div><strong>10</strong>어제 사용한 곡</div><div class="now"><strong>250</strong>오늘 누적 목표</div><div><strong>0</strong>오늘 만들 영상</div></div>
+<h3>AI가 좋은 방향을 지키며 생산하게 하세요</h3><p>아래 명령은 AI가 노래의 큰 느낌은 유지하면서도 제목·곡 구조·악기·속도·보컬을 조금씩 다르게 만들도록 합니다.</p>
+<div class="prompt"><button class="copy" data-copy>복사</button><pre>오늘은 노래 생산만 하는 날이야. 영상 렌더링과 유튜브 업로드는 절대 하지 마.
+
+어제 확정한 나의 노래 주문서를 기준으로, 샘플을 제외한 내 mp3가 누적 250개가 될 때까지 Suno에서 만들어 다운로드해줘.
+
+나는 음악 용어를 모르는 왕초보니까 네가 품질을 최대한 관리해줘.
+1. 먼저 어제 잘 나온 곡의 공통점을 쉬운 말로 정리해 「나의노래설계.md」에 저장해줘.
+2. 특정 가수나 기존 곡은 따라 하지 마.
+3. 같은 느낌은 유지하되 제목·곡 구조·주요 악기·속도·보컬·곡 길이는 번갈아 바꿔줘.
+4. 첫 부분이 지나치게 길거나, 가사가 뭉개지거나, 끝이 잘리는 실패를 줄이도록 작사스킬 기준을 지켜줘.
+5. 20개씩 만들고 곡창고의 날짜별 묶음 폴더로 옮겨줘. 재료 폴더에는 쌓아두지 마.
+6. 파일이 열리는지, 길이가 이상하지 않은지, 같은 파일이 중복되지 않았는지 검사해줘.
+7. 곡마다 제목·느낌·주요 악기·보컬·속도·길이를 기록\곡목록.csv에 남겨줘.
+8. 매 20개가 끝날 때마다 「현재 mp3 몇 개 / 목표 250개」만 알려주고 계속해줘.
+9. 로그인·결제·캡차·크레딧 부족이 나올 때만 나를 불러줘. 브라우저가 끊기면 다시 연결해서 이어서 해줘.
+
+시작하기 전에 현재 내 mp3 개수를 먼저 세고, 부족한 수만 만들어줘.</pre></div>
+<div class="warn"><b>컴퓨터가 오래 일할 수 있습니다.</b><br>화면이 움직이는 동안 건드리지 마세요. 잠깐 멈췄다면 새 작업을 시작하지 말고 Orca에 <b>「현재 개수 확인하고 이어서 해줘」</b>라고 말합니다.</div>
+<h3>끝났을 때 숫자만 확인하세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>샘플은 빼고, 사용완료_플리01과 곡창고에 있는 내 mp3 개수를 합쳐서 다시 세어줘.
+누적 250개가 맞는지 확인하고, 부족하면 부족한 수만 이어서 만들어줘.
+영상은 만들지 마.</pre></div>
+<div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 3 완료 ✅
+- 영상 작업 없이 노래 생산에 집중
+- 내 mp3 누적 250개 확인
+- 곡창고 날짜별 보관 확인</pre></div>
+</section>
+
+<section class="panel" id="d4" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 4 · 9/3 THU</p><h2>노래 500곡 생산을 끝내기</h2><p>오늘도 영상은 만들지 않습니다. 노래 재고를 확보하는 마지막 날입니다.</p><div class="goal"><b>오늘 성공 숫자</b><br>내 mp3 누적 <b>500개</b>, 1차 검사 통과 목표 <b>약 400개</b>입니다.</div></div>
+<div class="meter"><div><strong>250</strong>시작 숫자</div><div class="now"><strong>500</strong>생성 완료</div><div><strong>400</strong>사용 가능 목표</div></div>
+<h3>1. 500곡까지 이어서 만드세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>어제 작업을 이어서 해줘. 오늘도 영상 렌더링과 유튜브 업로드는 하지 마.
+
+샘플을 제외한 내 mp3가 누적 500개가 될 때까지 부족한 수만 Suno에서 만들어 다운로드해줘.
+「나의노래설계.md」를 기준으로 좋은 느낌은 유지하고, 제목·곡 구조·주요 악기·속도·보컬·길이는 다양하게 바꿔줘.
+20개씩 곡창고에 안전하게 옮기고, 매 묶음이 끝날 때마다 실제 mp3 개수를 다시 세어줘.
+새로 만든 곡 정보도 기록\곡목록.csv에 이어서 남겨줘.
+로그인·결제·캡차·크레딧 부족이 나올 때만 나를 불러줘.
+누적 500개가 되면 새 곡 생성을 멈추고 알려줘.</pre></div>
+<h3>2. AI에게 1차 검사를 맡기세요</h3><p>AI가 기술적으로 이상한 파일을 먼저 골라냅니다. 음악 취향까지 완벽하게 판단하는 검사는 아니므로 파일을 삭제하지 않고 따로 분류합니다.</p>
+<div class="prompt"><button class="copy" data-copy>복사</button><pre>곡창고의 mp3 500개를 1차 검사해줘.
+Day 2에 이미 사용한 「사용완료_플리01」의 10곡은 개수에만 포함하고, 위치나 상태는 바꾸지 마.
+나머지 곡에서 아래 문제를 찾아줘.
+1. 열리지 않는 파일
+2. 너무 짧거나 끝이 잘린 것으로 의심되는 파일
+3. 소리가 거의 없는 파일
+4. 완전히 같은 중복 파일
+5. 제목이나 파일명이 겹치는 파일
+을 찾아줘.
+
+파일은 삭제하지 말고 「검토필요」 폴더로 옮겨줘. 나머지는 「사용가능」 폴더로 정리해줘.
+마지막에 전체 / 사용완료 / 사용가능 / 검토필요 개수를 표로 보여주고 기록\곡재고현황.md에 저장해줘.</pre></div>
+<div class="check"><b>400개가 정확하지 않아도 실패가 아닙니다.</b><br>오늘의 핵심은 500개를 생성하고, 문제가 의심되는 파일을 안전하게 분리하는 것입니다.</div>
+<div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 4 완료 ✅
+- 내 mp3 누적 500개 생성
+- 사용가능 / 검토필요 분류 완료
+- 곡재고현황 기록 확인</pre></div>
+</section>
+
+<section class="panel" id="d5" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 5 · 9/4 FRI</p><h2>곡을 묶고 렌더링을 계속 돌리기</h2><p>이제부터 노래를 영상으로 바꿉니다. 한 번에 한 영상만 렌더링합니다.</p><div class="goal"><b>오늘 성공 화면</b><br>20곡짜리 묶음이 만들어지고, 첫 영상이 완성되거나 렌더링 중이면 끝입니다.</div></div>
+<h3>1. 20곡씩 플레이리스트 묶음을 만드세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>이제 곡 생산은 끝났어. 「사용가능」 곡을 플레이리스트 영상으로 묶어줘.
+
+1. 나의노래설계와 곡 정보를 보고 분위기가 자연스럽게 이어지는 곡끼리 묶어줘.
+2. 기본은 한 묶음에 20곡으로 해줘. 남은 곡이 20개보다 적으면 마지막 묶음으로 따로 둬.
+3. 곡재고현황에 플리 번호와 곡 목록을 기록해줘.
+4. Day 2의 사용완료_플리01 곡은 다시 사용하지 마.
+5. 같은 곡이 두 묶음에 들어가지 않았는지 검사해줘.
+6. 「렌더대기\플리02, 플리03…」 폴더로 정리해줘.
+7. 각 플리의 주제에 맞는 배경 이미지 한 장도 준비해줘. 내가 사용할 권리가 있는 이미지인지 확인하고, 모든 영상에 같은 배경을 반복해서 쓰지 마.
+
+먼저 묶음 수와 각 묶음의 한 줄 주제를 보여줘. 어려운 음악 용어는 쓰지 마.</pre></div>
+<h3>2. 렌더링을 시작하세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>렌더대기 폴더의 플리02부터 한 편씩 렌더링해줘.
+지금 만들 묶음의 20곡과 배경 이미지 한 장만 재료 폴더에 넣고 재료 검사를 먼저 해줘.
+검사에 통과하면 영상을 만들어줘.
+
+완성되면 사용한 곡을 「사용완료」로 표시하고, 재료 폴더를 비운 뒤 다음 묶음으로 넘어가줘.
+한 번에 영상 하나만 만들고, 오류가 나면 기록\렌더오류.txt를 읽어 직접 고친 뒤 다시 실행해줘.
+오늘은 유튜브에 올리지 마.</pre></div>
+<div class="warn"><b>렌더링은 오래 걸리는 것이 정상입니다.</b><br>한 시간짜리 영상은 한 시간 안팎이 걸릴 수 있습니다. 컴퓨터가 잠들지 않게 하고 밤에도 계속 돌려도 됩니다.</div>
+<div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 5 완료 ✅
+- 사용 가능 곡을 20곡씩 분류
+- 렌더대기 폴더 확인
+- 첫 영상 완성 또는 렌더링 진행 확인</pre></div>
+</section>
+
+<section class="panel" id="d6" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 6 · 9/5 SAT</p><h2>렌더링을 계속 돌리며 썸네일 개발하기</h2><p>영상은 컴퓨터가 만들게 두고, 사람은 클릭하고 싶은 첫인상을 정합니다.</p><div class="goal"><b>오늘 성공 결과</b><br>채널의 기준 썸네일 1장과 서로 다른 변형 3장이 있으면 끝입니다.</div></div>
+<h3>1. 잘 보이는 썸네일의 공통점만 찾으세요</h3><figure class="thumb-board"><img src="썸네일보드/additional_100.jpg" alt="여러 플레이리스트 썸네일을 한 화면에 모은 참고 보드" loading="lazy"><figcaption>참고용 비교 보드입니다. 이미지나 문구를 그대로 복사하지 말고, 색·중심 대상·글자 크기 같은 구성만 관찰하세요.</figcaption></figure>
+<div class="prompt"><button class="copy" data-copy>복사</button><pre>먼저 어제 시작한 렌더링 상태를 확인해줘. 멈췄으면 완성된 플리 다음 번호부터 다시 이어서 돌리고, 같은 영상을 중복으로 만들지 마.
+렌더링은 계속 진행하게 두고, 이제 내 채널 썸네일을 도와줘.
+
+나는 디자인을 모르는 왕초보야. 먼저 한 번에 질문 하나씩 물어봐줘.
+1. 누가 듣는 채널인지
+2. 언제 듣는 음악인지
+3. 어떤 기분을 주고 싶은지
+4. 사진 중심인지 그림 중심인지
+5. 썸네일에 글자를 넣을지
+
+답을 들은 뒤 내 채널만의 썸네일 방향 3개를 쉬운 말로 제안해줘. 남의 썸네일을 복사하지 마.
+각 방향은 1280×720 크기, 작은 휴대전화 화면에서도 중심 대상이 보이게 설계해줘.
+
+네가 이미지를 직접 만들 수 있으면 시안 3장을 만들어줘.
+직접 만들 수 없으면 멈추지 말고, 이미지 생성 도구에 넣을 정확한 문장 3개를 만들어주고 단순한 도형과 글자로 된 로컬 시안도 만들어줘.</pre></div>
+<h3>2. 기준 한 장을 고르고 변형을 만드세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>썸네일 시안 3장을 작은 크기로 나란히 보여줘.
+내가 번호를 고르면 그 시안을 기준 썸네일로 저장해줘.
+같은 채널처럼 보이되 색·장면·중심 대상을 다르게 한 변형 3장도 만들어줘.
+모든 파일이 1280×720인지 확인하고 「썸네일완성」 폴더에 저장해줘.</pre></div>
+<div class="check"><b>같은 채널처럼 보여야 하지만 똑같으면 안 됩니다.</b><br>폰 크기로 줄였을 때 중심 대상이 바로 보이고, 각 영상의 장면과 색에는 차이가 있어야 합니다.</div>
+<div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 6 완료 ✅
+- 렌더링 계속 진행
+- 기준 썸네일 1장 선택
+- 썸네일 변형 3장 저장</pre></div>
+</section>
+
+<section class="panel" id="d7" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">DAY 7 · 9/6 SUN</p><h2>제목을 붙이고 3일 간격 공개 일정을 만들기</h2><p>완성 파일을 한꺼번에 공개하지 않습니다. 공개 날짜를 먼저 정합니다.</p><div class="goal"><b>오늘 성공 결과</b><br>각 영상의 제목·썸네일·공개 날짜가 적힌 발행표가 있으면 끝입니다.</div></div>
+<h3>1. 영상마다 다른 썸네일과 제목을 만드세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>완성된 플레이리스트 영상과 각 곡 목록을 확인해줘.
+Day 6의 기준 썸네일 규칙을 사용하되, 완성 영상마다 색·장면·중심 대상을 다르게 한 썸네일을 하나씩 만들어줘. 아직 완성되지 않은 영상은 발행표에 「렌더 대기」로 표시해줘.
+
+영상마다 실제 분위기와 듣는 상황이 드러나는 제목 후보 3개를 만들어줘.
+
+제목 앞부분만 읽어도 언제 듣는 어떤 음악인지 알 수 있게 해줘.
+같은 문장에서 숫자만 바꾸지 말고, 영상마다 표현과 핵심 상황을 다르게 해줘.
+특정 가수·기존 채널·기존 영상 제목은 따라 하지 마.
+나에게 한 영상씩 보여주고 제목 번호를 고르게 해줘.</pre></div>
+<h3>2. 3일 간격 발행표를 만드세요</h3><div class="prompt"><button class="copy" data-copy>복사</button><pre>내가 고른 제목과 썸네일을 영상별로 짝지어줘.
+첫 공개일부터 3일에 한 편씩 공개되는 발행표를 만들어줘.
+
+표에는 플리 번호, 제목, 썸네일 파일, 공개 날짜와 시각, 업로드 상태를 넣어줘.
+기록\3일간격_발행표.md로 저장해줘.
+이미 예약한 플리01과 날짜가 겹치지 않게 해줘.
+
+오늘은 완성된 영상 중 다음 차례 한 편만 업로드·예약해줘. 크롬이 움직이는 동안 내가 건드리지 않도록 시작 전에 알려줘.
+나머지는 발행표 순서대로 나중에 예약할 수 있게 정확한 요청 문장도 적어줘.</pre></div>
+<ol class="steps"><li class="step"><div><h4>AI가 올릴 영상·제목·예약 시각을 먼저 보여주면 확인하세요</h4></div></li><li class="step"><div><h4>크롬이 움직이는 동안 마우스와 키보드를 건드리지 마세요</h4></div></li><li class="step"><div><h4>YouTube Studio에서 「예약됨」과 날짜를 직접 확인하세요</h4></div></li></ol><div class="screen-map"><div>YouTube Studio<small>콘텐츠</small></div><div>예약됨<small>공개 상태</small></div><div>3일 간격<small>날짜 확인</small></div></div><div class="stop"><b>예약일이 3일 간격이라는 뜻이지, 3일마다 새로 작업하라는 뜻은 아닙니다.</b><br>영상은 미리 렌더링해 두고, 공개만 천천히 이어갑니다.</div>
+<div class="cert"><h3>최종 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 7 완료 ✅
+- 영상별 제목·썸네일 연결
+- 3일 간격 발행표 완성
+- 다음 플레이리스트 「예약됨」 확인
+- 남은 렌더링 계속 진행</pre></div>
+</section>
+
+<section class="panel" id="help" role="tabpanel" hidden>
+<div class="day-hero"><p class="date">HELP</p><h2>막혔을 때는 여기만 보세요</h2><p>설명하지 못해도 괜찮습니다. 화면의 글을 그대로 AI에게 보여주면 됩니다.</p></div>
+<div class="qa"><div><b>크롬이 멈췄어요</b><br><code>현재까지 만든 파일 개수 확인하고, 멈춘 곳부터 이어서 해줘.</code></div><div><b>무슨 오류인지 모르겠어요</b><br><code>점검해줘. 오류를 읽고 네가 고친 뒤 다시 실행해줘.</code></div><div><b>렌더링이 실패했어요</b><br><code>기록\렌더오류.txt를 읽고 원인을 고친 뒤 다시 렌더링해줘.</code></div><div><b>AI가 업로드를 못 한다고 해요</b><br><code>점검해줘. 유튜브 로그인과 업로드 프로그램부터 확인해줘.</code></div><div><b>로그인·결제·캡차 화면이 나왔어요</b><br>본인이 크롬 창에서 처리한 뒤 Orca에 <code>처리했어. 이어서 해줘.</code>라고 말하세요.</div><div><b>몇 곡까지 만들었는지 모르겠어요</b><br><code>샘플과 사용완료 곡을 구분해서 내 mp3 실제 개수를 다시 세어줘.</code></div><div><b>혼자 해결되지 않아요</b><br>화면 전체를 휴대전화로 찍어 참가자방에 올리세요. 비밀번호·인증번호·결제 정보가 보이지 않는지 먼저 확인합니다.</div></div>
+<div class="prompt"><button class="copy" data-copy>복사</button><pre>지금 화면과 작업 폴더를 확인해줘.
+어디에서 멈췄는지 쉬운 말 한 줄로 설명하고,
+내가 지금 해야 할 행동 딱 하나만 알려줘.
+네가 직접 고칠 수 있는 문제면 먼저 고치고 결과를 확인해줘.</pre></div>
+<div class="policy">게시할 때는 본인이 만들었거나 이용 권리를 확인한 음원·이미지만 사용하세요. Suno 곡은 생성 당시 플랜과 <a href="https://about.suno.com/terms" target="_blank" rel="noopener">현재 이용 조건</a>을 확인하고, 설명의 AI·음원 출처 고지를 유지합니다. YouTube에서는 AI 사용 사실을 사실대로 표시하고 영상마다 곡 구성·제목·썸네일에 실질적인 차이를 둡니다. <a href="https://support.google.com/youtube/answer/1311392" target="_blank" rel="noopener">YouTube 채널 수익화 정책</a></div>
+</section>
 </main>
-
-<footer><div class="wrap">
-  유튜브 플리 자동화 챌린지 · 3기 7일 커리큘럼 · 그밤PD<br>
-  교육 근거 · 썸네일 200장 비교 분석 · AI 생성곡 270곡 제작 기록<br>
-  <span style="color:#5b6a83">최종 검토 2026-08-14 · 수익화 및 서비스 이용 조건은 발행 시점의 YouTube·Suno 최신 약관을 기준으로 확인해요.</span>
-</div></footer>
-
+<footer><p class="footer-mark">플리챌린지 3기</p><p class="footer-sub">7 DAYS · ONE STEP AT A TIME · 2026</p></footer><div class="toast" id="toast" role="status" aria-live="polite">복사했습니다</div>
 <script>
-function copyCert(id, btn){
-  var el = document.getElementById(id);
-  if (!el) return;
-  var 글 = el.textContent;
-  function 끝(){ var 본래 = btn.textContent; btn.textContent = '복사했습니다'; setTimeout(function(){ btn.textContent = 본래; }, 1500); }
-  function 예비(){
-    var t = document.createElement('textarea');
-    t.value = 글; t.style.position = 'fixed'; t.style.opacity = '0';
-    document.body.appendChild(t); t.select();
-    try { document.execCommand('copy'); 끝(); } catch(e) {}
-    document.body.removeChild(t);
-  }
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(글).then(끝, 예비);
-  } else { 예비(); }
-}
-
-var tabs = document.querySelectorAll('.tabrow button');
-var panels = document.querySelectorAll('.panel');
-function show(id, moveToPanel){
-  var activePanel = null;
-  tabs.forEach(function(b){
-    var active = b.dataset.t === id;
-    b.classList.toggle('on', active);
-    b.setAttribute('aria-selected', active ? 'true' : 'false');
-    b.setAttribute('tabindex', active ? '0' : '-1');
-    if (active) { b.scrollIntoView({block:'nearest', inline:'center'}); }
-  });
-  panels.forEach(function(p){
-    var active = p.id === id;
-    p.classList.toggle('on', active);
-    p.hidden = !active;
-    if (active) { activePanel = p; }
-  });
-  try { localStorage.setItem('pli-curri-tab', id); } catch(e){}
-  if (moveToPanel && activePanel) { activePanel.scrollIntoView({ block:'start', behavior:'smooth' }); }
-}
-tabs.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.t, true); }); });
-document.querySelector('.tabrow').addEventListener('keydown', function(e){
-  var visibleTabs = Array.prototype.filter.call(tabs, function(tab){ return tab.offsetParent !== null; });
-  var current = visibleTabs.indexOf(document.activeElement);
-  if (current < 0) { return; }
-  var next = current;
-  if (e.key === 'ArrowRight') { next = (current + 1) % visibleTabs.length; }
-  else if (e.key === 'ArrowLeft') { next = (current - 1 + visibleTabs.length) % visibleTabs.length; }
-  else if (e.key === 'Home') { next = 0; }
-  else if (e.key === 'End') { next = visibleTabs.length - 1; }
-  else { return; }
-  e.preventDefault();
-  visibleTabs[next].focus();
-  show(visibleTabs[next].dataset.t, true);
-});
-var viewToggle = document.getElementById('view-toggle');
-var viewHelp = document.getElementById('view-help');
-function setView(detail){
-  document.body.classList.toggle('easy-mode', !detail);
-  document.body.classList.toggle('detail-mode', detail);
-  viewToggle.setAttribute('aria-pressed', detail ? 'true' : 'false');
-  viewToggle.textContent = detail ? '쉬운 설명만 보기' : '자세한 설명도 보기';
-  viewHelp.textContent = detail ? '세부 이유와 추가 도움말까지 모두 보여드립니다.' : '처음에는 꼭 해야 할 내용만 보여드립니다.';
-  if (!detail && (document.getElementById('fac').classList.contains('on') || document.getElementById('ref').classList.contains('on'))) {
-    show('ov', false);
-  }
-  try { localStorage.setItem('pli-curri-view', detail ? 'detail' : 'easy'); } catch(e){}
-}
-viewToggle.addEventListener('click', function(){ setView(!document.body.classList.contains('detail-mode')); });
-var saved = null;
-try { saved = localStorage.getItem('pli-curri-tab'); } catch(e){}
-var savedView = null;
-try { savedView = localStorage.getItem('pli-curri-view'); } catch(e){}
-setView(savedView === 'detail');
-if (saved && document.getElementById(saved) && (saved !== 'fac' && saved !== 'ref' || savedView === 'detail')) { show(saved, false); }
+(function(){
+var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab')),panels=Array.prototype.slice.call(document.querySelectorAll('.panel'));
+function show(id,scroll){if(!document.getElementById(id))id='ov';tabs.forEach(function(t){var on=t.dataset.tab===id;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false');});panels.forEach(function(p){p.hidden=p.id!==id;});try{localStorage.setItem('pli3-tab',id);}catch(e){}if(history.replaceState)history.replaceState(null,'','#'+id);if(scroll)document.getElementById('main').scrollIntoView({block:'start'});}
+tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.tab,true);});});document.querySelector('.tabs').addEventListener('keydown',function(e){var i=tabs.indexOf(document.activeElement),n=i;if(i<0)return;if(e.key==='ArrowRight')n=(i+1)%tabs.length;else if(e.key==='ArrowLeft')n=(i-1+tabs.length)%tabs.length;else return;e.preventDefault();tabs[n].focus();show(tabs[n].dataset.tab,false);});
+var toast=document.getElementById('toast');function copied(){toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},1300);}function copyText(text){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(copied);return;}var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();copied();}
+document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(b.parentElement.querySelector('pre').textContent.trim());});});
+document.getElementById('makePrompt').addEventListener('click',function(){function v(id){return document.getElementById(id).value.trim();}var wish=v('wish');var text='나는 음악 용어를 모르는 왕초보야. '+v('situation')+' 듣는 '+v('mood')+' '+v('genre')+' 플레이리스트를 만들고 싶어.\n'+v('vocal')+', '+v('tempo')+', 가사는 '+v('language')+'로 해줘.';if(wish)text+='\n내가 꼭 원하는 점: '+wish;text+='\n\n먼저 내 취향을 더 정확히 알기 위해 한 번에 질문 하나씩 물어봐줘. 질문마다 쉬운 선택지 3개를 줘.\n답을 다 들으면 서로 자연스럽게 이어지지만 제목·곡 구조·악기·속도가 조금씩 다른 10곡 설계표를 보여줘. 특정 가수나 기존 곡은 모사하지 마.\n\n내가 「이대로 만들어줘」라고 하면 확정된 설계표를 기록\\나의노래설계.md에 저장하고, Suno에서 직접 곡을 만들고 mp3가 정확히 10개가 될 때까지 재료 폴더에 다운로드해줘. 로그인·결제·캡차가 필요할 때만 나를 불러줘.\n10곡이 모이면 권리 확인을 한 번에 하나씩 도와주고, 간단한 내 배경·썸네일도 준비해서 플레이리스트 영상 제작과 유튜브 예약까지 진행해줘. 크롬이 혼자 움직이기 전에는 마우스와 키보드를 건드리지 말라고 먼저 알려줘.\n완료되면 Studio에서 「예약됨」인지 확인하고, 사용한 10곡은 곡창고의 사용완료_플리01 폴더로 옮겨줘.';document.getElementById('songPrompt').textContent=text;document.getElementById('madePrompt').scrollIntoView({behavior:'smooth',block:'center'});});
+var id=location.hash.replace('#','');if(!id){try{id=localStorage.getItem('pli3-tab')||'ov';}catch(e){id='ov';}}show(id,false);
+})();
 </script>
 </body>
 </html>
