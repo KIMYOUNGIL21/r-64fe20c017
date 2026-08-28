@@ -292,7 +292,7 @@ text+='\n음원 10곡과 기록·백업이 확인되면 배경·썸네일을 준
 document.getElementById('songPrompt').textContent=text;
 scrollBelowMenu(document.getElementById('madePrompt'));
 });
-var hashId=location.hash.replace('#',''),id=hashId;if(!id){try{id=localStorage.getItem('pli3-tab')||'ov';}catch(e){id='ov';}}show(id,Boolean(hashId)||id!=='ov',false);
+var hashId=location.hash.replace('#',''),id=hashId;if(!id){try{id=localStorage.getItem('pli3-tab')||'ov';}catch(e){id='ov';}}show(id,false,false);if(hashId||id!=='ov')setTimeout(function(){scrollBelowMenu(document.getElementById('main'));},80);
 })();
 </script>
 </body>
