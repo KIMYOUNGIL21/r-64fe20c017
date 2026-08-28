@@ -269,7 +269,8 @@ Day 6의 기준 썸네일 규칙을 사용하되, 완성 영상마다 색·장�
 <script>
 (function(){
 var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab')),panels=Array.prototype.slice.call(document.querySelectorAll('.panel'));
-function show(id,scroll,writeHash){if(!document.getElementById(id))id='ov';tabs.forEach(function(t){var on=t.dataset.tab===id;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false');});panels.forEach(function(p){p.hidden=p.id!==id;});try{localStorage.setItem('pli3-tab',id);}catch(e){}if(writeHash!==false&&history.replaceState)history.replaceState(null,'','#'+id);if(scroll)document.getElementById('main').scrollIntoView({block:'start'});}
+function scrollBelowMenu(el){var y=el.getBoundingClientRect().top+window.pageYOffset-165;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
+function show(id,scroll,writeHash){if(!document.getElementById(id))id='ov';tabs.forEach(function(t){var on=t.dataset.tab===id;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false');});panels.forEach(function(p){p.hidden=p.id!==id;});try{localStorage.setItem('pli3-tab',id);}catch(e){}if(writeHash!==false&&history.replaceState)history.replaceState(null,'','#'+id);if(scroll)scrollBelowMenu(document.getElementById('main'));}
 tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.tab,true);});});document.querySelector('.tabs').addEventListener('keydown',function(e){var i=tabs.indexOf(document.activeElement),n=i;if(i<0)return;if(e.key==='ArrowRight')n=(i+1)%tabs.length;else if(e.key==='ArrowLeft')n=(i-1+tabs.length)%tabs.length;else return;e.preventDefault();tabs[n].focus();show(tabs[n].dataset.tab,false);});
 document.querySelector('.brand').addEventListener('click',function(e){e.preventDefault();show('ov',true);});
 var toast=document.getElementById('toast');function copied(){toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},1300);}function copyText(text){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(copied);return;}var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();copied();}
@@ -289,7 +290,7 @@ text+='\n플레이리스트는 가장 대표적인 곡으로 시작하고, 같�
 text+='\n로그인·결제·캡차·크레딧 부족이 필요할 때만 나를 불러줘. 크롬이 혼자 움직이기 전에는 마우스와 키보드를 건드리지 말라고 먼저 알려줘.';
 text+='\n음원 10곡과 기록·백업이 확인되면 배경·썸네일을 준비하고 플레이리스트 영상을 만들어 유튜브에 예약해줘. 완료되면 Studio에서 「예약됨」인지 확인하고, 실제 사용한 10곡은 곡창고의 사용완료_플리01로 옮겨줘.';
 document.getElementById('songPrompt').textContent=text;
-document.getElementById('madePrompt').scrollIntoView({behavior:'smooth',block:'start'});
+scrollBelowMenu(document.getElementById('madePrompt'));
 });
 var hashId=location.hash.replace('#',''),id=hashId;if(!id){try{id=localStorage.getItem('pli3-tab')||'ov';}catch(e){id='ov';}}show(id,Boolean(hashId)||id!=='ov',false);
 })();
