@@ -39,13 +39,13 @@ h3{margin:46px 0 16px;font-size:27px;line-height:1.3}h4{margin:0 0 8px;font-size
 <section class="panel" id="ov" role="tabpanel">
 <div class="day-hero"><p class="date">OVERVIEW</p><h2>7일 동안 이렇게 움직여요</h2><p>앞부분은 생산과 저장, 뒷부분은 선별과 가공입니다.</p><div class="goal"><b>가장 중요한 원칙</b><br>수노 화면의 곡 수가 아니라 <b>내 컴퓨터에 받은 음원 파일 수</b>를 셉니다.</div></div>
 <div class="stop"><b>9월 2일 밤을 안전 마감으로 잡으세요.</b><br>Suno는 9월 3일부터 Free 7회(평생 체험), Pro 월 20회, Premier 월 60회로 다운로드를 제한한다고 공지했습니다. 이미 만든 곡에도 적용되므로 9월 3일을 주 생산일로 잡지 않습니다. <a href="https://suno.com/blog/suno-updates-tos" target="_blank" rel="noopener">Suno 공식 공지 보기</a></div>
-<div class="flow"><div><b>Day 1</b>자동화가 실제로 움직이는지 확인</div><div><b>Day 2</b>내 노래 10곡을 다운로드하고 첫 플레이리스트 완성</div><div><b>Day 3</b>영상은 만들지 않고 로컬 음원을 최대 500곡까지 확보</div><div><b>Day 4</b>다운로드 누락을 확인하고 사용 가능 곡을 선별</div><div><b>Day 5</b>좋은 곡을 20곡씩 묶고 렌더링 시작</div><div><b>Day 6</b>렌더링을 계속 돌리며 썸네일 개발</div><div><b>Day 7</b>제목·설명·예약 일정을 정리</div></div>
+<div class="flow"><div><b>Day 1</b>샘플과 내 노래 1곡으로 자동화 확인</div><div><b>Day 2</b>내 노래 10곡을 다운로드하고 첫 플레이리스트 완성</div><div><b>Day 3</b>영상은 만들지 않고 로컬 음원을 최대 500곡까지 확보</div><div><b>Day 4</b>다운로드 누락을 확인하고 사용 가능 곡을 선별</div><div><b>Day 5</b>좋은 곡을 20곡씩 묶고 렌더링 시작</div><div><b>Day 6</b>렌더링을 계속 돌리며 썸네일 개발</div><div><b>Day 7</b>제목·설명·예약 일정을 정리</div></div>
 <h3>처음 보는 말은 이것만 알아두세요</h3><table class="choice-table"><tr><th>Orca</th><td>AI와 대화하면서 내 컴퓨터의 파일을 직접 작업하는 작업장입니다.</td></tr><tr><th>재료 폴더</th><td>지금 만들 영상 한 편에 들어갈 노래와 이미지를 잠시 넣는 곳입니다.</td></tr><tr><th>곡창고</th><td>많이 만든 노래를 안전하게 모아 두는 폴더입니다. AI가 만들어 줍니다.</td></tr><tr><th>렌더링</th><td>노래와 이미지를 하나의 동영상 파일로 합치는 작업입니다.</td></tr><tr><th>업로드와 공개</th><td>업로드는 YouTube Studio에 파일을 넣는 것, 공개는 시청자가 볼 수 있게 여는 것입니다. 이번에는 3일에 한 편씩 공개합니다.</td></tr></table>
 <div class="check"><b>비밀번호는 어디에도 붙여넣지 마세요.</b><br>로그인·인증번호·결제·캡차는 열린 크롬 창에서 본인이 직접 처리합니다.</div>
 </section>
 
 <section class="panel" id="d1" role="tabpanel" hidden>
-<div class="day-hero"><p class="date">DAY 1 · 8/31 MON</p><h2>자동화가 움직이는지 눈으로 확인하기</h2><p>오늘은 잘 만드는 날이 아니라, 공장이 실제로 작동하는지 확인하는 날입니다.</p><div class="goal"><b>오늘 성공 화면</b><br>YouTube Studio에서 샘플 영상이 <b>「비공개」</b>로 보이면 끝입니다.</div></div>
+<div class="day-hero"><p class="date">DAY 1 · 8/31 MON</p><h2>자동화가 움직이는지 눈으로 확인하기</h2><p>오늘은 잘 만드는 날이 아니라, 공장이 실제로 작동하는지 확인하는 날입니다.</p><div class="goal"><b>오늘 성공 화면</b><br>YouTube Studio에서 <b>샘플 영상과 내 노래 1곡 영상</b>이 모두 <b>「비공개」</b>로 보이면 끝입니다.</div></div>
 <h3>1. 받은 ZIP을 공장으로 준비하세요</h3><ol class="steps"><li class="step"><div><h4>ZIP은 직접 풀지 말고 Orca에 아래 문장을 붙여넣으세요</h4></div></li></ol><div class="prompt"><button class="copy" data-copy>복사</button><pre>내 다운로드 폴더에서 플리공장_셋팅코드.zip을 찾아 현재 Orca에서 열어 둔 프로젝트 폴더에 설치해줘.
 이미 설치되어 있으면 내 파일을 덮어쓰지 말고 빠진 것만 확인해줘.
 설치 뒤 AGENTS.md, CLAUDE.md, 공장.py, 업로더.py, 설정.json, 재료 폴더가 바로 아래에 있는지 확인하고 점검.py를 고쳐줘 모드로 실행해줘.
@@ -57,9 +57,20 @@ h3{margin:46px 0 16px;font-size:27px;line-height:1.3}h4{margin:0 0 8px;font-size
 완성되면 유튜브에 비공개로 올리고, 비공개인지 확인해줘.</pre></div>
 <ol class="steps" start="2"><li class="step"><div><h4>AI가 제목 번호를 물으면 마음에 드는 번호를 고르세요</h4><p>모르겠으면 <b>「1번으로 해줘」</b>라고 답하면 됩니다.</p></div></li><li class="step"><div><h4>크롬이 혼자 움직일 때 기다리세요</h4><p>마우스와 키보드를 건드리지 않습니다. 1~10분 걸릴 수 있습니다.</p></div></li><li class="step"><div><h4>YouTube Studio의 「콘텐츠」를 확인하세요</h4></div></li></ol>
 <div class="screen-map"><div>YouTube Studio<small>studio.youtube.com</small></div><div>콘텐츠<small>왼쪽 메뉴</small></div><div>비공개<small>샘플 영상 상태</small></div></div><div class="stop"><b>샘플은 공개하지 마세요.</b><br>연습용 재료라서 「비공개」 상태를 그대로 둡니다.</div>
+<h3>4. 내 노래 1곡으로 한 번 더 확인하세요</h3><ol class="steps"><li class="step"><div><h4>아래 문장을 Orca에 붙여넣으세요</h4><p>이미 만든 노래가 있으면 그중 하나를 고르고, 없으면 원하는 느낌을 말해 새로 만듭니다.</p></div></li></ol><div class="prompt"><button class="copy" data-copy>복사</button><pre>이제 내가 만든 노래 1곡으로도 자동화가 되는지 확인해줘.
+Suno에 내 노래가 있으면 내가 하나를 고를 수 있게 쉬운 목록으로 보여줘. 아직 없으면 원하는 느낌을 한 번에 질문 하나씩 물어보고 1곡을 만들어줘.
+Suno 로그인 창이 나오면 로그인은 내가 직접 할게. 로그인·결제·캡차가 끝나면 이어서 해줘.
+A/B 두 곡이 나오면 처음 부분을 비교할 수 있게 하고, 내가 번호로 한 곡을 고르게 해줘.
+고른 노래를 실제 음원 파일로 다운로드하고 생성일·Suno 플랜·곡 주소 또는 ID·내가 만든 곡이라는 확인을 기록해줘.
+Day 1 샘플 음원·가사·배경·썸네일은 삭제하지 말고 샘플보관 폴더로 옮겨줘. 재료 폴더에는 내가 고른 노래 1곡과 그 노래용 배경·썸네일만 넣어줘.
+그 재료로 영상을 만든 뒤 유튜브에 「비공개」로 올려줘. 오늘은 공개하거나 예약하지 마.
+끝나면 YouTube Studio의 콘텐츠에서 내 노래 영상이 「비공개」인지 확인해줘.</pre></div>
+<ol class="steps" start="2"><li class="step"><div><h4>노래가 있으면 번호로 하나를 고르세요</h4><p>노래가 없으면 AI가 묻는 질문에 평소 말로 답하면 됩니다.</p></div></li><li class="step"><div><h4>Suno 로그인이 필요하면 열린 크롬에서 직접 로그인하세요</h4><p>비밀번호와 인증번호는 크롬 창에만 입력합니다.</p></div></li><li class="step"><div><h4>YouTube Studio에서 내 노래 영상도 「비공개」인지 확인하세요</h4></div></li></ol>
+<div class="check"><b>Day 1 영상 두 개는 모두 시험용입니다.</b><br>샘플 영상과 내 노래 1곡 영상은 비공개로 두고, 실제 첫 플레이리스트 예약은 Day 2에 합니다.</div>
 <div class="cert"><h3>오늘 인증</h3><button class="copy" data-copy>문구 복사</button><pre>Day 1 완료 ✅
 - 샘플 영상 자동 생성 확인
-- YouTube Studio 「비공개」 확인</pre></div>
+- 내 노래 1곡 영상 자동 생성 확인
+- YouTube Studio에서 영상 2개 「비공개」 확인</pre></div>
 </section>
 
 <section class="panel" id="d2" role="tabpanel" hidden>
