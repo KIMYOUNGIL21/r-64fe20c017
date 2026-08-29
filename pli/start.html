@@ -181,10 +181,9 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
       </tr>
       <tr>
         <td class="order">5</td>
-        <td class="work"><h3>Orca에서 AI 열기</h3><ol><li>Orca 화면 <b>가운데 큰 빈칸</b>을 누릅니다.</li><li class="claude-only"><code>claude</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li class="codex-only"><code>codex</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li>AI 인사말이 보이면 완료입니다.</li></ol>
-          <p class="claude-only">권장 설정: <b>Sonnet · Medium</b></p><p class="codex-only">권장 설정: <b>Luna · High</b></p>
+        <td class="work"><h3>Orca에서 AI 열고 모델 설정</h3><ol><li>Orca 화면 <b>가운데 큰 빈칸</b>을 누릅니다.</li><li class="claude-only"><code>claude</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li class="codex-only"><code>codex</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li>AI 인사말이 나오면 아래 입력칸에 <code>/model</code>을 쓰고 <kbd>Enter</kbd>를 누릅니다.</li><li class="claude-only">목록에서 <b>Sonnet</b>을 고르고, 강도는 <b>Medium</b>으로 설정합니다.</li><li class="codex-only">목록에서 <b>Luna</b>를 고르고, 강도는 <b>High</b>로 설정합니다.</li></ol>
         </td>
-        <td class="done"><label class="chk"><input type="checkbox" data-k="ai"><span>AI 인사말을 봤어요</span></label></td>
+        <td class="done"><label class="chk"><input type="checkbox" data-k="ai"><span>AI를 열고 모델을 설정했어요</span></label></td>
       </tr>
       <tr>
         <td class="order">6</td>
@@ -648,7 +647,7 @@ function copyText(id, button) {
 
 /* ── 단계 체크 · 진행 막대 ── */
 var STORE = 'pli-a-done';
-var LABEL = { ps:'파워셸 창 열기', install:'프로그램 설치', login:'AI 로그인', orca:'Orca에서 공장 폴더 열기', ai:'Orca에서 AI 열기', yt:'유튜브 채널 + 전화번호 인증', key:'분석 API 키 준비', suno:'수노 가입' };
+var LABEL = { ps:'파워셸 창 열기', install:'프로그램 설치', login:'AI 로그인', orca:'Orca에서 공장 폴더 열기', ai:'Orca에서 AI 열기 + 모델 설정', yt:'유튜브 채널 + 전화번호 인증', key:'분석 API 키 준비', suno:'수노 가입' };
 var boxes = Array.prototype.slice.call(document.querySelectorAll('.chk input'));
 var keys = [];
 boxes.forEach(function(b){ if (keys.indexOf(b.dataset.k) < 0) keys.push(b.dataset.k); });
