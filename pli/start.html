@@ -105,6 +105,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 .task-table .chk { margin-top:0; padding:13px; }
 .task-table .quick-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
 .task-table .quick-links a { display:inline-block; padding:7px 11px; border:1px solid var(--line); border-radius:9px; color:var(--amber); text-decoration:none; font-weight:800; }
+.next-link { display:inline-block; margin-top:18px; padding:12px 18px; border-radius:10px; background:var(--green); color:#07120b; text-decoration:none; font-weight:900; }
 .help-details { margin-top:10px; border:1px solid var(--line); border-radius:10px; background:#0e1626; }
 .help-details summary { padding:10px 12px; color:var(--amber); cursor:pointer; font-weight:800; }
 .help-details p { padding:0 12px 12px; font-size:15px; }
@@ -126,6 +127,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
   <span class="badge">유튜브 플리 자동화 챌린지 · 시작 전 준비</span>
   <h1>Day 0.<br>시작 준비 작업표</h1>
   <p>아래 표를 <b>1번부터 8번까지</b> 순서대로 진행하고, 끝난 항목만 체크하세요.</p>
+  <div class="warn"><b>이 페이지는 설치할 Windows PC의 Chrome에서 여세요.</b><br>휴대폰으로 보고 있다면 이 주소를 작업할 PC로 보내 다시 여세요.</div>
 </div></header>
 
 <div class="tracker"><div class="wrap" id="day0Progress" role="progressbar" aria-label="Day 0 진행률" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
@@ -135,10 +137,10 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 
 <section class="provider-tabs"><div class="wrap">
   <h2>먼저 사용할 AI 하나를 선택하세요</h2>
-  <p>결제한 서비스에 맞는 버튼을 누르세요.</p>
+  <p><b>Claude를 결제했다면 왼쪽</b>, <b>ChatGPT를 결제하고 Codex를 쓴다면 오른쪽</b>을 누르세요.</p>
   <div class="provider-buttons" role="group" aria-label="AI 선택">
-    <button type="button" id="claudeTab" aria-pressed="false" onclick="chooseProvider('claude', false)">클로드 사용자</button>
-    <button type="button" id="codexTab" aria-pressed="false" onclick="chooseProvider('codex', false)">코덱스 사용자</button>
+    <button type="button" id="claudeTab" aria-pressed="false" onclick="chooseProvider('claude', false)">Claude 결제자</button>
+    <button type="button" id="codexTab" aria-pressed="false" onclick="chooseProvider('codex', false)">ChatGPT·Codex 결제자</button>
   </div>
   <p class="provider-status" id="providerStatus" aria-live="polite">위의 두 버튼 중 하나를 누르면 다음 안내가 열립니다.</p>
 </div></section>
@@ -160,15 +162,17 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
         <td class="work"><h3>필수 프로그램 설치</h3><p>아래 버튼을 누르고 파워셸에 붙여넣은 뒤 <kbd>Enter</kbd>를 누르세요. 설치 결과 표가 나올 때까지 기다립니다.</p>
           <div class="claude-only"><div class="copybox"><pre id="compactClaudeSetup">[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;$env:PLI_AI='claude';irm https://kimyoungil21.github.io/r-64fe20c017/pli/go.ps1|iex</pre><button onclick="copyText('compactClaudeSetup',this)">클로드 설치 한 줄 복사</button></div></div>
           <div class="codex-only"><div class="copybox"><pre id="compactCodexSetup">[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;$env:PLI_AI='codex';irm https://kimyoungil21.github.io/r-64fe20c017/pli/go.ps1|iex</pre><button onclick="copyText('compactCodexSetup',this)">코덱스 설치 한 줄 복사</button></div></div>
+          <p><b>성공 기준:</b> 설치가 <b>8/8까지 끝나고</b>, 결과 표에 <b>확인 필요·재실행 필요·직접 설치</b>가 하나도 없으며 Orca와 선택한 AI가 <b>[OK]</b>로 보입니다. 셋팅코드와 API 키는 뒤 단계에서 준비하므로 지금 안내가 떠도 정상입니다.</p>
           <details class="help-details"><summary>설치가 멈췄을 때만 열기</summary><p>Microsoft Store가 열리면 <b>앱 설치 관리자</b>를 설치하세요. 결과 표에 <b>확인 필요·재실행 필요·직접 설치</b>가 있으면 파워셸을 닫고 새로 연 뒤 같은 설치 한 줄을 다시 실행하세요.</p></details>
         </td>
-        <td class="done"><label class="chk"><input type="checkbox" data-k="install"><span>설치 결과 표를 봤어요</span></label></td>
+        <td class="done"><label class="chk"><input type="checkbox" data-k="install"><span>8/8 완료 + 재실행·직접 설치 항목이 없어요</span></label></td>
       </tr>
       <tr>
         <td class="order">3</td>
         <td class="work"><h3>AI 계정 로그인</h3><p>설치 중 브라우저가 열리면 결제한 계정으로 로그인하세요.</p>
-          <div class="claude-only"><p>로그인 화면이 안 열렸으면 파워셸에 <code>claude</code>를 입력하고 <kbd>Enter</kbd>를 누르세요.</p></div>
-          <div class="codex-only"><p>로그인 화면이 안 열렸으면 파워셸에 <code>codex login</code>을 입력하고 <kbd>Enter</kbd>를 누르세요.</p></div>
+          <div class="claude-only"><p><b>Claude 유료 구독을 결제한 계정</b>으로 로그인합니다. 화면이 안 열렸으면 파워셸에 <code>claude</code>를 입력하고 <kbd>Enter</kbd>를 누르세요.</p></div>
+          <div class="codex-only"><p><b>ChatGPT 유료 계정</b>으로 로그인합니다. 화면이 안 열렸으면 파워셸에 <code>codex login</code>을 입력하고 <kbd>Enter</kbd>를 누르세요.</p></div>
+          <p>파워셸에 AI 인사말이나 입력할 수 있는 줄이 나타나면 로그인 성공입니다.</p>
         </td>
         <td class="done"><label class="chk"><input type="checkbox" data-k="login"><span>로그인을 마쳤어요</span></label></td>
       </tr>
@@ -176,18 +180,19 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
         <td class="order">4</td>
         <td class="work"><h3>Orca에서 플리공장 열기</h3><ol><li><b>Orca</b>를 엽니다.</li><li><b>Add Project → 폴더 찾아보기</b>를 누릅니다.</li><li>파일 이름 칸에 아래 주소를 붙여넣고 <kbd>Enter</kbd>를 누릅니다.</li></ol>
           <div class="copybox"><pre id="compactFactoryPath">C:\플리공장</pre><button onclick="copyText('compactFactoryPath',this)">플리공장 주소 복사</button></div>
+          <p><b>파일 이름 칸이 안 보이면</b> 왼쪽의 <b>내 PC → 로컬 디스크(C:) → 플리공장 → 폴더 선택</b> 순서로 누르세요.</p>
         </td>
-        <td class="done"><label class="chk"><input type="checkbox" data-k="orca"><span>플리공장을 열었어요</span></label></td>
+        <td class="done"><label class="chk"><input type="checkbox" data-k="orca"><span>Orca 왼쪽에 플리공장이 보여요</span></label></td>
       </tr>
       <tr>
         <td class="order">5</td>
-        <td class="work"><h3>Orca에서 AI 열고 모델 설정</h3><ol><li>Orca 화면 <b>가운데 큰 빈칸</b>을 누릅니다.</li><li class="claude-only"><code>claude</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li class="codex-only"><code>codex</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li>AI 인사말이 나오면 아래 입력칸에 <code>/model</code>을 쓰고 <kbd>Enter</kbd>를 누릅니다.</li><li class="claude-only">목록에서 <b>Sonnet</b>을 고르고, 강도는 <b>Medium</b>으로 설정합니다.</li><li class="codex-only">목록에서 <b>Luna</b>를 고르고, 강도는 <b>High</b>로 설정합니다.</li></ol>
+        <td class="work"><h3>Orca에서 AI 열고 모델 설정</h3><ol><li>Orca 화면 <b>가운데 큰 빈칸</b>을 누릅니다.</li><li class="claude-only"><code>claude</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li class="codex-only"><code>codex</code>를 입력하고 <kbd>Enter</kbd>를 누릅니다.</li><li>AI 인사말이 나오면 아래 입력칸에 <code>/model</code>을 쓰고 <kbd>Enter</kbd>를 누릅니다.</li><li class="claude-only">목록에서 <b>Sonnet</b>을 고르고, 강도는 <b>Medium</b>으로 설정합니다.</li><li class="claude-only"><kbd>Shift</kbd>+<kbd>Tab</kbd>을 눌러 모드를 바꾸고 <b>Auto</b>가 보이면 멈춥니다.</li><li class="codex-only">목록에서 <b>Luna</b>를 고르고, 강도는 <b>High</b>로 설정합니다.</li><li class="codex-only"><code>/permissions</code>를 입력하고 <b>Full access</b>를 선택합니다.</li></ol>
         </td>
-        <td class="done"><label class="chk"><input type="checkbox" data-k="ai"><span>AI를 열고 모델을 설정했어요</span></label></td>
+        <td class="done"><label class="chk"><input type="checkbox" data-k="ai"><span>모델과 실행 권한을 설정했어요</span></label></td>
       </tr>
       <tr>
         <td class="order">6</td>
-        <td class="work"><h3>YouTube 채널과 전화번호 인증</h3><ol><li>크롬에서 YouTube에 로그인하고 채널을 만듭니다. 이미 있으면 넘어갑니다.</li><li>아래 인증 페이지에서 전화번호 인증을 완료합니다.</li></ol>
+        <td class="work"><h3>YouTube 채널과 전화번호 인증</h3><ol><li><b>YouTube 열기</b>를 누르고 구글 계정으로 로그인합니다.</li><li>오른쪽 위 <b>프로필 사진 → 채널 만들기</b>를 누릅니다. 채널이 이미 보이면 넘어갑니다.</li><li>채널 이름과 핸들을 확인하고 <b>채널 만들기</b>를 누릅니다.</li><li><b>전화번호 인증 열기</b>를 눌러 전화번호와 문자 인증번호를 입력합니다.</li><li><b>이미 인증되었습니다</b>가 나오면 그대로 완료입니다.</li></ol>
           <div class="quick-links"><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube 열기</a><a href="https://www.youtube.com/verify" target="_blank" rel="noopener">전화번호 인증 열기</a></div>
         </td>
         <td class="done"><label class="chk"><input type="checkbox" data-k="yt"><span>채널과 인증을 마쳤어요</span></label></td>
@@ -197,7 +202,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
         <td class="work"><h3>분석 API 키 준비</h3><p>Orca의 AI 입력칸에 아래 문장을 붙여넣고, AI가 알려주는 행동을 한 단계씩 진행하세요.</p>
           <div class="copybox"><pre id="compactKeyPrompt">공개 유튜브 채널 분석에 쓸 API 키를 준비할 거야. Google Cloud에서 「플리공장」 프로젝트 만들기 → YouTube Data API v3 사용 → API 키 만들기 순서로, 내가 지금 눌러야 할 것 하나만 쉬운 한국어로 알려줘. 로그인·동의·API 키 복사는 내가 직접 할게. 키를 복사했다고 말하면 C:\플리공장\API키.txt에 저장하도록 안내하고, 마지막에 설치 명령을 다시 실행해 「분석 API 키 — 준비됨」까지 확인해줘.</pre><button onclick="copyText('compactKeyPrompt',this)">AI에게 보낼 문장 복사</button></div>
         </td>
-        <td class="done"><label class="chk"><input type="checkbox" data-k="key"><span>API 키를 저장했어요</span></label></td>
+        <td class="done"><label class="chk"><input type="checkbox" data-k="key"><span>API키.txt 저장 + 분석 API 키 준비됨을 확인했어요</span></label></td>
       </tr>
       <tr>
         <td class="order">8</td>
@@ -603,6 +608,7 @@ footer { padding:38px 0 62px; border-top:1px solid var(--line); color:#7183a6; t
 - 유튜브 채널 + 전화번호 인증
 - 공개 채널 분석 API 키
 - 수노 가입</pre><button onclick="copyText('doneMsg',this)">참가방에 올릴 문구 복사하기</button></div>
+  <a class="next-link" href="https://kimyoungil21.github.io/r-64fe20c017/pli/커리큘럼.html#d1">Day 1 시작하기</a>
 </div></section>
 
 <section class="step"><div class="wrap">
