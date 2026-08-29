@@ -27,7 +27,7 @@ $AI실행모드 = $env:PLI_NONINTERACTIVE -eq '1'
 
 $공장 = 'C:\플리공장'
 $패키지이름 = '플리공장_셋팅코드.zip'
-$패키지SHA256 = '0CE8DD43C913505CBBC1B70289B33E057CBE53664EC9A50D84F704E219B072C4'
+$패키지SHA256 = 'BE1F2348D0218FA703C3010103CC56A74BD870099CD17FE3B379139483BF50C5'
 $코드파일 = @(
   '.gitignore', 'AGENTS.md', 'CLAUDE.md', '곡형식_8가지.md', '공장.py',
   '분석기.py', '샘플재료_이용안내.md', '시작하세요.md', '업로더.py', '작사스킬.md'
@@ -186,6 +186,15 @@ function Test-AnalysisApiKey {
 function RefreshPath {
   $m = [Environment]::GetEnvironmentVariable('Path','Machine')
   $u = [Environment]::GetEnvironmentVariable('Path','User')
+  $claudeBin = Join-Path $HOME '.local\bin'
+  if (Test-Path -LiteralPath $claudeBin) {
+    $사용자경로 = @($u -split ';' | Where-Object { $_ })
+    if ($사용자경로 -notcontains $claudeBin) {
+      $u = (($사용자경로 + $claudeBin) -join ';')
+      [Environment]::SetEnvironmentVariable('Path', $u, 'User')
+      Ok '클로드코드 실행 경로를 Windows 사용자 PATH에 추가했습니다'
+    }
+  }
   $env:Path = $m + ';' + $u
 }
 
@@ -324,9 +333,23 @@ if (-not $파이썬) {
 } else {
   $pyExe = $파이썬.Exe
   $pyArgs = @($파이썬.Args)
-  & $pyExe @pyArgs -m pip install --quiet --upgrade google-api-python-client 2>&1 | Out-Null
-  & $pyExe @pyArgs -c 'import googleapiclient' 2>&1 | Out-Null
-  if ($LASTEXITCODE -eq 0) { Ok '채널 분석용 패키지 준비 완료'; $결과['파이썬 패키지'] = '준비됨' }
+  $패키지준비 = $false
+  $이전오류설정 = $ErrorActionPreference
+  try {
+    # Windows PowerShell 5.1은 pip의 정상 경고(stderr)도 NativeCommandError로
+    # 바꿀 수 있다. 설치기 전체가 4/8에서 끝나지 않도록 여기서만 숨긴다.
+    $ErrorActionPreference = 'SilentlyContinue'
+    & $pyExe @pyArgs -m pip install --quiet --upgrade google-api-python-client *> $null
+    if ($LASTEXITCODE -eq 0) {
+      & $pyExe @pyArgs -c 'import googleapiclient' *> $null
+      $패키지준비 = ($LASTEXITCODE -eq 0)
+    }
+  } catch {
+    $패키지준비 = $false
+  } finally {
+    $ErrorActionPreference = $이전오류설정
+  }
+  if ($패키지준비) { Ok '채널 분석용 패키지 준비 완료'; $결과['파이썬 패키지'] = '준비됨' }
   else { Warn '패키지 설치를 확인하지 못했습니다 (나중에 AI가 다시 시도합니다)'; $결과['파이썬 패키지'] = '확인 필요' }
 }
 
