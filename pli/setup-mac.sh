@@ -27,7 +27,7 @@ NONINTERACTIVE="${PLI_NONINTERACTIVE:-0}"
 
 FACTORY="$HOME/플리공장"
 ZIP_NAME="플리공장_셋팅코드.zip"
-ZIP_SHA256="0CE8DD43C913505CBBC1B70289B33E057CBE53664EC9A50D84F704E219B072C4"
+ZIP_SHA256="32AD7F0A6E47834B7225D5B0E8E94D885044966BB5C2B925BC99BD1371DB701C"
 CODE_FILES=".gitignore
 AGENTS.md
 CLAUDE.md
@@ -37,7 +37,9 @@ CLAUDE.md
 샘플재료_이용안내.md
 시작하세요.md
 업로더.py
-작사스킬.md"
+작사스킬.md
+점검.py
+자주묻는질문.md"
 RESULT=""
 
 say()  { printf '\033[36m%s\033[0m\n' "$1"; }
@@ -93,6 +95,7 @@ path = sys.argv[1]
 code_files = {
     ".gitignore", "AGENTS.md", "CLAUDE.md", "곡형식_8가지.md", "공장.py",
     "분석기.py", "샘플재료_이용안내.md", "설정.json", "시작하세요.md", "업로더.py", "작사스킬.md",
+    "점검.py", "자주묻는질문.md",
 }
 required_materials = {
     "재료/배경 - 오늘이 제일 좋은 날.jpg",
